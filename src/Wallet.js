@@ -72,6 +72,10 @@ class Wallet extends Component {
     constructor(props) {
         super(props);
 
+        const url = (process.env.NODE_ENV === 'development')
+            ? 'http://localhost:8080/cash36'
+            : 'https://cash36-backend.herokuapp.com/cash36';
+
         this.state = {
             dialogOpen: false,
             sellAmount: '',
@@ -81,6 +85,7 @@ class Wallet extends Component {
             exchanging: false,
             loadingHistory: false,
             history: [],
+            backendUrl: url,
         }
     }
 
@@ -112,7 +117,7 @@ class Wallet extends Component {
             "name": name
         }
 
-        fetch("http://192.168.2.110:8080/cash36/token/", {
+        fetch(`${this.state.backendUrl}/token/`, {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
@@ -135,7 +140,7 @@ class Wallet extends Component {
     getTransferHistory() {
         this.setState({ loadingHistory: true });
 
-        fetch(`http://192.168.2.110:8080/cash36/token/history?userAddress=${this.props.loggedInAddress}`, {
+        fetch(`${this.state.backendUrl}/token/history?userAddress=${this.props.loggedInAddress}`, {
             method: "GET",
             headers: {
                 'Accept': 'application/json',
@@ -154,7 +159,7 @@ class Wallet extends Component {
         this.setState({ exchanging: true });
 
         let amount = this.state.sellAmount;
-        fetch(`http://192.168.2.110:8080/cash36/token/${this.state.selectedToken}/?amount=${amount}&fromAddress=${this.props.loggedInAddress}`, {
+        fetch(`${this.state.backendUrl}/token/${this.state.selectedToken}/?amount=${amount}&fromAddress=${this.props.loggedInAddress}`, {
             method: "DELETE",
             headers: {
                 'Accept': 'application/json',
@@ -172,7 +177,7 @@ class Wallet extends Component {
         this.setState({ exchanging: true });
 
         let amount = this.state.buyAmount;
-        fetch(`http://192.168.2.110:8080/cash36/token/${this.state.selectedToken}/?amount=${amount}&forAddress=${this.props.loggedInAddress}`, {
+        fetch(`${this.state.backendUrl}/token/${this.state.selectedToken}/?amount=${amount}&forAddress=${this.props.loggedInAddress}`, {
             method: "PUT",
             headers: {
                 'Accept': 'application/json',

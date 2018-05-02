@@ -58,6 +58,10 @@ class Main extends Component {
     constructor(props) {
         super(props);
 
+        const url = (process.env.NODE_ENV === 'development')
+            ? 'http://localhost:8080/cash36'
+            : 'https://cash36-backend.herokuapp.com/cash36';
+
         this.state = {
             dialogOpen: false,
             loading: false,
@@ -68,6 +72,7 @@ class Main extends Component {
             selectedToken: 'CHF36',
             baseFee: 0.015,
             exchanging: false,
+            backendUrl: url
         }
     }
 
@@ -79,7 +84,7 @@ class Main extends Component {
             "name": name
         }
 
-        fetch("http://192.168.2.110:8080/cash36/token/", {
+        fetch(`${this.state.backendUrl}/token/`, {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
@@ -98,7 +103,7 @@ class Main extends Component {
         this.setState({ exchanging: true });
 
         let amount = this.state.sellAmount;
-        fetch(`http://192.168.2.110:8080/cash36/token/${symbol}/?amount=${amount}&fromAddress=${this.props.loggedInAddress}`, {
+        fetch(`${this.state.backendUrl}/token/${symbol}/?amount=${amount}&fromAddress=${this.props.loggedInAddress}`, {
             method: "DELETE",
             headers: {
                 'Accept': 'application/json',
@@ -115,7 +120,7 @@ class Main extends Component {
         this.setState({ exchanging: true });
 
         let amount = this.state.buyAmount;
-        fetch(`http://192.168.2.110:8080/cash36/token/${symbol}/?amount=${amount}&forAddress=${this.props.loggedInAddress}`, {
+        fetch(`${this.state.backendUrl}/token/${symbol}/?amount=${amount}&forAddress=${this.props.loggedInAddress}`, {
             method: "PUT",
             headers: {
                 'Accept': 'application/json',

@@ -29,13 +29,19 @@ class App extends Component {
 
     constructor(props) {
         super(props);
+
+        const url = (process.env.NODE_ENV === 'development')
+            ? 'http://localhost:8080/cash36'
+            : 'https://cash36-backend.herokuapp.com/cash36';
+
         this.state = {
             tokens: {},
             loggedInAddress: '',
             name: '',
             avatar: '',
             verified: false,
-            tabIndex: 0
+            tabIndex: 0,
+            backendUrl: url
         }
     }
 
@@ -65,7 +71,7 @@ class App extends Component {
 
     checkUser(userAddress) {
         // Check if User is verified
-        fetch(`http://localhost:8080/cash36/kyc/user/?userAddress=${userAddress}`).then(results => {
+        fetch(`${this.state.backendUrl}/kyc/user/?userAddress=${userAddress}`).then(results => {
             return results.json();
         }).then(verified => {
             console.log(verified);
@@ -74,12 +80,12 @@ class App extends Component {
     }
 
     updateTokens() {
-        fetch('http://localhost:8080/cash36/token').then(results => {
+        fetch(`${this.state.backendUrl}/token`).then(results => {
             return results.json();
         }).then(data => {
             if (this.state.loggedInAddress !== '') {
                 for (let i = 0; i < data.length; i++) {
-                    fetch(`http://localhost:8080/cash36/token/${data[ i ].symbol}/balance?userAddress=${this.state.loggedInAddress}`).then(results => {
+                    fetch(`${this.state.backendUrl}/token/${data[ i ].symbol}/balance?userAddress=${this.state.loggedInAddress}`).then(results => {
                         return results.json();
                     }).then(balance => {
                         data[ i ].balance = balance;
