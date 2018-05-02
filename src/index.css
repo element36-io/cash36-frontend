@@ -1,0 +1,8 @@
+body {
+    background-color: #191C2A;
+    margin: 0px;
+}
+
+body > #root > div {
+    flex: 1
+}

@@ -1,0 +1,26 @@
+image: alpine:latest
+
+stages:
+  - build
+  - deploy_dev
+
+build:
+  stage: build
+  script:
+    - apk add --no-cache nodejs nodejs-npm git python g++ make
+    - npm install -g yarn
+    - yarn
+    - yarn build
+  only:
+    - develop
+
+production:
+  stage: deploy_dev
+  image: ruby:latest
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=cash36-frontend --api-key=$HEROKU_API_KEY
+  only:
+    - develop
