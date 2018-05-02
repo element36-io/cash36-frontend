@@ -4,7 +4,6 @@ import { withStyles } from 'material-ui/styles';
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import Button from 'material-ui/Button';
 import AddIcon from '@material-ui/icons/Add';
-import { Typography } from "material-ui";
 
 const styles = theme => ({
     root: {

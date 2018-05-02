@@ -5,7 +5,7 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import { Avatar, Button, Tab, Tabs } from 'material-ui';
 import logoImage from './assets/logo.svg';
-import Grid from 'material-ui/es/Grid/Grid';
+import Grid from 'material-ui/Grid';
 import VerifiedUser from '@material-ui/icons/VerifiedUser';
 
 

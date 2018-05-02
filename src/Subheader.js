@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 import { Paper } from 'material-ui';
-import Grid from "material-ui/es/Grid/Grid";
+import Grid from "material-ui/Grid";
 
 
 const styles = {
