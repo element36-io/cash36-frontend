@@ -448,7 +448,7 @@ class Wallet extends Component {
                                                 </Grid>
                                                 <Grid item xs={6}>
                                                     <Typography variant="subheading" align="right">
-                                                        {this.state.sellAmount - (this.state.sellAmount * this.state.baseFee)} CHF36
+                                                        {this.state.sellAmount - (this.state.sellAmount * this.state.baseFee)} CHF
                                                     </Typography>
                                                 </Grid>
                                             </Grid>
