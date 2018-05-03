@@ -70,8 +70,10 @@ class Header extends React.Component {
                                          label='Home'/>
                                     <Tab classes={{ root: classes.tabRoot }}
                                          label='Wallet'/>
+                                    {props.loggedInAddress === '0xc6091b59436356f8b8d884e4b218f6d2cbbc5913' &&
                                     <Tab classes={{ root: classes.tabRoot }}
                                          label='Administration'/>
+                                    }
                                 </Tabs>
                             </Grid>
                             <Grid item>
