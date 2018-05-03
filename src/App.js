@@ -36,6 +36,8 @@ class App extends Component {
 
         this.state = {
             tokens: {},
+            tokenHistory: {},
+            loadingHistory: true,
             loggedInAddress: '',
             name: '',
             avatar: '',
@@ -58,7 +60,7 @@ class App extends Component {
             let avatar = '';
             if (name.indexOf(' ') > 0) {
                 let parts = name.split(' ');
-                avatar = parts[0].substr(0, 1) + parts[1].substr(0, 1);
+                avatar = parts[ 0 ].substr(0, 1) + parts[ 1 ].substr(0, 1);
                 console.log(avatar.toUpperCase());
             }
 
@@ -83,6 +85,13 @@ class App extends Component {
         fetch(`${this.state.backendUrl}/token`).then(results => {
             return results.json();
         }).then(data => {
+            // Load History data
+            for (let i = 0; i < data.length; i++) {
+                this.getHistory(data[ i ].symbol).then(() => {
+                    this.setState({ loadingHistory: false });
+                });
+            }
+            // Load balances if logged in user
             if (this.state.loggedInAddress !== '') {
                 for (let i = 0; i < data.length; i++) {
                     fetch(`${this.state.backendUrl}/token/${data[ i ].symbol}/balance?userAddress=${this.state.loggedInAddress}`).then(results => {
@@ -98,20 +107,31 @@ class App extends Component {
         });
     }
 
+    async getHistory(symbol) {
+        fetch(`${this.state.backendUrl}/token/${symbol}/total-supply/history`).then(results => {
+            return results.json();
+        }).then(data => {
+            let history = this.state.tokenHistory;
+            history[symbol] = data;
+            return this.setState({ tokenHistory: history });
+        });
+    }
+
     changeTab = (event, value) => {
-        this.setState({ tabIndex: value});
+        this.setState({ tabIndex: value });
     }
 
     render() {
         return (
             <MuiThemeProvider theme={theme}>
-                <div style={{backgroundColor: '#191B2A'}}>
+                <div style={{ backgroundColor: '#191B2A' }}>
                     <Header handleLogin={this.handleLogin.bind(this)} changeTab={this.changeTab.bind(this)}
                             tabIndex={this.state.tabIndex} loggedInAddress={this.state.loggedInAddress}
-                            avatar={this.state.avatar} verified={this.state.verified} />
+                            avatar={this.state.avatar} verified={this.state.verified}/>
                     <Subheader/>
                     {this.state.tabIndex === 0 &&
-                    <Main tokens={this.state.tokens} updateTokens={this.updateTokens.bind(this)}
+                    <Main tokens={this.state.tokens} tokenHistory={this.state.tokenHistory}
+                          loadingHistory={this.state.loadingHistory} updateTokens={this.updateTokens.bind(this)}
                           loggedInAddress={this.state.loggedInAddress}/>
                     }
                     {this.state.tabIndex === 1 &&

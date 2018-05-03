@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import { Avatar, Grid, Paper, Typography } from "material-ui";
+import { Avatar, CircularProgress, Grid, Paper, Typography } from "material-ui";
 import { Area, AreaChart } from "recharts";
 import CopyIcon from '@material-ui/icons/ContentCopy';
+
 
 const styles = theme => ({
     root: {
@@ -134,16 +135,7 @@ class Main extends Component {
     }
 
     render() {
-        const { classes, tokens } = this.props;
-        const data = [
-            { name: 'Page A', uv: 1000, pv: 2400, amt: 2400 },
-            { name: 'Page B', uv: 3000, pv: 1398, amt: 2210 },
-            { name: 'Page C', uv: 2000, pv: 9800, amt: 2290 },
-            { name: 'Page D', uv: 2780, pv: 3908, amt: 2000 },
-            { name: 'Page E', uv: 1890, pv: 4800, amt: 2181 },
-            { name: 'Page F', uv: 2390, pv: 3800, amt: 2500 },
-            { name: 'Page G', uv: 3490, pv: 4300, amt: 2100 },
-        ];
+        const { classes, tokens, tokenHistory, loadingHistory } = this.props;
 
         return (
             <div className={classes.root}>
@@ -165,19 +157,20 @@ class Main extends Component {
                                         </Grid>
                                         <Grid container spacing={16}>
                                             <Grid item>
-                                                <div style={{maxWidth: 170}}>
+                                                <div style={{ maxWidth: 170 }}>
                                                     <Typography variant="caption" noWrap>
                                                         {token.tokenAddress}
                                                     </Typography>
                                                 </div>
                                             </Grid>
                                             <Grid item>
-                                                <a style={{cursor: 'pointer'}}><CopyIcon style={{fontSize: '100%', color: '#F6BA39'}}/></a>
+                                                <a style={{ cursor: 'pointer' }}><CopyIcon
+                                                    style={{ fontSize: '100%', color: '#F6BA39' }}/></a>
                                             </Grid>
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                                <Grid container direction={'column'} style={{paddingTop: 25}}>
+                                <Grid container direction={'column'} style={{ paddingTop: 25 }}>
                                     <Grid item>
                                         <Typography variant="caption">
                                             Total Supply
@@ -189,7 +182,7 @@ class Main extends Component {
                                         </Typography>
                                     </Grid>
                                 </Grid>
-                                <Grid container direction={'column'} style={{paddingTop: 25}}>
+                                <Grid container direction={'column'} style={{ paddingTop: 25 }}>
                                     <Grid item>
                                         <Typography variant="caption">
                                             Balance Bank Account
@@ -201,9 +194,19 @@ class Main extends Component {
                                         </Typography>
                                     </Grid>
                                 </Grid>
+                                {loadingHistory &&
+                                <Grid container justify="center" alignItems={'center'}
+                                      style={{ marginTop: 45, marginBottom: 45 }}>
+                                    <Grid item>
+                                        <CircularProgress className={classes.progress}
+                                                          style={{ color: '#199FC6' }} thickness={7}/>
+                                    </Grid>
+                                </Grid>
+                                }
+                                {!loadingHistory &&
                                 <Grid container style={{ marginLeft: -15 }}>
                                     <Grid item>
-                                        <AreaChart width={280} height={200} data={data}
+                                        <AreaChart width={280} height={200} data={tokenHistory[token.symbol]}
                                                    margin={{ top: 20, right: 0, left: 0, bottom: 0 }}>
                                             <defs>
                                                 <linearGradient id="stroke" x1="0" y1="0" x2="1" y2="1">
@@ -215,11 +218,13 @@ class Main extends Component {
                                                     <stop offset="100%" stopColor="#B93E4F" stopOpacity={0}/>
                                                 </linearGradient>
                                             </defs>
-                                            <Area type="monotone" dataKey="uv" stroke="url(#stroke)" fillOpacity={1}
+                                            <Area type="monotone" dataKey="totalSupply" stroke="url(#stroke)"
+                                                  fillOpacity={1}
                                                   fill="url(#fill)"/>
                                         </AreaChart>
                                     </Grid>
                                 </Grid>
+                                }
                             </Paper>
                         </Grid>
                     )}
