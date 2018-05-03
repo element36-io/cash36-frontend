@@ -90,7 +90,9 @@ class Wallet extends Component {
     }
 
     componentDidMount() {
-        this.getTransferHistory();
+        if (this.props.loggedInAddress !== '') {
+            this.getTransferHistory();
+        }
     }
 
     handleChangeAmount = name => event => {
