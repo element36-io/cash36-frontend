@@ -309,14 +309,14 @@ class Wallet extends Component {
                                                     disabled
                                                     label="Bank Name"
                                                     type="text"
-                                                    value="Our Bank"
+                                                    value="Universal Bank"
                                                     className={classes.textField}
                                                 />
                                                 <TextField
                                                     disabled
                                                     label="Bank Address"
                                                     type="text"
-                                                    value="Some address 10, Zug"
+                                                    value="Börsenstrasse 15, 8022 Zürich"
                                                     className={classes.textField}
                                                 />
                                                 <TextField
@@ -344,7 +344,7 @@ class Wallet extends Component {
                                                     disabled
                                                     label="Receipient Address"
                                                     type="text"
-                                                    value="Some Street 9, Zug"
+                                                    value="Bahnmatt 25, 6340 Baar"
                                                     className={classes.textField}
                                                 />
                                                 <TextField
