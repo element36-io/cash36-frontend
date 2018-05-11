@@ -35,15 +35,15 @@ class Wallet extends Component {
         fetch(`${this.state.backendUrl}/token`).then(results => {
             return results.json();
         }).then(data => {
-            // Load balances
-            for (let i = 0; i < data.length; i++) {
-                fetch(`${this.state.backendUrl}/token/${data[ i ].symbol}/balance?userAddress=${this.props.loggedInAddress}`).then(results => {
-                    return results.json();
-                }).then(balance => {
-                    data[ i ].balance = balance;
-                });
-            }
-            this.setState({ tokens: data });
+            // Fetch user balance for all tokens
+            Promise.all(data.map(async(token) => {
+                let balance = await fetch(`${this.state.backendUrl}/token/${token.symbol}/balance?userAddress=${this.props.loggedInAddress}`);
+                balance = await balance.json();
+                token.balance = balance;
+                return token;
+            })).then(data => {
+                this.setState({ tokens: data });
+            });
         });
     }
 

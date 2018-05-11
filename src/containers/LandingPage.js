@@ -29,10 +29,17 @@ const styles = theme => ({
         maxHeight: 100,
     },
     avatar: {
-        color: 'rgba(0, 0, 0, 0.7)',
-        borderRadius: 7,
+        color: 'white',
+        borderRadius: 100,
+        border: '1px solid black',
         fontSize: '60%',
-        background: 'linear-gradient(110deg, #F4E05F, #F6BA39)',
+        background: 'linear-gradient(110deg, #67B6F4, #000000)',
+    },
+    caption: {
+        fontSize: '0.8rem',
+        fontWeight: 700,
+        lineHeight: '1.375em',
+        opacity: 0.7,
     },
 });
 
@@ -114,7 +121,7 @@ class LandingPage extends Component {
                                             </Grid>
                                             <Grid item>
                                                 <a style={{ cursor: 'pointer' }}><CopyIcon
-                                                    style={{ fontSize: '100%', color: '#F6BA39' }}/></a>
+                                                    style={{ fontSize: '100%', color: '#67B6F4' }}/></a>
                                             </Grid>
                                         </Grid>
                                     </Grid>
