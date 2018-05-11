@@ -8,6 +8,7 @@ import hand from '../assets/hand.png';
 import yin from '../assets/yin.png';
 import screw from '../assets/screw.png';
 
+
 const styles = theme => ({
     root: {
         flexGrow: 1,
@@ -96,7 +97,7 @@ class LandingPage extends Component {
                 {tokens.length !== 0 &&
                 <Grid container justify="center" alignItems={'center'} spacing={40} style={{ marginTop: -50 }}>
                     {tokens.length > 0 && tokens.map((token, key) =>
-                        <Grid item key={key} xs={5}>
+                        <Grid item key={key} xs={11} md={5}>
                             <Paper className={classes.paper} elevation={1}>
                                 <Grid container alignItems={'center'} wrap="nowrap" spacing={16}>
                                     <Grid item xs={2}>
@@ -111,7 +112,7 @@ class LandingPage extends Component {
                                             </Grid>
                                             <Grid container spacing={16}>
                                                 <Grid item>
-                                                    <div>
+                                                    <div style={{ maxWidth: 200 }}>
                                                         <Typography variant="caption" noWrap>
                                                             {token.tokenAddress}
                                                         </Typography>
@@ -128,7 +129,7 @@ class LandingPage extends Component {
                                 <Grid container alignItems={'center'} wrap="nowrap" spacing={16}>
                                     <Grid item xs={2}>
                                     </Grid>
-                                    <Grid item xs={5}>
+                                    <Grid item xs={10} md={5}>
                                         <Grid container direction={'column'}>
                                             <Grid item>
                                                 <Typography variant="caption">
@@ -137,12 +138,13 @@ class LandingPage extends Component {
                                             </Grid>
                                             <Grid item>
                                                 <Typography variant="title">
-                                                    {token.totalSupply} <span className={classes.caption}>{token.symbol}</span>
+                                                    {token.totalSupply} <span
+                                                    className={classes.caption}>{token.symbol}</span>
                                                 </Typography>
                                             </Grid>
                                         </Grid>
                                     </Grid>
-                                    <Grid item xs={5}>
+                                    <Grid item xs={10} md={5}>
                                         <Grid container direction={'column'}>
                                             <Grid item>
                                                 <Typography variant="caption">
@@ -151,7 +153,8 @@ class LandingPage extends Component {
                                             </Grid>
                                             <Grid item>
                                                 <Typography variant="title">
-                                                    {token.totalSupply} <span className={classes.caption}>{token.fiat}</span>
+                                                    {token.totalSupply} <span
+                                                    className={classes.caption}>{token.fiat}</span>
                                                 </Typography>
                                             </Grid>
                                         </Grid>
@@ -159,33 +162,33 @@ class LandingPage extends Component {
                                 </Grid>
                                 {/*{loadingHistory &&*/}
                                 {/*<Grid container justify="center" alignItems={'center'}*/}
-                                      {/*style={{ marginTop: 45, marginBottom: 45 }}>*/}
-                                    {/*<Grid item>*/}
-                                        {/*<CircularProgress className={classes.progress}*/}
-                                                          {/*style={{ color: '#199FC6' }} thickness={7}/>*/}
-                                    {/*</Grid>*/}
+                                {/*style={{ marginTop: 45, marginBottom: 45 }}>*/}
+                                {/*<Grid item>*/}
+                                {/*<CircularProgress className={classes.progress}*/}
+                                {/*style={{ color: '#199FC6' }} thickness={7}/>*/}
+                                {/*</Grid>*/}
                                 {/*</Grid>*/}
                                 {/*}*/}
                                 {/*{!loadingHistory &&*/}
                                 {/*<Grid container style={{ marginLeft: -15 }}>*/}
-                                    {/*<Grid item>*/}
-                                        {/*<AreaChart width={280} height={100} data={tokenHistory[ token.symbol ]}*/}
-                                                   {/*margin={{ top: 20, right: 0, left: 0, bottom: 0 }}>*/}
-                                            {/*<defs>*/}
-                                                {/*<linearGradient id="stroke" x1="0" y1="0" x2="1" y2="1">*/}
-                                                    {/*<stop offset="0%" stopColor="#F4E05F" stopOpacity={1}/>*/}
-                                                    {/*<stop offset="90%" stopColor="#F4E05F" stopOpacity={1}/>*/}
-                                                {/*</linearGradient>*/}
-                                                {/*<linearGradient id="fill" x1="0" y1="0" x2="0" y2="1">*/}
-                                                    {/*<stop offset="15%" stopColor="#F4E05F" stopOpacity={0.8}/>*/}
-                                                    {/*<stop offset="100%" stopColor="#B93E4F" stopOpacity={0}/>*/}
-                                                {/*</linearGradient>*/}
-                                            {/*</defs>*/}
-                                            {/*<Area type="monotone" dataKey="totalSupply" stroke="url(#stroke)"*/}
-                                                  {/*fillOpacity={1}*/}
-                                                  {/*fill="url(#fill)"/>*/}
-                                        {/*</AreaChart>*/}
-                                    {/*</Grid>*/}
+                                {/*<Grid item>*/}
+                                {/*<AreaChart width={280} height={100} data={tokenHistory[ token.symbol ]}*/}
+                                {/*margin={{ top: 20, right: 0, left: 0, bottom: 0 }}>*/}
+                                {/*<defs>*/}
+                                {/*<linearGradient id="stroke" x1="0" y1="0" x2="1" y2="1">*/}
+                                {/*<stop offset="0%" stopColor="#F4E05F" stopOpacity={1}/>*/}
+                                {/*<stop offset="90%" stopColor="#F4E05F" stopOpacity={1}/>*/}
+                                {/*</linearGradient>*/}
+                                {/*<linearGradient id="fill" x1="0" y1="0" x2="0" y2="1">*/}
+                                {/*<stop offset="15%" stopColor="#F4E05F" stopOpacity={0.8}/>*/}
+                                {/*<stop offset="100%" stopColor="#B93E4F" stopOpacity={0}/>*/}
+                                {/*</linearGradient>*/}
+                                {/*</defs>*/}
+                                {/*<Area type="monotone" dataKey="totalSupply" stroke="url(#stroke)"*/}
+                                {/*fillOpacity={1}*/}
+                                {/*fill="url(#fill)"/>*/}
+                                {/*</AreaChart>*/}
+                                {/*</Grid>*/}
                                 {/*</Grid>*/}
                                 {/*}*/}
                             </Paper>
@@ -195,7 +198,7 @@ class LandingPage extends Component {
                 }
                 <Grid container justify="space-around" spacing={40} style={{ padding: 50 }}>
                     <Grid item xs={12} md={4}>
-                        <Grid container direction="column" alignItems="center" spacing={40} >
+                        <Grid container direction="column" alignItems="center" spacing={40}>
                             <Grid item>
                                 <img className={classes.img} src={yin} alt={'yin'}/>
                             </Grid>
@@ -211,7 +214,7 @@ class LandingPage extends Component {
                         </Grid>
                     </Grid>
                     <Grid item xs={12} md={4}>
-                        <Grid container direction="column" alignItems="center" spacing={40} >
+                        <Grid container direction="column" alignItems="center" spacing={40}>
                             <Grid item>
                                 <img className={classes.img} src={hand} alt={'hand'}/>
                             </Grid>
@@ -228,7 +231,7 @@ class LandingPage extends Component {
                         </Grid>
                     </Grid>
                     <Grid item xs={12} md={4}>
-                        <Grid container direction="column" alignItems="center" spacing={40} >
+                        <Grid container direction="column" alignItems="center" spacing={40}>
                             <Grid item>
                                 <img className={classes.img} src={screw} alt={'screw'}/>
                             </Grid>

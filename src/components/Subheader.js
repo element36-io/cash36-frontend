@@ -10,7 +10,7 @@ const styles = {
         flexGrow: 1,
     },
     paper: {
-        height: 250,
+        minHeight: 250,
         background: 'linear-gradient(180deg, #000000 80%,#333333 100%)',
         borderRadius: 0
     },
@@ -27,7 +27,7 @@ class Subheader extends React.Component {
             <div className={classes.root}>
                 <Paper className={classes.paper} elevation={0}>
                     <Grid className={classes.grid} container justify="center">
-                        <Grid item style={{textAlign: 'center'}} xs={6}>
+                        <Grid item style={{textAlign: 'center'}} xs={12} md={6}>
                             <Typography variant="title" style={{color: 'white'}}>Fiat and Crypto United</Typography>
                             <Typography variant="subheading" style={{color: 'white', marginTop: 10}}>We offer Swiss Frank (CHF) and Euro (EUR) as ERC20
                                 compatible tokens, symbols are CHF36 and EUR36 - others will follow when we

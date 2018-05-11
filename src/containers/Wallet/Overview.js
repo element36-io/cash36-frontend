@@ -169,13 +169,13 @@ class Overview extends React.Component {
                 </Grid>
                 <Grid container justify="center" spacing={40}>
                     <Grid item xs={12} md={8}>
-                        <Paper className={classes.paper} elevation={1}>
+                        <Paper className={classes.paper} style={{ padding: 35 }} elevation={1}>
                             <Grid container direction="column" spacing={40}>
                                 <Grid item>
                                     <Typography variant="title">LAST ACTIVITY</Typography>
                                 </Grid>
                                 <Grid item>
-                                    <Grid container direction="column" wrap="nowrap" spacing={16}>
+                                    <Grid container direction="column" wrap="nowrap" spacing={40}>
                                         <Grid item>
                                             {this.state.loadingHistory &&
                                             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>

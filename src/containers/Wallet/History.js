@@ -114,11 +114,11 @@ class History extends React.Component {
                 </Grid>
                 <Grid container justify="center" spacing={40} style={{ paddingBottom: 60 }}>
                     <Grid item xs={12} md={8}>
-                        <Paper style={{ width: '100%', minHeight: 280, padding: 15 }}
+                        <Paper style={{ width: '100%', minHeight: 280, padding: 35 }}
                                elevation={1}>
-                            <Grid container direction="column" wrap="nowrap" spacing={16}>
+                            <Grid container direction="column" wrap="nowrap" spacing={40}>
                                 <Grid item>
-                                    <Typography variant='title'>Transaction history</Typography>
+                                    <Typography variant='title'>TRANSACTION HISTORY</Typography>
                                 </Grid>
                                 <Grid item>
                                     {this.state.loadingHistory &&
