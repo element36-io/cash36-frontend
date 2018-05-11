@@ -48,6 +48,8 @@ class WalletNav extends React.Component {
                         centered
                     >
                         <Tab classes={{ root: classes.tabRoot }}
+                             label='OVERVIEW'/>
+                        <Tab classes={{ root: classes.tabRoot }}
                              label='BUY'/>
                         <Tab classes={{ root: classes.tabRoot }}
                              label='SELL'/>

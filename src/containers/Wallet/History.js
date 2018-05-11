@@ -99,7 +99,7 @@ class History extends React.Component {
         return (
             <div className={classes.root}>
                 <Grid container justify="center" spacing={40}>
-                    <Grid item xs={12} md={5}>
+                    <Grid item xs={12} md={4}>
                         <UserProfile/>
                     </Grid>
                     <Grid item xs={6} md={4}>
@@ -113,12 +113,12 @@ class History extends React.Component {
                     </Grid>
                 </Grid>
                 <Grid container justify="center" spacing={40} style={{ paddingBottom: 60 }}>
-                    <Grid item xs={12} md={9}>
-                        <Paper style={{ backgroundColor: 'white', width: '100%', minHeight: 280, padding: 15 }}
+                    <Grid item xs={12} md={8}>
+                        <Paper style={{ width: '100%', minHeight: 280, padding: 15 }}
                                elevation={1}>
                             <Grid container direction="column" wrap="nowrap" spacing={16}>
                                 <Grid item>
-                                    <Typography variant='body1'>Transaction history</Typography>
+                                    <Typography variant='title'>Transaction history</Typography>
                                 </Grid>
                                 <Grid item>
                                     {this.state.loadingHistory &&

@@ -8,7 +8,6 @@ import hand from '../assets/hand.png';
 import yin from '../assets/yin.png';
 import screw from '../assets/screw.png';
 
-
 const styles = theme => ({
     root: {
         flexGrow: 1,

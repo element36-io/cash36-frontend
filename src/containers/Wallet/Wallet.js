@@ -6,6 +6,7 @@ import BuyTokens from "./BuyTokens";
 import SellTokens from "./SellTokens";
 import History from "./History";
 import { connect } from "react-redux";
+import Overview from "./Overview";
 
 class Wallet extends Component {
 
@@ -51,9 +52,10 @@ class Wallet extends Component {
         return (
             <div>
                 <WalletNav tabIndex={this.state.tabIndex} changeTab={this.changeTab.bind(this)}/>
-                {this.state.tabIndex === 0 && <BuyTokens tokens={this.state.tokens} updateTokens={this.updateTokens.bind(this)}/>}
-                {this.state.tabIndex === 1 && <SellTokens tokens={this.state.tokens} updateTokens={this.updateTokens.bind(this)}/>}
-                {this.state.tabIndex === 2 && <History tokens={this.state.tokens}/>}
+                {this.state.tabIndex === 0 && <Overview tokens={this.state.tokens}/>}
+                {this.state.tabIndex === 1 && <BuyTokens tokens={this.state.tokens} updateTokens={this.updateTokens.bind(this)}/>}
+                {this.state.tabIndex === 2 && <SellTokens tokens={this.state.tokens} updateTokens={this.updateTokens.bind(this)}/>}
+                {this.state.tabIndex === 3 && <History tokens={this.state.tokens}/>}
             </div>
         );
     }

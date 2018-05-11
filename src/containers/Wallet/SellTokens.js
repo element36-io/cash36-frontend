@@ -105,7 +105,7 @@ class SellTokens extends React.Component {
         return (
             <div className={classes.root}>
                 <Grid container justify="center" spacing={40}>
-                    <Grid item xs={12} md={5}>
+                    <Grid item xs={12} md={4}>
                         <UserProfile/>
                     </Grid>
                     <Grid item xs={6} md={4}>
@@ -119,7 +119,7 @@ class SellTokens extends React.Component {
                     </Grid>
                 </Grid>
                 <Grid container justify="center" spacing={40} style={{ paddingBottom: 60 }}>
-                    <Grid item xs={12} md={9}>
+                    <Grid item xs={12} md={8}>
                         <Paper style={{ width: '100%', minHeight: 400, padding: 35 }} elevation={1}>
                             <Grid container direction="column" wrap="nowrap" spacing={40}>
                                 <Grid item>
