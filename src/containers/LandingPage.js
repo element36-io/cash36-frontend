@@ -21,8 +21,6 @@ const styles = theme => ({
         padding: theme.spacing.unit * 2,
         borderRadius: 2,
         opacity: 1,
-        minWidth: 200,
-        maxWidth: 250,
     },
     img: {
         maxHeight: 100,
@@ -98,55 +96,65 @@ class LandingPage extends Component {
                 {tokens.length !== 0 &&
                 <Grid container justify="center" alignItems={'center'} spacing={40} style={{ marginTop: -50 }}>
                     {tokens.length > 0 && tokens.map((token, key) =>
-                        <Grid item key={key}>
+                        <Grid item key={key} xs={5}>
                             <Paper className={classes.paper} elevation={1}>
                                 <Grid container alignItems={'center'} wrap="nowrap" spacing={16}>
-                                    <Grid item>
+                                    <Grid item xs={2}>
                                         <Avatar className={classes.avatar}>{token.symbol}</Avatar>
                                     </Grid>
-                                    <Grid container direction="column">
-                                        <Grid item>
-                                            <Typography variant="subheading">
-                                                {token.name}
-                                            </Typography>
-                                        </Grid>
-                                        <Grid container spacing={16}>
+                                    <Grid item xs={10}>
+                                        <Grid container direction="column">
                                             <Grid item>
-                                                <div style={{ maxWidth: 170 }}>
-                                                    <Typography variant="caption" noWrap>
-                                                        {token.tokenAddress}
-                                                    </Typography>
-                                                </div>
+                                                <Typography variant="subheading">
+                                                    {token.name}
+                                                </Typography>
                                             </Grid>
-                                            <Grid item>
-                                                <a style={{ cursor: 'pointer' }}><CopyIcon
-                                                    style={{ fontSize: '100%', color: '#67B6F4' }}/></a>
+                                            <Grid container spacing={16}>
+                                                <Grid item>
+                                                    <div>
+                                                        <Typography variant="caption" noWrap>
+                                                            {token.tokenAddress}
+                                                        </Typography>
+                                                    </div>
+                                                </Grid>
+                                                <Grid item>
+                                                    <a style={{ cursor: 'pointer' }}><CopyIcon
+                                                        style={{ fontSize: '100%', color: '#67B6F4' }}/></a>
+                                                </Grid>
                                             </Grid>
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                                <Grid container direction={'column'} style={{ paddingTop: 25 }}>
-                                    <Grid item>
-                                        <Typography variant="caption">
-                                            Total Supply
-                                        </Typography>
+                                <Grid container alignItems={'center'} wrap="nowrap" spacing={16}>
+                                    <Grid item xs={2}>
                                     </Grid>
-                                    <Grid item>
-                                        <Typography variant="title">
-                                            {token.totalSupply} <span className={classes.caption}>{token.symbol}</span>
-                                        </Typography>
+                                    <Grid item xs={5}>
+                                        <Grid container direction={'column'}>
+                                            <Grid item>
+                                                <Typography variant="caption">
+                                                    Total Supply
+                                                </Typography>
+                                            </Grid>
+                                            <Grid item>
+                                                <Typography variant="title">
+                                                    {token.totalSupply} <span className={classes.caption}>{token.symbol}</span>
+                                                </Typography>
+                                            </Grid>
+                                        </Grid>
                                     </Grid>
-                                </Grid>
-                                <Grid container direction={'column'} style={{ paddingTop: 25 }}>
-                                    <Grid item>
-                                        <Typography variant="caption">
-                                            Balance Bank Account
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item>
-                                        <Typography variant="title">
-                                            {token.totalSupply} <span className={classes.caption}>{token.fiat}</span>
-                                        </Typography>
+                                    <Grid item xs={5}>
+                                        <Grid container direction={'column'}>
+                                            <Grid item>
+                                                <Typography variant="caption">
+                                                    Balance Bank Account
+                                                </Typography>
+                                            </Grid>
+                                            <Grid item>
+                                                <Typography variant="title">
+                                                    {token.totalSupply} <span className={classes.caption}>{token.fiat}</span>
+                                                </Typography>
+                                            </Grid>
+                                        </Grid>
                                     </Grid>
                                 </Grid>
                                 {/*{loadingHistory &&*/}
