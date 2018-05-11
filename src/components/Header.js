@@ -101,7 +101,7 @@ class Header extends React.Component {
                                         </Tooltip>
                                     </Grid>
                                     <Grid item>
-                                        <img src={this.props.credentials.avatar.uri}
+                                        <img src={this.props.credentials.avatar.uri} alt={'avatar'}
                                              style={{ width: 50, borderRadius: 100, border: '1px solid white' }}/>
                                     </Grid>
                                     <Grid item>

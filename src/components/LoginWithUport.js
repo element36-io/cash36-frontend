@@ -7,7 +7,7 @@ export default LoginWithUport => {
     return (
         <div>
             <Typography variant="caption" style={{ fontSize: '14px', paddingLeft: 15 }}>Login with</Typography>
-            <img src={uportLogo} style={{ width: 90, paddingTop: 10 }}/>
+            <img src={uportLogo} style={{ width: 90, paddingTop: 10 }} alt={'UPORT'}/>
         </div>
     )
 }

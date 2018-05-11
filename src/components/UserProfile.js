@@ -27,7 +27,7 @@ class UserProfile extends React.Component {
             <Paper className={classes.paper} elevation={1}>
                 <Grid container alignItems="center" spacing={40}>
                     <Grid item xs={3} md={3}>
-                        <img className={classes.avatar} src={this.props.credentials.avatar.uri}/>
+                        <img className={classes.avatar} src={this.props.credentials.avatar.uri} alt={'avatar'}/>
                     </Grid>
                     <Grid item xs={9} md={9}>
                         <Grid container direction="column">

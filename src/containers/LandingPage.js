@@ -46,22 +46,8 @@ class LandingPage extends Component {
             : 'https://cash36-backend.herokuapp.com/cash36';
 
         this.state = {
-            dialogOpen: false,
             loading: false,
-            tabTokenIndex: 0,
-            sellAmount: '',
-            buyAmount: '',
-            selectedToken: 'CHF36',
-            baseFee: 0.015,
-            exchanging: false,
             tokens: {},
-            tokenHistory: {},
-            loadingHistory: true,
-            loggedInAddress: '',
-            name: '',
-            avatar: '',
-            verified: false,
-            tabIndex: 0,
             backendUrl: url,
         }
     }
@@ -71,6 +57,7 @@ class LandingPage extends Component {
     }
 
     updateTokens() {
+        this.setState({ loading: true });
         fetch(`${this.state.backendUrl}/token`).then(results => {
             return results.json();
         }).then(data => {
@@ -80,7 +67,7 @@ class LandingPage extends Component {
             //         this.setState({ loadingHistory: false });
             //     });
             // }
-            this.setState({ tokens: data });
+            this.setState({ loading: false, tokens: data });
         });
     }
 
@@ -96,7 +83,7 @@ class LandingPage extends Component {
 
     render() {
         const { classes } = this.props;
-        const { tokens, tokenHistory, loadingHistory } = this.state;
+        const { tokens } = this.state;
 
         return (
             <div className={classes.root}>
@@ -196,7 +183,7 @@ class LandingPage extends Component {
                     <Grid item xs={12} md={4}>
                         <Grid container direction="column" alignItems="center" spacing={40} >
                             <Grid item>
-                                <img className={classes.img} src={yin}/>
+                                <img className={classes.img} src={yin} alt={'yin'}/>
                             </Grid>
                             <Grid item>
                                 <Typography variant={"title"}>FIAT AND TRANSPARENCY</Typography>
@@ -212,7 +199,7 @@ class LandingPage extends Component {
                     <Grid item xs={12} md={4}>
                         <Grid container direction="column" alignItems="center" spacing={40} >
                             <Grid item>
-                                <img className={classes.img} src={hand}/>
+                                <img className={classes.img} src={hand} alt={'hand'}/>
                             </Grid>
                             <Grid item>
                                 <Typography variant={"title"}>WHITE WALLETS</Typography>
@@ -229,7 +216,7 @@ class LandingPage extends Component {
                     <Grid item xs={12} md={4}>
                         <Grid container direction="column" alignItems="center" spacing={40} >
                             <Grid item>
-                                <img className={classes.img} src={screw}/>
+                                <img className={classes.img} src={screw} alt={'screw'}/>
                             </Grid>
                             <Grid item>
                                 <Typography variant={"title"}>ERC20</Typography>

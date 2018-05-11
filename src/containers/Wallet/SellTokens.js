@@ -8,8 +8,6 @@ import {
     InputLabel,
     MenuItem,
     Paper, Select,
-    Tab,
-    Tabs,
     TextField,
     Typography
 } from 'material-ui';
