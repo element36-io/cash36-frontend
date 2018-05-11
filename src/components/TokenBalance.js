@@ -39,7 +39,7 @@ class TokenBalance extends React.Component {
                         <Avatar className={classes.avatar}>{token.symbol}</Avatar>
                     </Grid>
                     <Grid item>
-                        <Grid container direction={'column'} spacing={8}>
+                        <Grid container direction={'column'}>
                             <Grid item>
                                 <Typography variant="caption" style={{ fontSize: 14 }}>
                                     Your {token.name} balance
