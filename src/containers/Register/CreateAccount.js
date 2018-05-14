@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import { Grid, Paper } from "material-ui";
 import QRCode from 'qrcode.react'
-import { Connect, MNID, SimpleSigner } from "uport-connect";
+import { Connect, SimpleSigner } from "uport-connect";
 import LoginWithUport from "../../components/LoginWithUport";
 
 const styles = theme => ({
@@ -52,14 +52,8 @@ class CreateAccount extends Component {
             notifications: true,
             //accountType: 'segregated'
         }, this.uPortURIHandler).then((credentials) => {
-            let userAddress = MNID.decode(credentials.address).address;
-
-            this.props.afterValid(userAddress, credentials.address);
+            this.props.afterValid(credentials);
         });
-    }
-
-    _validate() {
-        this.props.afterValid(2)
     }
 
     uPortURIHandler(uri) {

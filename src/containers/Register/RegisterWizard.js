@@ -13,15 +13,14 @@ class RegisterWizard extends React.Component {
         super(props);
 
         this.state = {
-            loggedInAddress: '',
-            loggedInMNID: '',
+            credentials: {},
             currentStep: 1
         };
     }
 
-    _next(loggedInAddress, loggedInMNID) {
-        if (loggedInAddress && loggedInMNID) {
-            this.setState({ loggedInAddress: loggedInAddress, loggedInMNID: loggedInMNID });
+    _next(data) {
+        if (data) {
+            this.setState({ credentials: data });
         }
 
         let currentStep = this.state.currentStep;
@@ -41,12 +40,11 @@ class RegisterWizard extends React.Component {
             <div>
                 <SubheaderEmpty/>
                 <DownloadUport currentStep={this.state.currentStep} afterValid={this._next.bind(this)}/>
-                <CreateAccount currentStep={this.state.currentStep} afterValid={this._next.bind(this)}
-                               loggedInAddress={this.state.loggedInAddress} loggedInMNID={this.state.loggedInMNID}/>
+                <CreateAccount currentStep={this.state.currentStep} afterValid={this._next.bind(this)}/>
                 <EnterCredentials currentStep={this.state.currentStep} afterValid={this._next.bind(this)}/>
                 <UploadID currentStep={this.state.currentStep} afterValid={this._next.bind(this)}/>
                 <AttestUser currentStep={this.state.currentStep} afterValid={this._next.bind(this)}
-                            loggedInAddress={this.state.loggedInAddress} loggedInMNID={this.state.loggedInMNID}/>
+                            credentials={this.state.credentials}/>
             </div>
         );
     }

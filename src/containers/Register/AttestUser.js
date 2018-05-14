@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import QRCode from 'qrcode.react'
 import { Connect, SimpleSigner } from "uport-connect";
 
-
 const styles = theme => ({
     root: {
         marginTop: -50,
@@ -52,16 +51,11 @@ class AttestUser extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('attest mounted');
-
         if (nextProps.currentStep === 5) {
-            console.log(this.props.loggedInMNID);
-
             this.uport.attestCredentials({
-                sub: this.props.loggedInMNID,
-                claim: { 'cash36KYC': { 'Name': 'Maik Blumenthal', 'verified on': new Date() }, kyc: 'passed' }
+                sub: this.props.credentials.address,
+                claim: { 'cash36KYC': { 'Name': this.props.credentials.name, 'verified on': new Date() } }
             }, this.uPortURIHandler).then((att) => {
-                console.log(att);
                 this.setState({ attested: true })
             })
         }
@@ -83,21 +77,32 @@ class AttestUser extends React.Component {
                 <Grid container justify='center'>
                     <Grid item xs={8}>
                         <Paper className={classes.paper}>
-                            <Typography variant="body2">
-                                Identification was successful, please scan the QR Code with the uport app
-                                and receive our Verification
-                            </Typography>
-                            {!this.state.attested &&
-                            <QRCode value={this.state.uri} size={300}/>
-                            }
-                            {this.state.attested &&
-                            <div>
-                                <Typography variant="body2">'Done, ready to go...'</Typography>
-                                <Link to="/login" style={{ textDecoration: 'none' }}>
-                                    <Button className={classes.button}>Continue to Login</Button>
-                                </Link>
-                            </div>
-                            }
+                            <Grid container direction="column" spacing={16}>
+                                <Grid item>
+                                    <Typography variant="title">
+                                        Verification with uport app
+                                    </Typography>
+                                </Grid>
+                                <Grid item>
+                                    <Typography variant="body2">
+                                        Identification was successful, please scan the QR Code below with your uport app
+                                        to receive our verification.
+                                    </Typography>
+                                </Grid>
+                                <Grid item>
+                                    {!this.state.attested &&
+                                        <QRCode value={this.state.uri} size={300}/>
+                                    }
+                                    {this.state.attested &&
+                                    <div>
+                                        <Typography variant="body2">'Done, ready to go...'</Typography>
+                                        <Link to="/login" style={{ textDecoration: 'none' }}>
+                                            <Button className={classes.button}>Continue to Login</Button>
+                                        </Link>
+                                    </div>
+                                    }
+                                </Grid>
+                            </Grid>
                         </Paper>
                     </Grid>
                 </Grid>
