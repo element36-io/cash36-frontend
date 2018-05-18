@@ -35,17 +35,6 @@ const mapItem = (notifications) => {
     }
 };
 
-const mapItem = (notifications) => {
-    return notifications.map((n, key) => (
-        <ListItem key={key}>
-            <ListItemIcon>
-                <SwapHoriz/>
-            </ListItemIcon>
-            <ListItemText inset primary={n.header} secondary={n.message}/>
-        </ListItem>
-    ));
-};
-
 class NotificationList extends React.Component {
 
     render() {
