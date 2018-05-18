@@ -68,7 +68,7 @@ class App extends Component {
             this.setState({ notifications: data });
         });
 
-        let socket = new SockJS('http://localhost:8080/cash36/ws');
+        let socket = new SockJS(`${this.state.backendUrl}/ws`);
         this.stompClient = Stomp.over(socket);
         this.stompClient.connect({}, (frame) => {
             this.stompClient.subscribe('/topics/updates', (messageOutput) => {
