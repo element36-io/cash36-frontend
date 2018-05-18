@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as _ from 'lodash';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import {
     CircularProgress,
     Grid,
@@ -10,7 +10,7 @@ import {
     TableHead,
     TableRow,
     Typography
-} from 'material-ui';
+} from '@material-ui/core';
 import TokenBalance from "../../components/TokenBalance";
 import UserProfile from "../../components/UserProfile";
 import { connect } from "react-redux";
@@ -18,7 +18,10 @@ import { connect } from "react-redux";
 
 const styles = theme => ({
     root: {
+        flexGrow: 1,
         paddingTop: 30,
+        paddingLeft: 20,
+        paddingRight: 20,
     },
     amountField: {
         marginLeft: theme.spacing.unit,
@@ -53,6 +56,11 @@ const styles = theme => ({
         width: '100%',
         height: 150,
         padding: theme.spacing.unit,
+    },
+    row: {
+        '&:nth-of-type(odd)': {
+            backgroundColor: '#f5f5f5',
+        },
     },
 });
 
@@ -129,18 +137,18 @@ class History extends React.Component {
                                     }
                                     {!this.state.loadingHistory &&
                                     <Table className={classes.table}>
-                                        <TableHead>
+                                        <TableHead style={{backgroundColor: 'black'}}>
                                             <TableRow>
-                                                <TableCell numeric>Block</TableCell>
-                                                <TableCell>Action</TableCell>
-                                                <TableCell numeric>Amount</TableCell>
-                                                <TableCell>Token</TableCell>
+                                                <TableCell style={{color: 'white'}} numeric>Block</TableCell>
+                                                <TableCell style={{color: 'white'}}>Action</TableCell>
+                                                <TableCell style={{color: 'white'}} numeric>Amount</TableCell>
+                                                <TableCell style={{color: 'white'}}>Token</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
                                             {this.state.history.length > 0 && this.state.history.map((n, key) => {
                                                 return (
-                                                    <TableRow key={key}>
+                                                    <TableRow key={key} className={classes.row}>
                                                         <TableCell numeric>{n.blockNumber}</TableCell>
                                                         <TableCell>{n.action}</TableCell>
                                                         <TableCell

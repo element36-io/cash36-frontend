@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import { Avatar, Grid, Paper, Typography } from "material-ui";
+import { withStyles } from '@material-ui/core/styles';
+import { Avatar, Grid, Paper, Typography } from "@material-ui/core";
 import CopyIcon from '@material-ui/icons/ContentCopy';
 import Subheader from "../components/Subheader";
 import hand from '../assets/hand.png';
@@ -58,20 +58,10 @@ class LandingPage extends Component {
     }
 
     componentDidMount() {
-        this.updateTokens();
-    }
-
-    updateTokens() {
         this.setState({ loading: true });
         fetch(`${this.state.backendUrl}/token`).then(results => {
             return results.json();
         }).then(data => {
-            // Load History data
-            // for (let i = 0; i < data.length; i++) {
-            //     this.getHistory(data[ i ].symbol).then(() => {
-            //         this.setState({ loadingHistory: false });
-            //     });
-            // }
             this.setState({ loading: false, tokens: data });
         });
     }

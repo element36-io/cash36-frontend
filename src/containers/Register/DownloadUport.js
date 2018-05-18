@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import {
     Button,
     Grid,
     Paper, Typography,
-} from "material-ui";
+} from "@material-ui/core";
 import { AppleAppStore, GooglePlayStore } from '../../icons';
 import LoginWithUport from "../../components/LoginWithUport";
-
 
 const styles = theme => ({
     root: {
@@ -18,13 +17,12 @@ const styles = theme => ({
     paper: {
         margin: theme.spacing.unit * 2,
         padding: theme.spacing.unit * 2,
-        borderRadius: 7,
-        minHeight: 430,
+        paddingBottom: 50,
+        borderRadius: 2,
     },
     button: {
         position: 'relative',
         float: 'right',
-        top: 120,
     },
 });
 

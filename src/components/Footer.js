@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Typography, withStyles } from 'material-ui';
+import { Grid, Typography, withStyles } from '@material-ui/core';
+import { Link } from "react-router-dom";
 
 
 const footerStyle = {
@@ -75,6 +76,7 @@ function Footer({ ...props }) {
                     <Typography variant="caption" style={{color: 'white'}}>
                         &copy; {1900 + new Date().getYear()}{' '} element36
                     </Typography>
+                    <Link to={"/admin"}><Typography variant="caption" style={{color: '#67B6F4'}}>Administration</Typography></Link>
                 </Grid>
             </Grid>
         </div>

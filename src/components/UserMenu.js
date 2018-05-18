@@ -1,7 +1,9 @@
 import React from 'react';
-import IconButton from 'material-ui/IconButton';
-import Menu, { MenuItem } from 'material-ui/Menu';
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { Link } from "react-router-dom";
 
 class UserMenu extends React.Component {
     state = {
@@ -34,6 +36,9 @@ class UserMenu extends React.Component {
                     open={Boolean(anchorEl)}
                     onClose={this.handleClose}
                 >
+                    <MenuItem key={'admin'} component={Link} to={"/admin"}>
+                        Admin
+                    </MenuItem>
                     <MenuItem key={'logout'} onClick={this.handleLogout}>
                         Logout
                     </MenuItem>

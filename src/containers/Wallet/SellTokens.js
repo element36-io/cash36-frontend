@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import {
     Button,
     CircularProgress, FormControl,
@@ -10,14 +10,13 @@ import {
     Paper, Select,
     TextField,
     Typography
-} from 'material-ui';
+} from '@material-ui/core';
 import TokenBalance from "../../components/TokenBalance";
 import UserProfile from "../../components/UserProfile";
 import { connect } from "react-redux";
-
+import Snackbar from "@material-ui/core/Snackbar";
 
 const styles = theme => ({
-
     root: {
         flexGrow: 1,
         paddingTop: 30,
@@ -55,6 +54,7 @@ class SellTokens extends React.Component {
             baseFee: 0.015,
             exchanging: false,
             backendUrl: url,
+            snackOpen: false,
         }
     }
 
@@ -66,7 +66,11 @@ class SellTokens extends React.Component {
         this.setState({ [ name ]: event.target.value });
     };
 
-    sellTokens() {
+    closeSnack = () => {
+        this.setState({snackOpen: false});
+    }
+
+    sellTokens = () => {
         // Validate input
         let sellAmountError = false;
         let selectedTokenError = false;
@@ -93,17 +97,24 @@ class SellTokens extends React.Component {
                 'Content-Type': 'application/json',
             },
         }).then((response) => {
-            this.setState({ exchanging: false, sellAmount: '', selectedToken: '' });
+            this.setState({ exchanging: false, sellAmount: '', selectedToken: '', snackOpen: true });
             this.props.updateTokens();
         }).then((data) => {
         });
-    }
+    };
 
     render() {
         const { classes, tokens } = this.props;
 
         return (
             <div className={classes.root}>
+                <Snackbar
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                    open={this.state.snackOpen}
+                    onClose={this.closeSnack}
+                    autoHideDuration={5000}
+                    message={"Request received - You will be notified once it's processed"}
+                />
                 <Grid container justify="center" spacing={40}>
                     <Grid item xs={12} md={4}>
                         <UserProfile/>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import { Grid, Paper } from "material-ui";
+import { withStyles } from '@material-ui/core/styles';
+import { Grid, Paper } from "@material-ui/core";
 import QRCode from 'qrcode.react'
 import { Connect, SimpleSigner } from "uport-connect";
 import LoginWithUport from "../../components/LoginWithUport";
@@ -14,8 +14,7 @@ const styles = theme => ({
     paper: {
         margin: theme.spacing.unit * 2,
         padding: theme.spacing.unit * 2,
-        borderRadius: 7,
-        minHeight: 430,
+        borderRadius: 2,
     },
     button: {
         position: 'relative',
@@ -48,7 +47,7 @@ class CreateAccount extends Component {
 
     componentWillMount() {
         this.uport.requestCredentials({
-            requested: [ 'name', 'avatar', 'temp' ],
+            requested: [ 'name', 'avatar', 'cash36KYC' ],
             notifications: true,
             //accountType: 'segregated'
         }, this.uPortURIHandler).then((credentials) => {

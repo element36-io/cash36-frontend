@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'material-ui/Button';
-import TextField from 'material-ui/TextField';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 import Dialog, {
     DialogActions,
     DialogContent,
     DialogContentText,
     DialogTitle,
-} from 'material-ui/Dialog';
-import { CircularProgress, Grid } from "material-ui";
-import { withStyles } from "material-ui/styles/index";
+} from '@material-ui/core/Dialog';
+import { CircularProgress, Grid } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles/index";
 
 const styles = theme => ({
     progress: {

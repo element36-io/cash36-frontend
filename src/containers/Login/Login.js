@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import {
     Grid,
     Paper, Typography,
-} from "material-ui";
+} from "@material-ui/core";
 import QRCode from 'qrcode.react'
 import { Connect, SimpleSigner } from "uport-connect";
 import { AppleAppStore, GooglePlayStore } from '../../icons';
@@ -19,7 +19,7 @@ const styles = theme => ({
     paper: {
         margin: theme.spacing.unit * 2,
         padding: theme.spacing.unit * 2,
-        borderRadius: 7,
+        borderRadius: 2,
     },
 });
 
@@ -70,7 +70,7 @@ class Login extends Component {
         return (
             <div className={classes.root}>
                 <Grid container justify='center'>
-                    <Grid item xs={12} md={6}>
+                    <Grid item xs={12} md={6} lg={5}>
                         <Paper className={classes.paper}>
                             <Grid container alignItems='center' justify='space-around' spacing={16}>
                                 <Grid item md={4}>

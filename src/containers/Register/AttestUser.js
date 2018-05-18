@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import { Button, Grid, Paper, Typography } from "material-ui";
+import { withStyles } from '@material-ui/core/styles';
+import { Button, Grid, Paper, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import QRCode from 'qrcode.react'
 import { Connect, SimpleSigner } from "uport-connect";
@@ -14,7 +14,7 @@ const styles = theme => ({
     paper: {
         margin: theme.spacing.unit * 2,
         padding: theme.spacing.unit * 2,
-        borderRadius: 7,
+        borderRadius: 2,
         minHeight: 430,
     },
     button: {
@@ -44,10 +44,6 @@ class AttestUser extends React.Component {
             network: 'rinkeby',
             signer: SimpleSigner('98fe93a539f8ed46def934713918f888df1e088dc0ec6c58333f131b4f4ca358')
         });
-    }
-
-    _validate() {
-        this.props.afterValid()
     }
 
     componentWillReceiveProps(nextProps) {

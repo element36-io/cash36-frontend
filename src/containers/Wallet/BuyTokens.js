@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import {
     Button,
     CircularProgress,
@@ -11,11 +11,10 @@ import {
     Select,
     TextField,
     Typography
-} from 'material-ui';
+} from '@material-ui/core';
 import TokenBalance from "../../components/TokenBalance";
 import { connect } from "react-redux";
 import UserProfile from "../../components/UserProfile";
-
 
 const styles = theme => ({
     root: {
@@ -61,9 +60,9 @@ class BuyTokens extends React.Component {
             selectedTokenError: false,
             preparing: false,
             prepared: false,
-            exchanging: false,
             backendUrl: url,
-            transferInstructions: {}
+            transferInstructions: {},
+            snackOpen: false,
         }
     }
 
@@ -75,7 +74,7 @@ class BuyTokens extends React.Component {
         this.setState({ [ name ]: event.target.value });
     };
 
-    preparePayment() {
+    validateInput() {
         // Validate input
         let buyAmountError = false;
         let selectedTokenError = false;
@@ -89,31 +88,39 @@ class BuyTokens extends React.Component {
 
         if (buyAmountError || selectedTokenError) {
             this.setState({ buyAmountError: buyAmountError, selectedTokenError: selectedTokenError });
-            return;
+            return false;
         }
-
-        // Call backend
-        //this.setState({ preparing: true });
-
-        // then
-        this.setState({ transferInstructions: {}, preparing: false, prepared: true });
+        return true;
     }
 
-    buyTokens() {
-        this.setState({ exchanging: true });
+    preparePayment() {
+        if (this.validateInput()) {
+            this.setState({ preparing: true });
 
-        let amount = this.state.buyAmount;
-        fetch(`${this.state.backendUrl}/token/${this.state.selectedToken}/?amount=${amount}&forAddress=${this.props.loggedInAddress}`, {
-            method: "PUT",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-        }).then((response) => {
-            this.props.updateTokens();
-            this.reset();
-        }).then((data) => {
-        });
+            fetch(`${this.state.backendUrl}/token/${this.state.selectedToken}/?amount=${this.state.buyAmount}&forAddress=${this.props.loggedInAddress}`, {
+                method: "PUT",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+            }).then((response) => {
+                return response.json();
+            }).then((data) => {
+                    this.setState({ transferInstructions: {
+                        amount: data.amount,
+                        bankName: data.bankName,
+                        bankBic: data.bankBic,
+                        bankAddress: data.bankAddress,
+                        bankCountry: data.bankCountry,
+                        receipientName: data.receipientName,
+                        receipientIban: data.receipientIban,
+                        receipientAddress: data.receipientAddress,
+                        paymentReferenceId: data.paymentReferenceId
+                    },
+                    preparing: false,
+                    prepared: true });
+            });
+        }
     }
 
     reset() {
@@ -123,7 +130,6 @@ class BuyTokens extends React.Component {
             prepared: false,
             buyAmount: '',
             selectedToken: '',
-            exchanging: false,
         });
     }
 
@@ -219,14 +225,14 @@ class BuyTokens extends React.Component {
                                                     disabled
                                                     label="Bank Name"
                                                     type="text"
-                                                    value="Universal Bank"
+                                                    value={this.state.transferInstructions.bankName}
                                                     className={classes.textField}
                                                 />
                                                 <TextField
                                                     disabled
                                                     label="Swift/BIC"
                                                     type="text"
-                                                    value="XYZABC123"
+                                                    value={this.state.transferInstructions.bankBic}
                                                     className={classes.textField}
                                                 />
                                             </Grid>
@@ -235,14 +241,14 @@ class BuyTokens extends React.Component {
                                                     disabled
                                                     label="Bank Address"
                                                     type="text"
-                                                    value="Börsenstrasse 15, 8022 Zürich"
+                                                    value={this.state.transferInstructions.bankAddress}
                                                     className={classes.textField}
                                                 />
                                                 <TextField
                                                     disabled
                                                     label="Bank Country"
                                                     type="text"
-                                                    value="Switzerland"
+                                                    value={this.state.transferInstructions.bankCountry}
                                                     className={classes.textField}
                                                 />
                                             </Grid>
@@ -251,14 +257,14 @@ class BuyTokens extends React.Component {
                                                     disabled
                                                     label="Receipient Name"
                                                     type="text"
-                                                    value="element36 GmbH"
+                                                    value={this.state.transferInstructions.receipientName}
                                                     className={classes.textField}
                                                 />
                                                 <TextField
                                                     disabled
                                                     label="Receipient IBAN"
                                                     type="text"
-                                                    value="CH123456232442342342"
+                                                    value={this.state.transferInstructions.receipientIban}
                                                     className={classes.textField}
                                                 />
                                             </Grid>
@@ -267,7 +273,7 @@ class BuyTokens extends React.Component {
                                                     disabled
                                                     label="Receipient Address"
                                                     type="text"
-                                                    value="Bahnmatt 25, 6340 Baar"
+                                                    value={this.state.transferInstructions.receipientAddress}
                                                     className={classes.textField}
                                                 />
                                             </Grid>
@@ -276,7 +282,7 @@ class BuyTokens extends React.Component {
                                                     disabled
                                                     label="Amount"
                                                     type="text"
-                                                    value={`${this.state.buyAmount} ${this.state.selectedToken.substr(0, 3)}`}
+                                                    value={`${this.state.transferInstructions.amount} ${this.state.selectedToken.substr(0, 3)}`}
                                                     className={classes.textField}
                                                 />
                                             </Grid>
@@ -286,14 +292,13 @@ class BuyTokens extends React.Component {
                                                     label="Reference Number/Purpose"
                                                     helperText={<span style={{ color: 'red' }}>This must be included exactly for your transfer to work</span>}
                                                     type="text"
-                                                    value="ABCDEF1234567890"
+                                                    value={this.state.transferInstructions.paymentReferenceId}
                                                     className={classes.textField}
                                                     style={{ width: '60%' }}
                                                 />
                                             </Grid>
                                             <Grid item xs={3} md={3}>
                                                 <div style={{ paddingTop: 40 }}>
-                                                    {!this.state.exchanging &&
                                                     <Grid container alignItems="center" spacing={16}>
                                                         <Grid item>
                                                             <a onClick={this.reset.bind(this)}
@@ -304,15 +309,7 @@ class BuyTokens extends React.Component {
                                                                 </Typography>
                                                             </a>
                                                         </Grid>
-                                                        <Grid item>
-                                                            <Button onClick={() => this.buyTokens()}>SIMULATE
-                                                                BUY</Button>
-                                                        </Grid>
                                                     </Grid>
-                                                    }
-                                                    {this.state.exchanging &&
-                                                    <CircularProgress className={classes.progress}
-                                                                      style={{ color: '#199FC6' }} thickness={7}/>}
                                                 </div>
                                             </Grid>
                                         </form>

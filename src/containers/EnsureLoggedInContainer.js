@@ -21,7 +21,6 @@ class EnsureLoggedInContainer extends Component {
         const { isLoggedIn } = this.props;
 
         if (!isLoggedIn) {
-            //let redirectAfterLogin = this.props.location.pathname
             this.props.history.replace('/login');
         }
     }

@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import { Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, TextField, Typography } from "material-ui";
-
+import { withStyles } from '@material-ui/core/styles';
+import { Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, TextField, Typography } from "@material-ui/core";
 
 const styles = theme => ({
     root: {
@@ -24,8 +23,8 @@ const styles = theme => ({
     paper: {
         margin: theme.spacing.unit * 2,
         padding: theme.spacing.unit * 2,
-        borderRadius: 7,
-        minHeight: 430,
+        paddingBottom: 50,
+        borderRadius: 2,
     },
     button: {
         position: 'relative',

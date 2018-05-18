@@ -3,7 +3,6 @@ import SubheaderEmpty from "../../components/SubheaderEmpty";
 import Login from "./Login";
 import Verification from "./Verification";
 
-
 class LoginWizard extends React.Component {
 
     constructor(props) {

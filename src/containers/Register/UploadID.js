@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import { Button, Grid, Paper, Typography } from "material-ui";
+import { withStyles } from '@material-ui/core/styles';
+import { Button, Grid, Paper, Typography } from "@material-ui/core";
 
 const styles = theme => ({
     root: {
@@ -11,13 +11,13 @@ const styles = theme => ({
     paper: {
         margin: theme.spacing.unit * 2,
         padding: theme.spacing.unit * 2,
-        borderRadius: 7,
+        paddingBottom: 50,
+        borderRadius: 2,
         minHeight: 430,
     },
     button: {
         position: 'relative',
         float: 'right',
-        top: 250,
     },
 });
 

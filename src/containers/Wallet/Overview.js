@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as _ from 'lodash';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import {
     Avatar, CircularProgress,
     Grid,
     Paper, Table, TableBody, TableCell, TableHead, TableRow,
     Typography
-} from 'material-ui';
+} from '@material-ui/core';
 import TokenBalance from "../../components/TokenBalance";
 import { connect } from "react-redux";
 import UserProfile from "../../components/UserProfile";
@@ -40,6 +40,11 @@ const styles = theme => ({
         fontWeight: 700,
         lineHeight: '1.375em',
         opacity: 0.7,
+    },
+    row: {
+        '&:nth-of-type(odd)': {
+            backgroundColor: '#f5f5f5',
+        },
     },
 });
 
@@ -167,7 +172,7 @@ class Overview extends React.Component {
                         </Grid>
                     )}
                 </Grid>
-                <Grid container justify="center" spacing={40}>
+                <Grid container justify="center" spacing={40} style={{ paddingBottom: 60 }}>
                     <Grid item xs={12} md={8}>
                         <Paper className={classes.paper} style={{ padding: 35 }} elevation={1}>
                             <Grid container direction="column" spacing={40}>
@@ -185,18 +190,18 @@ class Overview extends React.Component {
                                             }
                                             {!this.state.loadingHistory &&
                                             <Table className={classes.table}>
-                                                <TableHead>
+                                                <TableHead style={{backgroundColor: 'black'}}>
                                                     <TableRow>
-                                                        <TableCell numeric>Block</TableCell>
-                                                        <TableCell>Action</TableCell>
-                                                        <TableCell numeric>Amount</TableCell>
-                                                        <TableCell>Token</TableCell>
+                                                        <TableCell style={{color: 'white'}} numeric>Block</TableCell>
+                                                        <TableCell style={{color: 'white'}}>Action</TableCell>
+                                                        <TableCell style={{color: 'white'}} numeric>Amount</TableCell>
+                                                        <TableCell style={{color: 'white'}}>Token</TableCell>
                                                     </TableRow>
                                                 </TableHead>
                                                 <TableBody>
                                                     {this.state.history.length > 0 && this.state.history.map((n, key) => {
                                                         return (
-                                                            <TableRow key={key}>
+                                                            <TableRow key={key} className={classes.row}>
                                                                 <TableCell numeric>{n.blockNumber}</TableCell>
                                                                 <TableCell>{n.action}</TableCell>
                                                                 <TableCell

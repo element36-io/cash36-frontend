@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import { Button, CircularProgress, Grid, Paper, Typography, } from "material-ui";
+import { withStyles } from '@material-ui/core/styles';
+import { Button, CircularProgress, Grid, Paper, Typography, } from "@material-ui/core";
 import VerfifiedUser from '@material-ui/icons/VerifiedUser';
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { MNID } from "uport-connect";
 import * as actions from "../../actions/user";
@@ -17,7 +17,7 @@ const styles = theme => ({
     paper: {
         margin: theme.spacing.unit * 2,
         padding: theme.spacing.unit * 2,
-        borderRadius: 7,
+        borderRadius: 2,
         minHeight: 430,
     },
     helper: {
@@ -75,7 +75,7 @@ class Verification extends Component {
         return (
             <div className={classes.root}>
                 <Grid container justify='center'>
-                    <Grid item xs={12} md={6}>
+                    <Grid item xs={12} md={6} lg={5}>
                         <Paper className={classes.paper}>
                             {this.state.verifying &&
                             <CircularProgress className={classes.progress}
@@ -83,15 +83,7 @@ class Verification extends Component {
                             {!this.state.verifying && this.state.verified ?
                                 <Grid container direction="column" alignItems="center" justify="space-between" spacing={40}>
                                     <Grid item>
-                                        <Typography variant="title">Welcome back to cash36!</Typography>
-                                    </Grid>
-                                    <Grid item>
-                                        <VerfifiedUser style={{ color: 'green', fontSize: '200%' }}/>
-                                    </Grid>
-                                    <Grid item>
-                                        <Link to="/wallet" style={{ textDecoration: 'none' }}>
-                                            <Button>Continue</Button>
-                                        </Link>
+                                        <VerfifiedUser style={{ color: 'green', fontSize: '500%' }}/>
                                     </Grid>
                                 </Grid>
                                 :
@@ -110,6 +102,7 @@ class Verification extends Component {
                                 </Grid>
                             }
                         </Paper>
+                        {this.state.verified && <Redirect to={"/wallet"}/>}
                     </Grid>
                 </Grid>
             </div>

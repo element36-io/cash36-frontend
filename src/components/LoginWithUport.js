@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from "material-ui";
+import { Typography } from "@material-ui/core";
 import uportLogo from '../assets/uport-logo-w.png';
 
 
