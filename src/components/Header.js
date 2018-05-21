@@ -15,6 +15,7 @@ import AccountBalanceWallet from "@material-ui/icons/AccountBalanceWallet";
 import Home from "@material-ui/icons/Home";
 import NotificationsMenu from "./NotificationsMenu";
 
+
 const styles = theme => ({
     root: {
         flexGrow: 1,
@@ -103,11 +104,9 @@ class Header extends React.Component {
                                         </Tooltip>
                                     </Grid>
                                     <Grid item>
-                                        <Tooltip id="tooltip-bottom" title="Notifications" placement="bottom">
-                                            <NotificationsMenu openDrawer={this.props.openDrawer}
-                                                               notificationsBadge={this.props.notificationsBadge}
-                                                               reset={this.props.reset.bind(this)}/>
-                                        </Tooltip>
+                                        <NotificationsMenu openDrawer={this.props.openDrawer}
+                                                           notificationsBadge={this.props.notificationsBadge}
+                                                           reset={this.props.reset.bind(this)}/>
                                     </Grid>
                                     <Grid item>
                                         <img src={this.props.credentials.avatar.uri} alt={'avatar'}

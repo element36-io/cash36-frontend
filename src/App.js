@@ -11,6 +11,9 @@ import SnackbarContent from "@material-ui/core/SnackbarContent";
 import Button from "@material-ui/core/Button";
 import Slide from "@material-ui/core/Slide";
 import NotificationList from "./components/NotificationList";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as actions from "./actions/user";
 
 const theme = createMuiTheme({
     palette: {
@@ -61,7 +64,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        fetch(`${this.state.backendUrl}/notifications`)
+        fetch(`${this.state.backendUrl}/notifications/${this.props.loggedInAddress}`)
             .then((response) => {
                 return response.json();
             }).then((data) => {
@@ -70,8 +73,8 @@ class App extends Component {
 
         let socket = new SockJS(`${this.state.backendUrl}/ws`);
         this.stompClient = Stomp.over(socket);
-        this.stompClient.connect({}, (frame) => {
-            this.stompClient.subscribe('/topics/updates', (messageOutput) => {
+        this.stompClient.connect({userId: '0x123456'}, (frame) => {
+            this.stompClient.subscribe('/topics/updates/'+ this.props.loggedInAddress, (messageOutput) => {
                 let notifications = this.state.notifications;
                 notifications.push(JSON.parse(messageOutput.body));
                 notifications = _.orderBy(notifications, [ 'creationDate' ], [ 'desc' ]);
@@ -151,4 +154,19 @@ class App extends Component {
     }
 }
 
-export default App;
+const mapStateToProps = state => ({
+    credentials: state.user.credentials,
+    loggedIn: state.user.loggedIn,
+    loggedInAddress: state.user.loggedInAddress,
+});
+
+const mapDispatchToProps = dispatch => {
+    return {
+        actions: bindActionCreators(actions, dispatch),
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(App);

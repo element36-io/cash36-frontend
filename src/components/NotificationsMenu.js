@@ -4,6 +4,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Notification from '@material-ui/icons/Notifications';
 import withStyles from "@material-ui/core/styles/withStyles";
 import Badge from "@material-ui/core/Badge";
+import Tooltip from "@material-ui/core/Tooltip";
+
 
 const styles = theme => ({
     margin: {
@@ -26,7 +28,7 @@ class NotificationsMenu extends React.Component {
         const { classes } = this.props;
 
         return (
-            <div>
+            <Tooltip id="tooltip-bottom" title="Notifications" placement="bottom">
                 <IconButton className={classes.margin} onClick={this.handleClick} style={{ width: 24 }}>
                     {this.props.notificationsBadge > 0 &&
                     <Badge className={classes.badge} badgeContent={this.props.notificationsBadge} color="primary">
@@ -37,7 +39,7 @@ class NotificationsMenu extends React.Component {
                     <Notification style={{ color: 'white' }}/>
                     }
                 </IconButton>
-            </div>
+            </Tooltip>
         );
     }
 }
