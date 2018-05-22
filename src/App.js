@@ -14,6 +14,7 @@ import NotificationList from "./components/NotificationList";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as actions from "./actions/user";
+import { withRouter } from "react-router-dom";
 
 const theme = createMuiTheme({
     palette: {
@@ -166,7 +167,7 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(
+export default withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
-)(App);
+)(App));
