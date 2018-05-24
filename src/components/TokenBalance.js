@@ -35,10 +35,10 @@ class TokenBalance extends React.Component {
         return (
             <Paper className={classes.paper} elevation={1}>
                 <Grid container alignItems="center" spacing={16}>
-                    <Grid item>
+                    <Grid item xs={2}>
                         <Avatar className={classes.avatar}>{token.symbol}</Avatar>
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={10}>
                         <Grid container direction={'column'}>
                             <Grid item>
                                 <Typography variant="caption" style={{ fontSize: 14 }}>

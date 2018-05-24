@@ -17,7 +17,6 @@ class NotificationsMenu extends React.Component {
 
     handleClick = () => {
         this.props.openDrawer();
-        this.props.reset();
     };
 
     handleLogout = () => {
@@ -25,17 +24,17 @@ class NotificationsMenu extends React.Component {
     }
 
     render() {
-        const { classes } = this.props;
+        const { classes, badgeCount } = this.props;
 
         return (
             <Tooltip id="tooltip-bottom" title="Notifications" placement="bottom">
                 <IconButton className={classes.margin} onClick={this.handleClick} style={{ width: 24 }}>
-                    {this.props.notificationsBadge > 0 &&
-                    <Badge className={classes.badge} badgeContent={this.props.notificationsBadge} color="primary">
+                    {badgeCount > 0 &&
+                    <Badge className={classes.badge} badgeContent={badgeCount} color="primary">
                         <Notification style={{ color: 'white' }}/>
                     </Badge>
                     }
-                    {this.props.notificationsBadge === 0 &&
+                    {badgeCount === 0 &&
                     <Notification style={{ color: 'white' }}/>
                     }
                 </IconButton>

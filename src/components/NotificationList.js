@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as _ from 'lodash';
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import SwapHoriz from '@material-ui/icons/SwapVerticalCircle';
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -8,6 +9,8 @@ import Info from "@material-ui/icons/Info";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import Typography from "@material-ui/core/Typography";
+
 
 const styles = theme => ({
     margin: {
@@ -17,12 +20,19 @@ const styles = theme => ({
 
 const mapItem = (notifications) => {
     if (notifications && notifications.length > 0) {
+        notifications = _.orderBy(notifications, [ 'creationDate' ], [ 'desc' ]);
         return notifications.map((n, key) => (
             <ListItem key={key}>
                 <ListItemIcon>
                     <SwapHoriz/>
                 </ListItemIcon>
-                <ListItemText inset primary={n.header} secondary={n.message}/>
+                <ListItemText disableTypography inset
+                              primary={
+                                  <Typography style={{ fontWeight: n.new ? 700 : 400, fontSize: '110%' }}>{n.header}</Typography>
+                              }
+                              secondary={
+                                  <Typography style={{ fontWeight: n.new ? 700 : 400, opacity: 0.7 }}>{n.message}</Typography>
+                              }/>
             </ListItem>
         ));
     } else {

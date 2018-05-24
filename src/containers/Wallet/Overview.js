@@ -46,6 +46,18 @@ const styles = theme => ({
             backgroundColor: '#f5f5f5',
         },
     },
+    gridItem: {
+        flexDirection: 'column',
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: 'row',
+        },
+    },
+    gridItemReverse: {
+        flexDirection: 'row',
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: 'column',
+        },
+    },
 });
 
 class Overview extends React.Component {
@@ -71,7 +83,7 @@ class Overview extends React.Component {
     getTransferHistory() {
         this.setState({ loadingHistory: true });
 
-        fetch(`${this.state.backendUrl}/token/history?userAddress=${this.props.loggedInAddress}`, {
+        fetch(`${this.state.backendUrl}/tokens/history?userAddress=${this.props.loggedInAddress}`, {
             method: "GET",
             headers: {
                 'Accept': 'application/json',
@@ -92,13 +104,13 @@ class Overview extends React.Component {
         return (
             <div className={classes.root}>
                 <Grid container justify="center" spacing={40}>
-                    <Grid item xs={12} md={4}>
+                    <Grid item xs={12} sm={6} md={5} lg={4}>
                         <UserProfile/>
                     </Grid>
-                    <Grid item xs={6} md={4}>
-                        <Grid container direction="column" spacing={16}>
+                    <Grid item xs={12} sm={6} md={5} lg={4}>
+                        <Grid container className={classes.gridItem} spacing={16}>
                             {tokens.length > 0 && tokens.map((token, key) =>
-                                <Grid item key={key}>
+                                <Grid item key={key} xs={12}>
                                     <TokenBalance token={token}/>
                                 </Grid>
                             )}
@@ -107,9 +119,9 @@ class Overview extends React.Component {
                 </Grid>
                 <Grid container justify="center" spacing={40}>
                     {tokens.length > 0 && tokens.map((token, key) =>
-                        <Grid key={key} item xs={12} md={4}>
+                        <Grid key={key} item xs={12} sm={6} md={5} lg={4}>
                             <Paper className={classes.paper} elevation={1}>
-                                <Grid container alignItems={'center'} wrap="nowrap" spacing={16}>
+                                <Grid container wrap="nowrap" spacing={16}>
                                     <Grid item xs={2}>
                                         <Avatar className={classes.avatar}>{token.symbol}</Avatar>
                                     </Grid>
@@ -121,14 +133,12 @@ class Overview extends React.Component {
                                                 </Typography>
                                             </Grid>
                                             <Grid container spacing={16}>
-                                                <Grid item>
-                                                    <div>
-                                                        <Typography variant="caption" noWrap>
-                                                            {token.tokenAddress}
-                                                        </Typography>
-                                                    </div>
+                                                <Grid item xs={10} zeroMinWidth>
+                                                    <Typography variant="caption" noWrap>
+                                                        {token.tokenAddress}
+                                                    </Typography>
                                                 </Grid>
-                                                <Grid item>
+                                                <Grid item xs={2}>
                                                     <a style={{ cursor: 'pointer' }}><CopyIcon
                                                         style={{ fontSize: '100%', color: '#67B6F4' }}/></a>
                                                 </Grid>
@@ -136,34 +146,38 @@ class Overview extends React.Component {
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                                <Grid container alignItems={'center'} wrap="nowrap" spacing={16}>
+                                <Grid container spacing={16}>
                                     <Grid item xs={2}>
                                     </Grid>
-                                    <Grid item xs={5}>
-                                        <Grid container direction={'column'}>
-                                            <Grid item>
-                                                <Typography variant="caption">
-                                                    Total Supply
-                                                </Typography>
+                                    <Grid item xs={10}>
+                                        <Grid container wrap="nowrap" spacing={8} className={classes.gridItemReverse}>
+                                            <Grid item xs={12} md={6}>
+                                                <Grid container direction={'column'}>
+                                                    <Grid item>
+                                                        <Typography variant="caption">
+                                                            Total Supply
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="title">
+                                                            {token.totalSupply} <span className={classes.caption}>{token.symbol}</span>
+                                                        </Typography>
+                                                    </Grid>
+                                                </Grid>
                                             </Grid>
-                                            <Grid item>
-                                                <Typography variant="title">
-                                                    {token.totalSupply} <span className={classes.caption}>{token.symbol}</span>
-                                                </Typography>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid item xs={5}>
-                                        <Grid container direction={'column'}>
-                                            <Grid item>
-                                                <Typography variant="caption">
-                                                    Balance Bank Account
-                                                </Typography>
-                                            </Grid>
-                                            <Grid item>
-                                                <Typography variant="title">
-                                                    {token.totalSupply} <span className={classes.caption}>{token.fiat}</span>
-                                                </Typography>
+                                            <Grid item xs={12} md={6}>
+                                                <Grid container direction={'column'}>
+                                                    <Grid item>
+                                                        <Typography variant="caption">
+                                                            Balance Bank Account
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="title">
+                                                            {token.totalSupply} <span className={classes.caption}>{token.fiat}</span>
+                                                        </Typography>
+                                                    </Grid>
+                                                </Grid>
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -173,7 +187,7 @@ class Overview extends React.Component {
                     )}
                 </Grid>
                 <Grid container justify="center" spacing={40} style={{ paddingBottom: 60 }}>
-                    <Grid item xs={12} md={8}>
+                    <Grid item xs={12} md={10} lg={8}>
                         <Paper className={classes.paper} style={{ padding: 35 }} elevation={1}>
                             <Grid container direction="column" spacing={40}>
                                 <Grid item>

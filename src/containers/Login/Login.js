@@ -28,12 +28,7 @@ class Login extends Component {
     constructor(props) {
         super(props);
 
-        const url = (process.env.NODE_ENV === 'development')
-            ? 'http://localhost:8080/cash36'
-            : 'https://cash36-backend.herokuapp.com/cash36';
-
         this.state = {
-            backendUrl: url,
             uri: '',
         };
 

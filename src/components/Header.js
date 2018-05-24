@@ -15,7 +15,6 @@ import AccountBalanceWallet from "@material-ui/icons/AccountBalanceWallet";
 import Home from "@material-ui/icons/Home";
 import NotificationsMenu from "./NotificationsMenu";
 
-
 const styles = theme => ({
     root: {
         flexGrow: 1,
@@ -42,15 +41,18 @@ class Header extends React.Component {
         this.state = {
             loggedOut: false,
         }
+
+        console.log(props.location);
     }
 
     logout = () => {
         this.props.actions.userLoggedOut();
         this.setState({ loggedOut: true })
-    }
+    };
 
     render() {
         const { classes } = this.props;
+        const path = this.props.location.pathname;
 
         return (
             <div className={classes.root}>
@@ -89,6 +91,7 @@ class Header extends React.Component {
                             {this.props.loggedIn &&
                             <Grid item>
                                 <Grid container alignItems='center' spacing={16}>
+                                    {path === '/wallet' &&
                                     <Grid item>
                                         <Tooltip id="tooltip-bottom" title="Home" placement="bottom">
                                             <Link to={'/'} style={{ textDecoration: 'none' }}>
@@ -96,6 +99,8 @@ class Header extends React.Component {
                                             </Link>
                                         </Tooltip>
                                     </Grid>
+                                    }
+                                    {path !== '/wallet' &&
                                     <Grid item>
                                         <Tooltip id="tooltip-bottom" title="Wallet" placement="bottom">
                                             <Link to={'/wallet'} style={{ textDecoration: 'none' }}>
@@ -103,11 +108,13 @@ class Header extends React.Component {
                                             </Link>
                                         </Tooltip>
                                     </Grid>
+                                    }
+                                    {path === '/wallet' &&
                                     <Grid item>
                                         <NotificationsMenu openDrawer={this.props.openDrawer}
-                                                           notificationsBadge={this.props.notificationsBadge}
-                                                           reset={this.props.reset.bind(this)}/>
+                                                           badgeCount={this.props.badgeCount}/>
                                     </Grid>
+                                    }
                                     <Grid item>
                                         <img src={this.props.credentials.avatar.uri} alt={'avatar'}
                                              style={{ width: 50, borderRadius: 100, border: '1px solid white' }}/>
@@ -133,7 +140,7 @@ Header.propTypes = {
 const mapStateToProps = state => ({
     credentials: state.user.credentials,
     loggedIn: state.user.loggedIn,
-    loggedInAddress: state.user.loggedInAddress,
+    badgeCount: state.notification.badgeCount,
 });
 
 const mapDispatchToProps = dispatch => {

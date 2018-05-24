@@ -3,7 +3,6 @@ import {
     USER_LOGGED_OUT
 } from '../config/Actions';
 
-
 export function userLoggedIn(credentials, userAddress) {
     return {
         type: USER_LOGGED_IN,

@@ -22,6 +22,7 @@ class UserProfile extends React.Component {
 
     render() {
         const { classes } = this.props;
+        const verified = new Date(this.props.credentials.cash36KYC[ "verified on" ]);
 
         return (
             <Paper className={classes.paper} elevation={1}>
@@ -35,8 +36,8 @@ class UserProfile extends React.Component {
                                 <Typography variant="subheading">{this.props.credentials.name}'s
                                     Wallet</Typography>
                             </Grid>
-                            <Grid item>
-                                <Typography variant="caption">{this.props.loggedInAddress}</Typography>
+                            <Grid item zeroMinWidth>
+                                <Typography variant="caption" noWrap>{this.props.loggedInAddress}</Typography>
                             </Grid>
                             <Divider style={{ marginTop: 20, marginBottom: 10 }}/>
                             <Grid item>
@@ -46,7 +47,8 @@ class UserProfile extends React.Component {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="caption">Verified
-                                            on {this.props.credentials.cash36KYC[ "verified on" ]}</Typography>
+                                            on {`${verified.getDate()}.${verified.getMonth() + 1}.${verified.getFullYear()}`}
+                                        </Typography>
                                     </Grid>
                                 </Grid>
                             </Grid>

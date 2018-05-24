@@ -90,7 +90,7 @@ class SellTokens extends React.Component {
         this.setState({ exchanging: true });
 
         let amount = this.state.sellAmount;
-        fetch(`${this.state.backendUrl}/token/${this.state.selectedToken}/?amount=${amount}&fromAddress=${this.props.loggedInAddress}`, {
+        fetch(`${this.state.backendUrl}/payments/${this.state.selectedToken}/?amount=${amount}&fromAddress=${this.props.loggedInAddress}`, {
             method: "DELETE",
             headers: {
                 'Accept': 'application/json',
@@ -116,13 +116,13 @@ class SellTokens extends React.Component {
                     message={"Request received - You will be notified once it's processed"}
                 />
                 <Grid container justify="center" spacing={40}>
-                    <Grid item xs={12} md={4}>
+                    <Grid item xs={12} sm={6} md={5} lg={4}>
                         <UserProfile/>
                     </Grid>
-                    <Grid item xs={6} md={4}>
-                        <Grid container direction="column" spacing={16}>
+                    <Grid item xs={12} sm={6} md={5} lg={4}>
+                        <Grid container className={classes.gridItem} spacing={16}>
                             {tokens.length > 0 && tokens.map((token, key) =>
-                                <Grid item key={key}>
+                                <Grid item key={key} xs={12}>
                                     <TokenBalance token={token}/>
                                 </Grid>
                             )}
@@ -130,7 +130,7 @@ class SellTokens extends React.Component {
                     </Grid>
                 </Grid>
                 <Grid container justify="center" spacing={40} style={{ paddingBottom: 60 }}>
-                    <Grid item xs={12} md={8}>
+                    <Grid item xs={12} md={10} lg={8}>
                         <Paper style={{ width: '100%', minHeight: 400, padding: 35 }} elevation={1}>
                             <Grid container direction="column" wrap="nowrap" spacing={40}>
                                 <Grid item>

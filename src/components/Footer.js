@@ -59,20 +59,20 @@ function Footer({ ...props }) {
 
     return (
         <div className={classes.container}>
-            <Grid container justify="space-between" spacing={40}>
-                <Grid item xs={12} md={4}>
+            <Grid container justify="space-between">
+                <Grid item xs={4} md={4}>
                     <Typography variant="caption" style={{color: 'white'}}>
                         element36 GmbH<br/>
                         Bahnmatt 25<br/>
                         CH 6340 Baar
                     </Typography>
                 </Grid>
-                <Grid item xs={6} md={4} style={{textAlign: 'center'}}>
+                <Grid item xs={4} md={4} style={{textAlign: 'center'}}>
                     <Typography variant="caption" style={{color: 'white'}}>
                         Support: ask@element36.io
                     </Typography>
                 </Grid>
-                <Grid item xs={6} md={4} style={{textAlign: 'right'}}>
+                <Grid item xs={4} md={4} style={{textAlign: 'right'}}>
                     <Typography variant="caption" style={{color: 'white'}}>
                         &copy; {1900 + new Date().getYear()}{' '} element36
                     </Typography>

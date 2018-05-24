@@ -7,7 +7,9 @@ import Subheader from "../components/Subheader";
 import hand from '../assets/hand.png';
 import yin from '../assets/yin.png';
 import screw from '../assets/screw.png';
-
+import { update } from "../actions/token";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 const styles = theme => ({
     root: {
@@ -39,6 +41,12 @@ const styles = theme => ({
         lineHeight: '1.375em',
         opacity: 0.7,
     },
+    gridItemReverse: {
+        flexDirection: 'row',
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: 'column',
+        },
+    },
 });
 
 class LandingPage extends Component {
@@ -52,44 +60,27 @@ class LandingPage extends Component {
 
         this.state = {
             loading: false,
-            tokens: {},
             backendUrl: url,
         }
     }
 
     componentDidMount() {
-        this.setState({ loading: true });
-        fetch(`${this.state.backendUrl}/token`).then(results => {
-            return results.json();
-        }).then(data => {
-            this.setState({ loading: false, tokens: data });
-        });
+        this.props.updateTokens(this.state.backendUrl);
     }
 
-    // async getHistory(symbol) {
-    //     fetch(`${this.state.backendUrl}/token/${symbol}/total-supply/history`).then(results => {
-    //         return results.json();
-    //     }).then(data => {
-    //         let history = this.state.tokenHistory;
-    //         history[ symbol ] = data;
-    //         return this.setState({ tokenHistory: history });
-    //     });
-    // }
-
     render() {
-        const { classes } = this.props;
-        const { tokens } = this.state;
+        const { classes, tokens } = this.props;
 
         return (
             <div className={classes.root}>
                 <Subheader/>
                 {tokens.length === 0 && 'No Tokens available'}
                 {tokens.length !== 0 &&
-                <Grid container justify="center" alignItems={'center'} spacing={40} style={{ marginTop: -50 }}>
+                <Grid container justify="center" spacing={40} style={{marginTop: -50}}>
                     {tokens.length > 0 && tokens.map((token, key) =>
-                        <Grid item key={key} xs={11} md={5}>
+                        <Grid key={key} item xs={11} sm={6} md={5} lg={4}>
                             <Paper className={classes.paper} elevation={1}>
-                                <Grid container alignItems={'center'} wrap="nowrap" spacing={16}>
+                                <Grid container wrap="nowrap" spacing={16}>
                                     <Grid item xs={2}>
                                         <Avatar className={classes.avatar}>{token.symbol}</Avatar>
                                     </Grid>
@@ -101,14 +92,12 @@ class LandingPage extends Component {
                                                 </Typography>
                                             </Grid>
                                             <Grid container spacing={16}>
-                                                <Grid item>
-                                                    <div style={{ maxWidth: 200 }}>
-                                                        <Typography variant="caption" noWrap>
-                                                            {token.tokenAddress}
-                                                        </Typography>
-                                                    </div>
+                                                <Grid item xs={10} zeroMinWidth>
+                                                    <Typography variant="caption" noWrap>
+                                                        {token.tokenAddress}
+                                                    </Typography>
                                                 </Grid>
-                                                <Grid item>
+                                                <Grid item xs={2}>
                                                     <a style={{ cursor: 'pointer' }}><CopyIcon
                                                         style={{ fontSize: '100%', color: '#67B6F4' }}/></a>
                                                 </Grid>
@@ -116,71 +105,42 @@ class LandingPage extends Component {
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                                <Grid container alignItems={'center'} wrap="nowrap" spacing={16}>
+                                <Grid container spacing={16}>
                                     <Grid item xs={2}>
                                     </Grid>
-                                    <Grid item xs={10} md={5}>
-                                        <Grid container direction={'column'}>
-                                            <Grid item>
-                                                <Typography variant="caption">
-                                                    Total Supply
-                                                </Typography>
+                                    <Grid item xs={10}>
+                                        <Grid container wrap="nowrap" spacing={8} className={classes.gridItemReverse}>
+                                            <Grid item xs={12} md={6}>
+                                                <Grid container direction={'column'}>
+                                                    <Grid item>
+                                                        <Typography variant="caption">
+                                                            Total Supply
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="title">
+                                                            {token.totalSupply} <span className={classes.caption}>{token.symbol}</span>
+                                                        </Typography>
+                                                    </Grid>
+                                                </Grid>
                                             </Grid>
-                                            <Grid item>
-                                                <Typography variant="title">
-                                                    {token.totalSupply} <span
-                                                    className={classes.caption}>{token.symbol}</span>
-                                                </Typography>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid item xs={10} md={5}>
-                                        <Grid container direction={'column'}>
-                                            <Grid item>
-                                                <Typography variant="caption">
-                                                    Balance Bank Account
-                                                </Typography>
-                                            </Grid>
-                                            <Grid item>
-                                                <Typography variant="title">
-                                                    {token.totalSupply} <span
-                                                    className={classes.caption}>{token.fiat}</span>
-                                                </Typography>
+                                            <Grid item xs={12} md={6}>
+                                                <Grid container direction={'column'}>
+                                                    <Grid item>
+                                                        <Typography variant="caption">
+                                                            Balance Bank Account
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="title">
+                                                            {token.totalSupply} <span className={classes.caption}>{token.fiat}</span>
+                                                        </Typography>
+                                                    </Grid>
+                                                </Grid>
                                             </Grid>
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                                {/*{loadingHistory &&*/}
-                                {/*<Grid container justify="center" alignItems={'center'}*/}
-                                {/*style={{ marginTop: 45, marginBottom: 45 }}>*/}
-                                {/*<Grid item>*/}
-                                {/*<CircularProgress className={classes.progress}*/}
-                                {/*style={{ color: '#199FC6' }} thickness={7}/>*/}
-                                {/*</Grid>*/}
-                                {/*</Grid>*/}
-                                {/*}*/}
-                                {/*{!loadingHistory &&*/}
-                                {/*<Grid container style={{ marginLeft: -15 }}>*/}
-                                {/*<Grid item>*/}
-                                {/*<AreaChart width={280} height={100} data={tokenHistory[ token.symbol ]}*/}
-                                {/*margin={{ top: 20, right: 0, left: 0, bottom: 0 }}>*/}
-                                {/*<defs>*/}
-                                {/*<linearGradient id="stroke" x1="0" y1="0" x2="1" y2="1">*/}
-                                {/*<stop offset="0%" stopColor="#F4E05F" stopOpacity={1}/>*/}
-                                {/*<stop offset="90%" stopColor="#F4E05F" stopOpacity={1}/>*/}
-                                {/*</linearGradient>*/}
-                                {/*<linearGradient id="fill" x1="0" y1="0" x2="0" y2="1">*/}
-                                {/*<stop offset="15%" stopColor="#F4E05F" stopOpacity={0.8}/>*/}
-                                {/*<stop offset="100%" stopColor="#B93E4F" stopOpacity={0}/>*/}
-                                {/*</linearGradient>*/}
-                                {/*</defs>*/}
-                                {/*<Area type="monotone" dataKey="totalSupply" stroke="url(#stroke)"*/}
-                                {/*fillOpacity={1}*/}
-                                {/*fill="url(#fill)"/>*/}
-                                {/*</AreaChart>*/}
-                                {/*</Grid>*/}
-                                {/*</Grid>*/}
-                                {/*}*/}
                             </Paper>
                         </Grid>
                     )}
@@ -247,4 +207,14 @@ LandingPage.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(LandingPage);
+const mapDispatchToProps = dispatch => {
+    return {
+        updateTokens: bindActionCreators(update, dispatch),
+    };
+};
+
+const mapStateToProps = state => ({
+    tokens: state.token.tokens,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(LandingPage));

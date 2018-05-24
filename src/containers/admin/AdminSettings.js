@@ -40,7 +40,7 @@ class AdminSettings extends Component {
     componentDidMount() {
         const token = localStorage.getItem("access_token")
 
-        fetch(`${this.state.backendUrl}/token`)
+        fetch(`${this.state.backendUrl}/tokens`)
             .then(res => {
                 console.log('===> res' + res);
                 if (res.ok) {
@@ -52,7 +52,7 @@ class AdminSettings extends Component {
                 }
             })
 
-        fetch(`${this.state.backendUrl}/admin/exchange/?exchangeAddress=0x123`, {
+        fetch(`${this.state.backendUrl}/admin/exchanges/?exchangeAddress=0x123`, {
             headers: {
                 'Authorization': token,
             }

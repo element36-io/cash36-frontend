@@ -64,7 +64,7 @@ class AttestUser extends React.Component {
     render() {
         const { classes } = this.props;
 
-        if (this.props.currentStep !== 5) {
+        if (this.props.currentStep !== 4) {
             return null;
         }
 

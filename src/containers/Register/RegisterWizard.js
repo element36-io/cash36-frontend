@@ -1,7 +1,6 @@
 import React from 'react';
 import CreateAccount from "./CreateAccount";
 import EnterCredentials from "./EnterCredentials";
-import UploadID from "./UploadID";
 import SubheaderEmpty from "../../components/SubheaderEmpty";
 import DownloadUport from "./DownloadUport";
 import AttestUser from "./AttestUser";
@@ -24,8 +23,8 @@ class RegisterWizard extends React.Component {
         }
 
         let currentStep = this.state.currentStep;
-        if (currentStep >= 5) {
-            currentStep = 5;
+        if (currentStep >= 4) {
+            currentStep = 4;
         } else {
             currentStep = currentStep + 1;
         }
@@ -42,7 +41,7 @@ class RegisterWizard extends React.Component {
                 <DownloadUport currentStep={this.state.currentStep} afterValid={this._next.bind(this)}/>
                 <CreateAccount currentStep={this.state.currentStep} afterValid={this._next.bind(this)}/>
                 <EnterCredentials currentStep={this.state.currentStep} afterValid={this._next.bind(this)}/>
-                <UploadID currentStep={this.state.currentStep} afterValid={this._next.bind(this)}/>
+                {/*<UploadID currentStep={this.state.currentStep} afterValid={this._next.bind(this)}/>*/}
                 <AttestUser currentStep={this.state.currentStep} afterValid={this._next.bind(this)}
                             credentials={this.state.credentials}/>
             </div>

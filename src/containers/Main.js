@@ -4,7 +4,6 @@ import LandingPage from './LandingPage';
 import RegisterWizard from './Register/RegisterWizard';
 import LoginWizard from './Login/LoginWizard'
 import EnsureLoggedInContainer from "./EnsureLoggedInContainer";
-import Admin from "./admin/Admin";
 
 class Main extends Component {
 
@@ -14,7 +13,7 @@ class Main extends Component {
                 <Switch>
                     <Route exact path='/' component={LandingPage}/>
                     <Route path='/login' component={LoginWizard}/>
-                    <Route path='/admin' component={Admin}/>
+                    {/*<Route path='/admin' component={Admin}/>*/}
                     <Route path='/register' component={RegisterWizard}/>
                     <Route path='/wallet' component={EnsureLoggedInContainer}/>
                 </Switch>

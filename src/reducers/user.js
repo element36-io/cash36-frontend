@@ -16,7 +16,8 @@ export default (state = initialState, action) => {
                 ...state,
                 credentials: action.credentials,
                 loggedIn: true,
-                loggedInAddress: action.loggedInAddress
+                loggedInAddress: action.loggedInAddress,
+                lastLogin: new Date(),
             }
 
         case USER_LOGGED_OUT:
@@ -24,7 +25,8 @@ export default (state = initialState, action) => {
                 ...state,
                 credentials: null,
                 loggedIn: false,
-                loggedInAddress: null
+                loggedInAddress: null,
+                lastLogin: new Date(),
             }
 
         default:
