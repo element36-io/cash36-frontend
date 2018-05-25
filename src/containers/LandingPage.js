@@ -58,9 +58,7 @@ class LandingPage extends Component {
         this.state = {
             loading: false,
             backendUrl: `${API_ROOT}/cash36`,
-        }
-
-        console.log(API_ROOT);
+        };
     }
 
     componentDidMount() {
