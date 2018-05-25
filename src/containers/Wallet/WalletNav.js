@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Paper, Tab, Tabs } from '@material-ui/core';
 
-
 const styles = {
     root: {
         flexGrow: 1,
