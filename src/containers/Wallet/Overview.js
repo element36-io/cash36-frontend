@@ -3,15 +3,14 @@ import PropTypes from 'prop-types';
 import * as _ from 'lodash';
 import { withStyles } from '@material-ui/core/styles';
 import {
-    Avatar, CircularProgress,
+    CircularProgress,
     Grid,
     Paper, Table, TableBody, TableCell, TableHead, TableRow,
     Typography
 } from '@material-ui/core';
-import TokenBalance from "../../components/TokenBalance";
 import { connect } from "react-redux";
-import UserProfile from "../../components/UserProfile";
-import CopyIcon from "@material-ui/icons/ContentCopy"
+import WalletUserProfile from "../../components/WalletUserProfile";
+import WalletTokenDetails from "../../components/WalletTokenDetails";
 
 const styles = theme => ({
     root: {
@@ -25,16 +24,6 @@ const styles = theme => ({
         padding: theme.spacing.unit * 2,
         opacity: 1,
     },
-    img: {
-        maxHeight: 100,
-    },
-    avatar: {
-        color: 'white',
-        borderRadius: 100,
-        border: '1px solid black',
-        fontSize: '60%',
-        background: 'linear-gradient(110deg, #67B6F4, #000000)',
-    },
     caption: {
         fontSize: '0.8rem',
         fontWeight: 700,
@@ -44,18 +33,6 @@ const styles = theme => ({
     row: {
         '&:nth-of-type(odd)': {
             backgroundColor: '#f5f5f5',
-        },
-    },
-    gridItem: {
-        flexDirection: 'column',
-        [theme.breakpoints.down('sm')]: {
-            flexDirection: 'row',
-        },
-    },
-    gridItemReverse: {
-        flexDirection: 'row',
-        [theme.breakpoints.down('sm')]: {
-            flexDirection: 'column',
         },
     },
 });
@@ -103,89 +80,8 @@ class Overview extends React.Component {
 
         return (
             <div className={classes.root}>
-                <Grid container justify="center" spacing={40}>
-                    <Grid item xs={12} sm={6} md={5} lg={4}>
-                        <UserProfile/>
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={5} lg={4}>
-                        <Grid container className={classes.gridItem} spacing={16}>
-                            {tokens.length > 0 && tokens.map((token, key) =>
-                                <Grid item key={key} xs={12}>
-                                    <TokenBalance token={token}/>
-                                </Grid>
-                            )}
-                        </Grid>
-                    </Grid>
-                </Grid>
-                <Grid container justify="center" spacing={40}>
-                    {tokens.length > 0 && tokens.map((token, key) =>
-                        <Grid key={key} item xs={12} sm={6} md={5} lg={4}>
-                            <Paper className={classes.paper} elevation={1}>
-                                <Grid container wrap="nowrap" spacing={16}>
-                                    <Grid item xs={2}>
-                                        <Avatar className={classes.avatar}>{token.symbol}</Avatar>
-                                    </Grid>
-                                    <Grid item xs={10}>
-                                        <Grid container direction="column">
-                                            <Grid item>
-                                                <Typography variant="subheading">
-                                                    {token.name}
-                                                </Typography>
-                                            </Grid>
-                                            <Grid container spacing={16}>
-                                                <Grid item xs={10} zeroMinWidth>
-                                                    <Typography variant="caption" noWrap>
-                                                        {token.tokenAddress}
-                                                    </Typography>
-                                                </Grid>
-                                                <Grid item xs={2}>
-                                                    <a style={{ cursor: 'pointer' }}><CopyIcon
-                                                        style={{ fontSize: '100%', color: '#67B6F4' }}/></a>
-                                                </Grid>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                                <Grid container spacing={16}>
-                                    <Grid item xs={2}>
-                                    </Grid>
-                                    <Grid item xs={10}>
-                                        <Grid container wrap="nowrap" spacing={8} className={classes.gridItemReverse}>
-                                            <Grid item xs={12} md={6}>
-                                                <Grid container direction={'column'}>
-                                                    <Grid item>
-                                                        <Typography variant="caption">
-                                                            Total Supply
-                                                        </Typography>
-                                                    </Grid>
-                                                    <Grid item>
-                                                        <Typography variant="title">
-                                                            {token.totalSupply} <span className={classes.caption}>{token.symbol}</span>
-                                                        </Typography>
-                                                    </Grid>
-                                                </Grid>
-                                            </Grid>
-                                            <Grid item xs={12} md={6}>
-                                                <Grid container direction={'column'}>
-                                                    <Grid item>
-                                                        <Typography variant="caption">
-                                                            Balance Bank Account
-                                                        </Typography>
-                                                    </Grid>
-                                                    <Grid item>
-                                                        <Typography variant="title">
-                                                            {token.totalSupply} <span className={classes.caption}>{token.fiat}</span>
-                                                        </Typography>
-                                                    </Grid>
-                                                </Grid>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </Paper>
-                        </Grid>
-                    )}
-                </Grid>
+                <WalletUserProfile tokens={tokens}/>
+                <WalletTokenDetails tokens={tokens}/>
                 <Grid container justify="center" spacing={40} style={{ paddingBottom: 60 }}>
                     <Grid item xs={12} md={10} lg={8}>
                         <Paper className={classes.paper} style={{ padding: 35 }} elevation={1}>
@@ -198,8 +94,7 @@ class Overview extends React.Component {
                                         <Grid item>
                                             {this.state.loadingHistory &&
                                             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                                                <CircularProgress className={classes.progress}
-                                                                  style={{ color: '#199FC6' }} thickness={7}/>
+                                                <CircularProgress style={{ color: '#199FC6' }} thickness={7}/>
                                             </div>
                                             }
                                             {!this.state.loadingHistory &&
