@@ -15,6 +15,7 @@ import Slide from "@material-ui/core/Slide";
 import Snackbar from "@material-ui/core/Snackbar";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
 import Button from "@material-ui/core/Button";
+import { API_ROOT } from "../../config/Api";
 
 function TransitionUp(props) {
     return <Slide {...props} direction="up"/>;
@@ -25,12 +26,8 @@ class Wallet extends Component {
     constructor(props) {
         super(props);
 
-        const url = (process.env.NODE_ENV === 'development')
-            ? 'http://localhost:8080/cash36'
-            : 'https://cash36-backend.herokuapp.com/cash36';
-
         this.state = {
-            backendUrl: url,
+            backendUrl: `${API_ROOT}/cash36`,
             tokens: {},
             tabIndex: 0,
             message: 'I love snacks',

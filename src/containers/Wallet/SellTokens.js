@@ -14,6 +14,7 @@ import {
 import { connect } from "react-redux";
 import Snackbar from "@material-ui/core/Snackbar";
 import WalletUserProfile from "../../components/WalletUserProfile";
+import { API_ROOT } from "../../config/Api";
 
 const styles = theme => ({
     root: {
@@ -41,10 +42,6 @@ class SellTokens extends React.Component {
     constructor(props) {
         super(props);
 
-        const url = (process.env.NODE_ENV === 'development')
-            ? 'http://localhost:8080/cash36'
-            : 'https://cash36-backend.herokuapp.com/cash36';
-
         this.state = {
             sellAmount: '',
             sellAmountError: false,
@@ -52,7 +49,7 @@ class SellTokens extends React.Component {
             selectedTokenError: false,
             baseFee: 0.015,
             exchanging: false,
-            backendUrl: url,
+            backendUrl: `${API_ROOT}/cash36`,
             snackOpen: false,
         }
     }

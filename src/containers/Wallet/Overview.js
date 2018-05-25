@@ -11,6 +11,7 @@ import {
 import { connect } from "react-redux";
 import WalletUserProfile from "../../components/WalletUserProfile";
 import WalletTokenDetails from "../../components/WalletTokenDetails";
+import { API_ROOT } from "../../config/Api";
 
 const styles = theme => ({
     root: {
@@ -42,12 +43,8 @@ class Overview extends React.Component {
     constructor(props) {
         super(props);
 
-        const url = (process.env.NODE_ENV === 'development')
-            ? 'http://localhost:8080/cash36'
-            : 'https://cash36-backend.herokuapp.com/cash36';
-
         this.state = {
-            backendUrl: url,
+            backendUrl: `${API_ROOT}/cash36`,
             history: [],
             loadingHistory: false,
         }

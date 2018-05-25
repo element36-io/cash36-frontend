@@ -5,6 +5,7 @@ import { Button, Grid, Paper, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import QRCode from 'qrcode.react'
 import { Connect, SimpleSigner } from "uport-connect";
+import { API_ROOT } from "../../config/Api";
 
 const styles = theme => ({
     root: {
@@ -28,12 +29,8 @@ class AttestUser extends React.Component {
     constructor(props) {
         super(props);
 
-        const url = (process.env.NODE_ENV === 'development')
-            ? 'http://localhost:8080/cash36'
-            : 'https://cash36-backend.herokuapp.com/cash36';
-
         this.state = {
-            backendUrl: url,
+            backendUrl: `${API_ROOT}/cash36`,
             uri: '',
             attested: false,
         };
