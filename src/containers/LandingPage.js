@@ -10,6 +10,7 @@ import { update } from "../actions/token";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import TokenDetails from "../components/TokenDetails";
+import { API_ROOT } from "../config/Api";
 
 const styles = theme => ({
     root: {
@@ -62,6 +63,8 @@ class LandingPage extends Component {
             loading: false,
             backendUrl: url,
         }
+
+        console.log(API_ROOT);
     }
 
     componentDidMount() {
@@ -78,7 +81,7 @@ class LandingPage extends Component {
                 {tokens.length !== 0 &&
                 <Grid container justify="center" spacing={40} style={{marginTop: -50}}>
                     {tokens.length > 0 && tokens.map((token, key) =>
-                        <Grid key={key} item xs={11} sm={6} md={5} lg={4}>
+                        <Grid key={key} item xs={11} sm={5} md={5} lg={4}>
                             <TokenDetails token={token}/>
                         </Grid>
                     )}
