@@ -9,6 +9,7 @@ import * as actions from "./actions/user";
 import { withRouter } from "react-router-dom";
 import NotificationList from "./components/NotificationList";
 import { resetBadgeCount } from "./actions/notification";
+import { API_ROOT } from "./config/Api";
 
 const theme = createMuiTheme({
     palette: {
@@ -35,12 +36,8 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        const url = (process.env.NODE_ENV === 'development')
-            ? 'http://localhost:8080/cash36'
-            : 'https://cash36-backend.herokuapp.com/cash36';
-
         this.state = {
-            backendUrl: url,
+            backendUrl: `${API_ROOT}/cash36`,
             message: 'I love snacks',
             messageColor: 'white',
             snackOpen: false,

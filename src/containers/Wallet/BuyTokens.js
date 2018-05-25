@@ -14,6 +14,7 @@ import {
 } from '@material-ui/core';
 import { connect } from "react-redux";
 import WalletUserProfile from "../../components/WalletUserProfile";
+import { API_ROOT } from "../../config/Api";
 
 const styles = theme => ({
     root: {
@@ -48,10 +49,6 @@ class BuyTokens extends React.Component {
     constructor(props) {
         super(props);
 
-        const url = (process.env.NODE_ENV === 'development')
-            ? 'http://localhost:8080/cash36'
-            : 'https://cash36-backend.herokuapp.com/cash36';
-
         this.state = {
             buyAmount: '',
             buyAmountError: false,
@@ -59,7 +56,7 @@ class BuyTokens extends React.Component {
             selectedTokenError: false,
             preparing: false,
             prepared: false,
-            backendUrl: url,
+            backendUrl: `${API_ROOT}/cash36`,
             transferInstructions: {},
             snackOpen: false,
         }
