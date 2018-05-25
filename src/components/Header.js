@@ -40,9 +40,7 @@ class Header extends React.Component {
 
         this.state = {
             loggedOut: false,
-        }
-
-        console.log(props.location);
+        };
     }
 
     logout = () => {

@@ -11,9 +11,8 @@ import {
     TableRow,
     Typography
 } from '@material-ui/core';
-import TokenBalance from "../../components/TokenBalance";
-import UserProfile from "../../components/UserProfile";
 import { connect } from "react-redux";
+import WalletUserProfile from "../../components/WalletUserProfile";
 
 
 const styles = theme => ({
@@ -106,20 +105,7 @@ class History extends React.Component {
 
         return (
             <div className={classes.root}>
-                <Grid container justify="center" spacing={40}>
-                    <Grid item xs={12} sm={6} md={5} lg={4}>
-                        <UserProfile/>
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={5} lg={4}>
-                        <Grid container className={classes.gridItem} spacing={16}>
-                            {tokens.length > 0 && tokens.map((token, key) =>
-                                <Grid item key={key} xs={12}>
-                                    <TokenBalance token={token}/>
-                                </Grid>
-                            )}
-                        </Grid>
-                    </Grid>
-                </Grid>
+                <WalletUserProfile tokens={tokens}/>
                 <Grid container justify="center" spacing={40} style={{ paddingBottom: 60 }}>
                     <Grid item xs={12} md={10} lg={8}>
                         <Paper style={{ width: '100%', minHeight: 280, padding: 35 }}
