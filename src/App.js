@@ -72,7 +72,7 @@ class App extends Component {
                     <Chip label={this.state.env} style={{ position: 'absolute',
                             right: 0,
                             top: 80,
-                            zIndex: 5000,
+                            zIndex: 1000,
                             borderRadius: 2,
                             backgroundColor: 'green',
                             opacity: 0.9,
