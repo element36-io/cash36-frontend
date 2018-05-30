@@ -24,7 +24,7 @@ deploy to dev:
   only:
     - develop
 
-deploy to tesst:
+deploy to test:
   environment: test
   stage: deploy
   image: ruby:latest
