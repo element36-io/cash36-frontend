@@ -64,7 +64,7 @@ class SellTokens extends React.Component {
 
     closeSnack = () => {
         this.setState({snackOpen: false});
-    }
+    };
 
     sellTokens = () => {
         // Validate input

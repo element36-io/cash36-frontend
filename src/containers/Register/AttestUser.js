@@ -44,7 +44,7 @@ class AttestUser extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.currentStep === 5) {
+        if (nextProps.currentStep === 4) {
             this.uport.attestCredentials({
                 sub: this.props.credentials.address,
                 claim: { 'cash36KYC': { 'Name': this.props.credentials.name, 'verified on': new Date() } }

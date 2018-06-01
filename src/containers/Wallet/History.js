@@ -14,7 +14,8 @@ import {
 import { connect } from "react-redux";
 import WalletUserProfile from "../../components/WalletUserProfile";
 import { API_ROOT } from "../../config/Api";
-
+import Tooltip from "@material-ui/core/Tooltip";
+import ExitToApp from "@material-ui/icons/ExitToApp";
 
 const styles = theme => ({
     root: {
@@ -126,6 +127,7 @@ class History extends React.Component {
                                                 <TableCell style={{color: 'white'}}>Action</TableCell>
                                                 <TableCell style={{color: 'white'}} numeric>Amount</TableCell>
                                                 <TableCell style={{color: 'white'}}>Token</TableCell>
+                                                <TableCell style={{color: 'white'}}></TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
@@ -137,6 +139,13 @@ class History extends React.Component {
                                                         <TableCell
                                                             numeric>{n.action === 'sell' ? '-' : ''}{n.amount}</TableCell>
                                                         <TableCell>{n.token}</TableCell>
+                                                        <TableCell>
+                                                            <Tooltip id="tooltip-bottom" title="See on Etherscan" placement="bottom">
+                                                                <a href={`https://rinkeby.etherscan.io/tx/${n.txHash}`} target='_blank'>
+                                                                    <ExitToApp style={{color: 'grey', fontSize: '100%'}}></ExitToApp>
+                                                                </a>
+                                                            </Tooltip>
+                                                        </TableCell>
                                                     </TableRow>
                                                 );
                                             })}

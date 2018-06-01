@@ -15,6 +15,8 @@ import {
 import { connect } from "react-redux";
 import WalletUserProfile from "../../components/WalletUserProfile";
 import { API_ROOT } from "../../config/Api";
+import Snackbar from "@material-ui/core/Snackbar";
+
 
 const styles = theme => ({
     root: {
@@ -70,6 +72,10 @@ class BuyTokens extends React.Component {
         this.setState({ [ name ]: event.target.value });
     };
 
+    closeSnack = () => {
+        this.setState({ snackOpen: false });
+    };
+
     validateInput() {
         // Validate input
         let buyAmountError = false;
@@ -102,7 +108,8 @@ class BuyTokens extends React.Component {
             }).then((response) => {
                 return response.json();
             }).then((data) => {
-                    this.setState({ transferInstructions: {
+                this.setState({
+                    transferInstructions: {
                         amount: data.amount,
                         bankName: data.bankName,
                         bankBic: data.bankBic,
@@ -114,9 +121,37 @@ class BuyTokens extends React.Component {
                         paymentReferenceId: data.paymentReferenceId
                     },
                     preparing: false,
-                    prepared: true });
+                    prepared: true
+                });
             });
         }
+    }
+
+    simulatePayment() {
+        fetch(`${this.state.backendUrl}/payments/payment-simulation`, {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body:
+                JSON.stringify({
+                    senderIban: this.props.loggedInAddress,
+                    purpose: this.state.transferInstructions.paymentReferenceId,
+                    amount: this.state.transferInstructions.amount,
+                    currency: this.state.selectedToken ? this.state.selectedToken.substr(0, 3) : ''
+                })
+        }).then((response) => {
+            this.setState({
+                transferInstructions: {},
+                preparing: false,
+                prepared: false,
+                buyAmount: '',
+                selectedToken: '',
+                snackOpen: true,
+            });
+        }).then((data) => {
+        });
     }
 
     reset() {
@@ -185,12 +220,12 @@ class BuyTokens extends React.Component {
                                         </Grid>
                                         <Grid item>
                                             <div style={{ paddingTop: 20 }}>
-                                            {!this.state.preparing &&
-                                            <Button onClick={() => this.preparePayment()}
-                                                    disabled={this.state.prepared}>Prepare Payment</Button>}
-                                            {this.state.preparing &&
-                                            <CircularProgress className={classes.progress}
-                                                              style={{ color: '#199FC6' }} thickness={7}/>}
+                                                {!this.state.preparing &&
+                                                <Button onClick={() => this.preparePayment()}
+                                                        disabled={this.state.prepared}>Prepare Payment</Button>}
+                                                {this.state.preparing &&
+                                                <CircularProgress className={classes.progress}
+                                                                  style={{ color: '#199FC6' }} thickness={7}/>}
                                             </div>
                                         </Grid>
                                     </Grid>
@@ -269,7 +304,7 @@ class BuyTokens extends React.Component {
                                                     className={classes.textField}
                                                 />
                                             </Grid>
-                                            <Grid item xs={9} md={9}>
+                                            <Grid item xs={8}>
                                                 <TextField
                                                     disabled
                                                     label="Reference Number/Purpose"
@@ -280,9 +315,9 @@ class BuyTokens extends React.Component {
                                                     style={{ width: '60%' }}
                                                 />
                                             </Grid>
-                                            <Grid item xs={3} md={3}>
+                                            <Grid item xs={4}>
                                                 <div style={{ paddingTop: 40 }}>
-                                                    <Grid container alignItems="center" spacing={16}>
+                                                    <Grid container alignItems="center" justify="flex-end" spacing={16}>
                                                         <Grid item>
                                                             <a onClick={this.reset.bind(this)}
                                                                style={{ cursor: 'pointer' }}>
@@ -291,6 +326,11 @@ class BuyTokens extends React.Component {
                                                                     Reset
                                                                 </Typography>
                                                             </a>
+                                                        </Grid>
+                                                        <Grid item>
+                                                            <Button onClick={() => this.simulatePayment()}
+                                                                    disabled={!this.state.prepared}>Simulate
+                                                                Payment</Button>
                                                         </Grid>
                                                     </Grid>
                                                 </div>
@@ -303,6 +343,13 @@ class BuyTokens extends React.Component {
                         </Paper>
                     </Grid>
                 </Grid>
+                <Snackbar
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                    open={this.state.snackOpen}
+                    onClose={this.closeSnack}
+                    autoHideDuration={5000}
+                    message={"Request received - You will be notified once it's processed"}
+                />
             </div>
         );
     }
