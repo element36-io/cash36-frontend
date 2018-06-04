@@ -1,7 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, TextField, Typography } from "@material-ui/core";
+import {
+    Button,
+    FormControl,
+    Grid,
+    InputLabel,
+    MenuItem,
+    Paper,
+    Select,
+    TextField,
+    Typography
+} from "@material-ui/core";
+import { API_ROOT } from "../../config/Api";
+import { MNID } from "uport-connect";
+import Snackbar from "@material-ui/core/Snackbar";
+import SnackbarContent from "@material-ui/core/SnackbarContent";
+import Slide from "@material-ui/core/Slide";
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
     root: {
@@ -13,12 +29,14 @@ const styles = theme => ({
         flexWrap: 'wrap',
     },
     formControl: {
-        width: 200,
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        minWidth: 200,
     },
     textField: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
-        width: 200,
+        minWidth: 200,
     },
     paper: {
         margin: theme.spacing.unit * 2,
@@ -32,12 +50,19 @@ const styles = theme => ({
     },
 });
 
+function TransitionUp(props) {
+    return <Slide {...props} direction="up"/>;
+}
+
 class EnterCredentials extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
+            backendUrl: `${API_ROOT}/cash36`,
+            loggedInAddress: '',
+            snackOpen: false,
             firstName: '',
             lastName: '',
             email: '',
@@ -51,6 +76,12 @@ class EnterCredentials extends React.Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (this.props.currentStep !== nextProps.currentStep && typeof nextProps.credentials.address === 'string') {
+            this.setState({ loggedInAddress: MNID.decode(nextProps.credentials.address).address });
+        }
+    }
+
     handleChange = name => event => {
         this.setState({
             [ name ]: event.target.value,
@@ -61,8 +92,40 @@ class EnterCredentials extends React.Component {
         this.setState({ birthDate: date });
     };
 
-    _validate() {
-        this.props.afterValid()
+    handleCloseSnack = () => {
+        this.setState({ snackOpen: false });
+    };
+
+    registerUser() {
+        fetch(`${this.state.backendUrl}/users/register`, {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body:
+                JSON.stringify({
+                    ethereumAddress: this.state.loggedInAddress,
+                    firstName: this.state.firstName,
+                    lastName: this.state.lastName,
+                    email: this.state.email,
+                    country: this.state.country,
+                })
+        }).then((response) => {
+            if (response.ok) {
+                this.props.afterValid();
+            } else {
+                console.log(response);
+                switch (response.status) {
+                    case 400:
+                        console.log('Error: user already exists');
+                        this.setState({snackOpen: true});
+                        break;
+                    default:
+                        console.log('Error: request rejected from server');
+                }
+            }
+        });
     }
 
     render() {
@@ -79,97 +142,135 @@ class EnterCredentials extends React.Component {
                         <Paper className={classes.paper}>
                             <Typography variant="title">Enter your information</Typography>
                             <form className={classes.container} noValidate autoComplete="off">
-                                <TextField
-                                    required
-                                    id="firstname"
-                                    label="Firstname"
-                                    className={classes.textField}
-                                    value={this.state.firstName}
-                                    onChange={this.handleChange('firstName')}
-                                    margin="normal"
-                                />
-                                <TextField
-                                    required
-                                    id="lastname"
-                                    label="Lastname"
-                                    className={classes.textField}
-                                    value={this.state.lastName}
-                                    onChange={this.handleChange('lastName')}
-                                    margin="normal"
-                                />
-                                <TextField
-                                    required
-                                    id="email"
-                                    label="Email"
-                                    className={classes.textField}
-                                    value={this.state.email}
-                                    onChange={this.handleChange('email')}
-                                    margin="normal"
-                                />
-                                <TextField
-                                    required
-                                    id="birthDate"
-                                    label="Date of birth"
-                                    className={classes.textField}
-                                    value={this.state.birthDate}
-                                    onChange={this.handleChange('birthDate')}
-                                    margin="normal"
-                                />
-                                <TextField
-                                    required
-                                    id="street"
-                                    label="Street"
-                                    className={classes.textField}
-                                    value={this.state.street}
-                                    onChange={this.handleChange('street')}
-                                    margin="normal"
-                                />
-                                <TextField
-                                    required
-                                    id="zip"
-                                    label="Zip Code"
-                                    className={classes.textField}
-                                    value={this.state.zip}
-                                    onChange={this.handleChange('zip')}
-                                    margin="normal"
-                                />
-                                <TextField
-                                    required
-                                    id="city"
-                                    label="City"
-                                    className={classes.textField}
-                                    value={this.state.city}
-                                    onChange={this.handleChange('city')}
-                                    margin="normal"
-                                />
-                                <TextField
-                                    required
-                                    id="country"
-                                    label="Country"
-                                    className={classes.textField}
-                                    value={this.state.country}
-                                    onChange={this.handleChange('country')}
-                                    margin="normal"
-                                />
-                                <FormControl className={classes.formControl}>
-                                    <InputLabel htmlFor="nationality">Nationality</InputLabel>
-                                    <Select
-                                        value={this.state.nationality}
-                                        onChange={this.handleChange('nationality')}
-                                        inputProps={{
-                                            id: 'nationality',
-                                        }}
-                                    >
-                                        <MenuItem value='CH'>Switzerland</MenuItem>
-                                        <MenuItem value='DE'>Germany</MenuItem>
-                                        <MenuItem value='AT'>Austria</MenuItem>
-                                    </Select>
-                                </FormControl>
+                                <Grid container alignItems='center' justify='space-between'>
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            required
+                                            id="firstname"
+                                            label="Firstname"
+                                            className={classes.textField}
+                                            value={this.state.firstName}
+                                            onChange={this.handleChange('firstName')}
+                                            margin="normal"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            required
+                                            id="lastname"
+                                            label="Lastname"
+                                            className={classes.textField}
+                                            value={this.state.lastName}
+                                            onChange={this.handleChange('lastName')}
+                                            margin="normal"
+                                        />
+                                    </Grid>
+                                    <Grid xs={12} sm={6}>
+                                        <TextField
+                                            required
+                                            id="email"
+                                            label="Email"
+                                            className={classes.textField}
+                                            value={this.state.email}
+                                            onChange={this.handleChange('email')}
+                                            margin="normal"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            required
+                                            id="country"
+                                            label="Country"
+                                            className={classes.textField}
+                                            value={this.state.country}
+                                            onChange={this.handleChange('country')}
+                                            margin="normal"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            id="street"
+                                            label="Street"
+                                            className={classes.textField}
+                                            value={this.state.street}
+                                            onChange={this.handleChange('street')}
+                                            margin="normal"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            id="zip"
+                                            label="Zip Code"
+                                            className={classes.textField}
+                                            value={this.state.zip}
+                                            onChange={this.handleChange('zip')}
+                                            margin="normal"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            id="city"
+                                            label="City"
+                                            className={classes.textField}
+                                            value={this.state.city}
+                                            onChange={this.handleChange('city')}
+                                            margin="normal"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            id="birthDate"
+                                            label="Date of birth"
+                                            className={classes.textField}
+                                            value={this.state.birthDate}
+                                            onChange={this.handleChange('birthDate')}
+                                            margin="normal"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                        <FormControl className={classes.formControl}>
+                                            <InputLabel htmlFor="nationality">Nationality</InputLabel>
+                                            <Select
+                                                value={this.state.nationality}
+                                                onChange={this.handleChange('nationality')}
+                                                inputProps={{
+                                                    id: 'nationality',
+                                                }}
+                                            >
+                                                <MenuItem value='CH'>Switzerland</MenuItem>
+                                                <MenuItem value='DE'>Germany</MenuItem>
+                                                <MenuItem value='AT'>Austria</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                    </Grid>
+                                </Grid>
                             </form>
-                            <Button className={classes.button} onClick={this._validate.bind(this)}>Next</Button>
+                            <Button className={classes.button} onClick={this.registerUser.bind(this)}>Next</Button>
                         </Paper>
                     </Grid>
                 </Grid>
+                <Snackbar
+                    TransitionComponent={TransitionUp}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                    open={this.state.snackOpen}
+                    onClose={this.handleCloseSnack}
+                    autoHideDuration={5000}
+                >
+                    <SnackbarContent
+                        message={
+                            <span style={{ color: 'white' }}>
+                                This uport address is already registered, please try a different uport address or proceed to login
+                            </span>
+                        }
+                        action={
+                            <Link to="/login" style={{ textDecoration: 'none' }}>
+                                <Button style={{ color: 'white', backgroundColor: '#313131' }} size="small">
+                                    Go to Login
+                                </Button>
+                            </Link>
+                        }
+                    />
+                </Snackbar>
             </div>
         );
     }
