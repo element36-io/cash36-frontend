@@ -67,6 +67,7 @@ class CreateAccount extends Component {
 
             fetch(`${this.state.backendUrl}/users/is-registered/?address=${address}`)
                 .then(response => {
+                    console.log(response);
                     if (response.ok) {
                         // User found --> already registered --> show error
                         this.setState({ snackOpen: true });

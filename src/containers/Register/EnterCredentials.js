@@ -15,6 +15,7 @@ import {
 import { API_ROOT } from "../../config/Api";
 import { MNID } from "uport-connect";
 
+
 const styles = theme => ({
     root: {
         marginTop: -50,
@@ -55,14 +56,18 @@ class EnterCredentials extends React.Component {
             backendUrl: `${API_ROOT}/cash36`,
             loggedInAddress: '',
             firstName: '',
+            firstNameError: false,
             lastName: '',
+            lastNameError: false,
             email: '',
+            emailError: false,
             birthDate: '',
             nationality: '',
             street: '',
             zip: '',
             city: '',
             country: '',
+            countryError: false,
             phone: '',
         }
     }
@@ -83,32 +88,50 @@ class EnterCredentials extends React.Component {
         this.setState({ birthDate: date });
     };
 
+    validateInput() {
+        let error = false;
+        let mustFields = [ 'firstName', 'lastName', 'email', 'country' ];
+
+        const updatedState = {};
+        mustFields.forEach(f => {
+                error = error || this.state[ f ] === '';
+                updatedState[ `${f}Error` ] = this.state[ f ] === '';
+                this.setState({
+                    ...this.state,
+                    ...updatedState,
+                });
+            });
+        return error;
+    }
+
     registerUser() {
-        fetch(`${this.state.backendUrl}/users/register`, {
-            method: "POST",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body:
-                JSON.stringify({
-                    ethereumAddress: this.state.loggedInAddress,
-                    firstName: this.state.firstName,
-                    lastName: this.state.lastName,
-                    email: this.state.email,
-                    country: this.state.country,
-                })
-        }).then((response) => {
-            if (response.ok) {
-                this.props.afterValid();
-            } else {
-                console.log(response);
-                switch (response.status) {
-                    default:
-                        console.log('Error: request rejected from server');
+        if (!this.validateInput()) {
+            fetch(`${this.state.backendUrl}/users/register`, {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body:
+                    JSON.stringify({
+                        ethereumAddress: this.state.loggedInAddress,
+                        firstName: this.state.firstName,
+                        lastName: this.state.lastName,
+                        email: this.state.email,
+                        country: this.state.country,
+                    })
+            }).then((response) => {
+                if (response.ok) {
+                    this.props.afterValid();
+                } else {
+                    console.log(response);
+                    switch (response.status) {
+                        default:
+                            console.log('Error: request rejected from server');
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     render() {
@@ -135,6 +158,7 @@ class EnterCredentials extends React.Component {
                                             value={this.state.firstName}
                                             onChange={this.handleChange('firstName')}
                                             margin="normal"
+                                            error={this.state.firstNameError}
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
@@ -146,6 +170,7 @@ class EnterCredentials extends React.Component {
                                             value={this.state.lastName}
                                             onChange={this.handleChange('lastName')}
                                             margin="normal"
+                                            error={this.state.lastNameError}
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
@@ -157,6 +182,7 @@ class EnterCredentials extends React.Component {
                                             value={this.state.email}
                                             onChange={this.handleChange('email')}
                                             margin="normal"
+                                            error={this.state.emailError}
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
@@ -168,6 +194,7 @@ class EnterCredentials extends React.Component {
                                             value={this.state.country}
                                             onChange={this.handleChange('country')}
                                             margin="normal"
+                                            error={this.state.countryError}
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={6}>

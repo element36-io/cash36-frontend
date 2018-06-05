@@ -70,7 +70,7 @@ class AttestUser extends React.Component {
                 <Grid container justify='center'>
                     <Grid item xs={8}>
                         <Paper className={classes.paper}>
-                            <Grid container direction="column" spacing={16}>
+                            <Grid container direction="column" alignItems={'center'} spacing={16}>
                                 <Grid item>
                                     <Typography variant="title">
                                         Verification with uport app
