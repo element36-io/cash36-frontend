@@ -40,7 +40,7 @@ class RegisterWizard extends React.Component {
                 <SubheaderEmpty/>
                 <DownloadUport currentStep={this.state.currentStep} afterValid={this._next.bind(this)}/>
                 <CreateAccount currentStep={this.state.currentStep} afterValid={this._next.bind(this)}/>
-                <EnterCredentials currentStep={this.state.currentStep} afterValid={this._next.bind(this)}/>
+                <EnterCredentials credentials={this.state.credentials} currentStep={this.state.currentStep} afterValid={this._next.bind(this)}/>
                 {/*<UploadID currentStep={this.state.currentStep} afterValid={this._next.bind(this)}/>*/}
                 <AttestUser currentStep={this.state.currentStep} afterValid={this._next.bind(this)}
                             credentials={this.state.credentials}/>

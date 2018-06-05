@@ -66,6 +66,13 @@ class SellTokens extends React.Component {
         this.setState({snackOpen: false});
     };
 
+    calcFee() {
+        let fee = this.state.sellAmount * this.state.baseFee;
+        fee = (Math.round(fee*Math.pow(10,2))/Math.pow(10,2)).toFixed(2);
+        fee = Math.round(fee * 2) / 2.0;
+        return fee;
+    }
+
     sellTokens = () => {
         // Validate input
         let sellAmountError = false;
@@ -163,7 +170,7 @@ class SellTokens extends React.Component {
                                                 <Grid item xs={6}>
                                                     <Typography variant="subheading" align="right"
                                                                 color="secondary">
-                                                        -{this.state.sellAmount * this.state.baseFee} {this.state.selectedToken.substr(0,3)}
+                                                        -{this.calcFee()} {this.state.selectedToken}
                                                     </Typography>
                                                 </Grid>
                                             </Grid>
@@ -177,7 +184,7 @@ class SellTokens extends React.Component {
                                                 </Grid>
                                                 <Grid item xs={6}>
                                                     <Typography variant="subheading" style={{fontWeight: 700, fontSize: '110%'}} align="right">
-                                                        {this.state.sellAmount - (this.state.sellAmount * this.state.baseFee)} {this.state.selectedToken.substr(0,3)}
+                                                        {this.state.sellAmount - this.calcFee()} {this.state.selectedToken.substr(0,3)}
                                                     </Typography>
                                                 </Grid>
                                             </Grid>
