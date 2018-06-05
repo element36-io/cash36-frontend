@@ -14,10 +14,6 @@ import {
 } from "@material-ui/core";
 import { API_ROOT } from "../../config/Api";
 import { MNID } from "uport-connect";
-import Snackbar from "@material-ui/core/Snackbar";
-import SnackbarContent from "@material-ui/core/SnackbarContent";
-import Slide from "@material-ui/core/Slide";
-import { Link } from "react-router-dom";
 
 const styles = theme => ({
     root: {
@@ -50,10 +46,6 @@ const styles = theme => ({
     },
 });
 
-function TransitionUp(props) {
-    return <Slide {...props} direction="up"/>;
-}
-
 class EnterCredentials extends React.Component {
 
     constructor(props) {
@@ -62,7 +54,6 @@ class EnterCredentials extends React.Component {
         this.state = {
             backendUrl: `${API_ROOT}/cash36`,
             loggedInAddress: '',
-            snackOpen: false,
             firstName: '',
             lastName: '',
             email: '',
@@ -92,10 +83,6 @@ class EnterCredentials extends React.Component {
         this.setState({ birthDate: date });
     };
 
-    handleCloseSnack = () => {
-        this.setState({ snackOpen: false });
-    };
-
     registerUser() {
         fetch(`${this.state.backendUrl}/users/register`, {
             method: "POST",
@@ -117,10 +104,6 @@ class EnterCredentials extends React.Component {
             } else {
                 console.log(response);
                 switch (response.status) {
-                    case 400:
-                        console.log('Error: user already exists');
-                        this.setState({snackOpen: true});
-                        break;
                     default:
                         console.log('Error: request rejected from server');
                 }
@@ -165,7 +148,7 @@ class EnterCredentials extends React.Component {
                                             margin="normal"
                                         />
                                     </Grid>
-                                    <Grid xs={12} sm={6}>
+                                    <Grid item xs={12} sm={6}>
                                         <TextField
                                             required
                                             id="email"
@@ -249,28 +232,6 @@ class EnterCredentials extends React.Component {
                         </Paper>
                     </Grid>
                 </Grid>
-                <Snackbar
-                    TransitionComponent={TransitionUp}
-                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-                    open={this.state.snackOpen}
-                    onClose={this.handleCloseSnack}
-                    autoHideDuration={5000}
-                >
-                    <SnackbarContent
-                        message={
-                            <span style={{ color: 'white' }}>
-                                This uport address is already registered, please try a different uport address or proceed to login
-                            </span>
-                        }
-                        action={
-                            <Link to="/login" style={{ textDecoration: 'none' }}>
-                                <Button style={{ color: 'white', backgroundColor: '#313131' }} size="small">
-                                    Go to Login
-                                </Button>
-                            </Link>
-                        }
-                    />
-                </Snackbar>
             </div>
         );
     }

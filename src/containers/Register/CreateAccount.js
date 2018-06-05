@@ -3,9 +3,14 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Grid, Paper } from "@material-ui/core";
 import QRCode from 'qrcode.react'
-import { Connect, SimpleSigner } from "uport-connect";
+import { Connect, MNID, SimpleSigner } from "uport-connect";
 import LoginWithUport from "../../components/LoginWithUport";
 import { API_ROOT } from "../../config/Api";
+import Snackbar from "@material-ui/core/Snackbar";
+import SnackbarContent from "@material-ui/core/SnackbarContent";
+import { Link } from "react-router-dom";
+import Slide from "@material-ui/core/Slide";
+import Button from "@material-ui/core/Button";
 
 const styles = theme => ({
     root: {
@@ -24,6 +29,10 @@ const styles = theme => ({
     },
 });
 
+function TransitionUp(props) {
+    return <Slide {...props} direction="up"/>;
+}
+
 class CreateAccount extends Component {
 
     constructor(props) {
@@ -32,6 +41,7 @@ class CreateAccount extends Component {
         this.state = {
             backendUrl: `${API_ROOT}/cash36`,
             uri: '',
+            snackOpen: false,
         };
 
         this.uPortURIHandler = this.uPortURIHandler.bind(this);
@@ -42,13 +52,31 @@ class CreateAccount extends Component {
         });
     }
 
+    handleCloseSnack = () => {
+        this.setState({ snackOpen: false });
+    };
+
     componentWillMount() {
         this.uport.requestCredentials({
             requested: [ 'name', 'avatar', 'cash36KYC' ],
             notifications: true,
             //accountType: 'segregated'
         }, this.uPortURIHandler).then((credentials) => {
-            this.props.afterValid(credentials);
+
+            let address = MNID.decode(credentials.address).address;
+
+            fetch(`${this.state.backendUrl}/users/is-registered/?address=${address}`)
+                .then(response => {
+                    if (response.ok) {
+                        // User found --> already registered --> show error
+                        this.setState({ snackOpen: true });
+                    } else {
+                        // User no found --> so not yet registered --> proceed
+                        if (response.status === 404) {
+                            this.props.afterValid(credentials);
+                        }
+                    }
+                })
         });
     }
 
@@ -83,6 +111,28 @@ class CreateAccount extends Component {
                         </Paper>
                     </Grid>
                 </Grid>
+                <Snackbar
+                    TransitionComponent={TransitionUp}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                    open={this.state.snackOpen}
+                    onClose={this.handleCloseSnack}
+                    autoHideDuration={5000}
+                >
+                    <SnackbarContent
+                        message={
+                            <span style={{ color: 'white' }}>
+                                This uport address is already registered, please try a different uport address or proceed to login
+                            </span>
+                        }
+                        action={
+                            <Link to="/login" style={{ textDecoration: 'none' }}>
+                                <Button style={{ color: 'white', backgroundColor: '#313131' }} size="small">
+                                    Go to Login
+                                </Button>
+                            </Link>
+                        }
+                    />
+                </Snackbar>
             </div>
         );
     }
