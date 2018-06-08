@@ -119,7 +119,7 @@ class Overview extends React.Component {
                                                                 <TableCell>
                                                                     <Tooltip id="tooltip-bottom" title="See on Etherscan" placement="bottom">
                                                                         <a href={`https://rinkeby.etherscan.io/tx/${n.txHash}`} target='_blank'>
-                                                                            <ExitToApp style={{color: 'grey', fontSize: '100%'}}></ExitToApp>
+                                                                            <ExitToApp style={{color: '#67B6F4', fontSize: '100%'}}></ExitToApp>
                                                                         </a>
                                                                     </Tooltip>
                                                                 </TableCell>

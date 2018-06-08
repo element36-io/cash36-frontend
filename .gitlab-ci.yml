@@ -11,6 +11,7 @@ build:
     - npm install -g yarn
     - yarn
     - yarn build
+  retry: 1
 
 deploy to dev:
   environment: dev
@@ -21,6 +22,7 @@ deploy to dev:
     - apt-get install -y ruby-dev
     - gem install dpl
     - dpl --provider=heroku --app=cash36-frontend --api-key=$HEROKU_API_KEY
+  retry: 1
   only:
     - develop
 
@@ -33,5 +35,6 @@ deploy to test:
     - apt-get install -y ruby-dev
     - gem install dpl
     - dpl --provider=heroku --app=cash36-test-frontend --api-key=$HEROKU_API_KEY
+  retry: 1
   only:
     - master

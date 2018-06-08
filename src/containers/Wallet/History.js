@@ -17,6 +17,7 @@ import { API_ROOT } from "../../config/Api";
 import Tooltip from "@material-ui/core/Tooltip";
 import ExitToApp from "@material-ui/icons/ExitToApp";
 
+
 const styles = theme => ({
     root: {
         flexGrow: 1,
@@ -114,20 +115,20 @@ class History extends React.Component {
                                 </Grid>
                                 <Grid item>
                                     {this.state.loadingHistory &&
-                                    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                         <CircularProgress className={classes.progress}
                                                           style={{ color: '#199FC6' }} thickness={7}/>
                                     </div>
                                     }
                                     {!this.state.loadingHistory &&
                                     <Table className={classes.table}>
-                                        <TableHead style={{backgroundColor: 'black'}}>
+                                        <TableHead style={{ backgroundColor: 'black' }}>
                                             <TableRow>
-                                                <TableCell style={{color: 'white'}} numeric>Block</TableCell>
-                                                <TableCell style={{color: 'white'}}>Action</TableCell>
-                                                <TableCell style={{color: 'white'}} numeric>Amount</TableCell>
-                                                <TableCell style={{color: 'white'}}>Token</TableCell>
-                                                <TableCell style={{color: 'white'}}></TableCell>
+                                                <TableCell style={{ color: 'white' }} numeric>Block</TableCell>
+                                                <TableCell style={{ color: 'white' }}>Action</TableCell>
+                                                <TableCell style={{ color: 'white' }} numeric>Amount</TableCell>
+                                                <TableCell style={{ color: 'white' }}>Token</TableCell>
+                                                <TableCell style={{ color: 'white' }}></TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
@@ -140,9 +141,14 @@ class History extends React.Component {
                                                             numeric>{n.action === 'sell' ? '-' : ''}{n.amount}</TableCell>
                                                         <TableCell>{n.token}</TableCell>
                                                         <TableCell>
-                                                            <Tooltip id="tooltip-bottom" title="See on Etherscan" placement="bottom">
-                                                                <a href={`https://rinkeby.etherscan.io/tx/${n.txHash}`} target='_blank'>
-                                                                    <ExitToApp style={{color: 'grey', fontSize: '100%'}}></ExitToApp>
+                                                            <Tooltip id="tooltip-bottom" title="See on Etherscan"
+                                                                     placement="bottom">
+                                                                <a href={`https://rinkeby.etherscan.io/tx/${n.txHash}`}
+                                                                   target='_blank'>
+                                                                    <ExitToApp style={{
+                                                                        color: '#67B6F4',
+                                                                        fontSize: '100%'
+                                                                    }}></ExitToApp>
                                                                 </a>
                                                             </Tooltip>
                                                         </TableCell>
