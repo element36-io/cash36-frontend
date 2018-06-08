@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Avatar, Grid, Paper, Typography } from '@material-ui/core';
-import CopyIcon from "@material-ui/icons/ContentCopy"
+import ExitToApp from "@material-ui/icons/ExitToApp"
+import Tooltip from "@material-ui/core/Tooltip";
+
 
 const styles = theme => ({
     paper: {
@@ -25,7 +27,7 @@ const styles = theme => ({
     },
     gridItemReverse: {
         flexDirection: 'row',
-        [theme.breakpoints.down('sm')]: {
+        [ theme.breakpoints.down('sm') ]: {
             flexDirection: 'column',
         },
     },
@@ -56,8 +58,13 @@ class TokenDetails extends React.Component {
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={2}>
-                                    <a style={{ cursor: 'pointer' }}><CopyIcon
-                                        style={{ fontSize: '100%', color: '#67B6F4' }}/></a>
+                                    <Tooltip id="tooltip-bottom" title="See on Etherscan" placement="bottom">
+                                        <a style={{ cursor: 'pointer' }}
+                                           href={`https://rinkeby.etherscan.io/token/${token.tokenAddress}`}
+                                           target='_blank'>
+                                            <ExitToApp style={{ fontSize: '100%', color: '#67B6F4' }}/>
+                                        </a>
+                                    </Tooltip>
                                 </Grid>
                             </Grid>
                         </Grid>
