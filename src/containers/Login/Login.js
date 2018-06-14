@@ -43,7 +43,8 @@ class Login extends Component {
 
     componentWillMount() {
         this.uport.requestCredentials({
-            requested: [ 'name', 'avatar', 'cash36KYC' ],
+            requested: [ 'name', 'avatar' ],
+            verified: [ 'cash36KYC' ],
             notifications: true
         }, this.uPortURIHandler).then((credentials) => {
             // Next step
