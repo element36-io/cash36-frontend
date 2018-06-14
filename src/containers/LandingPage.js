@@ -167,7 +167,7 @@ class LandingPage extends Component {
                             &nbsp;&nbsp;notifications: {"true"} <br/>
                             }).then((credentials) => {'{'}<br/>
                             &nbsp;&nbsp;...<br/>
-                            &nbsp;&nbsp;if (credentials.address === credentials.verified[0].sub &&<br/>
+                            &nbsp;&nbsp;if (credentials.verified.length > 0 && credentials.address === credentials.verified[0].sub &&<br/>
                                 &nbsp;&nbsp;&nbsp;&nbsp;credentials.verified[0].iss === '2ozGXFqx3eKzmg7zQQZuTnEW6EeAVUzyUu6') {'{'}<br/>
                                 &nbsp;&nbsp;&nbsp;&nbsp;console.log('user verified by cash36')<br/>
                                 &nbsp;&nbsp;{'}'}

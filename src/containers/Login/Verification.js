@@ -48,8 +48,11 @@ class Verification extends Component {
 
             let userAddress = MNID.decode(nextProps.credentials.address).address;
 
+            console.log(nextProps.credentials);
+
             let verified = false;
-            if (nextProps.credentials.address === nextProps.credentials.verified[0].sub &&
+            if (nextProps.credentials.verified.length > 0 &&
+                nextProps.credentials.address === nextProps.credentials.verified[0].sub &&
                 nextProps.credentials.verified[0].iss === '2ozGXFqx3eKzmg7zQQZuTnEW6EeAVUzyUu6' &&
                 nextProps.credentials.verified[0].claim['cash36KYC']['Name'] === nextProps.credentials.name) {
 
