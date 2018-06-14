@@ -37,9 +37,9 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        let env = 'local';
-        if (process.env.NODE_ENV === 'staging') env = 'dev';
-        if (process.env.NODE_ENV === 'production') env = 'test';
+        let env = 'LOCAL';
+        if (process.env.NODE_ENV === 'staging') env = 'DEV';
+        if (process.env.NODE_ENV === 'production') env = 'RINKEBY';
 
         this.state = {
             backendUrl: `${API_ROOT}/cash36`,
