@@ -49,7 +49,11 @@ class Verification extends Component {
             let userAddress = MNID.decode(nextProps.credentials.address).address;
 
             let verified = false;
-            if (nextProps.credentials.cash36KYC && nextProps.credentials.cash36KYC['Name'] === nextProps.credentials.name) {
+            if (nextProps.credentials.address === nextProps.credentials.verified[0].sub &&
+                nextProps.credentials.verified[0].iss === '2ozGXFqx3eKzmg7zQQZuTnEW6EeAVUzyUu6' &&
+                nextProps.credentials.verified[0].claim['cash36KYC']['Name'] === nextProps.credentials.name) {
+
+                console.log('user verified by cash36');
                 verified = true;
             }
 
