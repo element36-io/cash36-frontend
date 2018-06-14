@@ -133,6 +133,51 @@ class LandingPage extends Component {
                         </Grid>
                     </Grid>
                 </Grid>
+                <Grid container direction={"column"} spacing={40} style={{ padding: 50 }}>
+                    <Grid item>
+                        <Typography variant={"title"}>Usage</Typography>
+                    </Grid>
+                    <Grid item>
+                        <Typography variant={"body2"}>
+                            To use our tokens in your project/product, you need the following:
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                        <Typography variant={"body2"}>
+                            1) The address of the token you wish to use - you can copy the value from above.<br/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;The tokens are ERC20 compatible, so just instantiate an ERC20 Token (we use <br/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;the contracts from open-zeppelin library) with the address<br/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;and you can use the token as any other ERC20 Token.<br/><br/>
+                            2) Public address of our cash36 uport application: <strong>2ozGXFqx3eKzmg7zQQZuTnEW6EeAVUzyUu6</strong><br/><br/>
+                            3) uport - As we use identities managed by uport, include <a href="https://uport.me">uport</a>
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                        <Typography variant={"body2"}>
+                            Every user who gets identified by cash36 receive an uport attestation `cash36KYC` including<br/>
+                            users name and the verification date.<br/>
+
+                            We recommend the following way to request credentials. Further we encourage you to verify<br/>
+                            the issuer of `cash36` which should equal the public address of our cash36 uport application:<br/><br/>
+
+                            <code>
+                            uport.requestCredentials({'{'}<br/>
+                            &nbsp;&nbsp;requested: [ 'name', 'avatar' ],<br/>
+                            &nbsp;&nbsp;verified: [ 'cash36KYC' ],<br/>
+                            &nbsp;&nbsp;notifications: {"true"} <br/>
+                            }).then((credentials) => {'{'}<br/>
+                            &nbsp;&nbsp;...<br/>
+                            &nbsp;&nbsp;if (credentials.address === credentials.verified[0].sub &&<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;credentials.verified[0].iss === '2ozGXFqx3eKzmg7zQQZuTnEW6EeAVUzyUu6') {'{'}<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;console.log('user verified by cash36')<br/>
+                                &nbsp;&nbsp;{'}'}
+                            </code>
+                            <br/><br/>
+                            Note: No matter if you make this check, our Smart contract will only allow identified users<br/>
+                            to own/receive our tokens. Therefore transaction to unidentified addresses will fail.
+                        </Typography>
+                    </Grid>
+                </Grid>
             </div>
         );
     }
