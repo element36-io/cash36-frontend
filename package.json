@@ -5,7 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^1.1.0",
     "@material-ui/icons": "^1.1.0",
-    "cash36-contracts": "^0.1.21-alpha",
+    "cash36-contracts": "^0.1.22-alpha",
     "classnames": "2.2.5",
     "material-ui-pickers": "^1.0.0-rc.9",
     "qrcode.react": "^0.8.0",
