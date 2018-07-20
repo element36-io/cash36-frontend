@@ -1543,9 +1543,9 @@ caseless@~0.12.0:
   version "0.12.0"
   resolved "http://167.99.243.81:4873/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
 
-cash36-contracts@^0.1.21:
-  version "0.1.21"
-  resolved "http://167.99.243.81:4873/cash36-contracts/-/cash36-contracts-0.1.21.tgz#9304c42994621f6b54c48f7f957066dfde31a124"
+cash36-contracts@^0.1.22-alpha:
+  version "0.1.22-alpha"
+  resolved "http://167.99.243.81:4873/cash36-contracts/-/cash36-contracts-0.1.22-alpha.tgz#46a5ba2cd64b130aea74948ac7e816eb089f8e86"
   dependencies:
     ethereumjs-testrpc "6.0.3"
     openzeppelin-solidity "1.10.0"
