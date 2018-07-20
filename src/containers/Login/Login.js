@@ -39,6 +39,8 @@ class Login extends Component {
             network: 'rinkeby',
             signer: SimpleSigner('98fe93a539f8ed46def934713918f888df1e088dc0ec6c58333f131b4f4ca358')
         });
+
+        window.web3.setProvider(this.uport.getProvider());
     }
 
     componentWillMount() {

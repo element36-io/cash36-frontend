@@ -27,7 +27,7 @@ class UserMenu extends React.Component {
         return (
             <div>
                 <IconButton onClick={this.handleClick} style={{ width: 24 }}>
-                    <MoreVertIcon style={{ color: 'white' }}/>
+                    <MoreVertIcon style={{ color: 'gray' }}/>
                 </IconButton>
                 <Menu
                     id="long-menu"

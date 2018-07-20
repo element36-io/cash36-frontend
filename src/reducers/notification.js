@@ -1,22 +1,40 @@
 import {
-    INIT_NOTIFICATIONS,
+    INIT_NOTIFICATIONS_REQUEST,
+    INIT_NOTIFICATIONS_SUCCESS,
+    INIT_NOTIFICATIONS_ERROR,
     NEW_NOTIFICATION,
-    RESET_BADGE_COUNT,
+    UPDATE_BADGE_COUNT,
 } from '../config/Actions'
+
 
 const initialState = {
     notifications: [],
+    isFetching: false,
+    error: '',
     badgeCount: 0,
     lastRead: new Date(),
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case INIT_NOTIFICATIONS:
+        case INIT_NOTIFICATIONS_REQUEST:
             return {
                 ...state,
-                notifications: action.data,
-                badgeCount: action.badgeCount,
+                isFetching: true,
+            };
+
+        case INIT_NOTIFICATIONS_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                notifications: action.payload,
+            };
+
+        case INIT_NOTIFICATIONS_ERROR:
+            return {
+                ...state,
+                isFetching: false,
+                error: action.error,
             };
 
         case NEW_NOTIFICATION:
@@ -40,15 +58,17 @@ export default (state = initialState, action) => {
                 badgeCount: badgeCount + 1,
             };
 
-        case RESET_BADGE_COUNT:
+        case UPDATE_BADGE_COUNT:
 
             let all = state.notifications;
-            all.map(n => n.new = false);
+            if (action.badgeCount === 0) {
+                all.map(n => n.new = false);
+            }
 
             return {
                 ...state,
                 notifications: all,
-                badgeCount: 0,
+                badgeCount: action.badgeCount,
                 lastRead: new Date(),
             };
 

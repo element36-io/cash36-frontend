@@ -1,37 +1,43 @@
+import { CALL_API } from "../middleware/api";
+
 import {
-    UPDATE_TOKENS,
+    UPDATE_TOKENS_REQUEST,
+    UPDATE_TOKENS_SUCCESS,
+    UPDATE_TOKENS_ERROR,
 } from '../config/Actions';
 
-export function updateTokens(data) {
-    return {
-        type: UPDATE_TOKENS,
-        data: data
+export function updatePublic() {
+    return async (dispatch) => {
+        const actionResponse = await dispatch({
+            [CALL_API]: {
+                endpoint: `/public/tokens`,
+                authenticated: false,
+                method: "GET",
+                types: [UPDATE_TOKENS_REQUEST, UPDATE_TOKENS_SUCCESS, UPDATE_TOKENS_ERROR]
+            }
+        });
+
+        if (actionResponse.error) {
+            throw new Error("Promise flow received action error", actionResponse);
+        }
+        return actionResponse;
     };
 }
 
-export function update(backendUrl, loggedInAddress) {
+export function update() {
     return async (dispatch) => {
-        try {
-            fetch(`${backendUrl}/tokens`).then(results => {
-                return results.json();
-            }).then(data => {
-                if (loggedInAddress) {
-                    // Fetch user balance for all tokens
-                    Promise.all(data.map(async (token) => {
-                        let balance = await fetch(`${backendUrl}/tokens/${token.symbol}/balance?userAddress=${loggedInAddress}`);
-                        balance = await balance.json();
-                        token.balance = balance;
-                        return token;
-                    })).then(data => {
-                        dispatch(updateTokens(data));
-                    });
-                } else {
-                    dispatch(updateTokens(data));
+            const actionResponse = await dispatch({
+                [CALL_API]: {
+                    endpoint: `/cash36/tokens`,
+                    authenticated: true,
+                    method: "GET",
+                    types: [UPDATE_TOKENS_REQUEST, UPDATE_TOKENS_SUCCESS, UPDATE_TOKENS_ERROR]
                 }
             });
-        } catch (error) {
-            console.log(error)
-        }
-        return Promise.resolve();
+
+            if (actionResponse.error) {
+                throw new Error("Promise flow received action error", actionResponse);
+            }
+        return actionResponse;
     };
 }

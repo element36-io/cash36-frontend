@@ -27,7 +27,6 @@ class Wallet extends Component {
         super(props);
 
         this.state = {
-            backendUrl: `${API_ROOT}/cash36`,
             tokens: {},
             tabIndex: 0,
             message: 'I love snacks',
@@ -49,15 +48,19 @@ class Wallet extends Component {
 
     componentWillUnmount() {
         if (this.stompClient != null) {
-            this.stompClient.disconnect();
+            try {
+                this.stompClient.disconnect();
+            } catch(err) {
+                // ignore the case if not yet connected
+            }
         }
     }
 
     connectWs() {
-        let socket = new SockJS(`${this.state.backendUrl}/ws`);
+        let socket = new SockJS(`${API_ROOT}/ws`);
         this.stompClient = Stomp.over(socket);
         this.stompClient.connect({}, (frame) => {
-            this.stompClient.subscribe('/topics/updates/' + this.props.loggedInAddress, (messageOutput) => {
+            this.stompClient.subscribe('/topics/updates/'+ this.props.loggedInAddress, (messageOutput) => {
                 this.newNotification(JSON.parse(messageOutput.body));
 
                 this.setState({
@@ -77,7 +80,9 @@ class Wallet extends Component {
     }
 
     updateTokens() {
-        this.props.tokenActions.update(this.state.backendUrl, this.props.loggedInAddress);
+        this.props.tokenActions.update().catch(err => {
+            this.props.history.replace('/login');
+        });
     }
 
     newNotification(notification) {
@@ -86,7 +91,7 @@ class Wallet extends Component {
     }
 
     loadNotifications() {
-        this.props.notificationActions.init(this.state.backendUrl, this.props.loggedInAddress, this.props.lastRead);
+        this.props.notificationActions.init(this.props.lastRead);
     }
 
     changeTab = (event, value) => {

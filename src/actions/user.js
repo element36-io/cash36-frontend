@@ -1,5 +1,6 @@
 import {
     USER_LOGGED_IN,
+    USER_ATTESTED,
     USER_LOGGED_OUT
 } from '../config/Actions';
 
@@ -11,16 +12,26 @@ export function userLoggedIn(credentials, userAddress) {
     };
 }
 
+export function userAttested(attest) {
+    return {
+        type: USER_ATTESTED,
+        attest: attest
+    };
+}
+
 export function userLoggedOut() {
     return {
         type: USER_LOGGED_OUT
     };
 }
 
-export function logout(web3) {
+export function logout() {
     return async (dispatch) => {
         try {
-            web3.eth.accounts.wallet.clear();
+            console.log('logout');
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('refresh_token');
+            localStorage.removeItem('expires_at');
             dispatch(userLoggedOut());
         } catch (error) {
             console.log(error)

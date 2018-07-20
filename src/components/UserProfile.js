@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import { Divider, Grid, Paper, Typography } from '@material-ui/core';
 import { connect } from "react-redux";
 import VerifiedUser from "@material-ui/icons/VerifiedUser";
+import { Link } from "react-router-dom";
+
 
 const styles = theme => ({
     paper: {
@@ -22,7 +24,12 @@ class UserProfile extends React.Component {
 
     render() {
         const { classes } = this.props;
-        const verified = new Date(this.props.credentials.cash36KYC[ "verified on" ]);
+        let verified;
+        if (this.props.credentials.cash36KYC) {
+            verified = new Date(this.props.credentials.cash36KYC[ "verified on" ]);
+        } else {
+            verified = undefined;
+        }
 
         return (
             <Paper className={classes.paper} elevation={1}>
@@ -41,6 +48,7 @@ class UserProfile extends React.Component {
                             </Grid>
                             <Divider style={{ marginTop: 20, marginBottom: 10 }}/>
                             <Grid item>
+                                {verified !== undefined &&
                                 <Grid container alignItems="center" spacing={16}>
                                     <Grid item>
                                         <VerifiedUser style={{ color: 'green' }}/>
@@ -51,6 +59,20 @@ class UserProfile extends React.Component {
                                         </Typography>
                                     </Grid>
                                 </Grid>
+                                }
+                                {verified === undefined &&
+                                <Grid container alignItems="center" spacing={16}>
+                                    <Grid item>
+                                        <VerifiedUser style={{ color: 'red' }}/>
+                                    </Grid>
+                                    <Grid item>
+                                        <Typography variant="caption">Not yet Verified</Typography>
+                                        <Link to="/attest">
+                                            <Typography variant="caption">Get verified</Typography>
+                                        </Link>
+                                    </Grid>
+                                </Grid>
+                                }
                             </Grid>
                         </Grid>
                     </Grid>

@@ -5,6 +5,7 @@ import rootReducer from '../reducers/rootReducer';
 import throttle from 'lodash/throttle'
 
 import { loadState, saveState } from "./localStorage";
+import { api } from "../middleware/api";
 const persistedState = loadState();
 
 const loggerMiddleware = createLogger();
@@ -14,7 +15,8 @@ const configureStore = createStore(
     persistedState,
     applyMiddleware(
         thunkMiddleware,
-        loggerMiddleware
+        loggerMiddleware,
+        api,
     )
 )
 

@@ -11,7 +11,7 @@ const styles = {
     },
     paper: {
         minHeight: 250,
-        background: 'linear-gradient(180deg, #000000 80%,#333333 100%)',
+        //background: 'linear-gradient(180deg, #000000 80%,#333333 100%)',
         borderRadius: 0
     },
     grid: {

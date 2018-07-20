@@ -6,11 +6,10 @@ import Subheader from "../components/Subheader";
 import hand from '../assets/hand.png';
 import yin from '../assets/yin.png';
 import screw from '../assets/screw.png';
-import { update } from "../actions/token";
+import { updatePublic } from "../actions/token";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import TokenDetails from "../components/TokenDetails";
-import { API_ROOT } from "../config/Api";
 
 const styles = theme => ({
     root: {
@@ -57,12 +56,11 @@ class LandingPage extends Component {
 
         this.state = {
             loading: false,
-            backendUrl: `${API_ROOT}/cash36`,
         };
     }
 
     componentDidMount() {
-        this.props.updateTokens(this.state.backendUrl);
+        this.props.updateTokens();
     }
 
     render() {
@@ -181,6 +179,7 @@ class LandingPage extends Component {
             </div>
         );
     }
+
 }
 
 LandingPage.propTypes = {
@@ -189,7 +188,7 @@ LandingPage.propTypes = {
 
 const mapDispatchToProps = dispatch => {
     return {
-        updateTokens: bindActionCreators(update, dispatch),
+        updateTokens: bindActionCreators(updatePublic, dispatch),
     };
 };
 

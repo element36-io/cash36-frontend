@@ -99,12 +99,17 @@ class BuyTokens extends React.Component {
         if (this.validateInput()) {
             this.setState({ preparing: true });
 
-            fetch(`${this.state.backendUrl}/payments/${this.state.selectedToken}/?amount=${this.state.buyAmount}&forAddress=${this.props.loggedInAddress}`, {
-                method: "PUT",
+            fetch(`${this.state.backendUrl}/payments/`, {
+                method: "POST",
                 headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
+                body: JSON.stringify({
+                        "symbol": this.state.selectedToken,
+                        "amount": this.state.buyAmount
+                    })
             }).then((response) => {
                 return response.json();
             }).then((data) => {
@@ -131,6 +136,7 @@ class BuyTokens extends React.Component {
         fetch(`${this.state.backendUrl}/payments/payment-simulation`, {
             method: "POST",
             headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },

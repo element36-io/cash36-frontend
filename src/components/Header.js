@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { Button, Tooltip, Typography } from '@material-ui/core';
-import logoImage from '../assets/logo.svg';
+import logoImage from '../assets/logo-w-cash.svg';
 import Grid from '@material-ui/core/Grid';
 import { Link, Redirect } from "react-router-dom";
 import { bindActionCreators } from "redux";
@@ -21,15 +21,16 @@ const styles = theme => ({
         zIndex: 1000,
     },
     header: {
-        background: 'linear-gradient(0deg, #000000 80%,#333333 100%)',
+        //background: 'linear-gradient(0deg, #000000 80%,#333333 100%)',
     },
     avatar: {
-        color: 'white',
+        //color: 'white',
+        color: 'black',
         fontSize: '70%',
     },
     logo: {
         height: 55,
-        marginTop: 12,
+        marginTop: 3,
     },
 });
 
@@ -44,7 +45,8 @@ class Header extends React.Component {
     }
 
     logout = () => {
-        this.props.actions.userLoggedOut();
+        this.props.actions.logout();
+
         this.setState({ loggedOut: true })
     };
 
@@ -69,14 +71,14 @@ class Header extends React.Component {
                                     <Grid item>
                                         <Link to={'/register'}>
                                             <Typography variant="caption" style={{
-                                                color: 'white',
+                                                color: 'gray',
                                                 fontSize: 14,
                                                 textDecoration: 'underline'
                                             }}>Register</Typography>
                                         </Link>
                                     </Grid>
                                     <Grid item>
-                                        <Typography variant="caption" style={{ color: 'white' }}>or</Typography>
+                                        <Typography variant="caption" style={{ color: 'gray' }}>or</Typography>
                                     </Grid>
                                     <Grid item>
                                         <Link to={'/login'} style={{ textDecoration: 'none' }}>
@@ -93,7 +95,7 @@ class Header extends React.Component {
                                     <Grid item>
                                         <Tooltip id="tooltip-bottom" title="Home" placement="bottom">
                                             <Link to={'/'} style={{ textDecoration: 'none' }}>
-                                                <Home style={{ color: 'white' }}/>
+                                                <Home style={{ color: 'gray' }}/>
                                             </Link>
                                         </Tooltip>
                                     </Grid>
@@ -102,7 +104,7 @@ class Header extends React.Component {
                                     <Grid item>
                                         <Tooltip id="tooltip-bottom" title="Wallet" placement="bottom">
                                             <Link to={'/wallet'} style={{ textDecoration: 'none' }}>
-                                                <AccountBalanceWallet style={{ color: 'white' }}/>
+                                                <AccountBalanceWallet style={{ color: 'gray' }}/>
                                             </Link>
                                         </Tooltip>
                                     </Grid>
@@ -115,7 +117,7 @@ class Header extends React.Component {
                                     }
                                     <Grid item>
                                         <img src={this.props.credentials.avatar.uri} alt={'avatar'}
-                                             style={{ width: 50, borderRadius: 100, border: '1px solid white' }}/>
+                                             style={{ width: 50, borderRadius: 100, border: '1px solid black' }}/>
                                     </Grid>
                                     <Grid item>
                                         <UserMenu logout={this.logout.bind(this)}/>

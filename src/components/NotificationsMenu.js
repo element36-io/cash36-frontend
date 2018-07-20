@@ -31,11 +31,11 @@ class NotificationsMenu extends React.Component {
                 <IconButton className={classes.margin} onClick={this.handleClick} style={{ width: 24 }}>
                     {badgeCount > 0 &&
                     <Badge className={classes.badge} badgeContent={badgeCount} color="primary">
-                        <Notification style={{ color: 'white' }}/>
+                        <Notification style={{ color: 'gray' }}/>
                     </Badge>
                     }
                     {badgeCount === 0 &&
-                    <Notification style={{ color: 'white' }}/>
+                    <Notification style={{ color: 'gray' }}/>
                     }
                 </IconButton>
             </Tooltip>
