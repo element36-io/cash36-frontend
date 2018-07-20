@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import * as _ from 'lodash';
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import SwapHoriz from '@material-ui/icons/SwapVerticalCircle';
-import withStyles from "@material-ui/core/styles/withStyles";
+import { withStyles } from "@material-ui/core/styles";
 import ListItemText from "@material-ui/core/ListItemText";
 import Info from "@material-ui/icons/Info";
 import Drawer from "@material-ui/core/Drawer";
