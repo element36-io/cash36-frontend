@@ -69,8 +69,9 @@ class LandingPage extends Component {
         return (
             <div className={classes.root}>
                 <Subheader/>
-                {tokens.length === 0 && 'No Tokens available'}
-                {tokens.length !== 0 &&
+                {tokens === undefined && 'No Tokens available'}
+                {tokens && tokens.length === 0 && 'No Tokens available'}
+                {tokens && tokens.length !== 0 &&
                 <Grid container justify="center" spacing={40} style={{marginTop: -50}}>
                     {tokens.length > 0 && tokens.map((token, key) =>
                         <Grid key={key} item xs={11} sm={5} md={5} lg={4}>
@@ -131,7 +132,7 @@ class LandingPage extends Component {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid container direction={"column"} spacing={40} style={{ padding: 50 }}>
+                <Grid container direction={"column"} alignItems={'center'} spacing={40} style={{ padding: 50 }}>
                     <Grid item>
                         <Typography variant={"title"}>Usage</Typography>
                     </Grid>

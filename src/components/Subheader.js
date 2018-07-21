@@ -28,8 +28,8 @@ class Subheader extends React.Component {
                 <Paper className={classes.paper} elevation={0}>
                     <Grid className={classes.grid} container justify="center">
                         <Grid item style={{textAlign: 'center'}} xs={12} md={6}>
-                            <Typography variant="title" style={{color: 'white'}}>Fiat and Crypto United</Typography>
-                            <Typography variant="subheading" style={{color: 'white', marginTop: 10}}>We offer Swiss Frank (CHF) and Euro (EUR) as ERC20
+                            <Typography variant="title" style={{color: 'black'}}>Fiat and Crypto United</Typography>
+                            <Typography variant="subheading" style={{color: 'black', marginTop: 10}}>We offer Swiss Frank (CHF) and Euro (EUR) as ERC20
                                 compatible tokens, symbols are CHF36 and EUR36 - others will follow when we
                                 enter new markets. Each of our tokens are attached to an already identified
                                 person. Using our token means, that you can work with real FIAT on the Blockchain
