@@ -56,11 +56,11 @@ class Web3ProviderNew extends React.Component {
         }
 
         web3 = new Web3();
-        web3.setProvider(new web3.providers.HttpProvider("http://167.99.243.81:8866/"));
+        web3.setProvider(new web3.providers.HttpProvider("http://167.99.243.81:6688/"));
 
         window.web3 = web3;
 
-        console.log('web3 injected and ready. Connected to: http://167.99.243.81:8866/');
+        console.log('web3 injected and ready. Connected to: http://167.99.243.81:6688/');
     }
 
     setNetwork() {
