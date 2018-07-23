@@ -11,7 +11,7 @@ import { bindActionCreators } from "redux";
 
 const styles = theme => ({
     root: {
-        marginTop: -50,
+        //marginTop: -50,
         flexGrow: 1,
     },
     paper: {

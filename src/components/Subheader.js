@@ -11,7 +11,7 @@ const styles = {
     },
     paper: {
         minHeight: 250,
-        backgroundColor: '#F5F5F5`',
+        backgroundColor: '#F5F5F5',
         borderRadius: 0
     },
     grid: {
