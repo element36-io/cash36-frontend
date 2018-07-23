@@ -111,7 +111,6 @@ class Password extends Component {
                 if (response.ok) {
                     this.props.actions.requestToken(userAddress, this.state.password)
                         .then((response) => {
-                            console.log(response);
                             if (response !== undefined) {
                                 this.props.userActions.userLoggedIn(this.props.credentials, userAddress);
                                 this.setState({redirect: true});
@@ -120,7 +119,6 @@ class Password extends Component {
                             }
                         });
                 } else {
-                    console.log(response);
                     switch (response.status) {
                         default:
                             console.log('Error: request rejected from server');
