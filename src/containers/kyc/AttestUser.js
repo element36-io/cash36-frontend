@@ -12,7 +12,7 @@ import { Redirect } from "react-router-dom";
 
 const styles = theme => ({
     root: {
-        marginTop: -50,
+        //marginTop: -50,
         flexGrow: 1,
     },
     paper: {

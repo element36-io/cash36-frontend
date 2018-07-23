@@ -25,7 +25,7 @@ import { Redirect } from "react-router-dom";
 
 const styles = theme => ({
     root: {
-        marginTop: -50,
+        //marginTop: -50,
         flexGrow: 1,
         paddingBottom: 50,
     },
@@ -96,7 +96,7 @@ class Password extends Component {
         if (!this.validateInput()) {
             let userAddress = MNID.decode(this.props.credentials.address).address;
 
-            fetch(`${API_ROOT}/public/register`, {
+            fetch(`${API_ROOT}/public/register/`, {
                 method: "POST",
                 headers: {
                     'Accept': 'application/json',

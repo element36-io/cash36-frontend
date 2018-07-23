@@ -69,17 +69,6 @@ class App extends Component {
             <MuiThemeProvider theme={theme}>
                 <div>
                     <Header location={this.props.location} openDrawer={this.openDrawer.bind(this)}/>
-                    <Chip label={this.state.env} style={{ position: 'absolute',
-                            right: 0,
-                            top: 80,
-                            zIndex: 1000,
-                            borderRadius: 2,
-                            backgroundColor: 'green',
-                            opacity: 0.9,
-                            color: '#CCCCCC',
-                            textTransform: 'uppercase',
-                            fontSize: '80%',
-                        }} />
                     <Main/>
                     <NotificationList drawerOpen={this.state.drawerOpen} notifications={this.props.notifications} closeDrawer={this.closeDrawer.bind(this)}/>
                     <Footer/>
