@@ -71,14 +71,14 @@ class Header extends React.Component {
                                     <Grid item>
                                         <Link to={'/register'}>
                                             <Typography variant="caption" style={{
-                                                color: 'gray',
+                                                color: '#62757E',
                                                 fontSize: 14,
                                                 textDecoration: 'underline'
                                             }}>Register</Typography>
                                         </Link>
                                     </Grid>
                                     <Grid item>
-                                        <Typography variant="caption" style={{ color: 'gray' }}>or</Typography>
+                                        <Typography variant="caption" style={{ color: '#62757E' }}>or</Typography>
                                     </Grid>
                                     <Grid item>
                                         <Link to={'/login'} style={{ textDecoration: 'none' }}>
@@ -95,7 +95,7 @@ class Header extends React.Component {
                                     <Grid item>
                                         <Tooltip id="tooltip-bottom" title="Home" placement="bottom">
                                             <Link to={'/'} style={{ textDecoration: 'none' }}>
-                                                <Home style={{ color: 'gray' }}/>
+                                                <Home style={{ color: '#62757E' }}/>
                                             </Link>
                                         </Tooltip>
                                     </Grid>
@@ -104,7 +104,7 @@ class Header extends React.Component {
                                     <Grid item>
                                         <Tooltip id="tooltip-bottom" title="Wallet" placement="bottom">
                                             <Link to={'/wallet'} style={{ textDecoration: 'none' }}>
-                                                <AccountBalanceWallet style={{ color: 'gray' }}/>
+                                                <AccountBalanceWallet style={{ color: '#62757E' }}/>
                                             </Link>
                                         </Tooltip>
                                     </Grid>
