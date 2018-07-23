@@ -9,6 +9,10 @@
     core-js "^2.5.3"
     regenerator-runtime "^0.11.1"
 
+"@mars/heroku-js-runtime-env@^3.0.2":
+  version "3.0.2"
+  resolved "http://167.99.243.81:4873/@mars%2fheroku-js-runtime-env/-/heroku-js-runtime-env-3.0.2.tgz#e5b8480ed82b54046474a08a139b8d9560af3a28"
+
 "@material-ui/core@^1.1.0":
   version "1.1.0"
   resolved "http://167.99.243.81:4873/@material-ui%2fcore/-/core-1.1.0.tgz#592a58efe2001396125c3187565d3cb88a98b2e7"
