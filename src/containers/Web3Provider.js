@@ -2,6 +2,8 @@ const Web3 = require('web3');
 const React = require('react');
 const PropTypes = require('prop-types');
 
+const WEB3_NODE = require('../config/Api.js').WEB3_NODE;
+
 const childContextTypes = {
     web3: PropTypes.shape({
         givenProvider: PropTypes.boolean,
@@ -56,11 +58,11 @@ class Web3ProviderNew extends React.Component {
         }
 
         web3 = new Web3();
-        web3.setProvider(new web3.providers.HttpProvider("http://167.99.243.81:6688/"));
+        web3.setProvider(new web3.providers.HttpProvider(WEB3_NODE));
 
         window.web3 = web3;
 
-        console.log('web3 injected and ready. Connected to: http://167.99.243.81:6688/');
+        console.log('web3 injected and ready. Connected to: '+ WEB3_NODE);
     }
 
     setNetwork() {
