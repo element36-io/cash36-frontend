@@ -6,6 +6,6 @@ console.log('Environment: '+ apiEnv);
 
 let url = 'http://localhost:8080';
 if (apiEnv === 'staging') url = 'https://cash36-backend.herokuapp.com';
-if (apiEnv === 'production' || process.env.NODE_ENV === 'production') url = 'https://cash36-test-backend.herokuapp.com';
+if (apiEnv === 'production') url = 'https://cash36-test-backend.herokuapp.com';
 
 export const API_ROOT = url;
