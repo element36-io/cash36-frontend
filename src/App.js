@@ -10,7 +10,6 @@ import { withRouter } from "react-router-dom";
 import NotificationList from "./components/NotificationList";
 import { resetBadgeCount } from "./actions/notification";
 import { API_ROOT } from "./config/Api";
-import Chip from "@material-ui/core/Chip";
 
 const theme = createMuiTheme({
     palette: {
