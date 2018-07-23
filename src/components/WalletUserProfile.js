@@ -26,7 +26,7 @@ class WalletUserProfile extends React.Component {
                 </Grid>
                 <Grid item xs={12} sm={6} md={5} lg={4}>
                     <Grid container className={classes.gridItem} spacing={16}>
-                        {tokens.length > 0 && tokens.map((token, key) =>
+                        {tokens && tokens.length > 0 && tokens.map((token, key) =>
                             <Grid item key={key} xs={12}>
                                 <TokenBalance token={token}/>
                             </Grid>

@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Button, Grid, Paper, Typography } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Grid, Paper, Typography } from "@material-ui/core";
 import QRCode from 'qrcode.react'
 import { Connect, SimpleSigner } from "uport-connect";
 import { API_ROOT } from "../../config/Api";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as actions from "../../actions/user";
+import { Redirect } from "react-router-dom";
 
 const styles = theme => ({
     root: {
@@ -43,15 +46,15 @@ class AttestUser extends React.Component {
         });
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.currentStep === 4) {
-            this.uport.attestCredentials({
-                sub: this.props.credentials.address,
-                claim: { 'cash36KYC': { 'Name': this.props.credentials.name, 'verified on': new Date() } }
-            }, this.uPortURIHandler).then((att) => {
-                this.setState({ attested: true })
-            })
-        }
+    componentWillMount() {
+        let claim = { 'Name': this.props.credentials.name, 'Level': 1, 'verified on': new Date() };
+        this.uport.attestCredentials({
+            sub: this.props.credentials.address,
+            claim: { 'cash36KYC': claim }
+        }, this.uPortURIHandler).then((att) => {
+            this.props.actions.userAttested(claim);
+
+        })
     }
 
     uPortURIHandler(uri) {
@@ -60,10 +63,6 @@ class AttestUser extends React.Component {
 
     render() {
         const { classes } = this.props;
-
-        if (this.props.currentStep !== 4) {
-            return null;
-        }
 
         return (
             <div className={classes.root}>
@@ -78,24 +77,15 @@ class AttestUser extends React.Component {
                                 </Grid>
                                 <Grid item>
                                     <Typography variant="body2">
-                                        Identification was successful, please scan the QR Code below with your uport app
+                                        Please scan the QR Code below with your uPort app
                                         to receive our verification.
                                     </Typography>
                                 </Grid>
                                 <Grid item>
-                                    {!this.state.attested &&
-                                        <QRCode value={this.state.uri} size={300}/>
-                                    }
-                                    {this.state.attested &&
-                                    <div>
-                                        <Typography variant="body2">'Done, ready to go...'</Typography>
-                                        <Link to="/login" style={{ textDecoration: 'none' }}>
-                                            <Button className={classes.button}>Continue to Login</Button>
-                                        </Link>
-                                    </div>
-                                    }
+                                    <QRCode value={this.state.uri} size={300}/>
                                 </Grid>
                             </Grid>
+                            {this.props.attested && <Redirect to={"/wallet"}/>}
                         </Paper>
                     </Grid>
                 </Grid>
@@ -108,4 +98,16 @@ AttestUser.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(AttestUser);
+const mapStateToProps = state => ({
+    loggedInAddress: state.user.loggedInAddress,
+    credentials: state.user.credentials,
+    attested: state.user.attested,
+});
+
+const mapDispatchToProps = dispatch => {
+    return {
+        actions: bindActionCreators(actions, dispatch),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(AttestUser));

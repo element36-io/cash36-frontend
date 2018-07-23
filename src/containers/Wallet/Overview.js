@@ -59,9 +59,12 @@ class Overview extends React.Component {
     getTransferHistory() {
         this.setState({ loadingHistory: true });
 
-        fetch(`${this.state.backendUrl}/tokens/history?userAddress=${this.props.loggedInAddress}`, {
+        let token = localStorage.getItem('access_token');
+
+        fetch(`${this.state.backendUrl}/tokens/history`, {
             method: "GET",
             headers: {
+                'Authorization': 'Bearer ' + token,
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },

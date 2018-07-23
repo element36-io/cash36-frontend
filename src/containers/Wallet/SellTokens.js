@@ -11,10 +11,11 @@ import {
     TextField,
     Typography
 } from '@material-ui/core';
-import { connect } from "react-redux";
 import Snackbar from "@material-ui/core/Snackbar";
 import WalletUserProfile from "../../components/WalletUserProfile";
 import { API_ROOT } from "../../config/Api";
+import { Cash36Contract, Token36Contract } from "cash36-contracts";
+import addCash36 from "../cash36";
 
 const styles = theme => ({
     root: {
@@ -47,7 +48,7 @@ class SellTokens extends React.Component {
             sellAmountError: false,
             selectedToken: '',
             selectedTokenError: false,
-            baseFee: 0.015,
+            baseFee: 0.02,
             exchanging: false,
             backendUrl: `${API_ROOT}/cash36`,
             snackOpen: false,
@@ -92,19 +93,35 @@ class SellTokens extends React.Component {
 
         this.setState({ exchanging: true });
 
-        let amount = this.state.sellAmount;
-        fetch(`${this.state.backendUrl}/payments/${this.state.selectedToken}/?amount=${amount}&fromAddress=${this.props.loggedInAddress}`, {
-            method: "DELETE",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-        }).then((response) => {
-            this.setState({ exchanging: false, sellAmount: '', selectedToken: '', snackOpen: true });
-            this.props.updateTokens();
-        }).then((data) => {
-        });
+        this.burnTokens(this.props.loggedInAddress, this.state.selectedToken, this.state.sellAmount)
+            .then((response) => {
+                this.setState({ exchanging: false, sellAmount: '', selectedToken: '', snackOpen: true });
+                this.props.updateTokens();
+            }).then((data) => {
+            });
     };
+
+    async burnTokens(address, tokenSymbol, amount) {
+        let web3 = this.props.web3;
+
+        const cash36Contract = new web3.eth.Contract(Cash36Contract.abi, Cash36Contract.networks[ this.props.networkId ].address);
+        let tokenAddress = await cash36Contract.methods.getTokenBySymbol(tokenSymbol).call();
+        const token36Contract = new web3.eth.Contract(Token36Contract.abi, tokenAddress);
+
+        // Calculate amount of gas needed and add extra margin of 10%
+        let estimate = await token36Contract.methods.burn(amount).estimateGas({ from: this.props.loggedInAddress });
+        let data = await token36Contract.methods.burn(amount).encodeABI();
+
+        const options = {
+            from: this.props.loggedInAddress,
+            to: tokenAddress,
+            gas: estimate + Math.round(estimate * 0.1),
+            nonce: await web3.eth.getTransactionCount(this.props.loggedInAddress, 'pending'),
+            data: data
+        };
+
+        return web3.eth.sendTransaction(options);
+    }
 
     render() {
         const { classes, tokens } = this.props;
@@ -164,7 +181,7 @@ class SellTokens extends React.Component {
                                             <Grid container alignItems={'center'}>
                                                 <Grid item xs={6}>
                                                     <Typography variant="subheading" color="secondary">
-                                                        Exchange Fee (1.5%)
+                                                        Exchange Fee ({this.state.baseFee * 100}%)
                                                     </Typography>
                                                 </Grid>
                                                 <Grid item xs={6}>
@@ -222,10 +239,4 @@ SellTokens.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-    loggedInAddress: state.user.loggedInAddress,
-});
-
-export default connect(
-    mapStateToProps,
-)(withStyles(styles)(SellTokens));
+export default addCash36(withStyles(styles)(SellTokens));

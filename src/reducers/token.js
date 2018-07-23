@@ -1,5 +1,7 @@
 import {
-    UPDATE_TOKENS,
+    UPDATE_TOKENS_REQUEST,
+    UPDATE_TOKENS_SUCCESS,
+    UPDATE_TOKENS_ERROR,
 } from '../config/Actions'
 
 const initialState = {
@@ -9,13 +11,26 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
 
-        case UPDATE_TOKENS:
-
+        case UPDATE_TOKENS_REQUEST:
             return {
                 ...state,
-                tokens: action.data,
+                isFetching: true,
             };
-            
+
+        case UPDATE_TOKENS_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                tokens: action.payload,
+            };
+
+        case UPDATE_TOKENS_ERROR:
+            return {
+                ...state,
+                isFetching: false,
+                error: action.error,
+            };
+
         default:
             return state;
     }

@@ -53,7 +53,6 @@ class EnterCredentials extends React.Component {
         super(props);
 
         this.state = {
-            backendUrl: `${API_ROOT}/cash36`,
             loggedInAddress: '',
             firstName: '',
             firstNameError: false,
@@ -106,9 +105,11 @@ class EnterCredentials extends React.Component {
 
     registerUser() {
         if (!this.validateInput()) {
-            fetch(`${this.state.backendUrl}/users/register`, {
+            console.log('fetch userdata');
+            fetch(`${API_ROOT}/users/user-data`, {
                 method: "POST",
                 headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
@@ -121,6 +122,7 @@ class EnterCredentials extends React.Component {
                         country: this.state.country,
                     })
             }).then((response) => {
+                console.log(response);
                 if (response.ok) {
                     this.props.afterValid();
                 } else {
@@ -137,7 +139,7 @@ class EnterCredentials extends React.Component {
     render() {
         const { classes } = this.props;
 
-        if (this.props.currentStep !== 3) {
+        if (this.props.currentStep !== 4) {
             return null;
         }
 

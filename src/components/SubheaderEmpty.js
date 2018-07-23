@@ -10,7 +10,8 @@ const styles = {
     },
     paper: {
         height: 50,
-        background: 'linear-gradient(180deg, #000000 80%,#333333 100%)',
+        //background: 'linear-gradient(180deg, #000000 80%,#333333 100%)',
+        background: 'white'
     },
     grid: {
         paddingTop: 20,

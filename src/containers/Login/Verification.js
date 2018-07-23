@@ -43,26 +43,24 @@ class Verification extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.currentStep !== nextProps.currentStep) {
+        if (this.props.currentStep !== nextProps.currentStep && nextProps.currentStep === 3) {
             this.setState({ verifying: true });
 
             let userAddress = MNID.decode(nextProps.credentials.address).address;
 
             console.log(nextProps.credentials);
 
-            let verified = false;
-            if (nextProps.credentials.verified.length > 0 &&
-                nextProps.credentials.address === nextProps.credentials.verified[0].sub &&
-                nextProps.credentials.verified[0].iss === '2ozGXFqx3eKzmg7zQQZuTnEW6EeAVUzyUu6' &&
-                nextProps.credentials.verified[0].claim['cash36KYC']['Name'] === nextProps.credentials.name) {
+            let verified = true;
+            // if (nextProps.credentials.verified.length > 0 &&
+            //     nextProps.credentials.address === nextProps.credentials.verified[0].sub &&
+            //     nextProps.credentials.verified[0].iss === '2ozGXFqx3eKzmg7zQQZuTnEW6EeAVUzyUu6' &&
+            //     nextProps.credentials.verified[0].claim['cash36KYC']['Name'] === nextProps.credentials.name) {
+            //
+            //     console.log('user verified by cash36');
+            //     verified = true;
+            // }
 
-                console.log('user verified by cash36');
-                verified = true;
-            }
-
-            if (verified) {
-                this.props.actions.userLoggedIn(nextProps.credentials, userAddress);
-            }
+            this.props.actions.userLoggedIn(nextProps.credentials, userAddress);
             this.setState({ verified: verified, verifying: false });
         }
     }
@@ -70,7 +68,7 @@ class Verification extends Component {
     render() {
         const { classes } = this.props;
 
-        if (this.props.currentStep !== 2) {
+        if (this.props.currentStep !== 3) {
             return null;
         }
 

@@ -1,16 +1,11 @@
+import { CALL_API } from "../middleware/api";
 import {
-    INIT_NOTIFICATIONS,
+    INIT_NOTIFICATIONS_REQUEST,
+    INIT_NOTIFICATIONS_SUCCESS,
+    INIT_NOTIFICATIONS_ERROR,
     NEW_NOTIFICATION,
-    RESET_BADGE_COUNT
+    UPDATE_BADGE_COUNT
 } from '../config/Actions';
-
-export function initNotifications(data, badgeCount) {
-    return {
-        type: INIT_NOTIFICATIONS,
-        data: data,
-        badgeCount: badgeCount,
-    };
-}
 
 export function newNotification(title, message, type, creationDate) {
     return {
@@ -25,31 +20,43 @@ export function newNotification(title, message, type, creationDate) {
 
 export function resetBadgeCount() {
     return {
-        type: RESET_BADGE_COUNT
+        type: UPDATE_BADGE_COUNT,
+        badgeCount: 0,
     };
 }
 
-export function init(backendUrl, loggedInAddress, lastRead) {
+export function updateBadgeCount(badgeCount) {
+    return {
+        type: UPDATE_BADGE_COUNT,
+        badgeCount: badgeCount,
+    };
+}
+
+export function init(lastRead) {
     return async (dispatch) => {
-        try {
-            // Load notifications from backend
-            fetch(`${backendUrl}/notifications/${loggedInAddress}`)
-                .then((response) => {
-                    return response.json();
-                }).then((data) => {
-                    let badgeCount = 0;
-                    data.map(n => {
-                        n.new = lastRead < new Date(n.creationDate);
-                        if (lastRead < new Date(n.creationDate)) {
-                            badgeCount++;
-                        }
-                        return n;
-                    });
-                    dispatch(initNotifications(data, badgeCount));
-            });
-        } catch (error) {
-            console.log(error)
+        const actionResponse = await dispatch({
+            [ CALL_API ]: {
+                endpoint: `/cash36/notifications`,
+                authenticated: true,
+                method: "GET",
+                types: [ INIT_NOTIFICATIONS_REQUEST, INIT_NOTIFICATIONS_SUCCESS, INIT_NOTIFICATIONS_ERROR ]
+            }
+        });
+
+        if (actionResponse.error) {
+            throw new Error("Promise flow received action error", actionResponse);
         }
-        return Promise.resolve();
+
+        let badgeCount = 0;
+        actionResponse.payload.map(n => {
+            n.new = lastRead < new Date(n.creationDate);
+            if (lastRead < new Date(n.creationDate)) {
+                badgeCount++;
+            }
+            return n;
+        });
+        await dispatch(updateBadgeCount(badgeCount));
+
+        return actionResponse;
     };
 }

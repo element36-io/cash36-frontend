@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Grid, Paper } from "@material-ui/core";
 import QRCode from 'qrcode.react'
-import { Connect, MNID, SimpleSigner } from "uport-connect";
+import { Connect, SimpleSigner } from "uport-connect";
 import LoginWithUport from "../../components/LoginWithUport";
 import { API_ROOT } from "../../config/Api";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -50,6 +50,8 @@ class CreateAccount extends Component {
             network: 'rinkeby',
             signer: SimpleSigner('98fe93a539f8ed46def934713918f888df1e088dc0ec6c58333f131b4f4ca358')
         });
+
+        window.web3 = this.uport.getWeb3();
     }
 
     handleCloseSnack = () => {
@@ -58,26 +60,25 @@ class CreateAccount extends Component {
 
     componentWillMount() {
         this.uport.requestCredentials({
-            requested: [ 'name', 'avatar', 'cash36KYC' ],
+            requested: [ 'name', 'avatar' ],
+            verified: [ 'cash36KYC' ],
             notifications: true,
             //accountType: 'segregated'
         }, this.uPortURIHandler).then((credentials) => {
+            let verified = false;
+            if (credentials.verified.length > 0 &&
+                credentials.address === credentials.verified[0].sub &&
+                credentials.verified[0].iss === '2ozGXFqx3eKzmg7zQQZuTnEW6EeAVUzyUu6' &&
+                credentials.verified[0].claim['cash36KYC']['Name'] === credentials.name) {
 
-            let address = MNID.decode(credentials.address).address;
-
-            fetch(`${this.state.backendUrl}/users/is-registered/?address=${address}`)
-                .then(response => {
-                    console.log(response);
-                    if (response.ok) {
-                        // User found --> already registered --> show error
-                        this.setState({ snackOpen: true });
-                    } else {
-                        // User no found --> so not yet registered --> proceed
-                        if (response.status === 404) {
-                            this.props.afterValid(credentials);
-                        }
-                    }
-                })
+                console.log('user already verified by cash36');
+                verified = true;
+            }
+            if (verified) {
+                this.setState({ snackOpen: true });
+            } else {
+                this.props.afterValid(credentials);
+            }
         });
     }
 
@@ -122,7 +123,7 @@ class CreateAccount extends Component {
                     <SnackbarContent
                         message={
                             <span style={{ color: 'white' }}>
-                                This uport address is already registered, please try a different uport address or proceed to login
+                                This uPort address is already registered, please try a different uPort account or proceed to login
                             </span>
                         }
                         action={

@@ -10,7 +10,7 @@ const styles = {
     },
     paper: {
         height: 50,
-        backgroundColor: 'black',
+        //backgroundColor: 'black',
         position: 'relative',
     },
     tabsIndicator: {
@@ -27,7 +27,7 @@ const styles = {
         },
         '&:focus': {
             color: '#67B6F4',
-            backgroundColor: '#333333',
+            backgroundColor: '#eeeeee',
             opacity: 0.8,
         },
     },
@@ -40,7 +40,7 @@ class WalletNav extends React.Component {
 
         return (
             <div className={classes.root}>
-                <Paper className={classes.paper}>
+                <Paper className={classes.paper} elevation={1}>
                     <Tabs
                         value={this.props.tabIndex}
                         onChange={this.props.changeTab}
