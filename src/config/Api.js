@@ -9,11 +9,11 @@ let web3NodeUrl = 'http://167.99.243.81:6688/';
 
 if (apiEnv === 'staging') {
     url = 'http://cash36-backend.herokuapp.com';
-    web3NodeUrl = 'https://167.99.243.81/eth/';
+    web3NodeUrl = 'http://167.99.243.81:6688/';
 }
 if (apiEnv === 'production') {
-    url = 'http://cash36-test-backend.herokuapp.com';
-    web3NodeUrl = 'https://167.99.243.81/rinkeby/';
+    url = 'https://cash36-test-backend.herokuapp.com';
+    web3NodeUrl = 'https://rinkeby.infura.io/v3/4cf538c6b0bb4562bdc2f31430327c08';
 }
 
 export const API_ROOT = url;
