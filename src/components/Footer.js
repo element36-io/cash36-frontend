@@ -62,7 +62,7 @@ function Footer({ ...props }) {
             <Grid container justify="space-between">
                 <Grid item xs={4} md={4}>
                     <Typography variant="caption" style={{color: 'white'}}>
-                        element36 GmbH<br/>
+                        element36 AG<br/>
                         Bahnmatt 25<br/>
                         CH 6340 Baar
                     </Typography>

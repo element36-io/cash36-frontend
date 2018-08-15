@@ -388,6 +388,12 @@ async@^2.1.2, async@^2.1.4, async@^2.4.1:
   dependencies:
     lodash "^4.14.0"
 
+async@^2.6.0:
+  version "2.6.1"
+  resolved "http://167.99.243.81:4873/async/-/async-2.6.1.tgz#b245a23ca71930044ec53fa46aa00a3e87c6a610"
+  dependencies:
+    lodash "^4.17.10"
+
 asynckit@^0.4.0:
   version "0.4.0"
   resolved "http://167.99.243.81:4873/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
@@ -667,6 +673,16 @@ babel-plugin-istanbul@^4.0.0:
 babel-plugin-jest-hoist@^20.0.3:
   version "20.0.3"
   resolved "http://167.99.243.81:4873/babel-plugin-jest-hoist/-/babel-plugin-jest-hoist-20.0.3.tgz#afedc853bd3f8dc3548ea671fbe69d03cc2c1767"
+
+babel-plugin-module-resolver@^3.1.1:
+  version "3.1.1"
+  resolved "http://167.99.243.81:4873/babel-plugin-module-resolver/-/babel-plugin-module-resolver-3.1.1.tgz#881cf67e3d4b8400d5eaaefc1be44d2dc1fe404f"
+  dependencies:
+    find-babel-config "^1.1.0"
+    glob "^7.1.2"
+    pkg-up "^2.0.0"
+    reselect "^3.0.1"
+    resolve "^1.4.0"
 
 babel-plugin-syntax-async-functions@^6.8.0:
   version "6.13.0"
@@ -1100,7 +1116,7 @@ balanced-match@^1.0.0:
   version "1.0.0"
   resolved "http://167.99.243.81:4873/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
 
-base-x@^3.0.0:
+base-x@^3.0.0, base-x@^3.0.2:
   version "3.0.4"
   resolved "http://167.99.243.81:4873/base-x/-/base-x-3.0.4.tgz#94c1788736da065edb1d68808869e357c977fa77"
   dependencies:
@@ -1117,6 +1133,10 @@ base64-js@^1.0.2:
 base64url@^2.0.0:
   version "2.0.0"
   resolved "http://167.99.243.81:4873/base64url/-/base64url-2.0.0.tgz#eac16e03ea1438eff9423d69baa36262ed1f70bb"
+
+base64url@^3.0.0:
+  version "3.0.0"
+  resolved "http://167.99.243.81:4873/base64url/-/base64url-3.0.0.tgz#f2ba30b15f80413d88e3e6116c4f3f7f61e28a2a"
 
 base@^0.11.1:
   version "0.11.2"
@@ -1152,6 +1172,16 @@ binary-extensions@^1.0.0:
   version "1.11.0"
   resolved "http://167.99.243.81:4873/binary-extensions/-/binary-extensions-1.11.0.tgz#46aa1751fb6a2f93ee5e689bb1087d4b14c6c205"
 
+bindings@^1.2.1:
+  version "1.3.0"
+  resolved "http://167.99.243.81:4873/bindings/-/bindings-1.3.0.tgz#b346f6ecf6a95f5a815c5839fc7cdb22502f1ed7"
+
+bip66@^1.1.3:
+  version "1.1.5"
+  resolved "http://167.99.243.81:4873/bip66/-/bip66-1.1.5.tgz#01fa8748785ca70955d5011217d1b3139969ca22"
+  dependencies:
+    safe-buffer "^5.0.1"
+
 bl@^1.0.0:
   version "1.2.2"
   resolved "http://167.99.243.81:4873/bl/-/bl-1.2.2.tgz#a160911717103c07410cef63ef51b397c025af9c"
@@ -1185,7 +1215,7 @@ bn.js@^3.1.1, bn.js@^3.1.2:
   version "3.3.0"
   resolved "http://167.99.243.81:4873/bn.js/-/bn.js-3.3.0.tgz#1138e577889fdc97bbdab51844f2190dfc0ae3d7"
 
-bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.11.6, bn.js@^4.4.0:
+bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.11.0, bn.js@^4.11.3, bn.js@^4.11.6, bn.js@^4.4.0:
   version "4.11.8"
   resolved "http://167.99.243.81:4873/bn.js/-/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
 
@@ -1306,7 +1336,7 @@ browser-stdout@1.3.0:
   version "1.3.0"
   resolved "http://167.99.243.81:4873/browser-stdout/-/browser-stdout-1.3.0.tgz#f351d32969d32fa5d7a5567154263d928ae3bd1f"
 
-browserify-aes@^1.0.0, browserify-aes@^1.0.4:
+browserify-aes@^1.0.0, browserify-aes@^1.0.4, browserify-aes@^1.0.6:
   version "1.2.0"
   resolved "http://167.99.243.81:4873/browserify-aes/-/browserify-aes-1.2.0.tgz#326734642f403dabc3003209853bb70ad428ef48"
   dependencies:
@@ -1378,6 +1408,12 @@ browserslist@^2.1.2, browserslist@^2.5.1:
     caniuse-lite "^1.0.30000792"
     electron-to-chromium "^1.3.30"
 
+bs58@^4.0.1:
+  version "4.0.1"
+  resolved "http://167.99.243.81:4873/bs58/-/bs58-4.0.1.tgz#be161e76c354f6f788ae4071f63f34e8c4f0a42a"
+  dependencies:
+    base-x "^3.0.2"
+
 bser@1.0.2:
   version "1.0.2"
   resolved "http://167.99.243.81:4873/bser/-/bser-1.0.2.tgz#381116970b2a6deea5646dd15dd7278444b56169"
@@ -1444,6 +1480,13 @@ buffer@^4.3.0:
 buffer@^5.0.5:
   version "5.1.0"
   resolved "http://167.99.243.81:4873/buffer/-/buffer-5.1.0.tgz#c913e43678c7cb7c8bd16afbcddb6c5505e8f9fe"
+  dependencies:
+    base64-js "^1.0.2"
+    ieee754 "^1.1.4"
+
+buffer@^5.1.0:
+  version "5.2.0"
+  resolved "http://167.99.243.81:4873/buffer/-/buffer-5.2.0.tgz#53cf98241100099e9eeae20ee6d51d21b16e541e"
   dependencies:
     base64-js "^1.0.2"
     ieee754 "^1.1.4"
@@ -1547,9 +1590,9 @@ caseless@~0.12.0:
   version "0.12.0"
   resolved "http://167.99.243.81:4873/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
 
-cash36-contracts@^0.1.22-alpha:
-  version "0.1.22-alpha"
-  resolved "http://167.99.243.81:4873/cash36-contracts/-/cash36-contracts-0.1.22-alpha.tgz#46a5ba2cd64b130aea74948ac7e816eb089f8e86"
+cash36-contracts@^0.1.24:
+  version "0.1.24"
+  resolved "http://167.99.243.81:4873/cash36-contracts/-/cash36-contracts-0.1.24.tgz#1f4ae9b7de8424aa19cd642183b48b24a95acf47"
   dependencies:
     ethereumjs-testrpc "6.0.3"
     openzeppelin-solidity "1.10.0"
@@ -2388,6 +2431,41 @@ detect-port-alt@1.1.6:
     address "^1.0.1"
     debug "^2.6.0"
 
+did-jwt@0.0.8:
+  version "0.0.8"
+  resolved "http://167.99.243.81:4873/did-jwt/-/did-jwt-0.0.8.tgz#2e20557220821a71ad7849499114086e9f820c9a"
+  dependencies:
+    babel-runtime "^6.26.0"
+    base64url "^2.0.0"
+    buffer "^5.1.0"
+    did-resolver "^0.0.4"
+    elliptic "^6.4.0"
+    js-sha256 "^0.9.0"
+    js-sha3 "^0.7.0"
+    mnid "^0.1.1"
+    uport-did-resolver "^0.0.2"
+    uport-lite "^1.0.2"
+
+did-jwt@^0.0.7:
+  version "0.0.7"
+  resolved "http://167.99.243.81:4873/did-jwt/-/did-jwt-0.0.7.tgz#f38a4f24154f20c084bd17810970be9f91b9530c"
+  dependencies:
+    babel-runtime "^6.26.0"
+    base64url "^2.0.0"
+    did-resolver "^0.0.4"
+    elliptic "^6.4.0"
+    js-sha256 "^0.9.0"
+    js-sha3 "^0.7.0"
+    mnid "^0.1.1"
+    uport-did-resolver "^0.0.2"
+    uport-lite "^1.0.2"
+
+did-resolver@^0.0.4:
+  version "0.0.4"
+  resolved "http://167.99.243.81:4873/did-resolver/-/did-resolver-0.0.4.tgz#d835c44d50acbfeff11b34755cf5ad33d21c7a03"
+  dependencies:
+    babel-runtime "^6.26.0"
+
 diff@3.3.1:
   version "3.3.1"
   resolved "http://167.99.243.81:4873/diff/-/diff-3.3.1.tgz#aa8567a6eed03c531fc89d3f711cd0e5259dec75"
@@ -2506,6 +2584,14 @@ dotenv@4.0.0:
   version "4.0.0"
   resolved "http://167.99.243.81:4873/dotenv/-/dotenv-4.0.0.tgz#864ef1379aced55ce6f95debecdce179f7a0cd1d"
 
+drbg.js@^1.0.1:
+  version "1.0.1"
+  resolved "http://167.99.243.81:4873/drbg.js/-/drbg.js-1.0.1.tgz#3e36b6c42b37043823cdbc332d58f31e2445480b"
+  dependencies:
+    browserify-aes "^1.0.6"
+    create-hash "^1.1.2"
+    create-hmac "^1.1.4"
+
 duplexer3@^0.1.4:
   version "0.1.4"
   resolved "http://167.99.243.81:4873/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
@@ -2537,7 +2623,7 @@ elliptic@^5.1.0:
     hash.js "^1.0.0"
     inherits "^2.0.1"
 
-elliptic@^6.0.0, elliptic@^6.3.2, elliptic@^6.4.0:
+elliptic@^6.0.0, elliptic@^6.2.3, elliptic@^6.3.2, elliptic@^6.4.0:
   version "6.4.0"
   resolved "http://167.99.243.81:4873/elliptic/-/elliptic-6.4.0.tgz#cac9af8762c85836187003c8dfe193e5e2eae5df"
   dependencies:
@@ -2889,6 +2975,26 @@ ethereumjs-testrpc@6.0.3:
   dependencies:
     webpack "^3.0.0"
 
+ethereumjs-util@^5.2.0:
+  version "5.2.0"
+  resolved "http://167.99.243.81:4873/ethereumjs-util/-/ethereumjs-util-5.2.0.tgz#3e0c0d1741471acf1036052d048623dee54ad642"
+  dependencies:
+    bn.js "^4.11.0"
+    create-hash "^1.1.2"
+    ethjs-util "^0.1.3"
+    keccak "^1.0.2"
+    rlp "^2.0.0"
+    safe-buffer "^5.1.1"
+    secp256k1 "^3.0.1"
+
+ethjs-abi@0.2.0:
+  version "0.2.0"
+  resolved "http://167.99.243.81:4873/ethjs-abi/-/ethjs-abi-0.2.0.tgz#d3e2c221011520fc499b71682036c14fcc2f5b25"
+  dependencies:
+    bn.js "4.11.6"
+    js-sha3 "0.5.5"
+    number-to-bn "1.7.0"
+
 ethjs-abi@^0.1.8:
   version "0.1.9"
   resolved "http://167.99.243.81:4873/ethjs-abi/-/ethjs-abi-0.1.9.tgz#5211c4adc3a20793ad319a9d2204e43807e76fea"
@@ -2897,6 +3003,63 @@ ethjs-abi@^0.1.8:
     js-sha3 "0.5.5"
     number-to-bn "1.7.0"
 
+ethjs-abi@^0.2.1:
+  version "0.2.1"
+  resolved "http://167.99.243.81:4873/ethjs-abi/-/ethjs-abi-0.2.1.tgz#e0a7a93a7e81163a94477bad56ede524ab6de533"
+  dependencies:
+    bn.js "4.11.6"
+    js-sha3 "0.5.5"
+    number-to-bn "1.7.0"
+
+ethjs-contract@^0.1.9:
+  version "0.1.9"
+  resolved "http://167.99.243.81:4873/ethjs-contract/-/ethjs-contract-0.1.9.tgz#1c2766896a56d47ec1d6d661829c49cc38a5520a"
+  dependencies:
+    ethjs-abi "0.2.0"
+    ethjs-filter "0.1.5"
+    ethjs-util "0.1.3"
+    js-sha3 "0.5.5"
+
+ethjs-filter@0.1.5:
+  version "0.1.5"
+  resolved "http://167.99.243.81:4873/ethjs-filter/-/ethjs-filter-0.1.5.tgz#0112af6017c24677e32b8fdeb20e6196019b7598"
+
+ethjs-format@0.2.7:
+  version "0.2.7"
+  resolved "http://167.99.243.81:4873/ethjs-format/-/ethjs-format-0.2.7.tgz#20c92f31c259a381588d069830d838b489774b86"
+  dependencies:
+    bn.js "4.11.6"
+    ethjs-schema "0.2.1"
+    ethjs-util "0.1.3"
+    is-hex-prefixed "1.0.0"
+    number-to-bn "1.7.0"
+    strip-hex-prefix "1.0.0"
+
+ethjs-provider-http@^0.1.6:
+  version "0.1.6"
+  resolved "http://167.99.243.81:4873/ethjs-provider-http/-/ethjs-provider-http-0.1.6.tgz#1ec5d9b4be257ef1d56a500b22a741985e889420"
+  dependencies:
+    xhr2 "0.1.3"
+
+ethjs-query@^0.3.5:
+  version "0.3.8"
+  resolved "http://167.99.243.81:4873/ethjs-query/-/ethjs-query-0.3.8.tgz#aa5af02887bdd5f3c78b3256d0f22ffd5d357490"
+  dependencies:
+    babel-runtime "^6.26.0"
+    ethjs-format "0.2.7"
+    ethjs-rpc "0.2.0"
+    promise-to-callback "^1.0.0"
+
+ethjs-rpc@0.2.0:
+  version "0.2.0"
+  resolved "http://167.99.243.81:4873/ethjs-rpc/-/ethjs-rpc-0.2.0.tgz#3d0011e32cfff156ed6147818c6fb8f801701b4c"
+  dependencies:
+    promise-to-callback "^1.0.0"
+
+ethjs-schema@0.2.1:
+  version "0.2.1"
+  resolved "http://167.99.243.81:4873/ethjs-schema/-/ethjs-schema-0.2.1.tgz#47e138920421453617069034684642e26bb310f4"
+
 ethjs-unit@0.1.6:
   version "0.1.6"
   resolved "http://167.99.243.81:4873/ethjs-unit/-/ethjs-unit-0.1.6.tgz#c665921e476e87bce2a9d588a6fe0405b2c41699"
@@ -2904,12 +3067,36 @@ ethjs-unit@0.1.6:
     bn.js "4.11.6"
     number-to-bn "1.7.0"
 
+ethjs-util@0.1.3:
+  version "0.1.3"
+  resolved "http://167.99.243.81:4873/ethjs-util/-/ethjs-util-0.1.3.tgz#dfd5ea4a400dc5e421a889caf47e081ada78bb55"
+  dependencies:
+    is-hex-prefixed "1.0.0"
+    strip-hex-prefix "1.0.0"
+
 ethjs-util@^0.1.3:
   version "0.1.4"
   resolved "http://167.99.243.81:4873/ethjs-util/-/ethjs-util-0.1.4.tgz#1c8b6879257444ef4d3f3fbbac2ded12cd997d93"
   dependencies:
     is-hex-prefixed "1.0.0"
     strip-hex-prefix "1.0.0"
+
+ethr-did-registry@^0.0.2:
+  version "0.0.2"
+  resolved "http://167.99.243.81:4873/ethr-did-registry/-/ethr-did-registry-0.0.2.tgz#61746bb70c1ad64e86e424fb32ade4a620f7a180"
+
+ethr-did-resolver@^0.0.7:
+  version "0.0.7"
+  resolved "http://167.99.243.81:4873/ethr-did-resolver/-/ethr-did-resolver-0.0.7.tgz#9914e2cec1d64dfbe5a9f5916033596262edf171"
+  dependencies:
+    babel-plugin-module-resolver "^3.1.1"
+    babel-runtime "^6.26.0"
+    did-resolver "^0.0.4"
+    ethjs-abi "^0.2.1"
+    ethjs-contract "^0.1.9"
+    ethjs-provider-http "^0.1.6"
+    ethjs-query "^0.3.5"
+    ethr-did-registry "^0.0.2"
 
 event-emitter@~0.3.5:
   version "0.3.5"
@@ -3226,6 +3413,13 @@ finalhandler@1.1.1:
     parseurl "~1.3.2"
     statuses "~1.4.0"
     unpipe "~1.0.0"
+
+find-babel-config@^1.1.0:
+  version "1.1.0"
+  resolved "http://167.99.243.81:4873/find-babel-config/-/find-babel-config-1.1.0.tgz#acc01043a6749fec34429be6b64f542ebb5d6355"
+  dependencies:
+    json5 "^0.5.1"
+    path-exists "^3.0.0"
 
 find-cache-dir@^0.1.1:
   version "0.1.1"
@@ -4114,6 +4308,10 @@ is-finite@^1.0.0:
   dependencies:
     number-is-nan "^1.0.0"
 
+is-fn@^1.0.0:
+  version "1.0.0"
+  resolved "http://167.99.243.81:4873/is-fn/-/is-fn-1.0.0.tgz#9543d5de7bcf5b08a22ec8a20bae6e286d510d8c"
+
 is-fullwidth-code-point@^1.0.0:
   version "1.0.0"
   resolved "http://167.99.243.81:4873/is-fullwidth-code-point/-/is-fullwidth-code-point-1.0.0.tgz#ef9e31386f031a7f0d643af82fde50c457ef00cb"
@@ -4618,6 +4816,10 @@ js-base64@^2.1.9:
   version "2.4.3"
   resolved "http://167.99.243.81:4873/js-base64/-/js-base64-2.4.3.tgz#2e545ec2b0f2957f41356510205214e98fad6582"
 
+js-sha256@^0.9.0:
+  version "0.9.0"
+  resolved "http://167.99.243.81:4873/js-sha256/-/js-sha256-0.9.0.tgz#0b89ac166583e91ef9123644bd3c5334ce9d0966"
+
 js-sha3@0.5.5:
   version "0.5.5"
   resolved "http://167.99.243.81:4873/js-sha3/-/js-sha3-0.5.5.tgz#baf0c0e8c54ad5903447df96ade7a4a1bca79a4a"
@@ -4629,6 +4831,10 @@ js-sha3@^0.3.1:
 js-sha3@^0.5.7:
   version "0.5.7"
   resolved "http://167.99.243.81:4873/js-sha3/-/js-sha3-0.5.7.tgz#0d4ffd8002d5333aabaf4a23eed2f6374c9f28e7"
+
+js-sha3@^0.7.0:
+  version "0.7.0"
+  resolved "http://167.99.243.81:4873/js-sha3/-/js-sha3-0.7.0.tgz#0a5c57b36f79882573b2d84051f8bb85dd1bd63a"
 
 js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "3.0.2"
@@ -4838,6 +5044,15 @@ jsx-ast-utils@^2.0.0:
   dependencies:
     array-includes "^3.0.3"
 
+keccak@^1.0.2:
+  version "1.4.0"
+  resolved "http://167.99.243.81:4873/keccak/-/keccak-1.4.0.tgz#572f8a6dbee8e7b3aa421550f9e6408ca2186f80"
+  dependencies:
+    bindings "^1.2.1"
+    inherits "^2.0.3"
+    nan "^2.2.1"
+    safe-buffer "^5.1.0"
+
 keccakjs@^0.2.1:
   version "0.2.1"
   resolved "http://167.99.243.81:4873/keccakjs/-/keccakjs-0.2.1.tgz#1d633af907ef305bbf9f2fa616d56c44561dfa4d"
@@ -5013,7 +5228,7 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "http://167.99.243.81:4873/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-"lodash@>=3.5 <5", lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@~4.17.4:
+"lodash@>=3.5 <5", lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@~4.17.4:
   version "4.17.10"
   resolved "http://167.99.243.81:4873/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
 
@@ -5342,6 +5557,17 @@ multicast-dns@^6.0.1:
     dns-packet "^1.3.1"
     thunky "^1.0.2"
 
+muport-did-resolver@^0.1.0:
+  version "0.1.3"
+  resolved "http://167.99.243.81:4873/muport-did-resolver/-/muport-did-resolver-0.1.3.tgz#fa2c18559e956cb2a268eb0bf91dcb48d52d6b86"
+  dependencies:
+    bs58 "^4.0.1"
+    did-resolver "^0.0.4"
+    elliptic "^6.4.0"
+    ethereumjs-util "^5.2.0"
+    js-sha3 "^0.7.0"
+    xmlhttprequest "^1.8.0"
+
 mute-stream@0.0.7:
   version "0.0.7"
   resolved "http://167.99.243.81:4873/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
@@ -5354,7 +5580,7 @@ mz@^2.6.0:
     object-assign "^4.0.1"
     thenify-all "^1.0.0"
 
-nan@2.10.0, nan@^2.0.8, nan@^2.3.3, nan@^2.9.2:
+nan@2.10.0, nan@^2.0.8, nan@^2.2.1, nan@^2.3.3, nan@^2.9.2:
   version "2.10.0"
   resolved "http://167.99.243.81:4873/nan/-/nan-2.10.0.tgz#96d0cd610ebd58d4b4de9cc0c6828cda99c7548f"
 
@@ -5932,6 +6158,12 @@ pkg-dir@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
+pkg-up@^2.0.0:
+  version "2.0.0"
+  resolved "http://167.99.243.81:4873/pkg-up/-/pkg-up-2.0.0.tgz#c819ac728059a461cab1c3889a2be3c49a004d7f"
+  dependencies:
+    find-up "^2.1.0"
+
 pluralize@^7.0.0:
   version "7.0.0"
   resolved "http://167.99.243.81:4873/pluralize/-/pluralize-7.0.0.tgz#298b89df8b93b0221dbf421ad2b1b1ea23fc6777"
@@ -6285,6 +6517,13 @@ process@~0.5.1:
 progress@^2.0.0:
   version "2.0.0"
   resolved "http://167.99.243.81:4873/progress/-/progress-2.0.0.tgz#8a1be366bf8fc23db2bd23f10c6fe920b4389d1f"
+
+promise-to-callback@^1.0.0:
+  version "1.0.0"
+  resolved "http://167.99.243.81:4873/promise-to-callback/-/promise-to-callback-1.0.0.tgz#5d2a749010bfb67d963598fcd3960746a68feef7"
+  dependencies:
+    is-fn "^1.0.0"
+    set-immediate-shim "^1.0.1"
 
 promise@8.0.1:
   version "8.0.1"
@@ -6887,7 +7126,7 @@ repeating@^2.0.0:
   dependencies:
     is-finite "^1.0.0"
 
-request@^2.65.0, request@^2.75.0, request@^2.79.0:
+request@^2.65.0, request@^2.79.0:
   version "2.85.0"
   resolved "http://167.99.243.81:4873/request/-/request-2.85.0.tgz#5a03615a47c61420b3eb99b7dba204f83603e1fa"
   dependencies:
@@ -6937,6 +7176,10 @@ requires-port@1.0.x, requires-port@^1.0.0:
   version "1.0.0"
   resolved "http://167.99.243.81:4873/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
 
+reselect@^3.0.1:
+  version "3.0.1"
+  resolved "http://167.99.243.81:4873/reselect/-/reselect-3.0.1.tgz#efdaa98ea7451324d092b2b2163a6a1d7a9a2147"
+
 resolve-cwd@^2.0.0:
   version "2.0.0"
   resolved "http://167.99.243.81:4873/resolve-cwd/-/resolve-cwd-2.0.0.tgz#00a9f7387556e27038eae232caa372a6a59b665a"
@@ -6982,6 +7225,12 @@ resolve@^1.3.2, resolve@^1.5.0:
   dependencies:
     path-parse "^1.0.5"
 
+resolve@^1.4.0:
+  version "1.8.1"
+  resolved "http://167.99.243.81:4873/resolve/-/resolve-1.8.1.tgz#82f1ec19a423ac1fbd080b0bab06ba36e84a7a26"
+  dependencies:
+    path-parse "^1.0.5"
+
 restore-cursor@^2.0.0:
   version "2.0.0"
   resolved "http://167.99.243.81:4873/restore-cursor/-/restore-cursor-2.0.0.tgz#9f7ee287f82fd326d4fd162923d62129eee0dfaf"
@@ -7011,6 +7260,12 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
   dependencies:
     hash-base "^3.0.0"
     inherits "^2.0.1"
+
+rlp@^2.0.0:
+  version "2.1.0"
+  resolved "http://167.99.243.81:4873/rlp/-/rlp-2.1.0.tgz#e4f9886d5a982174f314543831e36e1a658460f9"
+  dependencies:
+    safe-buffer "^5.1.1"
 
 run-async@^2.2.0:
   version "2.3.0"
@@ -7092,6 +7347,19 @@ scryptsy@^1.2.1:
   resolved "http://167.99.243.81:4873/scryptsy/-/scryptsy-1.2.1.tgz#a3225fa4b2524f802700761e2855bdf3b2d92163"
   dependencies:
     pbkdf2 "^3.0.3"
+
+secp256k1@^3.0.1:
+  version "3.5.0"
+  resolved "http://167.99.243.81:4873/secp256k1/-/secp256k1-3.5.0.tgz#677d3b8a8e04e1a5fa381a1ae437c54207b738d0"
+  dependencies:
+    bindings "^1.2.1"
+    bip66 "^1.1.3"
+    bn.js "^4.11.3"
+    create-hash "^1.1.2"
+    drbg.js "^1.0.1"
+    elliptic "^6.2.3"
+    nan "^2.2.1"
+    safe-buffer "^5.1.0"
 
 seek-bzip@^1.0.5:
   version "1.0.5"
@@ -8039,41 +8307,80 @@ update-notifier@^2.3.0:
     semver-diff "^2.0.0"
     xdg-basedir "^3.0.0"
 
-uport-connect@^0.7.3:
-  version "0.7.3"
-  resolved "http://167.99.243.81:4873/uport-connect/-/uport-connect-0.7.3.tgz#4f553fc23ef6455d66f744f0ef74cfa9b4bd75a3"
+uport-connect@^0.7.5:
+  version "0.7.5"
+  resolved "http://167.99.243.81:4873/uport-connect/-/uport-connect-0.7.5.tgz#9a6470582d744361df3ded864dc772bc77c4c885"
   dependencies:
     async "^2.1.4"
+    did-jwt "0.0.8"
     ethjs-abi "^0.1.8"
     ethjs-util "^0.1.3"
     ipfs-mini "^1.0.1"
-    json-loader "^0.5.4"
     mnid "^0.1.1"
     mobile-detect "^1.3.5"
     nets "^3.2.0"
     qr-image "^3.1.0"
     qs "^6.2.1"
-    request "^2.75.0"
-    uport "^0.6.2"
+    uport "^0.6.3"
     web3 "0.19.0"
 
-uport-lite@^1.0.0:
+uport-core@^0.0.43:
+  version "0.0.43"
+  resolved "http://167.99.243.81:4873/uport-core/-/uport-core-0.0.43.tgz#abde77790d54db0398ef61c2b093b19def66838e"
+  dependencies:
+    async "^2.6.0"
+    did-jwt "0.0.8"
+    mnid "^0.1.1"
+    nets "^3.2.0"
+    qr-image "^3.1.0"
+    qs "^6.2.1"
+    tweetnacl-util "^0.15.0"
+    uport-registry "^5.1.0"
+
+uport-did-resolver@^0.0.2:
+  version "0.0.2"
+  resolved "http://167.99.243.81:4873/uport-did-resolver/-/uport-did-resolver-0.0.2.tgz#b1e9deec8bf5d08d101d078ea876aa09ac727cce"
+  dependencies:
+    babel-runtime "^6.26.0"
+    did-resolver "^0.0.4"
+    uport-lite "^1.0.2"
+
+uport-did-resolver@^0.0.3:
+  version "0.0.3"
+  resolved "http://167.99.243.81:4873/uport-did-resolver/-/uport-did-resolver-0.0.3.tgz#1336d3a84f6ae1897bed7233eabe72db9ce647a1"
+  dependencies:
+    babel-runtime "^6.26.0"
+    did-resolver "^0.0.4"
+    uport-lite "^1.0.2"
+
+uport-lite@^1.0.0, uport-lite@^1.0.2:
   version "1.0.2"
   resolved "http://167.99.243.81:4873/uport-lite/-/uport-lite-1.0.2.tgz#f3a96d8df52d5496e2c6c8ec7cfd377b431513d4"
   dependencies:
     base-x "^3.0.0"
     xmlhttprequest "^1.8.0"
 
-uport@^0.6.2:
-  version "0.6.2"
-  resolved "http://167.99.243.81:4873/uport/-/uport-0.6.2.tgz#3b75a545c530ef8b67969e580003c2128e1592ba"
+uport-registry@^5.1.0:
+  version "5.1.0"
+  resolved "http://167.99.243.81:4873/uport-registry/-/uport-registry-5.1.0.tgz#2f310ce0d154f07450453d559e3cf3da3114794c"
+
+uport@^0.6.3:
+  version "0.6.3"
+  resolved "http://167.99.243.81:4873/uport/-/uport-0.6.3.tgz#e93cbc36817e63b548f83a340f92fb2713e3a7bc"
   dependencies:
+    base64url "^3.0.0"
+    did-jwt "^0.0.7"
+    did-resolver "^0.0.4"
     ethjs-util "^0.1.3"
+    ethr-did-resolver "^0.0.7"
     jsontokens "^0.7.6"
     mnid "^0.1.1"
+    muport-did-resolver "^0.1.0"
     nets "^3.2.0"
     tweetnacl "^1.0.0"
     tweetnacl-util "^0.15.0"
+    uport-core "^0.0.43"
+    uport-did-resolver "^0.0.3"
     uport-lite "^1.0.0"
 
 upper-case@^1.1.1:
@@ -8739,6 +9046,10 @@ xhr-request@^1.0.1:
 xhr2@*, xhr2@0.1.4:
   version "0.1.4"
   resolved "http://167.99.243.81:4873/xhr2/-/xhr2-0.1.4.tgz#7f87658847716db5026323812f818cadab387a5f"
+
+xhr2@0.1.3:
+  version "0.1.3"
+  resolved "http://167.99.243.81:4873/xhr2/-/xhr2-0.1.3.tgz#cbfc4759a69b4a888e78cf4f20b051038757bd11"
 
 xhr@^2.0.4, xhr@^2.3.3:
   version "2.5.0"
