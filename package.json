@@ -6,7 +6,7 @@
     "@mars/heroku-js-runtime-env": "^3.0.2",
     "@material-ui/core": "^1.1.0",
     "@material-ui/icons": "^1.1.0",
-    "cash36-contracts": "^0.1.22-alpha",
+    "cash36-contracts": "^0.1.24",
     "classnames": "2.2.5",
     "material-ui-pickers": "^1.0.0-rc.9",
     "qrcode.react": "^0.8.0",
@@ -22,7 +22,7 @@
     "redux-thunk": "^2.2.0",
     "sockjs-client": "^1.1.4",
     "stompjs": "^2.3.3",
-    "uport-connect": "^0.7.3",
+    "uport-connect": "^0.7.5",
     "web3": "1.0.0-beta.34"
   },
   "scripts": {

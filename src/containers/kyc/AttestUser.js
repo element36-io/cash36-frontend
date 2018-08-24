@@ -35,7 +35,6 @@ class AttestUser extends React.Component {
         this.state = {
             backendUrl: `${API_ROOT}/cash36`,
             uri: '',
-            attested: false,
         };
 
         this.uPortURIHandler = this.uPortURIHandler.bind(this);
@@ -53,7 +52,6 @@ class AttestUser extends React.Component {
             claim: { 'cash36KYC': claim }
         }, this.uPortURIHandler).then((att) => {
             this.props.actions.userAttested(claim);
-
         })
     }
 

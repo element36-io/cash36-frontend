@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
                 loggedIn: true,
                 loggedInAddress: action.loggedInAddress,
                 lastLogin: new Date(),
-            }
+            };
 
         case USER_ATTESTED:
 
@@ -40,7 +40,7 @@ export default (state = initialState, action) => {
                 loggedIn: false,
                 loggedInAddress: null,
                 lastLogin: new Date(),
-            }
+            };
 
         default:
             return state;
