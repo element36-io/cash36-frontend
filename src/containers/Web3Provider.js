@@ -1,6 +1,3 @@
-import { Connect, SimpleSigner } from "uport-connect";
-
-
 const Web3 = require('web3');
 const React = require('react');
 const PropTypes = require('prop-types');
