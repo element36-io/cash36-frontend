@@ -104,8 +104,6 @@ class SellTokens extends React.Component {
     async burnTokens(address, tokenSymbol, amount) {
         let web3 = this.props.web3;
 
-        console.log(web3.version);
-
         const cash36Contract = new web3.eth.Contract(Cash36Contract.abi, Cash36Contract.networks[ this.props.networkId ].address);
         let tokenAddress = await cash36Contract.methods.getTokenBySymbol(tokenSymbol).call();
         const token36Contract = new web3.eth.Contract(Token36Contract.abi, tokenAddress);

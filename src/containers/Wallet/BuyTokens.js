@@ -99,7 +99,7 @@ class BuyTokens extends React.Component {
         if (this.validateInput()) {
             this.setState({ preparing: true });
 
-            fetch(`${this.state.backendUrl}/payments/`, {
+            fetch(`${this.state.backendUrl}/buy/`, {
                 method: "POST",
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('access_token'),

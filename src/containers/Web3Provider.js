@@ -1,3 +1,6 @@
+import { Connect, SimpleSigner } from "uport-connect";
+
+
 const Web3 = require('web3');
 const React = require('react');
 const PropTypes = require('prop-types');
@@ -58,6 +61,15 @@ class Web3ProviderNew extends React.Component {
         }
 
         web3 = new Web3();
+
+        // this.uport = new Connect('cash36', {
+        //     clientId: '2ozGXFqx3eKzmg7zQQZuTnEW6EeAVUzyUu6',
+        //     network: 'rinkeby',
+        //     signer: SimpleSigner('98fe93a539f8ed46def934713918f888df1e088dc0ec6c58333f131b4f4ca358')
+        // });
+
+        //window.web3.setProvider(this.uport.getProvider());
+
         web3.setProvider(new web3.providers.HttpProvider(WEB3_NODE));
 
         window.web3 = web3;

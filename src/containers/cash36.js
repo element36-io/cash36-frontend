@@ -16,8 +16,6 @@ const addCash36 = WrappedComponent => {
         constructor(props, context) {
             super(props, context);
 
-            console.log(context);
-
             this.state = {
                 web3: context.web3.web3,
                 networkId: context.web3.networkId,
