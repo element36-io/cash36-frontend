@@ -16,6 +16,7 @@ import WalletUserProfile from "../../components/WalletUserProfile";
 import { API_ROOT } from "../../config/Api";
 import { Cash36Contract, Token36Contract } from "cash36-contracts";
 import addCash36 from "../cash36";
+import { Connect, SimpleSigner } from 'uport-connect'
 
 const styles = theme => ({
     root: {
@@ -103,6 +104,13 @@ class SellTokens extends React.Component {
 
     async burnTokens(address, tokenSymbol, amount) {
         let web3 = this.props.web3;
+
+         this.uport = new Connect('cash36', {
+           clientId: '2ozGXFqx3eKzmg7zQQZuTnEW6EeAVUzyUu6',
+           network: 'rinkeby',
+           signer: SimpleSigner('98fe93a539f8ed46def934713918f888df1e088dc0ec6c58333f131b4f4ca358')
+        });
+        web3.setProvider(this.uport.getProvider())
 
         const cash36Contract = new web3.eth.Contract(Cash36Contract.abi, Cash36Contract.networks[ this.props.networkId ].address);
         let tokenAddress = await cash36Contract.methods.getTokenBySymbol(tokenSymbol).call();
