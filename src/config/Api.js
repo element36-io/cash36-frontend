@@ -4,7 +4,7 @@ const env = runtimeEnv();
 let apiEnv = env.REACT_APP_ENV;
 console.log('Environment: '+ apiEnv);
 
-let url = 'http://localhost:8080';
+let url = 'http://localhost:9090';
 let web3NodeUrl = 'http://167.99.243.81:8866/';
 
 if (apiEnv === 'staging') {

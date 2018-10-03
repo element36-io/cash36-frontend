@@ -101,35 +101,42 @@ class Overview extends React.Component {
                                             }
                                             {!this.state.loadingHistory &&
                                             <Table className={classes.table}>
-                                                <TableHead style={{backgroundColor: 'black'}}>
-                                                    <TableRow>
-                                                        <TableCell style={{color: 'white'}} numeric>Block</TableCell>
-                                                        <TableCell style={{color: 'white'}}>Action</TableCell>
-                                                        <TableCell style={{color: 'white'}} numeric>Amount</TableCell>
-                                                        <TableCell style={{color: 'white'}}>Token</TableCell>
-                                                        <TableCell style={{color: 'white'}}></TableCell>
+                                              <TableHead style={{ backgroundColor: 'black' }}>
+                                                <TableRow>
+                                                  <TableCell style={{ color: 'white' }} numeric>Date</TableCell>
+                                                  <TableCell style={{ color: 'white' }}>Action</TableCell>
+                                                  <TableCell style={{ color: 'white' }} numeric>Amount</TableCell>
+                                                  <TableCell style={{ color: 'white' }}>Token</TableCell>
+                                                  <TableCell style={{ color: 'white' }}>Status</TableCell>
+                                                  <TableCell style={{ color: 'white' }}></TableCell>
+                                                </TableRow>
+                                              </TableHead>
+                                              <TableBody>
+                                                {this.state.history.length > 0 && this.state.history.map((n, key) => {
+                                                  return (
+                                                    <TableRow key={key} className={classes.row}>
+                                                      <TableCell numeric>{n.date}</TableCell>
+                                                      <TableCell>{n.action}</TableCell>
+                                                      <TableCell
+                                                        numeric>{n.action === 'SELL' ? '-' : ''}{n.amount}</TableCell>
+                                                      <TableCell>{n.symbol}</TableCell>
+                                                      <TableCell>{n.status}</TableCell>
+                                                      <TableCell>
+                                                        <Tooltip id="tooltip-bottom" title="See on Etherscan"
+                                                                 placement="bottom">
+                                                          <a href={`https://rinkeby.etherscan.io/tx/${n.txHash}`}
+                                                             target='_blank'>
+                                                            <ExitToApp style={{
+                                                              color: '#67B6F4',
+                                                              fontSize: '100%'
+                                                            }}/>
+                                                          </a>
+                                                        </Tooltip>
+                                                      </TableCell>
                                                     </TableRow>
-                                                </TableHead>
-                                                <TableBody>
-                                                    {this.state.history.length > 0 && this.state.history.map((n, key) => {
-                                                        return (
-                                                            <TableRow key={key} className={classes.row}>
-                                                                <TableCell numeric>{n.blockNumber}</TableCell>
-                                                                <TableCell>{n.action}</TableCell>
-                                                                <TableCell
-                                                                    numeric>{n.action === 'sell' ? '-' : ''}{n.amount}</TableCell>
-                                                                <TableCell>{n.token}</TableCell>
-                                                                <TableCell>
-                                                                    <Tooltip id="tooltip-bottom" title="See on Etherscan" placement="bottom">
-                                                                        <a href={`https://rinkeby.etherscan.io/tx/${n.txHash}`} target='_blank'>
-                                                                            <ExitToApp style={{color: '#67B6F4', fontSize: '100%'}}></ExitToApp>
-                                                                        </a>
-                                                                    </Tooltip>
-                                                                </TableCell>
-                                                            </TableRow>
-                                                        );
-                                                    })}
-                                                </TableBody>
+                                                  );
+                                                })}
+                                              </TableBody>
                                             </Table>
                                             }
                                         </Grid>

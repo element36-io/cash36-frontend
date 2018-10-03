@@ -14,7 +14,6 @@ class Main extends Component {
                 <Switch>
                     <Route exact path='/' component={LandingPage}/>
                     <Route path='/login' component={LoginWizard}/>
-                    {/*<Route path='/admin' component={Admin}/>*/}
                     <Route path='/register' component={RegisterWizard}/>
                     <Route path='/attest' component={AttestUser}/>
                     <Route path='/wallet' component={EnsureLoggedInContainer}/>

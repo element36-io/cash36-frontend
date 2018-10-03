@@ -127,10 +127,11 @@ class History extends React.Component {
                                     <Table className={classes.table}>
                                         <TableHead style={{ backgroundColor: 'black' }}>
                                             <TableRow>
-                                                <TableCell style={{ color: 'white' }} numeric>Block</TableCell>
+                                                <TableCell style={{ color: 'white' }} numeric>Date</TableCell>
                                                 <TableCell style={{ color: 'white' }}>Action</TableCell>
                                                 <TableCell style={{ color: 'white' }} numeric>Amount</TableCell>
                                                 <TableCell style={{ color: 'white' }}>Token</TableCell>
+                                                <TableCell style={{ color: 'white' }}>Status</TableCell>
                                                 <TableCell style={{ color: 'white' }}></TableCell>
                                             </TableRow>
                                         </TableHead>
@@ -138,11 +139,12 @@ class History extends React.Component {
                                             {this.state.history.length > 0 && this.state.history.map((n, key) => {
                                                 return (
                                                     <TableRow key={key} className={classes.row}>
-                                                        <TableCell numeric>{n.blockNumber}</TableCell>
+                                                        <TableCell numeric>{n.date}</TableCell>
                                                         <TableCell>{n.action}</TableCell>
                                                         <TableCell
-                                                            numeric>{n.action === 'sell' ? '-' : ''}{n.amount}</TableCell>
-                                                        <TableCell>{n.token}</TableCell>
+                                                            numeric>{n.action === 'SELL' ? '-' : ''}{n.amount}</TableCell>
+                                                        <TableCell>{n.symbol}</TableCell>
+                                                        <TableCell>{n.status}</TableCell>
                                                         <TableCell>
                                                             <Tooltip id="tooltip-bottom" title="See on Etherscan"
                                                                      placement="bottom">
