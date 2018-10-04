@@ -12,7 +12,7 @@ if (apiEnv === 'staging') {
     web3NodeUrl = 'http://167.99.243.81:8866/';
 }
 if (apiEnv === 'production') {
-    url = 'https://167.99.243.81:9090';
+    url = 'http://167.99.243.81:9090';
     web3NodeUrl = 'http://167.99.243.81:8866/';
 }
 
