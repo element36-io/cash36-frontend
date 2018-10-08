@@ -90,7 +90,7 @@ class Password extends Component {
 
     submit() {
         if (!this.validateInput()) {
-            let userAddress = MNID.decode(this.props.credentials.address).address;
+            let userAddress = MNID.decode(this.props.credentials.networkAddress).address;
             this.props.actions.requestToken(userAddress, this.state.password)
                 .then((response) => {
                     console.log(response);

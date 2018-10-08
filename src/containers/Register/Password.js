@@ -94,7 +94,7 @@ class Password extends Component {
 
     submit() {
         if (!this.validateInput()) {
-            let userAddress = MNID.decode(this.props.credentials.address).address;
+            let userAddress = MNID.decode(this.props.credentials.networkAddress).address;
 
             fetch(`${API_ROOT}/public/register/`, {
                 method: "POST",
