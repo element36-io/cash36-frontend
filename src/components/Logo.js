@@ -1,6 +1,6 @@
-import React from 'react'
-import { withStyles } from '@material-ui/core/styles'
-import { Typography } from '@material-ui/core'
+import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import { Typography } from '@material-ui/core';
 
 const styles = theme => ({
   root: {
@@ -19,7 +19,7 @@ const styles = theme => ({
     fontWeight: '500',
     padding: '.4rem'
   }
-})
+});
 
 const Logo = ({ classes }) => (
   <div className={classes.root}>
@@ -30,6 +30,6 @@ const Logo = ({ classes }) => (
         cash36
     </Typography>
   </div>
-)
+);
 
-export default (withStyles(styles)(Logo))
+export default (withStyles(styles)(Logo));

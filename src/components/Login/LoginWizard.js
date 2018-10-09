@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 // import { connect } from 'react-redux'
-import { withStyles } from '@material-ui/core/styles'
-import { Typography } from '@material-ui/core'
-import backgroundImage from '../../assets/background-login.jpg'
+import { withStyles } from '@material-ui/core/styles';
+import { Typography } from '@material-ui/core';
+import backgroundImage from '../../assets/background-login.jpg';
 
-import Logo from '../Logo'
-import LoginWithUport from './LoginWithUport'
-import LoginForm from './LoginForm'
-import Nav from './Nav'
+import Logo from '../Logo';
+import LoginWithUport from './LoginWithUport';
+import LoginForm from './LoginForm';
+import Nav from './Nav';
 
 const styles = theme => ({
   root: {
@@ -79,7 +79,7 @@ const styles = theme => ({
   nav: {
     position: 'absolute'
   }
-})
+});
 
 class LoginWizard extends Component {
   state = {
@@ -89,22 +89,22 @@ class LoginWizard extends Component {
 
   _next = (data) => {
     if (data) {
-      this.setState({ credentials: data })
+      this.setState({ credentials: data });
     }
     // look familiar?
-    let currentStep = this.state.currentStep
+    let currentStep = this.state.currentStep;
     if (currentStep >= 3) {
-      currentStep = 3
+      currentStep = 3;
     } else {
-      currentStep = currentStep + 1
+      currentStep = currentStep + 1;
     }
     this.setState({
       currentStep: currentStep
-    })
+    });
   }
 
   render () {
-    const { classes } = this.props
+    const { classes } = this.props;
     return (
       <div className={classes.root}>
         <div className={classes.leftPanel}>
@@ -129,12 +129,12 @@ class LoginWizard extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
 LoginWizard.propTypes = {
   classes: PropTypes.object
-}
+};
 
-export default (withStyles(styles)(LoginWizard))
+export default (withStyles(styles)(LoginWizard));

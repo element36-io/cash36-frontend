@@ -1,11 +1,11 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import './index.css'
-import App from './components/App'
-import registerServiceWorker from './registerServiceWorker'
-import { Provider } from 'react-redux'
-import index from './store/index'
-import Web3ProviderNew from './components/Web3Provider'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './components/App';
+import registerServiceWorker from './registerServiceWorker';
+import { Provider } from 'react-redux';
+import index from './store/index';
+import Web3ProviderNew from './components/Web3Provider';
 
 ReactDOM.render(
   <Provider store={index}>
@@ -14,6 +14,6 @@ ReactDOM.render(
     </Web3ProviderNew>
   </Provider>,
   document.getElementById('root')
-)
+);
 
-registerServiceWorker()
+registerServiceWorker();

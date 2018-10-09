@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import { Typography } from '@material-ui/core'
-import { withStyles } from '@material-ui/core/styles'
-import QRCode from 'qrcode.react'
-import { Connect, SimpleSigner } from 'uport-connect'
-import uportLogo from '../../assets/uport-logo-w.png'
-import { AppleAppStore, GooglePlayStore } from '../../icons'
+import React, { Component } from 'react';
+import { Typography } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import QRCode from 'qrcode.react';
+import { Connect, SimpleSigner } from 'uport-connect';
+import uportLogo from '../../assets/uport-logo-w.png';
+import { AppleAppStore, GooglePlayStore } from '../../icons';
 
 const styles = theme => ({
   root: {
@@ -44,7 +44,7 @@ const styles = theme => ({
   appIcon: {
     marginRight: '1rem'
   }
-})
+});
 
 class LoginWithUport extends Component {
   state = {
@@ -57,7 +57,7 @@ class LoginWithUport extends Component {
   })
 
   uPortURIHandler = (uri) => {
-    this.setState({ uri })
+    this.setState({ uri });
   }
 
   componentWillMount () {
@@ -67,12 +67,12 @@ class LoginWithUport extends Component {
       notifications: true
     }, this.uPortURIHandler).then((credentials) => {
       // Next step
-      this.props.afterValid(credentials)
-    })
+      this.props.afterValid(credentials);
+    });
   }
 
   render () {
-    const { classes } = this.props
+    const { classes } = this.props;
     return (
       <div className={classes.root}>
         <Typography
@@ -111,8 +111,8 @@ class LoginWithUport extends Component {
           </a>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default withStyles(styles)(LoginWithUport)
+export default withStyles(styles)(LoginWithUport);

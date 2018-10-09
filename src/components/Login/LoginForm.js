@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { MNID } from 'uport-connect'
-import { connect } from 'react-redux'
-import { TextField, Typography } from '@material-ui/core'
-import { withStyles } from '@material-ui/core/styles'
-import StyledButton from '../StyledButton'
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { MNID } from 'uport-connect';
+import { connect } from 'react-redux';
+import { TextField, Typography } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import StyledButton from '../StyledButton';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 const styles = theme => ({
   root: {
@@ -54,7 +54,7 @@ const styles = theme => ({
     marginLeft: '1rem',
     marginTop: '1rem'
   }
-})
+});
 
 class LoginForm extends Component {
   state = {
@@ -64,18 +64,18 @@ class LoginForm extends Component {
   handleInputChange = name => event => {
     this.setState({
       [name]: event.target.value
-    })
+    });
   }
 
   handleFormSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     // After log in was clicked
-    console.log('username:', MNID.decode(this.props.credentials.networkAddress).address)
-    console.log('password:', this.state.password)
+    console.log('username:', MNID.decode(this.props.credentials.networkAddress).address);
+    console.log('password:', this.state.password);
   }
 
   render () {
-    const { classes, errorMessage, credentials } = this.props
+    const { classes, errorMessage, credentials } = this.props;
     return (
       <form
         className={classes.root}
@@ -163,17 +163,17 @@ class LoginForm extends Component {
         Forgot password?
         </Typography>
       </form>
-    )
+    );
   }
 }
 
-const mapStateToProps = ({ auth }) => ({ errorMessage: auth.errorMessage })
+const mapStateToProps = ({ auth }) => ({ errorMessage: auth.errorMessage });
 
 LoginForm.propTypes = {
   classes: PropTypes.object,
   errorMessage: PropTypes.string,
   history: PropTypes.object,
   login: PropTypes.func
-}
+};
 
-export default connect(mapStateToProps)(withStyles(styles)(LoginForm))
+export default connect(mapStateToProps)(withStyles(styles)(LoginForm));
