@@ -2,7 +2,7 @@ const Web3 = require('web3')
 const React = require('react')
 const PropTypes = require('prop-types')
 
-const WEB3_NODE = require('../config/Api.js').WEB3_NODE
+const WEB3_NODE = require('../config/api.js').WEB3_NODE
 
 const childContextTypes = {
   web3: PropTypes.shape({
