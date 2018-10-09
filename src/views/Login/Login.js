@@ -11,12 +11,6 @@ import LoginForm from './LoginForm';
 import Nav from './Nav/Nav';
 
 const styles = theme => ({
-  header: {
-    display: 'flex',
-    justifyContent: 'flex-start',
-    width: '100%',
-    marginBottom: '6rem'
-  },
   bold: {
     fontWeight: '500'
   },
@@ -49,11 +43,7 @@ const styles = theme => ({
     marginBottom: '2rem',
     color: theme.palette.common.white
   },
-  terms: {
-    fontSize: '1.2rem',
-    position: 'absolute',
-    bottom: 20
-  },
+
   nav: {
     position: 'absolute'
   }
@@ -86,14 +76,14 @@ class Login extends Component {
     return (
       <div className='login'>
         <div>
-          <div className={classes.header}>
+          <div className='login__header'>
             <Logo />
           </div>
           <div>
             {this.state.currentStep === 1 && <LoginWithUport currentStep={this.state.currentStep} afterValid={this._next} />}
             {this.state.currentStep === 2 && <LoginForm currentStep={this.state.currentStep} afterValid={this._next} credentials={this.state.credentials} />}
           </div>
-          <div className={classes.terms}>
+          <div className='login__terms'>
             By signing in, you agree to <span className={classes.bold}>Cash36 Terms and Conditions & Privacy Policy</span>
           </div>
         </div>

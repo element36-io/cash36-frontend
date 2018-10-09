@@ -23,4 +23,17 @@
     justify-content: flex-end;
     padding: 2rem;
   }
+
+  &__header {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    margin-bottom: 6rem;
+  }
+
+  &__terms {
+    font-size: 1.2rem;
+    position: absolute;
+    bottom: 2rem;
+  }
 }
