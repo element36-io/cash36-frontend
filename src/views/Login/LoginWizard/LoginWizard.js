@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 // import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
-import backgroundImage from '../../assets/background-login.jpg';
+import backgroundImage from '../../../assets/background-login.jpg';
 
-import Logo from '../Logo';
-import LoginWithUport from './LoginWithUport';
-import LoginForm from './LoginForm';
-import Nav from './Nav';
+import Logo from '../../../components/Logo';
+import LoginWithUport from '../LoginWithUport/LoginWithUport';
+import LoginForm from '../LoginForm/LoginForm';
+import Nav from '../Nav/Nav';
 
 const styles = theme => ({
   root: {

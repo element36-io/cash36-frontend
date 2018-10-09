@@ -3,8 +3,8 @@ import { Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import QRCode from 'qrcode.react';
 import { Connect, SimpleSigner } from 'uport-connect';
-import uportLogo from '../../assets/uport-logo-w.png';
-import { AppleAppStore, GooglePlayStore } from '../../icons';
+import uportLogo from '../../../assets/uport-logo-w.png';
+import { AppleAppStore, GooglePlayStore } from '../../../icons';
 
 const styles = theme => ({
   root: {

@@ -4,7 +4,7 @@ import { MNID } from 'uport-connect';
 import { connect } from 'react-redux';
 import { TextField, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import StyledButton from '../StyledButton';
+import StyledButton from '../../../components/StyledButton';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 const styles = theme => ({

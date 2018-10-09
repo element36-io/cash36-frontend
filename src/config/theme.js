@@ -1,10 +1,6 @@
-import React, { Component } from 'react';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import LoginWizard from './Login/LoginWizard';
-import Wallet from './Wallet/Wallet';
+import { createMuiTheme } from '@material-ui/core/styles';
 
-const theme = createMuiTheme({
+export default createMuiTheme({
   palette: {
     primary: {
       light: '#6bafe6',
@@ -44,20 +40,3 @@ const theme = createMuiTheme({
     primaryOverlay: 'linear-gradient(to right bottom, rgba(107, 175, 230, 0.7), rgba(70, 156, 224, 0.7))'
   }
 });
-
-class App extends Component {
-  render () {
-    return (
-      <MuiThemeProvider theme={theme}>
-        <Router>
-          <Switch>
-            <Route exact path='/' component={Wallet} />
-            <Route exact path='/login' component={LoginWizard} />
-          </Switch>
-        </Router>
-      </MuiThemeProvider>
-    );
-  }
-}
-
-export default App;
