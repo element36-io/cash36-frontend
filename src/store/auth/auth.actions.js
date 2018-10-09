@@ -1,6 +1,8 @@
 import axios from 'axios'
-import { API_ROOT } from '../config/Api'
-import { AUTH_USER, AUTH_ERROR } from './types'
+import { API_ROOT } from '../../config/api'
+
+export const AUTH_USER = 'AUTH_USER';
+export const AUTH_ERROR = 'AUTH_ERROR';
 
 export const login = (username, password, callback) => async dispatch => {
   const config = {

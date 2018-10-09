@@ -6,6 +6,7 @@
     "@mars/heroku-js-runtime-env": "^3.0.2",
     "@material-ui/core": "^1.1.0",
     "@material-ui/icons": "^1.1.0",
+    "axios": "^0.18.0",
     "cash36-contracts": "^0.1.24",
     "classnames": "2.2.5",
     "material-ui-pickers": "^1.0.0-rc.9",

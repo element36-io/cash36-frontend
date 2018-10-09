@@ -4,11 +4,11 @@ import './index.css'
 import App from './components/App'
 import registerServiceWorker from './registerServiceWorker'
 import { Provider } from 'react-redux'
-import configureStore from './store/configureStore'
+import index from './store/index'
 import Web3ProviderNew from './components/Web3Provider'
 
 ReactDOM.render(
-  <Provider store={configureStore}>
+  <Provider store={index}>
     <Web3ProviderNew>
       <App />
     </Web3ProviderNew>

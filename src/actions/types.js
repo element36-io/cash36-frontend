@@ -1,6 +1,5 @@
 // AUTHENTICATION
-export const AUTH_USER = 'AUTH_USER'
-export const AUTH_ERROR = 'AUTH_ERROR'
+
 
 // USER
 export const USER_LOGGED_IN = 'USER_LOGGED_IN'
