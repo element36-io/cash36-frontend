@@ -3,42 +3,14 @@ import PropTypes from 'prop-types';
 // import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
-import backgroundImage from '../../assets/background-login.jpg';
+import './Login.scss';
 
-import Logo from '../Logo';
+import Logo from '../../components/Logo';
 import LoginWithUport from './LoginWithUport';
 import LoginForm from './LoginForm';
-import Nav from './Nav';
+import Nav from './Nav/Nav';
 
 const styles = theme => ({
-  root: {
-    display: 'flex',
-    flex: 1,
-    backgroundColor: theme.palette.greys.headerGrey
-  },
-  leftPanel: {
-    width: '40%',
-    height: '100vh',
-    padding: '4.5rem 6rem',
-    position: 'relative'
-  },
-  rightPanel: {
-    backgroundImage: `${theme.gradients.primaryOverlay}, url(${backgroundImage})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    height: '100vh',
-    width: '60%',
-    display: 'flex',
-    justifyContent: 'flex-end',
-    padding: '2rem',
-    position: 'relative'
-  },
-  header: {
-    display: 'flex',
-    justifyContent: 'flex-start',
-    width: '100%',
-    marginBottom: '6rem'
-  },
   bold: {
     fontWeight: '500'
   },
@@ -71,17 +43,13 @@ const styles = theme => ({
     marginBottom: '2rem',
     color: theme.palette.common.white
   },
-  terms: {
-    fontSize: '1.2rem',
-    position: 'absolute',
-    bottom: 20
-  },
+
   nav: {
     position: 'absolute'
   }
 });
 
-class LoginWizard extends Component {
+class Login extends Component {
   state = {
     currentStep: 1,
     credentials: {}
@@ -106,22 +74,23 @@ class LoginWizard extends Component {
   render () {
     const { classes } = this.props;
     return (
-      <div className={classes.root}>
-        <div className={classes.leftPanel}>
-          <div className={classes.header}>
+      <div className='login'>
+        <div>
+          <div className='login__header'>
             <Logo />
           </div>
           <div>
             {this.state.currentStep === 1 && <LoginWithUport currentStep={this.state.currentStep} afterValid={this._next} />}
             {this.state.currentStep === 2 && <LoginForm currentStep={this.state.currentStep} afterValid={this._next} credentials={this.state.credentials} />}
           </div>
-          <div className={classes.terms}>
+          <div className='login__terms'>
             By signing in, you agree to <span className={classes.bold}>Cash36 Terms and Conditions & Privacy Policy</span>
           </div>
         </div>
-        <div className={classes.rightPanel}>
+        <div>
           <div className={classes.nav}>
             <Nav />
+            <div className='test'> TEST </div>
           </div>
           <div className={classes.bigLogoBox}>
             <Typography className={classes.logoBoxUpper}>36</Typography>
@@ -133,8 +102,8 @@ class LoginWizard extends Component {
   }
 }
 
-LoginWizard.propTypes = {
+Login.propTypes = {
   classes: PropTypes.object
 };
 
-export default (withStyles(styles)(LoginWizard));
+export default (withStyles(styles)(Login));
