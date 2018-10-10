@@ -1,50 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Typography } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
 import QRCode from 'qrcode.react';
 import { Connect, SimpleSigner } from 'uport-connect';
 import uportLogo from '../../../assets/uport-logo-w.png';
 import { AppleAppStore, GooglePlayStore } from '../../../icons';
-
-const styles = theme => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  headline: {
-    fontWeight: '500',
-    fontSize: '3rem'
-  },
-  uportLogo: {
-    height: '2rem',
-    width: 'auto'
-  },
-  uportMessage: {
-    display: 'flex',
-    alignItems: 'center'
-  },
-  bold: {
-    fontWeight: '500'
-  },
-  qrCode: {
-    marginTop: '1rem',
-    '&>*': {
-      backgroundColor: theme.palette.common.white,
-      padding: '2rem',
-      width: '200px',
-      height: '200px',
-      borderRadius: 4
-    }
-  },
-  noAccMessage: {
-    margin: '1rem 0'
-  },
-  appIcons: {
-  },
-  appIcon: {
-    marginRight: '1rem'
-  }
-});
+import { uportLogin } from '../../../store/auth/auth.actions.js';
+import './LoginWithUport.scss';
 
 class LoginWithUport extends Component {
   state = {
@@ -65,39 +27,34 @@ class LoginWithUport extends Component {
       requested: [ 'name', 'avatar' ],
       verified: [ 'cash36KYC' ],
       notifications: true
-    }, this.uPortURIHandler).then((credentials) => {
+    }, this.uPortURIHandler).then((uportCreds) => {
       // Next step
-      this.props.afterValid(credentials);
+      this.props.afterValid(uportCreds);
+      this.props.uportLogin(uportCreds);
     });
   }
 
   render () {
-    const { classes } = this.props;
     return (
-      <div className={classes.root}>
-        <Typography
-          variant='title'
-          className={classes.headline}
-          paragraph
-        >
+      <div className='login-uport'>
+        <Typography variant='title' className='login-uport__headline' paragraph>
           Welcome
         </Typography>
-        <Typography className={classes.subheading}>
-          Welcome to <span className={classes.bold}>cash36!</span>
+        <Typography>
+          Welcome to <span>cash36!</span> <br />
+          <span className='login-uport__message'>
+            In order to use our website, please log in with <img className='login-uport__logo' src={uportLogo} alt='UPORT' />
+          </span>
         </Typography>
-        <Typography className={classes.uportMessage}>
-          In order to use our website, please log in with <img className={classes.uportLogo} src={uportLogo} alt='UPORT' />
-        </Typography>
-        <div className={classes.qrCode}>
-          <QRCode value={this.state.uri} size={270} />
+        <div className='login-uport__qrcode'>
+          <QRCode value={this.state.uri} size={250} />
         </div>
-        <Typography variant='caption' color='inherit' className={classes.noAccMessage}>Need a uPort Account?</Typography>
-        <div className={classes.appIcons}>
+        <Typography variant='caption' color='inherit'>Need a uPort Account?</Typography>
+        <div className='login-uport__app-store-icons'>
           <a
             target='_blank'
             rel='noopener noreferrer'
             href='https://itunes.apple.com/us/app/uport-id/id1123434510'
-            className={classes.appIcon}
           >
             <AppleAppStore />
           </a>
@@ -105,7 +62,6 @@ class LoginWithUport extends Component {
             target='_blank'
             rel='noopener noreferrer'
             href='https://play.google.com/store/apps/details?id=com.uportMobile'
-            className={classes.appIcon}
           >
             <GooglePlayStore />
           </a>
@@ -115,4 +71,4 @@ class LoginWithUport extends Component {
   }
 }
 
-export default withStyles(styles)(LoginWithUport);
+export default connect(null, { uportLogin })(LoginWithUport);

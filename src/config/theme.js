@@ -36,8 +36,7 @@ export default createMuiTheme({
     fontWeightMedium: 500
   },
   gradients: {
-    primary: 'linear-gradient(to left bottom, #6bafe6, #469CE0)',
-    primaryOverlay: 'linear-gradient(to right bottom, rgba(107, 175, 230, 0.7), rgba(70, 156, 224, 0.7))'
+    primary: 'linear-gradient(to left bottom, #6bafe6, #469CE0)'
   },
   overrides: {
     MuiMenuItem: {

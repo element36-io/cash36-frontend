@@ -1,67 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { MNID } from 'uport-connect';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { MNID } from 'uport-connect';
 import { TextField, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import StyledButton from '../../../components/StyledButton';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-
-const styles = theme => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    width: '40rem'
-  },
-  headline: {
-    marginBottom: '3rem',
-    fontWeight: '500'
-  },
-  textField: {
-    backgroundColor: theme.palette.common.white,
-    border: `1px solid ${theme.palette.greys.lightGrey}`,
-    padding: '1rem'
-  },
-  textFieldUsername: {
-    border: `1px solid ${theme.palette.greys.lightGrey}`,
-    padding: '1rem',
-    backgroundColor: theme.palette.greys.headerGrey
-  },
-  label: {
-    fontSize: '1.9rem',
-    marginLeft: '1rem',
-    marginTop: '1rem'
-  },
-  input: {
-    marginTop: '1rem',
-    fontSize: '1.4rem'
-  },
-  button: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginTop: '2rem',
-    backgroundImage: theme.gradients.primary
-  },
-  forgotPassword: {
-    marginTop: '2rem',
-    alignSelf: 'flex-start'
-  },
-  marginBot: {
-    marginBottom: '3rem'
-  },
-  errorMessage: {
-    marginLeft: '1rem',
-    marginTop: '1rem'
-  }
-});
+import { login, clearErrors } from '../../../store/auth/auth.actions';
+import styles from './MuiStyles';
 
 class LoginForm extends Component {
-  state = {
-    password: ''
+  state = { password: '' }
+
+  componentWillUnmount () {
+    this.props.clearErrors();
   }
 
   handleInputChange = name => event => {
+    this.props.clearErrors();
     this.setState({
       [name]: event.target.value
     });
@@ -69,13 +26,22 @@ class LoginForm extends Component {
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    // After log in was clicked
-    console.log('username:', MNID.decode(this.props.credentials.networkAddress).address);
-    console.log('password:', this.state.password);
+    const username = MNID.decode(this.props.uportCreds.networkAddress).address;
+    const { password } = this.state;
+    const user = {
+      username,
+      name: this.props.uportCreds.name,
+      avatarUri: this.props.uportCreds.avatar.uri,
+      lastLoggedIn: new Date().getTime()
+    };
+    this.props.login(username, password, user, () => {
+      this.props.history.push('/');
+    });
   }
 
   render () {
-    const { classes, errorMessage, credentials } = this.props;
+    const { classes, errorMessage, uportCreds } = this.props;
+    const firstName = uportCreds.name.split(' ')[0];
     return (
       <form
         className={classes.root}
@@ -92,7 +58,7 @@ class LoginForm extends Component {
           variant='subheading'
           color='inherit'
         >
-          Welcome {credentials.name}
+          Welcome, {firstName}
         </Typography>
         <Typography
           variant='subheading'
@@ -108,7 +74,7 @@ class LoginForm extends Component {
           disabled
           autoComplete='off'
           maring='normal'
-          value={MNID.decode(credentials.networkAddress).address}
+          value={MNID.decode(uportCreds.networkAddress).address}
           fullWidth
           className={classes.textFieldUsername}
           InputProps={{
@@ -176,4 +142,4 @@ LoginForm.propTypes = {
   login: PropTypes.func
 };
 
-export default connect(mapStateToProps)(withStyles(styles)(LoginForm));
+export default withRouter(connect(mapStateToProps, { login, clearErrors })(withStyles(styles)(LoginForm)));

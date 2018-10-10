@@ -3,8 +3,33 @@ import { API_ROOT } from '../../config/api';
 
 export const AUTH_USER = 'AUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
+export const UPORT_LOGIN = 'UPORT_LOGIN';
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
-export const login = (username, password, callback) => async dispatch => {
+export const uportLogin = (uportCreds) => {
+  return {
+    type: UPORT_LOGIN,
+    payload: uportCreds
+  };
+};
+
+export const register = (username, password, callback) => async dispatch => {
+  try {
+    await axios.post(
+      `${API_ROOT}/public/register`,
+      { username, password }
+    );
+
+    callback();
+  } catch (error) {
+    dispatch({
+      type: AUTH_ERROR,
+      payload: error.response.data.message
+    });
+  }
+};
+
+export const login = (username, password, user, callback) => async dispatch => {
   const config = {
     data: `username=${username}&password=${password}&grant_type=password`,
     headers: {
@@ -29,7 +54,10 @@ export const login = (username, password, callback) => async dispatch => {
 
     dispatch({
       type: AUTH_USER,
-      payload: true
+      payload: {
+        isAuthenticated: true,
+        user
+      }
     });
     callback();
   } catch (error) {
@@ -44,8 +72,11 @@ export const logout = () => dispatch => {
   localStorage.removeItem('access_token');
   localStorage.removeItem('refresh_token');
   localStorage.removeItem('expires_at');
+  localStorage.removeItem('user');
   dispatch({
     type: AUTH_USER,
-    payload: false
+    payload: { isAuthenticated: false, user: {} }
   });
 };
+
+export const clearErrors = () => ({ type: CLEAR_ERRORS });
