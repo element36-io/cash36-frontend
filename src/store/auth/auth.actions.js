@@ -72,7 +72,6 @@ export const logout = () => dispatch => {
   localStorage.removeItem('access_token');
   localStorage.removeItem('refresh_token');
   localStorage.removeItem('expires_at');
-  localStorage.removeItem('user');
   dispatch({
     type: AUTH_USER,
     payload: { isAuthenticated: false, user: {} }
