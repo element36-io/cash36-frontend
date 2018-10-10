@@ -1,3 +1,4 @@
+@import './mixins.scss';
 @import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500');
 
 html {
@@ -13,9 +14,9 @@ html {
 }
 
 body {
-  background-color: #FCFCFC;
+  background-color: #f6f7fa;
   position: relative;
-  margin: 0px;
+  margin: 0;
   height: 100%;
   font-size: 1.6rem;
   font-family: 'Rubik', sans-serif;
@@ -29,6 +30,9 @@ body > #root > div {
   max-width: 140rem;
   margin: 0 auto;
   height: 100%;
+  @include mobile {
+    padding-top: 87px;
+  }
 }
 
 ul {
@@ -40,5 +44,3 @@ ul {
 a {
   text-decoration: none;
 }
-
-

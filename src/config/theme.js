@@ -36,6 +36,13 @@ export default createMuiTheme({
     fontWeightMedium: 500
   },
   gradients: {
-    primary: 'linear-gradient(to left bottom, #316d9c, #469CE0)'
+    primary: 'linear-gradient(to left bottom, #6bafe6, #469CE0)'
+  },
+  overrides: {
+    MuiMenuItem: {
+      root: {
+        fontSize: '1.5rem'
+      }
+    }
   }
 });
