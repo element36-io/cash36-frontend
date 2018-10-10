@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import AuthContainer from '../../components/AuthContainer';
-import LoginWizard from './LoginWizard';
+import RegisterForm from './RegisterForm';
 
-class Login extends Component {
+class Register extends Component {
   render () {
     return (
       this.props.authed
         ? <Redirect to='/' />
         : <AuthContainer>
-          <LoginWizard />
+          <RegisterForm />
         </AuthContainer>
 
     );
@@ -20,4 +20,4 @@ class Login extends Component {
 
 const mapStateToProps = ({ auth }) => ({ authed: auth.isAuthenticated });
 
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps)(Register);
