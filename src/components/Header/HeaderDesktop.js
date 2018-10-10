@@ -1,13 +1,10 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import HeaderMenu from './HeaderMenu';
 import HeaderAlerts from './HeaderAlerts';
 import navLinks from './navLinks';
 
-const HeaderDesktop = props => {
-  const { logout } = props;
-
+const HeaderDesktop = () => {
   return (
     <Fragment>
       <ul>
@@ -18,14 +15,10 @@ const HeaderDesktop = props => {
       </ul>
       <div>
         <HeaderAlerts alertsCount={3} />
-        <HeaderMenu logout={logout} />
+        <HeaderMenu />
       </div>
     </Fragment>
   );
-};
-
-HeaderDesktop.propTypes = {
-  logout: PropTypes.func.isRequired
 };
 
 export default HeaderDesktop;

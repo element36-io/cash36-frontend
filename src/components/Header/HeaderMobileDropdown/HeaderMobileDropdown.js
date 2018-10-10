@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import RightArrowIcon from '@material-ui/icons/KeyboardArrowRight';
 import navLinks from '../navLinks';
 import './HeaderMobileDropdown.scss';
 
 const HeaderMobileDropdown = props => {
-  const { isActive, logout, clickCallback } = props;
+  const { isActive, clickCallback } = props;
 
   return (
     <div className={`header__mobile-dropdown ${isActive ? 'active' : ''}`}>
@@ -27,13 +27,13 @@ const HeaderMobileDropdown = props => {
             />
           </NavLink>
         </li>
-        <li onClick={logout}>
-          <span>
-                        Logout
+        <li>
+          <Link to='/logout'>
+              Logout
             <RightArrowIcon
               className='header__mobile-dropdown__icon'
             />
-          </span>
+          </Link>
         </li>
       </ul>
     </div>
@@ -42,7 +42,6 @@ const HeaderMobileDropdown = props => {
 
 HeaderMobileDropdown.propTypes = {
   isActive: PropTypes.bool,
-  logout: PropTypes.func.isRequired,
   clickCallback: PropTypes.func.isRequired
 };
 

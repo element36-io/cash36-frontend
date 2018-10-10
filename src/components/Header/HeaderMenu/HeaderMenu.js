@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/KeyboardArrowDown';
@@ -14,13 +14,12 @@ class HeaderMenu extends Component {
       this.setState({ anchorEl: evt.currentTarget });
     };
 
-    handleClose = evt => {
+    handleClose = () => {
       this.setState({ anchorEl: null });
     };
 
     render () {
       const { anchorEl } = this.state;
-      const { logout } = this.props;
 
       return (
         <div className='header__menu'>
@@ -34,16 +33,14 @@ class HeaderMenu extends Component {
             open={Boolean(anchorEl)}
             onClose={this.handleClose}
           >
-            <MenuItem onClick={logout}>Logout</MenuItem>
+            <MenuItem>
+              <Link to='/logout'>Logout</Link>
+            </MenuItem>
           </Menu>
         </div>
 
       );
     }
 }
-
-HeaderMenu.propTypes = {
-  logout: PropTypes.func.isRequired
-};
 
 export default HeaderMenu;
