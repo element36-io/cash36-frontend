@@ -1,0 +1,24 @@
+@import '../../styles/settings.scss';
+//TODO: Change logo to image with text indent
+.brand {
+  display: flex;
+  align-items: center;
+
+  div {
+    margin-right: 1rem;
+    background-image: $gradient-primary;
+    border-radius: 4px;
+    width: 3.3rem;
+    height: 4.7rem;
+    color: #fff;
+    font-size: 1.3rem;
+    text-align: right;
+    font-weight: 500;
+    padding: .4rem;
+  }
+
+  span {
+    font-weight: 500;
+    font-size: 1.8rem
+  }
+}

@@ -1,0 +1,35 @@
+@import '../../../styles/settings';
+
+.header__menu {
+  display: flex;
+  align-items: center;
+  margin-left: 35px;
+
+  span {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 15px;
+    background: $primary-light-2;
+
+    i {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #308fee;
+      font-size: 20px;
+    }
+  }
+
+  .header__menu__icon {
+    font-size: 2.5rem;
+    color: $darkGrey;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
