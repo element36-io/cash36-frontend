@@ -28,7 +28,7 @@ const PopupMenu = props => {
 PopupMenu.propTypes = {
     placement: PropTypes.string,
     open: PropTypes.bool.isRequired,
-    anchor: PropTypes.object.isRequired,
+    anchor: PropTypes.object,
     handleClose: PropTypes.func.isRequired,
     children: PropTypes.object
 };

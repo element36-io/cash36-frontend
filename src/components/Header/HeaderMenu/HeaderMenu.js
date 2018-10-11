@@ -15,11 +15,9 @@ class HeaderMenu extends Component {
         this.setState({ open: true, anchorEl: evt.currentTarget });
     };
 
-    handleClose = evt => {
+    handleClose = () => {
         this.setState({ open: false, anchorEl: null });
     };
-
-    anchorEl = null;
 
     render () {
         const { open, anchorEl } = this.state;
