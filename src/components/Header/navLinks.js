@@ -9,7 +9,7 @@ const navLinks = [{
   url: '/sell'
 }, {
   label: 'Transfer',
-  url: '/transfer'
+  url: '/trasnfer'
 }, {
   label: 'History',
   url: '/history'

@@ -4,11 +4,11 @@ import Logo from '../Logo';
 import Responsive from '../Responsive';
 import HeaderDesktop from './HeaderDesktop';
 import HeaderMobile from './HeaderMobile';
-
+import { logout } from '../../store/auth/auth.actions';
 import './Header.scss';
 
 const Header = props => {
-  const { auth: { isAuthenticated } } = props;
+  const { auth: { isAuthenticated }, logout } = props;
 
   if (!isAuthenticated) return null;
 
@@ -16,10 +16,10 @@ const Header = props => {
     <header>
       <Logo />
       <Responsive>
-        <HeaderDesktop />
+        <HeaderDesktop logout={logout} />
       </Responsive>
       <Responsive isMobile>
-        <HeaderMobile />
+        <HeaderMobile logout={logout} />
       </Responsive>
     </header>
   );
@@ -27,4 +27,4 @@ const Header = props => {
 
 const mapStateToProps = ({ auth }) => ({ auth });
 
-export default connect(mapStateToProps, null, null, { pure: false })(Header);
+export default connect(mapStateToProps, { logout })(Header);
