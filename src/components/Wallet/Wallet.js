@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import requireAuth from '../requireAuth';
 import BalanceCard from '../BalanceCard';
+import QuickActions from '../QuickActions';
 import { getTokens } from '../../store/tokens/tokens.actions';
 
 import './Wallet.scss';
@@ -12,11 +13,14 @@ class Wallet extends Component {
   }
   render () {
     return (
-      <div className='balance-cards'>
-        {this.props.tokens.map(({ symbol, name, balance }) =>
-          <BalanceCard key={name} name={name} symbol={symbol} balance={balance} />)}
-      </div>
+      <div>
+        <div className='balance-cards'>
+          {this.props.tokens.map(({ symbol, name, balance }) =>
+            <BalanceCard key={name} name={name} symbol={symbol} balance={balance} />)}
+        </div>
 
+        <QuickActions />
+      </div>
     );
   }
 }
