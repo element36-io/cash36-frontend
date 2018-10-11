@@ -8,7 +8,7 @@ import { logout } from '../../store/auth/auth.actions';
 import './Header.scss';
 
 const Header = props => {
-  const { auth: { isAuthenticated }, logout } = props;
+  const { auth: { isAuthenticated, user }, logout } = props;
 
   if (!isAuthenticated) return null;
 
@@ -19,7 +19,7 @@ const Header = props => {
         <HeaderDesktop logout={logout} />
       </Responsive>
       <Responsive isMobile>
-        <HeaderMobile logout={logout} />
+        <HeaderMobile user={user} logout={logout} />
       </Responsive>
     </header>
   );

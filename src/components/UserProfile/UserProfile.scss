@@ -1,0 +1,114 @@
+@import '../../styles/settings.scss';
+
+.user-profile {
+  display: flex;
+
+  &.user-profile--alt {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .user-profile__avatar {
+      margin: 0 0 20px;
+    }
+  }
+
+  &__avatar {
+    position: relative;
+    width: 105px;
+    margin-right: 20px;
+
+    div, img {
+      margin-bottom: 5px;
+    }
+
+    div {
+      position: relative;
+      display: block;
+      height: 105px;
+
+      background: $primary-light-2;
+      border-radius: 7px;
+
+      i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: $primary-light-3;
+        font-size: 40px;
+      }
+    }
+
+    > span:first-of-type {
+      position: absolute;
+      right:0;
+      bottom: 0;
+      transform: translateX(50%);
+
+      span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        color: #fff;
+        transform: translate(-50%, -50%);
+        font-size: 15px;
+      }
+
+      > i {
+        font-size: 25px;
+        color: $primary-light-3;
+      }
+    }
+
+    > span:last-of-type {
+      position: relative;
+      display: block;
+      width: 80%;
+      height: 5px;
+      background: $primary-light-2;
+      border-radius: 3px;
+      overflow: hidden;
+
+      &.Tier_0:after {
+        width: 10%;
+      }
+
+      &.Tier_1:after {
+        width: 50%;
+      }
+
+      &.Tier_2:after {
+        width: 100%;
+      }
+
+      &:after {
+        position: absolute;
+        display: block;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        background: $primary-light-3;
+        content: '';
+        transition: all .3s;
+      }
+    }
+  }
+
+  &__info {
+    p {
+      margin: 0 0 10px;
+      color: $darkGrey;
+      font-size: 1.4rem;
+
+      span {
+        color: $text-primary;
+        font-size: 2rem;
+      }
+
+      &:last-of-type {
+        text-decoration: underline;
+      }
+    }
+  }
+}
