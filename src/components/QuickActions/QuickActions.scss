@@ -1,0 +1,66 @@
+@import '../../styles/settings.scss';
+
+.quick-actions {
+  display: inline-flex;
+  flex-direction: column;
+
+  > div:first-child {
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    color: $text-secondary;
+    margin-bottom: 1rem;
+  }
+
+  > div:last-child {
+    display: flex;
+  }
+
+  &__button {
+    background-color: $grey-blue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 1rem;
+    width: 12rem;
+    height: 10rem;
+
+    &:not(:last-child) {
+      margin-right: 2rem;
+    }
+
+    &:hover {
+      background-color: none;
+      background-image: $gradient-primary;
+      div:first-child {
+        background-image: none;
+        background-color: $grey-blue;
+        color: $primary-main;
+        font-weight: 500;
+      }
+      div:last-child {
+        color: $white;
+      }
+    }
+
+    > div:first-child {
+      background-image: $gradient-primary;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      padding: .5rem;
+      color: $white;
+      transition: all .1s;
+    }
+
+    > div:last-child {
+      margin-top: .5rem;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: $primary-main;
+      transition: all .1s;
+    }
+  }
+}
