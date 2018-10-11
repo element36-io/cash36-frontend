@@ -139,7 +139,8 @@ LoginForm.propTypes = {
   classes: PropTypes.object,
   errorMessage: PropTypes.string,
   history: PropTypes.object,
-  login: PropTypes.func
+  login: PropTypes.func.isRequired,
+  uportCreds: PropTypes.object.isRequired
 };
 
 export default withRouter(connect(mapStateToProps, { login, clearErrors })(withStyles(styles)(LoginForm)));

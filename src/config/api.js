@@ -40,9 +40,9 @@ const getRefreshedToken = async (refreshToken) => {
 
     const token = response.data;
 
-    sessionStorage.setItem('access_token', token.access_token);
-    sessionStorage.setItem('refresh_token', token.refresh_token);
-    sessionStorage.setItem('expires_at', new Date().getTime() + (token.expires_in * 1000));
+    localStorage.setItem('access_token', token.access_token);
+    localStorage.setItem('refresh_token', token.refresh_token);
+    localStorage.setItem('expires_at', new Date().getTime() + (token.expires_in * 1000));
 
     return token.access_token;
   } catch (error) {
@@ -54,9 +54,9 @@ const getRefreshedToken = async (refreshToken) => {
 api.interceptors.request.use(
   async function (config) {
     const getToken = async () => {
-      const token = sessionStorage.getItem('access_token');
-      const refreshToken = sessionStorage.getItem('refresh_token');
-      const expiresAt = sessionStorage.getItem('expires_at');
+      const token = localStorage.getItem('access_token');
+      const refreshToken = localStorage.getItem('refresh_token');
+      const expiresAt = localStorage.getItem('expires_at');
 
       // Check if expired and if true, get new
       if (token && new Date().getTime() > expiresAt) {

@@ -10,6 +10,11 @@ $secondary-light: #ff7961;
 $secondary-main: #f44336;
 $secondary-dark: #ba000d;
 
+$text-disabled: rgba(0, 0, 0, 0.38);
+$text-hint: rgba(0, 0, 0, 0.38);
+$text-primary: rgba(0, 0, 0, 0.87);
+$text-secondary: rgba(0, 0, 0, 0.54);
+
 $white: #fff;
 $black: #272727;
 
@@ -23,3 +28,14 @@ $processingYellow: #F9F6DF;
 $completeGreen: #ECFAF7;
 
 $gradient-primary: linear-gradient(to left bottom, $primary-dark, $primary-main);
+
+
+$euro-light: #6579B9;
+$euro-dark: #634E91;
+$gradient-euro: linear-gradient(to right top, $euro-dark, $euro-light);
+
+$franc-light: #F9B48D;
+$franc-dark: #FD7B6F;
+$gradient-franc: linear-gradient(to right top, $franc-dark, $franc-light);
+
+$box-shadow-1: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);

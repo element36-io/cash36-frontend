@@ -1,0 +1,98 @@
+@import '../../styles/settings.scss';
+
+.balance-card {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  padding-top: 1rem;
+  padding-right: 1rem;
+  height: 10rem;
+  width: 27rem;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+
+  &:not(:last-child) {
+    margin-right: 2rem;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+  }
+
+  &--EUR36 {
+    &:after {
+      background-image: $gradient-euro;
+    }
+  }
+
+  &--CHF36 {
+    &:after {
+      background-image: $gradient-franc;
+    }
+  }
+
+    > div {
+      display: flex;
+    }
+
+    > div:first-child {
+      justify-content: space-between;
+    }
+
+    > div:last-child {
+      align-items: center;
+    }
+
+  &__menu-icon {
+    color: $text-secondary;
+  }
+
+  &__icon {
+    border-radius: 4px;
+    transform: rotate(45deg);
+    width: 2.75rem;
+    height: 2.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1.5rem;
+
+    > div {
+      transform: rotate(-45deg);
+      color: $white;
+      font-weight: 500;
+    }
+
+    &--CHF36 {
+      background-image: $gradient-franc;
+      &::after {
+        background-image: $gradient-franc;
+      }
+    }
+
+    &--EUR36 {
+      background-image: $gradient-euro;
+      &::after {
+        background-image: $gradient-franc;
+      }
+    }
+  }
+
+  &__balance {
+    font-size: 2.5rem;
+
+    span {
+      font-size: 1.4rem;
+      text-transform: uppercase;
+      color: $text-secondary;
+    }
+  }
+}

@@ -2,6 +2,7 @@ import { UPORT_LOGIN, AUTH_USER, AUTH_ERROR, CLEAR_ERRORS } from './auth.actions
 
 const initialState = {
   isAuthenticated: !!localStorage.getItem('access_token'),
+  // isAuthenticated: true,
   user: JSON.parse(localStorage.getItem('state')) ? JSON.parse(localStorage.getItem('state')).user : undefined
 };
 

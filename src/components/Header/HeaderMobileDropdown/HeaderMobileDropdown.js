@@ -10,7 +10,7 @@ const HeaderMobileDropdown = props => {
 
   return (
     <div className={`header__mobile-dropdown ${isActive ? 'active' : ''}`}>
-      <ul>
+      <ul className="paper">
         {navLinks.map(link => <li key={link.label}>
           <NavLink exact activeClassName='selected'
             to={link.url} onClick={clickCallback}>{link.label}

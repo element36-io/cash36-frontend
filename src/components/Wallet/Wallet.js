@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import requireAuth from '../requireAuth';
+import BalanceCard from '../BalanceCard';
+import { getTokens } from '../../store/tokens/tokens.actions';
 
-const Wallet = () => (
-  <div>
-    Wallet Component
-  </div>
-);
+import './Wallet.scss';
 
-export default requireAuth(Wallet);
+class Wallet extends Component {
+  componentDidMount () {
+    this.props.getTokens();
+  }
+  render () {
+    return (
+      <div className='balance-cards'>
+        {this.props.tokens.map(({ symbol, name, balance }) =>
+          <BalanceCard key={name} name={name} symbol={symbol} balance={balance} />)}
+      </div>
+
+    );
+  }
+}
+
+const mapStateToProps = ({ tokens }) => ({ tokens });
+
+export default requireAuth(connect(mapStateToProps, { getTokens })(Wallet));
