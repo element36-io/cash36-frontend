@@ -27,4 +27,4 @@ const Header = props => {
 
 const mapStateToProps = ({ auth }) => ({ auth });
 
-export default connect(mapStateToProps, { logout })(Header);
+export default connect(mapStateToProps, { logout }, null, { pure: false })(Header);
