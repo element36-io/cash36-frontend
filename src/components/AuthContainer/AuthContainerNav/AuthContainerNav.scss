@@ -9,7 +9,7 @@
       margin-right: 3rem;
     }
 
-    a {
+    a, span {
       color: $white;
       text-transform: uppercase;
       font-weight: 500;
@@ -21,6 +21,10 @@
     &:last-child {
       a {
         background-image: $gradient-primary;
+      }
+
+      span {
+        background: $darkGrey;
       }
     }
   }

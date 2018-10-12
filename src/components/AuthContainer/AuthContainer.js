@@ -8,7 +8,7 @@ import Logo from '../Logo';
 import AuthContainerNav from './AuthContainerNav';
 
 const AuthContainer = props => {
-    const {isAuthenticated, children} = props;
+    const {auth: {isAuthenticated, uportCreds}, children} = props;
 
     return (
         isAuthenticated
@@ -26,7 +26,7 @@ const AuthContainer = props => {
             </div>
           </div>
           <div>
-            <AuthContainerNav />
+            <AuthContainerNav showRegister={Boolean(uportCreds)}/>
             <div className='auth-container__logo-alt'>
               <Typography>36</Typography>
               <Typography>Cash</Typography>
@@ -37,6 +37,6 @@ const AuthContainer = props => {
     );
 };
 
-const mapStateToProps = ({ auth: {isAuthenticated} }) => ({isAuthenticated });
+const mapStateToProps = ({ auth }) => ({auth });
 
 export default connect(mapStateToProps)(AuthContainer);

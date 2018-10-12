@@ -1,23 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-
+import React from 'react';
 import AuthContainer from '../../components/AuthContainer';
 import RegisterForm from './RegisterForm';
 
-class Register extends Component {
-  render () {
-    return (
-      this.props.authed
-        ? <Redirect to='/' />
-        : <AuthContainer>
-          <RegisterForm />
-        </AuthContainer>
+const Register = () => <AuthContainer><RegisterForm /></AuthContainer>;
 
-    );
-  }
-}
-
-const mapStateToProps = ({ auth }) => ({ authed: auth.isAuthenticated });
-
-export default connect(mapStateToProps)(Register);
+export default Register;

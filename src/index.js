@@ -9,9 +9,9 @@ import Web3ProviderNew from './components/Web3Provider';
 
 ReactDOM.render(
   <Provider store={store}>
-    <Web3ProviderNew>
+    {/*<Web3ProviderNew>*/}
       <App />
-    </Web3ProviderNew>
+    {/*</Web3ProviderNew>*/}
   </Provider>,
   document.getElementById('root')
 );
