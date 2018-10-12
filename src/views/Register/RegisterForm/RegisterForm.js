@@ -54,8 +54,7 @@ class RegisterForm extends Component {
     const { classes, uportCreds, errorMessage } = this.props;
     const { passwordError } = this.state;
     return (
-      uportCreds
-        ? <form
+       <form
           className={classes.root}
           onSubmit={this.handleFormSubmit}
         >
@@ -154,7 +153,7 @@ class RegisterForm extends Component {
           >
         Forgot password?
           </Typography>
-        </form> : <Redirect to='/login' />
+        </form>
     );
   }
 }

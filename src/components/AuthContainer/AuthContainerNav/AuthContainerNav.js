@@ -11,10 +11,11 @@ const AuthContainerNav = props => {
             <li><Link to='#'>Home</Link></li>
             <li><Link to='#'>Support</Link></li>
             <li>
-                {props.location.pathname === '/login' && (
+                {
+                    props.location.pathname === '/login' ?
                     showRegister ? <Link to='/register'>Register</Link> : <span>Register</span>
-                )}
-                {props.location.pathname === '/register' && <Link to='/login'>Login</Link>}
+                    : <Link to='/login'>Login</Link>
+                }
             </li>
         </ul>
     );

@@ -26,7 +26,7 @@ const AuthContainer = props => {
             </div>
           </div>
           <div>
-            <AuthContainerNav showRegister={Boolean(uportCreds)}/>
+            <AuthContainerNav showRegister={Boolean()}/>
             <div className='auth-container__logo-alt'>
               <Typography>36</Typography>
               <Typography>Cash</Typography>
