@@ -1,0 +1,8 @@
+@import '../../../../styles/settings.scss';
+
+.activity-table-action {
+  > div:first-child {
+    color: $text-secondary;
+    font-size: 1.4rem;
+  }
+}

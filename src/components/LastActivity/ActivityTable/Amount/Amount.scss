@@ -1,0 +1,13 @@
+@import '../../../../styles/settings.scss';
+
+.activity-table-amount {
+  > div:first-child {
+    font-weight: 500;
+  }
+
+  > div:last-child {
+    color: $text-secondary;
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
+}

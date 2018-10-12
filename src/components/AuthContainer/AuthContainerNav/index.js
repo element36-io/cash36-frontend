@@ -1,1 +1,1 @@
-export {default} from './AuthContainerNav';
+export { default } from './AuthContainerNav';

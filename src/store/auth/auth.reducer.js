@@ -1,12 +1,13 @@
 import { UPORT_LOGIN, AUTH_USER, AUTH_ERROR, CLEAR_ERRORS } from './auth.actions';
+import mockState from './auth.mock';
 
-const initialState = {
-  isAuthenticated: !!localStorage.getItem('access_token'),
-  // isAuthenticated: true,
-  user: JSON.parse(localStorage.getItem('state')) ? JSON.parse(localStorage.getItem('state')).user : undefined
-};
+// const initialState = {
+//   isAuthenticated: !!localStorage.getItem('access_token'),
+//   // isAuthenticated: true,
+//   user: JSON.parse(localStorage.getItem('state')) ? JSON.parse(localStorage.getItem('state')).user : undefined
+// };
 
-export default (state = initialState, action) => {
+export default (state = mockState, action) => {
   switch (action.type) {
     case UPORT_LOGIN:
       return {

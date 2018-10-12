@@ -54,106 +54,106 @@ class RegisterForm extends Component {
     const { classes, uportCreds, errorMessage } = this.props;
     const { passwordError } = this.state;
     return (
-       <form
-          className={classes.root}
-          onSubmit={this.handleFormSubmit}
+      <form
+        className={classes.root}
+        onSubmit={this.handleFormSubmit}
+      >
+        <Typography
+          variant='display1'
+          color='inherit'
+          className={classes.headline}
         >
-          <Typography
-            variant='display1'
-            color='inherit'
-            className={classes.headline}
-          >
           Welcome
-          </Typography>
-          <Typography
-            variant='subheading'
-            color='inherit'
-          >
+        </Typography>
+        <Typography
+          variant='subheading'
+          color='inherit'
+        >
           Welcome aboard
-          </Typography>
-          <Typography
-            variant='subheading'
-            color='inherit'
-            className={classes.marginBot}
-          >
+        </Typography>
+        <Typography
+          variant='subheading'
+          color='inherit'
+          className={classes.marginBot}
+        >
           Please, choose a password
-          </Typography>
-          <TextField
-            name='username'
-            label='Username (uPort ID)'
-            type='text'
-            disabled
-            autoComplete='off'
-            value={MNID.decode(uportCreds.networkAddress).address}
-            fullWidth
-            className={classes.textFieldUsername}
-            InputProps={{
-              disableUnderline: true,
-              className: classes.input
-            }}
-            InputLabelProps={{
-              shrink: true,
-              className: classes.label
-            }}
-          />
-          <TextField
-            label='Password'
-            type='password'
-            autoComplete='off'
-            value={this.state.password}
-            onChange={this.handleInputChange('password')}
-            fullWidth
-            className={classes.textField}
-            InputProps={{
-              disableUnderline: true,
-              className: classes.input
-            }}
-            InputLabelProps={{
-              shrink: true,
-              className: classes.label
-            }}
-          />
-          <TextField
-            label='Confirm Password'
-            type='password'
-            autoComplete='off'
-            value={this.state.confirmPassword}
-            onChange={this.handleInputChange('confirmPassword')}
-            fullWidth
-            className={classes.textField}
-            InputProps={{
-              disableUnderline: true,
-              className: classes.input
-            }}
-            InputLabelProps={{
-              shrink: true,
-              className: classes.label
-            }}
-          />
-          <Typography
-            className={classes.errorMessage}
-          >
-            {errorMessage ? <span>{errorMessage}</span> : <span>{passwordError}</span>}
-          </Typography>
-          <StyledButton
-            variant='raised'
-            color='primary'
-            type='submit'
-            size='large'
-            fullWidth
-            className={classes.button}
-          >
-            <span>Register</span>
-            <ArrowForwardIcon />
-          </StyledButton>
-          <Typography
-            className={classes.forgotPassword}
-            color='textSecondary'
-            gutterBottom
-          >
+        </Typography>
+        <TextField
+          name='username'
+          label='Username (uPort ID)'
+          type='text'
+          disabled
+          autoComplete='off'
+          value={MNID.decode(uportCreds.networkAddress).address}
+          fullWidth
+          className={classes.textFieldUsername}
+          InputProps={{
+            disableUnderline: true,
+            className: classes.input
+          }}
+          InputLabelProps={{
+            shrink: true,
+            className: classes.label
+          }}
+        />
+        <TextField
+          label='Password'
+          type='password'
+          autoComplete='off'
+          value={this.state.password}
+          onChange={this.handleInputChange('password')}
+          fullWidth
+          className={classes.textField}
+          InputProps={{
+            disableUnderline: true,
+            className: classes.input
+          }}
+          InputLabelProps={{
+            shrink: true,
+            className: classes.label
+          }}
+        />
+        <TextField
+          label='Confirm Password'
+          type='password'
+          autoComplete='off'
+          value={this.state.confirmPassword}
+          onChange={this.handleInputChange('confirmPassword')}
+          fullWidth
+          className={classes.textField}
+          InputProps={{
+            disableUnderline: true,
+            className: classes.input
+          }}
+          InputLabelProps={{
+            shrink: true,
+            className: classes.label
+          }}
+        />
+        <Typography
+          className={classes.errorMessage}
+        >
+          {errorMessage ? <span>{errorMessage}</span> : <span>{passwordError}</span>}
+        </Typography>
+        <StyledButton
+          variant='raised'
+          color='primary'
+          type='submit'
+          size='large'
+          fullWidth
+          className={classes.button}
+        >
+          <span>Register</span>
+          <ArrowForwardIcon />
+        </StyledButton>
+        <Typography
+          className={classes.forgotPassword}
+          color='textSecondary'
+          gutterBottom
+        >
         Forgot password?
-          </Typography>
-        </form>
+        </Typography>
+      </form>
     );
   }
 }
