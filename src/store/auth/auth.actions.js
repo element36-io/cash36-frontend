@@ -68,15 +68,15 @@ export const login = (username, password, user, callback) => async dispatch => {
   }
 };
 
-export const logout = () => dispatch => {
+export const logout = () => {
   localStorage.removeItem('access_token');
   localStorage.removeItem('refresh_token');
   localStorage.removeItem('expires_at');
   localStorage.removeItem('user');
-  dispatch({
+  return {
     type: AUTH_USER,
     payload: { isAuthenticated: false, user: {} }
-  });
+  };
 };
 
 export const clearErrors = () => ({ type: CLEAR_ERRORS });

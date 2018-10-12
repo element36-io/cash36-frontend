@@ -7,6 +7,12 @@
   "plugins": [
     "react"
   ],
+  "globals": {
+    "describe": true,
+    "it": true,
+    "expect": true,
+    "beforeEach": true
+  },
   "rules": {
     "react/jsx-filename-extension": [
       2,

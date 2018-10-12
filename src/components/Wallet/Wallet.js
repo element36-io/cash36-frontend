@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import requireAuth from '../requireAuth';
 import BalanceCard from '../BalanceCard';
 import QuickActions from '../QuickActions';
+import LastActivity from '../LastActivity';
 import { getTokens } from '../../store/tokens/tokens.actions';
 
 import './Wallet.scss';
@@ -20,6 +21,7 @@ class Wallet extends Component {
         </div>
 
         <QuickActions />
+        <LastActivity />
       </div>
     );
   }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import formatAmount from '../../helpers/formatAmount';
 
 import './BalanceCard.scss';
 
@@ -24,7 +25,7 @@ class BalanceCard extends Component {
             {this.renderCurrencySymbol()}
           </div>
           <div className='balance-card__balance'>
-            {balance.toFixed(2)} <span>{symbol}</span>
+            {formatAmount(balance)} <span>{symbol}</span>
           </div>
         </div>
       </div>

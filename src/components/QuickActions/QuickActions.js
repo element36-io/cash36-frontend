@@ -10,7 +10,7 @@ const QuickActions = () => {
       <div>Quick Actions</div>
       <div>
         {buttons.map(({ link, Icon, label }) => (
-          <Link to={link} className='quick-actions__button'>
+          <Link key={label} to={link} className='quick-actions__button'>
             <div>
               <Icon />
             </div>
