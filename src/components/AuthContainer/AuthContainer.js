@@ -5,12 +5,13 @@ import { Typography } from '@material-ui/core';
 import './AuthContainer.scss';
 
 import Logo from '../Logo';
-import Nav from './Nav/Nav';
+import AuthContainerNav from './AuthContainerNav';
 
 const AuthContainer = props => {
-    const {authed, children} = props;
+    const {isAuthenticated, children} = props;
+
     return (
-      authed
+        isAuthenticated
         ? <Redirect to='/' />
         : <div className='auth-container'>
           <div>
@@ -25,8 +26,8 @@ const AuthContainer = props => {
             </div>
           </div>
           <div>
-            <Nav />
-            <div className='auth-container__big-logo'>
+            <AuthContainerNav />
+            <div className='auth-container__logo-alt'>
               <Typography>36</Typography>
               <Typography>Cash</Typography>
             </div>
@@ -36,6 +37,6 @@ const AuthContainer = props => {
     );
 };
 
-const mapStateToProps = ({ auth }) => ({ authed: auth.isAuthenticated });
+const mapStateToProps = ({ auth: {isAuthenticated} }) => ({isAuthenticated });
 
 export default connect(mapStateToProps)(AuthContainer);
