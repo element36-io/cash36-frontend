@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
@@ -7,10 +7,10 @@ import './AuthContainer.scss';
 import Logo from '../Logo';
 import Nav from './Nav/Nav';
 
-class AuthContainer extends Component {
-  render () {
+const AuthContainer = props => {
+    const {authed, children} = props;
     return (
-      this.props.authed
+      authed
         ? <Redirect to='/' />
         : <div className='auth-container'>
           <div>
@@ -18,7 +18,7 @@ class AuthContainer extends Component {
               <Logo />
             </div>
             <div>
-              {this.props.children}
+              {children}
             </div>
             <div className='auth-container__terms'>
             By signing in, you agree to <span>Cash36 Terms and Conditions & Privacy Policy</span>
@@ -34,8 +34,7 @@ class AuthContainer extends Component {
         </div>
 
     );
-  }
-}
+};
 
 const mapStateToProps = ({ auth }) => ({ authed: auth.isAuthenticated });
 
