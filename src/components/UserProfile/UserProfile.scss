@@ -20,15 +20,14 @@
 
     div, img {
       margin-bottom: 5px;
+      border-radius: 7px;
     }
 
     div {
       position: relative;
       display: block;
       height: 105px;
-
       background: $primary-light-2;
-      border-radius: 7px;
 
       i {
         position: absolute;
