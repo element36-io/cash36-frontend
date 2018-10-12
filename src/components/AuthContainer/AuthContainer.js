@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
 import './AuthContainer.scss';
 
 import Logo from '../Logo';
-import Nav from './Nav/Nav';
+import AuthContainerNav from './AuthContainerNav';
 
-class AuthContainer extends Component {
-  render () {
+const AuthContainer = props => {
+    const {auth: {isAuthenticated, uportCreds}, children} = props;
+
     return (
-      this.props.authed
+        isAuthenticated
         ? <Redirect to='/' />
         : <div className='auth-container'>
           <div>
@@ -18,15 +19,15 @@ class AuthContainer extends Component {
               <Logo />
             </div>
             <div>
-              {this.props.children}
+              {children}
             </div>
             <div className='auth-container__terms'>
             By signing in, you agree to <span>Cash36 Terms and Conditions & Privacy Policy</span>
             </div>
           </div>
           <div>
-            <Nav />
-            <div className='auth-container__big-logo'>
+            <AuthContainerNav showRegister={Boolean(uportCreds)}/>
+            <div className='auth-container__logo-alt'>
               <Typography>36</Typography>
               <Typography>Cash</Typography>
             </div>
@@ -34,9 +35,8 @@ class AuthContainer extends Component {
         </div>
 
     );
-  }
-}
+};
 
-const mapStateToProps = ({ auth }) => ({ authed: auth.isAuthenticated });
+const mapStateToProps = ({ auth }) => ({auth });
 
 export default connect(mapStateToProps)(AuthContainer);

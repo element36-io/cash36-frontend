@@ -1,0 +1,31 @@
+@import '../../../styles/settings.scss';
+
+.auth-nav {
+  display: flex;
+  margin: 1rem 3rem;
+
+  li {
+    &:not(:last-child) {
+      margin-right: 3rem;
+    }
+
+    a, span {
+      color: $white;
+      text-transform: uppercase;
+      font-weight: 500;
+      font-size: 1.8rem;
+      padding: 1rem;
+      border-radius: 4px;
+    }
+
+    &:last-child {
+      a {
+        background-image: $gradient-primary;
+      }
+
+      span {
+        background: $darkGrey;
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { MNID } from 'uport-connect';
 import { TextField, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -54,8 +54,7 @@ class RegisterForm extends Component {
     const { classes, uportCreds, errorMessage } = this.props;
     const { passwordError } = this.state;
     return (
-      uportCreds
-        ? <form
+       <form
           className={classes.root}
           onSubmit={this.handleFormSubmit}
         >
@@ -154,7 +153,7 @@ class RegisterForm extends Component {
           >
         Forgot password?
           </Typography>
-        </form> : <Redirect to='/login' />
+        </form>
     );
   }
 }
