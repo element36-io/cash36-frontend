@@ -16,6 +16,7 @@
   &__avatar {
     position: relative;
     width: 105px;
+    min-width: 105px;
     margin-right: 20px;
 
     div, img {

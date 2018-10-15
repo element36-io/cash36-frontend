@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { formatDate } from '../../../../helpers/dates.helpers';
+import { formatDate } from '../../../helpers/dates.helpers';
 
 import './Date.scss';
 

@@ -4,6 +4,7 @@ import './UserProfile.scss';
 import tiers from './tiers';
 import StyledButton from '../StyledButton';
 
+// Remove Tier when backend returns user tier later
 const UserProfile = props => {
   const { user: { username, avatarUri, tier, name }, alt } = props;
 
@@ -14,19 +15,19 @@ const UserProfile = props => {
         <span>
           <i className='fas fa-shield-alt' />
           <span>
-            {tiers[tier].iconText}
+            {tiers[tier || 'Tier_0'].iconText}
           </span>
         </span>
-        <span className={tier} />
+        <span className={tier || 'Tier_0'} />
       </div>
       <div className='user-profile__info'>
         <p>
-          <span>{name}</span> ({tiers[tier].text} user) <i className='fas fa-exclamation-triangle' />
+          <span>{name}</span> ({tiers[tier || 'Tier_0'].text} user) <i className='fas fa-exclamation-triangle' />
         </p>
         <p>
           {username}
         </p>
-        {tier !== 'Tier_2' && <StyledButton variant='contained' color='primary'>{tiers[tier].btnText}</StyledButton>}
+        {tier !== 'Tier_2' && <StyledButton variant='contained' color='primary'>{tiers[tier || 'Tier_0'].btnText}</StyledButton>}
       </div>
     </div>
   );
