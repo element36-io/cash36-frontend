@@ -1,17 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import formatAmount from '../../../../helpers/formatAmount';
+import { formatAmount } from '../../../../helpers/currencies.helpers';
 
 import './Amount.scss';
 
+const renderAction = (type, amount) => `${type === 'SELL' ? '+' : '-'}${formatAmount(amount)}`;
+
 const Amount = ({ type, amount, symbol }) => {
-  const renderAction = () => {
-    if (type === 'SELL') return `+${formatAmount(amount)}`;
-    if (type === 'BUY') return `-${formatAmount(amount)}`;
-  };
   return (
     <div className='activity-table-amount'>
-      <div>{renderAction()}</div>
+      <div>{renderAction(type, amount)}</div>
       <div>{symbol}</div>
     </div>
   );

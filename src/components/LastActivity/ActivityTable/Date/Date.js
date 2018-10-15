@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
+import { formatDate } from '../../../../helpers/dates.helpers';
 
 import './Date.scss';
 
 const Date = ({ date }) => (
   <div className='activity-table-date'>
     <div color='textPrimary'>
-      {moment(date, 'DD-MM-YYYY').format('MMM')}
+      {formatDate(date, 'MMM')}
     </div>
     <div color='textPrimary'>
-      {moment(date, 'DD-MM-YYYY').format('DD')}
+      {formatDate(date, 'DD')}
     </div>
   </div>
 );

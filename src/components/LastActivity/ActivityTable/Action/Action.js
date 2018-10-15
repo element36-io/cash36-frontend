@@ -6,8 +6,7 @@ import './Action.scss';
 
 const Action = ({ type, username }) => (
   <div className='activity-table-action'>
-    {type === 'BUY' && <div>Received from</div>}
-    {type === 'SELL' && <div>Sent to</div>}
+    <div>{type === 'BUY' ? 'Received from' : 'Sent to'}</div>
     <Typography noWrap>{username}</Typography>
   </div>
 );

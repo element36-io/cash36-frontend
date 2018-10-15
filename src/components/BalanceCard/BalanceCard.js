@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import formatAmount from '../../helpers/formatAmount';
+import { formatAmount } from '../../helpers/currencies.helpers';
 
 import './BalanceCard.scss';
 
