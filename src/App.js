@@ -5,7 +5,7 @@ import theme from './config/theme';
 import Header from './components/Header';
 import Login from './views/Login';
 import Register from './views/Register';
-import Wallet from './components/Wallet/Wallet';
+import Home from './views/Home';
 
 class App extends Component {
   render () {
@@ -15,7 +15,7 @@ class App extends Component {
           <Fragment>
             <Header />
             <Switch>
-              <Route exact path='/' component={Wallet} />
+              <Route exact path='/' component={Home} />
               <Route exact path='/login' component={Login} />
               <Route exact path='/register' component={Register} />
             </Switch>

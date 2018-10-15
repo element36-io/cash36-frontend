@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { formatAmount } from '../../../../helpers/currencies.helpers';
+import { formatAmount } from '../../../helpers/currencies.helpers';
 
 import './Amount.scss';
 
