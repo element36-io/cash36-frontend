@@ -22,7 +22,7 @@ const mockActivity = [{
   'status': 'ON_HOLD',
   'symbol': 'EUR36',
   'targetAddress': '0x8ee94d7797dc24aa48ed1c363dc6c10093452f60',
-  'txHash': '1315353'
+  'txHash': '13153515353'
 },
 {
   'action': 'BUY',
@@ -31,7 +31,7 @@ const mockActivity = [{
   'status': 'COMPLETED',
   'symbol': 'EUR36',
   'targetAddress': '0x8ee94d7797dc24aa48ed1c363dc6c10093452f60',
-  'txHash': '1315353'
+  'txHash': '131533553153'
 },
 {
   'action': 'SELL',
@@ -40,7 +40,7 @@ const mockActivity = [{
   'status': 'OPEN',
   'symbol': 'EUR36',
   'targetAddress': '0x8ee94d7797dc24aa48ed1c363dc6c10093452f60',
-  'txHash': '1315353'
+  'txHash': '13153335353'
 }];
 
 const ActivityTable = () => (

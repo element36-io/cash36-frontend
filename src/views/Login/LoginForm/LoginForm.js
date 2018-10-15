@@ -73,7 +73,6 @@ class LoginForm extends Component {
           type='text'
           disabled
           autoComplete='off'
-          maring='normal'
           value={MNID.decode(uportCreds.networkAddress).address}
           fullWidth
           className={classes.textFieldUsername}
@@ -91,7 +90,6 @@ class LoginForm extends Component {
           label='Password'
           type='password'
           autoComplete='off'
-          maring='normal'
           value={this.state.password}
           onChange={this.handleInputChange('password')}
           fullWidth
