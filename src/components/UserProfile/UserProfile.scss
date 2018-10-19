@@ -9,21 +9,20 @@
     text-align: center;
 
     .user-profile__avatar {
-      margin: 0 0 20px;
+      margin: 0 0 2rem;
     }
   }
 
   &__avatar {
     position: relative;
-    width: 105px;
-    min-width: 105px;
-    margin-right: 20px;
+    width: 10.5rem;
+    min-width: 10.5rem;
+    margin-right: 2rem;
 
     div, img {
-      margin-bottom: 5px;
-      border-radius: 7px;
-      height: 10rem;
-      width: 10rem;
+      height: 10.5rem;
+      width: 10.5rem;
+      border-radius: 12px;
     }
 
     img {
@@ -33,8 +32,7 @@
     div {
       position: relative;
       display: block;
-      height: 105px;
-      background: $primary-light-2;
+      background: $primary-light-4;
 
       i {
         position: absolute;
@@ -42,15 +40,18 @@
         left: 50%;
         transform: translate(-50%, -50%);
         color: $primary-light-3;
-        font-size: 40px;
+        font-size: 4rem;
       }
     }
 
-    > span:first-of-type {
+    .user-profile__avatar__badge {
       position: absolute;
-      right:0;
-      bottom: 0;
-      transform: translateX(50%);
+      left: 8.3rem;
+      top: 8rem;
+      display: block;
+      width: 34px;
+      height: 41px;
+      background: url('../../assets/icons/shield.svg') no-repeat center;
 
       span {
         position: absolute;
@@ -58,26 +59,25 @@
         left: 50%;
         color: #fff;
         transform: translate(-50%, -50%);
-        font-size: 15px;
+        font-size: 1.3rem;
       }
 
-      > i {
-        font-size: 25px;
-        color: $primary-light-3;
+      &.user-profile__avatar__badge--alt {
+        background: url('../../assets/icons/shield-checked.svg') no-repeat center;
       }
     }
 
     > span:last-of-type {
       position: relative;
       display: block;
-      width: 80%;
-      height: 5px;
-      background: $primary-light-2;
+      width: 8rem;
+      height: .5rem;
+      background: $primary-light-4;
       border-radius: 3px;
       overflow: hidden;
 
       &.Tier_0:after {
-        width: 10%;
+        width: 9%;
       }
 
       &.Tier_1:after {
