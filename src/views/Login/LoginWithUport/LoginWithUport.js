@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { Typography } from '@material-ui/core';
 import QRCode from 'qrcode.react';
 import { Connect, SimpleSigner } from 'uport-connect';
-import uportLogo from '../../../assets/uport-logo-w.png';
-import { AppleAppStore, GooglePlayStore } from '../../../icons';
+import uportLogo from '../../../assets/Login/uport-logo.png';
+import appStoreBadge from '../../../assets/Login/app-store-badge.svg';
+import googlePlayBadge from '../../../assets/Login/google-play-badge.svg';
 import { uportLogin } from '../../../store/auth/auth.actions.js';
 import './LoginWithUport.scss';
 
@@ -56,14 +57,14 @@ class LoginWithUport extends Component {
             rel='noopener noreferrer'
             href='https://itunes.apple.com/us/app/uport-id/id1123434510'
           >
-            <AppleAppStore />
+            <img src={appStoreBadge} alt='app-store-badge' />
           </a>
           <a
             target='_blank'
             rel='noopener noreferrer'
             href='https://play.google.com/store/apps/details?id=com.uportMobile'
           >
-            <GooglePlayStore />
+            <img src={googlePlayBadge} alt='google-play-badge' />
           </a>
         </div>
       </div>

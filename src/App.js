@@ -6,6 +6,11 @@ import Header from './components/Header';
 import Login from './views/Login';
 import Register from './views/Register';
 import Home from './views/Home';
+import Buy from './views/Buy';
+import Sell from './views/Sell';
+import Transfer from './views/Transfer';
+import History from './views/History';
+import Contacts from './views/Contacts';
 
 class App extends Component {
   render () {
@@ -16,6 +21,11 @@ class App extends Component {
             <Header />
             <Switch>
               <Route exact path='/' component={Home} />
+              <Route exact path='/buy' component={Buy} />
+              <Route exact path='/sell' component={Sell} />
+              <Route exact path='/transfer' component={Transfer} />
+              <Route exact path='/history' component={History} />
+              <Route exact path='/contacts' component={Contacts} />
               <Route exact path='/login' component={Login} />
               <Route exact path='/register' component={Register} />
             </Switch>

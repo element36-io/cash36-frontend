@@ -1,6 +1,5 @@
 import axios from 'axios';
 import runtimeEnv from '@mars/heroku-js-runtime-env';
-import { logout } from '../store/auth/auth.actions';
 
 const env = runtimeEnv();
 let apiEnv = env.REACT_APP_ENV;
@@ -48,7 +47,6 @@ const getRefreshedToken = async (refreshToken) => {
     return token.access_token;
   } catch (error) {
     console.log('Token expired, logging you out...');
-    logout();
   }
 };
 

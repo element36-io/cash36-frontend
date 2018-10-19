@@ -3,7 +3,8 @@
 $primary-light: #6bafe6;
 $primary-light-2: #e4eefa;
 $primary-light-3: #308fee;
-$primary-main: #469CE0;
+$primary-light-4: rgba(236,246,254,1);
+$primary-main: #308fee;
 $primary-dark: #208FEA;
 $primary-dark-2: #316d9c;
 
@@ -19,25 +20,36 @@ $text-secondary: rgba(0, 0, 0, 0.54);
 $white: #fff;
 $black: #272727;
 
+$text-black-1: rgba(1,21,44,1);
+
+$text-light-grey-1: rgba(1,21,44, .5);
+$text-light-grey-2: rgba(1,21,44, .75);
+$text-light-grey-3: rgba(1,21,44, 1);
+
+$green-1: rgba(72,214,182,0.1);
+$green-2: rgba(72,214,182, 1);
+
+$border-light-grey-1: rgba(179,198,213, .25);
+
+$grey-1: rgba(1,21,44,1);
 $darkGrey: #949CA8;
-$headerGrey: #F9F9FC;
+$headerGrey: #F7F8FB;
 $lightGrey: #ededed;
 $backgroundGrey: #FCFCFC;
 $grey-blue: #E4EFFA;
+$red-light: #FFEDED;
+$yellow-light: #F9F6DF;
+$green-light: #ECFAF7;
 
-$warningRed: #FFEDED;
-$processingYellow: #F9F6DF;
-$completedGreen: #ECFAF7;
-
+// Gradients
 $gradient-primary: linear-gradient(to left bottom, $primary-dark, $primary-light);
+$gradient-secondary: linear-gradient(180deg, rgba(99,180,245, .1) 0%, rgba(1,126,229,.1) 100%);
+$gradient-3: linear-gradient(225.95deg, rgba(105,184,242,1) 0%, rgba(1,126,229,1) 100%);
+$gradient-green-1: linear-gradient(225.95deg, #48D6B6 0%, #32B396 100%);
 
-
-$euro-light: #6579B9;
-$euro-dark: #634E91;
-$gradient-euro: linear-gradient(to right top, $euro-dark, $euro-light);
-
-$franc-light: #F9B48D;
-$franc-dark: #FD7B6F;
-$gradient-franc: linear-gradient(to right top, $franc-dark, $franc-light);
+$gradient-euro: linear-gradient(224.83deg, #69B4EF 0%, #623479 100%);
+$gradient-dollar: linear-gradient(224.83deg, #F5EBA9 0%, #FF6464 100%);
+$gradient-franc: linear-gradient(44.83deg, #C921B4 0%, #109EDB 100%);
+$gradient-pound: linear-gradient(224.83deg, #00A679 0%, #623479 100%);
 
 $box-shadow-1: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);

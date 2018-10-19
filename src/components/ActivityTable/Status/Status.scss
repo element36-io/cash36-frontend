@@ -20,15 +20,15 @@
   }
 
   &__complete {
-    background-color: $completedGreen;
+    background-color: $green-light;
   }
 
   &__processing {
-    background-color: $processingYellow;
+    background-color: $yellow-light;
   }
 
   &__on-hold {
-    background-color: $warningRed;
+    background-color: $red-light;
   }
 
   &__open {

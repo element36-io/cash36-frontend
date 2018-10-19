@@ -4,7 +4,7 @@ export default createMuiTheme({
   palette: {
     primary: {
       light: '#6bafe6',
-      main: '#469CE0',
+      main: '#1F8EEA',
       dark: '#316d9c',
       contrastText: '#fff'
     },
@@ -36,12 +36,29 @@ export default createMuiTheme({
     fontWeightMedium: 500
   },
   gradients: {
-    primary: 'linear-gradient(to left bottom, #6bafe6, #469CE0)'
+    primary: 'linear-gradient(225.95deg, #69B8F2 0%, #017EE5 100%)'
   },
   overrides: {
     MuiMenuItem: {
       root: {
         fontSize: '1.5rem'
+      }
+    },
+    MuiButton: {
+      root: {
+        backgroundImage: 'linear-gradient(225.95deg, #69B8F2 0%, #017EE5 100%)'
+      }
+    },
+    MuiCircularProgress: {
+      colorPrimary: {
+        color: '#fff'
+      }
+    },
+    MuiSelect: {
+      select: {
+        '&:focus': {
+          background: 'none'
+        }
       }
     }
   }
