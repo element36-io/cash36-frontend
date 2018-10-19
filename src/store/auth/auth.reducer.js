@@ -1,9 +1,7 @@
-import { UPORT_LOGIN, AUTH_USER, AUTH_ERROR, CLEAR_ERRORS } from './auth.actions';
-// import mockState from './auth.mock';
+import { UPORT_LOGIN, AUTH_USER, AUTH_ERROR, CLEAR_ERRORS, GET_KYC } from './auth.actions';
 
 const initialState = {
   isAuthenticated: !!localStorage.getItem('access_token'),
-  // isAuthenticated: true,
   user: JSON.parse(localStorage.getItem('state')) ? JSON.parse(localStorage.getItem('state')).user : undefined
 };
 
@@ -33,6 +31,15 @@ export default (state = initialState, action) => {
         errorMessage: ''
       };
     }
+    case GET_KYC:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          kycLevel: action.payload.kycLevel,
+          kycProcessStatus: action.payload.kycProcessStatus
+        }
+      };
     default:
       return state;
   }

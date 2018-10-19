@@ -6,7 +6,7 @@ import StyledButton from '../StyledButton';
 
 // Remove Tier when backend returns user tier later
 const UserProfile = props => {
-  const { user: { username, avatarUri, tier, name }, alt } = props;
+  const { user: { username, avatarUri, tier, name }, alt, clickCallback } = props;
 
   return (
     <div className={`user-profile ${alt ? 'user-profile--alt ' : ''}`}>
@@ -27,7 +27,7 @@ const UserProfile = props => {
         <p>
           {username}
         </p>
-        {tier !== 'Tier_2' && <StyledButton variant='contained' color='primary'>{tiers[tier || 'Tier_0'].btnText}</StyledButton>}
+        {tier !== 'Tier_2' && <StyledButton variant='contained' onClick={clickCallback} color='primary'>{tiers[tier || 'Tier_0'].btnText}</StyledButton>}
       </div>
     </div>
   );
@@ -35,7 +35,7 @@ const UserProfile = props => {
 
 UserProfile.propTypes = {
   user: PropTypes.object.isRequired,
-  verification: PropTypes.func,
+  clickCallback: PropTypes.func,
   alt: PropTypes.bool
 };
 

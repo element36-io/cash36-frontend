@@ -19,9 +19,10 @@
   }
 
   > div:last-child {
-    background-image: url(../../assets/background-login.jpg);
+    background-image: url(../../assets/Login/background-image.png);
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
     width: 60%;
     justify-content: flex-end;
     padding: 2rem;
@@ -38,38 +39,6 @@
 
     span {
       font-weight: 500;
-    }
-  }
-
-  &__logo-alt {
-    background-image: $gradient-primary;
-    border-radius: 1rem;
-    width: 28rem;
-    height: 40rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 0 2.5rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    > p:first-child {
-      display: flex;
-      justify-content: flex-end;
-      font-size: 11rem;
-      font-weight: 500;
-      color: $white;
-    }
-
-    > p:last-child {
-      display: flex;
-      justify-content: flex-start;
-      font-size: 6rem;
-      font-weight: 500;
-      margin-bottom: 2rem;
-      color: $white;
     }
   }
 }

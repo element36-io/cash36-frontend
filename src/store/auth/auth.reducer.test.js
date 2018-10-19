@@ -3,7 +3,8 @@ import {
   AUTH_USER,
   CLEAR_ERRORS,
   UPORT_LOGIN,
-  AUTH_ERROR
+  AUTH_ERROR,
+  GET_KYC
 } from './auth.actions';
 
 const defaultState = {
@@ -60,4 +61,18 @@ it('should clear error message', () => {
   const state = authReducer(defaultState, action);
 
   expect(state.errorMessage).toBe('');
+});
+
+it('should set proper Kyc status state', () => {
+  const action = {
+    type: GET_KYC,
+    payload: {
+      kycLevel: 'Tier_0',
+      kycProcessStatus: null
+    }
+  };
+
+  const state = authReducer(defaultState, action);
+
+  expect(state).toEqual({ ...defaultState, user: { ...action.payload } });
 });

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import './AuthContainerNav.scss';
 
-const AuthContainerNav = props => {
-  const { showRegister } = props;
+export const AuthContainerNav = props => {
+  const { showRegister, location: { pathname } } = props;
 
   return (
     <ul className='auth-nav'>
@@ -12,7 +12,7 @@ const AuthContainerNav = props => {
       <li><Link to='#'>Support</Link></li>
       <li>
         {
-          props.location.pathname === '/login'
+          pathname === '/login'
             ? showRegister ? <Link to='/register'>Register</Link> : <span>Register</span>
             : <Link to='/login'>Login</Link>
         }
@@ -21,7 +21,8 @@ const AuthContainerNav = props => {
   );
 };
 AuthContainerNav.propTypes = {
-  showRegister: PropTypes.bool
+  showRegister: PropTypes.bool.isRequired,
+  location: PropTypes.object.isRequired
 };
 
 export default withRouter(AuthContainerNav);

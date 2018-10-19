@@ -11,7 +11,8 @@
     "describe": true,
     "it": true,
     "expect": true,
-    "beforeEach": true
+    "beforeEach": true,
+    "jest": true
   },
   "rules": {
     "react/jsx-filename-extension": [

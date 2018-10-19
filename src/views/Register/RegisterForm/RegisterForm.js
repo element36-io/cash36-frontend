@@ -40,7 +40,7 @@ class RegisterForm extends Component {
       this.setState({ passwordError: 'Please enter a password' });
     } else if (password === confirmPassword) {
       this.setState({ passwordError: '' });
-      this.props.register(username, password, () => {
+      this.props.register(username, password, user.avatarUri, () => {
         this.props.login(username, password, user, () => {
           this.props.history.push('/');
         });

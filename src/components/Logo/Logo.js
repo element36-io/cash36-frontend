@@ -1,16 +1,8 @@
 import React from 'react';
-import './Logo.scss';
+import logo from '../../assets/Logo.png';
 
-// TODO: Replace logo with image + txt
 const Logo = () => (
-  <div className='brand'>
-    <div>
-            36
-    </div>
-    <span>
-            cash36
-    </span>
-  </div>
+  <img src={logo} alt='LOGO' />
 );
 
 export default Logo;

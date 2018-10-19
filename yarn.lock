@@ -7441,11 +7441,6 @@ jest-leak-detector@^23.6.0:
   dependencies:
     pretty-format "^23.6.0"
 
-jest-localstorage-mock@^2.2.0:
-  version "2.2.0"
-  resolved "http://167.99.243.81:4873/jest-localstorage-mock/-/jest-localstorage-mock-2.2.0.tgz#ce9a9de01dfdde2ad8aa08adf73acc7e5cc394cf"
-  integrity sha512-x+P0vcwr4540bCAYzTEpiD9rs+zh/QZzyiABV+MU6yM2OPwPlrrLyUx/6gValMyt6tg5lX6Z53o2rHWfUht5Xw==
-
 jest-matcher-utils@^23.6.0:
   version "23.6.0"
   resolved "http://167.99.243.81:4873/jest-matcher-utils/-/jest-matcher-utils-23.6.0.tgz#726bcea0c5294261a7417afb6da3186b4b8cac80"
@@ -8400,7 +8395,7 @@ matchmediaquery@^0.3.0:
   dependencies:
     css-mediaquery "^0.1.2"
 
-material-ui-pickers@^1.0.0-rc.9:
+material-ui-pickers@^1.0.0-rc.17:
   version "1.0.0-rc.17"
   resolved "http://167.99.243.81:4873/material-ui-pickers/-/material-ui-pickers-1.0.0-rc.17.tgz#9f0e732fbfadeac1dde3af7b760f3944bc2c86d7"
   integrity sha512-mzNbMmqTkPhZqfb2nVQ1jBIOb0QUDTMVs6RnqTccCnqPJ8iea5d+P9KTnjyObkeE+Kt0+Fn7OX1+v/w3h0tbHg==
@@ -10741,6 +10736,11 @@ react-app-polyfill@^0.1.3:
     promise "8.0.2"
     raf "3.4.0"
     whatwg-fetch "3.0.0"
+
+react-country-flag@^1.0.1:
+  version "1.0.1"
+  resolved "http://167.99.243.81:4873/react-country-flag/-/react-country-flag-1.0.1.tgz#30594a8500f98fa30a3ff4b909d985c47b130a7f"
+  integrity sha512-kIdiwofJbNjkz3ZNiJuRzKttEZCyBVkT6AUmeLp6Y8W1b2Tng+1dSuMV4WmXZ1FDM6mfRcoSGiwAj4PUoE8kZw==
 
 react-dev-utils@^6.0.4:
   version "6.0.4"
@@ -13281,6 +13281,11 @@ validate-npm-package-license@^3.0.1:
   dependencies:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
+
+validator@^10.8.0:
+  version "10.8.0"
+  resolved "http://167.99.243.81:4873/validator/-/validator-10.8.0.tgz#8acb15a5c39411cbc8ef2be0c98c2514da4410a7"
+  integrity sha512-mXqMxfCh5NLsVgYVKl9WvnHNDPCcbNppHSPPowu0VjtSsGWVY+z8hJF44edLR1nbLNzi3jYoYsIl8KZpioIk6g==
 
 validator@^7.0.0:
   version "7.2.0"

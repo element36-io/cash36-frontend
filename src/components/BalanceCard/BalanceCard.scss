@@ -28,12 +28,40 @@
   }
 
   &--EUR36 {
+    background-image: url('../../assets/BalanceCard/euro.svg');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
     &:after {
       background-image: $gradient-euro;
     }
   }
 
+  &--USD36 {
+    background-image: url('../../assets/BalanceCard/dollar.svg');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    &:after {
+      background-image: $gradient-dollar;
+    }
+  }
+
+  &--GBP36 {
+    background-image: url('../../assets/BalanceCard/pound.svg');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    &:after {
+      background-image: $gradient-pound;
+    }
+  }
+
   &--CHF36 {
+    background-image: url('../../assets/BalanceCard/franc.svg');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
     &:after {
       background-image: $gradient-franc;
     }
@@ -56,34 +84,7 @@
   }
 
   &__icon {
-    border-radius: 4px;
-    transform: rotate(45deg);
-    width: 2.75rem;
-    height: 2.75rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 1.5rem;
-
-    > div {
-      transform: rotate(-45deg);
-      color: $white;
-      font-weight: 500;
-    }
-
-    &--CHF36 {
-      background-image: $gradient-franc;
-      &::after {
-        background-image: $gradient-franc;
-      }
-    }
-
-    &--EUR36 {
-      background-image: $gradient-euro;
-      &::after {
-        background-image: $gradient-franc;
-      }
-    }
+    margin-right: .5rem;
   }
 
   &__balance {
