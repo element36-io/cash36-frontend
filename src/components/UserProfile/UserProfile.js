@@ -12,20 +12,18 @@ const UserProfile = props => {
       <div className='user-profile__avatar'>
         {avatarUri ? <img src={avatarUri} alt={name} /> : <div><i className='fas fa-user' /></div>}
         <span className={`user-profile__avatar__badge ${kycLevel === 'Tier_2' ? 'user-profile__avatar__badge--alt': ''}`}>
-          <span>
-              {kycLevel !== 'Tier_2' && tiers[kycLevel || 'Tier_0'].iconText}
-          </span>
+            {kycLevel && <span>{tiers[kycLevel].iconText}</span>}
         </span>
         <span className={kycLevel} />
       </div>
       <div className='user-profile__info'>
         <p>
-          <span>{name}</span> ({tiers[kycLevel || 'Tier_0'].text} user) <i className='fas fa-exclamation-triangle' />
+          <span>{name}</span> ({kycLevel && tiers[kycLevel].text} user) <i className='fas fa-exclamation-triangle' />
         </p>
         <p>
           {username}
         </p>
-        {kycLevel !== 'Tier_2' && <StyledButton variant='contained' onClick={clickCallback} color='primary'>{tiers[kycLevel || 'Tier_0'].btnText}</StyledButton>}
+        {kycLevel !== 'Tier_2' && <StyledButton variant='contained' onClick={clickCallback} color='primary'>{kycLevel && tiers[kycLevel].btnText}</StyledButton>}
       </div>
     </div>
   );
