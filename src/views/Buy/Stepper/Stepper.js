@@ -25,8 +25,6 @@ const Stepper = ({ step }) => {
       return renderSteps(steps[1]);
     case 2:
       return renderSteps(steps[2]);
-    case 3:
-      return renderSteps(steps[2]);
     default:
       return null;
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import UserProfile from './UserProfile';
-import StylesButton from '../StyledButton';
+import DefaultButton from '../Buttons/DefaultButton';
 import mock from '../../store/auth/auth.mock';
 
 describe('Shallow render UserProfile', () => {
@@ -12,12 +12,12 @@ describe('Shallow render UserProfile', () => {
   });
 
   it('should have verification button', () => {
-    expect(wrapper.find(StylesButton).length).toEqual(1);
+    expect(wrapper.find(DefaultButton).length).toEqual(1);
   });
 
   it('should have user-profile--alt and hide verification button', () => {
     wrapper.setProps({ alt: true, user: { ...mock.user, tier: 'Tier_2' } });
     expect(wrapper.find('.user-profile--alt').length).toEqual(1);
-    expect(wrapper.find(StylesButton).length).toEqual(0);
+    expect(wrapper.find(DefaultButton).length).toEqual(0);
   });
 });

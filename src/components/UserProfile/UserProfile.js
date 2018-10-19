@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './UserProfile.scss';
 import tiers from './tiers';
-import StyledButton from '../StyledButton';
+import DefaultButton from '../Buttons/DefaultButton';
 
 // Remove Tier when backend returns user tier later
 const UserProfile = props => {
@@ -27,7 +27,7 @@ const UserProfile = props => {
         <p>
           {username}
         </p>
-        {tier !== 'Tier_2' && <StyledButton variant='contained' onClick={clickCallback} color='primary'>{tiers[tier || 'Tier_0'].btnText}</StyledButton>}
+        {tier !== 'Tier_2' && <DefaultButton variant='contained' onClick={clickCallback} color='primary'>{tiers[tier || 'Tier_0'].btnText}</DefaultButton>}
       </div>
     </div>
   );

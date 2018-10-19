@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import CloseIcon from '@material-ui/icons/Close';
-import StyledButton from '../StyledButton';
+import DefaultButton from '../Buttons/DefaultButton';
 import Tier1Form from './Tier1Form';
 import Tier2Form from './Tier2Form';
 import VerificationProgress from './VerificationProgress';
@@ -57,9 +57,9 @@ class Verification extends Component {
       <Tier1Form close={this.props.close} nextStep={this.nextStep} toggleModalBlock={this.toggleModalBlock} />,
       <Tier2Form close={this.props.close} successCallback={this.nextStep} />,
       <VerificationProgress tier='Tier 2'>
-        <StyledButton onClick={this.props.close} fullWidth color='primary' variant='raised'>
+        <DefaultButton onClick={this.props.close} fullWidth color='primary' variant='raised'>
                 Finish
-        </StyledButton>
+        </DefaultButton>
       </VerificationProgress>
     ];
 

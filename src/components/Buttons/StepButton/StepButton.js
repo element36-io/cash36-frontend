@@ -1,28 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import StyledButton from '../../StyledButton';
+import DefaultButton from '../DefaultButton';
 
 import './StepButton.scss';
 
-const StepButton = ({ text, handleClick }) => (
-  <StyledButton
+const StepButton = ({ text, onClick }) => (
+  <DefaultButton
     variant='raised'
-    color='primary'
     type='button'
     size='large'
     fullWidth
     className='step-button'
-    onClick={handleClick}
+    onClick={onClick}
   >
     <span>{text}</span>
     <ArrowForwardIcon />
-  </StyledButton>
+  </DefaultButton>
 );
 
 StepButton.propTypes = {
   buttonText: PropTypes.string,
-  handleClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired
 };
 
 export default StepButton;

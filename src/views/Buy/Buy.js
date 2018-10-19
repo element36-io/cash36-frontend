@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Stepper from './Stepper';
 import BuyTokens from './BuyTokens';
 import PaymentMethod from './PaymentMethod';
+import BackButton from '../../components/Buttons/BackButton';
 
 import './Buy.scss';
 
@@ -9,8 +10,7 @@ class Buy extends Component {
   state = {
     step: 0,
     amount: '',
-    symbol: 'EUR36',
-    errorMessage: ''
+    symbol: 'EUR36'
   }
 
   nextStep = () => {
@@ -19,6 +19,12 @@ class Buy extends Component {
         this.setState({ step: 1 });
       }
     }
+  }
+
+  previousStep = () => {
+    this.setState((prevState) => {
+      return { step: prevState.step - 1 };
+    });
   }
 
   handleChange = (event) => {
@@ -30,6 +36,7 @@ class Buy extends Component {
     const { step } = this.state;
     return (
       <div className='buy paper'>
+        {step > 0 && <BackButton onClick={this.previousStep} />}
         <Stepper step={step} />
         <div className='buy__content'>
           {step === 0 &&
