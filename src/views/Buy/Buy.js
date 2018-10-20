@@ -8,7 +8,7 @@ import './Buy.scss';
 
 class Buy extends Component {
   state = {
-    step: 0,
+    step: 1,
     amount: '',
     symbol: 'EUR36'
   }
