@@ -7,6 +7,9 @@ import './PaymentMethod.scss';
 
 class PaymentMethod extends Component {
   handleManualClick = () => {
+    // Call Api /cash36/buy
+
+    // Call Next step
     // Go to the Initiate payment and call API to get info
     console.log('this will be manual transfer');
   }
@@ -29,6 +32,8 @@ class PaymentMethod extends Component {
           <span className='payment-method__separator'>Or</span>
           <DefaultButton
             onClick={this.handleAutoClick}
+            disabled
+            style={{ backgroundColor: 'rgba(0, 0, 0, 0.08)' }}
           >
             <span className='payment-method__buttons--heading'>Automatic Bank Transfer</span>
             <span className='payment-method__buttons--icon'><QRCode value='#' size={72} /></span>

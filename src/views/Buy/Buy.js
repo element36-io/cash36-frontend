@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Stepper from './Stepper';
 import BuyTokens from './BuyTokens';
 import PaymentMethod from './PaymentMethod';
+import InitiateManualPayment from './InitiateManualPayment';
 import BackButton from '../../components/Buttons/BackButton';
 
 import './Buy.scss';
@@ -19,11 +20,15 @@ class Buy extends Component {
         this.setState({ step: 1 });
       }
     }
+
+    // if (this.state.step === 1) {
+
+    // }
   }
 
   previousStep = () => {
     this.setState((prevState) => {
-      return { step: prevState.step - 1 };
+      return { step: parseInt(prevState.step - 1) };
     });
   }
 
@@ -46,7 +51,8 @@ class Buy extends Component {
               symbol={this.state.symbol}
               nextStep={this.nextStep}
             />}
-          {step === 1 && <PaymentMethod />}
+          {step === 1 && <PaymentMethod next={this.nextStep} />}
+          {step === 2.1 && <InitiateManualPayment next={this.nextStep} />}
         </div>
         <div className='buy__footer'>
           Buying cash36 Tokens is as simple as a bank transfer. First, choose amount and type of Token you wish to buy.
