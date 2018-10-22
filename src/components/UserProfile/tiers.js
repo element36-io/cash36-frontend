@@ -1,4 +1,3 @@
-import React from 'react';
 export default {
   Tier_0: {
     text: 'Tier 0',
