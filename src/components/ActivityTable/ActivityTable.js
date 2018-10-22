@@ -16,9 +16,9 @@ const ActivityTable = ({ userActivity }) => (
       <div>Amount</div>
     </div>
     <div className='activity-table__body paper'>
-      {userActivity.map((activity) => {
+      {userActivity.map((activity, index) => {
         return (
-          <div key={activity.txHash} className='activity-table__row'>
+          <div key={index} className='activity-table__row'>
             <div><Date date={activity.date} /></div>
             <div><Action type={activity.action} username={activity.targetAddress} /></div>
             <div><Status status={activity.status} /></div>
