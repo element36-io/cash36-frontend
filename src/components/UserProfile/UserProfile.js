@@ -23,7 +23,7 @@ const UserProfile = props => {
         <p>
           {username}
         </p>
-        {kycLevel && kycLevel !== 'Tier_2' && <StyledButton variant='contained' onClick={clickCallback} color='primary'>{tiers[kycLevel].btnText}</StyledButton>}
+        {kycLevel && kycLevel !== 'Tier_2' && <DefaultButton variant='contained' onClick={clickCallback} color='primary'>{tiers[kycLevel].btnText}</DefaultButton>}
       </div>
     </div>
   );
