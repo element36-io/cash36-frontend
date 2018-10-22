@@ -23,15 +23,11 @@ class Buy extends Component {
         this.setState({ step: 1 });
       }
     }
-
-    if (this.state.step === 1) {
-      this.onManualTransferClick();
-    }
   }
 
   previousStep = () => {
     this.setState((prevState) => {
-      return { step: parseInt(prevState.step - 1) };
+      return { step: Math.round(prevState.step - 1) };
     });
   }
 

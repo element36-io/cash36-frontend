@@ -5,19 +5,7 @@ import { decodeSpecialChars, getCountryCode } from '../../../helpers/text.helper
 
 import './InitiateManualPayment.scss';
 
-// const data = {
-//   bankName: '31135',
-//   bankAddress: '113414',
-//   receipientName: '3144134',
-//   receipientAddress: '13141341',
-//   amount: 15,
-//   bankBic: 315135,
-//   bankCountry: 'Switzerland',
-//   receipientIban: 13515135135,
-//   paymentReferenceId: '133414134'
-// };
-
-const InitiateManualPayment = ({ next, handleOrderSubmit, transferData }) => (
+const InitiateManualPayment = ({ handleOrderSubmit, transferData }) => (
   <div className='initiate-manual-payment'>
     <h2>Initiate the payment</h2>
     <div className='initiate-manual-payment__info'>
