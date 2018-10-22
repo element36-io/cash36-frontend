@@ -16,7 +16,7 @@ const Header = props => {
     <header>
       <Logo />
       <Responsive>
-        <HeaderDesktop logout={logout} />
+        <HeaderDesktop logout={logout} user={user} />
       </Responsive>
       <Responsive isMobile>
         <HeaderMobile user={user} logout={logout} />

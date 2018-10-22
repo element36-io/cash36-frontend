@@ -15,9 +15,10 @@ header {
   }
 
   @include desktop {
-    padding: 3rem 0;
     background-color: $headerGrey;
     padding: 5.2rem 11.5rem 10.5rem 11.5rem;
+    font-size: 1.8rem;
+    line-height: 2.2rem;
 
     ul {
       margin-left: 10rem;
