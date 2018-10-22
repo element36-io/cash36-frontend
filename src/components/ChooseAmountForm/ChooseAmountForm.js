@@ -20,6 +20,7 @@ class ChooseAmountForm extends PureComponent {
           label='Choose Amount'
           type='text'
           onChange={this.handleAmountChange}
+          placeholder='0'
           autoComplete='off'
           value={this.props.amount}
           fullWidth
