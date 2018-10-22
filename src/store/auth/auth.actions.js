@@ -27,7 +27,7 @@ export const uportLogin = (uportCreds) => {
 
 export const getKyc = () => async dispatch => {
   try {
-    const response = await API.post('/cash36/user/current-user');
+    const response = await API.get('/cash36/user/current-user');
 
     dispatch({
       type: GET_KYC,

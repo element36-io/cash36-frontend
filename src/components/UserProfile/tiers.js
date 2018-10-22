@@ -1,4 +1,3 @@
-import React from 'react';
 export default {
   Tier_0: {
     text: 'Tier 0',
@@ -11,7 +10,6 @@ export default {
     btnText: 'Continue verification'
   },
   Tier_2: {
-    text: 'Verified',
-    iconText: <i className='fas fa-check' />
+    text: 'Verified'
   }
 };
