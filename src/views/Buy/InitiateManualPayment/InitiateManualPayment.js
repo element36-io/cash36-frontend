@@ -5,17 +5,17 @@ import { decodeSpecialChars, getCountryCode } from '../../../helpers/text.helper
 
 import './InitiateManualPayment.scss';
 
-const data = {
-  bankName: '31135',
-  bankAddress: '113414',
-  receipientName: '3144134',
-  receipientAddress: '13141341',
-  amount: 15,
-  bankBic: 315135,
-  bankCountry: 'Switzerland',
-  receipientIban: 13515135135,
-  paymentReferenceId: '133414134'
-};
+// const data = {
+//   bankName: '31135',
+//   bankAddress: '113414',
+//   receipientName: '3144134',
+//   receipientAddress: '13141341',
+//   amount: 15,
+//   bankBic: 315135,
+//   bankCountry: 'Switzerland',
+//   receipientIban: 13515135135,
+//   paymentReferenceId: '133414134'
+// };
 
 const InitiateManualPayment = ({ next, handleOrderSubmit, transferData }) => (
   <div className='initiate-manual-payment'>
@@ -23,33 +23,33 @@ const InitiateManualPayment = ({ next, handleOrderSubmit, transferData }) => (
     <div className='initiate-manual-payment__info'>
       <div className='initiate-manual-payment__info-field'>
         <span>Bank Name</span>
-        <span>{data.bankName}</span>
+        <span>{transferData.bankName}</span>
       </div>
       <div className='initiate-manual-payment__info-field'>
         <span>Bank Address</span>
-        <span>{decodeSpecialChars(data.bankAddress)}</span>
+        <span>{decodeSpecialChars(transferData.bankAddress)}</span>
       </div>
       <div className='initiate-manual-payment__info-field'>
         <span>Receipient Name</span>
-        <span>{data.receipientName}</span>
+        <span>{transferData.receipientName}</span>
       </div>
       <div className='initiate-manual-payment__info-field'>
         <span>Receipient Address</span>
-        <span>{decodeSpecialChars(data.receipientAddress)}</span>
+        <span>{decodeSpecialChars(transferData.receipientAddress)}</span>
       </div>
       <div className='initiate-manual-payment__info-field'>
         <span>Amount</span>
-        <span>{data.amount}</span>
+        <span>{transferData.amount}</span>
       </div>
       <div className='initiate-manual-payment__info-field'>
         <span>Swift/BIC</span>
-        <span>{data.bankBic}</span>
+        <span>{transferData.bankBic}</span>
       </div>
       <div className='initiate-manual-payment__info-field'>
         <span>Bank Country</span>
         <span className='initiate-manual-payment__info-field--country'>
           <ReactCountryFlag
-            code={getCountryCode(data.bankCountry)}
+            code={getCountryCode(transferData.bankCountry)}
             svg
             styleProps={{
               width: '2rem',
@@ -58,16 +58,16 @@ const InitiateManualPayment = ({ next, handleOrderSubmit, transferData }) => (
               marginRight: '.5rem'
             }}
           />
-          <span>{data.bankCountry}</span>
+          <span>{transferData.bankCountry}</span>
         </span>
       </div>
       <div className='initiate-manual-payment__info-field'>
         <span>Recipient IBAN</span>
-        <span>{data.receipientIban}</span>
+        <span>{transferData.receipientIban}</span>
       </div>
       <div className='initiate-manual-payment__info-field'>
         <span>Reference Number/Purpose</span>
-        <span>{data.paymentReferenceId}</span>
+        <span>{transferData.paymentReferenceId}</span>
       </div>
       <div className='initiate-manual-payment__info-field'>
         <span className='initiate-manual-payment__message'>This must be included exactly for your transfer to work</span>

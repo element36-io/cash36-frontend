@@ -41,11 +41,17 @@ class Buy extends Component {
       amount: parseInt(this.state.amount),
       symbol: this.state.symbol
     };
-    const response = await API.post('/cash36/buy', data);
-    this.setState({
-      manualTransferData: response.data,
-      step: 2.1
-    });
+
+    try {
+      const response = await API.post('/cash36/buy', data);
+      this.setState({
+        manualTransferData: response.data,
+        step: 2.1
+      });
+    } catch (error) {
+      console.log(error);
+      alert(error.response.data.message); // TODO, handle the error properly
+    }
   }
 
   handleAutoTransferClick = () => {
