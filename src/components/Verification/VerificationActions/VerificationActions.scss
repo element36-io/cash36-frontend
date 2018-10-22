@@ -13,7 +13,9 @@
 
     &:first-child {
       background: #ECF6FE;
-      color: $primary-main;
+      > span {
+        color: $primary-main;
+      }
     }
   }
 

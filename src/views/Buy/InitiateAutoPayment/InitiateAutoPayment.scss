@@ -1,0 +1,18 @@
+@import '../../../styles/settings.scss';
+
+.initiate-auto-payment {
+  margin-top: 5.7rem;
+  text-align: center;
+
+  &__qrcode {
+    margin: 1rem 0;
+    margin-bottom: 3.2rem;
+
+    & > * {
+      background-color: $white;
+      padding: 2rem;
+      border-radius: 4px;
+      box-shadow: 0 5px 6px 0 rgba(0,0,0,0.05);
+    }
+  }
+}

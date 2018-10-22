@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './UserProfile.scss';
 import tiers from './tiers';
-import StyledButton from '../StyledButton';
+import DefaultButton from '../Buttons/DefaultButton';
 
 const UserProfile = props => {
   const { user: { username, avatarUri, name, kycLevel }, alt, clickCallback } = props;
@@ -23,7 +23,7 @@ const UserProfile = props => {
         <p>
           {username}
         </p>
-        {kycLevel && kycLevel !== 'Tier_2' && <StyledButton variant='contained' onClick={clickCallback} color='primary'>{tiers[kycLevel].btnText}</StyledButton>}
+        {kycLevel && kycLevel !== 'Tier_2' && <DefaultButton variant='contained' onClick={clickCallback} color='primary'>{tiers[kycLevel].btnText}</DefaultButton>}
       </div>
     </div>
   );

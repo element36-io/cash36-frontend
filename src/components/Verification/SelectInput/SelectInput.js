@@ -40,7 +40,6 @@ export const SelectInput = ({ classes, name, label, value, onChange, countryData
             styleProps={{
               width: '2rem',
               height: '1.3rem',
-              boxShadow: '0 5px 10px 0 rgba(53,155,236,0.2)',
               backgroundSize: 'cover',
               marginRight: '.5rem'
             }}

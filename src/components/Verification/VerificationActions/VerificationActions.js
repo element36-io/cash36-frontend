@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import StyledButton from '../../StyledButton';
+import DefaultButton from '../../Buttons/DefaultButton';
 import './VerificationActions.scss';
 
 const VerificationActions = props => {
@@ -9,17 +9,17 @@ const VerificationActions = props => {
 
   return (
     <div className='verification-form__actions'>
-      <StyledButton
+      <DefaultButton
         onClick={close}
       >
                 Verify Later
-      </StyledButton>
-      <StyledButton
+      </DefaultButton>
+      <DefaultButton
         onClick={buttonCallback}
         disabled={isSubmitting}
       >
         {isSubmitting ? <CircularProgress size={20} /> : buttonText}
-      </StyledButton>
+      </DefaultButton>
     </div>
   );
 };

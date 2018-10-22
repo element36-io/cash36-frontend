@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { MNID } from 'uport-connect';
 import { TextField, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import StyledButton from '../../../components/StyledButton';
+import DefaultButton from '../../../components/Buttons/DefaultButton';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { register, login, clearErrors } from '../../../store/auth/auth.actions';
 import styles from './MuiStyles';
@@ -135,7 +135,7 @@ class RegisterForm extends Component {
         >
           {errorMessage ? <span>{errorMessage}</span> : <span>{passwordError}</span>}
         </Typography>
-        <StyledButton
+        <DefaultButton
           variant='raised'
           color='primary'
           type='submit'
@@ -145,7 +145,7 @@ class RegisterForm extends Component {
         >
           <span>Register</span>
           <ArrowForwardIcon />
-        </StyledButton>
+        </DefaultButton>
         <Typography
           className={classes.forgotPassword}
           color='textSecondary'
