@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import { isEmail } from 'validator';
+import IBAN from 'iban';
 import CloseIcon from '@material-ui/icons/Close';
 import VerificationHeader from '../VerificationHeader';
 import VerificationActions from '../VerificationActions';
@@ -66,54 +68,68 @@ export class Tier1Form extends Component {
         bankLine1,
         bankLine2,
         accountNr,
-        email,
-        errorMessage
+        email
       } = this.state;
       const { getKyc, toggleModalBlock } = this.props;
       // check if all values in the form are filled
-      const isFormFilled = Object.values(this.state).filter(value => value).length === 14;
+      const isFormFilled = Object.values(this.state).filter(value => value).length > 13;
+      const isEmailValid = isEmail(email);
+      const isIbanValid = IBAN.isValid(iban);
       const userAge = (moment().year() - moment(this.state.dob).year());
+
+      // check if form is filled out
+      if (!isFormFilled) {
+        this.setState({ errorMessage: 'One or more fields are empty. Please recheck.' });
+        return;
+      }
       // check if user > 18
       if (userAge < 18) {
         this.setState({ errorMessage: 'You must be over 18 to use the app' });
         return;
       }
-      if (!errorMessage && isFormFilled) {
-        // Submit the form
-        try {
-          const data = {
-            accountNr,
-            bankLine1,
-            bankLine2,
-            city,
-            country,
-            dateOfBirth: moment(dob).format('DD.MM.YYYY'),
-            firstName,
-            iban,
-            lastName,
-            nationality,
-            street,
-            streetNr,
-            zip,
-            email
-          };
-          this.setState({ submitting: true, submitted: false });
-          toggleModalBlock();
-          await API.post('/cash36/user/tier-1', data);
-          this.setState({ submitting: false, submitted: true });
-          toggleModalBlock();
-          getKyc();
-        } catch (error) {
-          this.setState({
-            errorMessage: 'There was an error with your request',
-            submitting: false,
-            submitted: false
-          });
-          toggleModalBlock();
-          console.log(error.response);
-        }
-      } else {
-        this.setState({ errorMessage: 'One or more fields are empty. Please recheck.' });
+      // check if email is valid
+
+      if (!isIbanValid) {
+        this.setState({ errorMessage: 'Your IBAN is invalid, please recheck' });
+        return;
+      }
+
+      if (!isEmailValid) {
+        this.setState({ errorMessage: 'Please enter a valid email address' });
+        return;
+      }
+      // Checks passed! Submit the form!
+      try {
+        const data = {
+          accountNr,
+          bankLine1,
+          bankLine2,
+          city,
+          country,
+          dateOfBirth: moment(dob).format('DD.MM.YYYY'),
+          firstName,
+          iban,
+          lastName,
+          nationality,
+          street,
+          streetNr,
+          zip,
+          email
+        };
+        this.setState({ submitting: true, submitted: false });
+        toggleModalBlock();
+        await API.post('/cash36/user/tier-1', data);
+        this.setState({ submitting: false, submitted: true });
+        toggleModalBlock();
+        getKyc();
+      } catch (error) {
+        this.setState({
+          errorMessage: 'There was an error with your request',
+          submitting: false,
+          submitted: false
+        });
+        toggleModalBlock();
+        console.log(error.response);
       }
     };
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import steps from './steps';
 import './Stepper.scss';
 
@@ -30,6 +31,10 @@ const Stepper = ({ step }) => {
     default:
       return null;
   }
+};
+
+Stepper.propTypes = {
+  step: PropTypes.number.isRequired
 };
 
 export default Stepper;

@@ -1,5 +1,4 @@
 import api from '../../config/api';
-import { logout } from '../auth/auth.actions';
 
 export const GET_COUNTRIES = 'GET_COUNTRIES';
 
@@ -15,10 +14,6 @@ export const getCountries = () => async dispatch => {
       }
     });
   } catch (error) {
-    if (error.response.status === 401) {
-      console.log('Access unauthorized');
-      dispatch(logout());
-    }
     console.log(error);
   }
 };

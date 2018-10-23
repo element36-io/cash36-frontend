@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import requireAuth from '../../components/requireAuth';
 import API from '../../config/api';
+import Responsive from '../../components/Responsive';
 import Stepper from './Stepper';
 import BuyTokens from './BuyTokens';
 import PaymentMethod from './PaymentMethod';
@@ -32,7 +34,6 @@ class Buy extends Component {
   }
 
   handleManualTransferClick = async () => {
-    console.log(this.state.amount, this.state.symbol);
     const data = {
       amount: parseInt(this.state.amount),
       symbol: this.state.symbol
@@ -45,8 +46,7 @@ class Buy extends Component {
         step: 2.1
       });
     } catch (error) {
-      console.log(error);
-      alert(error.response.data.message); // TODO, handle the error properly
+      console.log(error); // TODO, handle the error
     }
   }
 
@@ -69,7 +69,12 @@ class Buy extends Component {
     return (
       <div className='buy paper'>
         {step > 0 && <BackButton onClick={this.previousStep} />}
-        <Stepper step={step} />
+        <Responsive>
+          <Stepper step={step} />
+        </Responsive>
+        <Responsive isMobile>
+          {step !== 2.2 && <Stepper step={step} />}
+        </Responsive>
         <div className='buy__content'>
           {step === 0 &&
             <BuyTokens
@@ -112,4 +117,4 @@ class Buy extends Component {
   }
 }
 
-export default Buy;
+export default requireAuth(Buy);

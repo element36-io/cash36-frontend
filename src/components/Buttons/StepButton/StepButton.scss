@@ -1,7 +1,21 @@
+@import '../../../styles/mixins.scss';
+
 .step-button {
+  > * {
+    padding: 0;
+    font-size: 1.6rem;
+  }
   > span:first-of-type {
     display: flex;
     justify-content: space-between;
     font-size: 1.6rem;
+    line-height: 19px;
+    padding: 0;
+
+    @include mobile {
+      font-size: 1.6rem;
+      padding: 1rem 0;
+      border-radius: 4px;
+    }
   }
 }

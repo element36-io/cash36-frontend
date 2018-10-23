@@ -15,6 +15,7 @@ export default {
     opacity: '0.5',
     position: 'absolute',
     top: '1.9rem',
-    left: '2.7rem'
+    left: '2.7rem',
+    zIndex: 3
   }
 };
