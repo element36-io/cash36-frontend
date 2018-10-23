@@ -3,16 +3,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import requireAuth from '../../components/requireAuth';
 import SellToknes from './SellTokens';
+import SellConfirmation from './SellConfirmation';
+import SellSuccess from './SellSuccess';
 import { getTokens } from '../../store/tokens/tokens.actions';
 import './Sell.scss';
-
-import TransactionFooter from '../../components/TransactionFooter';
-import ActionStatus from '../../components/ActionStatus';
 
 class Sell extends Component {
   state = {
     step: 0,
-    amount: '',
+    amount: '245',
     symbol: 'EUR36'
   };
 
@@ -36,8 +35,8 @@ class Sell extends Component {
     return (
       <div className='sell paper token-actions'>
         <div className='sell__content'>
-          <TransactionFooter />
-          <ActionStatus type='error' title='In progress' />
+
+          <SellSuccess amount={amount} symbol={symbol} />
           <SellToknes amount={amount} symbol={symbol} handleChange={this.handleChange} nextStep={this.nextStep}
             token={selectedToken} />
         </div>
