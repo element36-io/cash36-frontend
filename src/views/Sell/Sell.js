@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import requireAuth from '../../components/requireAuth';
 import SellToknes from './SellTokens';
+import { getTokens } from '../../store/tokens/tokens.actions';
 import './Sell.scss';
+
+import TransactionFooter from '../../components/TransactionFooter';
 
 class Sell extends Component {
   state = {
@@ -8,6 +14,10 @@ class Sell extends Component {
     amount: '',
     symbol: 'EUR36'
   };
+
+  componentDidMount () {
+    this.props.getTokens();
+  }
 
   handleChange = (event) => {
     const { name, value } = event.target;
@@ -20,15 +30,27 @@ class Sell extends Component {
 
   render () {
     const { amount, symbol } = this.state;
+    const selectedToken = this.props.tokens.filter(token => token.symbol === symbol)[0];
 
     return (
       <div className='sell paper token-actions'>
         <div className='sell__content'>
-          <SellToknes amount={amount} symbol={symbol} handleChange={this.handleChange} nextStep={this.nextStep} />
+          <TransactionFooter />
+          <SellToknes amount={amount} symbol={symbol} handleChange={this.handleChange} nextStep={this.nextStep}
+            token={selectedToken} />
         </div>
       </div>
     );
   }
 }
 
-export default Sell;
+Sell.propTypes = {
+  tokens: PropTypes.array,
+  getTokens: PropTypes.func
+};
+
+const mapStateToProps = ({ tokens: { tokens = [] } }) => ({
+  tokens
+});
+
+export default requireAuth(connect(mapStateToProps, { getTokens })(Sell));
