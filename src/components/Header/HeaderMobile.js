@@ -9,7 +9,6 @@ class HeaderMobile extends Component {
     state = {
       activeNav: false,
       showVerification: false
-
     };
 
     toggleNav = () => {

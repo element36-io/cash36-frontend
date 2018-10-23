@@ -18,7 +18,9 @@ class RegisterForm extends Component {
   }
 
   handleInputChange = name => event => {
-    this.props.clearErrors();
+    if (this.props.errorMessage) {
+      this.props.clearErrors();
+    }
     this.setState({
       [name]: event.target.value
     });

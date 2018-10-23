@@ -36,7 +36,6 @@ export const getKyc = () => async dispatch => {
   } catch (error) {
     if (error.response.status === 401) {
       console.log('Access unauthorized');
-      dispatch(logout());
     }
     console.log(error);
   }

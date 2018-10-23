@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReactCountryFlag from 'react-country-flag';
 import { TextField, MenuItem } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import styles from './MuiStyles';
 
 export const SelectInput = ({ classes, name, label, value, onChange, countryData }) => (
@@ -22,7 +23,8 @@ export const SelectInput = ({ classes, name, label, value, onChange, countryData
       className: classes.label
     }}
     SelectProps={{
-      displayEmpty: true
+      displayEmpty: true,
+      IconComponent: KeyboardArrowDownIcon
     }}
   >
     <MenuItem value='' disabled>

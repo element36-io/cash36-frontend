@@ -1,3 +1,4 @@
+@import '../../../styles/mixins.scss';
 @import '../../../styles/settings.scss';
 
 .initiate-manual-payment {
@@ -39,5 +40,21 @@
     font-size: 1.2rem;
     color: $black !important;
     font-weight: 500;
+  }
+
+  @include mobile {
+    margin: 0;
+    padding: 2rem;
+    > h2 {
+      position: absolute;
+      right: 0;
+      top: 2.5rem;
+      left: 0;
+    }
+    &__info {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      grid-auto-flow: row;
+    }
   }
 }

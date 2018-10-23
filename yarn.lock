@@ -6540,6 +6540,11 @@ hyphenate-style-name@^1.0.0, hyphenate-style-name@^1.0.2:
   resolved "http://167.99.243.81:4873/hyphenate-style-name/-/hyphenate-style-name-1.0.2.tgz#31160a36930adaf1fc04c6074f7eb41465d4ec4b"
   integrity sha1-MRYKNpMK2vH8BMYHT360FGXU7Es=
 
+iban@^0.0.11:
+  version "0.0.11"
+  resolved "http://167.99.243.81:4873/iban/-/iban-0.0.11.tgz#b67e642b6f1d96aa25e280fbc30ecd974c2fa073"
+  integrity sha512-9X0t/S+c6vBdgq3Hrt55HAonXfPmGuO/Vz507lXwQh+F5/0psvZWfh9jD14NvNYAfggk8WrYCWNvLVpCWLWdUQ==
+
 iconv-lite@0.4.19:
   version "0.4.19"
   resolved "http://167.99.243.81:4873/iconv-lite/-/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"

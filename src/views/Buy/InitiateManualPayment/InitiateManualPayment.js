@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactCountryFlag from 'react-country-flag';
 import StepButton from '../../../components/Buttons/StepButton';
-import { decodeSpecialChars, getCountryCode } from '../../../helpers/text.helpers';
+import { getCountryCode } from '../../../helpers/text.helpers';
 
 import './InitiateManualPayment.scss';
 
@@ -15,7 +16,7 @@ const InitiateManualPayment = ({ handleOrderSubmit, transferData }) => (
       </div>
       <div className='initiate-manual-payment__info-field'>
         <span>Bank Address</span>
-        <span>{decodeSpecialChars(transferData.bankAddress)}</span>
+        <span>{transferData.bankAddress}</span>
       </div>
       <div className='initiate-manual-payment__info-field'>
         <span>Receipient Name</span>
@@ -23,7 +24,7 @@ const InitiateManualPayment = ({ handleOrderSubmit, transferData }) => (
       </div>
       <div className='initiate-manual-payment__info-field'>
         <span>Receipient Address</span>
-        <span>{decodeSpecialChars(transferData.receipientAddress)}</span>
+        <span>{transferData.receipientAddress}</span>
       </div>
       <div className='initiate-manual-payment__info-field'>
         <span>Amount</span>
@@ -64,5 +65,10 @@ const InitiateManualPayment = ({ handleOrderSubmit, transferData }) => (
     <StepButton text={'Submit Order'} onClick={handleOrderSubmit} />
   </div>
 );
+
+InitiateManualPayment.propTypes = {
+  handleOrderSubmit: PropTypes.func,
+  transferData: PropTypes.object.isRequired
+};
 
 export default InitiateManualPayment;
