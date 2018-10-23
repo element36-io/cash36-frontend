@@ -4,11 +4,6 @@
 .verification-form__progress {
   text-align: center;
 
-  .verification-form__icon-wrapper {
-    background: $green-1;
-    color: $green-2;
-  }
-
   @include desktop {
     padding-top: 2.4rem;
 

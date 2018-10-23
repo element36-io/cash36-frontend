@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TimeIcon from '@material-ui/icons/Schedule';
+import ActionStatus from '../../ActionStatus';
 import './VerificationProgress.scss';
 
 const VerificationProgress = props => {
@@ -8,9 +8,7 @@ const VerificationProgress = props => {
 
   return (
     <div className='verification-form__progress'>
-      <div className='verification-form__icon-wrapper'>
-        <TimeIcon />
-      </div>
+      <ActionStatus type='progress' />
       <h2>{tier} Verification - In Progress</h2>
       <h2>Verification in progress</h2>
       <p>

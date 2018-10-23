@@ -7,6 +7,7 @@ import { getTokens } from '../../store/tokens/tokens.actions';
 import './Sell.scss';
 
 import TransactionFooter from '../../components/TransactionFooter';
+import ActionStatus from '../../components/ActionStatus';
 
 class Sell extends Component {
   state = {
@@ -36,6 +37,7 @@ class Sell extends Component {
       <div className='sell paper token-actions'>
         <div className='sell__content'>
           <TransactionFooter />
+          <ActionStatus type='error' title='In progress' />
           <SellToknes amount={amount} symbol={symbol} handleChange={this.handleChange} nextStep={this.nextStep}
             token={selectedToken} />
         </div>
