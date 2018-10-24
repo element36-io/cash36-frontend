@@ -2,14 +2,11 @@
 @import '../../styles/settings.scss';
 
 .buy {
-  margin: -4.8rem auto 0;
   max-width: 117rem;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 4.8rem 0 3.2rem 0;
-
   position: relative;
 
   &__content {
@@ -26,8 +23,6 @@
   }
 
   @include mobile {
-    margin: 0 1rem;
-    margin-bottom: 1rem;
     padding-top: 8rem;
 
     &__footer {

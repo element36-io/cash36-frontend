@@ -2,15 +2,6 @@
 @import '../../styles/mixins.scss';
 
 .home-page {
-  &__balance-cards {
-    display: flex;
-    margin: 3rem 0;
-
-    @include desktop {
-      padding: 0 11.5rem;
-    }
-  }
-
   &__activity {
     > h2 {
       font-size: 2.5rem;
@@ -32,9 +23,6 @@
   }
 
   @include desktop {
-    > * {
-      padding: 0 11.5rem;
-    }
     &__user-actions {
       display: flex;
       justify-content: space-between;
@@ -44,6 +32,7 @@
     }
     &__balance-cards {
       margin-top: -5rem;
+      display: flex;
     }
   }
 
@@ -53,7 +42,10 @@
         margin-bottom: 20px;
       }
     }
+
+    &__balance-cards {
+      margin: 3rem 0;
+    }
   }
 
 }
-

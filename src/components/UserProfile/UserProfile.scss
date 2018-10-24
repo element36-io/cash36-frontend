@@ -114,6 +114,7 @@
 
       &:last-of-type {
         text-decoration: underline;
+        word-break: break-all;
       }
     }
   }
