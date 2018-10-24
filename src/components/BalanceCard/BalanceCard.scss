@@ -1,4 +1,5 @@
 @import '../../styles/settings.scss';
+@import '../../styles/mixins.scss';
 
 .balance-card {
   display: inline-flex;
@@ -7,14 +8,9 @@
   padding-top: 1rem;
   padding-right: 1rem;
   height: 10rem;
-  width: 27rem;
   justify-content: space-between;
   position: relative;
   overflow: hidden;
-
-  &:not(:last-child) {
-    margin-right: 2rem;
-  }
 
   &:after {
     content: '';
@@ -94,6 +90,21 @@
       font-size: 1.4rem;
       text-transform: uppercase;
       color: $text-secondary;
+    }
+  }
+
+  @include desktop {
+    width: 27rem;
+    &:not(:last-child) {
+      margin-right: 2rem;
+    }
+  }
+
+  @include mobile {
+    width: 100%;
+
+    &:not(:last-child) {
+      margin-bottom: 1.5rem;
     }
   }
 }

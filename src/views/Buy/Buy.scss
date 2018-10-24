@@ -2,7 +2,6 @@
 @import '../../styles/settings.scss';
 
 .buy {
-  margin: -4.8rem auto 0;
   max-width: 117rem;
   display: flex;
   flex-direction: column;
@@ -24,8 +23,6 @@
   }
 
   @include mobile {
-    margin: 0 1rem;
-    margin-bottom: 1rem;
     padding-top: 8rem;
 
     &__footer {
