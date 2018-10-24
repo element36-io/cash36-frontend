@@ -42,7 +42,7 @@ class LoginWithUport extends Component {
           Welcome
         </Typography>
         <Typography>
-          Welcome to <span>cash36!</span> <br />
+          Welcome to <span>element36!</span> <br />
           <span className='login-uport__message'>
             In order to use our website, please log in with <img className='login-uport__logo' src={uportLogo} alt='UPORT' />
           </span>
