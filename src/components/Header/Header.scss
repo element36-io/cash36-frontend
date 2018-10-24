@@ -15,8 +15,10 @@ header {
   }
 
   @include desktop {
-    background-color: $headerGrey;
-    padding: 5.2rem 11.5rem 10.5rem 11.5rem;
+    width: 100%;
+    max-width: 117rem;
+    margin: 0 auto;
+    padding: 5.2rem 0 5.3rem;
     font-size: 1.8rem;
     line-height: 2.2rem;
 
@@ -50,6 +52,5 @@ header {
     z-index: 5;
     height: 8.7rem;
     padding: 2rem 1rem;
-    background: #f6f7fa;
   }
 }

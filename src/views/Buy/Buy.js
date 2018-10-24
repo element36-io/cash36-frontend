@@ -67,14 +67,14 @@ class Buy extends Component {
   render () {
     const { step, manualTransferData } = this.state;
     return (
-      <div className="page-wrapper">
+      <div className='wrapper'>
         <div className='buy paper'>
-          {step > 0 && <BackButton onClick={this.previousStep}/>}
+          {step > 0 && <BackButton onClick={this.previousStep} />}
           <Responsive>
-            <Stepper step={step}/>
+            <Stepper step={step} />
           </Responsive>
           <Responsive isMobile>
-            {step !== 2.2 && <Stepper step={step}/>}
+            {step !== 2.2 && <Stepper step={step} />}
           </Responsive>
           <div className='buy__content'>
             {step === 0 &&
@@ -105,7 +105,7 @@ class Buy extends Component {
             {(step < 2) &&
             <span>
               Buying cash36 Tokens is as simple as a bank transfer. First, choose amount and type of Token you wish to buy.
-              <br/>
+              <br />
               After that you will receive the transfer instructions. Once we receive the amount, the tokens will be credited to your account.
             </span>}
             {step > 2 &&
