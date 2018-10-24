@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Connect, SimpleSigner } from 'uport-connect';
 
@@ -74,15 +73,7 @@ const addCash36 = WrappedComponent => {
     web3: PropTypes.object
   };
 
-  function mapStateToProps (state) {
-    return {
-      credentials: state.user.credentials,
-      isLoggedIn: state.user.loggedIn,
-      loggedInAddress: state.user.loggedInAddress
-    };
-  }
-
-  return connect(mapStateToProps)(cash36);
+  return cash36;
 };
 
 export default addCash36;

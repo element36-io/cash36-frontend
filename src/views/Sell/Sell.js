@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import requireAuth from '../../components/requireAuth';
 import SellToknes from './SellTokens';
-import SellConfirmation from './SellConfirmation';
-import SellSuccess from './SellSuccess';
+// import SellConfirmation from './SellConfirmation';
+// import SellSuccess from './SellSuccess';
 import { getTokens } from '../../store/tokens/tokens.actions';
+import addCash36 from '../../components/cash36';
 import './Sell.scss';
 
 class Sell extends Component {
@@ -17,6 +18,12 @@ class Sell extends Component {
 
   componentDidMount () {
     this.props.getTokens();
+    console.log('==================');
+    console.log('==================');
+    console.log(this.props);
+    console.log('==================');
+    console.log('==================');
+
   }
 
   handleChange = (event) => {
@@ -35,8 +42,6 @@ class Sell extends Component {
     return (
       <div className='sell paper token-actions'>
         <div className='sell__content'>
-
-          <SellSuccess amount={amount} symbol={symbol} />
           <SellToknes amount={amount} symbol={symbol} handleChange={this.handleChange} nextStep={this.nextStep}
             token={selectedToken} />
         </div>
@@ -54,4 +59,4 @@ const mapStateToProps = ({ tokens: { tokens = [] } }) => ({
   tokens
 });
 
-export default requireAuth(connect(mapStateToProps, { getTokens })(Sell));
+export default requireAuth(addCash36(connect(mapStateToProps, { getTokens })(Sell)));
