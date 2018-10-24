@@ -7,7 +7,7 @@ import './ActionStatus.scss';
 
 const ActionStatus = props => {
   const { type, title } = props;
-  let icon = `<${type}Icon/>`;
+  let icon = '';
 
   switch (type) {
     case 'success':
