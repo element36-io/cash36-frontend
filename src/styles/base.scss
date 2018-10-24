@@ -48,6 +48,7 @@ h1, h2, h3, h4, h5, h6, p, ol, ul {
   max-width: 140rem;
   margin: 0 auto;
   height: 100%;
+  padding-bottom: 2.4rem;
   @include mobile {
     padding-top: 87px;
   }
