@@ -11,29 +11,30 @@ import { getTokens, getUserActivity } from '../../store/tokens/tokens.actions';
 import './Home.scss';
 
 class Home extends Component {
-    state = {
-      showVerification: false
-    };
+  state = {
+    showVerification: false
+  };
 
-    componentDidMount () {
-      this.props.getTokens();
-      this.props.getUserActivity();
-    }
+  componentDidMount () {
+    this.props.getTokens();
+    this.props.getUserActivity();
+  }
 
-    toggleVerification = () => {
-      this.setState({ showVerification: !this.state.showVerification });
-    };
+  toggleVerification = () => {
+    this.setState({ showVerification: !this.state.showVerification });
+  };
 
-    closeVerification = () => {
-      this.setState({ showVerification: false });
-    };
+  closeVerification = () => {
+    this.setState({ showVerification: false });
+  };
 
-    render () {
-      const { showVerification } = this.state;
-      const { user, tokens, userActivity } = this.props;
+  render () {
+    const { showVerification } = this.state;
+    const { user, tokens, userActivity } = this.props;
 
-      return (
-        <div className='home-page page-wrapper'>
+    return (
+      <div className='home-page'>
+        <div className='wrapper'>
           <Verification isVisible={showVerification} user={user} close={this.closeVerification} />
           <div className='home-page__user-actions'>
             <UserProfile user={user} clickCallback={this.toggleVerification} />
@@ -52,11 +53,11 @@ class Home extends Component {
                 <p>Keep track of your most recent transactions here when you sell, buy or transfer cash36 currencies</p>
               </div>
             }
-
           </div>
         </div>
-      );
-    }
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = ({ auth: { user }, tokens: { tokens = [], userActivity = [] } }) => ({
