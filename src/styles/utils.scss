@@ -1,5 +1,9 @@
 @import './settings.scss';
 
+.page-wrapper {
+  padding-bottom: 2.4rem;
+}
+
 .paper {
   background-color: $white;
   box-shadow: $box-shadow-1;
