@@ -23,7 +23,8 @@ body {
   margin: 0;
   height: 100%;
   color: $text-black-1;
-  background-color: $backgroundGrey;
+  background: linear-gradient(to bottom, $headerGrey 0,$backgroundGrey 200px,#fff 200px,#fff 100%);
+  //background: linear-gradient(to bottom, orange 0,red 200px,#fff 200px,#fff 100%) no-repeat;
   line-height: 1.6;
   font-size: 16px;
   font-size: 1.6rem;
@@ -45,7 +46,6 @@ h1, h2, h3, h4, h5, h6, p, ol, ul {
 }
 
 #root {
-  max-width: 140rem;
   margin: 0 auto;
   height: 100%;
   @include mobile {

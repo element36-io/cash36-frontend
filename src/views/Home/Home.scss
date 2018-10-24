@@ -23,16 +23,16 @@
   }
 
   @include desktop {
+    background: linear-gradient(to bottom, $backgroundGrey 0, $backgroundGrey 209px, #fff 209px, #fff 100%) no-repeat;
+
     &__user-actions {
       display: flex;
       justify-content: space-between;
-      background-color: $headerGrey;
-      margin-top: -4.8rem;
-      padding-bottom: 8.2rem;
+      padding-bottom: 3.7rem;
     }
     &__balance-cards {
-      margin-top: -5rem;
       display: flex;
+      margin-bottom: 4rem;
     }
   }
 
@@ -44,7 +44,7 @@
     }
 
     &__balance-cards {
-      margin: 3rem 0;
+      margin-bottom: 2.4rem;
     }
   }
 
