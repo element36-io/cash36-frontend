@@ -18,7 +18,7 @@ describe('Shallow render component', () => {
   });
 
   it('should render 6 divs inside the component', () => {
-    expect(wrapper.find('div').length).toBe(6);
+    expect(wrapper.find('div').length).toBe(4);
   });
 
   it('should render 1 Typography element inside the component', () => {

@@ -33,7 +33,7 @@ class Home extends Component {
       const { user, tokens, userActivity } = this.props;
 
       return (
-        <div className='home-page'>
+        <div className='home-page page-wrapper'>
           <Verification isVisible={showVerification} user={user} close={this.closeVerification} />
           <div className='home-page__user-actions'>
             <UserProfile user={user} clickCallback={this.toggleVerification} />

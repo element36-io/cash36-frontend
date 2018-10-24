@@ -6,6 +6,10 @@ html {
   height: 100%;
   box-sizing: border-box;
   font-size: 62.5%;
+
+  @include mobile {
+    font-size: 57.5%;
+  }
 }
 
 *,
@@ -24,6 +28,10 @@ body {
   font-size: 16px;
   font-size: 1.6rem;
   font-family: 'Rubik', sans-serif;
+
+  @include mobile {
+    background-color: $headerGrey;
+  }
 }
 
 body > #root > div {

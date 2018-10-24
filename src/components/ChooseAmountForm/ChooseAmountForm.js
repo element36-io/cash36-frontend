@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { TextField, MenuItem } from '@material-ui/core';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { isNumeric } from 'validator';
 
 import './ChooseAmountForm.scss';
@@ -43,7 +44,8 @@ class ChooseAmountForm extends PureComponent {
             disableUnderline: true
           }}
           SelectProps={{
-            displayEmpty: true
+            displayEmpty: true,
+            IconComponent: KeyboardArrowDownIcon
           }}
           InputLabelProps={{
             shrink: true

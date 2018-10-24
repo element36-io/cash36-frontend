@@ -21,7 +21,7 @@ export const AuthContainer = props => {
             {children}
           </div>
           <div className='auth-container__terms'>
-            By signing in, you agree to <span>Cash36 Terms and Conditions & Privacy Policy</span>
+            By signing in, you agree to <span>element36 Terms and Conditions & Privacy Policy</span>
           </div>
         </div>
         <div>
