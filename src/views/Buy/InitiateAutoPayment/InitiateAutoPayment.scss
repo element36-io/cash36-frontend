@@ -2,7 +2,6 @@
 @import '../../../styles/settings.scss';
 
 .initiate-auto-payment {
-  margin-top: 5.7rem;
   text-align: center;
 
   &__heading {
@@ -38,8 +37,8 @@
   }
 
   @include mobile {
-    margin: 0 2rem;
-    padding: 0;
+    margin: 5.7rem 2rem;
+    padding: 2rem 1.2rem;
     > h2 {
       position: absolute;
       right: 0;

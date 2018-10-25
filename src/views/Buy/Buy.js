@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import requireAuth from '../../components/requireAuth';
 import API from '../../config/api';
-import Responsive from '../../components/Responsive';
-import Stepper from './Stepper';
 import BuyTokens from './BuyTokens';
 import PaymentMethod from './PaymentMethod';
 import InitiateManualPayment from './InitiateManualPayment';
@@ -66,16 +65,11 @@ class Buy extends Component {
 
   render () {
     const { step, manualTransferData } = this.state;
+    const { iban } = this.props;
     return (
       <div className='wrapper'>
         <div className='buy paper'>
           {step > 0 && <BackButton onClick={this.previousStep} />}
-          <Responsive>
-            <Stepper step={step} />
-          </Responsive>
-          <Responsive isMobile>
-            {step !== 2.2 && <Stepper step={step} />}
-          </Responsive>
           <div className='buy__content'>
             {step === 0 &&
             <BuyTokens
@@ -103,14 +97,14 @@ class Buy extends Component {
           </div>
           <div className='buy__footer'>
             {(step < 2) &&
-            <span>
+            <span style={{ fontSize: '1.2rem' }}>
               Buying cash36 Tokens is as simple as a bank transfer. First, choose amount and type of Token you wish to buy.
               <br />
               After that you will receive the transfer instructions. Once we receive the amount, the tokens will be credited to your account.
             </span>}
             {step > 2 &&
-            <span>
-              Please make sure your payment will be triggered from your registered bank account: IBAN CH3343 23 3 32 32 32
+            <span style={{ fontSize: '1.6rem' }}>
+              Please make sure your payment will be triggered from your registered bank account: IBAN {iban || 'CH3343 23 3 32 32 32'}
             </span>}
           </div>
         </div>
@@ -119,4 +113,6 @@ class Buy extends Component {
   }
 }
 
-export default requireAuth(Buy);
+const mapStateToProps = ({ auth }) => ({ iban: auth.user.iban });
+
+export default requireAuth(connect(mapStateToProps)(Buy));

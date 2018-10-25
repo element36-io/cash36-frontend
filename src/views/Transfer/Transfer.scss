@@ -1,0 +1,38 @@
+@import '../../styles/mixins.scss';
+
+.transfer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  &__content {
+    max-width: 63rem;
+    width: 100%;
+    margin: 0 auto;
+
+    @include desktop {
+      padding: 14.4rem 0;
+    }
+
+    @include mobile {
+      padding: 2rem 1.2rem;
+    }
+  }
+
+  &__transfer-status {
+    p {
+      margin-bottom: 3.2rem;
+      text-align: center;
+    }
+  }
+
+  @include desktop {
+    .transfer__transfer-status {
+      p {
+        font-size: 1.8rem;
+        line-height: 2.4rem;
+      }
+    }
+  }
+}

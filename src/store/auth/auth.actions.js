@@ -29,6 +29,8 @@ export const getKyc = () => async dispatch => {
   try {
     const response = await API.get('/cash36/user/current-user');
 
+    console.log(response);
+
     dispatch({
       type: GET_KYC,
       payload: response.data

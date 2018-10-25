@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactCountryFlag from 'react-country-flag';
-import StepButton from '../../../components/Buttons/StepButton';
 import { getCountryCode } from '../../../helpers/text.helpers';
 
 import './InitiateManualPayment.scss';
+import TransactionFooter from '../../../components/TransactionFooter';
 
-const InitiateManualPayment = ({ handleOrderSubmit, transferData }) => (
+const InitiateManualPayment = ({ handleOrderSubmit, transferData, goToHistory, goToHome }) => (
   <div className='initiate-manual-payment'>
-    <h2>Initiate the payment</h2>
+    <h2>Trigger your payment</h2>
     <div className='initiate-manual-payment__info'>
       <div className='initiate-manual-payment__info-field'>
         <span>Bank Name</span>
@@ -24,11 +24,13 @@ const InitiateManualPayment = ({ handleOrderSubmit, transferData }) => (
       </div>
       <div className='initiate-manual-payment__info-field'>
         <span>Receipient Address</span>
-        <span>{transferData.receipientAddress}</span>
+        <span>
+          {transferData.receipientAddress}
+        </span>
       </div>
       <div className='initiate-manual-payment__info-field'>
         <span>Amount</span>
-        <span>{transferData.amount}</span>
+        <span>{transferData.amount} {transferData.currency}</span>
       </div>
       <div className='initiate-manual-payment__info-field'>
         <span>Swift/BIC</span>
@@ -59,10 +61,13 @@ const InitiateManualPayment = ({ handleOrderSubmit, transferData }) => (
         <span>{transferData.paymentReferenceId}</span>
       </div>
       <div className='initiate-manual-payment__info-field'>
-        <span className='initiate-manual-payment__message'>This must be included exactly for your transfer to work</span>
+        <span className='initiate-manual-payment__message--warning'>This must be included exactly for your transfer to work</span>
       </div>
     </div>
-    <StepButton text={'Submit Order'} onClick={handleOrderSubmit} />
+    <div className='initiate-manual-payment__message--credit'>
+      <p>Tokens will be credited to your account as soon as the transfer is complete. <br /> You can always check your order status in your account history.</p>
+    </div>
+    <TransactionFooter />
   </div>
 );
 

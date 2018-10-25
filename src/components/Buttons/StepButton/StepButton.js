@@ -14,6 +14,7 @@ const StepButton = ({ text, onClick, disabled }) => (
     disabled={disabled}
     className='step-button'
     onClick={onClick}
+    style={disabled && { opacity: '0.5' }}
   >
     <span>{text}</span>
     <ArrowForwardIcon />
