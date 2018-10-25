@@ -21,6 +21,8 @@ $text-secondary: rgba(0, 0, 0, 0.54);
 $white: #fff;
 $black: #01152C;
 
+$link-blue-1: #1F8EEA;
+
 $text-black-1: #01152C;
 
 $text-light-grey-1: rgba(1,21,44, .5);
@@ -42,12 +44,13 @@ $grey-blue:  #ECF6FE;
 $red-light: #FFEDED;
 $yellow-light: #F9F6DF;
 $green-light: #ECFAF7;
-
+$red-1: #FF2525;
 // Gradients
 $gradient-primary: linear-gradient(to left bottom, $primary-dark, $primary-light);
 $gradient-secondary: linear-gradient(180deg, rgba(99,180,245, .1) 0%, rgba(1,126,229,.1) 100%);
 $gradient-3: linear-gradient(225.95deg, rgba(105,184,242,1) 0%, rgba(1,126,229,1) 100%);
 $gradient-green-1: linear-gradient(225.95deg, #48D6B6 0%, #32B396 100%);
+$gradient-red-1: linear-gradient(225.95deg, #FF2525 0%, #FD6767 100%);
 
 $gradient-euro: linear-gradient(224.83deg, #69B4EF 0%, #623479 100%);
 $gradient-dollar: linear-gradient(224.83deg, #F5EBA9 0%, #FF6464 100%);

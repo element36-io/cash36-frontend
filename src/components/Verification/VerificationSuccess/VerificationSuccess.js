@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import DoneIcon from '@material-ui/icons/Done';
+import ActionStatus from '../../ActionStatus';
 import VerificationActions from '../VerificationActions';
 import './VerificationSuccess.scss';
 
@@ -9,9 +9,7 @@ const VerificationSuccess = props => {
 
   return (
     <div className='verification-form__success'>
-      <div className='verification-form__icon-wrapper'>
-        <DoneIcon />
-      </div>
+      <ActionStatus type='success' />
       <h2>
             Success
       </h2>

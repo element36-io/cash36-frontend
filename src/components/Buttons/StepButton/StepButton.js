@@ -5,12 +5,13 @@ import DefaultButton from '../DefaultButton';
 
 import './StepButton.scss';
 
-const StepButton = ({ text, onClick }) => (
+const StepButton = ({ text, onClick, disabled }) => (
   <DefaultButton
     variant='raised'
     type='button'
     size='large'
     fullWidth
+    disabled={disabled}
     className='step-button'
     onClick={onClick}
   >
@@ -21,7 +22,8 @@ const StepButton = ({ text, onClick }) => (
 
 StepButton.propTypes = {
   buttonText: PropTypes.string,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  disabled: PropTypes.bool
 };
 
 export default StepButton;

@@ -1,0 +1,54 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/settings.scss';
+
+.action-status {
+  text-align: center;
+
+  .action-status__icon-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 11rem;
+    height: 11rem;
+    border-radius: 50%;
+
+    > * {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 48px;
+    }
+
+    &.action-status__icon-wrapper--success {
+      background: $gradient-green-1;
+      color: #fff;
+
+      > * {
+        font-size: 62px;
+      }
+    }
+
+    &.action-status__icon-wrapper--progress {
+      background: $green-1;
+      color: $green-2;
+    }
+
+    &.action-status__icon-wrapper--error {
+      background: $gradient-red-1;
+      color: #fff;
+    }
+  }
+
+  @include desktop {
+    .action-status__icon-wrapper, h2 {
+      margin-bottom: 3.2rem;
+    }
+  }
+
+  @include mobile {
+
+    .action-status__icon-wrapper, h2 {
+      margin-bottom: 1.6rem;
+    }
+  }
+}

@@ -1,0 +1,45 @@
+@import '../../styles/settings.scss';
+@import '../../styles/mixins.scss';
+
+.sell {
+  position: relative;
+
+  .sell__content {
+    max-width: 63rem;
+    margin: 0 auto;
+  }
+
+  .sell__sell-status {
+    p {
+      margin-bottom: 3.2rem;
+      text-align: center;
+    }
+
+
+  }
+
+  @include desktop {
+    .sell__sell-status {
+      padding: 15.6rem 0;
+
+      p {
+        font-size: 1.8rem;
+        line-height: 2.4rem;
+      }
+    }
+  }
+
+  @include mobile {
+    padding:0 1.2rem ;
+
+    .sell__sell-status {
+        padding: 6.7rem 0 7.7rem;
+
+        p {
+          font-size: 1.5rem;
+          line-height: 1.8rem;
+        }
+
+    }
+  }
+}
