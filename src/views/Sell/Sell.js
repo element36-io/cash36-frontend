@@ -59,11 +59,12 @@ class Sell extends Component {
     };
 
     return web3.eth.sendTransaction(options)
-      .once('transactionHash', hash => {
+      .on('receipt', () => {
         if (this._isMounted) this.setState({ step: 2 });
       })
-      .on('error', err => {
-        if (this._isMounted) this.setState({ step: 3, error: err });
+      .on('error', () => {
+        // Update with proper error message
+        if (this._isMounted) this.setState({ step: 3, error: 'Selling token was unsuccessful' });
       });
   };
 
