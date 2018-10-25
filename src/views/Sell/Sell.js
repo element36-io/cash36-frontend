@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { Cash36Contract, Token36Contract } from 'cash36-contracts';
 import requireAuth from '../../components/requireAuth';
 import SellToknes from './SellTokens';
-// import SellConfirmation from './SellConfirmation';
-// import SellSuccess from './SellSuccess';
+import SellConfirmation from './SellConfirmation';
+import SellSuccess from './SellSuccess';
+import SellError from './SellError';
 import { getTokens } from '../../store/tokens/tokens.actions';
 import addCash36 from '../../components/cash36';
 import './Sell.scss';
@@ -13,17 +14,18 @@ import './Sell.scss';
 class Sell extends Component {
   state = {
     step: 0,
-    amount: '245',
-    symbol: 'EUR36'
+    amount: '',
+    symbol: 'EUR36',
+    error: null
   };
 
   componentDidMount () {
     this.props.getTokens();
-    console.log('==================');
-    console.log('==================');
-    console.log(this.props);
-    console.log('==================');
-    console.log('==================');
+    this._isMounted = true;
+  }
+
+  componentWillUnmount () {
+    this._isMounted = false;
   }
 
   handleChange = (event) => {
@@ -32,48 +34,62 @@ class Sell extends Component {
   };
 
   nextStep = () => {
-    console.log('next step');
-    console.log('==================');
-    console.log('==================');
-    console.log(this.props);
-    console.log('==================');
-    console.log('==================');
+    this.setState({ step: 1 });
     this.burnTokens();
   };
 
-  async burnTokens (address = this.props.user.username, tokenSymbol = 'EUR36', amount = 20) {
-    let { web3, networkId } = this.props;
-    // let web3 = this.props.web3;
+  burnTokens = async () => {
+    let { web3, networkId, user: { username } } = this.props;
+    const { symbol, amount } = this.state;
 
     const cash36Contract = new web3.eth.Contract(Cash36Contract.abi, Cash36Contract.networks[networkId].address);
-    let tokenAddress = await cash36Contract.methods.getTokenBySymbol(tokenSymbol).call();
+    const tokenAddress = await cash36Contract.methods.getTokenBySymbol(symbol).call();
     const token36Contract = new web3.eth.Contract(Token36Contract.abi, tokenAddress);
 
     // Calculate amount of gas needed and add extra margin of 10%
-    let estimate = await token36Contract.methods.burn(amount).estimateGas({ from: address });
-    let data = await token36Contract.methods.burn(amount).encodeABI();
+    const estimate = await token36Contract.methods.burn(amount).estimateGas({ from: username });
+    const data = await token36Contract.methods.burn(amount).encodeABI();
 
     const options = {
-      from: address,
+      from: username,
       to: tokenAddress,
       gas: estimate + Math.round(estimate * 0.1),
-      nonce: await web3.eth.getTransactionCount(address, 'pending'),
+      nonce: await web3.eth.getTransactionCount(username, 'pending'),
       data
     };
 
-    return web3.eth.sendTransaction(options);
-  }
+    return web3.eth.sendTransaction(options)
+      .once('transactionHash', hash => {
+        if (this._isMounted) this.setState({ step: 2 });
+      })
+      .on('error', err => {
+        if (this._isMounted) this.setState({ step: 3, error: err });
+      });
+  };
 
-  render () {
-    const { amount, symbol } = this.state;
+  renderStep = () => {
+    const { amount, symbol, step, error } = this.state;
     const selectedToken = this.props.tokens.filter(token => token.symbol === symbol)[0];
 
+    switch (step) {
+      case 1:
+        return <SellConfirmation />;
+      case 2:
+        return <SellSuccess amount={amount} symbol={symbol} />;
+      case 3:
+        return <SellError message={error} />;
+      default:
+        return <SellToknes amount={amount} symbol={symbol} handleChange={this.handleChange} nextStep={this.nextStep}
+          token={selectedToken} />;
+    }
+  };
+
+  render () {
     return (
       <div className='wrapper'>
         <div className='sell paper'>
           <div className='sell__content'>
-            <SellToknes amount={amount} symbol={symbol} handleChange={this.handleChange} nextStep={this.nextStep}
-              token={selectedToken} />
+            {this.renderStep()}
           </div>
         </div>
       </div>
@@ -83,7 +99,8 @@ class Sell extends Component {
 
 Sell.propTypes = {
   tokens: PropTypes.array,
-  getTokens: PropTypes.func
+  getTokens: PropTypes.func,
+  receiptCallback: PropTypes.func
 };
 
 const mapStateToProps = ({ tokens: { tokens = [] }, auth: { user } }) => ({

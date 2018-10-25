@@ -2,34 +2,32 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Typography } from '@material-ui/core';
 import QRCode from 'qrcode.react';
-import { Connect, SimpleSigner } from 'uport-connect';
 import uportLogo from '../../../assets/Login/uport-logo.png';
 import appStoreBadge from '../../../assets/Login/app-store-badge.svg';
 import googlePlayBadge from '../../../assets/Login/google-play-badge.svg';
 import { uportLogin } from '../../../store/auth/auth.actions.js';
+
+import uPort from '../../../config/uport.config';
+
 import './LoginWithUport.scss';
 
 class LoginWithUport extends Component {
   state = {
     uri: ''
   }
-  uport = new Connect('cash36', {
-    clientId: '2ozGXFqx3eKzmg7zQQZuTnEW6EeAVUzyUu6',
-    network: 'rinkeby',
-    signer: SimpleSigner('98fe93a539f8ed46def934713918f888df1e088dc0ec6c58333f131b4f4ca358')
-  })
 
   uPortURIHandler = (uri) => {
     this.setState({ uri });
   }
 
   componentWillMount () {
-    this.uport.requestCredentials({
+    uPort.requestCredentials({
       requested: [ 'name', 'avatar' ],
       verified: [ 'cash36KYC' ],
       notifications: true
     }, this.uPortURIHandler).then((uportCreds) => {
       // Next step
+      console.log(uportCreds);
       this.props.afterValid(uportCreds);
       this.props.uportLogin(uportCreds);
     });

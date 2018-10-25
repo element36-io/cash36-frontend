@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Connect, SimpleSigner } from 'uport-connect';
+import uPort from '../config/uport.config';
 
 /**
  * HOC for cash36. Add cash36 contracts to the wrapped component.
@@ -19,13 +19,7 @@ const addCash36 = WrappedComponent => {
         loading: true
       };
 
-      this.uport = new Connect('cash36', {
-        clientId: '2ozGXFqx3eKzmg7zQQZuTnEW6EeAVUzyUu6',
-        network: 'rinkeby',
-        signer: SimpleSigner('98fe93a539f8ed46def934713918f888df1e088dc0ec6c58333f131b4f4ca358')
-      });
-
-      this.state.web3.setProvider(this.uport.getProvider());
+      this.state.web3.setProvider(uPort.getProvider());
     }
 
     transactionHashCallback (action) {
@@ -36,10 +30,15 @@ const addCash36 = WrappedComponent => {
     }
 
     receiptCallback (action) {
-      return (receipt) => {
-        console.log('receiptCallback - ' + action);
-        // this.props.dispatch(success(Messages.transactionMined(action)));
-      };
+      // return (receipt) => {
+      console.log('receiptCallback - ' + action);
+      console.log('==================');
+      console.log('==================');
+      console.log(`RECEIPT CALLBACK`);
+      console.log('==================');
+      console.log('==================');
+      // this.props.dispatch(success(Messages.transactionMined(action)));
+      // };
     }
 
     errorCallback (action) {
@@ -63,7 +62,8 @@ const addCash36 = WrappedComponent => {
 
     render () {
       return (
-        <WrappedComponent {...this.state} {...this.props} getCallbacks={this.getCallbacks.bind(this)}
+        <WrappedComponent {...this.state} {...this.props} receiptCallback={this.receiptCallback}
+          getCallbacks={this.getCallbacks.bind(this)}
           dispatchError={this.dispatchError.bind(this)} />
       );
     }
