@@ -1,0 +1,16 @@
+@import '../../../styles/mixins.scss';
+
+.login__header {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+
+  @include desktop {
+
+  }
+
+  @include mobile {
+
+  }
+}
