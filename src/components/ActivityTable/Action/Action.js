@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Typography from '@material-ui/core/Typography';
+import TruncateString from 'react-truncate-string';
 
 import './Action.scss';
 
 const Action = ({ type, username }) => (
   <div className='activity-table-action'>
     <div>{type === 'BUY' ? 'Received from' : 'Sent to'}</div>
-    <Typography noWrap>{username}</Typography>
+    <span><TruncateString text={username} /></span>
   </div>
 );
 

@@ -2,7 +2,6 @@
 @import '../../../styles/settings.scss';
 
 .initiate-manual-payment {
-  margin-top: 5.7rem;
   text-align: center;
 
   &__info {
@@ -13,8 +12,32 @@
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(5, 1fr);
     grid-auto-flow: column;
-    grid-column-gap: 8rem;
-    grid-row-gap: 1rem;
+    grid-column-gap: 4rem;
+  }
+
+  &__buttons {
+    border-bottom: 1px solid $lightGrey;
+    margin-bottom: 2.4rem;
+    padding-bottom: 2.4rem;
+
+    > button {
+      padding: 1.5rem 0;
+      > span {
+        color: $primary-main;
+      }
+    }
+
+    > button {
+      &:first-child {
+        > span {
+          color: $white;
+        }
+      }
+
+      &:last-child {
+        background: $white;
+      }
+    }
   }
 
   &__info-field {
@@ -36,15 +59,22 @@
     }
   }
 
-  &__message {
+  &__message--warning {
     font-size: 1.2rem;
     color: $black !important;
     font-weight: 500;
   }
 
+  &__message--credit {
+    margin-bottom: 1.6rem;
+    p {
+      font-size: 1.6rem;
+    }
+  }
+
   @include mobile {
-    margin: 0;
-    padding: 2rem;
+    margin-top: 5.7rem;
+    padding: 2rem 1.2rem;
     > h2 {
       position: absolute;
       right: 0;

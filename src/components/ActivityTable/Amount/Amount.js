@@ -4,7 +4,7 @@ import { formatAmount } from '../../../helpers/currencies.helpers';
 
 import './Amount.scss';
 
-const renderAction = (type, amount) => `${type === 'SELL' ? '+' : '-'}${formatAmount(amount)}`;
+const renderAction = (type, amount) => `${type === 'BUY' ? '+' : '-'}${formatAmount(amount)}`;
 
 const Amount = ({ type, amount, symbol }) => {
   return (

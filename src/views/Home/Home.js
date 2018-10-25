@@ -32,6 +32,8 @@ class Home extends Component {
     const { showVerification } = this.state;
     const { user, tokens, userActivity } = this.props;
 
+    const lastActivity = userActivity.slice(-5).reverse();
+
     return (
       <div className='home-page'>
         <div className='wrapper'>
@@ -47,7 +49,7 @@ class Home extends Component {
           <div className='home-page__activity'>
             <h2>Last Activity</h2>
             {userActivity.length
-              ? <ActivityTable userActivity={userActivity} />
+              ? <ActivityTable userActivity={lastActivity} />
               : <div className='paper home-page__no-activity'>
                 <h3>No Recent Activity.</h3>
                 <p>Keep track of your most recent transactions here when you sell, buy or transfer cash36 currencies</p>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Cash36Contract, Token36Contract } from 'cash36-contracts';
 import requireAuth from '../../components/requireAuth';
-import SellToknes from './SellTokens';
+import SellTokens from './SellTokens';
 import SellConfirmation from './SellConfirmation';
 import SellSuccess from './SellSuccess';
 import SellError from './SellError';
@@ -80,7 +80,7 @@ class Sell extends Component {
       case 3:
         return <SellError message={error} />;
       default:
-        return <SellToknes amount={amount} symbol={symbol} handleChange={this.handleChange} nextStep={this.nextStep}
+        return <SellTokens amount={amount} symbol={symbol} handleChange={this.handleChange} nextStep={this.nextStep}
           token={selectedToken} />;
     }
   };

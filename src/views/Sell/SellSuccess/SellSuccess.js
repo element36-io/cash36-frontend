@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TransactionFooter from '../../../components/TransactionFooter';
 import ActionStatus from '../../../components/ActionStatus';
-import TokenIcon from '../../../components/TokenIcon';
-import { formatAmount } from '../../../helpers/currencies.helpers';
 import './SellSuccess.scss';
+import AmountCard from '../../../components/AmountCard';
 
 const SellSuccess = props => {
   const { amount, symbol } = props;
@@ -12,15 +11,9 @@ const SellSuccess = props => {
   return (
     <div className='sell__sell-success'>
       <ActionStatus type='success' title='Success!' />
-      <div className={`sell__sell-success__token sell__sell-success__token--${symbol}`}>
-        <TokenIcon token={symbol} />
-        <div>
-          -{formatAmount(amount)}
-          <span className='sell__sell-success__token__symbol'>{symbol}</span>
-        </div>
-      </div>
+      <AmountCard amount={amount} symbol={symbol} />
       <p>
-          You've succesfuly sold {`${amount}${symbol}`}
+          You've succesfuly sold {`${amount} ${symbol}`}
       </p>
       <TransactionFooter />
     </div>
