@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import NavBtn from '../../../components/NavBtn';
 import Logo from '../../../components/Logo';
+import LoginNav from '../LoginNav';
 
 class LoginHeaderMobile extends Component {
   state = {
@@ -19,7 +20,10 @@ class LoginHeaderMobile extends Component {
     return (
       <div className='login__header'>
         {step !== 0 && <Logo />}
-        <NavBtn clickHandler={this.toggleNav} alt={step === 0} isActive={isActiveNav}/>
+        <NavBtn clickHandler={this.toggleNav} alt={step === 0 && !isActiveNav} isActive={isActiveNav}/>
+        <div className={`login__header__dropdown ${isActiveNav ? 'active' : ''}`}>
+          <div className="paper"><LoginNav /></div>
+        </div>
       </div>
     )
   }

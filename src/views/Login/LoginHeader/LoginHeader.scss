@@ -1,4 +1,5 @@
 @import '../../../styles/mixins.scss';
+@import '../../../styles/settings.scss';
 
 .login__header {
   position: relative;
@@ -7,7 +8,7 @@
 
   @include desktop {
     width: 100%;
-    min-height: 48px;
+    min-height: 4.8rem;
   }
 
   @include mobile {
@@ -22,6 +23,41 @@
     .nav-btn {
       right: 1rem;
       left: auto;
+      }
+
+    .login__header__dropdown {
+      z-index: 15;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      padding: 10rem 1rem 1rem;
+      background: $backgroundGrey;
+      transform: scale(0);
+      transform-origin: 50% 0;
+      transition: all .2s;
+
+      &.active {
+        transform: scale(1);
+        }
+
+      ul {
+        padding: 1.5rem;
+        text-align: left;
+
+        li:not(:last-child) {
+          margin-bottom: 1rem;
+          border-bottom: 1px solid $lightGrey
+          }
+
+        a {
+          position: relative;
+          display: block;
+          color: #272727;
+          cursor: pointer;
+          padding-bottom: 1rem;
+          }
+        }
       }
   }
 }
