@@ -1,3 +1,4 @@
+@import '../../styles/mixins';
 @import '../../styles/settings';
 
 .activity-table {
@@ -38,6 +39,34 @@
 
   &__body {
     border-radius: 10px;
+  }
+
+  @include mobile {
+    &__row {
+      padding: .5rem 1rem;
+      > div:first-child {
+        margin-right: 2rem;
+        align-items: center;
+        display: flex;
+      }
+
+      > div:nth-child(2) {
+        width: calc((100% - 7rem) / 2);
+        text-align: left;
+      }
+      > div:nth-child(3) {
+        width: calc((100%) / 2);
+        text-align: right;
+      }
+    }
+
+    &__row-2 {
+      &:not(:last-child) {
+        border-bottom: 1px solid $grey-border;
+      }
+      padding: 1rem;
+      padding-top: 0;
+    }
   }
 
 }
