@@ -6,6 +6,7 @@
     > h2 {
       font-size: 2.5rem;
       font-weight: 400;
+      margin-bottom: 1.6rem;
     }
   }
 
@@ -23,7 +24,7 @@
   }
 
   @include desktop {
-    background: linear-gradient(to bottom, $backgroundGrey 0, $backgroundGrey 209px, #fff 209px, #fff 100%) no-repeat;
+    background: linear-gradient(to bottom, $headerGrey 0, $headerGrey 209px, $backgroundGrey 209px, $backgroundGrey 100%) no-repeat;
 
     &__user-actions {
       display: flex;

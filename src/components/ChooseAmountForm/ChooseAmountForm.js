@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { TextField, MenuItem } from '@material-ui/core';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { isNumeric } from 'validator';
@@ -14,6 +15,7 @@ class ChooseAmountForm extends PureComponent {
     }
   }
   render () {
+    const { tokenSymbols } = this.props;
     return (
       <div className='choose-amount-form'>
         <TextField
@@ -51,8 +53,7 @@ class ChooseAmountForm extends PureComponent {
             shrink: true
           }}
         >
-          <MenuItem value='EUR36'>EUR36</MenuItem>
-          <MenuItem value='CHF36'>CHF36</MenuItem>
+          {tokenSymbols.map(symbol => <MenuItem key={symbol} value={symbol}>{symbol}</MenuItem>)}
         </TextField>
       </div>
     );
@@ -65,4 +66,8 @@ ChooseAmountForm.propTypes = {
   handleChange: PropTypes.func.isRequired
 };
 
-export default ChooseAmountForm;
+const mapStateToProps = ({ tokens: { tokens = [] } }) => ({
+  tokenSymbols: tokens.map(token => token.symbol)
+});
+
+export default connect(mapStateToProps)(ChooseAmountForm);

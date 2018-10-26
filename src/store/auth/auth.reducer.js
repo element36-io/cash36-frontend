@@ -31,8 +31,7 @@ export default (state = initialState, action) => {
         ...state,
         user: {
           ...state.user,
-          kycLevel: action.payload.kycLevel,
-          kycProcessStatus: action.payload.kycProcessStatus
+          ...action.payload
         }
       };
     default:

@@ -12,7 +12,7 @@ const DefaultButton = (props) => (
 );
 
 DefaultButton.propTypes = {
-  style: PropTypes.object,
+  style: PropTypes.any,
   children: PropTypes.any
 };
 

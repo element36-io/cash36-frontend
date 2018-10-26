@@ -4,7 +4,10 @@ import { formatAmount } from '../../../helpers/currencies.helpers';
 
 import './Amount.scss';
 
-const renderAction = (type, amount) => `${type === 'SELL' ? '+' : '-'}${formatAmount(amount)}`;
+const renderAction = (type, amount) => {
+  if (type === 'BUY' || type === 'RECEIVED') return `+${formatAmount(amount)}`;
+  if (type === 'SELL' || type === 'SENT') return `-${formatAmount(amount)}`;
+};
 
 const Amount = ({ type, amount, symbol }) => {
   return (

@@ -23,7 +23,7 @@ body {
   margin: 0;
   height: 100%;
   color: $text-black-1;
-  background: linear-gradient(to bottom, $headerGrey 0,$backgroundGrey 200px,#fff 200px,#fff 100%);
+  background: linear-gradient(to bottom, $headerGrey 0,$headerGrey 200px,$backgroundGrey 200px,$backgroundGrey 100%);
   //background: linear-gradient(to bottom, orange 0,red 200px,#fff 200px,#fff 100%) no-repeat;
   line-height: 1.6;
   font-size: 16px;
@@ -62,6 +62,11 @@ h1, h2, h3, h4, h5, h6, p, ol, ul {
 h2 {
   font-size: 2.4rem;
   line-height: 2.8rem;
+}
+
+h3 {
+  font-size: 1.8rem;
+  line-height: 2.2rem;
 }
 
 p {

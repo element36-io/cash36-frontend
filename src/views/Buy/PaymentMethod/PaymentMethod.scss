@@ -3,7 +3,6 @@
 @import '../../../styles/utils.scss';
 
 .payment-method {
-  margin: 6rem 0 3.2rem 0;
   display: flex;
   flex-direction: column;
 
@@ -50,7 +49,8 @@
   }
 
   @include mobile {
-    padding: 1rem;
+    padding: 2rem 1.2rem;
+    margin-top: 7.2rem;
     > h2 {
       @include mobile {
         position: absolute;
