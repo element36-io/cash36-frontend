@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import requireAuth from '../../components/requireAuth';
 import API from '../../config/api';
 import BuyTokens from './BuyTokens';
+import { getTokens } from '../../store/tokens/tokens.actions';
 import PaymentMethod from './PaymentMethod';
 import InitiateManualPayment from './InitiateManualPayment';
 import InitiateAutoPayment from './InitiateAutoPayment';
@@ -17,6 +18,10 @@ class Buy extends Component {
     symbol: 'EUR36',
     manualTransferData: null
   };
+
+  componentDidMount () {
+    this.props.getTokens();
+  }
 
   nextStep = () => {
     if (this.state.step === 0) {
@@ -69,7 +74,7 @@ class Buy extends Component {
     return (
       <div className='wrapper'>
         <div className='buy paper'>
-          {step > 0 && <BackButton onClick={this.previousStep} />}
+          {step > 0 && step !== 2.1 && <BackButton onClick={this.previousStep} />}
           <div className='buy__content'>
             {step === 0 &&
             <BuyTokens
@@ -104,7 +109,7 @@ class Buy extends Component {
             </span>}
             {step > 2 &&
             <span style={{ fontSize: '1.6rem' }}>
-              Please make sure your payment will be triggered from your registered bank account: IBAN {iban || 'CH3343 23 3 32 32 32'}
+              Please make sure your payment will be triggered from your registered bank account{iban ? `: IBAN ${iban}` : '.'}
             </span>}
           </div>
         </div>
@@ -113,6 +118,11 @@ class Buy extends Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => ({ iban: auth.user.iban });
+const mapStateToProps = ({ auth: { user } }) => {
+  if (user.kycLevel !== 'Tier_0') return { iban: user.bankAccounts[0].iban };
+  else return { iban: '' };
+};
 
-export default requireAuth(connect(mapStateToProps)(Buy));
+const mapDispatchToProps = { getTokens };
+
+export default requireAuth(connect(mapStateToProps, mapDispatchToProps)(Buy));

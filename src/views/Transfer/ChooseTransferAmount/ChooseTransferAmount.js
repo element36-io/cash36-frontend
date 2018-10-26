@@ -25,7 +25,7 @@ const ChooseTransferAmount = ({ address, symbol, amount, handleChange, token, ha
       ? <AvailableBalance balance={token.balance} symbol={symbol} />
       : <AvailableBalance balance={0} symbol={symbol} />}
 
-    <StepButton text={'Send Transfer'} onClick={handleSendTransferClick} disabled={!amount} />
+    <StepButton text={'Send'} onClick={handleSendTransferClick} disabled={!amount} />
   </div>
 );
 

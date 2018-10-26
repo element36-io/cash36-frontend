@@ -32,7 +32,7 @@ class Home extends Component {
     const { showVerification } = this.state;
     const { user, tokens, userActivity } = this.props;
 
-    const lastActivity = userActivity.slice(-5).reverse();
+    const lastActivity = userActivity.slice(0, 5);
 
     return (
       <div className='home-page'>
