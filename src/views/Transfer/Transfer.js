@@ -49,7 +49,7 @@ class Transfer extends Component {
       this.nextStep();
       this.setState({ inputError: '' });
     } else {
-      this.setState({ inputError: 'Contract address is not valid' });
+      this.setState({ inputError: 'Address is not valid' });
     }
   }
 
@@ -144,7 +144,7 @@ class Transfer extends Component {
       <div className='wrapper'>
         <div className='transfer paper'>
           <div className='transfer__content'>
-            {step > 0 && step < 3 && <BackButton onClick={this.previousStep} />}
+            {step === 1 && <BackButton onClick={this.previousStep} />}
             {this.renderStep()}
           </div>
         </div>
