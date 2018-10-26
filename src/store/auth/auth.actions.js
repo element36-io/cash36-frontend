@@ -3,7 +3,6 @@ import API, { API_ROOT } from '../../config/api';
 
 export const AUTH_USER = 'AUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
-export const UPORT_LOGIN = 'UPORT_LOGIN';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const GET_KYC = 'GET_KYC';
 
@@ -15,13 +14,6 @@ export const logout = () => {
   return {
     type: AUTH_USER,
     payload: { isAuthenticated: false, user: {} }
-  };
-};
-
-export const uportLogin = (uportCreds) => {
-  return {
-    type: UPORT_LOGIN,
-    payload: uportCreds
   };
 };
 

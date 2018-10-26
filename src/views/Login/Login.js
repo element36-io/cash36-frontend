@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { MNID } from 'uport-connect';
 import uPort from '../../config/uport.config';
 import Responsive from '../../components/Responsive';
 import LoginSidebar from './LoginSidebar';
 import LoginTerms from './LoginTerms';
 import LoginHeader from './LoginHeader';
-import { uportLogin } from '../../store/auth/auth.actions';
 import API from '../../config/api';
 
 import './Login.scss';
@@ -27,6 +27,7 @@ class Login extends Component {
     }, this.uPortURIHandler).then(uportCreds => {
       // Next step
       console.log(uportCreds);
+      console.log(MNID.decode(uportCreds.networkAddress).address);
       // API
       // this.props.uportLogin(uportCreds);
     });
@@ -35,6 +36,8 @@ class Login extends Component {
   uPortURIHandler = uPortUri => {
     this.setState({ uPortUri });
   };
+
+
 
   renderStep = () => {
     const { step, uPortUri } = this.state;
@@ -72,4 +75,4 @@ class Login extends Component {
 
 const mapStateToProps = ({ auth }) => ({ auth });
 
-export default connect(mapStateToProps, { uportLogin })(Login);
+export default connect(mapStateToProps)(Login);
