@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import requireAuth from '../../components/requireAuth';
 import ActivityTable from '../../components/ActivityTable';
 import { getUserActivity } from '../../store/tokens/tokens.actions';
+import Responsive from '../../components/Responsive';
 import DateRange from './DateRange';
+import DateRangeMobile from './DateRangeMobile';
 import './History.scss';
 
 class History extends Component {
@@ -20,7 +22,12 @@ class History extends Component {
             {userActivity.length > 0
               ? <div>
                 <div className='history__filters'>
-                  <DateRange />
+                  <Responsive>
+                    <DateRange />
+                  </Responsive>
+                  <Responsive isMobile>
+                    <DateRangeMobile />
+                  </Responsive>
                 </div>
                 <ActivityTable userActivity={userActivity} />
               </div>
