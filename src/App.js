@@ -10,7 +10,7 @@ import Buy from './views/Buy';
 import Sell from './views/Sell';
 import Transfer from './views/Transfer';
 import History from './views/History';
-import Contacts from './views/Contacts';
+// import Contacts from './views/Contacts';
 
 class App extends Component {
   render () {
@@ -25,7 +25,7 @@ class App extends Component {
               <Route exact path='/sell' component={Sell} />
               <Route exact path='/transfer' component={Transfer} />
               <Route exact path='/history' component={History} />
-              <Route exact path='/contacts' component={Contacts} />
+              {/* <Route exact path='/contacts' component={Contacts} /> */}
               <Route exact path='/login' component={Login} />
               <Route exact path='/register' component={Register} />
             </Switch>

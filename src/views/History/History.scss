@@ -1,0 +1,25 @@
+@import '../../styles/settings.scss';
+
+.history {
+  &__content {
+    max-width: 117rem;
+    margin: 0 auto;
+  }
+
+  &__filters {
+    margin-bottom: 2.4rem;
+  }
+
+  &__no-activity {
+    border-radius: 12px;
+    margin: 3rem 0;
+    padding: 3rem;
+    > h3 {
+      font-weight: 400;
+    }
+    > p {
+      color: $text-secondary;
+      margin-top: 2rem;
+    }
+  }
+}
