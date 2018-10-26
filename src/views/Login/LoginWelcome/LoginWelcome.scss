@@ -1,0 +1,13 @@
+.login__welcome {
+
+  .login__qrcode {
+    margin: 4rem 0 4rem 1.6rem;
+  }
+
+  .login__apps {
+    margin-top: 1rem;
+    > * {
+      margin-right: 1rem;
+    }
+  }
+}
