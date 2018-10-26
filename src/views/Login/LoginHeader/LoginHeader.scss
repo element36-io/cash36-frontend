@@ -7,7 +7,7 @@
   width: 100%;
 
   @include desktop {
-
+    min-height: 48px;
   }
 
   @include mobile {

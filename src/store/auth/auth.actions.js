@@ -6,6 +6,8 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const GET_KYC = 'GET_KYC';
 
+export const checkUserAddress = address => API.get(`/public/is-user/${address}`);
+
 export const logout = () => {
   localStorage.removeItem('access_token');
   localStorage.removeItem('refresh_token');
@@ -33,14 +35,12 @@ export const getKyc = () => async dispatch => {
   }
 };
 
-export const register = (username, password, avatarUrl, callback) => async dispatch => {
+export const register = (username, password, avatarUrl) => async dispatch => {
   try {
     await axios.post(
       `${API_ROOT}/public/register`,
       { username, password, avatarUrl }
     );
-
-    callback();
   } catch (error) {
     dispatch({
       type: AUTH_ERROR,
@@ -49,7 +49,7 @@ export const register = (username, password, avatarUrl, callback) => async dispa
   }
 };
 
-export const login = (username, password, user, callback) => async dispatch => {
+export const login = (username, password, user) => async dispatch => {
   const config = {
     data: `username=${username}&password=${password}&grant_type=password`,
     headers: {
@@ -80,7 +80,6 @@ export const login = (username, password, user, callback) => async dispatch => {
       }
     });
     dispatch(getKyc());
-    callback();
   } catch (error) {
     dispatch({
       type: AUTH_ERROR,
