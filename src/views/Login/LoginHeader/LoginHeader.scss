@@ -4,13 +4,24 @@
   position: relative;
   display: flex;
   justify-content: flex-start;
-  width: 100%;
 
   @include desktop {
+    width: 100%;
     min-height: 48px;
   }
 
   @include mobile {
+    > *
+    {
+      position: fixed;
+      z-index:20;
+      top: 1.6rem;
+      left: 1rem;
+      }
 
+    .nav-btn {
+      right: 1rem;
+      left: auto;
+      }
   }
 }
