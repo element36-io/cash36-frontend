@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import theme from './config/theme';
 import Header from './components/Header';
 import Login from './views/Login';
-import Register from './views/Register';
 import Home from './views/Home';
 import Buy from './views/Buy';
 import Sell from './views/Sell';
@@ -27,7 +26,6 @@ class App extends Component {
               <Route exact path='/history' component={History} />
               <Route exact path='/contacts' component={Contacts} />
               <Route exact path='/login' component={Login} />
-              <Route exact path='/register' component={Register} />
             </Switch>
           </Fragment>
         </Router>

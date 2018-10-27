@@ -1,4 +1,4 @@
-import { UPORT_LOGIN, AUTH_USER, AUTH_ERROR, CLEAR_ERRORS, GET_KYC } from './auth.actions';
+import { AUTH_USER, AUTH_ERROR, CLEAR_ERRORS, GET_KYC } from './auth.actions';
 
 const initialState = {
   isAuthenticated: !!localStorage.getItem('access_token'),
@@ -7,11 +7,6 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case UPORT_LOGIN:
-      return {
-        ...state,
-        uportCreds: action.payload
-      };
     case AUTH_USER:
       const { isAuthenticated, user } = action.payload;
       return {
