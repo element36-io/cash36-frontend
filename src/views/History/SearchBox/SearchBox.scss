@@ -4,6 +4,7 @@
 .history__search-box {
   display: flex;
   padding: 1rem 0;
+  flex: 1;
 
   > div {
     display: flex;
@@ -32,7 +33,6 @@
 
   @include mobile {
     overflow: hidden;
-    flex: 1;
     > div:first-child {
       padding: 0 1rem;
       border-right: 2px solid $grey-border;

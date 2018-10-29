@@ -21,14 +21,14 @@ const HeaderMobileDropdown = props => {
             />
           </NavLink></li>
         )}
-        <li>
+        {/* <li>
           <NavLink to='settings' onClick={clickCallback}>
                         Settings
             <RightArrowIcon
               className='header__mobile-dropdown__icon'
             />
           </NavLink>
-        </li>
+        </li> */}
         <li onClick={logout}>
           <span>
                         Logout

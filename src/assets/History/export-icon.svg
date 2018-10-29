@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="24px" viewBox="0 0 20 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>0F170C42-41AB-4420-AF36-AD9B4D19D5D1</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <linearGradient x1="63.8375539%" y1="31.9058287%" x2="0%" y2="115.334302%" id="linearGradient-1">
+            <stop stop-color="#63B4F5" offset="0%"></stop>
+            <stop stop-color="#017EE5" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Web-App---Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="History" transform="translate(-1137.000000, -167.000000)" fill="url(#linearGradient-1)">
+            <g id="Export" transform="translate(1110.000000, 147.000000)">
+                <path d="M29.4,20 C28.068,20 27,21.08 27,22.4 L27,41.6 C27,42.9254834 28.0745166,44 29.4,44 L43.8,44 C45.1254834,44 46.2,42.9254834 46.2,41.6 L46.2,27.2 L39,20 M37.8,21.8 L44.4,28.4 L37.8,28.4 M32.916,32.264 L41.4,32.264 L41.4,40.748 L38.856,38.204 L35.46,41.6 L32.064,38.204 L35.46,34.82" id="export-icon"></path>
+            </g>
+        </g>
+    </g>
+</svg>

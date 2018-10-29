@@ -9,6 +9,7 @@ import Responsive from '../../components/Responsive';
 import DateRange from './DateRange';
 import SearchBox from './SearchBox';
 import FilterBy from './FilterBy';
+import ExportData from './ExportData';
 import DateRangeMobile from './DateRangeMobile';
 import FilterSettingsMobile from './FilterSettingsMobile';
 import './History.scss';
@@ -55,6 +56,7 @@ class History extends Component {
                           filterBy={this.state.filterBy}
                           handleFilterChange={this.handleFilterChange}
                         />
+                        <ExportData />
                       </Responsive>
                       <Responsive isMobile>
                         <DateRangeMobile />
