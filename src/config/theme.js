@@ -50,7 +50,7 @@ export default createMuiTheme({
       }
     },
     MuiCircularProgress: {
-      colorPrimary: {
+      colorSecondary: {
         color: '#fff'
       }
     },

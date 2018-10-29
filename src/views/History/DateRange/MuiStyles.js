@@ -38,11 +38,14 @@ export default theme => ({
     zIndex: 4,
     '&>input': {
       padding: 0,
-      cursor: 'pointer'
+      cursor: 'pointer',
+      '&::placeholder': {
+        fontSize: '1.4rem'
+      }
     }
   },
   pickerInputBox: {
-    width: '12.7rem',
+    width: '11.5rem',
     display: 'flex',
     alignItems: 'center',
     position: 'relative',

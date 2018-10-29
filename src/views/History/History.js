@@ -8,8 +8,12 @@ import Responsive from '../../components/Responsive';
 import DateRange from './DateRange';
 import DateRangeMobile from './DateRangeMobile';
 import './History.scss';
+import { CircularProgress } from '@material-ui/core';
 
 class History extends Component {
+  state = {
+    loading: true
+  }
   componentDidMount () {
     this.props.getUserActivity();
   }
@@ -19,22 +23,30 @@ class History extends Component {
       <div className='wrapper'>
         <div className='history'>
           <div className='history__content'>
-            {userActivity.length > 0
-              ? <div>
-                <div className='history__filters'>
-                  <Responsive>
-                    <DateRange />
-                  </Responsive>
-                  <Responsive isMobile>
-                    <DateRangeMobile />
-                  </Responsive>
+            {userActivity === undefined
+              ? (
+                <div className='history__loader'>
+                  <CircularProgress color='primary' size={75} />
                 </div>
-                <ActivityTable userActivity={userActivity} />
-              </div>
-              : <div className='paper history__no-activity'>
-                <h3>No Activity History</h3>
-                <p>Keep track of your most recent transactions here when you sell, buy or transfer cash36 currencies</p>
-              </div>
+              )
+              : (
+                userActivity.length > 0
+                  ? <div>
+                    <div className='history__filters'>
+                      <Responsive>
+                        <DateRange />
+                      </Responsive>
+                      <Responsive isMobile>
+                        <DateRangeMobile />
+                      </Responsive>
+                    </div>
+                    <ActivityTable userActivity={userActivity} />
+                  </div>
+                  : <div className='paper history__no-activity'>
+                    <h3>No Activity History</h3>
+                    <p>Keep track of your most recent transactions here when you sell, buy or transfer cash36 currencies</p>
+                  </div>
+              )
             }
           </div>
         </div>
@@ -43,7 +55,7 @@ class History extends Component {
   }
 }
 
-const mapStateToProps = ({ tokens: { userActivity = [] } }) => ({
+const mapStateToProps = ({ tokens: { userActivity } }) => ({
   userActivity
 });
 
