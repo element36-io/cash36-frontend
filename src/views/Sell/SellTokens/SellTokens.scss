@@ -1,0 +1,60 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/settings.scss';
+
+.sell__sell-tokens {
+
+  h2 {
+    text-align: center;
+  }
+
+  p {
+    display: flex;
+    justify-content: space-between;
+
+    &:first-of-type {
+      color: $red-1;
+    }
+  }
+
+  @include desktop {
+    padding: 14.4rem 0;
+
+    h2 {
+      margin-bottom: 3.2rem;
+    }
+
+    p {
+      font-size: 1.6rem;
+      line-height: 1.9rem;
+
+      &:first-of-type {
+        margin-bottom: 1.6rem
+      }
+
+      &:last-of-type {
+        margin-bottom: 3.2rem;
+      }
+    }
+  }
+
+  @include mobile {
+    padding: 2.1rem 0 6.9rem;
+
+    h2 {
+      margin-bottom: 7.7rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      line-height: 1.4rem;
+
+      &:first-of-type {
+        margin-bottom: 1.2rem
+      }
+
+      &:last-of-type {
+        margin-bottom: 1.6rem;
+      }
+    }
+  }
+}

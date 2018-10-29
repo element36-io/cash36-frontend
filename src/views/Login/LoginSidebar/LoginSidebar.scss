@@ -1,0 +1,29 @@
+@import '../../../styles/settings.scss';
+
+.login__sidebar {
+  background: url(../../../assets/Login/background-image.jpg) no-repeat center;
+  background-size: cover;
+  width: 60%;
+  justify-content: flex-end;
+  padding: 2rem;
+
+  ul {
+    display: flex;
+    margin: 1rem 3rem;
+
+    li {
+      &:not(:last-child) {
+        margin-right: 3rem;
+      }
+
+      a, span {
+        color: $white;
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 1.8rem;
+        padding: 1rem;
+        border-radius: 4px;
+      }
+    }
+  }
+}

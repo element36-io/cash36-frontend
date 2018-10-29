@@ -1,0 +1,23 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/settings.scss';
+
+.verification-form__success {
+  padding-top: 2.4rem;
+  text-align: center;
+
+  .verification-form__actions {
+    margin-top: 3.2rem;
+  }
+
+  @include desktop {
+    h2 {
+      margin-bottom: 3.2rem;
+    }
+  }
+
+  @include mobile {
+    h2 {
+      margin-bottom: 1.6rem;
+    }
+  }
+}

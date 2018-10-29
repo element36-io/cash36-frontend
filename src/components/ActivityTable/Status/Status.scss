@@ -1,0 +1,37 @@
+@import '../../../styles/settings';
+
+.activity-table-status {
+  display: inline-flex;
+  padding: .3rem;
+  padding-right: 1rem;
+  border-radius: 4px;
+
+  &__icon {
+    border-right: 1px solid $lightGrey;
+    margin-right: .5rem;
+    padding: .3rem;
+  }
+
+  &__text {
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+  }
+
+  &__complete {
+    background-color: $green-light;
+  }
+
+  &__processing {
+    background-color: $yellow-light;
+  }
+
+  &__on-hold {
+    background-color: $red-light;
+  }
+
+  &__open {
+    background-color: $headerGrey;
+  }
+}

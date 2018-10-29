@@ -1,0 +1,121 @@
+@import '../../styles/settings.scss';
+
+.user-profile {
+  display: flex;
+
+  &.user-profile--alt {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .user-profile__avatar {
+      margin: 0 0 2rem;
+    }
+  }
+
+  &__avatar {
+    position: relative;
+    width: 10.5rem;
+    min-width: 10.5rem;
+    margin-right: 1.6rem;
+
+    div, img {
+      height: 10.5rem;
+      width: 10.5rem;
+      border-radius: 12px;
+    }
+
+    img {
+      object-fit: cover;
+    }
+
+    div {
+      position: relative;
+      display: block;
+      background: $primary-light-4;
+
+      i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: $primary-light-3;
+        font-size: 4rem;
+      }
+    }
+
+    .user-profile__avatar__badge {
+      position: absolute;
+      left: 8.3rem;
+      top: 8rem;
+      display: block;
+      width: 34px;
+      height: 41px;
+      background: url('../../assets/icons/shield.svg') no-repeat center;
+
+      span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        color: #fff;
+        transform: translate(-50%, -50%);
+        font-size: 1.3rem;
+      }
+
+      &.user-profile__avatar__badge--alt {
+        background: url('../../assets/icons/shield-checked.svg') no-repeat center;
+      }
+    }
+
+    > span:last-of-type {
+      position: relative;
+      display: block;
+      width: 8rem;
+      height: .5rem;
+      background: $primary-light-4;
+      border-radius: 3px;
+      overflow: hidden;
+
+      &.Tier_0:after {
+        width: 9%;
+      }
+
+      &.Tier_1:after {
+        width: 50%;
+      }
+
+      &.Tier_2:after {
+        width: 100%;
+      }
+
+      &:after {
+        position: absolute;
+        display: block;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        background: $primary-light-3;
+        content: '';
+        transition: all .3s;
+      }
+    }
+  }
+
+  &__info {
+    p {
+      margin: 0 0 10px;
+      color: $darkGrey;
+      font-size: 1.4rem;
+
+      span {
+        color: $text-primary;
+        font-size: 2rem;
+      }
+
+      &:last-of-type {
+        text-decoration: underline;
+        word-break: break-all;
+      }
+    }
+  }
+}

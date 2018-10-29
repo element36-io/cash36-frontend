@@ -1,0 +1,97 @@
+@import './mixins.scss';
+@import './utils.scss';
+@import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500');
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+  font-size: 62.5%;
+
+  @include mobile {
+    font-size: 57.5%;
+  }
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  height: 100%;
+  color: $text-black-1;
+  background: linear-gradient(to bottom, $headerGrey 0,$headerGrey 200px,$backgroundGrey 200px,$backgroundGrey 100%);
+  background-repeat: no-repeat;
+  background-color: $backgroundGrey;
+  //background: linear-gradient(to bottom, orange 0,red 200px,#fff 200px,#fff 100%) no-repeat;
+  line-height: 1.6;
+  font-size: 16px;
+  font-size: 1.6rem;
+  font-family: 'Rubik', sans-serif;
+
+  @include mobile {
+    background: none;
+    background-color: $headerGrey;
+  }
+}
+
+body > #root > div {
+  flex: 1;
+}
+
+h1, h2, h3, h4, h5, h6, p, ol, ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+#root {
+  margin: 0 auto;
+  height: 100%;
+  @include mobile {
+    padding-top: 87px;
+  }
+}
+
+h1, h2, h3, h4, h5, h6, p, ol, ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+h2 {
+  font-size: 2.4rem;
+  line-height: 2.8rem;
+}
+
+h3 {
+  font-size: 1.8rem;
+  line-height: 2.2rem;
+}
+
+p {
+  font-size: 1.6rem;
+  line-height: 1.9rem;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+strong {
+  font-weight: 500;
+}

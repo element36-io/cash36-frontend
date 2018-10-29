@@ -1,0 +1,12 @@
+@import '../../../styles/settings';
+
+.activity-table-action {
+  > div:first-child {
+    color: $text-secondary;
+    font-size: 1.4rem;
+  }
+
+  > span {
+    width: 100%;
+  }
+}

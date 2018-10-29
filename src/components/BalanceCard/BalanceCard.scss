@@ -1,0 +1,110 @@
+@import '../../styles/settings.scss';
+@import '../../styles/mixins.scss';
+
+.balance-card {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  padding-top: 1rem;
+  padding-right: 1rem;
+  height: 10rem;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+
+  &:after {
+    content: '';
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+  }
+
+  &--EUR36 {
+    background-image: url('../../assets/BalanceCard/euro.svg');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    &:after {
+      background-image: $gradient-euro;
+    }
+  }
+
+  &--USD36 {
+    background-image: url('../../assets/BalanceCard/dollar.svg');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    &:after {
+      background-image: $gradient-dollar;
+    }
+  }
+
+  &--GBP36 {
+    background-image: url('../../assets/BalanceCard/pound.svg');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    &:after {
+      background-image: $gradient-pound;
+    }
+  }
+
+  &--CHF36 {
+    background-image: url('../../assets/BalanceCard/franc.svg');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    &:after {
+      background-image: $gradient-franc;
+    }
+  }
+
+    > div {
+      display: flex;
+    }
+
+    > div:first-child {
+      justify-content: space-between;
+    }
+
+    > div:last-child {
+      align-items: center;
+    }
+
+  &__menu-icon {
+    color: $text-secondary;
+  }
+
+  &__icon {
+    margin-right: .5rem;
+  }
+
+  &__balance {
+    font-size: 2.5rem;
+
+    span {
+      font-size: 1.4rem;
+      text-transform: uppercase;
+      color: $text-secondary;
+    }
+  }
+
+  @include desktop {
+    width: 27rem;
+    &:not(:last-child) {
+      margin-right: 2rem;
+    }
+  }
+
+  @include mobile {
+    width: 100%;
+
+    &:not(:last-child) {
+      margin-bottom: 1.5rem;
+    }
+  }
+}

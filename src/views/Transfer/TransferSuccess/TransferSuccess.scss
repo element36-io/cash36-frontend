@@ -1,0 +1,89 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/settings.scss';
+
+.transfer__transfer-success {
+  text-align: center;
+
+  p {
+    margin-bottom: 3.2rem;
+    text-align: center;
+  }
+
+  .transfer__transfer-success__token {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    max-width: 27.5rem;
+    padding: 2.2rem .5rem 2.2rem 2.2rem;
+    border-radius: 10px;
+    overflow: hidden;
+
+    img {
+      margin-right: 1.4rem;
+    }
+
+    span {
+      margin-left: .8rem;
+      color: $text-secondary;
+      font-size: 1.2rem;
+      line-height: 1.4rem;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      display: block;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+    }
+
+    &--EUR36:after {
+        background-image: $gradient-euro;
+    }
+
+    &--USD36:after {
+        background-image: $gradient-dollar;
+    }
+
+    &--GBP36:after {
+        background-image: $gradient-pound;
+    }
+
+    &--CHF36:after {
+        background-image: $gradient-franc;
+      }
+  }
+
+  @include desktop {
+    p {
+      margin-bottom: 3.2rem;
+      font-size: 1.8rem;
+      line-height: 2.4rem;
+    }
+
+    .transfer__transfer-success__token {
+      margin-bottom: 2.4rem;
+      font-size: 2.4rem;
+      line-height: 2.8rem;
+    }
+  }
+
+  @include mobile {
+    padding: 5.5rem 0;
+
+    p {
+      margin-bottom: 2.4rem;
+      font-size: 1.5rem;
+      line-height: 1.8rem;
+    }
+
+    .transfer__transfer-success__token {
+      margin-bottom: 1.6rem;
+      font-size: 1.8rem;
+      line-height: 2.2rem;
+    }
+  }
+}

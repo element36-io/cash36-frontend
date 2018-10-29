@@ -1,0 +1,88 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/settings.scss';
+
+.amount-card {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  max-width: 27.5rem;
+  padding: 2.2rem .5rem 2.2rem 2.2rem;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 6px 0 rgba(0,0,0,0.05);
+  background-color: $white;
+
+  img {
+    margin-right: 1.4rem;
+  }
+
+  span {
+    margin-left: .8rem;
+    color: $text-secondary;
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+  }
+
+  &--EUR36 {
+    background-image: url('../../assets/BalanceCard/euro.svg');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    &:after {
+      background-image: $gradient-euro;
+    }
+  }
+
+  &--USD36 {
+    background-image: url('../../assets/BalanceCard/dollar.svg');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    &:after {
+      background-image: $gradient-dollar;
+    }
+  }
+
+  &--GBP36 {
+    background-image: url('../../assets/BalanceCard/pound.svg');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    &:after {
+      background-image: $gradient-pound;
+    }
+  }
+
+  &--CHF36 {
+    background-image: url('../../assets/BalanceCard/franc.svg');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    &:after {
+      background-image: $gradient-franc;
+    }
+  }
+
+  @include desktop {
+    margin-bottom: 2.4rem;
+    font-size: 2.4rem;
+    line-height: 2.8rem;
+  }
+
+  @include mobile {
+    margin-bottom: 1.6rem;
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+  }
+}

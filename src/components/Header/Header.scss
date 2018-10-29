@@ -1,0 +1,58 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/settings.scss';
+
+header {
+  display: flex;
+  align-items: center;
+  background-color: $headerGrey;
+
+  > div {
+    display: flex;
+    align-items: center;
+
+    &:last-child {
+      margin-left: auto;
+    }
+  }
+
+  @include desktop {
+    width: 100%;
+    max-width: 117rem;
+    margin: 0 auto;
+    padding: 5.2rem 0 5.3rem;
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+
+    ul {
+      margin-left: 10rem;
+
+      li {
+        display: inline-block;
+
+        &:not(:last-child) {
+          margin-right: 4rem;
+        }
+
+        a {
+          color: $darkGrey;
+          transition: all .3s;
+          font-weight: 500;
+          &:hover, &.selected {
+            color: $black;
+          }
+        }
+      }
+    }
+  }
+
+  @include mobile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+    height: 8.7rem;
+    padding: 2rem 1rem;
+    background: $backgroundGrey;
+  }
+}

@@ -1,0 +1,35 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/settings.scss';
+
+.transaction-footer {
+  text-align: center;
+
+  a {
+    color: $primary-main;
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: .4rem;
+
+    &:last-of-type {
+      display: inline-block;
+    }
+  }
+
+  @include desktop {
+    a {
+      &:last-of-type {
+        margin-top: 2.4rem
+      }
+    }
+  }
+
+  @include mobile {
+    a {
+      &:last-of-type {
+        margin-top: 1.6rem
+      }
+    }
+  }
+}

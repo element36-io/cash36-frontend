@@ -1,0 +1,21 @@
+.header__alerts {
+  position: relative;
+
+  i {
+    font-size: 22px;
+    color: #6ab5f8;
+  }
+
+  span {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 2px 4px 1px;
+    background: linear-gradient(#ee988e, #8eb268);
+    border: 2px solid #fff;
+    border-radius: 7px;
+    color: #fff;
+    font-size: 12px;
+    line-height: 1;
+  }
+}

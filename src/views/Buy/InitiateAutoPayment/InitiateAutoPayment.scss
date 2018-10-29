@@ -1,0 +1,84 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/settings.scss';
+
+.initiate-auto-payment {
+  text-align: center;
+
+  &__heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    > h2 {
+      margin-right: 1rem;
+    }
+
+    > svg {
+      fill: $darkGrey;
+      display: inline-block;
+      height: auto;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__qrcode {
+    margin: 1rem 0;
+    margin-bottom: 3.2rem;
+
+    & > * {
+      background-color: $white;
+      padding: 2rem;
+      border-radius: 4px;
+      box-shadow: 0 5px 6px 0 rgba(0,0,0,0.05);
+    }
+  }
+
+  @include mobile {
+    margin: 5.7rem 2rem;
+    padding: 2rem 1.2rem;
+    > h2 {
+      position: absolute;
+      right: 0;
+      top: 2.5rem;
+      left: 0;
+    }
+
+    &__heading {
+      > svg {
+        fill: $primary-main;
+      }
+    }
+  }
+
+  &__mobile {
+    p {
+      margin: 2rem;
+    }
+  }
+
+  &__mobile-buttons {
+    border-bottom: 1px solid $lightGrey;
+    margin-bottom: 2.4rem;
+    padding-bottom: 2.4rem;
+
+    > button {
+      padding: 1.5rem 0;
+      > span {
+        color: $primary-main;
+      }
+    }
+
+    > button {
+      &:first-child {
+        background: $grey-blue;
+      }
+
+      &:last-child {
+        background: $white;
+      }
+    }
+  }
+}

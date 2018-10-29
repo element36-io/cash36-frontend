@@ -1,0 +1,77 @@
+@import '../../styles/settings';
+
+.nav-btn {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  margin-left: 20px;
+  border-radius: 4px;
+  background: $primary-light-2;
+  cursor: pointer;
+
+  &.alt {
+    background: rgba(255, 255, 255, .3);
+
+    &.active span {
+      background: $white;
+      }
+
+    span {
+      background: $white;
+      }
+    }
+
+  div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  span {
+    position: absolute;
+    left: 0;
+    display: block;
+    height: 2px;
+    width: 15px;
+    background: $primary-dark-2;
+    opacity: 1;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+
+    &:nth-child(1) {
+      top: 2px;
+    }
+    &:nth-child(2), &:nth-child(3) {
+      top: 7px;
+    }
+    &:nth-child(4) {
+      top: 12px;
+    }
+  }
+
+  &.active {
+    span {
+      background: $darkGrey;
+
+      &:nth-child(1) {
+        top: 12px;
+        width: 0;
+        left: 50%;
+      }
+      &:nth-child(2) {
+        transform: rotate(45deg);
+      }
+      &:nth-child(3) {
+        transform: rotate(-45deg);
+      }
+      &:nth-child(4) {
+        top: 12px;
+        width: 0;
+        left: 50%;
+      }
+    }
+  }
+}

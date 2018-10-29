@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="34px" height="41px" viewBox="0 0 34 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>6C6E53C8-60B7-48D7-8B9E-B55B20149FCA</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <linearGradient x1="63.8375539%" y1="31.9058287%" x2="0%" y2="115.334302%" id="linearGradient-1">
+            <stop stop-color="#63B4F5" offset="0%"></stop>
+            <stop stop-color="#017EE5" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Web-App---Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Home---Tier-1-User" transform="translate(-195.000000, -241.000000)" fill="url(#linearGradient-1)" fill-rule="nonzero" stroke="#F4F5FA" stroke-width="3">
+            <g id="Top" transform="translate(0.000000, -2.000000)">
+                <g id="User" transform="translate(115.000000, 165.000000)">
+                    <g id="Image">
+                        <g id="Badge" transform="translate(83.000000, 80.000000)">
+                            <path d="M5.1032367,2.39629523 C10.7561242,-0.173199081 17.2438758,-0.173199081 22.8967633,2.39629523 L29.5,5.39776646 L29.5,15.9090909 C29.5,25.4470684 23.0433233,34.2876276 14.3634415,36.4553042 L14,36.5460685 L13.6365585,36.4553042 C4.95667674,34.2876276 -1.5,25.4470684 -1.5,15.9090909 L-1.5,5.39776646 L5.1032367,2.39629523 Z" id="Shape"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

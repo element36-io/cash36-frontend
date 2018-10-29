@@ -6,16 +6,26 @@
     "@mars/heroku-js-runtime-env": "^3.0.2",
     "@material-ui/core": "^1.1.0",
     "@material-ui/icons": "^1.1.0",
+    "axios": "^0.18.0",
     "cash36-contracts": "^0.1.24",
     "classnames": "2.2.5",
-    "material-ui-pickers": "^1.0.0-rc.9",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
+    "iban": "^0.0.11",
+    "jest-css-modules": "^1.1.0",
+    "material-ui-pickers": "^1.0.0-rc.17",
+    "moment": "^2.22.2",
+    "node-sass": "^4.9.3",
     "qrcode.react": "^0.8.0",
     "react": "^16.4.0",
+    "react-country-flag": "^1.0.1",
     "react-dom": "^16.4.0",
     "react-redux": "^5.0.7",
+    "react-responsive": "^5.0.0",
     "react-router": "^4.1.2",
     "react-router-dom": "^4.1.2",
-    "react-scripts": "1.1.4",
+    "react-scripts": "^2.0.4",
+    "react-truncate-string": "^1.3.0",
     "recharts": "^1.0.0-beta.10",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
@@ -23,12 +33,31 @@
     "sockjs-client": "^1.1.4",
     "stompjs": "^2.3.3",
     "uport-connect": "^0.7.8",
+    "validator": "^10.8.0",
     "web3": "1.0.0-beta.34"
+  },
+  "devDependencies": {
+    "eslint-config-semistandard": "^12.0.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-config-standard-jsx": "^6.0.2",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-standard": "^4.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
+    "eject": "react-scripts eject",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

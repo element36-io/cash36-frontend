@@ -1,0 +1,24 @@
+@import '../../../styles/mixins';
+
+.verification-form__tier2 {
+
+
+  @include desktop() {
+    .verification-form__file-wrapper {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+  }
+
+  @include mobile {
+    h3 {
+      display: none;
+    }
+
+   > p {
+      display: none;
+    }
+  }
+}
+

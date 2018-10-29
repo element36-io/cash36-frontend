@@ -1,0 +1,25 @@
+@import './settings.scss';
+@import './mixins.scss';
+
+.wrapper {
+  max-width: 117rem;
+  margin: 0 auto;
+  padding-bottom: 2.4rem;
+
+  @include mobile {
+    margin: 0 1rem;
+  }
+}
+
+.paper {
+  background-color: $white;
+  box-shadow: $box-shadow-1;
+  border-radius: 10px;
+}
+
+.abs-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -1,0 +1,49 @@
+@import '../../../styles/settings.scss';
+
+.header__mobile-dropdown {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  bottom: 0;
+  z-index: 10;
+  height: calc(100vh - 80px);
+  padding: 3rem 1rem;
+  background: #f6f7fa;
+  overflow: scroll;
+  transition: all .2s;
+  transform: scale(0);
+  transform-origin: 50% 0;
+
+  &.active {
+    transform: scale(1);
+  }
+
+  ul {
+    margin: 4rem 1rem 1rem;
+    padding: 1.5rem;
+
+    li:not(:last-child) {
+      margin-bottom: 1rem;
+      border-bottom: 1px solid $lightGrey
+    }
+
+    a, span {
+      position: relative;
+      display: block;
+      padding-right: 3rem;
+      color: #272727;
+      cursor: pointer;
+    }
+
+    a {
+      padding-bottom: 1rem;
+    }
+  }
+
+  .header__mobile-dropdown__icon {
+    position: absolute;
+    right: 0;
+    color: $darkGrey;
+  }
+}

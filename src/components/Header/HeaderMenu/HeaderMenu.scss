@@ -1,0 +1,42 @@
+@import '../../../styles/settings';
+
+.header__menu {
+  display: flex;
+  align-items: center;
+  margin-left: 2.8rem;
+
+  > span {
+    position: relative;
+    display: inline-block;
+    margin-right: 1rem;
+    width: 4.4rem;
+    height: 4.4rem;
+    border-radius: 16px;
+    background: $primary-light-4;
+    overflow: hidden;
+
+    i {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: $primary-light-3;
+      font-size: 1.8rem;
+    }
+
+    img {
+      border-radius: 16px;
+      border:2px solid #fff;
+      object-fit: cover;
+    }
+  }
+
+  .header__menu__icon {
+    font-size: 2.5rem;
+    color: $darkGrey;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
