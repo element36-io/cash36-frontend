@@ -7,11 +7,12 @@ import { TextField, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import DefaultButton from '../../../components/Buttons/DefaultButton';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import { login, clearErrors } from '../../../store/auth/auth.actions';
+import { register, login, clearErrors } from '../../../store/auth/auth.actions';
 import styles from './MuiStyles';
 
-class LoginForm extends Component {
-  state = { password: '' };
+// Remove MUI from this form, it's not needed
+class RegisterForm extends Component {
+  state = { password: '', confirmPassword: '', passwordError: '' };
 
   componentWillUnmount () {
     this.props.clearErrors();
@@ -26,47 +27,42 @@ class LoginForm extends Component {
     });
   };
 
-  handleFormSubmit = (event) => {
+  handleFormSubmit = async event => {
     event.preventDefault();
-    const username = MNID.decode(this.props.uportCreds.networkAddress).address;
-    const { password } = this.state;
+    const { password, confirmPassword } = this.state;
+    const { register, login, history, uportCreds } = this.props;
+    const username = MNID.decode(uportCreds.networkAddress).address;
     const user = {
       username,
-      name: this.props.uportCreds.name,
-      avatarUri: this.props.uportCreds.avatar ? this.props.uportCreds.avatar.uri : null,
+      name: uportCreds.name,
+      avatarUri: uportCreds.avatar ? uportCreds.avatar.uri : null,
       lastLoggedIn: new Date().getTime()
     };
-    this.props.login(username, password, user);
+
+    if (!password) {
+      this.setState({ passwordError: 'Please enter a password' });
+    } else if (password === confirmPassword) {
+      this.setState({ passwordError: '' });
+
+      await register(username, password, user.avatarUri);
+      await login(username, password, user);
+      history.push('/');
+    } else {
+      this.setState({ passwordError: 'Make sure passwords are a match' });
+    }
   };
 
   render () {
-    const { classes, errorMessage, uportCreds } = this.props;
-    const firstName = uportCreds.name.split(' ')[0];
+    const { classes, uportCreds, errorMessage } = this.props;
+    const { passwordError } = this.state;
     return (
       <div className='login__form'>
         <form
+          className={classes.root}
           onSubmit={this.handleFormSubmit}
         >
-          <Typography
-            variant='display1'
-            color='inherit'
-            className={classes.headline}
-          >
-            Welcome
-          </Typography>
-          <Typography
-            variant='subheading'
-            color='inherit'
-          >
-            Welcome, {firstName}
-          </Typography>
-          <Typography
-            variant='subheading'
-            color='inherit'
-            className={classes.marginBot}
-          >
-            Please, enter your password
-          </Typography>
+          <h2>Welcome</h2>
+          <p>Welcome aboard, <br /> please, choose a password</p>
           <TextField
             name='username'
             label='Username (uPort ID)'
@@ -86,7 +82,6 @@ class LoginForm extends Component {
             }}
           />
           <TextField
-            name='password'
             label='Password'
             type='password'
             autoComplete='off'
@@ -103,10 +98,27 @@ class LoginForm extends Component {
               className: classes.label
             }}
           />
+          <TextField
+            label='Confirm Password'
+            type='password'
+            autoComplete='off'
+            value={this.state.confirmPassword}
+            onChange={this.handleInputChange('confirmPassword')}
+            fullWidth
+            className={classes.textField}
+            InputProps={{
+              disableUnderline: true,
+              className: classes.input
+            }}
+            InputLabelProps={{
+              shrink: true,
+              className: classes.label
+            }}
+          />
           <Typography
             className={classes.errorMessage}
           >
-            {errorMessage}
+            {errorMessage ? <span>{errorMessage}</span> : <span>{passwordError}</span>}
           </Typography>
           <DefaultButton
             variant='raised'
@@ -116,16 +128,9 @@ class LoginForm extends Component {
             fullWidth
             className={classes.button}
           >
-            <span>Log in</span>
+            <span>Register</span>
             <ArrowForwardIcon />
           </DefaultButton>
-          <Typography
-            className={classes.forgotPassword}
-            color='textSecondary'
-            gutterBottom
-          >
-            Forgot password?
-          </Typography>
         </form>
       </div>
     );
@@ -134,12 +139,13 @@ class LoginForm extends Component {
 
 const mapStateToProps = ({ auth }) => ({ errorMessage: auth.errorMessage });
 
-LoginForm.propTypes = {
+RegisterForm.propTypes = {
   classes: PropTypes.object,
   errorMessage: PropTypes.string,
-  history: PropTypes.object,
+  history: PropTypes.object.isRequired,
   login: PropTypes.func.isRequired,
-  uportCreds: PropTypes.object.isRequired
+  register: PropTypes.func.isRequired,
+  uportCreds: PropTypes.object
 };
 
-export default withRouter(connect(mapStateToProps, { login, clearErrors })(withStyles(styles)(LoginForm)));
+export default withRouter(connect(mapStateToProps, { register, login, clearErrors })(withStyles(styles)(RegisterForm)));

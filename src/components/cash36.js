@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import uPort from '../config/uport.config';
+import { uPort } from '../config/uport.config';
 
 /**
  * HOC for cash36. Add cash36 contracts to the wrapped component.

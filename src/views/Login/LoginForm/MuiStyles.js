@@ -1,10 +1,4 @@
 export default theme => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    width: '40rem'
-  },
   headline: {
     marginBottom: '3rem',
     fontWeight: '500'

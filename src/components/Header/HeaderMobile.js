@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import HeaderAlerts from './HeaderAlerts';
-import HeaderNavBtn from './HeaderNavBtn';
+import NavBtn from '../NavBtn';
 import HeaderMobileDropdown from './HeaderMobileDropdown';
 import Verification from '../Verification/Verification';
 
@@ -31,7 +31,7 @@ class HeaderMobile extends Component {
         <div>
           <Verification isVisible={showVerification} user={user} close={this.closeVerification} />
           <HeaderAlerts alertsCount={3} />
-          <HeaderNavBtn isActive={activeNav} clickHandler={this.toggleNav} />
+          <NavBtn isActive={activeNav} clickHandler={this.toggleNav} />
           <HeaderMobileDropdown user={user} logout={logout} isActive={activeNav} clickCallback={this.toggleNav} openVerification={this.openVerification} />
         </div>
       );
