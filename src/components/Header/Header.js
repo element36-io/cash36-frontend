@@ -22,7 +22,7 @@ class Header extends Component {
   componentDidUpdate (prevProps) {
     const { auth: { isAuthenticated }, notifications: { isFetching, notifications }, fetchNotifications } = this.props;
     if (isAuthenticated && !notifications && !isFetching) {
-      fetchNotifications(localStorage.getItmes('lastRead'));
+      fetchNotifications(localStorage.getItem('lastRead'));
       this.connectWs();
     }
   }

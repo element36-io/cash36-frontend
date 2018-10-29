@@ -44,8 +44,6 @@ export function fetchNotifications (lastRead) {
 
     if (actionResponse.error) return;
 
-    console.log(actionResponse);
-
     let badgeCount = 0;
     actionResponse.payload.map(n => {
       n.new = lastRead < new Date(n.creationDate);
