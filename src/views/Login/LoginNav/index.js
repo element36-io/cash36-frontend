@@ -1,1 +1,1 @@
-export {default} from './LoginNav';
+export { default } from './LoginNav';

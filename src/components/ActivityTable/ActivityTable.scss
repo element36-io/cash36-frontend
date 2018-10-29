@@ -43,7 +43,12 @@
 
   @include mobile {
     &__row {
-      padding: .5rem 1rem;
+      display: inline-flex;
+      align-items: center;
+      padding: .5rem 1.5rem;
+      flex-wrap: wrap;
+      width: 100%;
+
       > div:first-child {
         margin-right: 2rem;
         align-items: center;
@@ -51,21 +56,20 @@
       }
 
       > div:nth-child(2) {
-        width: calc((100% - 7rem) / 2);
         text-align: left;
+        flex: 1;
       }
+
       > div:nth-child(3) {
-        width: calc((100%) / 2);
+        text-align: left;
+        order: 4;
+        min-width: 100%;
+      }
+
+      > div:nth-child(4) {
+        width: calc((100% - 7rem) / 4);
         text-align: right;
       }
-    }
-
-    &__row-2 {
-      &:not(:last-child) {
-        border-bottom: 1px solid $grey-border;
-      }
-      padding: 1rem;
-      padding-top: 0;
     }
   }
 

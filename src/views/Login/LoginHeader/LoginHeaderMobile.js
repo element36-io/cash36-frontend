@@ -10,22 +10,22 @@ class LoginHeaderMobile extends Component {
   };
 
   toggleNav = () => {
-    this.setState({isActiveNav: !this.state.isActiveNav})
+    this.setState({ isActiveNav: !this.state.isActiveNav });
   };
 
   render () {
-    const {isActiveNav} = this.state;
-    const {step} = this.props;
+    const { isActiveNav } = this.state;
+    const { step } = this.props;
 
     return (
       <div className='login__header'>
         {step !== 0 && <Logo />}
-        <NavBtn clickHandler={this.toggleNav} alt={step === 0 && !isActiveNav} isActive={isActiveNav}/>
+        <NavBtn clickHandler={this.toggleNav} alt={step === 0 && !isActiveNav} isActive={isActiveNav} />
         <div className={`login__header__dropdown ${isActiveNav ? 'active' : ''}`}>
-          <div className="paper"><LoginNav /></div>
+          <div className='paper'><LoginNav /></div>
         </div>
       </div>
-    )
+    );
   }
 }
 

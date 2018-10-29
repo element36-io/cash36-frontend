@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Responsive from '../Responsive';
 import Date from './Date';
@@ -21,24 +21,12 @@ const ActivityTable = ({ userActivity }) => (
     <div className='activity-table__body paper'>
       {userActivity.map((activity, index) => {
         return (
-          <Fragment>
-            <Responsive>
-              <div key={index} className='activity-table__row'>
-                <div><Date date={activity.date} /></div>
-                <div><Action type={activity.action} targetAddress={activity.targetAddress} /></div>
-                <div><Status status={activity.status} /></div>
-                <div><Amount type={activity.action} amount={activity.amount} symbol={activity.symbol} /></div>
-              </div>
-            </Responsive>
-            <Responsive isMobile>
-              <div key={index} className='activity-table__row'>
-                <div><Date date={activity.date} /></div>
-                <div><Action type={activity.action} targetAddress={activity.targetAddress} /></div>
-                <div><Amount type={activity.action} amount={activity.amount} symbol={activity.symbol} /></div>
-              </div>
-              <div className='activity-table__row-2'><Status status={activity.status} /></div>
-            </Responsive>
-          </Fragment>
+          <div key={index} className='activity-table__row'>
+            <div><Date date={activity.date} /></div>
+            <div><Action type={activity.action} targetAddress={activity.targetAddress} /></div>
+            <div><Status status={activity.status} /></div>
+            <div><Amount type={activity.action} amount={activity.amount} symbol={activity.symbol} /></div>
+          </div>
         );
       })}
     </div>
