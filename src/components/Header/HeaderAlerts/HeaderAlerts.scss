@@ -1,12 +1,13 @@
 .header__alerts {
   position: relative;
+  cursor: pointer;
 
   i {
     font-size: 22px;
     color: #6ab5f8;
   }
 
-  span {
+  .header__alerts__counter {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -19,3 +20,10 @@
     line-height: 1;
   }
 }
+
+.header__alerts__content {
+  display: flex;
+  flex-direction: column;
+  max-width: 49.5rem;
+  z-index: 20;
+  }

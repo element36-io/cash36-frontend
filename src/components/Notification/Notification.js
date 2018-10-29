@@ -29,7 +29,7 @@ const renderIcon = type => {
 };
 
 const Notification = ({ type, header, message, creationDate }) => (
-  <div className='notification paper'>
+  <div className='notification'>
     {renderIcon(type)}
     <div className='notification__content'>
       <span>{header}</span>

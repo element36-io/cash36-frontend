@@ -12,9 +12,6 @@ import { fetchNotifications, newNotification } from '../../store/notifications/n
 import './Header.scss';
 
 class Header extends Component {
-  state = {
-    showNotifications: false
-  }
 
   eventSource = null;
 
@@ -41,7 +38,7 @@ class Header extends Component {
     const { auth: { user }, newNotification } = this.props;
     let socket = new SockJS(`${API_ROOT}/ws`);
     this.eventSource = Stomp.over(socket);
-    this.eventSource.connect({}, (frame) => {
+    this.eventSource.connect({}, () => {
       this.eventSource.subscribe(`/topics/updates/${user.username}`, (message) => {
         newNotification(JSON.parse(message.body));
       });
@@ -52,10 +49,6 @@ class Header extends Component {
       }
     });
   };
-
-  closeNotificationsCallback = () => {
-    localStorage.setItem('lastRead', new Date());
-  }
 
   render () {
     const { auth: { isAuthenticated, user }, logout, notifications } = this.props;
