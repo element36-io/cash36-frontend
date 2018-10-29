@@ -9,7 +9,7 @@ const ExportData = () => (
     <DefaultButton
       onClick={() => { console.log('Export button clicked'); }}
     >
-      <img src={ExportIcon} />
+      <img src={ExportIcon} alt='' />
       <span>Export Data</span>
     </DefaultButton>
   </div>
