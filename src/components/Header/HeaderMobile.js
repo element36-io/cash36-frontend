@@ -24,8 +24,8 @@ class HeaderMobile extends Component {
     };
 
     render () {
-      const { activeNav, showVerification,  notifications } = this.state;
-      const { logout, user } = this.props;
+      const { activeNav, showVerification } = this.state;
+      const { logout, user, notifications } = this.props;
 
       return (
         <div>

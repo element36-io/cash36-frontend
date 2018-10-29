@@ -22,6 +22,7 @@ class HeaderAlerts extends Component {
 
 
   render() {
+    // if(!this.props.notifications) return null;
     const {notifications: {badgeCount, notifications}} = this.props;
     const {isOpen, anchorEl} = this.state;
 
