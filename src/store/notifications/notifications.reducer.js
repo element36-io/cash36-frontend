@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import {
   INIT_NOTIFICATIONS_REQUEST,
   INIT_NOTIFICATIONS_SUCCESS,
@@ -26,7 +27,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        notifications: action.payload
+        notifications: _.orderBy(action.payload, ['creationDate'], 'desc')
       };
 
     case INIT_NOTIFICATIONS_ERROR:
@@ -37,17 +38,12 @@ export default (state = initialState, action) => {
       };
 
     case NEW_NOTIFICATION:
-
       let newNotification = {
-        header: action.title,
-        message: action.message,
-        type: action.transferType,
-        creationDate: action.creationDate,
-        new: action.new
+        ...action.payload
       };
 
       let notifications = state.notifications;
-      notifications.push(newNotification);
+      notifications.unshift(newNotification);
 
       let badgeCount = state.badgeCount;
 

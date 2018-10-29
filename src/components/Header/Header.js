@@ -8,7 +8,7 @@ import Responsive from '../Responsive';
 import HeaderDesktop from './HeaderDesktop';
 import HeaderMobile from './HeaderMobile';
 import { logout } from '../../store/auth/auth.actions';
-import { fetchNotifications } from '../../store/notifications/notifications.actions';
+import { fetchNotifications, newNotification } from '../../store/notifications/notifications.actions';
 import './Header.scss';
 
 class Header extends Component {
@@ -19,6 +19,7 @@ class Header extends Component {
 
   eventSource = null;
 
+  //Fix this with subroutes
   componentDidUpdate (prevProps) {
     const { auth: { isAuthenticated }, notifications: { isFetching, notifications }, fetchNotifications } = this.props;
     if (isAuthenticated && !notifications && !isFetching) {
@@ -43,7 +44,7 @@ class Header extends Component {
     this.eventSource = Stomp.over(socket);
     this.eventSource.connect({}, (frame) => {
       this.eventSource.subscribe(`/topics/updates/${user.username}`, (message) => {
-        console.log(JSON.parse(message.body));
+        this.props.newNotification(JSON.parse(message.body));
       });
     }, (e) => {
       console.error(e, 'Connection lost');
@@ -80,4 +81,4 @@ class Header extends Component {
 
 const mapStateToProps = ({ auth, notifications }) => ({ auth, notifications });
 
-export default connect(mapStateToProps, { logout, fetchNotifications }, null, { pure: false })(Header);
+export default connect(mapStateToProps, { logout, fetchNotifications, newNotification }, null, { pure: false })(Header);

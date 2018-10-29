@@ -1,20 +1,15 @@
 import { CALL_API } from '../middleware/api.middleware';
 
-// NOTIFICATION
 export const INIT_NOTIFICATIONS_REQUEST = 'INIT_NOTIFICATIONS_REQUEST';
 export const INIT_NOTIFICATIONS_SUCCESS = 'INIT_NOTIFICATIONS_SUCCESS';
 export const INIT_NOTIFICATIONS_ERROR = 'INIT_NOTIFICATIONS_ERROR';
 export const NEW_NOTIFICATION = 'NEW_NOTIFICATION';
 export const UPDATE_BADGE_COUNT = 'UPDATE_BADGE_COUNT';
 
-export function newNotification (title, message, type, creationDate) {
+export function newNotification (payload) {
   return {
     type: NEW_NOTIFICATION,
-    title: title,
-    message: message,
-    transferType: type,
-    creationDate: creationDate,
-    new: true
+    payload
   };
 }
 
