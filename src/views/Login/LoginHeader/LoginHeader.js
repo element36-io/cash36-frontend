@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Responsive from '../../../components/Responsive';
 import Logo from '../../../components/Logo';
@@ -6,7 +6,7 @@ import LoginHeaderMobile from './LoginHeaderMobile';
 import './LoginHeader.scss';
 
 const LoginHeader = props => {
-  const {step} = props;
+  const { step } = props;
 
   return (
     <div className='login__header'>
@@ -14,7 +14,7 @@ const LoginHeader = props => {
         <Logo />
       </Responsive>
       <Responsive isMobile>
-        <LoginHeaderMobile step={step}/>
+        <LoginHeaderMobile step={step} />
       </Responsive>
     </div>
   );
