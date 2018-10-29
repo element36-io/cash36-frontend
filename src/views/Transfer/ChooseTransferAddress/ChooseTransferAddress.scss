@@ -33,6 +33,11 @@
       padding: 2.4rem 1.6rem;
       margin-bottom: .5rem;
 
+      &:focus-within {
+        border-bottom: 2px solid $primary-main;
+        margin-bottom: .4rem;
+      }
+
       @include mobile {
         font-size: 1.6rem;
       }
