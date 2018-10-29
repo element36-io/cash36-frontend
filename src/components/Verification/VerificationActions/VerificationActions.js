@@ -18,7 +18,7 @@ const VerificationActions = props => {
         onClick={buttonCallback}
         disabled={isSubmitting}
       >
-        {isSubmitting ? <CircularProgress size={20} /> : buttonText}
+        {isSubmitting ? <CircularProgress color='secondary' size={20} /> : buttonText}
       </DefaultButton>
     </div>
   );

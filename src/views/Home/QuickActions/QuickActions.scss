@@ -67,6 +67,26 @@
   }
 
   @include mobile {
+    width: 100%;
+    > div:last-child {
+      display: flex;
+      justify-content: center;
+    }
+    &__button {
+      padding: 0;
+      margin-bottom: 1rem;
+      width: 30%;
+
+      > div:last-child {
+        font-weight: 500;
+        font-size: 1.6rem;
+      }
+
+      &:not(:last-child) {
+        margin-right: 1rem;
+      }
+    }
+
     &__button:not(:last-child) {
       margin-bottom: 2rem;
     }

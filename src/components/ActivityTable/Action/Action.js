@@ -4,7 +4,7 @@ import TruncateString from 'react-truncate-string';
 
 import './Action.scss';
 
-const renderActionName = (type) => {
+const renderActionName = type => {
   if (type === 'BUY') return 'Bought Tokens';
   if (type === 'SELL') return 'Sold Tokens';
   if (type === 'SENT') return 'Sent to';

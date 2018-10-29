@@ -123,6 +123,4 @@ const mapStateToProps = ({ auth: { user } }) => {
   else return { iban: '' };
 };
 
-const mapDispatchToProps = { getTokens };
-
-export default requireAuth(connect(mapStateToProps, mapDispatchToProps)(Buy));
+export default requireAuth(connect(mapStateToProps, { getTokens })(Buy));

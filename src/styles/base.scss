@@ -24,6 +24,8 @@ body {
   height: 100%;
   color: $text-black-1;
   background: linear-gradient(to bottom, $headerGrey 0,$headerGrey 200px,$backgroundGrey 200px,$backgroundGrey 100%);
+  background-repeat: no-repeat;
+  background-color: $backgroundGrey;
   //background: linear-gradient(to bottom, orange 0,red 200px,#fff 200px,#fff 100%) no-repeat;
   line-height: 1.6;
   font-size: 16px;
@@ -31,6 +33,7 @@ body {
   font-family: 'Rubik', sans-serif;
 
   @include mobile {
+    background: none;
     background-color: $headerGrey;
   }
 }
@@ -87,4 +90,8 @@ a {
 img {
   max-width: 100%;
   height: auto;
+}
+
+strong {
+  font-weight: 500;
 }
