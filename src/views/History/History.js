@@ -1,21 +1,33 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { CircularProgress } from '@material-ui/core';
 import requireAuth from '../../components/requireAuth';
 import ActivityTable from '../../components/ActivityTable';
 import { getUserActivity } from '../../store/tokens/tokens.actions';
 import Responsive from '../../components/Responsive';
 import DateRange from './DateRange';
+import SearchBox from './SearchBox';
+import FilterBy from './FilterBy';
 import DateRangeMobile from './DateRangeMobile';
+import FilterSettingsMobile from './FilterSettingsMobile';
 import './History.scss';
-import { CircularProgress } from '@material-ui/core';
 
 class History extends Component {
   state = {
-    loading: true
+    filterBy: 'Date',
+    searchTerm: ''
   }
   componentDidMount () {
     this.props.getUserActivity();
+  }
+
+  handleFilterChange = event => {
+    this.setState({ filterBy: event.target.value });
+  }
+
+  handleSearchChange = event => {
+    this.setState({ searchTerm: event.target.value });
   }
   render () {
     const { userActivity } = this.props;
@@ -35,9 +47,22 @@ class History extends Component {
                     <div className='history__filters'>
                       <Responsive>
                         <DateRange />
+                        <SearchBox
+                          searchTerm={this.state.searchTerm}
+                          handleSearchChange={this.handleSearchChange}
+                        />
+                        <FilterBy
+                          filterBy={this.state.filterBy}
+                          handleFilterChange={this.handleFilterChange}
+                        />
                       </Responsive>
                       <Responsive isMobile>
                         <DateRangeMobile />
+                        <FilterSettingsMobile />
+                        <SearchBox
+                          searchTerm={this.state.searchTerm}
+                          handleSearchChange={this.handleSearchChange}
+                        />
                       </Responsive>
                     </div>
                     <ActivityTable userActivity={userActivity} />

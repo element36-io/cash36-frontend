@@ -1,0 +1,50 @@
+@import '../../../styles/settings.scss';
+@import '../../../styles/mixins.scss';
+
+.history__search-box {
+  display: flex;
+  padding: 1rem 0;
+
+  > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  > div:first-child {
+    padding: 0 1.7rem;
+    border-right: 2px solid $grey-border;
+
+    > svg {
+      font-size: 3rem;
+      opacity: .4;
+    }
+  }
+
+  > div:last-child {
+    padding: 0 1.7rem;
+    display: inline-flex;
+
+    input {
+      font-size: 1.6rem;
+    }
+  }
+
+  @include mobile {
+    overflow: hidden;
+    flex: 1;
+    > div:first-child {
+      padding: 0 1rem;
+      border-right: 2px solid $grey-border;
+      > svg {
+        font-size: 3rem;
+        opacity: .4;
+      }
+    }
+
+    > div:last-child {
+      width: 100%;
+      overflow: hidden;
+    }
+  }
+}
