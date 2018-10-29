@@ -40,7 +40,8 @@ class HeaderMobile extends Component {
 
 HeaderMobile.propTypes = {
   logout: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  notifications: PropTypes.object
 };
 
 export default HeaderMobile;

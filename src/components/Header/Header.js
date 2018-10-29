@@ -12,14 +12,13 @@ import { fetchNotifications, newNotification } from '../../store/notifications/n
 import './Header.scss';
 
 class Header extends Component {
-
   state = {
     showNotifications: false
   }
 
   eventSource = null;
 
-  //Fix this with subroutes
+  // Fix this with subroutes
   componentDidUpdate (prevProps) {
     const { auth: { isAuthenticated }, notifications: { isFetching, notifications }, fetchNotifications } = this.props;
     if (isAuthenticated && !notifications && !isFetching) {
@@ -39,40 +38,38 @@ class Header extends Component {
   }
 
   connectWs = () => {
-    const { auth: { user } } = this.props;
+    const { auth: { user }, newNotification } = this.props;
     let socket = new SockJS(`${API_ROOT}/ws`);
     this.eventSource = Stomp.over(socket);
     this.eventSource.connect({}, (frame) => {
       this.eventSource.subscribe(`/topics/updates/${user.username}`, (message) => {
-        this.props.newNotification(JSON.parse(message.body));
+        newNotification(JSON.parse(message.body));
       });
-    }, (e) => {
-      console.error(e, 'Connection lost');
-      if (e.startsWith('Whoops!')) {
+    }, (err) => {
+      console.error(err, 'Connection lost');
+      if (err.startsWith('Whoops!')) {
         // this.setState({ message: e, snackOpen: true, actionEnabled: true, autoHideDuration: null });
       }
     });
   };
 
-
-  closeNotifications = () => {
-    this.setState({showNotifications: false})
+  closeNotificationsCallback = () => {
     localStorage.setItem('lastRead', new Date());
-  };
+  }
 
   render () {
-    const { auth: { isAuthenticated, user }, logout } = this.props;
+    const { auth: { isAuthenticated, user }, logout, notifications } = this.props;
 
     if (!isAuthenticated) return null;
 
     return (
       <header>
-        <Logo/>
+        <Logo />
         <Responsive>
-          <HeaderDesktop logout={logout} user={user}/>
+          <HeaderDesktop logout={logout} user={user} notifications={notifications} />
         </Responsive>
         <Responsive isMobile>
-          <HeaderMobile user={user} logout={logout}/>
+          <HeaderMobile user={user} logout={logout} notifications={notifications} />
         </Responsive>
       </header>
     );

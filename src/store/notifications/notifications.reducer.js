@@ -54,15 +54,8 @@ export default (state = initialState, action) => {
       };
 
     case UPDATE_BADGE_COUNT:
-
-      let all = state.notifications;
-      if (action.badgeCount === 0) {
-        all.map(n => n.new = false);
-      }
-
       return {
         ...state,
-        notifications: all,
         badgeCount: action.badgeCount,
         lastRead: new Date()
       };

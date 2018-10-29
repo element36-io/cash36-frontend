@@ -45,7 +45,8 @@ class HeaderDesktop extends Component {
 
 HeaderDesktop.propTypes = {
   logout: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  notifications: PropTypes.object
 };
 
 export default HeaderDesktop;
