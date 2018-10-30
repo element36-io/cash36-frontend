@@ -2910,10 +2910,10 @@ caseless@~0.12.0:
   resolved "http://167.99.243.81:4873/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
   integrity sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
 
-cash36-contracts@^0.1.24:
-  version "0.1.29"
-  resolved "http://167.99.243.81:4873/cash36-contracts/-/cash36-contracts-0.1.29.tgz#ff127e6e481f32c483b0d28eaf30e738dcfb7956"
-  integrity sha512-A22YT5ByOJUz++I64YcyFtaL7tqh7HCMJeXHSDZUZnYBv45e319SCmsVRv7uZG8bGbRz5J9KD6ZT50/8MgK5Ew==
+cash36-contracts@^0.1.30:
+  version "0.1.30"
+  resolved "http://167.99.243.81:4873/cash36-contracts/-/cash36-contracts-0.1.30.tgz#b7446648b0aa4e41eb23a3089a4161bc4a9973a2"
+  integrity sha512-8LUyannVbowlFrqzcf6hamwfp4kv2iqehxocLCTrnSHbwr8a54DaTZiaOuU2ApqwGBHK981Ux8oRn+DJYOxGRg==
   dependencies:
     ethereumjs-testrpc "6.0.3"
     openzeppelin-solidity "1.10.0"
