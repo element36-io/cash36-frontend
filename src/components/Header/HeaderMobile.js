@@ -25,12 +25,12 @@ class HeaderMobile extends Component {
 
     render () {
       const { activeNav, showVerification } = this.state;
-      const { logout, user, notifications } = this.props;
+      const { logout, user } = this.props;
 
       return (
         <div>
           <Verification isVisible={showVerification} user={user} close={this.closeVerification} />
-          <HeaderAlerts notifications={notifications}/>
+          <HeaderAlerts />
           <NavBtn isActive={activeNav} clickHandler={this.toggleNav} />
           <HeaderMobileDropdown user={user} logout={logout} isActive={activeNav} clickCallback={this.toggleNav} openVerification={this.openVerification} />
         </div>
@@ -40,8 +40,7 @@ class HeaderMobile extends Component {
 
 HeaderMobile.propTypes = {
   logout: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
-  notifications: PropTypes.object
+  user: PropTypes.object.isRequired
 };
 
 export default HeaderMobile;

@@ -19,11 +19,13 @@
     font-size: 12px;
     line-height: 1;
   }
+
 }
 
-.header__alerts__content {
+.header__alerts__notifications {
   display: flex;
   flex-direction: column;
   max-width: 49.5rem;
   z-index: 20;
-  }
+}
+

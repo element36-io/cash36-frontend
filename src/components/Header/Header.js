@@ -12,7 +12,6 @@ import { fetchNotifications, newNotification } from '../../store/notifications/n
 import './Header.scss';
 
 class Header extends Component {
-
   eventSource = null;
 
   // Fix this with subroutes
@@ -51,7 +50,7 @@ class Header extends Component {
   };
 
   render () {
-    const { auth: { isAuthenticated, user }, logout, notifications } = this.props;
+    const { auth: { isAuthenticated, user }, logout } = this.props;
 
     if (!isAuthenticated) return null;
 
@@ -59,10 +58,10 @@ class Header extends Component {
       <header>
         <Logo />
         <Responsive>
-          <HeaderDesktop logout={logout} user={user} notifications={notifications} />
+          <HeaderDesktop logout={logout} user={user} />
         </Responsive>
         <Responsive isMobile>
-          <HeaderMobile user={user} logout={logout} notifications={notifications} />
+          <HeaderMobile user={user} logout={logout} />
         </Responsive>
       </header>
     );

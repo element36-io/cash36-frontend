@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import ConfirmationIcon from '../../assets/icons/confirmation-icon.svg';
-
 import './Notification.scss';
 
 const calculateTime = creationDate => {
@@ -21,30 +20,35 @@ const calculateTime = creationDate => {
   // else return minutes
   if (minutesFromMessage) return `${minutesFromMessage}m`;
   // default if 0 minutes have passed
-  return '0m';
+  return '0';
 };
 
 const renderIcon = type => {
-  if (type === 'PAYMENT' || type === 'PAYOUT') return <img src={ConfirmationIcon} />;
+  if (type === 'PAYMENT' || type === 'PAYOUT') return <img src={ConfirmationIcon} alt={type}/>;
 };
 
-const Notification = ({ type, header, message, creationDate }) => (
-  <div className='notification'>
-    {renderIcon(type)}
-    <div className='notification__content'>
-      <span>{header}</span>
-      <span>{message}</span>
+const Notification = props => {
+  const { type, header, message, creationDate, lastRead } = props;
+
+  return (
+    <div className={`notification ${creationDate > lastRead ? 'notification--unread' : ''}`}>
+      {renderIcon(type)}
+      <div className='notification__content'>
+        <span>{header}</span>
+        <span>{message}</span>
+      </div>
+      <div className='notification__time'>
+        {calculateTime(creationDate)}
+      </div>
     </div>
-    <div className='notification__time'>
-      {calculateTime(creationDate)}
-    </div>
-  </div>
-);
+  );
+};
 
 Notification.propTypes = {
   type: PropTypes.string.isRequired,
   header: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
-  creationDate: PropTypes.string.isRequired
+  creationDate: PropTypes.string.isRequired,
+  lastRead: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]).isRequired
 };
 export default Notification;
