@@ -29,7 +29,6 @@ export function updateBadgeCount (badgeCount) {
 }
 
 export function updateLastRead (lastRead) {
-  console.log('ACTION ============', lastRead)
   return {
     type: UPDATE_LAST_READ,
     lastRead

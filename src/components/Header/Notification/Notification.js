@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import ConfirmationIcon from '../../assets/icons/confirmation-icon.svg';
+import ConfirmationIcon from '../../../assets/icons/confirmation-icon.svg';
 import './Notification.scss';
 
 const calculateTime = creationDate => {
@@ -24,7 +24,7 @@ const calculateTime = creationDate => {
 };
 
 const renderIcon = type => {
-  if (type === 'PAYMENT' || type === 'PAYOUT') return <img src={ConfirmationIcon} alt={type}/>;
+  if (type === 'PAYMENT' || type === 'PAYOUT') return <img src={ConfirmationIcon} alt={type} />;
 };
 
 const Notification = props => {

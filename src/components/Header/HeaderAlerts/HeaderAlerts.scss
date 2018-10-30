@@ -23,9 +23,9 @@
 }
 
 .header__alerts__notifications {
-  display: flex;
-  flex-direction: column;
   max-width: 49.5rem;
+  max-height: 40rem;
   z-index: 20;
+  overflow-y: scroll;
 }
 

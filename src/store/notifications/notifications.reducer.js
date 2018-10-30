@@ -62,7 +62,6 @@ export default (state = initialState, action) => {
       };
 
     case UPDATE_LAST_READ:
-      console.log('REDUCER ============', action.lastRead);
       return {
         ...state,
         lastRead: action.lastRead

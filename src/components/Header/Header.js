@@ -61,7 +61,7 @@ class Header extends Component {
           <HeaderDesktop logout={logout} user={user} />
         </Responsive>
         <Responsive isMobile>
-          <HeaderMobile user={user} logout={logout} />
+          <HeaderMobile logout={logout} user={user} />
         </Responsive>
       </header>
     );
