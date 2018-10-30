@@ -8,7 +8,7 @@ const PopupMenu = props => {
   const { placement, open, anchor, handleClose, children } = props;
 
   return (
-    <Popper open={open} anchorEl={anchor} transition disablePortal placement={placement}>
+    <Popper open={open} anchorEl={anchor} transition placement={placement}>
       {({ TransitionProps, placement }) => (
         <Grow
           {...TransitionProps}

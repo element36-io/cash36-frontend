@@ -2,10 +2,12 @@ import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import throttle from 'lodash/throttle';
+import { apiCall } from './middleware/api.middleware';
 import { saveState } from './localStorage';
 import authReducer from './auth/auth.reducer';
 import tokensReducer from './tokens/tokens.reducer';
 import countriesReducer from './countries/countries.reducer';
+import notificationsReducer from './notifications/notifications.reducer';
 
 const loggerMiddleware = createLogger();
 
@@ -14,14 +16,16 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const reducers = combineReducers({
   auth: authReducer,
   tokens: tokensReducer,
-  countries: countriesReducer
+  countries: countriesReducer,
+  notifications: notificationsReducer
 });
 
 const store = createStore(
   reducers,
   composeEnhancers(applyMiddleware(
     thunkMiddleware,
-    loggerMiddleware
+    loggerMiddleware,
+    apiCall
   ))
 );
 
