@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import requireAuth from '../../components/requireAuth';
 import BalanceCard from '../../components/BalanceCard';
 import QuickActions from './QuickActions';
 import ActivityTable from '../../components/ActivityTable';
@@ -68,4 +67,4 @@ const mapStateToProps = ({ auth: { user }, tokens: { tokens = [], userActivity =
   userActivity
 });
 
-export default requireAuth(connect(mapStateToProps, { getTokens, getUserActivity })(Home));
+export default connect(mapStateToProps, { getTokens, getUserActivity })(Home);
