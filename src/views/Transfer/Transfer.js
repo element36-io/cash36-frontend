@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import addCash36 from '../../components/cash36';
 import { Cash36Contract, Token36Contract } from 'cash36-contracts';
-import requireAuth from '../../components/requireAuth';
 import ChooseTransferAddress from './ChooseTransferAddress';
 import ChooseTransferAmount from './ChooseTransferAmount';
 import BackButton from '../../components/Buttons/BackButton';
@@ -158,4 +157,4 @@ const mapStateToProps = ({ tokens: { tokens = [] }, auth: { user } }) => ({
   username: user.username
 });
 
-export default requireAuth(addCash36(connect(mapStateToProps, { getTokens })(Transfer)));
+export default addCash36(connect(mapStateToProps, { getTokens })(Transfer));

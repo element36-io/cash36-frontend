@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { CircularProgress } from '@material-ui/core';
-import requireAuth from '../../components/requireAuth';
 import ActivityTable from '../../components/ActivityTable';
 import { getUserActivity } from '../../store/tokens/tokens.actions';
 import Responsive from '../../components/Responsive';
@@ -90,4 +89,4 @@ History.propTypes = {
   userActivity: PropTypes.arrayOf(PropTypes.object)
 };
 
-export default requireAuth(connect(mapStateToProps, { getUserActivity })(History));
+export default connect(mapStateToProps, { getUserActivity })(History);

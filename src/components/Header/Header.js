@@ -14,13 +14,9 @@ import './Header.scss';
 class Header extends Component {
   eventSource = null;
 
-  // Fix this with subroutes
-  componentDidUpdate (prevProps) {
-    const { auth: { isAuthenticated }, notifications: { isFetching, notifications }, fetchNotifications } = this.props;
-    if (isAuthenticated && !notifications && !isFetching) {
-      fetchNotifications(localStorage.getItem('lastRead'));
-      this.connectWs();
-    }
+  componentDidMount () {
+    this.props.fetchNotifications(localStorage.getItem('lastRead'));
+    this.connectWs();
   }
 
   componentWillUnmount () {
@@ -50,18 +46,16 @@ class Header extends Component {
   };
 
   render () {
-    const { auth: { isAuthenticated, user }, logout } = this.props;
-
-    if (!isAuthenticated) return null;
+    const { auth: { user }, logout } = this.props;
 
     return (
       <header>
-        <Logo />
+        <Logo/>
         <Responsive>
-          <HeaderDesktop logout={logout} user={user} />
+          <HeaderDesktop logout={logout} user={user}/>
         </Responsive>
         <Responsive isMobile>
-          <HeaderMobile logout={logout} user={user} />
+          <HeaderMobile logout={logout} user={user}/>
         </Responsive>
       </header>
     );
