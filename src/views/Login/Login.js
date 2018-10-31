@@ -15,18 +15,28 @@ import './Login.scss';
 
 class Login extends Component {
   state = {
-    step: 0,
+    step: 1,
     uPortUri: uportUri,
-    uportCreds: null
+    // uportCreds: null
+    uportCreds: {
+      address: 'did:ethr:0xfacfa366a2ecbea07de2df72489d6f55083d2891',
+      avatar: { uri: 'https://ipfs.infura.io/ipfs/QmdDfwccYJire5P4v76qP6WyYUFiDoz54zbDRuv8tVWhzU' },
+      did: 'did:ethr:0xfacfa366a2ecbea07de2df72489d6f55083d2891',
+      name: 'Vladimir Nikolic',
+      networkAddress: '2oquUSd56AhWrVR81TKtuQgabpiCckHf4vw',
+      publicEncKey: 'jV9a+a5dGPOrTiuRHcMEVRmZkIqmtktO8RWJhGseyiQ=',
+      pushToken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NkstUiJ9.eyJpYXQiOjE1NDA5ODQ4MDksImV4cCI6MTU0MjI4MDgwOSwiYXVkIjoiMm96R1hGcXgzZUt6bWc3elFRWnVUbkVXNkVlQVZVenlVdTYiLCJ0eXBlIjoibm90aWZpY2F0aW9ucyIsInZhbHVlIjoiYXJuOmF3czpzbnM6dXMtd2VzdC0yOjExMzE5NjIxNjU1ODplbmRwb2ludC9HQ00vdVBvcnQvM2EyYWIxNGUtM2E4YS0zMzY1LTg2ZjMtODkyOWJjZDBhZGY1IiwiaXNzIjoiZGlkOmV0aHI6MHhmYWNmYTM2NmEyZWNiZWEwN2RlMmRmNzI0ODlkNmY1NTA4M2QyODkxIn0.cyK2qtrtio8zszBDep1llaLUIt5Bk3xX4VrQ253-_hG6ZQRBH2D4Zi__PpFPSBuYV9F8_SlLu6zWsUgJJV9CbwA',
+      verified: []
+    }
   };
 
-  componentDidMount () {
-    uPort.requestCredentials({
-      requested: ['name', 'avatar'],
-      verified: ['cash36KYC'],
-      notifications: true
-    }, this.uPortURIHandler).then(this.checkIfUserExists);
-  }
+  // componentDidMount () {
+  //   uPort.requestCredentials({
+  //     requested: ['name', 'avatar'],
+  //     verified: ['cash36KYC'],
+  //     notifications: true
+  //   }, this.uPortURIHandler).then(this.checkIfUserExists);
+  // }
 
   uPortURIHandler = uPortUri => {
     setUportUri(uPortUri);
@@ -34,6 +44,7 @@ class Login extends Component {
   };
 
   checkIfUserExists = async uportCreds => {
+    console.log(uportCreds);
     try {
       await checkUserAddress(MNID.decode(uportCreds.networkAddress).address);
       this.setState({ step: 1, uportCreds });

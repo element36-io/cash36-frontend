@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { MNID } from 'uport-connect';
-import { TextField, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import DefaultButton from '../../../components/Buttons/DefaultButton';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import DefaultButton from '../../../components/Buttons/DefaultButton';
+import LoginUsername from '../LoginUsername';
+import LoginField from '../LoginField';
 import { login, clearErrors } from '../../../store/auth/auth.actions';
 import styles from './MuiStyles';
 
@@ -17,12 +17,14 @@ class LoginForm extends Component {
     this.props.clearErrors();
   }
 
-  handleInputChange = name => event => {
+  handleInputChange = evt => {
+    const { name, value } = evt.target;
+
     if (this.props.errorMessage) {
       this.props.clearErrors();
     }
     this.setState({
-      [name]: event.target.value
+      [name]: value
     });
   };
 
@@ -41,73 +43,25 @@ class LoginForm extends Component {
 
   render () {
     const { classes, errorMessage, uportCreds } = this.props;
+    const { password } = this.state;
     const firstName = uportCreds.name.split(' ')[0];
     return (
       <div className='login__form'>
         <form
           onSubmit={this.handleFormSubmit}
         >
-          <Typography
-            variant='display1'
-            color='inherit'
-            className={classes.headline}
-          >
-            Welcome
-          </Typography>
-          <Typography
-            variant='subheading'
-            color='inherit'
-          >
-            Welcome, {firstName}
-          </Typography>
-          <Typography
-            variant='subheading'
-            color='inherit'
-            className={classes.marginBot}
-          >
+          <h2>Welcome</h2>
+          <p>
+            Welcome back, {firstName}<br />
             Please, enter your password
-          </Typography>
-          <TextField
-            name='username'
-            label='Username (uPort ID)'
-            type='text'
-            disabled
-            autoComplete='off'
-            value={MNID.decode(uportCreds.networkAddress).address}
-            fullWidth
-            className={classes.textFieldUsername}
-            InputProps={{
-              disableUnderline: true,
-              className: classes.input
-            }}
-            InputLabelProps={{
-              shrink: true,
-              className: classes.label
-            }}
-          />
-          <TextField
-            name='password'
-            label='Password'
-            type='password'
-            autoComplete='off'
-            value={this.state.password}
-            onChange={this.handleInputChange('password')}
-            fullWidth
-            className={classes.textField}
-            InputProps={{
-              disableUnderline: true,
-              className: classes.input
-            }}
-            InputLabelProps={{
-              shrink: true,
-              className: classes.label
-            }}
-          />
-          <Typography
-            className={classes.errorMessage}
-          >
+          </p>
+          <div className='login__field-wrapper'>
+            <LoginUsername networkAddress={uportCreds.networkAddress} />
+            <LoginField name='password' value={password} placeholder='Password' changeHandler={this.handleInputChange} label='Password' />
+          </div>
+          <p className='login__form__error'>
             {errorMessage}
-          </Typography>
+          </p>
           <DefaultButton
             variant='raised'
             color='primary'
@@ -119,13 +73,6 @@ class LoginForm extends Component {
             <span>Log in</span>
             <ArrowForwardIcon />
           </DefaultButton>
-          <Typography
-            className={classes.forgotPassword}
-            color='textSecondary'
-            gutterBottom
-          >
-            Forgot password?
-          </Typography>
         </form>
       </div>
     );
@@ -137,9 +84,7 @@ const mapStateToProps = ({ auth }) => ({ errorMessage: auth.errorMessage });
 LoginForm.propTypes = {
   classes: PropTypes.object,
   errorMessage: PropTypes.string,
-  history: PropTypes.object,
-  login: PropTypes.func.isRequired,
   uportCreds: PropTypes.object.isRequired
 };
 
-export default withRouter(connect(mapStateToProps, { login, clearErrors })(withStyles(styles)(LoginForm)));
+export default connect(mapStateToProps, { login, clearErrors })(withStyles(styles)(LoginForm));

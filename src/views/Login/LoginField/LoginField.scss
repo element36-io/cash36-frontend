@@ -1,0 +1,77 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/settings.scss';
+
+.login__field {
+  position: relative;
+  color: $text-light-grey-1;
+  border: 1px solid $grey-border;
+  text-align: left;
+  word-break: break-all;
+  overflow: hidden;
+
+  &.login__field--username {
+    background: $background-grey-1;
+  }
+
+  &:first-child {
+    border-radius: 4px 4px 0 0;
+  }
+
+  &:last-child {
+    border-radius: 0 0 4px 4px;
+  }
+
+  &:not(:first-child) {
+    border-top: 0;
+  }
+
+  label {
+    display: block;
+    margin-bottom: .6rem;
+  }
+
+  input {
+    width: 100%;
+    padding: 0;
+    outline: none;
+    border: none;
+
+    &:focus + span {
+      width: 120%;
+    }
+  }
+
+  span {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 1px);
+    display: block;
+    height: 3px;
+    width: 0;
+    background: $gradient-primary;
+    transition: width .3s;
+  }
+
+  @include desktop {
+    padding: 1.2rem;
+    font-size: 1.5rem;
+    line-height: 1.9rem;
+
+    label {
+      font-size: 1.4rem;
+      line-height: 1.7rem;
+    }
+  }
+
+  @include mobile {
+    padding: 1rem;
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+
+    label {
+      font-size: 1.2rem;
+      line-height: 1.4rem;
+    }
+  }
+}
