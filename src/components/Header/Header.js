@@ -50,12 +50,12 @@ class Header extends Component {
 
     return (
       <header>
-        <Logo/>
+        <Logo />
         <Responsive>
-          <HeaderDesktop logout={logout} user={user}/>
+          <HeaderDesktop logout={logout} user={user} />
         </Responsive>
         <Responsive isMobile>
-          <HeaderMobile logout={logout} user={user}/>
+          <HeaderMobile logout={logout} user={user} />
         </Responsive>
       </header>
     );

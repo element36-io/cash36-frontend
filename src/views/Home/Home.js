@@ -67,4 +67,4 @@ const mapStateToProps = ({ auth: { user }, tokens: { tokens = [], userActivity =
   userActivity
 });
 
-export default connect(mapStateToProps, { getTokens, getUserActivity })(Home)
+export default connect(mapStateToProps, { getTokens, getUserActivity })(Home);

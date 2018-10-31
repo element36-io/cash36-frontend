@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import theme from './config/theme';
 import Login from './views/Login';
 import Wallet from './views/Wallet';
-import Header from './components/Header';
 
 class App extends Component {
   render () {
@@ -12,8 +11,8 @@ class App extends Component {
       <MuiThemeProvider theme={theme}>
         <Router>
           <Switch>
-            <Route exact path='/login' component={Login}/>
-            <Route path='' component={Wallet}/>
+            <Route exact path='/login' component={Login} />
+            <Route path='' component={Wallet} />
           </Switch>
         </Router>
       </MuiThemeProvider>
