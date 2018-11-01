@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import ConfirmationIcon from '../../../assets/icons/confirmation-icon.svg';
+import Tier2Icon from '../../../assets/icons/tier2-badge.svg';
 import './Notification.scss';
 
 const calculateTime = creationDate => {
@@ -20,11 +21,12 @@ const calculateTime = creationDate => {
   // else return minutes
   if (minutesFromMessage) return `${minutesFromMessage}m`;
   // default if 0 minutes have passed
-  return '0';
+  return '0m';
 };
 
 const renderIcon = type => {
   if (type === 'PAYMENT' || type === 'PAYOUT') return <img src={ConfirmationIcon} alt={type} />;
+  if (type === 'TIER_2_CONFIRMED') return <img src={Tier2Icon} alt={type} />;
 };
 
 const Notification = props => {

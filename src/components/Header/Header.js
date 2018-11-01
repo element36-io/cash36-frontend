@@ -7,8 +7,9 @@ import Logo from '../Logo';
 import Responsive from '../Responsive';
 import HeaderDesktop from './HeaderDesktop';
 import HeaderMobile from './HeaderMobile';
-import { logout } from '../../store/auth/auth.actions';
+import { logout, getKyc } from '../../store/auth/auth.actions';
 import { fetchNotifications, newNotification } from '../../store/notifications/notifications.actions';
+import { getTokens, getUserActivity } from '../../store/tokens/tokens.actions';
 import './Header.scss';
 
 class Header extends Component {
@@ -30,12 +31,23 @@ class Header extends Component {
   }
 
   connectWs = () => {
-    const { auth: { user }, newNotification } = this.props;
+    const { auth: { user }, newNotification, getKyc, getTokens, getUserActivity } = this.props;
     let socket = new SockJS(`${API_ROOT}/ws`);
     this.eventSource = Stomp.over(socket);
     this.eventSource.connect({}, () => {
       this.eventSource.subscribe(`/topics/updates/${user.username}`, (message) => {
-        newNotification(JSON.parse(message.body));
+        const messageBody = JSON.parse(message.body);
+        newNotification(messageBody);
+        const { type } = messageBody;
+
+        if (type === 'PAYMENT' || type === 'PAYOUT') {
+          getTokens();
+          getUserActivity();
+        }
+
+        if (type === 'TIER_2_CONFIRMED') {
+          getKyc();
+        }
       });
     }, (err) => {
       console.error(err, 'Connection lost');
@@ -64,4 +76,11 @@ class Header extends Component {
 
 const mapStateToProps = ({ auth, notifications }) => ({ auth, notifications });
 
-export default connect(mapStateToProps, { logout, fetchNotifications, newNotification }, null, { pure: false })(Header);
+export default connect(mapStateToProps, {
+  logout,
+  fetchNotifications,
+  newNotification,
+  getTokens,
+  getUserActivity,
+  getKyc
+}, null, { pure: false })(Header);

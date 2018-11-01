@@ -4,6 +4,8 @@
   position: relative;
   display: inline-flex;
   padding: 1.6rem;
+  align-items: center;
+  width: 100%;
 
   &:not(:last-child) {
     &:after {
@@ -51,6 +53,6 @@
     color: $text-secondary;
     display: flex;
     align-items: center;
-    margin-left: 3.2rem;
+    margin-left: auto;
   }
 }
