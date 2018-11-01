@@ -7,11 +7,11 @@ import navLinks from '../navLinks';
 import './HeaderMobileDropdown.scss';
 
 const HeaderMobileDropdown = props => {
-  const { isActive, logout, clickCallback, user, openVerification } = props;
+  const { isActive, logout, clickCallback, openVerification } = props;
 
   return (
     <div className={`header__mobile-dropdown ${isActive ? 'active' : ''}`}>
-      <UserProfile user={user} alt clickCallback={openVerification} />
+      <UserProfile alt clickCallback={openVerification} />
       <ul className='paper'>
         {navLinks.map(link => <li key={link.label}>
           <NavLink exact activeClassName='selected'
@@ -46,8 +46,7 @@ HeaderMobileDropdown.propTypes = {
   isActive: PropTypes.bool,
   logout: PropTypes.func.isRequired,
   clickCallback: PropTypes.func.isRequired,
-  openVerification: PropTypes.func,
-  user: PropTypes.object
+  openVerification: PropTypes.func
 };
 
 export default HeaderMobileDropdown;

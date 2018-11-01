@@ -5,6 +5,8 @@ export const AUTH_USER = 'AUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const GET_KYC = 'GET_KYC';
+export const ATTESTATION_PROGRESS = 'ATTESTATION_PROGRESS';
+export const CONFIRM_ATTESTATION = 'CONFIRM_ATTESTATION';
 
 export const checkUserAddress = address => API.get(`/public/is-user/${address}`);
 
@@ -86,6 +88,19 @@ export const login = (username, password, user) => async dispatch => {
       payload: error.response.data.error_description
     });
   }
+};
+
+export const attestationProgress = () => {
+  return {
+    type: ATTESTATION_PROGRESS
+  };
+};
+
+export const confirmAttestation = data => {
+  return {
+    type: CONFIRM_ATTESTATION,
+    payload: data
+  };
 };
 
 export const clearErrors = () => ({ type: CLEAR_ERRORS });

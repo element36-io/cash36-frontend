@@ -38,7 +38,7 @@ class Home extends Component {
         <div className='wrapper'>
           <Verification isVisible={showVerification} user={user} close={this.closeVerification} />
           <div className='home-page__user-actions'>
-            <UserProfile user={user} clickCallback={this.toggleVerification} />
+            <UserProfile clickCallback={this.toggleVerification} />
             <QuickActions />
           </div>
           <div className='home-page__balance-cards'>

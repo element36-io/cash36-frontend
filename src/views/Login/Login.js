@@ -23,7 +23,7 @@ class Login extends Component {
   componentDidMount () {
     uPort.requestCredentials({
       requested: ['name', 'avatar'],
-      verified: ['cash36KYC'],
+      verified: ['element36Tier1', 'element36Tier2'],
       notifications: true
     }, this.uPortURIHandler).then(this.checkIfUserExists);
   }
@@ -34,6 +34,7 @@ class Login extends Component {
   };
 
   checkIfUserExists = async uportCreds => {
+    console.log(uportCreds);
     try {
       await checkUserAddress(MNID.decode(uportCreds.networkAddress).address);
       this.setState({ step: 1, uportCreds });
