@@ -6,8 +6,10 @@ const LoginUsername = props => {
   const { networkAddress } = props;
   return (
     <div className='login__field login__field--username'>
-      <label>Username (uPort ID)</label>
-      {MNID.decode(networkAddress).address}
+      <label>
+        <span>Username (uPort ID)</span>
+        {MNID.decode(networkAddress).address}
+      </label>
     </div>
   );
 };

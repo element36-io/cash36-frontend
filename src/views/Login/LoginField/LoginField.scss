@@ -27,7 +27,12 @@
 
   label {
     display: block;
-    margin-bottom: .6rem;
+    span {
+      display: block;
+    }
+    span:first-child {
+      margin-bottom: .6rem;
+    }
   }
 
   input {
@@ -39,39 +44,44 @@
     &:focus + span {
       width: 120%;
     }
-  }
 
-  span {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, 1px);
-    display: block;
-    height: 3px;
-    width: 0;
-    background: $gradient-primary;
-    transition: width .3s;
-  }
-
-  @include desktop {
-    padding: 1.2rem;
-    font-size: 1.5rem;
-    line-height: 1.9rem;
-
-    label {
-      font-size: 1.4rem;
-      line-height: 1.7rem;
+    & + span {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 1px);
+      display: block;
+      height: 3px;
+      width: 0;
+      background: $gradient-primary;
+      transition: width .3s;
     }
   }
 
-  @include mobile {
-    padding: 1rem;
-    font-size: 1.6rem;
-    line-height: 1.9rem;
-
+  @include desktop {
     label {
-      font-size: 1.2rem;
-      line-height: 1.4rem;
+      padding: 1.2rem;
+      font-size: 1.5rem;
+      line-height: 1.9rem;
+
+      span {
+        font-size: 1.4rem;
+        line-height: 1.7rem;
+      }
+    }
+
+  }
+
+  @include mobile {
+    label {
+      padding: 1rem;
+      font-size: 1.6rem;
+      line-height: 1.9rem;
+
+      span {
+        font-size: 1.2rem;
+        line-height: 1.4rem;
+      }
     }
   }
 }

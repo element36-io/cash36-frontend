@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { MNID } from 'uport-connect';
 import { TextField, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import DefaultButton from '../../../components/Buttons/DefaultButton';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import { register, login, clearErrors } from '../../../store/auth/auth.actions';
+import { register, login } from '../../../store/auth/auth.actions';
 import styles from './MuiStyles';
 
 // Remove MUI from this form, it's not needed
@@ -20,7 +19,6 @@ class RegisterForm extends Component {
 
   handleInputChange = name => event => {
     if (this.props.errorMessage) {
-      this.props.clearErrors();
     }
     this.setState({
       [name]: event.target.value
@@ -30,7 +28,7 @@ class RegisterForm extends Component {
   handleFormSubmit = async event => {
     event.preventDefault();
     const { password, confirmPassword } = this.state;
-    const { register, login, history, uportCreds } = this.props;
+    const { register, login, uportCreds } = this.props;
     const username = MNID.decode(uportCreds.networkAddress).address;
     const user = {
       username,
@@ -46,7 +44,6 @@ class RegisterForm extends Component {
 
       await register(username, password, user.avatarUri);
       await login(username, password, user);
-      history.push('/');
     } else {
       this.setState({ passwordError: 'Make sure passwords are a match' });
     }
@@ -142,10 +139,9 @@ const mapStateToProps = ({ auth }) => ({ errorMessage: auth.errorMessage });
 RegisterForm.propTypes = {
   classes: PropTypes.object,
   errorMessage: PropTypes.string,
-  history: PropTypes.object.isRequired,
   login: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
   uportCreds: PropTypes.object
 };
 
-export default withRouter(connect(mapStateToProps, { register, login, clearErrors })(withStyles(styles)(RegisterForm)));
+export default connect(mapStateToProps, { register, login })(withStyles(styles)(RegisterForm));

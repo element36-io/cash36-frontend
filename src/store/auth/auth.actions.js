@@ -2,8 +2,6 @@ import axios from 'axios';
 import API, { API_ROOT } from '../../config/api';
 
 export const AUTH_USER = 'AUTH_USER';
-export const AUTH_ERROR = 'AUTH_ERROR';
-export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const GET_KYC = 'GET_KYC';
 
 export const checkUserAddress = address => API.get(`/public/is-user/${address}`);
@@ -42,10 +40,7 @@ export const register = (username, password, avatarUrl) => async dispatch => {
       { username, password, avatarUrl }
     );
   } catch (error) {
-    dispatch({
-      type: AUTH_ERROR,
-      payload: error.response.data.message
-    });
+    return error.response.data.message;
   }
 };
 
@@ -80,12 +75,8 @@ export const login = (username, password, user) => async dispatch => {
       }
     });
     dispatch(getKyc());
+    return Promise.resolve();
   } catch (error) {
-    dispatch({
-      type: AUTH_ERROR,
-      payload: error.response.data.error_description
-    });
+    return Promise.reject(error.response.data);
   }
 };
-
-export const clearErrors = () => ({ type: CLEAR_ERRORS });
