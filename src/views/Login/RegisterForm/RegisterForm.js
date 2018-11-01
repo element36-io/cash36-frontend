@@ -1,147 +1,70 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { MNID } from 'uport-connect';
-import { TextField, Typography } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
-import DefaultButton from '../../../components/Buttons/DefaultButton';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import { register, login } from '../../../store/auth/auth.actions';
-import styles from './MuiStyles';
+import LoginUsername from '../LoginUsername';
+import LoginField from '../LoginField';
+import { register, createUserObject } from '../../../store/auth/auth.actions';
+import StepButton from '../../../components/Buttons/StepButton/StepButton';
 
-// Remove MUI from this form, it's not needed
 class RegisterForm extends Component {
-  state = { password: '', confirmPassword: '', passwordError: '' };
+  state = {
+    password: '',
+    confirmPassword: '',
+    error: null,
+    isSubmitting: false
+  };
 
-  componentWillUnmount () {
-    this.props.clearErrors();
-  }
-
-  handleInputChange = name => event => {
-    if (this.props.errorMessage) {
-    }
+  handleInputChange = evt => {
+    const { name, value } = evt.target;
     this.setState({
-      [name]: event.target.value
+      [name]: value
     });
   };
 
-  handleFormSubmit = async event => {
-    event.preventDefault();
-    const { password, confirmPassword } = this.state;
-    const { register, login, uportCreds } = this.props;
-    const username = MNID.decode(uportCreds.networkAddress).address;
-    const user = {
-      username,
-      name: uportCreds.name,
-      avatarUri: uportCreds.avatar ? uportCreds.avatar.uri : null,
-      lastLoggedIn: new Date().getTime()
-    };
+  handleFormSubmit = evt => {
+    evt.preventDefault();
+    const { password } = this.state;
+    const { register, uportCreds } = this.props;
+    const { user, username } = createUserObject(uportCreds);
 
-    if (!password) {
-      this.setState({ passwordError: 'Please enter a password' });
-    } else if (password === confirmPassword) {
-      this.setState({ passwordError: '' });
+    this.setState({ isSubmitting: true });
 
-      await register(username, password, user.avatarUri);
-      await login(username, password, user);
-    } else {
-      this.setState({ passwordError: 'Make sure passwords are a match' });
-    }
+    register(username, password, user)
+      .catch(error => this.setState({ error }));
   };
 
   render () {
-    const { classes, uportCreds, errorMessage } = this.props;
-    const { passwordError } = this.state;
+    const { uportCreds } = this.props;
+    const { error, password, confirmPassword, isSubmitting } = this.state;
     return (
-      <div className='login__form'>
-        <form
-          className={classes.root}
-          onSubmit={this.handleFormSubmit}
-        >
-          <h2>Welcome</h2>
-          <p>Welcome aboard, <br /> please, choose a password</p>
-          <TextField
-            name='username'
-            label='Username (uPort ID)'
-            type='text'
-            disabled
-            autoComplete='off'
-            value={MNID.decode(uportCreds.networkAddress).address}
-            fullWidth
-            className={classes.textFieldUsername}
-            InputProps={{
-              disableUnderline: true,
-              className: classes.input
-            }}
-            InputLabelProps={{
-              shrink: true,
-              className: classes.label
-            }}
-          />
-          <TextField
-            label='Password'
-            type='password'
-            autoComplete='off'
-            value={this.state.password}
-            onChange={this.handleInputChange('password')}
-            fullWidth
-            className={classes.textField}
-            InputProps={{
-              disableUnderline: true,
-              className: classes.input
-            }}
-            InputLabelProps={{
-              shrink: true,
-              className: classes.label
-            }}
-          />
-          <TextField
-            label='Confirm Password'
-            type='password'
-            autoComplete='off'
-            value={this.state.confirmPassword}
-            onChange={this.handleInputChange('confirmPassword')}
-            fullWidth
-            className={classes.textField}
-            InputProps={{
-              disableUnderline: true,
-              className: classes.input
-            }}
-            InputLabelProps={{
-              shrink: true,
-              className: classes.label
-            }}
-          />
-          <Typography
-            className={classes.errorMessage}
-          >
-            {errorMessage ? <span>{errorMessage}</span> : <span>{passwordError}</span>}
-          </Typography>
-          <DefaultButton
-            variant='raised'
-            color='primary'
-            type='submit'
-            size='large'
-            fullWidth
-            className={classes.button}
-          >
-            <span>Register</span>
-            <ArrowForwardIcon />
-          </DefaultButton>
-        </form>
-      </div>
+      <form className='login__form' onSubmit={this.handleFormSubmit}>
+        <h2>Welcome</h2>
+        <p>Welcome aboard, <br /> please, choose a password</p>
+        <div className='login__field-wrapper'>
+          <LoginUsername networkAddress={uportCreds.networkAddress} />
+          <LoginField name='password' value={password} changeHandler={this.handleInputChange} label='Password' />
+          <LoginField name='confirmPassword' value={confirmPassword} changeHandler={this.handleInputChange}
+            label='Confirm Password' />
+        </div>
+        {error && <p className='login__form__error'>{error}</p>}
+        <StepButton
+          variant='raised'
+          color='primary'
+          type='submit'
+          size='large'
+          fullWidth
+          text='Register'
+          onClick={this.handleFormSubmit}
+          disabled={!password.length || !confirmPassword.length || isSubmitting || password !== confirmPassword}
+        />
+      </form>
     );
   }
 }
 
-const mapStateToProps = ({ auth }) => ({ errorMessage: auth.errorMessage });
-
 RegisterForm.propTypes = {
-  classes: PropTypes.object,
-  errorMessage: PropTypes.string,
-  login: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
-  uportCreds: PropTypes.object
+  uportCreds: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps, { register, login })(withStyles(styles)(RegisterForm));
+export default connect(null, { register })(RegisterForm);

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { MNID } from 'uport-connect';
 import StepButton from '../../../components/Buttons/StepButton';
 import LoginUsername from '../LoginUsername';
 import LoginField from '../LoginField';
-import { login } from '../../../store/auth/auth.actions';
+import { login, createUserObject } from '../../../store/auth/auth.actions';
 
 class LoginForm extends Component {
   state = {
@@ -23,22 +22,17 @@ class LoginForm extends Component {
     });
   };
 
-  handleFormSubmit = (event) => {
-    event.preventDefault();
+  handleFormSubmit = evt => {
+    evt.preventDefault();
     const { login, uportCreds } = this.props;
-    const username = MNID.decode(uportCreds.networkAddress).address;
     const { password } = this.state;
-    const user = {
-      username,
-      name: this.props.uportCreds.name,
-      avatarUri: this.props.uportCreds.avatar ? this.props.uportCreds.avatar.uri : null,
-      lastLoggedIn: new Date().getTime()
-    };
-    this.setState({isSubmitting: true})
+    const { user, username } = createUserObject(uportCreds);
+
+    this.setState({ isSubmitting: true });
 
     login(username, password, user)
       .catch(error => {
-        this.setState({ error: error.error_description, isSubmitting: false });
+        this.setState({ error, isSubmitting: false });
       });
   };
 
