@@ -1,7 +1,5 @@
 import {
   AUTH_USER,
-  AUTH_ERROR,
-  CLEAR_ERRORS,
   GET_KYC,
   CONFIRM_ATTESTATION,
   ATTESTATION_PROGRESS
@@ -23,17 +21,6 @@ export default (state = initialState, action) => {
         user,
         errorMessage: ''
       };
-    case AUTH_ERROR:
-      return {
-        ...state,
-        errorMessage: action.payload
-      };
-    case CLEAR_ERRORS: {
-      return {
-        ...state,
-        errorMessage: ''
-      };
-    }
     case GET_KYC:
       return {
         ...state,

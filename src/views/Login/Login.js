@@ -34,7 +34,6 @@ class Login extends Component {
   };
 
   checkIfUserExists = async uportCreds => {
-    console.log(uportCreds);
     try {
       await checkUserAddress(MNID.decode(uportCreds.networkAddress).address);
       this.setState({ step: 1, uportCreds });
