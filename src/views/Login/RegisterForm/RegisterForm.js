@@ -34,9 +34,11 @@ class RegisterForm extends Component {
     const username = MNID.decode(uportCreds.networkAddress).address;
     const user = {
       username,
-      name: uportCreds.name,
-      avatarUri: uportCreds.avatar ? uportCreds.avatar.uri : null,
-      lastLoggedIn: new Date().getTime()
+      name: this.props.uportCreds.name,
+      uportAddress: this.props.uportCreds.address,
+      avatarUri: this.props.uportCreds.avatar ? this.props.uportCreds.avatar.uri : null,
+      lastLoggedIn: new Date().getTime(),
+      verified: this.props.uportCreds.verified
     };
 
     if (!password) {

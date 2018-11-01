@@ -33,8 +33,10 @@ class LoginForm extends Component {
     const user = {
       username,
       name: this.props.uportCreds.name,
+      uportAddress: this.props.uportCreds.address,
       avatarUri: this.props.uportCreds.avatar ? this.props.uportCreds.avatar.uri : null,
-      lastLoggedIn: new Date().getTime()
+      lastLoggedIn: new Date().getTime(),
+      verified: this.props.uportCreds.verified
     };
     this.props.login(username, password, user);
   };

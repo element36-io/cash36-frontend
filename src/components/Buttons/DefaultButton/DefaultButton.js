@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 
-const DefaultButton = (props) => (
+const DefaultButton = props => (
   <Button
     {...props}
     style={{ ...props.style, fontFamily: '"Rubik", sans-serif', color: '#fff' }}
