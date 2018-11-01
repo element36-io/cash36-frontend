@@ -4,6 +4,8 @@ import API, { API_ROOT } from '../../config/api';
 
 export const AUTH_USER = 'AUTH_USER';
 export const GET_KYC = 'GET_KYC';
+export const ATTESTATION_PROGRESS = 'ATTESTATION_PROGRESS';
+export const CONFIRM_ATTESTATION = 'CONFIRM_ATTESTATION';
 
 export const checkUserAddress = address => API.get(`/public/is-user/${address}`);
 
@@ -41,7 +43,6 @@ export const register = (username, password, user) => async dispatch => {
     );
     login(username, password, user)(dispatch);
   } catch (error) {
-    console.log(error);
     return Promise.reject(error.response.data.message || 'An error has occured');
   }
 };
@@ -88,11 +89,25 @@ export const createUserObject = uportCreds => {
     username,
     name: uportCreds.name,
     avatarUri: uportCreds.avatar ? uportCreds.avatar.uri : null,
-    lastLoggedIn: new Date().getTime()
+    lastLoggedIn: new Date().getTime(),
+    uportAddress: uportCreds.address,
+    verified: uportCreds.verified
   };
 
   return {
     username,
     user
+  };
+};
+export const attestationProgress = () => {
+  return {
+    type: ATTESTATION_PROGRESS
+  };
+};
+
+export const confirmAttestation = data => {
+  return {
+    type: CONFIRM_ATTESTATION,
+    payload: data
   };
 };

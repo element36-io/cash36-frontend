@@ -26,7 +26,6 @@ class RegisterForm extends Component {
     const { password } = this.state;
     const { register, uportCreds } = this.props;
     const { user, username } = createUserObject(uportCreds);
-
     this.setState({ isSubmitting: true });
 
     register(username, password, user)
