@@ -5,53 +5,65 @@ import DeleteIcon from '@material-ui/icons/Close';
 import './FileInput.scss';
 
 class FileInput extends PureComponent {
-    state = {
-      progress: 0
+  state = {
+    progress: 0,
+    name: null,
+    error: false
+  };
+
+  fileInput = React.createRef();
+
+  fileTypes = ['png', 'jpg', 'jpeg', 'pdf'];
+
+  removeItem = () => {
+    const { removeCallback, documentType } = this.props;
+    this.fileInput.current.value = '';
+    this.setState({ name: null, error: false });
+    removeCallback(documentType);
+  };
+
+  handleChange = evt => {
+    const { changeCallback, documentType, removeCallback } = this.props;
+    const { files } = evt.target;
+    const isValidFileType = this.fileTypes.includes(files[0].name.split('.').pop());
+
+    this.setState({ progress: 0, name: files[0].name, error: !isValidFileType });
+
+    let reader = new FileReader();
+
+    reader.onprogress = data => {
+      if (data.lengthComputable) {
+        let progress = parseInt(((data.loaded / data.total) * 100), 10);
+        this.setState({ progress });
+      }
     };
+    reader.readAsDataURL(files[0]);
 
-    fileInput = React.createRef();
-
-    removeItem = () => {
-      const { removeCallback, documentType } = this.props;
-      this.fileInput.current.value = '';
+    if (!isValidFileType) {
       removeCallback(documentType);
-    };
+      return;
+    }
 
-    handleChange = evt => {
-      const { changeCallback, documentType } = this.props;
-      const { files } = evt.target;
+    changeCallback(files[0], documentType);
+  };
 
-      this.setState({ progress: 0 });
+  render () {
+    const { progress, name, error } = this.state;
+    const { title } = this.props;
 
-      let reader = new FileReader();
-
-      reader.onprogress = data => {
-        if (data.lengthComputable) {
-          let progress = parseInt(((data.loaded / data.total) * 100), 10);
-          this.setState({ progress });
-        }
-      };
-      reader.readAsDataURL(files[0]);
-
-      changeCallback(files[0], documentType);
-    };
-
-    render () {
-      const { progress } = this.state;
-      const { title, documentName } = this.props;
-
-      return (
-        <div className={`verification-form__file-input ${documentName ? 'active' : ''}`}>
+    return (
+      <div className='verification-form__file-input__container'>
+        <div className={`verification-form__file-input ${name ? 'active' : ''} ${error ? 'error' : ''}`}>
           <div className='verification-form__file-input__header'>
             <i className='fas fa-file' />
             {title}
           </div>
           <div className='verification-form__file-input__body'>
             {
-              !documentName
+              !name
                 ? 'Upload a document or an image'
                 : <Fragment>
-                  <DeleteIcon onClick={this.removeItem} className='x' /> <span>{documentName}</span>
+                  <DeleteIcon onClick={this.removeItem} className='x' /> <span>{name}</span>
                 </Fragment>
             }
           </div>
@@ -60,22 +72,23 @@ class FileInput extends PureComponent {
             <input type='file' ref={this.fileInput} onChange={this.handleChange} />
           </label>
           {
-            documentName && (
-              <div className='verification-form__file-input_progress'>
+            name && (
+              <div className='verification-form__file-input__progress'>
                 <span style={{ width: `${progress}%` }} />
               </div>
             )
           }
         </div>
-      );
-    }
+        {error && <p>Only png, jpg, jpeg and pdf files are allowed</p>}
+      </div>
+    );
+  }
 }
 
 FileInput.propTypes = {
   changeCallback: PropTypes.func.isRequired,
   removeCallback: PropTypes.func.isRequired,
   documentType: PropTypes.string.isRequired,
-  documentName: PropTypes.string,
   title: PropTypes.string
 };
 

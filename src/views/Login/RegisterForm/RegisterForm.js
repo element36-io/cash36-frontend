@@ -29,7 +29,7 @@ class RegisterForm extends Component {
     this.setState({ isSubmitting: true });
 
     register(username, password, user)
-      .catch(error => this.setState({ error }));
+      .catch(error => this.setState({ error, isSubmitting: false }));
   };
 
   render () {
