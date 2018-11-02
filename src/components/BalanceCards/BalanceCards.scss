@@ -1,15 +1,24 @@
 @import '../../styles/mixins.scss';
 
 .balance-cards {
-  display: flex;
-  margin-bottom: 3rem;
-  padding-bottom: 1rem;
+  padding-bottom: .5rem;
   justify-content: space-between;
-  overflow: auto;
-  flex-wrap: nowrap;
+
+  @include desktop {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  @include tablet {
+    display: flex;
+    overflow: auto;
+    flex-wrap: nowrap;
+  }
 
   @include mobile {
-    margin-bottom: 2.4rem;
+    display: flex;
     flex-wrap: nowrap;
+    overflow: auto;
   }
 }
