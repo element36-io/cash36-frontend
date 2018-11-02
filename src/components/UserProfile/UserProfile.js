@@ -46,14 +46,12 @@ class UserProfile extends PureComponent {
   }
 
   render () {
-    const { user: { username, avatarUri, name, kycLevel }, alt, clickCallback } = this.props;
+    const { user: { username, avatarUri, name, kycLevel, kycProcessStatus }, alt, clickCallback } = this.props;
     return (
       <div className={`user-profile ${alt ? 'user-profile--alt' : ''}`}>
         <div className='user-profile__avatar'>
           {avatarUri ? <img src={avatarUri} alt={name} /> : <div><i className='fas fa-user' /></div>}
-          <span className={`user-profile__avatar__badge ${kycLevel === 'Tier_2' ? 'user-profile__avatar__badge--alt' : ''}`}>
-            {kycLevel && <span>{tiers[kycLevel].iconText}</span>}
-          </span>
+          { kycLevel && <div className={`user-profile__avatar__badge ${tiers[kycLevel].badgeClass}`} /> }
           <span className={kycLevel} />
         </div>
         <div className='user-profile__info'>
@@ -65,7 +63,8 @@ class UserProfile extends PureComponent {
             {username}
           </p>
           <div className='user-profile__buttons'>
-            {kycLevel && kycLevel !== 'Tier_2' && <DefaultButton variant='raised' onClick={clickCallback} color='primary'>{tiers[kycLevel].btnText}</DefaultButton>}
+            {kycLevel && kycLevel !== 'Tier_2' && kycProcessStatus !== 'AWAITING_VERIFICATION' && <DefaultButton variant='raised' onClick={clickCallback}>{tiers[kycLevel].btnText}</DefaultButton>}
+            {kycProcessStatus === 'AWAITING_VERIFICATION' && <div className='user-profile__buttons--awaiting'>Awaiting Verification</div>}
             {this.renderAttestUser()}
           </div>
         </div>
