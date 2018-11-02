@@ -1,7 +1,12 @@
 @import '../../../styles/mixins.scss';
+@import '../../../styles/settings.scss';
 
 .personal-information {
   margin-top: 4rem;
+
+  &__tier-0 {
+    padding: 2rem;
+  }
 
   @include desktop {
     width: 65%;
@@ -16,6 +21,41 @@
     > div:first-child {
       display: flex;
       justify-content: space-between;
+      border-bottom: 1px solid $grey-border;
+      margin-bottom: 1.6rem;
+      padding-bottom: 1rem;
+
+      > button {
+        background-color: transparent;
+        outline: none;
+        border: none;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  &__content {
+    > h3 {
+      margin: 1.6rem 0;
+    }
+
+    > div {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-column-gap: 7.2rem;
+      margin-bottom: 2.5rem;
+
+      @include mobile {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+
+    > div:first-child {
+      border-bottom: 1px solid $grey-border;
+      padding-bottom: 1.6rem;
     }
   }
 }
