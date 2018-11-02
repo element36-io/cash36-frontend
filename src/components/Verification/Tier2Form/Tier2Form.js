@@ -8,32 +8,27 @@ import API from '../../../config/api';
 import './Tier2Form.scss';
 import { getKyc } from '../../../store/auth/auth.actions';
 
-// TODO: add file validation
 class Tier2Form extends Component {
     state = {
       types: {
         ID_Front: {
           title: 'Government Issued ID (Front)',
           documentType: 'ID_Front',
-          documentName: null,
           file: null
         },
         ID_Back: {
           title: 'Government Issued ID (Back)',
           documentType: 'ID_Back',
-          documentName: null,
           file: null
         },
         Utility_Bill: {
           title: 'Verified Proof of Residence',
           documentType: 'Utility_Bill',
-          documentName: null,
           file: null
         },
         ID_Selfie: {
           title: 'ID Confirmation Photo',
           documentType: 'ID_Selfie',
-          documentName: null,
           file: null
         }
       },
@@ -46,7 +41,6 @@ class Tier2Form extends Component {
           ...this.state.types,
           [documentType]: {
             ...this.state.types[documentType],
-            documentName: file.name,
             file
           }
         }
@@ -59,7 +53,7 @@ class Tier2Form extends Component {
           ...this.state.types,
           [documentType]: {
             ...this.state.types[documentType],
-            documentName: null
+            file: null
           }
         }
       });
@@ -88,25 +82,25 @@ class Tier2Form extends Component {
     render () {
       const { types, submitting } = this.state;
       const { close } = this.props;
+      const disabled = Object.values(types).some(t => !t.file);
 
       return (
         <div className='verification-form__tier2'>
           <VerificationHeader title='Tier 2 Verification'
             subtitle='Please, upload the following information to be able to use most of your account' />
           <h3>
-                    Please, upload the following
+              Please, upload the following
           </h3>
           <div className='verification-form__file-wrapper'>
             {Object.keys(types).map(type => (
               <FileInput changeCallback={this.changeCallback} removeCallback={this.removeItem}
                 title={types[type].title}
                 documentType={types[type].documentType}
-                documentName={types[type].documentName}
                 key={types[type].documentType}
               />
             ))}
           </div>
-          <VerificationActions close={close} buttonCallback={this.submitFiles} isSubmitting={submitting} buttonText={'Submit & Continue'} />
+          <VerificationActions close={close} disabled={disabled} buttonCallback={this.submitFiles} isSubmitting={submitting} buttonText={'Submit & Continue'} />
         </div>
       );
     }
