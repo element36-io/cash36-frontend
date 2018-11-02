@@ -2,10 +2,14 @@
 
 .balance-cards {
   display: flex;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
+  padding-bottom: 1rem;
+  justify-content: space-between;
+  overflow: auto;
+  flex-wrap: nowrap;
 
   @include mobile {
     margin-bottom: 2.4rem;
-    flex-direction: column;
+    flex-wrap: nowrap;
   }
 }
