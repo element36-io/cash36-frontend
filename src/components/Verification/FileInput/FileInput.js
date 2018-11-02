@@ -63,13 +63,13 @@ class FileInput extends PureComponent {
               !name
                 ? 'Upload a document or an image'
                 : <Fragment>
-                  <DeleteIcon onClick={this.removeItem} className='x'/> <span>{name}</span>
+                  <DeleteIcon onClick={this.removeItem} className='x' /> <span>{name}</span>
                 </Fragment>
             }
           </div>
           <label>
-            <i className='fas fa-upload'/>
-            <input type='file' ref={this.fileInput} onChange={this.handleChange}/>
+            <i className='fas fa-upload' />
+            <input type='file' ref={this.fileInput} onChange={this.handleChange} />
           </label>
           {
             name && (
