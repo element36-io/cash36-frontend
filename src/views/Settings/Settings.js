@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import UserProfile from '../../components/UserProfile';
-// import Verification from '../../components/Verification';
 import DefaultButton from '../../components/Buttons/DefaultButton';
+import BalanceCards from '../../components/BalanceCards';
+import PersonalInformation from './PersonalInformation';
 import { getTokens } from '../../store/tokens/tokens.actions';
 import plusIcon from '../../assets/icons/plus-icon.svg';
 
 import './Settings.scss';
-import BalanceCards from '../../components/BalanceCards';
 
 class Settings extends Component {
   componentDidMount () {
@@ -33,6 +33,9 @@ class Settings extends Component {
               <img src={plusIcon} alt='' />
               Add Currency
             </DefaultButton>
+          </div>
+          <div className='settings__personal-information'>
+            <PersonalInformation />
           </div>
         </div>
       </div>

@@ -1,0 +1,21 @@
+@import '../../../styles/mixins.scss';
+
+.personal-information {
+  margin-top: 4rem;
+
+  @include desktop {
+    width: 65%;
+  }
+
+  > h2 {
+    margin-bottom: 2.4rem;
+  }
+  > form {
+    padding: 2.4rem;
+
+    > div:first-child {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}

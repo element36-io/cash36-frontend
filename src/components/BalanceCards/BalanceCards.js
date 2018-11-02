@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getTokens } from '../../store/tokens/tokens.actions';
 import BalanceCard from '../BalanceCard';
@@ -20,5 +21,10 @@ class BalanceCards extends Component {
 }
 
 const mapStateToProps = ({ tokens: { tokens = [] } }) => ({ tokens });
+
+BalanceCards.propTypes = {
+  getTokens: PropTypes.func.isRequired,
+  tokens: PropTypes.array.isRequired
+};
 
 export default connect(mapStateToProps, { getTokens })(BalanceCards);

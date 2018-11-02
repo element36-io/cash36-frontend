@@ -93,8 +93,9 @@ const mapStateToProps = ({ auth: { user, attesting } }) => ({ user, attesting })
 
 UserProfile.propTypes = {
   user: PropTypes.object.isRequired,
-  clickCallback: PropTypes.func,
-  alt: PropTypes.bool
+  alt: PropTypes.bool,
+  attestationProgress: PropTypes.func,
+  confirmAttestation: PropTypes.func
 };
 
 export default connect(mapStateToProps, { confirmAttestation, attestationProgress })(UserProfile);
