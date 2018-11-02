@@ -25,9 +25,9 @@ class FileInput extends PureComponent {
   handleChange = evt => {
     const { changeCallback, documentType, removeCallback } = this.props;
     const { files } = evt.target;
-    const ext = files[0].name.split('.').pop();
+    const isValidFileType = this.fileTypes.includes(files[0].name.split('.').pop());
 
-    this.setState({ progress: 0, name: files[0].name, error: !this.fileTypes.includes(ext) });
+    this.setState({ progress: 0, name: files[0].name, error: !isValidFileType });
 
     let reader = new FileReader();
 
@@ -39,7 +39,7 @@ class FileInput extends PureComponent {
     };
     reader.readAsDataURL(files[0]);
 
-    if (!this.fileTypes.includes(ext)) {
+    if (!isValidFileType) {
       removeCallback(documentType);
       return;
     }
