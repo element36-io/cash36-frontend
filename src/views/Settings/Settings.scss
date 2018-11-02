@@ -3,6 +3,15 @@
 @import '../../styles/settings.scss';
 
 .settings {
+
+  @include desktop {
+    background: linear-gradient(to bottom, $headerGrey 0, $headerGrey 209px, $backgroundGrey 209px, $backgroundGrey 100%) no-repeat;
+  }
+
+  &__profile {
+    margin-bottom: 3rem;
+  }
+
   &__buttons {
     > button {
       @extend .paper;

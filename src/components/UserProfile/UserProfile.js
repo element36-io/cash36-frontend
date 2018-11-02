@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { CircularProgress } from '@material-ui/core';
 import tiers from './tiers';
 import DefaultButton from '../Buttons/DefaultButton';
-import Verification from './Verification';
+import Verification from '../Verification';
 import { uPort } from '../../config/uport.config';
 import { confirmAttestation, attestationProgress } from '../../store/auth/auth.actions';
 

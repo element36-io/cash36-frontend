@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import UserProfile from '../../components/UserProfile';
+import UserProfile from '../../components/UserProfile';
 // import Verification from '../../components/Verification';
 import DefaultButton from '../../components/Buttons/DefaultButton';
 import { getTokens } from '../../store/tokens/tokens.actions';
@@ -21,6 +21,9 @@ class Settings extends Component {
     return (
       <div className='settings'>
         <div className='wrapper'>
+          <div className='settings__profile'>
+            <UserProfile />
+          </div>
           <div className='settings__buttons'>
             <BalanceCards />
             <DefaultButton
