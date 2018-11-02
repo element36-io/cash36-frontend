@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import BalanceCard from '../../components/BalanceCard';
 import QuickActions from './QuickActions';
 import ActivityTable from '../../components/ActivityTable';
 import UserProfile from '../../components/UserProfile';
 import Verification from '../../components/Verification';
-import { getTokens, getUserActivity } from '../../store/tokens/tokens.actions';
+import { getUserActivity } from '../../store/tokens/tokens.actions';
+import BalanceCards from '../../components/BalanceCards';
 
 import './Home.scss';
 
@@ -15,7 +15,6 @@ class Home extends Component {
   };
 
   componentDidMount () {
-    this.props.getTokens();
     this.props.getUserActivity();
   }
 
@@ -29,7 +28,7 @@ class Home extends Component {
 
   render () {
     const { showVerification } = this.state;
-    const { user, tokens, userActivity } = this.props;
+    const { user, userActivity } = this.props;
 
     const lastActivity = userActivity.slice(0, 5);
 
@@ -42,8 +41,7 @@ class Home extends Component {
             <QuickActions />
           </div>
           <div className='home-page__balance-cards'>
-            {tokens.map(({ symbol, name, balance }) =>
-              <BalanceCard key={name} name={name} symbol={symbol} balance={balance} />)}
+            <BalanceCards />
           </div>
           <div className='home-page__activity'>
             <h2>Last Activity</h2>
@@ -61,10 +59,9 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = ({ auth: { user }, tokens: { tokens = [], userActivity = [] } }) => ({
+const mapStateToProps = ({ auth: { user }, tokens: { userActivity = [] } }) => ({
   user,
-  tokens,
   userActivity
 });
 
-export default connect(mapStateToProps, { getTokens, getUserActivity })(Home);
+export default connect(mapStateToProps, { getUserActivity })(Home);

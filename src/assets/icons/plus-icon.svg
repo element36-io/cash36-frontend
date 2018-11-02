@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>E33F58A9-2773-487E-A7FE-21AACFB8DCDE@1x</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <linearGradient x1="63.8375539%" y1="31.9058287%" x2="0%" y2="115.334302%" id="linearGradient-1">
+            <stop stop-color="#63B4F5" offset="0%"></stop>
+            <stop stop-color="#017EE5" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Web-App---Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Contacts" transform="translate(-1127.000000, -163.000000)">
+            <g id="Search-" transform="translate(1110.000000, 147.000000)">
+                <g id="Group" transform="translate(17.000000, 16.000000)">
+                    <circle id="container" fill="url(#linearGradient-1)" cx="16.3137255" cy="15.6862745" r="15.6862745"></circle>
+                    <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="24.1568627 16.8067227 17.4341737 16.8067227 17.4341737 23.5294118 15.1932773 23.5294118 15.1932773 16.8067227 8.47058824 16.8067227 8.47058824 14.5658263 15.1932773 14.5658263 15.1932773 7.84313725 17.4341737 7.84313725 17.4341737 14.5658263 24.1568627 14.5658263"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

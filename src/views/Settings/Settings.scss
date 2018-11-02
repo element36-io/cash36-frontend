@@ -1,0 +1,48 @@
+@import '../../styles/utils.scss';
+@import '../../styles/mixins.scss';
+@import '../../styles/settings.scss';
+
+.settings {
+  &__buttons {
+    > button {
+      @extend .paper;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      height: 100%;
+
+      background-image: none;
+      text-transform: none;
+      > span {
+        color: $black;
+        font-weight: 400;
+        font-size: 1.8rem;
+        display: flex;
+        line-height: 22px;
+        flex-direction: column;
+      }
+
+      img {
+        margin-bottom: 1.2rem;
+        width: 3.2rem;
+        height: 3.2rem;
+      }
+    }
+    @include mobile {
+      > button {
+        width: 100%;
+        padding: 1rem 0;
+        > span {
+          flex-direction: row;
+          align-items: center;
+        }
+
+        img {
+          margin-bottom: 0;
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
+}

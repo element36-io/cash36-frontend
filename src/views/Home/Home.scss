@@ -31,10 +31,6 @@
       justify-content: space-between;
       padding-bottom: 3.7rem;
     }
-    &__balance-cards {
-      display: flex;
-      margin-bottom: 4rem;
-    }
   }
 
   @include mobile {
@@ -46,10 +42,6 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-    }
-
-    &__balance-cards {
-      margin-bottom: 2.4rem;
     }
   }
 

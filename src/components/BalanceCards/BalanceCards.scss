@@ -1,0 +1,11 @@
+@import '../../styles/mixins.scss';
+
+.balance-cards {
+  display: flex;
+  margin-bottom: 4rem;
+
+  @include mobile {
+    margin-bottom: 2.4rem;
+    flex-direction: column;
+  }
+}
