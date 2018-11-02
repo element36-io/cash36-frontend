@@ -23,14 +23,16 @@ body {
   margin: 0;
   height: 100%;
   color: $text-black-1;
-  background: linear-gradient(to bottom, $headerGrey 0,$headerGrey 200px,$backgroundGrey 200px,$backgroundGrey 100%);
-  background-repeat: no-repeat;
   background-color: $backgroundGrey;
   //background: linear-gradient(to bottom, orange 0,red 200px,#fff 200px,#fff 100%) no-repeat;
   line-height: 1.6;
   font-size: 16px;
   font-size: 1.6rem;
   font-family: 'Rubik', sans-serif;
+
+  @media screen and (min-width: 768px) and (max-width: 1169px) {
+    padding: 0 2rem;
+  }
 
   @include mobile {
     background: none;
