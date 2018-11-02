@@ -4,12 +4,25 @@ import { connect } from 'react-redux';
 import { CircularProgress } from '@material-ui/core';
 import tiers from './tiers';
 import DefaultButton from '../Buttons/DefaultButton';
+import Verification from './Verification';
 import { uPort } from '../../config/uport.config';
 import { confirmAttestation, attestationProgress } from '../../store/auth/auth.actions';
 
 import './UserProfile.scss';
 
 class UserProfile extends PureComponent {
+  state = {
+    showVerification: false
+  };
+
+  toggleVerification = () => {
+    this.setState({ showVerification: !this.state.showVerification });
+  };
+
+  closeVerification = () => {
+    this.setState({ showVerification: false });
+  };
+
   renderAttestUser = () => {
     const { user: { kycLevel, verified }, attesting } = this.props;
 
@@ -46,9 +59,12 @@ class UserProfile extends PureComponent {
   }
 
   render () {
-    const { user: { username, avatarUri, name, kycLevel, kycProcessStatus }, alt, clickCallback } = this.props;
+    const { user, user: { username, avatarUri, name, kycLevel, kycProcessStatus }, alt } = this.props;
+    const { showVerification } = this.state;
+
     return (
       <div className={`user-profile ${alt ? 'user-profile--alt' : ''}`}>
+        <Verification isVisible={showVerification} user={user} close={this.closeVerification} />
         <div className='user-profile__avatar'>
           {avatarUri ? <img src={avatarUri} alt={name} /> : <div><i className='fas fa-user' /></div>}
           { kycLevel && <div className={`user-profile__avatar__badge ${tiers[kycLevel].badgeClass}`} /> }
@@ -63,7 +79,7 @@ class UserProfile extends PureComponent {
             {username}
           </p>
           <div className='user-profile__buttons'>
-            {kycLevel && kycLevel !== 'Tier_2' && kycProcessStatus !== 'AWAITING_VERIFICATION' && <DefaultButton variant='raised' onClick={clickCallback}>{tiers[kycLevel].btnText}</DefaultButton>}
+            {kycLevel && kycLevel !== 'Tier_2' && kycProcessStatus !== 'AWAITING_VERIFICATION' && <DefaultButton variant='raised' onClick={this.toggleVerification}>{tiers[kycLevel].btnText}</DefaultButton>}
             {kycProcessStatus === 'AWAITING_VERIFICATION' && <div className='user-profile__buttons--awaiting'>Awaiting Verification</div>}
             {this.renderAttestUser()}
           </div>

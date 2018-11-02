@@ -27,7 +27,7 @@ class Settings extends Component {
               onClick={this.handleAddCurrencyClick}
               className='settings__add-currency'
             >
-              <img src={plusIcon} />
+              <img src={plusIcon} alt='' />
               Add Currency
             </DefaultButton>
           </div>

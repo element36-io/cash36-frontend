@@ -3,39 +3,24 @@ import { connect } from 'react-redux';
 import QuickActions from './QuickActions';
 import ActivityTable from '../../components/ActivityTable';
 import UserProfile from '../../components/UserProfile';
-import Verification from '../../components/Verification';
 import { getUserActivity } from '../../store/tokens/tokens.actions';
 import BalanceCards from '../../components/BalanceCards';
 
 import './Home.scss';
 
 class Home extends Component {
-  state = {
-    showVerification: false
-  };
-
   componentDidMount () {
     this.props.getUserActivity();
   }
 
-  toggleVerification = () => {
-    this.setState({ showVerification: !this.state.showVerification });
-  };
-
-  closeVerification = () => {
-    this.setState({ showVerification: false });
-  };
-
   render () {
-    const { showVerification } = this.state;
-    const { user, userActivity } = this.props;
+    const { userActivity } = this.props;
 
     const lastActivity = userActivity.slice(0, 5);
 
     return (
       <div className='home-page'>
         <div className='wrapper'>
-          <Verification isVisible={showVerification} user={user} close={this.closeVerification} />
           <div className='home-page__user-actions'>
             <UserProfile clickCallback={this.toggleVerification} />
             <QuickActions />
@@ -59,9 +44,6 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = ({ auth: { user }, tokens: { userActivity = [] } }) => ({
-  user,
-  userActivity
-});
+const mapStateToProps = ({ tokens: { userActivity = [] } }) => ({ userActivity });
 
 export default connect(mapStateToProps, { getUserActivity })(Home);
