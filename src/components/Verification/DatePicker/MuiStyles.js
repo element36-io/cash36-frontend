@@ -1,7 +1,4 @@
 export default theme => ({
-  root: {
-    borderBottom: '2px solid #EDF0F4'
-  },
   input: {
     fontSize: '1.6rem',
     '&>input': {

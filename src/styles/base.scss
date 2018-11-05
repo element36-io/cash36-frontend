@@ -29,6 +29,7 @@ body {
   font-size: 16px;
   font-size: 1.6rem;
   font-family: 'Rubik', sans-serif;
+  overflow: hidden;
 
   @media screen and (min-width: 768px) and (max-width: 1169px) {
     padding: 0 2rem;
@@ -51,6 +52,7 @@ body > div[role="tooltip"] {
 #root {
   margin: 0 auto;
   height: 100%;
+  overflow: scroll;
   @include mobile {
     padding-top: 87px;
   }

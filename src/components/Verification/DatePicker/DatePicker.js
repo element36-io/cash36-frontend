@@ -8,7 +8,7 @@ import RightArrowIcon from '@material-ui/icons/KeyboardArrowRight';
 import LeftArrowIcon from '@material-ui/icons/KeyboardArrowLeft';
 import styles from './MuiStyles';
 
-const DatePicker = ({ classes, dob, onChange }) => (
+const DatePicker = ({ classes, dob, onChange, disabled = false, editable = false }) => (
   <MuiPickersUtilsProvider utils={MomentUtils}>
     <InlineDatePicker
       value={dob}
@@ -16,6 +16,7 @@ const DatePicker = ({ classes, dob, onChange }) => (
       label='Date of Birth'
       disableFuture
       fullWidth
+      disabled={disabled}
       rightArrowIcon={<RightArrowIcon />}
       leftArrowIcon={<LeftArrowIcon />}
       className={classes.root}
@@ -23,7 +24,11 @@ const DatePicker = ({ classes, dob, onChange }) => (
       InputProps={{
         disableUnderline: true,
         placeholder: 'DD/MM/YYYY',
-        className: classes.input
+        className: classes.input,
+        style: {
+          color: editable && '#01152C',
+          borderBottom: disabled ? '1px solid transparent' : '1px solid #EDF0F4'
+        }
       }}
       InputLabelProps={{
         shrink: true,

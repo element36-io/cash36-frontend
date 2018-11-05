@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/KeyboardArrowDown';
 import PopupMenu from '../../PopupMenu';
 import './HeaderMenu.scss';
 
 const HeaderMenu = props => {
-  const { logout, open, anchorEl, closeCallback, openCallback, user: { avatarUri, name } } = props;
+  const { logout, open, anchorEl, closeCallback, openCallback, user: { avatarUri, name }, history } = props;
+  const redirect = (path) => {
+    history.push(path);
+    closeCallback();
+  };
 
   return (
     <div className='header__menu'>
@@ -22,7 +27,14 @@ const HeaderMenu = props => {
         className='header__menu__icon'
       />
       <PopupMenu handleClose={closeCallback} open={open} anchor={anchorEl} placement='bottom-end'>
-        <MenuItem onClick={logout}>Logout</MenuItem>
+        <Fragment>
+          <MenuItem onClick={() => { redirect('/settings'); }}>
+            Settings
+          </MenuItem>
+          <MenuItem onClick={logout}>
+            Logout
+          </MenuItem>
+        </Fragment>
       </PopupMenu>
     </div>
 
@@ -36,7 +48,6 @@ HeaderMenu.propTypes = {
   open: PropTypes.bool.isRequired,
   anchorEl: PropTypes.object,
   user: PropTypes.object
-
 };
 
-export default HeaderMenu;
+export default withRouter(HeaderMenu);
