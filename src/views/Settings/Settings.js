@@ -30,7 +30,6 @@ class Settings extends Component {
             <BalanceCards />
             <DefaultButton
               onClick={this.handleAddCurrencyClick}
-              className='settings__add-currency'
             >
               <img src={plusIcon} alt='' />
               Add Currency

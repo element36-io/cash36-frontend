@@ -2,23 +2,23 @@
 
 .balance-cards {
   padding-bottom: .5rem;
-  justify-content: space-between;
 
   @include desktop {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
   }
 
   @include tablet {
     display: flex;
     overflow: auto;
     flex-wrap: nowrap;
+    justify-content: space-between;
   }
 
   @include mobile {
     display: flex;
     flex-wrap: nowrap;
     overflow: auto;
+    justify-content: space-between;
   }
 }
