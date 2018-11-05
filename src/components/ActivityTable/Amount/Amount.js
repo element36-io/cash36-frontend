@@ -4,15 +4,10 @@ import { formatAmount } from '../../../helpers/currencies.helpers';
 
 import './Amount.scss';
 
-const renderAction = (type, amount) => {
-  if (type === 'BUY' || type === 'RECEIVED') return `+${formatAmount(amount)}`;
-  if (type === 'SELL' || type === 'SENT') return `-${formatAmount(amount)}`;
-};
-
 const Amount = ({ type, amount, symbol }) => {
   return (
     <div className='activity-table-amount'>
-      <div>{renderAction(type, amount)}</div>
+      <div>{type === 'BUY' || type === 'RECEIVED' ? '+' : '-'}{formatAmount(amount)}</div>
       <div>{symbol}</div>
     </div>
   );
