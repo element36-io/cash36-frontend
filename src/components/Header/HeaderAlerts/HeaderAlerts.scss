@@ -28,6 +28,7 @@
     z-index: 20;
     background: #fff;
     transition: all .2s ease-in;
+    overflow: auto;
 
     &.alerts-enter {
       opacity: 0;
@@ -56,7 +57,6 @@
       max-height: 40rem;
       box-shadow: $box-shadow-1;
       border-radius: 10px;
-      overflow: auto;
       transform-origin: 44.5rem top 0;
     }
   }
@@ -68,11 +68,8 @@
       bottom: 0;
       left: 0;
       top: 8.7rem;
+      max-height: calc(100vh - 8.7rem);
       transform-origin: center top 0;
     }
   }
-
 }
-
-
-

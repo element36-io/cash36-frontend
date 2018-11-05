@@ -4,7 +4,7 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import { CSSTransition } from 'react-transition-group';
 
 const PopUp = props => {
-  const {children, open, timeout, classNames, onClickAway} = props;
+  const { children, open, timeout, classNames, onClickAway } = props;
 
   return (
     <CSSTransition in={open} timeout={timeout} classNames={classNames} unmountOnExit>

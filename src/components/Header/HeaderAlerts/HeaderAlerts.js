@@ -31,7 +31,7 @@ class HeaderAlerts extends Component {
 
     return (
       <div className='header__alerts' onClick={this.openNotifications}>
-        <i className='fas fa-bell'/>
+        <i className='fas fa-bell' />
         {!!badgeCount && <span className='header__alerts__counter'>{badgeCount}</span>}
         {notifications && !!notifications.length && (
           <PopUp open={open} timeout={200} classNames='alerts' onClickAway={this.closeNotifications}>

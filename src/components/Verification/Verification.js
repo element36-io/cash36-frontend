@@ -69,7 +69,7 @@ class Verification extends Component {
 
       return (
         <Dialog onClose={close} open={isVisible} maxWidth={false} disableBackdropClick={blockModal}
-          disableEscapeKeyDown={blockModal}>
+          disableEscapeKeyDown={blockModal} className='verification-form-modal'>
           <div className='verification-form'>
             {step !== 0 && <CloseIcon onClick={close} className='verification-form__close' />}
             {this.steps[step]}
