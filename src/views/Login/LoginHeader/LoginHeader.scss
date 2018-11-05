@@ -12,18 +12,17 @@
   }
 
   @include mobile {
-    > *
-    {
+    > * {
       position: fixed;
-      z-index:20;
+      z-index: 20;
       top: 1.6rem;
       left: 1rem;
-      }
+    }
 
     .nav-btn {
       right: 1rem;
       left: auto;
-      }
+    }
 
     .login__header__dropdown {
       z-index: 15;
@@ -41,7 +40,7 @@
       &.active {
         transform: scale(1);
         opacity: 1;
-        }
+      }
 
       ul {
         padding: 1.5rem;
@@ -49,17 +48,20 @@
 
         li:not(:last-child) {
           margin-bottom: 1rem;
-          border-bottom: 1px solid $lightGrey
+          border-bottom: 1px solid $lightGrey;
+
+          a {
+            padding-bottom: 1rem;
           }
+        }
 
         a {
           position: relative;
           display: block;
           color: #272727;
           cursor: pointer;
-          padding-bottom: 1rem;
-          }
         }
       }
+    }
   }
 }

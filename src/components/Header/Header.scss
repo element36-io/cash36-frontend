@@ -23,6 +23,17 @@ header {
     font-size: 1.8rem;
     line-height: 2.2rem;
 
+    &:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 200px;
+      background: linear-gradient(to bottom, $headerGrey 0,$headerGrey 100%);
+      content: '';
+      z-index: -1;
+    }
+
     ul {
       margin-left: 10rem;
 
