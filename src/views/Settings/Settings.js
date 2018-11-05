@@ -5,6 +5,7 @@ import DefaultButton from '../../components/Buttons/DefaultButton';
 import BalanceCards from '../../components/BalanceCards';
 import PersonalInformation from './PersonalInformation';
 import { getTokens } from '../../store/tokens/tokens.actions';
+import { getCountries } from '../../store/countries/countries.actions';
 import plusIcon from '../../assets/icons/plus-icon.svg';
 
 import './Settings.scss';
@@ -12,6 +13,7 @@ import './Settings.scss';
 class Settings extends Component {
   componentDidMount () {
     this.props.getTokens();
+    this.props.getCountries();
   }
 
   handleAddCurrencyClick = () => {
@@ -45,4 +47,4 @@ class Settings extends Component {
 
 const mapStateToProps = ({ tokens: { tokens = [] } }) => ({ tokens });
 
-export default connect(mapStateToProps, { getTokens })(Settings);
+export default connect(mapStateToProps, { getTokens, getCountries })(Settings);

@@ -3,23 +3,26 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import editIcon from '../../../assets/icons/edit-icon.svg';
 import EditableInput from '../EditableInput';
+import EditableSelect from '../EditableSelect';
 
 import './PersonalInformation.scss';
 
 class PersonalInformation extends Component {
   state = {
     formDisabled: true,
-    firstName: this.props.user.firstName,
+    firstName: '',
     lastName: this.props.user.lastName,
     email: this.props.user.email,
     street: this.props.user.street,
     streetNr: this.props.user.streetNr,
     zip: this.props.user.zip,
     city: this.props.user.city,
-    iban: this.props.user.bankAccounts[0].iban,
-    bankLine1: this.props.user.bankAccounts[0].bankLine1,
-    accountNr: this.props.user.bankAccounts[0].accountNr,
-    bankLine2: this.props.user.bankAccounts[0].bankLine2
+    country: '',
+    nationality: '',
+    iban: '',
+    bankLine1: '',
+    accountNr: '',
+    bankLine2: ''
   }
 
   toggleEdit = () => {
@@ -47,12 +50,14 @@ class PersonalInformation extends Component {
       streetNr,
       zip,
       city,
+      nationality,
+      country,
       iban,
       bankLine1,
       accountNr,
       bankLine2
     } = this.state;
-    const { user: { kycLevel } } = this.props;
+    const { user: { kycLevel }, countries, nationalities } = this.props;
     return (
       <Fragment>
         {kycLevel === 'Tier_0' &&
@@ -76,7 +81,7 @@ class PersonalInformation extends Component {
                   name='firstName'
                   label='First Name'
                   disabled={formDisabled}
-                  value={firstName}
+                  value={firstName || this.props.user.firstName}
                   onChange={this.handleTextChange}
                 />
                 <EditableInput
@@ -122,6 +127,22 @@ class PersonalInformation extends Component {
                   value={city}
                   onChange={this.handleTextChange}
                 />
+                <EditableSelect
+                  name='country'
+                  label='Country of Residence'
+                  disabled={formDisabled}
+                  value={country || this.props.user.country.code}
+                  countryData={countries}
+                  onChange={this.handleTextChange}
+                />
+                <EditableSelect
+                  name='nationality'
+                  label='Nationality'
+                  disabled={formDisabled}
+                  value={nationality || this.props.user.nationality.code}
+                  countryData={nationalities}
+                  onChange={this.handleTextChange}
+                />
               </div>
               <h3>Bank Account</h3>
               <div>
@@ -129,28 +150,28 @@ class PersonalInformation extends Component {
                   name='iban'
                   label='IBAN'
                   disabled={formDisabled}
-                  value={iban}
+                  value={iban || this.props.user.bankAccounts[0].iban}
                   onChange={this.handleTextChange}
                 />
                 <EditableInput
                   name='bankLine1'
                   label='Bank Address Line 1'
                   disabled={formDisabled}
-                  value={bankLine1}
+                  value={bankLine1 || this.props.user.bankAccounts[0].bankLine1}
                   onChange={this.handleTextChange}
                 />
                 <EditableInput
                   name='accountNr'
                   label='Account Number'
                   disabled={formDisabled}
-                  value={accountNr}
+                  value={accountNr || this.props.user.bankAccounts[0].accountNr}
                   onChange={this.handleTextChange}
                 />
                 <EditableInput
                   name='bankLine2'
                   label='Bank Address Line 2'
                   disabled={formDisabled}
-                  value={bankLine2}
+                  value={bankLine2 || this.props.user.bankAccounts[0].bankLine2}
                   onChange={this.handleTextChange}
                 />
               </div>
@@ -163,7 +184,12 @@ class PersonalInformation extends Component {
   }
 }
 
-const mapStateToProps = ({ auth: { user } }) => ({ user });
+const mapStateToProps = ({ auth: { user }, countries: { countries = [], nationalities = [] } }) =>
+  ({
+    user,
+    countries,
+    nationalities
+  });
 
 PersonalInformation.propTypes = {
   user: PropTypes.object.isRequired
