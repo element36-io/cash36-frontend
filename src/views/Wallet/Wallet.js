@@ -7,6 +7,7 @@ import Buy from '../Buy';
 import Sell from '../Sell';
 import Transfer from '../Transfer';
 import History from '../History';
+import Settings from '../Settings';
 
 const Wallet = props => {
   const { isAuthenticated } = props;
@@ -22,6 +23,7 @@ const Wallet = props => {
         <Route exact path='/sell' component={Sell} />
         <Route exact path='/transfer' component={Transfer} />
         <Route exact path='/history' component={History} />
+        <Route exact path='/settings' component={Settings} />
       </Switch>
     </Fragment>
   );

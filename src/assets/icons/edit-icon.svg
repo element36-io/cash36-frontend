@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>9E337D72-CB36-489A-85B8-7A0ABFF88CE5</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <linearGradient x1="63.8375539%" y1="31.9058287%" x2="0%" y2="115.334302%" id="linearGradient-1">
+            <stop stop-color="#63B4F5" offset="0%"></stop>
+            <stop stop-color="#017EE5" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Web-App---Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="User-Settings" transform="translate(-835.000000, -529.000000)">
+            <g id="Tier-1-" transform="translate(115.000000, 512.000000)">
+                <g id="Head" transform="translate(24.000000, 17.000000)">
+                    <g id="Edit" transform="translate(696.000000, 0.000000)">
+                        <circle id="container" fill="url(#linearGradient-1)" cx="16" cy="16" r="16"></circle>
+                        <path d="M21.4771097,12.619775 C21.7298523,12.3670324 21.7298523,11.9457946 21.4771097,11.7060131 L19.9606536,10.189557 C19.7208721,9.93681433 19.2996343,9.93681433 19.0468916,10.189557 L17.8544647,11.3755034 L20.2846827,13.8057214 L21.4771097,12.619775 Z M10,19.2364486 L10,21.6666667 L12.430218,21.6666667 L19.5977411,14.4926631 L17.167523,12.062445 L10,19.2364486 Z" id="Shape" fill="#FFFFFF" fill-rule="nonzero"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
