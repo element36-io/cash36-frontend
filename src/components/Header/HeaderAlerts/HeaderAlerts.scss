@@ -1,3 +1,7 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/settings.scss';
+
+
 .header__alerts {
   position: relative;
   cursor: pointer;
@@ -20,12 +24,52 @@
     line-height: 1;
   }
 
-}
+  .header__alerts__content {
+    z-index: 20;
+    background: #fff;
+    transition: all .2s ease-in;
+    overflow: auto;
 
-.header__alerts__notifications {
-  max-width: 49.5rem;
-  max-height: 40rem;
-  z-index: 20;
-  overflow-y: scroll;
-}
+    &.alerts-enter {
+      opacity: 0;
+      transform: translate3d(0, -4rem, 0)  scale(0);
+    }
+    &.alerts-enter-active {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    &.alerts-exit {
+      opacity: 1;
+      transform: scale(1);
+    }
+    &.alerts-exit-active {
+      opacity: 0;
+      transform: translate3d(0, -4rem, 0) scale(0);
+    }
+  }
 
+  @include desktop {
+    .header__alerts__content {
+      position: absolute;
+      top: 4rem;
+      right: -6rem;
+      width: 49.5rem;
+      max-height: 40rem;
+      box-shadow: $box-shadow-1;
+      border-radius: 10px;
+      transform-origin: 44.5rem top 0;
+    }
+  }
+
+  @include mobile {
+    .header__alerts__content {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      top: 8.7rem;
+      max-height: calc(100vh - 8.7rem);
+      transform-origin: center top 0;
+    }
+  }
+}
