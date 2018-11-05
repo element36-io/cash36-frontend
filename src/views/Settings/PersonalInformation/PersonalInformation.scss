@@ -12,6 +12,10 @@
     width: 65%;
   }
 
+  @include tablet {
+    width: 100%;
+  }
+
   > h2 {
     margin-bottom: 2.4rem;
   }
@@ -43,10 +47,16 @@
     }
 
     > div {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-column-gap: 7.2rem;
-      margin-bottom: 2.5rem;
+    display: grid;
+      @include desktop {
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: 30rem;
+        margin-bottom: 2.5rem;
+      }
+
+      @include tablet {
+        grid-column-gap: 20rem;
+      }
 
       @include mobile {
         grid-template-columns: repeat(1, 1fr);

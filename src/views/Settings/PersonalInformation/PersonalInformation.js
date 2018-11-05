@@ -2,8 +2,10 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import editIcon from '../../../assets/icons/edit-icon.svg';
+import DefaultButton from '../../../components/Buttons/DefaultButton';
 import EditableInput from '../EditableInput';
 import EditableSelect from '../EditableSelect';
+import DatePicker from '../../../components/Verification/DatePicker';
 
 import './PersonalInformation.scss';
 
@@ -11,21 +13,42 @@ class PersonalInformation extends Component {
   state = {
     formDisabled: true,
     firstName: '',
-    lastName: this.props.user.lastName,
-    email: this.props.user.email,
-    street: this.props.user.street,
-    streetNr: this.props.user.streetNr,
-    zip: this.props.user.zip,
-    city: this.props.user.city,
+    lastName: '',
+    dob: '',
+    email: '',
+    street: '',
+    streetNr: '',
+    zip: '',
+    city: '',
     country: '',
     nationality: '',
     iban: '',
     bankLine1: '',
     accountNr: '',
-    bankLine2: ''
+    bankLine2: '',
+    errorMessage: ''
   }
 
   toggleEdit = () => {
+    if (!this.state.formDisabled) {
+      this.setState({
+        firstName: '',
+        lastName: '',
+        dob: '',
+        email: '',
+        street: '',
+        streetNr: '',
+        zip: '',
+        city: '',
+        country: '',
+        nationality: '',
+        iban: '',
+        bankLine1: '',
+        accountNr: '',
+        bankLine2: '',
+        errorMessage: ''
+      });
+    }
     this.setState({ formDisabled: !this.state.formDisabled });
   }
 
@@ -34,17 +57,27 @@ class PersonalInformation extends Component {
     this.setState({ [name]: value, errorMessage: '' });
   };
 
+  handleDateChange = (date) => {
+    this.setState({ dob: date, errorMessage: '' });
+  };
+
   renderFormHeader = () => {
     if (this.props.user.kycLevel === 'Tier_1') return 'Tier 1 Verification - Complete';
     if (this.props.user.kycLevel === 'Tier_2') return 'Tier 2 Verification - Complete';
     return null;
   }
 
+  handleFormSubmit = async (event) => {
+    event.preventDefault();
+    console.log('form submitted', this.state);
+  };
+
   render () {
     const {
       formDisabled,
       firstName,
       lastName,
+      dob,
       email,
       street,
       streetNr,
@@ -68,7 +101,7 @@ class PersonalInformation extends Component {
         {kycLevel !== 'Tier_0' &&
         <div className='personal-information'>
           <h2>Personal Information</h2>
-          <form className='paper'>
+          <form className='paper' onSubmit={this.handleFormSubmit}>
             <div>
               <h3>{this.renderFormHeader()}</h3>
               <button type='button' onClick={this.toggleEdit}>
@@ -88,14 +121,20 @@ class PersonalInformation extends Component {
                   name='lastName'
                   label='Last Name'
                   disabled={formDisabled}
-                  value={lastName}
+                  value={lastName || this.props.user.lastName}
                   onChange={this.handleTextChange}
+                />
+                <DatePicker
+                  dob={dob || this.props.user.dateOfBirth}
+                  onChange={this.handleDateChange}
+                  disabled={formDisabled}
+                  editable
                 />
                 <EditableInput
                   name='email'
                   label='Email'
                   disabled={formDisabled}
-                  value={email}
+                  value={email || this.props.user.email}
                   onChange={this.handleTextChange}
                   type='email'
                 />
@@ -103,28 +142,28 @@ class PersonalInformation extends Component {
                   name='street'
                   label='Street'
                   disabled={formDisabled}
-                  value={street}
+                  value={street || this.props.user.street}
                   onChange={this.handleTextChange}
                 />
                 <EditableInput
                   name='streetNr'
                   label='Street Number'
                   disabled={formDisabled}
-                  value={streetNr}
+                  value={streetNr || this.props.user.streetNr}
                   onChange={this.handleTextChange}
                 />
                 <EditableInput
                   name='zip'
                   label='ZIP Code'
                   disabled={formDisabled}
-                  value={zip}
+                  value={zip || this.props.user.zip}
                   onChange={this.handleTextChange}
                 />
                 <EditableInput
                   name='city'
                   label='Town/City'
                   disabled={formDisabled}
-                  value={city}
+                  value={city || this.props.user.city}
                   onChange={this.handleTextChange}
                 />
                 <EditableSelect
@@ -176,6 +215,10 @@ class PersonalInformation extends Component {
                 />
               </div>
             </div>
+            {!formDisabled &&
+            <DefaultButton fullWidth type='submit'>
+              Submit
+            </DefaultButton>}
           </form>
         </div>
         }

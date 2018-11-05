@@ -19,7 +19,7 @@ export const EditableSelect = ({ classes, name, label, value, onChange, countryD
     InputProps={{
       disableUnderline: true,
       style: {
-        color: '#000',
+        color: '#01152C',
         borderBottom: disabled ? '1px solid transparent' : '1px solid #EDF0F4'
       }
     }}
@@ -29,7 +29,7 @@ export const EditableSelect = ({ classes, name, label, value, onChange, countryD
     }}
     SelectProps={{
       displayEmpty: true,
-      IconComponent: disabled ? 'none' : KeyboardArrowDownIcon
+      IconComponent: disabled ? 'span' : KeyboardArrowDownIcon
     }}
   >
     {countryData.map(country => {
