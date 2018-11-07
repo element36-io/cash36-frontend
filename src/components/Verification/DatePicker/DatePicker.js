@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { withStyles } from '@material-ui/core/styles';
 import { InlineDatePicker } from 'material-ui-pickers/DatePicker';
 import MomentUtils from 'material-ui-pickers/utils/moment-utils';
@@ -8,10 +9,11 @@ import RightArrowIcon from '@material-ui/icons/KeyboardArrowRight';
 import LeftArrowIcon from '@material-ui/icons/KeyboardArrowLeft';
 import styles from './MuiStyles';
 
-const DatePicker = ({ classes, dob, onChange, disabled = false, editable = false }) => (
+const DatePicker = ({ classes, dateOfBirth, onChange, disabled = false, editable = false }) => (
   <MuiPickersUtilsProvider utils={MomentUtils}>
     <InlineDatePicker
-      value={dob}
+      format={'DD/MM/YYYY'}
+      value={moment(dateOfBirth, 'DD/MM/YYYY')}
       onChange={onChange}
       label='Date of Birth'
       disableFuture
@@ -20,7 +22,6 @@ const DatePicker = ({ classes, dob, onChange, disabled = false, editable = false
       rightArrowIcon={<RightArrowIcon />}
       leftArrowIcon={<LeftArrowIcon />}
       className={classes.root}
-      format={'DD/MM/YYYY'}
       InputProps={{
         disableUnderline: true,
         placeholder: 'DD/MM/YYYY',

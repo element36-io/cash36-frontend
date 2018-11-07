@@ -22,7 +22,7 @@ export class Tier1Form extends Component {
     state = {
       firstName: '',
       lastName: '',
-      dob: null,
+      dateOfBirth: null,
       city: '',
       street: '',
       country: '',
@@ -49,7 +49,7 @@ export class Tier1Form extends Component {
     };
 
     handleDateChange = (date) => {
-      this.setState({ dob: date, errorMessage: '' });
+      this.setState({ dateOfBirth: date, errorMessage: '' });
     };
 
     handleFormSubmit = async (event) => {
@@ -57,7 +57,7 @@ export class Tier1Form extends Component {
       const {
         firstName,
         lastName,
-        dob,
+        dateOfBirth,
         city,
         street,
         country,
@@ -75,7 +75,7 @@ export class Tier1Form extends Component {
       const isFormFilled = Object.values(this.state).filter(value => value).length > 13;
       const isEmailValid = isEmail(email);
       const isIbanValid = IBAN.isValid(iban);
-      const userAge = (moment().year() - moment(this.state.dob).year());
+      const userAge = (moment().year() - moment(this.state.dateOfBirth).year());
 
       // check if form is filled out
       if (!isFormFilled) {
@@ -106,7 +106,7 @@ export class Tier1Form extends Component {
           bankLine2,
           city,
           country,
-          dateOfBirth: moment(dob).format('DD.MM.YYYY'),
+          dateOfBirth: moment(dateOfBirth).format('DD.MM.YYYY'),
           firstName,
           iban,
           lastName,
@@ -135,7 +135,7 @@ export class Tier1Form extends Component {
 
     renderForm = () => {
       const { countries, nationalities, close } = this.props;
-      const { firstName, lastName, dob, city, country, nationality, street, streetNr, zip, iban, bankLine1, bankLine2, accountNr, email, errorMessage } = this.state;
+      const { firstName, lastName, dateOfBirth, city, country, nationality, street, streetNr, zip, iban, bankLine1, bankLine2, accountNr, email, errorMessage } = this.state;
 
       return (
         <form className='verification-form__tier1' onSubmit={this.handleFormSubmit} noValidate>
@@ -159,7 +159,7 @@ export class Tier1Form extends Component {
               onChange={this.handleTextChange}
             />
             <DatePicker
-              dob={dob}
+              dateOfBirth={dateOfBirth}
               onChange={this.handleDateChange}
             />
             <TextInput

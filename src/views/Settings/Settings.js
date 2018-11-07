@@ -20,6 +20,8 @@ class Settings extends Component {
     console.log('Add Currency Clicked');
   }
   render () {
+    const { user } = this.props;
+    const { kycLevel } = user;
     return (
       <div className='settings'>
         <div className='wrapper'>
@@ -36,7 +38,14 @@ class Settings extends Component {
             </DefaultButton>
           </div>
           <div className='settings__personal-information'>
-            <PersonalInformation />
+            {kycLevel === 'Tier_0' &&
+              <div className='paper settings__personal-information--tier0'>
+                In order to see and edit your personal data, please verify your account.
+              </div>
+            }
+            {kycLevel !== 'Tier_0' &&
+              <PersonalInformation user={user} />
+            }
           </div>
         </div>
       </div>
@@ -44,6 +53,6 @@ class Settings extends Component {
   }
 }
 
-const mapStateToProps = ({ tokens: { tokens = [] } }) => ({ tokens });
+const mapStateToProps = ({ auth: { user }, tokens: { tokens = [] } }) => ({ tokens, user });
 
 export default connect(mapStateToProps, { getTokens, getCountries })(Settings);

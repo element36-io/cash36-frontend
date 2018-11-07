@@ -4,8 +4,10 @@
 .personal-information {
   margin-top: 4rem;
 
-  &__tier-0 {
-    padding: 2rem;
+  &__error-message {
+    display: flex;
+    justify-content: center;
+    margin-top: .5rem;
   }
 
   @include desktop {
@@ -16,11 +18,23 @@
     width: 100%;
   }
 
+  @include mobile {
+    > form {
+      > button {
+        margin-top: 1rem;
+      }
+    }
+  }
+
   > h2 {
     margin-bottom: 2.4rem;
   }
   > form {
     padding: 2.4rem;
+
+    > span {
+      text-align: center;
+    }
 
     > div:first-child {
       display: flex;
@@ -28,6 +42,11 @@
       border-bottom: 1px solid $grey-border;
       margin-bottom: 1.6rem;
       padding-bottom: 1rem;
+
+      > h3 {
+        display: flex;
+        align-items: center;
+      }
 
       > button {
         background-color: transparent;
@@ -49,12 +68,13 @@
     > div {
     display: grid;
       @include desktop {
-        grid-template-columns: repeat(2, 1fr);
-        grid-column-gap: 30rem;
+        grid-template-columns: 20rem 1fr;
+        grid-column-gap: 25rem;
         margin-bottom: 2.5rem;
       }
 
       @include tablet {
+        grid-template-columns: 1fr 1fr;
         grid-column-gap: 20rem;
       }
 
