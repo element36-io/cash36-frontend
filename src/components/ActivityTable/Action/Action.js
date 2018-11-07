@@ -8,7 +8,7 @@ const renderActionName = type => {
   if (type === 'BUY') return 'Bought Tokens';
   if (type === 'SELL') return 'Sold Tokens';
   if (type === 'SENT') return 'Sent to';
-  if (type === 'RECEIVED') return 'Received from';
+  if (type === 'RECEIVED') return 'Bought Tokens';
 };
 
 const Action = ({ type, targetAddress }) => {

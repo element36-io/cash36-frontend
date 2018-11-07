@@ -8,6 +8,11 @@
     background: linear-gradient(to bottom, $headerGrey 0, $headerGrey 209px, $backgroundGrey 209px, $backgroundGrey 100%) no-repeat;
   }
 
+  &__personal-information--tier0 {
+    padding: 2rem;
+    margin-top: 2.4rem;
+  }
+
   &__profile {
     margin-bottom: 3rem;
   }

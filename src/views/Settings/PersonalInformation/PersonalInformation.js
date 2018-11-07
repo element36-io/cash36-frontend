@@ -1,7 +1,13 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import _ from 'lodash';
+import { isEmail } from 'validator';
+import moment from 'moment';
+import IBAN from 'iban';
 import editIcon from '../../../assets/icons/edit-icon.svg';
+import API from '../../../config/api';
+import { getKyc } from '../../../store/auth/auth.actions';
 import DefaultButton from '../../../components/Buttons/DefaultButton';
 import EditableInput from '../EditableInput';
 import EditableSelect from '../EditableSelect';
@@ -11,231 +17,219 @@ import './PersonalInformation.scss';
 
 class PersonalInformation extends Component {
   state = {
+    userInfo: {
+      ..._.pick(this.props.user, ['firstName', 'lastName', 'dateOfBirth', 'email', 'street', 'streetNr', 'zip', 'city']),
+      nationality: this.props.user.nationality.code,
+      country: this.props.user.country.code
+    },
+    bankInfo: {
+      ...this.props.user.bankAccounts[0]
+    },
     formDisabled: true,
-    firstName: '',
-    lastName: '',
-    dob: '',
-    email: '',
-    street: '',
-    streetNr: '',
-    zip: '',
-    city: '',
-    country: '',
-    nationality: '',
-    iban: '',
-    bankLine1: '',
-    accountNr: '',
-    bankLine2: '',
     errorMessage: ''
-  }
+  };
+
+  labels = {
+    firstName: 'First Name',
+    lastName: 'Last Name',
+    email: 'Email',
+    street: 'Street',
+    zip: 'ZIP Code',
+    city: 'Town/City',
+    streetNr: 'Street Number',
+    nationality: 'Nationality',
+    country: 'Country',
+    accountNr: 'Account Number',
+    bankLine1: 'Bank Address Line 1',
+    bankLine2: 'Bank Address Line 2',
+    iban: 'IBAN'
+  };
 
   toggleEdit = () => {
     if (!this.state.formDisabled) {
       this.setState({
-        firstName: '',
-        lastName: '',
-        dob: '',
-        email: '',
-        street: '',
-        streetNr: '',
-        zip: '',
-        city: '',
-        country: '',
-        nationality: '',
-        iban: '',
-        bankLine1: '',
-        accountNr: '',
-        bankLine2: '',
+        userInfo: {
+          ..._.pick(this.props.user, ['firstName', 'lastName', 'dateOfBirth', 'email', 'street', 'streetNr', 'zip', 'city']),
+          nationality: this.props.user.nationality.code,
+          country: this.props.user.country.code
+        },
+        bankInfo: {
+          ...this.props.user.bankAccounts[0]
+        },
         errorMessage: ''
       });
     }
     this.setState({ formDisabled: !this.state.formDisabled });
-  }
-
-  handleTextChange = event => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value, errorMessage: '' });
   };
 
-  handleDateChange = (date) => {
-    this.setState({ dob: date, errorMessage: '' });
+  userInfoTextChange = evt => {
+    const { name, value } = evt.target;
+    this.setState({
+      userInfo: {
+        ...this.state.userInfo,
+        [name]: value
+      }
+    });
+  }
+
+  bankInfoTextChange = evt => {
+    const { name, value } = evt.target;
+    this.setState({
+      bankInfo: {
+        ...this.state.bankInfo,
+        [name]: value
+      }
+    });
+  }
+
+  handleDateChange = date => {
+    this.setState({
+      userInfo: {
+        ...this.state.userInfo,
+        dateOfBirth: date
+      }
+    });
   };
 
   renderFormHeader = () => {
     if (this.props.user.kycLevel === 'Tier_1') return 'Tier 1 Verification - Complete';
     if (this.props.user.kycLevel === 'Tier_2') return 'Tier 2 Verification - Complete';
     return null;
-  }
+  };
 
-  handleFormSubmit = async (event) => {
-    event.preventDefault();
-    console.log('form submitted', this.state);
+  handleFormSubmit = async (evt) => {
+    evt.preventDefault();
+
+    const payload = {
+      firstName: this.state.userInfo.firstName,
+      lastName: this.state.userInfo.lastName,
+      dateOfBirth: this.state.userInfo.dateOfBirth,
+      email: this.state.userInfo.email,
+      street: this.state.userInfo.street,
+      streetNr: this.state.userInfo.streetNr,
+      zip: this.state.userInfo.zip,
+      city: this.state.userInfo.city,
+      country: this.state.userInfo.country,
+      nationality: this.state.userInfo.nationality,
+      accountNr: this.state.bankInfo.accountNr,
+      bankLine1: this.state.bankInfo.bankLine1,
+      bankLine2: this.state.bankInfo.bankLine2,
+      iban: this.state.bankInfo.iban
+    };
+
+    const isFormFilled = Object.values(payload).filter(value => value).length > 13;
+    const isEmailValid = isEmail(payload.email);
+    const isIbanValid = IBAN.isValid(payload.iban);
+    const userAge = (moment().year() - moment(payload.dateOfBirth).year());
+
+    if (!isFormFilled) {
+      this.setState({ errorMessage: 'One or more fields are empty. Please recheck.' });
+      return;
+    }
+    if (userAge < 18) {
+      this.setState({ errorMessage: 'Your age must be over 18' });
+      return;
+    }
+    if (!isIbanValid) {
+      this.setState({ errorMessage: 'Your IBAN is invalid, please recheck' });
+      return;
+    }
+    if (!isEmailValid) {
+      this.setState({ errorMessage: 'Please enter a valid email address' });
+      return;
+    }
+
+    try {
+      payload.dateOfBirth = moment(payload.dateOfBirth).format('DD.MM.YYYY');
+      await API.post('/cash36/user/update-tier-1', payload);
+      this.setState({ errorMessage: '', formDisabled: true });
+      this.props.getKyc();
+    } catch (error) {
+      this.setState({
+        errorMessage: 'There was an error with your request'
+      });
+      console.log(error.response);
+    }
+  };
+
+  renderField = (dataType, filedName) => {
+    const { formDisabled } = this.state;
+    const { nationalities, countries } = this.props;
+
+    switch (filedName) {
+      case 'dateOfBirth':
+        return <DatePicker
+          dateOfBirth={this.state[dataType][filedName]}
+          onChange={this.handleDateChange}
+          disabled={formDisabled}
+          editable
+          key={filedName}
+        />;
+      case 'country':
+      case 'nationality':
+        return <EditableSelect
+          name={filedName}
+          label={this.labels[filedName]}
+          disabled={formDisabled}
+          value={this.state[dataType][filedName]}
+          countryData={filedName === 'nationality' ? nationalities : countries}
+          onChange={this[`${dataType}TextChange`]}
+          key={filedName}
+        />;
+      default:
+        return <EditableInput
+          name={filedName}
+          label={this.labels[filedName]}
+          disabled={formDisabled}
+          value={this.state[dataType][filedName]}
+          onChange={this[`${dataType}TextChange`]}
+          key={filedName}
+          data={dataType}
+        />;
+    }
   };
 
   render () {
-    const {
-      formDisabled,
-      firstName,
-      lastName,
-      dob,
-      email,
-      street,
-      streetNr,
-      zip,
-      city,
-      nationality,
-      country,
-      iban,
-      bankLine1,
-      accountNr,
-      bankLine2
-    } = this.state;
-    const { user: { kycLevel }, countries, nationalities } = this.props;
+    const { formDisabled, userInfo, bankInfo, errorMessage } = this.state;
+    const { user: { kycLevel } } = this.props;
+
     return (
-      <Fragment>
-        {kycLevel === 'Tier_0' &&
-          <div className='paper personal-information__tier-0'>
-            In order to see and edit your personal data, please verify your account.
-          </div>
-        }
-        {kycLevel !== 'Tier_0' &&
-        <div className='personal-information'>
-          <h2>Personal Information</h2>
-          <form className='paper' onSubmit={this.handleFormSubmit}>
-            <div>
-              <h3>{this.renderFormHeader()}</h3>
+      <div className='personal-information'>
+        <h2>Personal Information</h2>
+        <form className='paper' onSubmit={this.handleFormSubmit}>
+          <div>
+            <h3>{this.renderFormHeader()}</h3>
+            {kycLevel === 'Tier_1' &&
               <button type='button' onClick={this.toggleEdit}>
                 <img src={editIcon} alt='' />
               </button>
+            }
+          </div>
+          <div className='personal-information__content'>
+            <div>
+              {Object.keys(userInfo).map(field => this.renderField('userInfo', field))}
             </div>
-            <div className='personal-information__content'>
-              <div>
-                <EditableInput
-                  name='firstName'
-                  label='First Name'
-                  disabled={formDisabled}
-                  value={firstName || this.props.user.firstName}
-                  onChange={this.handleTextChange}
-                />
-                <EditableInput
-                  name='lastName'
-                  label='Last Name'
-                  disabled={formDisabled}
-                  value={lastName || this.props.user.lastName}
-                  onChange={this.handleTextChange}
-                />
-                <DatePicker
-                  dob={dob || this.props.user.dateOfBirth}
-                  onChange={this.handleDateChange}
-                  disabled={formDisabled}
-                  editable
-                />
-                <EditableInput
-                  name='email'
-                  label='Email'
-                  disabled={formDisabled}
-                  value={email || this.props.user.email}
-                  onChange={this.handleTextChange}
-                  type='email'
-                />
-                <EditableInput
-                  name='street'
-                  label='Street'
-                  disabled={formDisabled}
-                  value={street || this.props.user.street}
-                  onChange={this.handleTextChange}
-                />
-                <EditableInput
-                  name='streetNr'
-                  label='Street Number'
-                  disabled={formDisabled}
-                  value={streetNr || this.props.user.streetNr}
-                  onChange={this.handleTextChange}
-                />
-                <EditableInput
-                  name='zip'
-                  label='ZIP Code'
-                  disabled={formDisabled}
-                  value={zip || this.props.user.zip}
-                  onChange={this.handleTextChange}
-                />
-                <EditableInput
-                  name='city'
-                  label='Town/City'
-                  disabled={formDisabled}
-                  value={city || this.props.user.city}
-                  onChange={this.handleTextChange}
-                />
-                <EditableSelect
-                  name='country'
-                  label='Country of Residence'
-                  disabled={formDisabled}
-                  value={country || this.props.user.country.code}
-                  countryData={countries}
-                  onChange={this.handleTextChange}
-                />
-                <EditableSelect
-                  name='nationality'
-                  label='Nationality'
-                  disabled={formDisabled}
-                  value={nationality || this.props.user.nationality.code}
-                  countryData={nationalities}
-                  onChange={this.handleTextChange}
-                />
-              </div>
-              <h3>Bank Account</h3>
-              <div>
-                <EditableInput
-                  name='iban'
-                  label='IBAN'
-                  disabled={formDisabled}
-                  value={iban || this.props.user.bankAccounts[0].iban}
-                  onChange={this.handleTextChange}
-                />
-                <EditableInput
-                  name='bankLine1'
-                  label='Bank Address Line 1'
-                  disabled={formDisabled}
-                  value={bankLine1 || this.props.user.bankAccounts[0].bankLine1}
-                  onChange={this.handleTextChange}
-                />
-                <EditableInput
-                  name='accountNr'
-                  label='Account Number'
-                  disabled={formDisabled}
-                  value={accountNr || this.props.user.bankAccounts[0].accountNr}
-                  onChange={this.handleTextChange}
-                />
-                <EditableInput
-                  name='bankLine2'
-                  label='Bank Address Line 2'
-                  disabled={formDisabled}
-                  value={bankLine2 || this.props.user.bankAccounts[0].bankLine2}
-                  onChange={this.handleTextChange}
-                />
-              </div>
+            <h3>Bank Account</h3>
+            <div>
+              {Object.keys(bankInfo).map(field => this.renderField('bankInfo', field))}
             </div>
-            {!formDisabled &&
-            <DefaultButton fullWidth type='submit'>
-              Submit
-            </DefaultButton>}
-          </form>
-        </div>
-        }
-      </Fragment>
+          </div>
+          {!formDisabled &&
+          <DefaultButton fullWidth type='submit' className='personal-information__submit-button'>
+            Submit
+          </DefaultButton>}
+          <span className='personal-information__error-message'>{errorMessage}</span>
+        </form>
+      </div>
     );
   }
 }
 
-const mapStateToProps = ({ auth: { user }, countries: { countries = [], nationalities = [] } }) =>
-  ({
-    user,
-    countries,
-    nationalities
-  });
+const mapStateToProps = ({ countries: { countries = [], nationalities = [] } }) => ({ countries, nationalities });
 
 PersonalInformation.propTypes = {
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  getKyc: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps)(PersonalInformation);
+export default connect(mapStateToProps, { getKyc })(PersonalInformation);
