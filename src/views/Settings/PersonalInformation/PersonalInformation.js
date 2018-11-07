@@ -140,10 +140,14 @@ class PersonalInformation extends Component {
     }
 
     try {
-      payload.dateOfBirth = moment(payload.dateOfBirth).format('DD.MM.YYYY');
+      // check if date has been changed TODO - handle this better
+      if (typeof (payload.dateOfBirth) === 'object') {
+        payload.dateOfBirth = moment(payload.dateOfBirth).format('DD.MM.YYYY');
+      }
       await API.post('/cash36/user/update-tier-1', payload);
       this.setState({ errorMessage: '', formDisabled: true });
       this.props.getKyc();
+      console.log('submitted!');
     } catch (error) {
       this.setState({
         errorMessage: 'There was an error with your request'

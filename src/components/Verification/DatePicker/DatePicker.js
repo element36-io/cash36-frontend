@@ -13,7 +13,7 @@ const DatePicker = ({ classes, dateOfBirth, onChange, disabled = false, editable
   <MuiPickersUtilsProvider utils={MomentUtils}>
     <InlineDatePicker
       format={'DD/MM/YYYY'}
-      value={moment(dateOfBirth, 'DD/MM/YYYY')}
+      value={dateOfBirth ? moment(dateOfBirth, 'DD/MM/YYYY') : null}
       onChange={onChange}
       label='Date of Birth'
       disableFuture
