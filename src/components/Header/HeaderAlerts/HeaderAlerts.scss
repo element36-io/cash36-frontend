@@ -11,6 +11,14 @@
     color: #6ab5f8;
   }
 
+  .header__alerts__icon {
+    display: inline-block;
+    width: 1.6rem;
+    height: 2rem;
+    background: url('../../../assets/icons/bell-icon.svg') no-repeat center;
+    background-size: 100% 100%;
+  }
+
   .header__alerts__counter {
     position: absolute;
     top: 10px;
