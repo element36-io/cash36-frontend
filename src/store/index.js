@@ -8,6 +8,7 @@ import authReducer from './auth/auth.reducer';
 import tokensReducer from './tokens/tokens.reducer';
 import countriesReducer from './countries/countries.reducer';
 import notificationsReducer from './notifications/notifications.reducer';
+import contactsReducer from './contacts/contacts.reducer';
 
 const loggerMiddleware = createLogger();
 
@@ -17,7 +18,8 @@ const reducers = combineReducers({
   auth: authReducer,
   tokens: tokensReducer,
   countries: countriesReducer,
-  notifications: notificationsReducer
+  notifications: notificationsReducer,
+  contacts: contactsReducer
 });
 
 const store = createStore(
