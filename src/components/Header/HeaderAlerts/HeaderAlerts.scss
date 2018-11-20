@@ -1,7 +1,6 @@
 @import '../../../styles/mixins.scss';
 @import '../../../styles/settings.scss';
 
-
 .header__alerts {
   position: relative;
   cursor: pointer;
@@ -35,24 +34,14 @@
   .header__alerts__content {
     z-index: 20;
     background: #fff;
-    transition: all .2s ease-in;
     overflow: auto;
+    transform-origin: 44.5rem top 0;
+    opacity: 0;
+    transform: translate3d(0, -4rem, 0) scale(0);
 
-    &.alerts-enter {
-      opacity: 0;
-      transform: translate3d(0, -4rem, 0)  scale(0);
-    }
-    &.alerts-enter-active {
+    &.header__alerts--active {
       opacity: 1;
       transform: translate3d(0, 0, 0) scale(1);
-    }
-    &.alerts-exit {
-      opacity: 1;
-      transform: scale(1);
-    }
-    &.alerts-exit-active {
-      opacity: 0;
-      transform: translate3d(0, -4rem, 0) scale(0);
     }
   }
 
@@ -65,7 +54,7 @@
       max-height: 40rem;
       box-shadow: $box-shadow-1;
       border-radius: 10px;
-      transform-origin: 44.5rem top 0;
+      transition: all .2s ease-in;
     }
   }
 

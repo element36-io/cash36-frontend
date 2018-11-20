@@ -1,17 +1,13 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/KeyboardArrowDown';
 import PopupMenu from '../../PopupMenu';
 import './HeaderMenu.scss';
 
 const HeaderMenu = props => {
-  const { logout, open, anchorEl, closeCallback, openCallback, user: { avatarUri, name }, history } = props;
-  const redirect = (path) => {
-    history.push(path);
-    closeCallback();
-  };
+  const { logout, open, anchorEl, closeCallback, openCallback, user: { avatarUri, name } } = props;
 
   return (
     <div className='header__menu'>
@@ -28,8 +24,10 @@ const HeaderMenu = props => {
       />
       <PopupMenu handleClose={closeCallback} open={open} anchor={anchorEl} placement='bottom-end'>
         <Fragment>
-          <MenuItem onClick={() => { redirect('/settings'); }}>
-            Settings
+          <MenuItem>
+            <Link to='/settings' onClick={closeCallback}>
+              Settings
+            </Link>
           </MenuItem>
           <MenuItem onClick={logout}>
             Logout
@@ -50,4 +48,4 @@ HeaderMenu.propTypes = {
   user: PropTypes.object
 };
 
-export default withRouter(HeaderMenu);
+export default HeaderMenu;
