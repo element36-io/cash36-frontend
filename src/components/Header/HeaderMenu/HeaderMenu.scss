@@ -5,7 +5,7 @@
   align-items: center;
   margin-left: 2.8rem;
 
-  > span {
+  .header__menu__image {
     position: relative;
     display: inline-block;
     margin-right: 1rem;
@@ -26,21 +26,42 @@
 
     img {
       border-radius: 16px;
-      border:2px solid #fff;
+      border: 2px solid #fff;
       object-fit: cover;
     }
   }
 
+  .header__menu__anchor {
+    position: relative;
+    line-height: 1;
+  }
+
+  .header__menu__content {
+    position: absolute;
+    top: 2rem;
+    right: 0;
+    transition: all .3s;
+    opacity: 0;
+    transform: scale(0) translate3d(0, -2rem, 0);
+    transform-origin: 100% 0;
+
+    &.header__menu__content--active {
+      opacity: 1;
+      transform: scale(1) translate3d(0, 0, 0);
+    }
+  }
+
   .header__menu__icon {
-    font-size: 2.5rem;
+    position: relative;
     color: $darkGrey;
+    font-size: 2.5rem;
 
     &:hover {
       cursor: pointer;
     }
   }
 
-  &__link {
+  a, a:visited, a:active {
     color: $text-black-1;
   }
 }
