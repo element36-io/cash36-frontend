@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import { updateLastRead, resetBadgeCount } from '../../../store/notifications/notifications.actions';
 import Notification from '../Notification';
-import PopUp from '../../PopUp';
 import './HeaderAlerts.scss';
 
 class HeaderAlerts extends Component {
@@ -11,38 +11,45 @@ class HeaderAlerts extends Component {
     open: false
   };
 
-  openNotifications = () => {
-    if (this.state.open) return;
-    this.setState({ open: true });
+  toggleNotification = evt => {
+    if (this.state.open) {
+      this.updateLastReadAndBadgeCount();
+    }
+    this.setState({ open: !this.state.open });
   };
 
-  closeNotifications = () => {
+  closeNotifications = (e) => {
+    if (!this.state.open) return;
+    this.setState({ open: false });
+    this.updateLastReadAndBadgeCount();
+  };
+
+  updateLastReadAndBadgeCount = () => {
     const lastRead = new Date().toISOString();
     const { resetBadgeCount, updateLastRead } = this.props;
-    this.setState({ open: false });
     updateLastRead(lastRead);
     resetBadgeCount();
     localStorage.setItem('lastRead', lastRead);
-  };
+  }
 
   render () {
     const { notifications: { badgeCount, notifications, lastRead } } = this.props;
     const { open } = this.state;
 
     return (
-      <div className='header__alerts' onClick={this.openNotifications}>
-        <span className='header__alerts__icon' />
-        {!!badgeCount && <span className='header__alerts__counter'>{badgeCount}</span>}
-        {notifications && !!notifications.length && (
-          <PopUp open={open} timeout={200} classNames='alerts' onClickAway={this.closeNotifications}>
-            <div className='header__alerts__content'>
+      <ClickAwayListener onClickAway={this.closeNotifications}>
+        <div className='header__alerts'>
+          <span className='header__alerts__icon' onClick={this.toggleNotification} />
+          {!!badgeCount && <span className='header__alerts__counter'>{badgeCount}</span>}
+          {notifications && !!notifications.length && (
+            <div className={`header__alerts__content ${open ? 'header__alerts--active' : ''}`}>
               {notifications && notifications.map(n => (
                 <Notification {...n} lastRead={lastRead} key={n.creationDate} />
               ))}
             </div>
-          </PopUp>
-        )}
-      </div>
+          )}
+        </div>
+      </ClickAwayListener>
     );
   }
 }
