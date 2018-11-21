@@ -31,6 +31,13 @@ export default (state = initialState, action) => {
         feching: false,
         error: action.payload
       };
+    case REMOVE_CONTACTS:
+      const contactsList = state.contactsList.filter(c => c.id != action.payload)
+      return {
+        ...state,
+        error: null,
+        contactsList
+      }
     default:
       return state;
   }

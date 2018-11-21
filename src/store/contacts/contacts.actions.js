@@ -11,12 +11,32 @@ export const getContacts = () => async dispatch => {
     dispatch({ type: GET_CONTACTS });
     const response = await API.get('/cash36/contacts');
 
+    // setTimeout(() => {
+    //   dispatch({
+    //     type: GET_CONTACTS_SUCCESS,
+    //     payload: response.data
+    //   });
+    // }, 3000)
+
     dispatch({
       type: GET_CONTACTS_SUCCESS,
       payload: response.data
     });
   } catch (error) {
     // Do better error handling
+    dispatch({ type: CONTACTS_ERROR, payload: error });
+    return Promise.reject(error);
+  }
+};
+
+export const removeContact = id => async dispatch => {
+  try {
+    await API.delete(`/cash36/contacts/${id}`);
+    dispatch({
+      type: REMOVE_CONTACTS,
+      payload: id
+    })
+  } catch (error) {
     dispatch({ type: CONTACTS_ERROR, payload: error });
     return Promise.reject(error);
   }

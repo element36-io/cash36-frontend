@@ -4,7 +4,7 @@ import { CircularProgress } from '@material-ui/core';
 import SearchBox from './SearchBox';
 import AddContact from './AddContact';
 import ContactItem from './ContactItem';
-import { getContacts } from '../../store/contacts/contacts.actions';
+import { getContacts, removeContact } from '../../store/contacts/contacts.actions';
 import './Contacts.scss';
 
 class Contacts extends Component {
@@ -25,8 +25,8 @@ class Contacts extends Component {
     console.log('====== ADD Contact');
   };
 
-  removeContact = contactId => {
-    console.log(`======= CONTACT REMOVE ${contactId}`);
+  removeContact = id => {
+    this.props.removeContact(id);
   };
 
   renderList = () => {
@@ -61,4 +61,4 @@ class Contacts extends Component {
 
 const mapStateToProps = ({ contacts }) => ({ contacts });
 
-export default connect(mapStateToProps, { getContacts })(Contacts);
+export default connect(mapStateToProps, { getContacts, removeContact })(Contacts);
