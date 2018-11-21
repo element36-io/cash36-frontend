@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { CircularProgress } from '@material-ui/core';
 import SearchBox from './SearchBox';
 import AddContact from './AddContact';
@@ -8,42 +8,54 @@ import { getContacts } from '../../store/contacts/contacts.actions';
 import './Contacts.scss';
 
 class Contacts extends Component {
+  state = {
+    search: ''
+  };
 
-  componentDidMount() {
-    if(!this.props.contacts.contactsList.length) this.props.getContacts();
+  componentDidMount () {
+    if (!this.props.contacts.contactsList.length) this.props.getContacts();
   }
 
   searchChangeHandler = evt => {
-    const {name, value} = evt.target;
-  }
+    const { name, value } = evt.target;
+    this.setState({ [name]: value });
+  };
 
   showContactForm = () => {
     console.log('====== ADD Contact');
-  }
+  };
 
   removeContact = contactId => {
-    console.log(`======= CONTACT REMOVE ${contactId}`)
+    console.log(`======= CONTACT REMOVE ${contactId}`);
+  };
+
+  renderList = () => {
+    const { contacts: { contactsList } } = this.props;
+    const search = this.state.search.toLowerCase();
+
+    if (!contactsList.length) return null;
+
+    return contactsList.filter(c => {
+      return c.contactName.toLowerCase().includes(search) || c.contactAddress.toLowerCase().includes(search);
+    }).map(c => <ContactItem key={c.id} contact={c} removeCallback={this.removeContact} />);
   }
 
   render () {
-    const { contacts: {fetching, error, contactsList}} = this.props;
+    const { contacts: { fetching } } = this.props;
+    const { search } = this.state;
 
     return (
-      <div className="wrapper contacts">
-        <div className="contacts__actions">
-          <SearchBox changeHandler={this.searchChangeHandler}/>
-          <AddContact clickHandler={this.showContactForm}/>
+      <div className='wrapper contacts'>
+        <div className='contacts__actions'>
+          <SearchBox changeHandler={this.searchChangeHandler} value={search} />
+          <AddContact clickHandler={this.showContactForm} />
         </div>
         {fetching && (
           <div className='contacts__loader'>
-            <CircularProgress color='primary' size={75}/>
+            <CircularProgress color='primary' size={75} />
           </div>
         )}
-        {!fetching && contactsList.length && (
-          <div className="contacts__list">
-            {contactsList.map(c => <ContactItem key={c.id} contact={c} removeCallback={this.removeContact} />)}
-          </div>
-        )}
+        {!fetching && <div className='contacts__list'>{this.renderList()}</div>}
       </div>
     );
   }
@@ -51,4 +63,4 @@ class Contacts extends Component {
 
 const mapStateToProps = ({ contacts }) => ({ contacts });
 
-export default connect(mapStateToProps, { getContacts })(Contacts)
+export default connect(mapStateToProps, { getContacts })(Contacts);

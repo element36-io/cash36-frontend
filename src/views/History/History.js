@@ -40,7 +40,7 @@ class History extends Component {
             {userActivity === undefined
               ? (
                 <div className='history__loader'>
-                  <CircularProgress color='primary' size={75}/>
+                  <CircularProgress color='primary' size={75} />
                 </div>
               )
               : (
@@ -48,7 +48,7 @@ class History extends Component {
                   ? <div>
                     <div className='history__filters'>
                       <Responsive>
-                        <DateRange/>
+                        <DateRange />
                         <SearchBox
                           searchTerm={this.state.searchTerm}
                           handleSearchChange={this.handleSearchChange}
@@ -57,18 +57,18 @@ class History extends Component {
                           filterBy={this.state.filterBy}
                           handleFilterChange={this.handleFilterChange}
                         />
-                        <ExportData/>
+                        <ExportData />
                       </Responsive>
                       <Responsive isMobile>
-                        <DateRangeMobile/>
-                        <FilterSettingsMobile/>
+                        <DateRangeMobile />
+                        <FilterSettingsMobile />
                         <SearchBox
                           searchTerm={this.state.searchTerm}
                           handleSearchChange={this.handleSearchChange}
                         />
                       </Responsive>
                     </div>
-                    <ActivityTable userActivity={userActivity}/>
+                    <ActivityTable userActivity={userActivity} />
                   </div>
                   : <div className='paper history__no-activity'>
                     <h3>No Activity History</h3>
