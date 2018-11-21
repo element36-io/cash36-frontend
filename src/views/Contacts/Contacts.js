@@ -37,8 +37,8 @@ class Contacts extends Component {
 
     return contactsList.filter(c => {
       return c.contactName.toLowerCase().includes(search) || c.contactAddress.toLowerCase().includes(search);
-    }).map(c => <ContactItem key={c.id} contact={c} removeCallback={this.removeContact} />);
-  }
+    }).map(c => <ContactItem key={c.id} contact={c} removeCallback={this.removeContact}/>);
+  };
 
   render () {
     const { contacts: { fetching } } = this.props;
@@ -47,15 +47,13 @@ class Contacts extends Component {
     return (
       <div className='wrapper contacts'>
         <div className='contacts__actions'>
-          <SearchBox changeHandler={this.searchChangeHandler} value={search} />
-          <AddContact clickHandler={this.showContactForm} />
+          <SearchBox changeHandler={this.searchChangeHandler} value={search}/>
+          <AddContact clickHandler={this.showContactForm}/>
         </div>
-        {fetching && (
-          <div className='contacts__loader'>
-            <CircularProgress color='primary' size={75} />
-          </div>
-        )}
-        {!fetching && <div className='contacts__list'>{this.renderList()}</div>}
+        {fetching ?
+          <div className='contacts__loader'><CircularProgress color='primary' size={75}/></div>
+          : <div className='contacts__list'>{this.renderList()}</div>
+        }
       </div>
     );
   }

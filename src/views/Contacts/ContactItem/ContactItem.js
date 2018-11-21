@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import './ContactItem.scss';
 
 class ContactItem extends PureComponent {
@@ -16,6 +17,9 @@ class ContactItem extends PureComponent {
 
     return (
       <div className='contact__list__item'>
+        <div className="contacts__list__item__actions">
+          <MoreVertIcon className="contacts__list__item__actions__icon"/>
+        </div>
         <div className='contact__item__image-wrapper'>
           {avatarUrl ? <img src={avatarUrl} alt={contactName} /> : <i className='fas fa-user' />}
         </div>
