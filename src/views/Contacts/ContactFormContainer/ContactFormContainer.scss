@@ -1,0 +1,39 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/settings.scss';
+
+.contact-form-container {
+  padding: 2.4rem;
+
+  .contact-form__close {
+    position: absolute;
+    top: 2.4rem;
+    right: 2.4rem;
+    z-index: 5;
+    color: $text-light-grey-4;
+    font-size: 2.4rem;
+    cursor: pointer;
+  }
+
+
+  @include desktop {
+    position: relative;
+    min-width: 49rem;
+    max-width: 49rem;
+  }
+
+  @include mobile {
+    position: fixed;
+    top: 8.7rem;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    background: #fff;
+    transition: transform 255ms;
+    transform: translateX(-100%);
+
+    &.--active {
+      transform: translateX(0);
+    }
+  }
+}

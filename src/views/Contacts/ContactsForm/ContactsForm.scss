@@ -2,18 +2,11 @@
 @import '../../../styles/settings.scss';
 
 .contact-form {
+  position: relative;
+
   h2 {
     font-size: 1.8rem;
     line-height: 2.2rem;
-  }
-
-  .contact-form__close {
-    position: absolute;
-    top: 2.4rem;
-    right: 2.4rem;
-    color: $text-light-grey-4;
-    font-size: 2.4rem;
-    cursor: pointer;
   }
 
   .contact-form__btn {
@@ -41,14 +34,15 @@
     &[disabled] {
       opacity: .5;
     }
+
+    &.--submitting {
+      > div {
+        justify-content: center;
+      }
+    }
   }
 
   @include desktop {
-    position: relative;
-    min-width: 49rem;
-    max-width: 49rem;
-    padding: 2.4rem;
-
     .contact-form__header {
       margin-bottom: 2.1rem;
       padding-bottom: 2.4rem;
@@ -64,21 +58,6 @@
   }
 
   @include mobile {
-    position: fixed;
-    top: 8.7rem;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 3;
-    padding: 2.4rem;
-    background: #fff;
-    transition: transform 255ms;
-    transform: translateX(-100%);
-
-    &.--active {
-      transform: translateX(0);
-    }
-
     .contact-form__header {
       margin-bottom: 2.4rem;
       text-align: center;

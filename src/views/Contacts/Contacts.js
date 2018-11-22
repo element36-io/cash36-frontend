@@ -4,12 +4,9 @@ import { CircularProgress } from '@material-ui/core';
 import SearchBox from './SearchBox';
 import AddContact from './AddContact';
 import ContactItem from './ContactItem';
-import ContactForm from './ContactsForm';
+import ContactFormContainer from './ContactFormContainer';
 import { getContacts, removeContact, addContact } from '../../store/contacts/contacts.actions';
 import './Contacts.scss';
-import Responsive from '../../components/Responsive';
-import ContactsForm from './ContactsForm/ContactsForm';
-import Dialog from '@material-ui/core/Dialog';
 
 class Contacts extends Component {
   state = {
@@ -26,13 +23,13 @@ class Contacts extends Component {
     this.setState({ [name]: value });
   };
 
-  showContactForm = () => {
-    this.setState({showForm: true});
+  showForm = () => {
+    this.setState({ showForm: true });
   };
 
   closeForm = () => {
-    this.setState({showForm: false});
-  }
+    this.setState({ showForm: false });
+  };
 
   removeContact = id => {
     this.props.removeContact(id);
@@ -40,7 +37,7 @@ class Contacts extends Component {
 
   addContact = () => {
     console.log('======= Add Contact');
-  }
+  };
 
   renderList = () => {
     const { contacts: { contactsList } } = this.props;
@@ -58,18 +55,11 @@ class Contacts extends Component {
     const { search, showForm } = this.state;
 
     return (
-      <div className='wrapper contacts' >
-        <Responsive>
-          <Dialog onClose={this.closeForm} open={showForm} maxWidth={false}>
-            <ContactForm closeForm={this.closeForm} submitCallback={addContact}/>
-          </Dialog>
-        </Responsive>
-        <Responsive isMobile>
-          <ContactForm closeForm={this.closeForm} submitCallback={this.addContact} isActive={showForm}/>
-        </Responsive>
+      <div className='wrapper contacts'>
+        <ContactFormContainer closeForm={this.closeForm} submitCallback={addContact} isActive={showForm}/>
         <div className='contacts__actions'>
           <SearchBox changeHandler={this.searchChangeHandler} value={search}/>
-          <AddContact clickHandler={this.showContactForm}/>
+          <AddContact clickHandler={this.showForm}/>
         </div>
         {fetching ?
           <div className='contacts__loader'><CircularProgress color='primary' size={75}/></div>

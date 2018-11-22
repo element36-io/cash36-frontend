@@ -38,11 +38,11 @@ export const removeContact = id => async dispatch => {
 export const addContact = data => async dispatch => {
   try {
     const response = await API.post('/cash36/contacts', data);
-    console.log("=====", response);
-    // dispatch({
-    //   type: ADD_CONTACTS,
-    //   payload: response.data
-    // });
+
+    dispatch({
+      type: ADD_CONTACTS,
+      payload: response.data
+    });
 
     return Promise.resolve();
   } catch(error) {
