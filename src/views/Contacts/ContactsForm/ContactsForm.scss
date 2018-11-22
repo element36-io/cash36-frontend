@@ -1,0 +1,93 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/settings.scss';
+
+.contact-form {
+  h2 {
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+  }
+
+  .contact-form__close {
+    position: absolute;
+    top: 2.4rem;
+    right: 2.4rem;
+    color: $text-light-grey-4;
+    font-size: 2.4rem;
+    cursor: pointer;
+  }
+
+  .contact-form__btn {
+    width: 100%;
+    background: $gradient-primary;
+    color: #fff;
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+    text-transform: uppercase;
+    border-radius: 4px;
+    transition: opacity 225ms;
+    overflow: hidden;
+
+    > div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .contacts__add-btn__icon {
+      font-size: 2.6rem;
+    }
+
+    &[disabled] {
+      opacity: .5;
+    }
+  }
+
+  @include desktop {
+    position: relative;
+    min-width: 49rem;
+    max-width: 49rem;
+    padding: 2.4rem;
+
+    .contact-form__header {
+      margin-bottom: 2.1rem;
+      padding-bottom: 2.4rem;
+      padding-right: 3rem;
+      border-bottom: 2px solid $border-light-grey-1;
+    }
+
+    .contact-form__btn {
+      > div {
+        padding: 1.5rem 1.6rem;
+      }
+    }
+  }
+
+  @include mobile {
+    position: fixed;
+    top: 8.7rem;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    padding: 2.4rem;
+    background: #fff;
+    transition: transform 255ms;
+    transform: translateX(-100%);
+
+    &.--active {
+      transform: translateX(0);
+    }
+
+    .contact-form__header {
+      margin-bottom: 2.4rem;
+      text-align: center;
+    }
+
+    .contact-form__btn {
+      > div {
+        padding: 1.5rem 1.2rem;
+      }
+    }
+  }
+}

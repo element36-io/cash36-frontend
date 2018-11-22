@@ -4,12 +4,17 @@ import { CircularProgress } from '@material-ui/core';
 import SearchBox from './SearchBox';
 import AddContact from './AddContact';
 import ContactItem from './ContactItem';
-import { getContacts, removeContact } from '../../store/contacts/contacts.actions';
+import ContactForm from './ContactsForm';
+import { getContacts, removeContact, addContact } from '../../store/contacts/contacts.actions';
 import './Contacts.scss';
+import Responsive from '../../components/Responsive';
+import ContactsForm from './ContactsForm/ContactsForm';
+import Dialog from '@material-ui/core/Dialog';
 
 class Contacts extends Component {
   state = {
-    search: ''
+    search: '',
+    showForm: false
   };
 
   componentDidMount () {
@@ -22,12 +27,20 @@ class Contacts extends Component {
   };
 
   showContactForm = () => {
-    console.log('====== ADD Contact');
+    this.setState({showForm: true});
   };
+
+  closeForm = () => {
+    this.setState({showForm: false});
+  }
 
   removeContact = id => {
     this.props.removeContact(id);
   };
+
+  addContact = () => {
+    console.log('======= Add Contact');
+  }
 
   renderList = () => {
     const { contacts: { contactsList } } = this.props;
@@ -41,11 +54,19 @@ class Contacts extends Component {
   };
 
   render () {
-    const { contacts: { fetching } } = this.props;
-    const { search } = this.state;
+    const { contacts: { fetching }, addContact } = this.props;
+    const { search, showForm } = this.state;
 
     return (
-      <div className='wrapper contacts'>
+      <div className='wrapper contacts' >
+        <Responsive>
+          <Dialog onClose={this.closeForm} open={showForm} maxWidth={false}>
+            <ContactForm closeForm={this.closeForm} submitCallback={addContact}/>
+          </Dialog>
+        </Responsive>
+        <Responsive isMobile>
+          <ContactForm closeForm={this.closeForm} submitCallback={this.addContact} isActive={showForm}/>
+        </Responsive>
         <div className='contacts__actions'>
           <SearchBox changeHandler={this.searchChangeHandler} value={search}/>
           <AddContact clickHandler={this.showContactForm}/>
@@ -61,4 +82,4 @@ class Contacts extends Component {
 
 const mapStateToProps = ({ contacts }) => ({ contacts });
 
-export default connect(mapStateToProps, { getContacts, removeContact })(Contacts);
+export default connect(mapStateToProps, { getContacts, removeContact, addContact })(Contacts);

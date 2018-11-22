@@ -32,12 +32,20 @@ export default (state = initialState, action) => {
         error: action.payload
       };
     case REMOVE_CONTACTS:
-      const contactsList = state.contactsList.filter(c => c.id != action.payload)
+      const contactsList = state.contactsList.filter(c => c.id !== action.payload)
       return {
         ...state,
         error: null,
         contactsList
-      }
+      };
+    case ADD_CONTACTS:
+      return {
+        contactsList: [
+          ...state.contactsList,
+          action.payload
+        ],
+        error: false,
+      };
     default:
       return state;
   }

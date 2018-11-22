@@ -7,8 +7,8 @@
 
   .contacts__list-item__actions {
     position: absolute;
-    top: 2.4rem;
-    right: 3rem;
+    top: .4rem;
+    right: 1rem;
     z-index: 5;
 
     .contacts__list-item__actions__icon {
@@ -21,10 +21,11 @@
       position: absolute;
       top: 60%;
       right: .5rem;
-      transition: all .3s;
+      transition: all 225ms;
       opacity: 0;
+      border-radius: 4px;
       transform: scale(0) translate3d(0, -2rem, 0);
-      transform-origin: 100% 0;
+      transform-origin: 80% 0;
 
       &.--active {
         opacity: 1;
@@ -185,7 +186,7 @@
       font-size: 1.2rem;
       line-height: 1.4rem;
 
-      span {
+      > div span {
         display: none;
       }
     }

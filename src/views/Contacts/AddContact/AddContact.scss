@@ -2,47 +2,52 @@
 @import '../../../styles/settings.scss';
 
 .contacts__add-btn {
-  display: flex;
-  align-items: center;
-  background: $white;
-  border-radius: 10px;
-  box-shadow: $box-shadow-1;
-  font-size: 1.6rem;
-  line-height: 1.9rem;
-  cursor: pointer;
+  > span {
+    border-radius: 10px;
+  }
 
-  span:first-of-type {
+  > div {
     display: flex;
     align-items: center;
-    justify-content: center;
-    color: $white;
-    background: $gradient-primary;
-    border-radius: 50%;
-  }
-
-  span:last-of-type {
-    margin-left: 1.2rem;
-  }
-
-  @include desktop {
-    padding: 1.6rem 1.7rem;
+    background: $white;
+    border-radius: 10px;
+    box-shadow: $box-shadow-1;
+    font-size: 1.6rem;
+    line-height: 1.9rem;
 
     span:first-of-type {
-      width: 3.2rem;
-      height: 3.2rem;
-    }
-  }
-
-  @include mobile {
-    padding: 1.2rem;
-
-    span:first-of-type {
-      width: 2.4rem;
-      height: 2.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $white;
+      background: $gradient-primary;
+      border-radius: 50%;
     }
 
     span:last-of-type {
-      display: none;
+      margin-left: 1.2rem;
+    }
+
+    @include desktop {
+      padding: 1.6rem 1.7rem;
+
+      span:first-of-type {
+        width: 3.2rem;
+        height: 3.2rem;
+      }
+    }
+
+    @include mobile {
+      padding: 1.2rem;
+
+      span:first-of-type {
+        width: 2.4rem;
+        height: 2.4rem;
+      }
+
+      span:last-of-type {
+        display: none;
+      }
     }
   }
 }

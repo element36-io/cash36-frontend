@@ -11,13 +11,6 @@ export const getContacts = () => async dispatch => {
     dispatch({ type: GET_CONTACTS });
     const response = await API.get('/cash36/contacts');
 
-    // setTimeout(() => {
-    //   dispatch({
-    //     type: GET_CONTACTS_SUCCESS,
-    //     payload: response.data
-    //   });
-    // }, 3000)
-
     dispatch({
       type: GET_CONTACTS_SUCCESS,
       payload: response.data
@@ -41,3 +34,19 @@ export const removeContact = id => async dispatch => {
     return Promise.reject(error);
   }
 };
+
+export const addContact = data => async dispatch => {
+  try {
+    const response = await API.post('/cash36/contacts', data);
+    console.log("=====", response);
+    // dispatch({
+    //   type: ADD_CONTACTS,
+    //   payload: response.data
+    // });
+
+    return Promise.resolve();
+  } catch(error) {
+    dispatch({ type: CONTACTS_ERROR, payload: error });
+    return Promise.reject(error);
+  }
+}
