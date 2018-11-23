@@ -13,6 +13,9 @@ const navLinks = [{
 }, {
   label: 'History',
   url: '/history'
+}, {
+  label: 'Contacts',
+  url: '/contacts'
 }];
 
 export default navLinks;

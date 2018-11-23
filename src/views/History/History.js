@@ -17,18 +17,20 @@ class History extends Component {
   state = {
     filterBy: 'Date',
     searchTerm: ''
-  }
+  };
+
   componentDidMount () {
     this.props.getUserActivity();
   }
 
   handleFilterChange = event => {
     this.setState({ filterBy: event.target.value });
-  }
+  };
 
   handleSearchChange = event => {
     this.setState({ searchTerm: event.target.value });
-  }
+  };
+
   render () {
     const { userActivity } = this.props;
     return (
@@ -70,7 +72,8 @@ class History extends Component {
                   </div>
                   : <div className='paper history__no-activity'>
                     <h3>No Activity History</h3>
-                    <p>Keep track of your most recent transactions here when you sell, buy or transfer cash36 currencies</p>
+                    <p>Keep track of your most recent transactions here when you sell, buy or transfer cash36
+                      currencies</p>
                   </div>
               )
             }

@@ -1,0 +1,53 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/settings.scss';
+
+.contacts__add-btn {
+  > span {
+    border-radius: 10px;
+  }
+
+  > div {
+    display: flex;
+    align-items: center;
+    background: $white;
+    border-radius: 10px;
+    box-shadow: $box-shadow-1;
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+
+    span:first-of-type {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $white;
+      background: $gradient-primary;
+      border-radius: 50%;
+    }
+
+    span:last-of-type {
+      margin-left: 1.2rem;
+    }
+
+    @include desktop {
+      padding: 1.6rem 1.7rem;
+
+      span:first-of-type {
+        width: 3.2rem;
+        height: 3.2rem;
+      }
+    }
+
+    @include mobile {
+      padding: 1.2rem;
+
+      span:first-of-type {
+        width: 2.4rem;
+        height: 2.4rem;
+      }
+
+      span:last-of-type {
+        display: none;
+      }
+    }
+  }
+}

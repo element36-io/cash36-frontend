@@ -1,0 +1,47 @@
+@import '../../../styles/settings.scss';
+
+.contact-input-wrapper {
+  width: 100%;
+  margin-bottom: 1.6rem;
+
+  .contact-input {
+    position: relative;
+  }
+
+  label {
+    position: absolute;
+    color: $text-light-grey-1;
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+  }
+
+  input {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    padding: 1.4rem .6rem .6rem 0;
+    background: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid $border-light-grey-1;
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+
+
+    &:focus + span {
+      width: 100%;
+    }
+  }
+
+  span {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    display: block;
+    height: 2px;
+    width: 0;
+    transform: translateX(-50%);
+    transition: width 255ms;
+    background: $primary-main;
+  }
+}
