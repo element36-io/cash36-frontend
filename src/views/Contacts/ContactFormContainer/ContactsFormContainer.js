@@ -35,11 +35,11 @@ class ContactsFormContainer extends Component {
     this.setState({ submitting: true });
 
     this.props.submitCallback({ contactAddress, contactName })
-      .then(res => {
+      .then(() => {
         this.setResponse(true, 'success', `${contactName} was added to your contacts!`, 'Add another');
-      }).catch(err => {
-      this.setResponse(true, 'error', 'Ooops! There was an error', 'Try again');
-    });
+      }).catch(() => {
+        this.setResponse(true, 'error', 'Ooops! There was an error', 'Try again');
+      });
   };
 
   setResponse = (showResponse, type, msg, btnText) => {
@@ -62,41 +62,44 @@ class ContactsFormContainer extends Component {
 
   validateForm = () => {
     const { contactName, contactAddress } = this.state;
-    return !contactName.trim() || !this.props.web3.utils.isAddress(contactAddress);
+    const { contactsList, web3} = this.props;
+    return !contactName.trim() || !web3.utils.isAddress(contactAddress) || !!contactsList.filter(c => contactAddress === c.contactAddress).length;
   };
 
   closeForm = () => {
     this.props.closeForm();
-    this.setState({
-      contactName: '',
-      contactAddress: '',
-      submitting: false,
-      error: null,
-      response: {
-        ...this.state.response,
-        showResponse: false
-      }
-    });
+    setTimeout(() => {
+      this.setState({
+        contactName: '',
+        contactAddress: '',
+        submitting: false,
+        error: null,
+        response: {
+          ...this.state.response,
+          showResponse: false
+        }
+      });
+    }, 300);
   };
 
   renderContent = () => {
-    const { isActive, closeForm } = this.props;
+    const { isActive } = this.props;
     const { submitting, contactAddress, contactName, response: { showResponse, btnText, type, msg } } = this.state;
     const isValid = this.validateForm();
 
     return (
       <div className={`contact-form-container ${isActive ? '--active' : ''}`}>
         <Responsive isMobile>
-          <BackButton onClick={closeForm}/>
+          <BackButton onClick={this.closeForm} />
         </Responsive>
         <Responsive>
-          <CloseIcon className='contact-form__close' onClick={closeForm}/>
+          <CloseIcon className='contact-form__close' onClick={this.closeForm} />
         </Responsive>
-        {showResponse ?
-          <ContactResponse onClick={this.showForm} type={type} btnText={btnText} title={msg}/>
+        {showResponse
+          ? <ContactResponse onClick={this.showForm} type={type} btnText={btnText} title={msg} />
           : <ContactsForm onSubmit={this.addContact} contactAddress={contactAddress}
-                          contactName={contactName} changeHandler={this.changeHandler}
-                          isValid={isValid} submitting={submitting}
+            contactName={contactName} changeHandler={this.changeHandler}
+            isValid={isValid} submitting={submitting}
           />
         }
       </div>
@@ -124,8 +127,8 @@ class ContactsFormContainer extends Component {
 ContactsFormContainer.propTypes = {
   isActive: PropTypes.bool,
   submitCallback: PropTypes.func.isRequired,
-  closeForm: PropTypes.func.isRequired
+  closeForm: PropTypes.func.isRequired,
+  contactsList: PropTypes.array.isRequired
 };
 
 export default addCash36(ContactsFormContainer);
-

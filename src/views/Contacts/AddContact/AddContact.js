@@ -8,9 +8,9 @@ const AddContact = props => {
   const { clickHandler } = props;
 
   return (
-    <BaseButton className="contacts__add-btn" onClick={clickHandler}>
+    <BaseButton className='contacts__add-btn' onClick={clickHandler}>
       <div>
-        <span><AddIcon/></span>
+        <span><AddIcon /></span>
         <span>New Contact</span>
       </div>
     </BaseButton>

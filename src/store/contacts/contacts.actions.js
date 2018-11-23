@@ -28,7 +28,7 @@ export const removeContact = id => async dispatch => {
     dispatch({
       type: REMOVE_CONTACTS,
       payload: id
-    })
+    });
   } catch (error) {
     dispatch({ type: CONTACTS_ERROR, payload: error });
     return Promise.reject(error);
@@ -45,8 +45,8 @@ export const addContact = data => async dispatch => {
     });
 
     return Promise.resolve();
-  } catch(error) {
+  } catch (error) {
     dispatch({ type: CONTACTS_ERROR, payload: error });
     return Promise.reject(error);
   }
-}
+};

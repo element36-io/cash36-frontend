@@ -1,1 +1,1 @@
-export {default} from './ContactResponse';
+export { default } from './ContactResponse';

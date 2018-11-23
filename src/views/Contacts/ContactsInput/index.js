@@ -1,1 +1,1 @@
-export {default} from './ContactsInput';
+export { default } from './ContactsInput';

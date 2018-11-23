@@ -15,7 +15,7 @@ class Contacts extends Component {
   };
 
   componentDidMount () {
-    if (!this.props.contacts.contactsList.length) this.props.getContacts();
+       this.props.getContacts();
   }
 
   searchChangeHandler = evt => {
@@ -35,34 +35,31 @@ class Contacts extends Component {
     this.props.removeContact(id);
   };
 
-  addContact = () => {
-    console.log('======= Add Contact');
-  };
-
   renderList = () => {
     const { contacts: { contactsList } } = this.props;
-    const search = this.state.search.toLowerCase();
+    const search = this.state.search.toLowerCase().trim();
 
     if (!contactsList.length) return null;
 
     return contactsList.filter(c => {
       return c.contactName.toLowerCase().includes(search) || c.contactAddress.toLowerCase().includes(search);
-    }).map(c => <ContactItem key={c.id} contact={c} removeCallback={this.removeContact}/>);
+    }).map(c => <ContactItem key={c.id} contact={c} removeCallback={this.removeContact} />);
   };
 
   render () {
-    const { contacts: { fetching }, addContact } = this.props;
+    const { contacts: { fetching, contactsList }, addContact } = this.props;
     const { search, showForm } = this.state;
 
     return (
       <div className='wrapper contacts'>
-        <ContactFormContainer closeForm={this.closeForm} submitCallback={addContact} isActive={showForm}/>
+        <ContactFormContainer closeForm={this.closeForm} submitCallback={addContact}
+                              isActive={showForm} contactsList={contactsList} />
         <div className='contacts__actions'>
-          <SearchBox changeHandler={this.searchChangeHandler} value={search}/>
-          <AddContact clickHandler={this.showForm}/>
+          <SearchBox changeHandler={this.searchChangeHandler} value={search} />
+          <AddContact clickHandler={this.showForm} />
         </div>
-        {fetching ?
-          <div className='contacts__loader'><CircularProgress color='primary' size={75}/></div>
+        {fetching
+          ? <div className='contacts__loader'><CircularProgress color='primary' size={75} /></div>
           : <div className='contacts__list'>{this.renderList()}</div>
         }
       </div>
