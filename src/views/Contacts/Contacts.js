@@ -15,7 +15,7 @@ class Contacts extends Component {
   };
 
   componentDidMount () {
-       this.props.getContacts();
+    this.props.getContacts();
   }
 
   searchChangeHandler = evt => {
@@ -53,7 +53,7 @@ class Contacts extends Component {
     return (
       <div className='wrapper contacts'>
         <ContactFormContainer closeForm={this.closeForm} submitCallback={addContact}
-                              isActive={showForm} contactsList={contactsList} />
+          isActive={showForm} contactsList={contactsList} />
         <div className='contacts__actions'>
           <SearchBox changeHandler={this.searchChangeHandler} value={search} />
           <AddContact clickHandler={this.showForm} />

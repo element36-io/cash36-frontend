@@ -62,7 +62,7 @@ class ContactsFormContainer extends Component {
 
   validateForm = () => {
     const { contactName, contactAddress } = this.state;
-    const { contactsList, web3} = this.props;
+    const { contactsList, web3 } = this.props;
     return !contactName.trim() || !web3.utils.isAddress(contactAddress) || !!contactsList.filter(c => contactAddress === c.contactAddress).length;
   };
 

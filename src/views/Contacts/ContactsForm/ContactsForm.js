@@ -7,7 +7,7 @@ import ContactsInput from '../ContactsInput';
 import './ContactsForm.scss';
 
 const ContactsForm = props => {
-  const { onSubmit, contactName, contactAddress,  changeHandler, submitting, isValid } = props;
+  const { onSubmit, contactName, contactAddress, changeHandler, submitting, isValid } = props;
 
   return (
     <div className='contact-form'>
