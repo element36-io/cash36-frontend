@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import addCash36 from '../../components/cash36';
 import { Cash36Contract, Token36Contract } from 'cash36-contracts';
-import ChooseTransferAddress from './ChooseTransferAddress';
+import TransferAddress from './TransferAddress';
 import ChooseTransferAmount from './ChooseTransferAmount';
 import BackButton from '../../components/Buttons/BackButton';
 import { getTokens } from '../../store/tokens/tokens.actions';
@@ -15,12 +15,10 @@ import './Transfer.scss';
 class Transfer extends Component {
   state = {
     step: 0,
-    address: '',
     symbol: 'EUR36',
     amount: '',
-    inputError: '',
     error: null
-  }
+  };
 
   componentDidMount () {
     this.props.getTokens();
@@ -42,21 +40,7 @@ class Transfer extends Component {
   };
 
   handleAddressSubmit = () => {
-    const isAddressValid = this.props.web3.utils.isAddress(this.state.address);
-
-    if (isAddressValid) {
       this.nextStep();
-      this.setState({ inputError: '' });
-    } else {
-      this.setState({ inputError: 'Address is not valid' });
-    }
-  }
-
-  handleAddressChange = (event) => {
-    this.setState({ address: event.target.value });
-    if (this.state.inputError) {
-      this.setState({ inputError: '' });
-    }
   }
 
   handleAmountChange = (event) => {
@@ -104,7 +88,8 @@ class Transfer extends Component {
   }
 
   renderStep = () => {
-    const { amount, symbol, step, address, inputError, error } = this.state;
+    const { amount, symbol, step, address, error } = this.state;
+    const {web3: {utils}} = this.props;
     const selectedToken = this.props.tokens.filter(token => token.symbol === symbol)[0];
 
     switch (step) {
@@ -127,11 +112,9 @@ class Transfer extends Component {
         return <TransferError message={error} />;
       default:
         return (
-          <ChooseTransferAddress
-            handleAddressChange={this.handleAddressChange}
-            address={address}
-            handleAddressSubmit={this.handleAddressSubmit}
-            inputError={inputError}
+          <TransferAddress
+            submitCallback={this.handleAddressSubmit}
+            utils={utils}
           />
         );
     }
