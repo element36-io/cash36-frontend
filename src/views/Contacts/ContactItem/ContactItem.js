@@ -5,6 +5,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 import BaseButton from '../../../components/Buttons/BaseButton/BaseButton';
+import Avatar from '../../../components/Avatar';
 import './ContactItem.scss';
 
 class ContactItem extends PureComponent {
@@ -49,17 +50,15 @@ class ContactItem extends PureComponent {
             </div>
           </div>
         </ClickAwayListener>
-        <div className='contact__item__image-wrapper'>
-          {avatarUrl ? <img src={avatarUrl} alt={contactName} /> : <i className='fas fa-user' />}
-        </div>
+        <Avatar avatarUrl={avatarUrl} cssClass='contact__item__image-wrapper' alt={contactName} />
         <div className='contacts__item__info'>
           <h4>{contactName}</h4>
           <span>{contactAddress}</span>
         </div>
         <BaseButton className='contact__list-item__btn' onClick={this.quickTransfer}>
-          <div>
+          <span>
             <span>Quick</span> Transfer
-          </div>
+          </span>
         </BaseButton>
       </div>
     );

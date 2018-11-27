@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import addCash36 from '../../components/cash36';
 import { Cash36Contract, Token36Contract } from 'cash36-contracts';
 import TransferAddress from './TransferAddress';
-import ChooseTransferAmount from './ChooseTransferAmount';
+import TransferAmount from './TransferAmount';
 import BackButton from '../../components/Buttons/BackButton';
 import { getTokens } from '../../store/tokens/tokens.actions';
+import { getContacts } from '../../store/contacts/contacts.actions';
 import TransferConfirmation from './TransferConfirmation';
 import TransferSuccess from './TransferSuccess';
 import TransferError from './TransferError';
@@ -17,11 +18,13 @@ class Transfer extends Component {
     step: 0,
     symbol: 'EUR36',
     amount: '',
+    target: null,
     error: null
   };
 
   componentDidMount () {
     this.props.getTokens();
+    this.props.getContacts();
     this._isMounted = true;
   }
 
@@ -31,43 +34,40 @@ class Transfer extends Component {
 
   nextStep = () => {
     this.setState((prevState) => ({ step: prevState.step + 1 }));
-  }
+  };
 
   previousStep = () => {
     this.setState((prevState) => {
-      return { step: Math.round(prevState.step - 1) };
+      return { step: prevState.step - 1 };
     });
   };
 
-  handleAddressSubmit = () => {
-      this.nextStep();
-  }
-
-  handleAmountChange = (event) => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
+  addTarget = target => {
+    this.setState({ target });
+    this.nextStep();
   };
 
-  handleSendTransferClick = () => {
+  sendTransfer = amount => {
     try {
-      this.setState({ step: 2 });
-      this.transferTokens();
+      this.setState({ step: 2, ...amount }, () => {
+        this.transferTokens();
+      });
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   transferTokens = async () => {
     const { web3, networkId, username } = this.props;
-    const { address, symbol, amount } = this.state;
+    const { target: { contactAddress }, amount, symbol } = this.state;
 
     const cash36Contract = new web3.eth.Contract(Cash36Contract.abi, Cash36Contract.networks[networkId].address);
     const tokenAddress = await cash36Contract.methods.getTokenBySymbol(symbol).call();
     const token36Contract = new web3.eth.Contract(Token36Contract.abi, tokenAddress);
 
     // Calculate amount of gas needed and add extra margin of 10%
-    const estimate = await token36Contract.methods.transfer(address, amount).estimateGas({ from: username });
-    const data = await token36Contract.methods.transfer(address, amount).encodeABI();
+    const estimate = await token36Contract.methods.transfer(contactAddress, amount).estimateGas({ from: username });
+    const data = await token36Contract.methods.transfer(contactAddress, amount).encodeABI();
 
     const options = {
       from: username,
@@ -85,35 +85,32 @@ class Transfer extends Component {
         console.log(error);
         if (this._isMounted) this.setState({ step: 4, error: 'Transfer has been denied via mobile device' });
       });
-  }
+  };
 
   renderStep = () => {
-    const { amount, symbol, step, address, error } = this.state;
-    const {web3: {utils}} = this.props;
-    const selectedToken = this.props.tokens.filter(token => token.symbol === symbol)[0];
+    const { amount, symbol, step, target, error } = this.state;
+    const { web3: { utils }, contactsList, tokens } = this.props;
 
     switch (step) {
       case 1:
         return (
-          <ChooseTransferAmount
-            symbol={symbol}
-            amount={amount}
-            handleChange={this.handleAmountChange}
-            address={address}
-            token={selectedToken}
-            handleSendTransferClick={this.handleSendTransferClick}
+          <TransferAmount
+            submitCallback={this.sendTransfer}
+            target={target}
+            tokens={tokens}
           />
         );
       case 2:
-        return <TransferConfirmation address={address} />;
+        return <TransferConfirmation target={target}/>;
       case 3:
-        return <TransferSuccess amount={amount} address={address} symbol={symbol} />;
+        return <TransferSuccess amount={amount} target={target} symbol={symbol}/>;
       case 4:
-        return <TransferError message={error} />;
+        return <TransferError message={error}/>;
       default:
         return (
           <TransferAddress
-            submitCallback={this.handleAddressSubmit}
+            submitCallback={this.addTarget}
+            contactsList={contactsList}
             utils={utils}
           />
         );
@@ -126,7 +123,7 @@ class Transfer extends Component {
       <div className='wrapper'>
         <div className='transfer paper'>
           <div className='transfer__content'>
-            {step === 1 && <BackButton onClick={this.previousStep} />}
+            {step === 1 && <BackButton onClick={this.previousStep}/>}
             {this.renderStep()}
           </div>
         </div>
@@ -135,9 +132,10 @@ class Transfer extends Component {
   }
 }
 
-const mapStateToProps = ({ tokens: { tokens = [] }, auth: { user } }) => ({
+const mapStateToProps = ({ tokens: { tokens = [] }, auth: { user }, contacts: { contactsList } }) => ({
   tokens,
-  username: user.username
+  username: user.username,
+  contactsList
 });
 
-export default addCash36(connect(mapStateToProps, { getTokens })(Transfer));
+export default addCash36(connect(mapStateToProps, { getTokens, getContacts })(Transfer));

@@ -3445,6 +3445,15 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
+create-react-class@^15.6.0:
+  version "15.6.3"
+  resolved "http://167.99.243.81:4873/create-react-class/-/create-react-class-15.6.3.tgz#2d73237fb3f970ae6ebe011a9e66f46dbca80036"
+  integrity sha512-M+/3Q6E6DLO6Yx3OwrWjwHBnvfXXYA7W+dFjt/ZDBemHO1DDZhsalX/NUtnTYclN6GfnBDRh4qRHjcDHmlJBJg==
+  dependencies:
+    fbjs "^0.8.9"
+    loose-envify "^1.3.1"
+    object-assign "^4.1.1"
+
 cross-fetch@^2.1.0, cross-fetch@^2.1.1:
   version "2.2.2"
   resolved "http://167.99.243.81:4873/cross-fetch/-/cross-fetch-2.2.2.tgz#a47ff4f7fc712daba8f6a695a11c948440d45723"
@@ -5501,7 +5510,7 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "^2.0.0"
 
-fbjs@^0.8.1:
+fbjs@^0.8.1, fbjs@^0.8.9:
   version "0.8.17"
   resolved "http://167.99.243.81:4873/fbjs/-/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
   integrity sha1-xNWY6taUkRJlPWWIsBpc3Nn5D90=
@@ -6722,6 +6731,11 @@ inquirer@6.2.0, inquirer@^6.1.0:
     string-width "^2.1.0"
     strip-ansi "^4.0.0"
     through "^2.3.6"
+
+install@^0.12.2:
+  version "0.12.2"
+  resolved "http://167.99.243.81:4873/install/-/install-0.12.2.tgz#ea10e9b2cbb5b0484f25080b24b5b34429d9f564"
+  integrity sha512-+7thTb4Rpvs9mnlhHKGZFJbGOO6kyMgy+gg0sgM5vFzIFK0wrCYXqdlaM71Bi289DTuPHf61puMFsaZBcwDIrg==
 
 internal-ip@^3.0.1:
   version "3.0.1"
@@ -10502,7 +10516,7 @@ prompts@^0.1.9:
     kleur "^2.0.1"
     sisteransi "^0.1.1"
 
-prop-types@^15.5.6, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@~15.6.0:
+prop-types@^15.5.10, prop-types@^15.5.6, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@~15.6.0:
   version "15.6.2"
   resolved "http://167.99.243.81:4873/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   integrity sha512-3pboPvLiWD7dkI3qf3KbUe6hKFKa52w+AE0VCqECtf+QHAKgOL37tTaNCnuX1nAAQ4ZhyP+kYVKf8rLmJ/feDQ==
@@ -10775,6 +10789,16 @@ react-dev-utils@^6.0.4:
     strip-ansi "4.0.0"
     text-table "0.2.0"
 
+react-dom@^15.0.2:
+  version "15.6.2"
+  resolved "http://167.99.243.81:4873/react-dom/-/react-dom-15.6.2.tgz#41cfadf693b757faf2708443a1d1fd5a02bef730"
+  integrity sha1-Qc+t9pO3V/rycIRDodH9WgK+9zA=
+  dependencies:
+    fbjs "^0.8.9"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.0"
+    prop-types "^15.5.10"
+
 react-dom@^16.4.0:
   version "16.5.2"
   resolved "http://167.99.243.81:4873/react-dom/-/react-dom-16.5.2.tgz#b69ee47aa20bab5327b2b9d7c1fe2a30f2cfa9d7"
@@ -10798,6 +10822,11 @@ react-event-listener@^0.6.2, react-event-listener@^0.6.4:
     "@babel/runtime" "7.0.0"
     prop-types "^15.6.0"
     warning "^4.0.1"
+
+react-ink@^6.4.0:
+  version "6.4.0"
+  resolved "http://167.99.243.81:4873/react-ink/-/react-ink-6.4.0.tgz#fa1573104237d3c08bcbf06108f3197b16762f76"
+  integrity sha512-CucEgFtGVFd0yJ8a+fic7FRHPv8QDba7UOoTvg4ezaRLGA7/FitwiQMIydBfiaZ7v+mrCsqWaH2ZpmthZRMxgQ==
 
 react-is@^16.5.2:
   version "16.5.2"
@@ -10850,6 +10879,22 @@ react-responsive@^5.0.0:
     hyphenate-style-name "^1.0.0"
     matchmediaquery "^0.3.0"
     prop-types "^15.6.1"
+
+react-ripple-effect@^1.0.4:
+  version "1.0.4"
+  resolved "http://167.99.243.81:4873/react-ripple-effect/-/react-ripple-effect-1.0.4.tgz#63a4e5b2779d26e2845ffe47b0b292cc58208bf5"
+  integrity sha1-Y6TlsnedJuKEX/5HsLKSzFggi/U=
+  dependencies:
+    react "^15.0.2"
+    react-dom "^15.0.2"
+
+react-ripples@^1.1.2:
+  version "1.1.2"
+  resolved "http://167.99.243.81:4873/react-ripples/-/react-ripples-1.1.2.tgz#059420c253b5b28255ddff4153eae9e00c2963f4"
+  integrity sha512-6lddMHlZUSseT26S/UfdcrW9jK5bzTQ7HKAgh8HMwiHxxjGQXhHvTF5Vu7mzRvNKw4h4ijvzoCBEPZqM93Hf3A==
+  dependencies:
+    prop-types "^15.6.0"
+    react "^16.2.0"
 
 react-router-dom@^4.1.2:
   version "4.3.1"
@@ -10973,6 +11018,27 @@ react-truncate-string@^1.3.0:
   integrity sha512-ZwMCNH0LMoqalJSziI0dhzlFFaCjDaax8SLsgZq+47aCcvtZzOYpT+vKJZEfmYJzObHQL9bV4CIqr4FMX3eZhQ==
   dependencies:
     throttle-debounce "^2.0.1"
+
+react@^15.0.2:
+  version "15.6.2"
+  resolved "http://167.99.243.81:4873/react/-/react-15.6.2.tgz#dba0434ab439cfe82f108f0f511663908179aa72"
+  integrity sha1-26BDSrQ5z+gvEI8PURZjkIF5qnI=
+  dependencies:
+    create-react-class "^15.6.0"
+    fbjs "^0.8.9"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.0"
+    prop-types "^15.5.10"
+
+react@^16.2.0:
+  version "16.6.3"
+  resolved "http://167.99.243.81:4873/react/-/react-16.6.3.tgz#25d77c91911d6bbdd23db41e70fb094cc1e0871c"
+  integrity sha512-zCvmH2vbEolgKxtqXL2wmGCUxUyNheYn/C+PD1YAjfxHC54+MhdruyhO7QieQrYsYeTxrn93PM2y0jRH1zEExw==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    scheduler "^0.11.2"
 
 react@^16.4.0:
   version "16.5.2"
@@ -11676,6 +11742,14 @@ schedule@^0.5.0:
   resolved "http://167.99.243.81:4873/schedule/-/schedule-0.5.0.tgz#c128fffa0b402488b08b55ae74bb9df55cc29cc8"
   integrity sha512-HUcJicG5Ou8xfR//c2rPT0lPIRR09vVvN81T9fqfVgBmhERUbDEQoYKjpBxbueJnCPpSu2ujXzOnRQt6x9o/jw==
   dependencies:
+    object-assign "^4.1.1"
+
+scheduler@^0.11.2:
+  version "0.11.2"
+  resolved "http://167.99.243.81:4873/scheduler/-/scheduler-0.11.2.tgz#a8db5399d06eba5abac51b705b7151d2319d33d3"
+  integrity sha512-+WCP3s3wOaW4S7C1tl3TEXp4l9lJn0ZK8G3W3WKRWmw77Z2cIFUW2MiNTMHn5sCjxN+t7N43HAOOgMjyAg5hlg==
+  dependencies:
+    loose-envify "^1.1.0"
     object-assign "^4.1.1"
 
 schema-utils@^0.4.4, schema-utils@^0.4.5:

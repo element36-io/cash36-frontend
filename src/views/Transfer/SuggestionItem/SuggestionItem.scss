@@ -1,0 +1,32 @@
+@import '../../../styles/settings.scss';
+@import '../../../styles/mixins.scss';
+
+.transfer-address__suggestion-item {
+  display: flex;
+  position: relative;
+  width: 100%;
+  align-items: center;
+  padding: .5rem 1rem;
+  cursor: pointer;
+
+  div {
+    width: 100%;
+    //display: flex;
+  }
+
+  .transfer-address__suggestion-item__avatar {
+    width: 4.6rem;
+    height: 4.6rem;
+    margin-right: 1rem;
+  }
+
+  @include desktop {
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+  }
+
+  @include mobile {
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+  }
+}

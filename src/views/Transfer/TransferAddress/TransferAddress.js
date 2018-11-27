@@ -1,52 +1,53 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TextField from '@material-ui/core/TextField';
 import StepButton from '../../../components/Buttons/StepButton';
+import TransferSuggestions from '../TransferSuggestions';
 import './TransferAddress.scss';
 
 class TransferAddress extends Component {
-
   state = {
-    address: ''
+    address: '',
+    showSuggestions: false,
+    selectedContact: null
   };
 
   handleChange = evt => {
-    const {name, value} = evt.target;
-    this.setState({[name]: value});
+    const { name, value } = evt.target;
+    let contact = this.state.selectedContact;
+    if (contact && value.trim() !== contact.contactAddress) contact = null;
+    this.setState({ [name]: value, showSuggestions: true, contact });
+  };
+
+  onSuggestionClick = selectedContact => {
+    this.setState({ showSuggestions: false, address: selectedContact.contactAddress, selectedContact });
   };
 
   onSubmit = evt => {
-    const isAddressValid = this.props.utils.isAddress(this.state.address);
-
-    if (isAddressValid) {
-    } else {
-    }
+    const target = this.state.selectedContact ? this.state.selectedContact : { contactAddress: this.state.address };
+    this.props.submitCallback(target);
   };
 
-  render() {
-    const {address} = this.state;
+  validateAddress = () => {
+    return this.props.utils.isAddress(this.state.address);
+  };
+
+  render () {
+    const { address, showSuggestions } = this.state;
+    const { contactsList } = this.props;
 
     return (
       <div className='transfer-address'>
         <h2>Transfer Tokens</h2>
         <h4>Transfer tokens to</h4>
-        <div className='transfer-address__input-wrapper'>
-          <TextField
-            name='address'
-            type='text'
-            onChange={this.handleChange}
-            placeholder='Address'
-            value={address}
-            autoComplete='off'
-            fullWidth
-            className='transfer-address__input'
-            InputProps={{
-              disableUnderline: true
-            }}
-          />
-          {/*<span>{inputError}</span>*/}
+        <div className='transfer-address__search-container'>
+          <div className='transfer-address__input-wrapper'>
+            <input onChange={this.handleChange} placeholder='Address' name='address' value={address} autoComplete='off' />
+            <span />
+          </div>
+          {/* <span>{inputError}</span> */}
+          {address.trim() && showSuggestions && <TransferSuggestions contacts={contactsList} onClick={this.onSuggestionClick} filter={address} />}
         </div>
-        <StepButton text={'Next Step'} onClick={this.onSubmit} disabled={!address}/>
+        <StepButton text={'Next Step'} onClick={this.onSubmit} disabled={!this.validateAddress()} />
       </div>
     );
   }
@@ -54,7 +55,8 @@ class TransferAddress extends Component {
 
 TransferAddress.propTypes = {
   submitCallback: PropTypes.func,
-  utils: PropTypes.object.isRequired
+  utils: PropTypes.object.isRequired,
+  contactsList: PropTypes.array
 };
 
 export default TransferAddress;

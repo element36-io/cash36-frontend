@@ -9,10 +9,10 @@ const AddContact = props => {
 
   return (
     <BaseButton className='contacts__add-btn' onClick={clickHandler}>
-      <div>
+      <span className='contacts__add-btn__inner'>
         <span><AddIcon /></span>
         <span>New Contact</span>
-      </div>
+      </span>
     </BaseButton>
   );
 };
