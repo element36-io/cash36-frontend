@@ -1,0 +1,96 @@
+@import '../../../styles/settings.scss';
+@import '../../../styles/mixins.scss';
+
+.transfer__contacts-container {
+  position: relative;
+  padding-top: 2.4rem;
+  padding-bottom: 2.4rem;
+  border-top: 1px solid $border-light-grey-1;
+  border-bottom: 1px solid $border-light-grey-1;
+
+  h4 {
+    margin-bottom: 2rem;
+    font-size: 1.4rem;
+    line-height: 1.7rem;
+    text-align: center;
+  }
+
+  .transfer__contacts__slider {
+    position: relative;
+  }
+
+  .transfer__contacts__list-wrapper {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .transfer__contacts-list {
+    display: flex;
+    flex-wrap: nowrap;
+    transition: all 255ms;
+
+    &.transfer__contacts-list--center {
+      justify-content: center;
+    }
+  }
+
+  .transfer__contact {
+    padding: 1.4rem .5rem;
+    border-radius: 12px;
+    border: 1px solid $border-light-grey-1;
+    background: #fff;
+    box-shadow: $box-shadow-1;
+    font-size: 1.3rem;
+    line-height: 1.5rem;
+  }
+
+  .transfer__contacts-container__pager {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2.4rem;
+
+    li {
+      display: block;
+      height: .2rem;
+      width: 4.8rem;
+      min-width: 2.4rem;
+      margin: 0 .6rem .6rem;
+      background: $grey-blue;
+      cursor: pointer;
+
+      &.active {
+        background: $gradient-3;
+        box-shadow: 0 5px 6px 0 rgba(0,0,0,0.05);
+      }
+    }
+  }
+
+  @include desktop {
+    width: 120%;
+    margin-bottom: 3.2rem;
+    padding: 2.4rem 10%;
+    background: rebeccapurple;
+
+    .transfer__contact {
+      width: calc((100% - 5.6rem)/5);
+      min-width: calc((100% - 5.6rem)/5);
+      max-width: calc((100% - 5.6rem)/5);
+      margin-right: 1.4rem;
+    }
+  }
+
+  @include mobile {
+    width: 100%;
+    margin-bottom: 2.4rem;
+    background: rebeccapurple;
+
+    .transfer__contact {
+      width: calc((100% - 1.6rem)/3);
+      min-width: calc((100% - 1.6rem)/3);
+      max-width: calc((100% - 1.6rem)/3);
+      margin-right: .8rem;
+    }
+  }
+}

@@ -101,11 +101,11 @@ class Transfer extends Component {
           />
         );
       case 2:
-        return <TransferConfirmation target={target}/>;
+        return <TransferConfirmation target={target} />;
       case 3:
-        return <TransferSuccess amount={amount} target={target} symbol={symbol}/>;
+        return <TransferSuccess amount={amount} target={target} symbol={symbol} />;
       case 4:
-        return <TransferError message={error}/>;
+        return <TransferError message={error} />;
       default:
         return (
           <TransferAddress
@@ -123,7 +123,7 @@ class Transfer extends Component {
       <div className='wrapper'>
         <div className='transfer paper'>
           <div className='transfer__content'>
-            {step === 1 && <BackButton onClick={this.previousStep}/>}
+            {step === 1 && <BackButton onClick={this.previousStep} />}
             {this.renderStep()}
           </div>
         </div>

@@ -3,21 +3,21 @@ import PropTypes from 'prop-types';
 import Avatar from '../../../components/Avatar';
 import Ink from 'react-ink';
 
-import './SuggestionItem.scss';
+import './TransferContact.scss';
 
-class SuggestionItem extends PureComponent {
+class TransferContact extends PureComponent {
   clickHandler = () => {
     const { contact, clickCallback } = this.props;
     clickCallback(contact);
   };
 
   render () {
-    const { contact } = this.props;
+    const { contact, alt } = this.props;
 
     return (
-      <div className='transfer-address__suggestion-item' onClick={this.clickHandler}>
+      <div className={`transfer__contact ${alt ? 'transfer__contact--alt' : ''}`} onClick={this.clickHandler}>
         <Avatar avatarUrl={contact.avatarUrl} alt={contact.contactName}
-          cssClass='transfer-address__suggestion-item__avatar' />
+          cssClass='transfer__contact__avatar' />
         <span>{contact.contactName}</span>
         <Ink duration={500} />
       </div>
@@ -25,9 +25,10 @@ class SuggestionItem extends PureComponent {
   }
 }
 
-SuggestionItem.propTypes = {
+TransferContact.propTypes = {
   contact: PropTypes.object.isRequired,
-  clickCallback: PropTypes.func.isRequired
+  clickCallback: PropTypes.func.isRequired,
+  alt: PropTypes.bool
 };
 
-export default SuggestionItem;
+export default TransferContact;

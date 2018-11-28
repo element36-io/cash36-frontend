@@ -1,20 +1,22 @@
 @import '../../../styles/settings.scss';
 @import '../../../styles/mixins.scss';
 
-.transfer-address__suggestion-item {
+.transfer__contact {
   display: flex;
   position: relative;
-  width: 100%;
   align-items: center;
   padding: .5rem 1rem;
   cursor: pointer;
 
-  div {
-    width: 100%;
-    //display: flex;
+  &.transfer__contact--alt {
+    flex-direction: column;
+
+    .transfer__contact__avatar {
+      margin-bottom: 1rem;
+    }
   }
 
-  .transfer-address__suggestion-item__avatar {
+  .transfer__contact__avatar {
     width: 4.6rem;
     height: 4.6rem;
     margin-right: 1rem;

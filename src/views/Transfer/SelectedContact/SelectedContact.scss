@@ -1,0 +1,24 @@
+@import '../../../styles/settings.scss';
+@import '../../../styles/mixins.scss';
+
+.transfer__selected-contact {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: flex-start;
+  padding: 1.2rem 1.5rem;
+  background: #fff;
+  color: $text-light-grey-1;
+  font-size: 1.2rem;
+  line-height: 1.4rem;
+
+  .transfer__selected-contact__avatar {
+    width: 3.8rem;
+    height: 3.8rem;
+    margin-right: 1.5rem;
+    border-radius: 12px;
+  }
+}

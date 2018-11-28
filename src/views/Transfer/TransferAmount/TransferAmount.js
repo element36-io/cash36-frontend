@@ -9,7 +9,6 @@ import StepButton from '../../../components/Buttons/StepButton';
 import './TransferAmount.scss';
 
 class TransferAmount extends Component {
-
   state = {
     amount: '',
     symbol: 'EUR36'
@@ -21,37 +20,37 @@ class TransferAmount extends Component {
   }
 
   submitAmount = () => {
-    const {amount, symbol} = this.state;
-    this.props.submitCallback({amount, symbol});
+    const { amount, symbol } = this.state;
+    this.props.submitCallback({ amount, symbol });
   }
 
   isDisabled = () => {
-    const {amount, symbol} = this.state;
+    const { amount, symbol } = this.state;
     const balance = this.props.tokens.filter(token => token.symbol === symbol)[0].balance;
     return !this.state.amount || amount > balance;
   }
 
   render () {
-    const { target, submitCallback, tokens } = this.props;
-    const { amount, symbol} = this.state;
+    const { target, tokens } = this.props;
+    const { amount, symbol } = this.state;
     const selectedToken = tokens.filter(token => token.symbol === symbol)[0];
 
     return (
       <div className='transfer-amount'>
         <div className='transfer-amount__header'>
           <h4>Sending to</h4>
-          <Avatar avatarUrl={target.avatarUrl} cssClass='transfer-amount__avatar'/>
+          <Avatar avatarUrl={target.avatarUrl} cssClass='transfer-amount__avatar' />
           {target.contactName && <span>{target.contactName}</span>}
-          <TruncateString text={target.contactAddress}/>
+          <TruncateString text={target.contactAddress} />
         </div>
-        <hr/>
+        <hr />
         <ChooseAmountForm
           amount={amount}
           symbol={symbol}
           handleChange={this.handleChange}
         />
-        <AvailableBalance balance={selectedToken ? selectedToken.balance : 0} symbol={symbol}/>
-        <StepButton text={'Send'} onClick={this.submitAmount} disabled={this.isDisabled()}/>
+        <AvailableBalance balance={selectedToken ? selectedToken.balance : 0} symbol={symbol} />
+        <StepButton text={'Send'} onClick={this.submitAmount} disabled={this.isDisabled()} />
       </div>
     );
   }
@@ -60,7 +59,7 @@ class TransferAmount extends Component {
 TransferAmount.propTypes = {
   target: PropTypes.object.isRequired,
   submitCallback: PropTypes.func.isRequired,
-  tokens: PropTypes.array.isRequired,
+  tokens: PropTypes.array.isRequired
 };
 
 export default TransferAmount;

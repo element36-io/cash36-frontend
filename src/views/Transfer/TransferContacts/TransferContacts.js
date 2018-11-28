@@ -1,11 +1,116 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Responsive from '../../../components/Responsive';
+import TransferContact from '../TransferContact';
+import ArrowBtn from '../ArrowBtn';
+import './TransferContacts.scss';
 
 class TransferContacts extends Component {
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      listOffset: 0,
+      currentPage: 0,
+      itemsPerPage: this.getItemsPerPage(),
+      numOfPages: this.getNumOfPages()
+    };
+  }
+
+  list = React.createRef();
+
+  componentDidMount () {
+    window.addEventListener('resize', this.windowResizeCallback);
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('resize', this.windowResizeCallback);
+  }
+
+  windowResizeCallback = () => {
+    const { itemsPerPage, currentPage } = this.state;
+    if ((window.innerWidth > 767 && itemsPerPage === 5) || (window.innerWidth < 767 && itemsPerPage === 3)) {
+      this.goToPage(currentPage);
+      return;
+    }
+    this.setState({
+      currentPage: 0,
+      itemsPerPage: this.getItemsPerPage(),
+      numOfPages: this.getNumOfPages()
+    }, () => {
+      this.goToPage(0);
+    });
+  }
+
+  getItemsPerPage = () => {
+    return window.innerWidth > 767 ? 5 : 3;
+  };
+
+  getNumOfPages = () => {
+    return Math.ceil(this.props.contactsList.length / this.getItemsPerPage());
+  };
+
+  nextPage = () => {
+    let { numOfPages, currentPage } = this.state;
+    if (currentPage === numOfPages - 1) return;
+    currentPage++;
+    this.goToPage(currentPage);
+  };
+
+  prevPage = () => {
+    let { currentPage } = this.state;
+    if (currentPage === 0) return;
+    currentPage--;
+    this.goToPage(currentPage);
+  };
+
+  goToPage = currentPage => {
+    let { itemsPerPage } = this.state;
+    const { contactsList } = this.props;
+
+    const sliderWidth = this.list.current.clientWidth;
+    const margin = window.getComputedStyle(this.list.current.firstChild).getPropertyValue('margin-right').split('px')[0];
+
+    const pageItems = contactsList.slice(currentPage * itemsPerPage, currentPage * itemsPerPage + itemsPerPage).length;
+    let activePage = itemsPerPage % pageItems || pageItems === 1 ? currentPage -1 : currentPage;
+    let listOffset = -(sliderWidth/sliderWidth)*100 * activePage - ((margin/sliderWidth)*100) * activePage;
+
+    if (itemsPerPage % pageItems || pageItems === 1) {
+      // listOffset -= -sliderWidth * (activePage) - (activePage) * margin - sliderWidth/itemsPerPage*pageItems;
+      listOffset -= ((this.list.current.firstChild.offsetWidth*pageItems)/sliderWidth)*100;
+    }
+
+    this.setState({ listOffset, currentPage });
+  };
+
   render () {
+    const { contactsList, clickCallback } = this.props;
+    const { listOffset, numOfPages, currentPage } = this.state;
+
     return (
-      <div>
-        contact list
+      <div className='transfer__contacts-container'>
+        <h4>Contacts</h4>
+        <div className='transfer__contacts__slider'>
+          <Responsive>
+            <ArrowBtn onClick={this.prevPage} />
+            <ArrowBtn alt onClick={this.nextPage} />
+          </Responsive>
+          <div className='transfer__contacts__list-wrapper'>
+            <div className='transfer__contacts-list' ref={this.list}
+              style={{ 'transform': `translateX(${listOffset}%)` }}>
+              {contactsList.map(c => (
+                <TransferContact contact={c} clickCallback={clickCallback} alt key={c.id} />
+              ))}
+            </div>
+          </div>
+        </div>
+        <ul className='transfer__contacts-container__pager'>
+          {[...Array(numOfPages).keys()].map((item, i) =>
+            <li className={currentPage === i ? 'active' : ''} onClick={() => {
+              this.goToPage(i);
+            }} key={i} />
+          )}
+        </ul>
       </div>
     );
   }
