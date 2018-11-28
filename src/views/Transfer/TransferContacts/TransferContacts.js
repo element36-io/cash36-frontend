@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Responsive from '../../../components/Responsive';
 import TransferContact from '../TransferContact';
@@ -67,10 +67,10 @@ class TransferContacts extends Component {
     const { contactsList } = this.props;
 
     const pageItems = contactsList.slice(currentPage * itemsPerPage, currentPage * itemsPerPage + itemsPerPage).length;
-    let listOffset = -100 * (itemsPerPage % pageItems || pageItems === 1 ? currentPage -1 : currentPage);
+    let listOffset = -100 * (itemsPerPage % pageItems || pageItems === 1 ? currentPage - 1 : currentPage);
 
     if (itemsPerPage % pageItems || pageItems === 1) {
-      listOffset -= (pageItems/itemsPerPage) * 100;
+      listOffset -= (pageItems / itemsPerPage) * 100;
     }
 
     this.setState({ listOffset, currentPage });
