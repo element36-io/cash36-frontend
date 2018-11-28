@@ -2,18 +2,18 @@ import React from 'react';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { MenuItem, TextField } from '@material-ui/core';
 
-import './FilterBy.scss';
+import './FilterByStatus.scss';
 
-const filters = ['Date', 'Name', 'Amount'];
+const filters = ['All', 'Open', 'Completed', 'Processing', 'On Hold'];
 
-const FilterBy = ({ filterBy, handleFilterChange }) => (
+const FilterByStatus = ({ filterByStatus, handleFilterByStatusChange }) => (
   <div className='history__filter-by paper'>
-    <span>Filter by:</span>
+    <span>Filter by status:</span>
     <TextField
-      name='filterBy'
+      name='filterByStatus'
       select
-      value={filterBy}
-      onChange={handleFilterChange}
+      value={filterByStatus}
+      onChange={handleFilterByStatusChange}
       fullWidth
       InputProps={{
         disableUnderline: true,
@@ -29,4 +29,4 @@ const FilterBy = ({ filterBy, handleFilterChange }) => (
   </div>
 );
 
-export default FilterBy;
+export default FilterByStatus;

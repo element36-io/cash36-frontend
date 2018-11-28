@@ -16,9 +16,21 @@ export const getTokens = () => async dispatch => {
   }
 };
 
-export const getUserActivity = () => async dispatch => {
+export const getUserActivity = (queryParams) => async dispatch => {
+  let params = '';
+  if (queryParams) {
+    const keys = Object.keys(queryParams).reduce((acc, key) => {
+      if (queryParams[key]) {
+        acc.push(`${key}=${queryParams[key]}`);
+      }
+      return acc;
+    }, []).join('&');
+
+    params = `?${keys}`;
+  }
+
   try {
-    const response = await API.get('/cash36/tokens/history');
+    const response = await API.get(`/cash36/tokens/history${params}`);
 
     dispatch({
       type: GET_USER_ACTIVITY,

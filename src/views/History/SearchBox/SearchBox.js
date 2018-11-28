@@ -3,11 +3,14 @@ import SearchIcon from '@material-ui/icons/Search';
 import TextField from '@material-ui/core/TextField';
 import './SearchBox.scss';
 
-const SearchBox = ({ searchTerm, handleSearchChange }) => (
-  <div className='history__search-box paper'>
-    <div>
+const SearchBox = ({ searchTerm, handleSearchChange, handleSearchTextSubmit }) => (
+  <form
+    onSubmit={handleSearchTextSubmit}
+    className='history__search-box paper'
+  >
+    <button type='submit'>
       <SearchIcon />
-    </div>
+    </button>
     <div>
       <TextField
         type='text'
@@ -19,7 +22,7 @@ const SearchBox = ({ searchTerm, handleSearchChange }) => (
         }}
       />
     </div>
-  </div>
+  </form>
 );
 
 export default SearchBox;
