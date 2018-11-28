@@ -29,6 +29,7 @@ class History extends Component {
   }
 
   handleFilterByStatusChange = event => {
+    const previousFilter = this.state.filters.status;
     this.setState({ filterByStatus: event.target.value }, () => {
       const getStatus = () => {
         if (this.state.filterByStatus === 'All') return '';
@@ -41,7 +42,9 @@ class History extends Component {
         ...this.state.filters,
         status: getStatus()
       } }, () => {
-        this.props.getUserActivity(this.state.filters);
+        if (this.state.filters.status !== previousFilter) {
+          this.props.getUserActivity(this.state.filters);
+        }
       });
     });
   };
