@@ -15,6 +15,8 @@ import './History.scss';
 
 class History extends Component {
   state = {
+    startDate: null,
+    endDate: null,
     filterByStatus: 'All',
     filters: {
       filterValue: '',
@@ -62,6 +64,20 @@ class History extends Component {
     this.props.getUserActivity(this.state.filters);
   }
 
+  handleStartDateChange = (date) => {
+    this.setState({ startDate: date }, () => {
+      // Do something when the date is picked
+      console.log(this.state.startDate);
+    });
+  }
+
+  handleEndDateChange = (date) => {
+    this.setState({ endDate: date }, () => {
+      // Do something when the date is picked
+      console.log(this.state.endDate);
+    });
+  }
+
   render () {
     const { userActivity } = this.props;
     return (
@@ -79,7 +95,12 @@ class History extends Component {
                   ? <div>
                     <div className='history__filters'>
                       <Responsive>
-                        <DateRange />
+                        <DateRange
+                          startDate={this.state.startDate}
+                          endDate={this.state.endDate}
+                          handleStartDateChange={this.handleStartDateChange}
+                          handleEndDateChange={this.handleEndDateChange}
+                        />
                         <SearchBox
                           searchTerm={this.state.filters.filterValue}
                           handleSearchChange={this.handleSearchChange}

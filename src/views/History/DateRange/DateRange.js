@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import MomentUtils from 'material-ui-pickers/utils/moment-utils';
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
@@ -11,84 +11,67 @@ import LeftArrowIcon from '@material-ui/icons/KeyboardArrowLeft';
 import DownArrowIcon from '@material-ui/icons/KeyboardArrowDown';
 import styles from './MuiStyles';
 
-class DateRange extends Component {
-  state = {
-    startDate: null,
-    endDate: null
-  }
-
-  handleStartDateChange = (date) => {
-    this.setState({ startDate: date }, () => {
-      // Do something when the date is picked
-      console.log(this.state.startDate);
-    });
-  }
-  handleEndDateChange = (date) => {
-    this.setState({ endDate: date }, () => {
-      // Do something when the date is picked
-      console.log(this.state.endDate);
-    });
-  }
-  render () {
-    const { startDate, endDate } = this.state;
-    const { classes } = this.props;
-    return (
-      <MuiPickersUtilsProvider utils={MomentUtils}>
-        <div className={`${classes.root} paper`}>
-          <div className={classes.picker}>
-            <div className={classes.label}>
-              <TodayIcon className={classes.icon} />
-              <span>Start</span>
-            </div>
-            <div className={classes.pickerInputBox}>
-              <InlineDatePicker
-                autoOk
-                value={startDate}
-                onChange={this.handleStartDateChange}
-                format={'DD/MM/YYYY'}
-                onlyCalendar
-                rightArrowIcon={<RightArrowIcon />}
-                leftArrowIcon={<LeftArrowIcon />}
-                InputProps={{
-                  disableUnderline: true,
-                  placeholder: 'DD/MM/YYYY',
-                  className: classes.input
-                }}
-              />
-              <DownArrowIcon className={classes.arrowIcon} />
-            </div>
+const DateRange = ({ classes, startDate, endDate, handleStartDateChange, handleEndDateChange }) => {
+  return (
+    <MuiPickersUtilsProvider utils={MomentUtils}>
+      <div className={`${classes.root} paper`}>
+        <div className={classes.picker}>
+          <div className={classes.label}>
+            <TodayIcon className={classes.icon} />
+            <span>Start</span>
           </div>
-          <div className={classes.picker}>
-            <div className={classes.label}>
-              <EventIcon className={classes.icon} />
-              <span>End</span>
-            </div>
-            <div className={classes.pickerInputBox}>
-              <InlineDatePicker
-                autoOk
-                value={endDate}
-                onChange={this.handleEndDateChange}
-                format={'DD/MM/YYYY'}
-                onlyCalendar
-                rightArrowIcon={<RightArrowIcon />}
-                leftArrowIcon={<LeftArrowIcon />}
-                InputProps={{
-                  disableUnderline: true,
-                  placeholder: 'DD/MM/YYYY',
-                  className: classes.input
-                }}
-              />
-              <DownArrowIcon className={classes.arrowIcon} />
-            </div>
+          <div className={classes.pickerInputBox}>
+            <InlineDatePicker
+              autoOk
+              value={startDate}
+              onChange={handleStartDateChange}
+              format={'DD/MM/YYYY'}
+              onlyCalendar
+              rightArrowIcon={<RightArrowIcon />}
+              leftArrowIcon={<LeftArrowIcon />}
+              InputProps={{
+                disableUnderline: true,
+                placeholder: 'DD/MM/YYYY',
+                className: classes.input
+              }}
+            />
+            <DownArrowIcon className={classes.arrowIcon} />
           </div>
         </div>
-      </MuiPickersUtilsProvider>
-    );
-  }
-}
+        <div className={classes.picker}>
+          <div className={classes.label}>
+            <EventIcon className={classes.icon} />
+            <span>End</span>
+          </div>
+          <div className={classes.pickerInputBox}>
+            <InlineDatePicker
+              autoOk
+              value={endDate}
+              onChange={handleEndDateChange}
+              format={'DD/MM/YYYY'}
+              onlyCalendar
+              rightArrowIcon={<RightArrowIcon />}
+              leftArrowIcon={<LeftArrowIcon />}
+              InputProps={{
+                disableUnderline: true,
+                placeholder: 'DD/MM/YYYY',
+                className: classes.input
+              }}
+            />
+            <DownArrowIcon className={classes.arrowIcon} />
+          </div>
+        </div>
+      </div>
+    </MuiPickersUtilsProvider>
+  );
+};
 
 DateRange.propTypes = {
-  classes: PropTypes.object
+  classes: PropTypes.object,
+  startDate: PropTypes.any,
+  endDate: PropTypes.any,
+  handleStartDateChange: PropTypes.func.isRequired,
+  handleEndDateChange: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(DateRange);
