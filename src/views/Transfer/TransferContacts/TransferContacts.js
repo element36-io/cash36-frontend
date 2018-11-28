@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import Responsive from '../../../components/Responsive';
 import TransferContact from '../TransferContact';
@@ -16,8 +16,6 @@ class TransferContacts extends Component {
       numOfPages: this.getNumOfPages()
     };
   }
-
-  list = React.createRef();
 
   componentDidMount () {
     window.addEventListener('resize', this.windowResizeCallback);
@@ -40,7 +38,7 @@ class TransferContacts extends Component {
     }, () => {
       this.goToPage(0);
     });
-  }
+  };
 
   getItemsPerPage = () => {
     return window.innerWidth > 767 ? 5 : 3;
@@ -68,16 +66,11 @@ class TransferContacts extends Component {
     let { itemsPerPage } = this.state;
     const { contactsList } = this.props;
 
-    const sliderWidth = this.list.current.clientWidth;
-    const margin = window.getComputedStyle(this.list.current.firstChild).getPropertyValue('margin-right').split('px')[0];
-
     const pageItems = contactsList.slice(currentPage * itemsPerPage, currentPage * itemsPerPage + itemsPerPage).length;
-    let activePage = itemsPerPage % pageItems || pageItems === 1 ? currentPage -1 : currentPage;
-    let listOffset = -(sliderWidth/sliderWidth)*100 * activePage - ((margin/sliderWidth)*100) * activePage;
+    let listOffset = -100 * (itemsPerPage % pageItems || pageItems === 1 ? currentPage -1 : currentPage);
 
     if (itemsPerPage % pageItems || pageItems === 1) {
-      // listOffset -= -sliderWidth * (activePage) - (activePage) * margin - sliderWidth/itemsPerPage*pageItems;
-      listOffset -= ((this.list.current.firstChild.offsetWidth*pageItems)/sliderWidth)*100;
+      listOffset -= (pageItems/itemsPerPage) * 100;
     }
 
     this.setState({ listOffset, currentPage });
@@ -85,18 +78,22 @@ class TransferContacts extends Component {
 
   render () {
     const { contactsList, clickCallback } = this.props;
-    const { listOffset, numOfPages, currentPage } = this.state;
+    const { listOffset, numOfPages, currentPage, itemsPerPage } = this.state;
 
     return (
       <div className='transfer__contacts-container'>
         <h4>Contacts</h4>
         <div className='transfer__contacts__slider'>
           <Responsive>
-            <ArrowBtn onClick={this.prevPage} />
-            <ArrowBtn alt onClick={this.nextPage} />
+            {contactsList.length > itemsPerPage && (
+              <Fragment>
+                <ArrowBtn onClick={this.prevPage} />
+                <ArrowBtn alt onClick={this.nextPage} />
+              </Fragment>
+            )}
           </Responsive>
           <div className='transfer__contacts__list-wrapper'>
-            <div className='transfer__contacts-list' ref={this.list}
+            <div className={`transfer__contacts-list ${contactsList.length < itemsPerPage ? 'transfer__contacts-list--center' : ''}`}
               style={{ 'transform': `translateX(${listOffset}%)` }}>
               {contactsList.map(c => (
                 <TransferContact contact={c} clickCallback={clickCallback} alt key={c.id} />
@@ -104,13 +101,15 @@ class TransferContacts extends Component {
             </div>
           </div>
         </div>
-        <ul className='transfer__contacts-container__pager'>
-          {[...Array(numOfPages).keys()].map((item, i) =>
-            <li className={currentPage === i ? 'active' : ''} onClick={() => {
-              this.goToPage(i);
-            }} key={i} />
-          )}
-        </ul>
+        {contactsList.length > itemsPerPage && (
+          <ul className='transfer__contacts-container__pager'>
+            {[...Array(numOfPages).keys()].map((item, i) =>
+              <li className={currentPage === i ? 'active' : ''} onClick={() => {
+                this.goToPage(i);
+              }} key={i} />
+            )}
+          </ul>
+        )}
       </div>
     );
   }

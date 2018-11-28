@@ -21,6 +21,7 @@
 
   .transfer__contacts__list-wrapper {
     position: relative;
+    padding-bottom: 5px;
     overflow: hidden;
     text-align: center;
   }
@@ -49,7 +50,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 2.4rem;
+    margin-top: 1.9rem;
 
     li {
       display: block;
@@ -71,12 +72,15 @@
     width: 120%;
     margin-bottom: 3.2rem;
     padding: 2.4rem 10%;
-    background: rebeccapurple;
+
+    .transfer__contacts-list {
+      width: calc(100% + 1.4rem);
+      }
 
     .transfer__contact {
-      width: calc((100% - 5.6rem)/5);
-      min-width: calc((100% - 5.6rem)/5);
-      max-width: calc((100% - 5.6rem)/5);
+      width: calc((100% - 1.4rem - 5.6rem)/5);
+      min-width: calc((100% - 1.4rem - 5.6rem)/5);
+      max-width: calc((100% - 1.4rem - 5.6rem)/5);
       margin-right: 1.4rem;
     }
   }
@@ -84,12 +88,15 @@
   @include mobile {
     width: 100%;
     margin-bottom: 2.4rem;
-    background: rebeccapurple;
+
+    .transfer__contacts-list {
+      width: calc(100% + .8rem);
+      }
 
     .transfer__contact {
-      width: calc((100% - 1.6rem)/3);
-      min-width: calc((100% - 1.6rem)/3);
-      max-width: calc((100% - 1.6rem)/3);
+      width: calc((100% - .8rem - 1.6rem)/3);
+      min-width: calc((100% - .8rem - 1.6rem)/3);
+      max-width: calc((100% - .8rem - 1.6rem)/3);
       margin-right: .8rem;
     }
   }
