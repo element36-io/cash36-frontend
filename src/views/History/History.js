@@ -74,7 +74,17 @@ class History extends Component {
   handleEndDateChange = (date) => {
     this.setState({ endDate: date }, () => {
       // Do something when the date is picked
-      console.log(this.state.endDate);
+      console.log(
+        this.state.endDate
+      );
+      // this.setState({
+      //   filters: {
+      //     ...this.state.filters,
+      //     to: this.state.endDate
+      //   }
+      // }, () => {
+      //   this.props.getUserActivity(this.state.filters);
+      // });
     });
   }
 
