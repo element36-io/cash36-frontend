@@ -1,6 +1,8 @@
-import { GET_TOKENS, GET_USER_ACTIVITY, FETCHING_FILTERS } from './tokens.actions';
+import { GET_TOKENS, GET_USER_ACTIVITY, FETCHING_FILTERS, HISTORY_FILTERED } from './tokens.actions';
 
-const initialState = {};
+const initialState = {
+  historyFiltered: false
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -13,6 +15,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         fetchingFilters: action.payload
+      };
+    case HISTORY_FILTERED:
+      return {
+        ...state,
+        historyFiltered: action.payload
       };
     case GET_USER_ACTIVITY:
       return {

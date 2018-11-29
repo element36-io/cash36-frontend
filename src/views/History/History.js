@@ -91,8 +91,115 @@ class History extends Component {
     });
   }
 
+  renderHistory = () => {
+    const { userActivity, historyFiltered, fetchingFilters } = this.props;
+
+    if (userActivity.length === 0 && historyFiltered === false) {
+      return <div className='paper history__no-activity'>
+        <h3>No Activity History</h3>
+        <p>Keep track of your most recent transactions here when you sell, buy or transfer cash36
+                currencies.</p>
+      </div>;
+    }
+
+    if (userActivity.length === 0 && historyFiltered === true) {
+      return <div>
+        <div className='history__filters'>
+          <Responsive>
+            <DateRange
+              startDate={this.state.startDate}
+              endDate={this.state.endDate}
+              handleStartDateChange={this.handleStartDateChange}
+              handleEndDateChange={this.handleEndDateChange}
+            />
+            <SearchBox
+              searchTerm={this.state.filters.filterValue}
+              handleSearchChange={this.handleSearchChange}
+              handleSearchTextSubmit={this.handleSearchTextSubmit}
+            />
+            <FilterByStatus
+              filterByStatus={this.state.filterByStatus}
+              handleFilterByStatusChange={this.handleFilterByStatusChange}
+            />
+            <ExportData />
+          </Responsive>
+          <Responsive isMobile>
+            <DateRangeMobile />
+            <FilterSettingsMobile />
+            <SearchBox
+              searchTerm={this.state.searchTerm}
+              handleSearchChange={this.handleSearchChange}
+              handleSearchTextSubmit={this.handleSearchTextSubmit}
+            />
+          </Responsive>
+        </div>
+        <div className='history__filter-loader-wrapper'>
+          <div style={fetchingFilters ? { opacity: '.3' } : null}>
+                NO RESULTS BRO
+          </div>
+          {fetchingFilters &&
+          <div
+            className='history__filter-loader'
+          >
+            <CircularProgress
+              color='primary'
+              size={75}
+            />
+          </div>}
+        </div>
+      </div>;
+    }
+    if (this.props.userActivity.length > 0) {
+      return <div>
+        <div className='history__filters'>
+          <Responsive>
+            <DateRange
+              startDate={this.state.startDate}
+              endDate={this.state.endDate}
+              handleStartDateChange={this.handleStartDateChange}
+              handleEndDateChange={this.handleEndDateChange}
+            />
+            <SearchBox
+              searchTerm={this.state.filters.filterValue}
+              handleSearchChange={this.handleSearchChange}
+              handleSearchTextSubmit={this.handleSearchTextSubmit}
+            />
+            <FilterByStatus
+              filterByStatus={this.state.filterByStatus}
+              handleFilterByStatusChange={this.handleFilterByStatusChange}
+            />
+            <ExportData />
+          </Responsive>
+          <Responsive isMobile>
+            <DateRangeMobile />
+            <FilterSettingsMobile />
+            <SearchBox
+              searchTerm={this.state.searchTerm}
+              handleSearchChange={this.handleSearchChange}
+              handleSearchTextSubmit={this.handleSearchTextSubmit}
+            />
+          </Responsive>
+        </div>
+        <div className='history__filter-loader-wrapper'>
+          <div style={fetchingFilters ? { opacity: '.3' } : null}>
+            <ActivityTable userActivity={userActivity} />
+          </div>
+          {fetchingFilters &&
+            <div
+              className='history__filter-loader'
+            >
+              <CircularProgress
+                color='primary'
+                size={75}
+              />
+            </div>}
+        </div>
+      </div>;
+    }
+  }
+
   render () {
-    const { userActivity, fetchingFilters } = this.props;
+    const { userActivity } = this.props;
     return (
       <div className='wrapper'>
         <div className='history'>
@@ -103,59 +210,7 @@ class History extends Component {
                   <CircularProgress color='primary' size={75} />
                 </div>
               )
-              : (
-                userActivity.length > 0
-                  ? <div>
-                    <div className='history__filters'>
-                      <Responsive>
-                        <DateRange
-                          startDate={this.state.startDate}
-                          endDate={this.state.endDate}
-                          handleStartDateChange={this.handleStartDateChange}
-                          handleEndDateChange={this.handleEndDateChange}
-                        />
-                        <SearchBox
-                          searchTerm={this.state.filters.filterValue}
-                          handleSearchChange={this.handleSearchChange}
-                          handleSearchTextSubmit={this.handleSearchTextSubmit}
-                        />
-                        <FilterByStatus
-                          filterByStatus={this.state.filterByStatus}
-                          handleFilterByStatusChange={this.handleFilterByStatusChange}
-                        />
-                        <ExportData />
-                      </Responsive>
-                      <Responsive isMobile>
-                        <DateRangeMobile />
-                        <FilterSettingsMobile />
-                        <SearchBox
-                          searchTerm={this.state.searchTerm}
-                          handleSearchChange={this.handleSearchChange}
-                          handleSearchTextSubmit={this.handleSearchTextSubmit}
-                        />
-                      </Responsive>
-                    </div>
-                    <div className='history__filter-loader-wrapper'>
-                      <div style={fetchingFilters ? { opacity: '.3' } : null}>
-                        <ActivityTable userActivity={userActivity} />
-                      </div>
-                      {fetchingFilters &&
-                        <div
-                          className='history__filter-loader'
-                        >
-                          <CircularProgress
-                            color='primary'
-                            size={75}
-                          />
-                        </div>}
-                    </div>
-                  </div>
-                  : <div className='paper history__no-activity'>
-                    <h3>No Activity History</h3>
-                    <p>Keep track of your most recent transactions here when you sell, buy or transfer cash36
-                      currencies.</p>
-                  </div>
-              )
+              : this.renderHistory()
             }
           </div>
         </div>
@@ -164,9 +219,10 @@ class History extends Component {
   }
 }
 
-const mapStateToProps = ({ tokens: { userActivity, fetchingFilters } }) => ({
+const mapStateToProps = ({ tokens: { userActivity, fetchingFilters, historyFiltered } }) => ({
   userActivity,
-  fetchingFilters
+  fetchingFilters,
+  historyFiltered
 });
 
 History.propTypes = {
