@@ -7,7 +7,7 @@ import SearchBox from '../SearchBox';
 import FilterByStatus from '../FilterByStatus';
 import ExportData from '../ExportData';
 import DateRangeMobile from '../DateRangeMobile';
-import FilterSettingsMobile from '../FilterSettingsMobile';
+import FilterByStatusMobile from '../FilterByStatusMobile';
 
 class HistoryFilters extends Component {
   render () {
@@ -36,7 +36,11 @@ class HistoryFilters extends Component {
         </Responsive>
         <Responsive isTablet>
           <DateRangeMobile />
-          <FilterSettingsMobile />
+          <FilterByStatusMobile
+            filterByStatus={this.props.filterByStatus}
+            handleFilterByStatusChange={this.props.handleFilterByStatusChange}
+            fetchingFilters={this.props.fetchingFilters}
+          />
           <SearchBox
             searchTerm={this.props.filters.filterValue}
             handleSearchChange={this.props.handleSearchChange}
