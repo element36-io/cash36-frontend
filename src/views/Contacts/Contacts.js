@@ -5,7 +5,7 @@ import SearchBox from './SearchBox';
 import AddContact from './AddContact';
 import ContactItem from './ContactItem';
 import ContactFormContainer from './ContactFormContainer';
-import { getContacts, removeContact, addContact } from '../../store/contacts/contacts.actions';
+import { getContacts, removeContact, addContact, addQuickTransfer } from '../../store/contacts/contacts.actions';
 import './Contacts.scss';
 
 class Contacts extends Component {
@@ -35,6 +35,11 @@ class Contacts extends Component {
     this.props.removeContact(id);
   };
 
+  quickTransfer = contact => {
+    this.props.addQuickTransfer(contact);
+    this.props.history.push('/transfer');
+  }
+
   renderList = () => {
     const { contacts: { contactsList } } = this.props;
     const search = this.state.search.toLowerCase().trim();
@@ -43,7 +48,7 @@ class Contacts extends Component {
 
     return contactsList.filter(c => {
       return c.contactName.toLowerCase().includes(search) || c.contactAddress.toLowerCase().includes(search);
-    }).map(c => <ContactItem key={c.id} contact={c} removeCallback={this.removeContact} />);
+    }).map(c => <ContactItem key={c.id} contact={c} removeCallback={this.removeContact} quickTransfer={this.quickTransfer} />);
   };
 
   render () {
@@ -69,4 +74,4 @@ class Contacts extends Component {
 
 const mapStateToProps = ({ contacts }) => ({ contacts });
 
-export default connect(mapStateToProps, { getContacts, removeContact, addContact })(Contacts);
+export default connect(mapStateToProps, { getContacts, removeContact, addContact, addQuickTransfer })(Contacts);

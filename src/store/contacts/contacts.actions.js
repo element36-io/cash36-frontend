@@ -5,6 +5,8 @@ export const GET_CONTACTS_SUCCESS = 'GET_CONTACTS_SUCCESS';
 export const CONTACTS_ERROR = 'CONTACTS_ERROR';
 export const ADD_CONTACTS = 'ADD_CONTACTS';
 export const REMOVE_CONTACTS = 'REMOVE_CONTACTS';
+export const ADD_QUICK_TRANSFER = 'ADD_QUICK_TRANSFER';
+export const REMOVE_QUICK_TRANSFER = 'REMOVE_QUICK_TRANSFER';
 
 export const getContacts = () => async dispatch => {
   try {
@@ -50,3 +52,6 @@ export const addContact = data => async dispatch => {
     return Promise.reject(error);
   }
 };
+
+export const addQuickTransfer = contact => ({ type: ADD_QUICK_TRANSFER, payload: contact });
+export const removeQuickTransfer = () => ({ type: REMOVE_QUICK_TRANSFER });
