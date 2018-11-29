@@ -1,23 +1,14 @@
 @import '../../../styles/settings.scss';
 
-.history__filter-by {
+.history__filter-by-status {
   display: flex;
   align-items: center;
   padding: 1rem 1.7rem;
-  width: 27rem;
 
   > span {
     color: $text-secondary;
     font-size: 1.6rem;
     white-space: nowrap;
     margin-right: .4rem;
-  }
-
-  &__input {
-    > div {
-      > div {
-        padding: 0;
-      }
-    }
   }
 }

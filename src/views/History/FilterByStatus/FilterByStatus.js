@@ -8,7 +8,7 @@ import './FilterByStatus.scss';
 const filters = ['All', 'Open', 'Completed', 'Processing', 'On Hold'];
 
 const FilterByStatus = ({ filterByStatus, handleFilterByStatusChange, fetchingFilters }) => (
-  <div className='history__filter-by paper'>
+  <div className='history__filter-by-status paper'>
     <span>Filter by status:</span>
     <TextField
       name='filterByStatus'
@@ -19,7 +19,10 @@ const FilterByStatus = ({ filterByStatus, handleFilterByStatusChange, fetchingFi
       disabled={fetchingFilters}
       InputProps={{
         disableUnderline: true,
-        className: 'history__filter-by__input'
+        className: 'history__filter-by__input',
+        style: {
+          fontSize: '1.6rem'
+        }
       }}
       SelectProps={{
         displayEmpty: true,

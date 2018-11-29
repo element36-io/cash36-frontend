@@ -21,10 +21,6 @@ export const getTokens = () => async dispatch => {
 export const getUserActivity = queryParams => async dispatch => {
   let params = '';
   if (queryParams) {
-    dispatch({
-      type: FETCHING_FILTERS,
-      payload: true
-    });
     const keys = Object.keys(queryParams).reduce((acc, key) => {
       if (queryParams[key]) {
         acc.push(`${key}=${queryParams[key]}`);
@@ -36,16 +32,20 @@ export const getUserActivity = queryParams => async dispatch => {
   }
 
   try {
-    const response = await API.get(`/cash36/tokens/history${params}`);
-
     dispatch({
-      type: GET_USER_ACTIVITY,
-      payload: response.data
+      type: FETCHING_FILTERS,
+      payload: true
     });
+    const response = await API.get(`/cash36/tokens/history${params}`);
 
     dispatch({
       type: FETCHING_FILTERS,
       payload: false
+    });
+
+    dispatch({
+      type: GET_USER_ACTIVITY,
+      payload: response.data
     });
 
     if (params) {

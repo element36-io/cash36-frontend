@@ -23,6 +23,12 @@ class History extends Component {
   };
 
   componentDidMount () {
+    if (!this.props.userActivity) {
+      this.props.getUserActivity();
+    }
+  }
+  // in Order to reset the filters when user leaves the screen
+  componentWillUnmount () {
     this.props.getUserActivity();
   }
 
@@ -90,6 +96,22 @@ class History extends Component {
     }
   }
 
+  resetFilters = () => {
+    this.setState({
+      startDate: null,
+      endDate: null,
+      filterByStatus: 'All',
+      filters: {
+        filterValue: '',
+        from: '',
+        to: '',
+        status: ''
+      }
+    }, () => {
+      this.props.getUserActivity(this.state.filters);
+    });
+  }
+
   renderHistory = () => {
     const { userActivity, historyFiltered, fetchingFilters } = this.props;
 
@@ -117,7 +139,13 @@ class History extends Component {
         />
         <div className='history__filter-loader-wrapper'>
           <div className='history__filter-no-results paper' style={fetchingFilters ? { opacity: '.3' } : null}>
-            <p>No Results, try another filter or</p> <BaseButton>reset all filters</BaseButton>
+            <p>No Results, try another filter <span>or</span></p>
+            <BaseButton
+              className='history__filter-resetBtn'
+              onClick={this.resetFilters}
+            >
+              <span>reset all filters</span>
+            </BaseButton>
           </div>
           {fetchingFilters &&
           <div

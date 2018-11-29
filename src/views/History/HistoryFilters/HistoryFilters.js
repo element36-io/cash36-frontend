@@ -13,7 +13,7 @@ class HistoryFilters extends Component {
   render () {
     return (
       <div className='history__filters'>
-        <Responsive>
+        <Responsive isDesktop>
           <DateRange
             startDate={this.props.startDate}
             endDate={this.props.endDate}
@@ -34,7 +34,7 @@ class HistoryFilters extends Component {
           />
           <ExportData />
         </Responsive>
-        <Responsive isMobile>
+        <Responsive isTablet>
           <DateRangeMobile />
           <FilterSettingsMobile />
           <SearchBox

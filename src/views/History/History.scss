@@ -42,9 +42,26 @@
     border-radius: 12px;
     margin: 3rem 0;
     padding: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     > p {
       color: $text-secondary;
+      margin-right: .5rem;
+    }
+  }
+
+  &__filter-resetBtn {
+    font-size: 1.4rem;
+
+    > span:first-child {
+      color: $white;
+      border-radius: 4px;
+      padding: 1rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      background-color: $primary-main;
     }
   }
 
@@ -62,6 +79,20 @@
   }
 
   @include mobile {
+
+    &__filter-no-results {
+      flex-direction: column;
+
+      > p {
+        margin-bottom: .8rem;
+        text-align: center;
+        > span {
+          margin-top: .8rem;
+          width: 100%;
+          display: block;
+        }
+      }
+    }
     &__filters {
       margin-top: 2.4rem;
       width: 100%;
