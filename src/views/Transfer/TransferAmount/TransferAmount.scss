@@ -1,7 +1,7 @@
 @import '../../../styles/settings.scss';
 @import '../../../styles/mixins.scss';
 
-.choose-transfer-amount {
+.transfer-amount {
   max-width: 57.5rem;
   width: 100%;
   display: flex;
@@ -43,21 +43,32 @@
     }
   }
 
+  .transfer-amount__header {
+    > :nth-child(3) {
+      font-size: 1.8rem;
+      line-height: 2.2rem;
+    }
+
+    > :nth-child(4) {
+      margin-top: .6rem;
+      color: $text-light-grey-1;
+      font-size: 1.4rem;
+      line-height: 1.7rem;
+    }
+  }
+
+  .transfer-amount__avatar {
+    width: 5.6rem;
+    height: 5.6rem;
+    margin-bottom: 1.3rem;
+  }
+
   @include mobile {
     > hr {
       margin: 3.2rem 0;
       border-bottom: 1px solid $grey-border;
       border-top: none;
       width: 100%;
-    }
-
-    > div:first-child {
-      > h3 {
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-        width: 70vw;
-      }
     }
   }
 }

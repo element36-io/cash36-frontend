@@ -34,28 +34,6 @@
     }
   }
 
-  .contact__item__image-wrapper {
-    position: relative;
-    background: $primary-light-4;
-    border-radius: 16px;
-    overflow: hidden;
-
-    img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    i {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: $primary-light-3;
-    }
-  }
-
   .contacts__item__info {
     overflow: hidden;
 
@@ -74,6 +52,7 @@
     color: $white;
     text-align: center;
     text-transform: uppercase;
+    font-weight: 500;
     cursor: pointer;
   }
 
@@ -186,7 +165,7 @@
       font-size: 1.2rem;
       line-height: 1.4rem;
 
-      > div span {
+      > span:first-of-type span {
         display: none;
       }
     }
