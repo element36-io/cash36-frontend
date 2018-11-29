@@ -23,7 +23,7 @@ class ContactItem extends PureComponent {
   };
 
   quickTransfer = () => {
-    console.log('======== QUICK TRANSFER');
+    this.props.quickTransfer(this.props.contact);
   };
 
   removeUser = () => {
@@ -67,7 +67,8 @@ class ContactItem extends PureComponent {
 
 ContactItem.propTypes = {
   contact: PropTypes.object.isRequired,
-  removeCallback: PropTypes.func.isRequired
+  removeCallback: PropTypes.func.isRequired,
+  quickTransfer: PropTypes.func.isRequired
 };
 
 export default ContactItem;
