@@ -153,7 +153,7 @@ class History extends Component {
                   : <div className='paper history__no-activity'>
                     <h3>No Activity History</h3>
                     <p>Keep track of your most recent transactions here when you sell, buy or transfer cash36
-                      currencies</p>
+                      currencies.</p>
                   </div>
               )
             }
