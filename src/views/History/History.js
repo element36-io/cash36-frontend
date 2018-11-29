@@ -92,7 +92,7 @@ class History extends Component {
   }
 
   render () {
-    const { userActivity } = this.props;
+    const { userActivity, fetchingFilters } = this.props;
     return (
       <div className='wrapper'>
         <div className='history'>
@@ -135,7 +135,20 @@ class History extends Component {
                         />
                       </Responsive>
                     </div>
-                    <ActivityTable userActivity={userActivity} />
+                    <div className='history__filter-loader-wrapper'>
+                      <div style={fetchingFilters ? { opacity: '.3' } : null}>
+                        <ActivityTable userActivity={userActivity} />
+                      </div>
+                      {fetchingFilters &&
+                        <div
+                          className='history__filter-loader'
+                        >
+                          <CircularProgress
+                            color='primary'
+                            size={75}
+                          />
+                        </div>}
+                    </div>
                   </div>
                   : <div className='paper history__no-activity'>
                     <h3>No Activity History</h3>
@@ -151,8 +164,9 @@ class History extends Component {
   }
 }
 
-const mapStateToProps = ({ tokens: { userActivity } }) => ({
-  userActivity
+const mapStateToProps = ({ tokens: { userActivity, fetchingFilters } }) => ({
+  userActivity,
+  fetchingFilters
 });
 
 History.propTypes = {

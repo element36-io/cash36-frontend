@@ -1,4 +1,4 @@
-import { GET_TOKENS, GET_USER_ACTIVITY } from './tokens.actions';
+import { GET_TOKENS, GET_USER_ACTIVITY, FETCHING_FILTERS } from './tokens.actions';
 
 const initialState = {};
 
@@ -8,6 +8,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         tokens: action.payload
+      };
+    case FETCHING_FILTERS:
+      return {
+        ...state,
+        fetchingFilters: action.payload
       };
     case GET_USER_ACTIVITY:
       return {

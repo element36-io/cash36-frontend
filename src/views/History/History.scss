@@ -21,6 +21,23 @@
     }
   }
 
+  &__filter-loader-wrapper {
+    position: relative;
+  }
+
+  &__filter-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    svg {
+      position: relative;
+      opacity: 1;
+      z-index: 15;
+    }
+  }
+
   &__no-activity {
     border-radius: 12px;
     margin: 3rem 0;

@@ -2,6 +2,7 @@ import API from '../../config/api';
 
 export const GET_TOKENS = 'GET_TOKENS';
 export const GET_USER_ACTIVITY = 'GET_USER_ACTIVITY';
+export const FETCHING_FILTERS = 'FETCHING_FILTERS';
 
 export const getTokens = () => async dispatch => {
   try {
@@ -19,6 +20,10 @@ export const getTokens = () => async dispatch => {
 export const getUserActivity = (queryParams) => async dispatch => {
   let params = '';
   if (queryParams) {
+    dispatch({
+      type: FETCHING_FILTERS,
+      payload: true
+    });
     const keys = Object.keys(queryParams).reduce((acc, key) => {
       if (queryParams[key]) {
         acc.push(`${key}=${queryParams[key]}`);
@@ -35,6 +40,11 @@ export const getUserActivity = (queryParams) => async dispatch => {
     dispatch({
       type: GET_USER_ACTIVITY,
       payload: response.data
+    });
+
+    dispatch({
+      type: FETCHING_FILTERS,
+      payload: false
     });
   } catch (error) {
     console.log(error);
