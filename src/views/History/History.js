@@ -4,13 +4,8 @@ import { connect } from 'react-redux';
 import { CircularProgress } from '@material-ui/core';
 import ActivityTable from '../../components/ActivityTable';
 import { getUserActivity } from '../../store/tokens/tokens.actions';
-import Responsive from '../../components/Responsive';
-import DateRange from './DateRange';
-import SearchBox from './SearchBox';
-import FilterByStatus from './FilterByStatus';
-import ExportData from './ExportData';
-import DateRangeMobile from './DateRangeMobile';
-import FilterSettingsMobile from './FilterSettingsMobile';
+import HistoryFilters from './HistoryFilters';
+import BaseButton from '../../components/Buttons/BaseButton';
 
 import './History.scss';
 
@@ -66,29 +61,33 @@ class History extends Component {
   }
 
   handleStartDateChange = date => {
-    this.setState({ startDate: date }, () => {
-      this.setState({
-        filters: {
-          ...this.state.filters,
-          from: this.state.startDate.format('DD.MM.YYYY')
-        }
-      }, () => {
-        this.props.getUserActivity(this.state.filters);
+    if (!this.props.fetchingFilters) {
+      this.setState({ startDate: date }, () => {
+        this.setState({
+          filters: {
+            ...this.state.filters,
+            from: this.state.startDate.format('DD.MM.YYYY')
+          }
+        }, () => {
+          this.props.getUserActivity(this.state.filters);
+        });
       });
-    });
+    }
   }
 
   handleEndDateChange = date => {
-    this.setState({ endDate: date }, () => {
-      this.setState({
-        filters: {
-          ...this.state.filters,
-          to: this.state.endDate.format('DD.MM.YYYY')
-        }
-      }, () => {
-        this.props.getUserActivity(this.state.filters);
+    if (!this.props.fetchingFilters) {
+      this.setState({ endDate: date }, () => {
+        this.setState({
+          filters: {
+            ...this.state.filters,
+            to: this.state.endDate.format('DD.MM.YYYY')
+          }
+        }, () => {
+          this.props.getUserActivity(this.state.filters);
+        });
       });
-    });
+    }
   }
 
   renderHistory = () => {
@@ -104,38 +103,21 @@ class History extends Component {
 
     if (userActivity.length === 0 && historyFiltered === true) {
       return <div>
-        <div className='history__filters'>
-          <Responsive>
-            <DateRange
-              startDate={this.state.startDate}
-              endDate={this.state.endDate}
-              handleStartDateChange={this.handleStartDateChange}
-              handleEndDateChange={this.handleEndDateChange}
-            />
-            <SearchBox
-              searchTerm={this.state.filters.filterValue}
-              handleSearchChange={this.handleSearchChange}
-              handleSearchTextSubmit={this.handleSearchTextSubmit}
-            />
-            <FilterByStatus
-              filterByStatus={this.state.filterByStatus}
-              handleFilterByStatusChange={this.handleFilterByStatusChange}
-            />
-            <ExportData />
-          </Responsive>
-          <Responsive isMobile>
-            <DateRangeMobile />
-            <FilterSettingsMobile />
-            <SearchBox
-              searchTerm={this.state.searchTerm}
-              handleSearchChange={this.handleSearchChange}
-              handleSearchTextSubmit={this.handleSearchTextSubmit}
-            />
-          </Responsive>
-        </div>
+        <HistoryFilters
+          startDate={this.state.startDate}
+          endDate={this.state.endDate}
+          handleStartDateChange={this.handleStartDateChange}
+          handleEndDateChange={this.handleEndDateChange}
+          filters={this.state.filters}
+          handleSearchChange={this.handleSearchChange}
+          handleSearchTextSubmit={this.handleSearchTextSubmit}
+          filterByStatus={this.state.filterByStatus}
+          handleFilterByStatusChange={this.handleFilterByStatusChange}
+          fetchingFilters={fetchingFilters}
+        />
         <div className='history__filter-loader-wrapper'>
-          <div style={fetchingFilters ? { opacity: '.3' } : null}>
-                NO RESULTS BRO
+          <div className='history__filter-no-results paper' style={fetchingFilters ? { opacity: '.3' } : null}>
+            <p>No Results, try another filter or</p> <BaseButton>reset all filters</BaseButton>
           </div>
           {fetchingFilters &&
           <div
@@ -151,35 +133,18 @@ class History extends Component {
     }
     if (this.props.userActivity.length > 0) {
       return <div>
-        <div className='history__filters'>
-          <Responsive>
-            <DateRange
-              startDate={this.state.startDate}
-              endDate={this.state.endDate}
-              handleStartDateChange={this.handleStartDateChange}
-              handleEndDateChange={this.handleEndDateChange}
-            />
-            <SearchBox
-              searchTerm={this.state.filters.filterValue}
-              handleSearchChange={this.handleSearchChange}
-              handleSearchTextSubmit={this.handleSearchTextSubmit}
-            />
-            <FilterByStatus
-              filterByStatus={this.state.filterByStatus}
-              handleFilterByStatusChange={this.handleFilterByStatusChange}
-            />
-            <ExportData />
-          </Responsive>
-          <Responsive isMobile>
-            <DateRangeMobile />
-            <FilterSettingsMobile />
-            <SearchBox
-              searchTerm={this.state.searchTerm}
-              handleSearchChange={this.handleSearchChange}
-              handleSearchTextSubmit={this.handleSearchTextSubmit}
-            />
-          </Responsive>
-        </div>
+        <HistoryFilters
+          startDate={this.state.startDate}
+          endDate={this.state.endDate}
+          handleStartDateChange={this.handleStartDateChange}
+          handleEndDateChange={this.handleEndDateChange}
+          filters={this.state.filters}
+          handleSearchChange={this.handleSearchChange}
+          handleSearchTextSubmit={this.handleSearchTextSubmit}
+          filterByStatus={this.state.filterByStatus}
+          handleFilterByStatusChange={this.handleFilterByStatusChange}
+          fetchingFilters={fetchingFilters}
+        />
         <div className='history__filter-loader-wrapper'>
           <div style={fetchingFilters ? { opacity: '.3' } : null}>
             <ActivityTable userActivity={userActivity} />
@@ -226,7 +191,9 @@ const mapStateToProps = ({ tokens: { userActivity, fetchingFilters, historyFilte
 });
 
 History.propTypes = {
-  userActivity: PropTypes.arrayOf(PropTypes.object)
+  userActivity: PropTypes.arrayOf(PropTypes.object),
+  fetchingFilters: PropTypes.bool,
+  historyFiltered: PropTypes.bool
 };
 
 export default connect(mapStateToProps, { getUserActivity })(History);

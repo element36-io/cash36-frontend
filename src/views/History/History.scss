@@ -38,6 +38,16 @@
     }
   }
 
+  &__filter-no-results {
+    border-radius: 12px;
+    margin: 3rem 0;
+    padding: 3rem;
+
+    > p {
+      color: $text-secondary;
+    }
+  }
+
   &__no-activity {
     border-radius: 12px;
     margin: 3rem 0;

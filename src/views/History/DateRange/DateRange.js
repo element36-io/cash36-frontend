@@ -11,7 +11,7 @@ import LeftArrowIcon from '@material-ui/icons/KeyboardArrowLeft';
 import DownArrowIcon from '@material-ui/icons/KeyboardArrowDown';
 import styles from './MuiStyles';
 
-const DateRange = ({ classes, startDate, endDate, handleStartDateChange, handleEndDateChange }) => {
+const DateRange = ({ classes, startDate, endDate, handleStartDateChange, handleEndDateChange, fetchingFilters }) => {
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <div className={`${classes.root} paper`}>
@@ -27,6 +27,7 @@ const DateRange = ({ classes, startDate, endDate, handleStartDateChange, handleE
               onChange={handleStartDateChange}
               format={'DD/MM/YYYY'}
               onlyCalendar
+              disabled={fetchingFilters}
               rightArrowIcon={<RightArrowIcon />}
               leftArrowIcon={<LeftArrowIcon />}
               InputProps={{
@@ -51,6 +52,7 @@ const DateRange = ({ classes, startDate, endDate, handleStartDateChange, handleE
               onChange={handleEndDateChange}
               format={'DD/MM/YYYY'}
               onlyCalendar
+              disabled={fetchingFilters}
               rightArrowIcon={<RightArrowIcon />}
               leftArrowIcon={<LeftArrowIcon />}
               InputProps={{
@@ -73,7 +75,8 @@ DateRange.propTypes = {
   startDate: PropTypes.any,
   endDate: PropTypes.any,
   handleStartDateChange: PropTypes.func.isRequired,
-  handleEndDateChange: PropTypes.func.isRequired
+  handleEndDateChange: PropTypes.func.isRequired,
+  fetchingFilters: PropTypes.bool.isRequired
 };
 
 export default withStyles(styles)(DateRange);

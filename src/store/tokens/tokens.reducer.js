@@ -1,7 +1,8 @@
 import { GET_TOKENS, GET_USER_ACTIVITY, FETCHING_FILTERS, HISTORY_FILTERED } from './tokens.actions';
 
 const initialState = {
-  historyFiltered: false
+  historyFiltered: false,
+  fetchingFilters: false
 };
 
 export default (state = initialState, action) => {
