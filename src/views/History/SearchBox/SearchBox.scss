@@ -51,9 +51,13 @@
     }
 
     > div:last-child {
-      width: 100%;
       padding: 0 .9rem;
       overflow: hidden;
+      // flex: 1;
+
+      input {
+        align-self: flex-start;
+      }
     }
 
     > button {
