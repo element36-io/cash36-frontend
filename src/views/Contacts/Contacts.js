@@ -48,7 +48,7 @@ class Contacts extends Component {
 
     return contactsList.filter(c => {
       return c.contactName.toLowerCase().includes(search) || c.contactAddress.toLowerCase().includes(search);
-    }).map(c => <ContactItem key={c.id} contact={c} removeCallback={this.removeContact} quickTransfer={this.quickTransfer}/>);
+    }).map(c => <ContactItem key={c.id} contact={c} removeCallback={this.removeContact} quickTransfer={this.quickTransfer} />);
   };
 
   render () {
