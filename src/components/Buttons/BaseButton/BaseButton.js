@@ -5,7 +5,7 @@ const BaseButton = props => {
   const { children } = props;
 
   return (
-    <ButtonBase {...props}>
+    <ButtonBase {...props} style={{ ...props.style, fontFamily: '"Rubik", sans-serif' }}>
       {children}
     </ButtonBase>
   );

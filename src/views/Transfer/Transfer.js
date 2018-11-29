@@ -6,7 +6,7 @@ import TransferAddress from './TransferAddress';
 import TransferAmount from './TransferAmount';
 import BackButton from '../../components/Buttons/BackButton';
 import { getTokens } from '../../store/tokens/tokens.actions';
-import { getContacts } from '../../store/contacts/contacts.actions';
+import { getContacts, removeQuickTransfer } from '../../store/contacts/contacts.actions';
 import TransferConfirmation from './TransferConfirmation';
 import TransferSuccess from './TransferSuccess';
 import TransferError from './TransferError';
@@ -14,17 +14,22 @@ import TransferError from './TransferError';
 import './Transfer.scss';
 
 class Transfer extends Component {
-  state = {
-    step: 0,
-    symbol: 'EUR36',
-    amount: '',
-    target: null,
-    error: null
-  };
+  constructor (props) {
+    super(props);
+    console.log('======== TRANSFER', this.props);
+    this.state = {
+      step: this.props.quickTransfer ? 1 : 0,
+      symbol: 'EUR36',
+      amount: '',
+      target: this.props.quickTransfer,
+      error: null
+    };
+  }
 
   componentDidMount () {
     this.props.getTokens();
     this.props.getContacts();
+    if (this.props.quickTransfer) this.props.removeQuickTransfer();
     this._isMounted = true;
   }
 
@@ -132,10 +137,11 @@ class Transfer extends Component {
   }
 }
 
-const mapStateToProps = ({ tokens: { tokens = [] }, auth: { user }, contacts: { contactsList } }) => ({
+const mapStateToProps = ({ tokens: { tokens = [] }, auth: { user }, contacts: { contactsList, quickTransfer } }) => ({
   tokens,
   username: user.username,
-  contactsList
+  contactsList,
+  quickTransfer
 });
 
-export default addCash36(connect(mapStateToProps, { getTokens, getContacts })(Transfer));
+export default addCash36(connect(mapStateToProps, { getTokens, getContacts, removeQuickTransfer })(Transfer));
