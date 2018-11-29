@@ -34,6 +34,7 @@ const DateRange = ({ classes, startDate, endDate, handleStartDateChange, handleE
                 placeholder: 'DD/MM/YYYY',
                 className: classes.input
               }}
+              disableFuture
             />
             <DownArrowIcon className={classes.arrowIcon} />
           </div>
@@ -57,6 +58,7 @@ const DateRange = ({ classes, startDate, endDate, handleStartDateChange, handleE
                 placeholder: 'DD/MM/YYYY',
                 className: classes.input
               }}
+              disableFuture
             />
             <DownArrowIcon className={classes.arrowIcon} />
           </div>

@@ -11,6 +11,7 @@ import FilterByStatus from './FilterByStatus';
 import ExportData from './ExportData';
 import DateRangeMobile from './DateRangeMobile';
 import FilterSettingsMobile from './FilterSettingsMobile';
+
 import './History.scss';
 
 class History extends Component {
@@ -64,27 +65,29 @@ class History extends Component {
     this.props.getUserActivity(this.state.filters);
   }
 
-  handleStartDateChange = (date) => {
+  handleStartDateChange = date => {
     this.setState({ startDate: date }, () => {
-      // Do something when the date is picked
-      console.log(this.state.startDate);
+      this.setState({
+        filters: {
+          ...this.state.filters,
+          from: this.state.startDate.format('DD.MM.YYYY')
+        }
+      }, () => {
+        this.props.getUserActivity(this.state.filters);
+      });
     });
   }
 
-  handleEndDateChange = (date) => {
+  handleEndDateChange = date => {
     this.setState({ endDate: date }, () => {
-      // Do something when the date is picked
-      console.log(
-        this.state.endDate
-      );
-      // this.setState({
-      //   filters: {
-      //     ...this.state.filters,
-      //     to: this.state.endDate
-      //   }
-      // }, () => {
-      //   this.props.getUserActivity(this.state.filters);
-      // });
+      this.setState({
+        filters: {
+          ...this.state.filters,
+          to: this.state.endDate.format('DD.MM.YYYY')
+        }
+      }, () => {
+        this.props.getUserActivity(this.state.filters);
+      });
     });
   }
 
