@@ -4,32 +4,69 @@ import { connect } from 'react-redux';
 import { CircularProgress } from '@material-ui/core';
 import ActivityTable from '../../components/ActivityTable';
 import { getUserActivity } from '../../store/tokens/tokens.actions';
-import Responsive from '../../components/Responsive';
-import DateRange from './DateRange';
-import SearchBox from './SearchBox';
-import FilterBy from './FilterBy';
-import ExportData from './ExportData';
-import DateRangeMobile from './DateRangeMobile';
-import FilterSettingsMobile from './FilterSettingsMobile';
+import HistoryFilters from './HistoryFilters';
+
 import './History.scss';
 
 class History extends Component {
-  state = {
-    filterBy: 'Date',
-    searchTerm: ''
-  };
-
   componentDidMount () {
     this.props.getUserActivity();
   }
 
-  handleFilterChange = event => {
-    this.setState({ filterBy: event.target.value });
-  };
+  renderHistory = () => {
+    const { userActivity, historyFiltered, fetchingFilters } = this.props;
 
-  handleSearchChange = event => {
-    this.setState({ searchTerm: event.target.value });
-  };
+    if (userActivity.length === 0 && historyFiltered === false) {
+      return <div className='paper history__no-activity'>
+        <h3>No Activity History</h3>
+        <p>Keep track of your most recent transactions here when you sell, buy or transfer cash36
+                currencies.</p>
+      </div>;
+    }
+
+    if (userActivity.length === 0 && historyFiltered === true) {
+      return <div>
+        <HistoryFilters
+          fetchingFilters={fetchingFilters}
+        />
+        <div className='history__filter-loader-wrapper'>
+          <div className='history__filter-no-results paper' style={fetchingFilters ? { opacity: '.3' } : null}>
+            <p>No results for this selected filter.</p>
+          </div>
+          {fetchingFilters &&
+          <div
+            className='history__filter-loader'
+          >
+            <CircularProgress
+              color='primary'
+              size={75}
+            />
+          </div>}
+        </div>
+      </div>;
+    }
+    if (this.props.userActivity.length > 0) {
+      return <div>
+        <HistoryFilters
+          fetchingFilters={fetchingFilters}
+        />
+        <div className='history__filter-loader-wrapper'>
+          <div style={fetchingFilters ? { opacity: '.3' } : null}>
+            <ActivityTable userActivity={userActivity} />
+          </div>
+          {fetchingFilters &&
+            <div
+              className='history__filter-loader'
+            >
+              <CircularProgress
+                color='primary'
+                size={75}
+              />
+            </div>}
+        </div>
+      </div>;
+    }
+  }
 
   render () {
     const { userActivity } = this.props;
@@ -43,39 +80,7 @@ class History extends Component {
                   <CircularProgress color='primary' size={75} />
                 </div>
               )
-              : (
-                userActivity.length > 0
-                  ? <div>
-                    <div className='history__filters'>
-                      <Responsive>
-                        <DateRange />
-                        <SearchBox
-                          searchTerm={this.state.searchTerm}
-                          handleSearchChange={this.handleSearchChange}
-                        />
-                        <FilterBy
-                          filterBy={this.state.filterBy}
-                          handleFilterChange={this.handleFilterChange}
-                        />
-                        <ExportData />
-                      </Responsive>
-                      <Responsive isMobile>
-                        <DateRangeMobile />
-                        <FilterSettingsMobile />
-                        <SearchBox
-                          searchTerm={this.state.searchTerm}
-                          handleSearchChange={this.handleSearchChange}
-                        />
-                      </Responsive>
-                    </div>
-                    <ActivityTable userActivity={userActivity} />
-                  </div>
-                  : <div className='paper history__no-activity'>
-                    <h3>No Activity History</h3>
-                    <p>Keep track of your most recent transactions here when you sell, buy or transfer cash36
-                      currencies</p>
-                  </div>
-              )
+              : this.renderHistory()
             }
           </div>
         </div>
@@ -84,12 +89,16 @@ class History extends Component {
   }
 }
 
-const mapStateToProps = ({ tokens: { userActivity } }) => ({
-  userActivity
+const mapStateToProps = ({ tokens: { userActivity, fetchingFilters, historyFiltered } }) => ({
+  userActivity,
+  fetchingFilters,
+  historyFiltered
 });
 
 History.propTypes = {
-  userActivity: PropTypes.arrayOf(PropTypes.object)
+  userActivity: PropTypes.arrayOf(PropTypes.object),
+  fetchingFilters: PropTypes.bool,
+  historyFiltered: PropTypes.bool
 };
 
 export default connect(mapStateToProps, { getUserActivity })(History);
