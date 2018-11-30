@@ -1,7 +1,15 @@
 image: alpine:latest
 
+variables:
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_DRIVER: overlay
+
+services:
+- docker:dind
+
 stages:
   - build
+  - package
   - deploy
 
 build:
@@ -13,28 +21,23 @@ build:
     - yarn build
   retry: 1
 
-deploy to dev:
-  environment: dev
-  stage: deploy
-  image: ruby:latest
+docker-build:
+  stage: package
+  image: docker:dind
   script:
-    - apt-get update -qy
-    - apt-get install -y ruby-dev
-    - gem install dpl
-    - dpl --provider=heroku --app=cash36-frontend --api-key=$HEROKU_API_KEY
+  - docker info
+  - docker build -t $CI_REGISTRY_IMAGE .
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  - docker push $CI_REGISTRY_IMAGE
   retry: 1
-  only:
-    - develop
+  #only:
+  #- master
 
-deploy to test:
-  environment: test
+deploy:
   stage: deploy
-  image: ruby:latest
   script:
-    - apt-get update -qy
-    - apt-get install -y ruby-dev
-    - gem install dpl
-    - dpl --provider=heroku --app=cash36-test-frontend --api-key=$HEROKU_API_KEY
+  - apk add --update --no-cache openssh sshpass
+  - ./deploy.sh $DO_PASS $GITLAB_PW_MAIK
   retry: 1
-  only:
-    - master
+  #only:
+  #- master
