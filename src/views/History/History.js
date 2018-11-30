@@ -5,111 +5,12 @@ import { CircularProgress } from '@material-ui/core';
 import ActivityTable from '../../components/ActivityTable';
 import { getUserActivity } from '../../store/tokens/tokens.actions';
 import HistoryFilters from './HistoryFilters';
-import BaseButton from '../../components/Buttons/BaseButton';
 
 import './History.scss';
 
 class History extends Component {
-  state = {
-    startDate: null,
-    endDate: null,
-    filterByStatus: 'All',
-    filters: {
-      filterValue: '',
-      from: '',
-      to: '',
-      status: ''
-    }
-  };
-
   componentDidMount () {
-    if (!this.props.userActivity) {
-      this.props.getUserActivity();
-    }
-  }
-  // in Order to reset the filters when user leaves the screen
-  componentWillUnmount () {
     this.props.getUserActivity();
-  }
-
-  handleFilterByStatusChange = event => {
-    const previousFilter = this.state.filters.status;
-    this.setState({ filterByStatus: event.target.value }, () => {
-      const getStatus = () => {
-        if (this.state.filterByStatus === 'All') return '';
-        if (this.state.filterByStatus === 'Open') return 'OPEN';
-        if (this.state.filterByStatus === 'Completed') return 'COMPLETED';
-        if (this.state.filterByStatus === 'Processing') return 'PROCESSING';
-        if (this.state.filterByStatus === 'On Hold') return 'ON_HOLD';
-      };
-      this.setState({ filters: {
-        ...this.state.filters,
-        status: getStatus()
-      } }, () => {
-        if (this.state.filters.status !== previousFilter) {
-          this.props.getUserActivity(this.state.filters);
-        }
-      });
-    });
-  };
-
-  handleSearchChange = event => {
-    this.setState({ filters: {
-      ...this.state.filters,
-      filterValue: event.target.value
-    } });
-  };
-
-  handleSearchTextSubmit = event => {
-    event.preventDefault();
-
-    this.props.getUserActivity(this.state.filters);
-  }
-
-  handleStartDateChange = date => {
-    if (!this.props.fetchingFilters) {
-      this.setState({ startDate: date }, () => {
-        this.setState({
-          filters: {
-            ...this.state.filters,
-            from: this.state.startDate.format('DD.MM.YYYY')
-          }
-        }, () => {
-          this.props.getUserActivity(this.state.filters);
-        });
-      });
-    }
-  }
-
-  handleEndDateChange = date => {
-    if (!this.props.fetchingFilters) {
-      this.setState({ endDate: date }, () => {
-        this.setState({
-          filters: {
-            ...this.state.filters,
-            to: this.state.endDate.format('DD.MM.YYYY')
-          }
-        }, () => {
-          this.props.getUserActivity(this.state.filters);
-        });
-      });
-    }
-  }
-
-  resetFilters = () => {
-    this.setState({
-      startDate: null,
-      endDate: null,
-      filterByStatus: 'All',
-      filters: {
-        filterValue: '',
-        from: '',
-        to: '',
-        status: ''
-      }
-    }, () => {
-      this.props.getUserActivity(this.state.filters);
-    });
   }
 
   renderHistory = () => {
@@ -126,26 +27,11 @@ class History extends Component {
     if (userActivity.length === 0 && historyFiltered === true) {
       return <div>
         <HistoryFilters
-          startDate={this.state.startDate}
-          endDate={this.state.endDate}
-          handleStartDateChange={this.handleStartDateChange}
-          handleEndDateChange={this.handleEndDateChange}
-          filters={this.state.filters}
-          handleSearchChange={this.handleSearchChange}
-          handleSearchTextSubmit={this.handleSearchTextSubmit}
-          filterByStatus={this.state.filterByStatus}
-          handleFilterByStatusChange={this.handleFilterByStatusChange}
           fetchingFilters={fetchingFilters}
         />
         <div className='history__filter-loader-wrapper'>
           <div className='history__filter-no-results paper' style={fetchingFilters ? { opacity: '.3' } : null}>
-            <p>No Results, try another filter <span>or</span></p>
-            <BaseButton
-              className='history__filter-resetBtn'
-              onClick={this.resetFilters}
-            >
-              <span>reset all filters</span>
-            </BaseButton>
+            <p>No results for this selected filter.</p>
           </div>
           {fetchingFilters &&
           <div
@@ -162,15 +48,6 @@ class History extends Component {
     if (this.props.userActivity.length > 0) {
       return <div>
         <HistoryFilters
-          startDate={this.state.startDate}
-          endDate={this.state.endDate}
-          handleStartDateChange={this.handleStartDateChange}
-          handleEndDateChange={this.handleEndDateChange}
-          filters={this.state.filters}
-          handleSearchChange={this.handleSearchChange}
-          handleSearchTextSubmit={this.handleSearchTextSubmit}
-          filterByStatus={this.state.filterByStatus}
-          handleFilterByStatusChange={this.handleFilterByStatusChange}
           fetchingFilters={fetchingFilters}
         />
         <div className='history__filter-loader-wrapper'>
