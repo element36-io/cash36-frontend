@@ -22,8 +22,8 @@ class Login extends Component {
 
   componentDidMount () {
     uPort.requestCredentials({
-      requested: [ 'name', 'avatar' ],
-      verified: [ 'cash36KYC' ],
+      requested: ['name', 'avatar'],
+      verified: ['element36Tier1', 'element36Tier2'],
       notifications: true
     }, this.uPortURIHandler).then(this.checkIfUserExists);
   }
@@ -33,15 +33,14 @@ class Login extends Component {
     this.setState({ uPortUri });
   };
 
-  checkIfUserExists = uportCreds => {
-    console.log('CHECK USER');
-    checkUserAddress(MNID.decode(uportCreds.networkAddress).address)
-      .then(() => {
-        this.setState({ step: 1, uportCreds });
-      }).catch(() => {
-        this.setState({ step: 2, uportCreds });
-      });
-  }
+  checkIfUserExists = async uportCreds => {
+    try {
+      await checkUserAddress(MNID.decode(uportCreds.networkAddress).address);
+      this.setState({ step: 1, uportCreds });
+    } catch (err) {
+      this.setState({ step: 2, uportCreds });
+    }
+  };
 
   renderStep = () => {
     const { step, uPortUri, uportCreds } = this.state;

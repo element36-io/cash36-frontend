@@ -3,11 +3,17 @@ import PropTypes from 'prop-types';
 import MediaQuery from 'react-responsive';
 
 const Responsive = props => {
-  const { isMobile, children } = props;
-  const breakpoint = isMobile ? '(max-width: 767px)' : '(min-width: 768px)';
+  const { isMobile, isTablet, isDesktop, children } = props;
+
+  const renderQuery = () => {
+    if (isMobile) return '(max-width: 767px)';
+    if (isTablet) return '(max-width: 967px)';
+    if (isDesktop) return '(min-width: 968px)';
+    else return '(min-width: 768px)';
+  };
 
   return (
-    <MediaQuery query={breakpoint}>
+    <MediaQuery query={renderQuery()}>
       {children}
     </MediaQuery>
   );

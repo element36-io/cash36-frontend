@@ -8,7 +8,7 @@ export default {
   COMPLETED: {
     cssClass: 'activity-table-status__complete',
     Icon: <CheckIcon className='activity-table-status__icon' />,
-    text: 'Complete'
+    text: 'Completed'
   },
   PROCESSING: {
     cssClass: 'activity-table-status__processing',

@@ -6,20 +6,27 @@
   padding: 1rem 0;
   flex: 1;
 
-  > div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  > div:first-child {
+  > button {
+    outline: none;
+    border: none;
     padding: 0 1.7rem;
     border-right: 2px solid $grey-border;
+    background-color: $white;
+
+    &:hover {
+      cursor: pointer;
+    }
 
     > svg {
       font-size: 3rem;
       opacity: .4;
     }
+  }
+
+  > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   > div:last-child {
@@ -32,6 +39,7 @@
   }
 
   @include mobile {
+    padding: 1.2rem 0;
     overflow: hidden;
     > div:first-child {
       padding: 0 1rem;
@@ -43,8 +51,26 @@
     }
 
     > div:last-child {
-      width: 100%;
+      padding: 0 .9rem;
       overflow: hidden;
+      // flex: 1;
+
+      input {
+        align-self: flex-start;
+      }
+    }
+
+    > button {
+      outline: none;
+      border: none;
+      padding: 0 .9rem;
+      border-right: 1px solid $grey-border;
+      background-color: $white;
+
+      > svg {
+        font-size: 2.5rem;
+        opacity: .4;
+      }
     }
   }
 }

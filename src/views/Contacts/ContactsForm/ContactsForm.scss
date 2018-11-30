@@ -1,0 +1,72 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/settings.scss';
+
+.contact-form {
+  position: relative;
+
+  h2 {
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+  }
+
+  .contact-form__btn {
+    width: 100%;
+    background: $gradient-primary;
+    color: #fff;
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+    text-transform: uppercase;
+    border-radius: 4px;
+    transition: opacity 225ms;
+    overflow: hidden;
+
+    > div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .contact-form__btn__icon {
+      font-size: 2.6rem;
+    }
+
+    &[disabled] {
+      opacity: .5;
+    }
+
+    &.--submitting {
+      > div {
+        justify-content: center;
+      }
+    }
+  }
+
+  @include desktop {
+    .contact-form__header {
+      margin-bottom: 2.1rem;
+      padding-bottom: 2.4rem;
+      padding-right: 3rem;
+      border-bottom: 2px solid $border-light-grey-1;
+    }
+
+    .contact-form__btn {
+      > div {
+        padding: 1.5rem 1.6rem;
+      }
+    }
+  }
+
+  @include mobile {
+    .contact-form__header {
+      margin-bottom: 2.4rem;
+      text-align: center;
+    }
+
+    .contact-form__btn {
+      > div {
+        padding: 1.5rem 1.2rem;
+      }
+    }
+  }
+}

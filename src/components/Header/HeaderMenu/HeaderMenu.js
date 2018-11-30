@@ -1,42 +1,64 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/KeyboardArrowDown';
-import PopupMenu from '../../PopupMenu';
 import './HeaderMenu.scss';
 
-const HeaderMenu = props => {
-  const { logout, open, anchorEl, closeCallback, openCallback, user: { avatarUri, name } } = props;
+class HeaderMenu extends Component {
+  state = {
+    open: false
+  };
 
-  return (
-    <div className='header__menu'>
-      <span>
-        {
-          avatarUri
-            ? <img src={avatarUri} alt={name} />
-            : <i className='fas fa-user' />
-        }
-      </span>
-      <MenuIcon
-        onClick={openCallback}
-        className='header__menu__icon'
-      />
-      <PopupMenu handleClose={closeCallback} open={open} anchor={anchorEl} placement='bottom-end'>
-        <MenuItem onClick={logout}>Logout</MenuItem>
-      </PopupMenu>
-    </div>
+  toggleMenu = () => {
+    this.setState({ open: !this.state.open });
+  };
 
-  );
-};
+  closeMenu = () => {
+    this.setState({ open: false });
+  };
+
+  render () {
+    const { logout, user: { avatarUri, name } } = this.props;
+    const { open } = this.state;
+
+    return (
+      <div className='header__menu'>
+        <span className='header__menu__image'>
+          {
+            avatarUri
+              ? <img src={avatarUri} alt={name} />
+              : <i className='fas fa-user' />
+          }
+        </span>
+        <ClickAwayListener onClickAway={this.closeMenu}>
+          <span className='header__menu__anchor'>
+            <MenuIcon
+              onClick={this.toggleMenu}
+              className='header__menu__icon'
+            />
+            <div className={`paper header__menu__content${open ? ' header__menu__content--active' : ''}`}>
+              <MenuItem>
+                <Link to='/settings' onClick={this.closeMenu}>
+                    Settings
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={logout}>
+                  Logout
+              </MenuItem>
+            </div>
+          </span>
+        </ClickAwayListener>
+      </div>
+
+    );
+  }
+}
 
 HeaderMenu.propTypes = {
   logout: PropTypes.func.isRequired,
-  openCallback: PropTypes.func.isRequired,
-  closeCallback: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired,
-  anchorEl: PropTypes.object,
   user: PropTypes.object
-
 };
 
 export default HeaderMenu;

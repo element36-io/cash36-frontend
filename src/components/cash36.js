@@ -32,11 +32,6 @@ const addCash36 = WrappedComponent => {
     receiptCallback (action) {
       // return (receipt) => {
       console.log('receiptCallback - ' + action);
-      console.log('==================');
-      console.log('==================');
-      console.log(`RECEIPT CALLBACK`);
-      console.log('==================');
-      console.log('==================');
       // this.props.dispatch(success(Messages.transactionMined(action)));
       // };
     }

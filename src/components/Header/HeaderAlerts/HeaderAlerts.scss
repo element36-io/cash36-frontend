@@ -1,12 +1,24 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/settings.scss';
+
 .header__alerts {
   position: relative;
+  cursor: pointer;
 
   i {
     font-size: 22px;
     color: #6ab5f8;
   }
 
-  span {
+  .header__alerts__icon {
+    display: inline-block;
+    width: 1.6rem;
+    height: 2rem;
+    background: url('../../../assets/icons/bell-icon.svg') no-repeat center;
+    background-size: 100% 100%;
+  }
+
+  .header__alerts__counter {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -17,5 +29,44 @@
     color: #fff;
     font-size: 12px;
     line-height: 1;
+  }
+
+  .header__alerts__content {
+    z-index: 20;
+    background: #fff;
+    overflow: auto;
+    transform-origin: 44.5rem top 0;
+    opacity: 0;
+    transform: translate3d(0, -4rem, 0) scale(0);
+
+    &.header__alerts--active {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+
+  @include desktop {
+    .header__alerts__content {
+      position: absolute;
+      top: 4rem;
+      right: -6rem;
+      width: 49.5rem;
+      max-height: 40rem;
+      box-shadow: $box-shadow-1;
+      border-radius: 10px;
+      transition: all .2s ease-in;
+    }
+  }
+
+  @include mobile {
+    .header__alerts__content {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      top: 8.7rem;
+      max-height: calc(100vh - 8.7rem);
+      transform-origin: center top 0;
+    }
   }
 }

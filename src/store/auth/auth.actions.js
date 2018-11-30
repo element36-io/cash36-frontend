@@ -1,10 +1,11 @@
 import axios from 'axios';
+import { MNID } from 'uport-connect';
 import API, { API_ROOT } from '../../config/api';
 
 export const AUTH_USER = 'AUTH_USER';
-export const AUTH_ERROR = 'AUTH_ERROR';
-export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const GET_KYC = 'GET_KYC';
+export const ATTESTATION_PROGRESS = 'ATTESTATION_PROGRESS';
+export const CONFIRM_ATTESTATION = 'CONFIRM_ATTESTATION';
 
 export const checkUserAddress = address => API.get(`/public/is-user/${address}`);
 
@@ -31,21 +32,18 @@ export const getKyc = () => async dispatch => {
     if (error.response.status === 401) {
       console.log('Access unauthorized');
     }
-    console.log(error);
   }
 };
 
-export const register = (username, password, avatarUrl) => async dispatch => {
+export const register = (username, password, user) => async dispatch => {
   try {
     await axios.post(
       `${API_ROOT}/public/register`,
-      { username, password, avatarUrl }
+      { username, password, avatarUrl: user.avatarUri }
     );
+    login(username, password, user)(dispatch);
   } catch (error) {
-    dispatch({
-      type: AUTH_ERROR,
-      payload: error.response.data.message
-    });
+    return Promise.reject(error.response.data.message || 'An error has occured');
   }
 };
 
@@ -81,11 +79,35 @@ export const login = (username, password, user) => async dispatch => {
     });
     dispatch(getKyc());
   } catch (error) {
-    dispatch({
-      type: AUTH_ERROR,
-      payload: error.response.data.error_description
-    });
+    return Promise.reject(error.response.data.error_description);
   }
 };
 
-export const clearErrors = () => ({ type: CLEAR_ERRORS });
+export const createUserObject = uportCreds => {
+  const username = MNID.decode(uportCreds.networkAddress).address;
+  const user = {
+    username,
+    name: uportCreds.name,
+    avatarUri: uportCreds.avatar ? uportCreds.avatar.uri : null,
+    lastLoggedIn: new Date().getTime(),
+    uportAddress: uportCreds.address,
+    verified: uportCreds.verified
+  };
+
+  return {
+    username,
+    user
+  };
+};
+export const attestationProgress = () => {
+  return {
+    type: ATTESTATION_PROGRESS
+  };
+};
+
+export const confirmAttestation = data => {
+  return {
+    type: CONFIRM_ATTESTATION,
+    payload: data
+  };
+};

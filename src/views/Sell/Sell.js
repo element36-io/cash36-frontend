@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Cash36Contract, Token36Contract } from 'cash36-contracts';
-import requireAuth from '../../components/requireAuth';
 import SellTokens from './SellTokens';
 import SellConfirmation from './SellConfirmation';
 import SellSuccess from './SellSuccess';
@@ -109,4 +108,4 @@ const mapStateToProps = ({ tokens: { tokens = [] }, auth: { user } }) => ({
   user
 });
 
-export default requireAuth(addCash36(connect(mapStateToProps, { getTokens })(Sell)));
+export default addCash36(connect(mapStateToProps, { getTokens })(Sell));

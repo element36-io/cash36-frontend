@@ -1,0 +1,74 @@
+@import '../../../styles/settings.scss';
+@import '../../../styles/mixins.scss';
+
+.transfer-amount {
+  max-width: 57.5rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > hr {
+    margin: 3.2rem 0;
+    border-bottom: 1px solid $grey-border;
+    border-top: none;
+    width: 120%;
+  }
+
+  > div:first-child {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    > h4 {
+      text-align: center;
+      margin-bottom: 1.6rem;
+    }
+
+    > i {
+      color: $primary-light-3;
+      width: 5.6rem;
+      height: 5.6rem;
+      border-radius: 16px;
+      background-color: $grey-blue;
+      display: flex;
+      align-items: center;
+      font-size: 1.8rem;
+      justify-content: center;
+      margin-bottom: 1.6rem;
+    }
+
+    > h3 {
+      letter-spacing: -1px;
+      text-align: center;
+    }
+  }
+
+  .transfer-amount__header {
+    > :nth-child(3) {
+      font-size: 1.8rem;
+      line-height: 2.2rem;
+    }
+
+    > :nth-child(4) {
+      margin-top: .6rem;
+      color: $text-light-grey-1;
+      font-size: 1.4rem;
+      line-height: 1.7rem;
+    }
+  }
+
+  .transfer-amount__avatar {
+    width: 5.6rem;
+    height: 5.6rem;
+    margin-bottom: 1.3rem;
+  }
+
+  @include mobile {
+    > hr {
+      margin: 3.2rem 0;
+      border-bottom: 1px solid $grey-border;
+      border-top: none;
+      width: 100%;
+    }
+  }
+}

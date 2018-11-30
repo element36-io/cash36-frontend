@@ -1,0 +1,37 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/settings.scss';
+
+.contacts {
+
+  .contacts__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .contacts__loader {
+    display: flex;
+    justify-content: center;
+  }
+
+  .contacts__list {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  @include desktop {
+
+    .contacts__actions {
+      margin-bottom: 3.2rem;
+    }
+  }
+
+  @include mobile {
+
+    .contacts__actions {
+      margin-bottom: 1.6rem;
+    }
+  }
+
+}
