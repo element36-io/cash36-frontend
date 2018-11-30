@@ -49,10 +49,17 @@ export const getUserActivity = queryParams => async dispatch => {
     });
 
     if (params) {
-      dispatch({
-        type: HISTORY_FILTERED,
-        payload: true
-      });
+      if (params === '?') {
+        dispatch({
+          type: HISTORY_FILTERED,
+          payload: false
+        });
+      } else {
+        dispatch({
+          type: HISTORY_FILTERED,
+          payload: true
+        });
+      }
     }
   } catch (error) {
     console.log(error);

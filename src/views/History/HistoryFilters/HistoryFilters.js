@@ -9,6 +9,7 @@ import FilterByStatus from '../FilterByStatus';
 import ExportData from '../ExportData';
 import DateRangeMobile from '../DateRangeMobile';
 import FilterByStatusMobile from '../FilterByStatusMobile';
+import BaseButton from '../../../components/Buttons/BaseButton';
 
 class HistoryFilters extends Component {
   state = {
@@ -87,27 +88,33 @@ class HistoryFilters extends Component {
     }
   }
 
-  // resetFilters = () => {
-  //   this.setState({
-  //     startDate: null,
-  //     endDate: null,
-  //     filterByStatus: 'All',
-  //     filters: {
-  //       filterValue: '',
-  //       from: '',
-  //       to: '',
-  //       status: ''
-  //     }
-  //   }, () => {
-  //     this.props.getUserActivity(this.state.filters);
-  //   });
-  // }
+  resetFilters = () => {
+    this.setState({
+      startDate: null,
+      endDate: null,
+      filterByStatus: 'All',
+      filters: {
+        filterValue: '',
+        from: '',
+        to: '',
+        status: ''
+      }
+    }, () => {
+      this.props.getUserActivity(this.state.filters);
+    });
+  }
 
   render () {
     const { startDate, endDate, filterByStatus, filters } = this.state;
-    const { fetchingFilters } = this.props;
+    const { fetchingFilters, historyFiltered } = this.props;
     return (
       <div className='history__filters'>
+        {historyFiltered && !fetchingFilters && <BaseButton
+          className='history__filters__reset-btn'
+          onClick={this.resetFilters}
+        >
+        Reset all filters
+        </BaseButton>}
         <Responsive isDesktop>
           <DateRange
             startDate={startDate}

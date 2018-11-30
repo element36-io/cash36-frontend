@@ -13,11 +13,30 @@
   }
 
   &__filters {
-    margin-bottom: 2.4rem;
+    margin-bottom: 3.2rem;
     display: flex;
+    position: relative;
 
     > *:not(:last-child) {
       margin-right: 2rem;
+    }
+
+    .history__filters__reset-btn {
+      background-color: $white;
+      box-shadow: $box-shadow-1;
+      color: $text-secondary;
+      padding: .3rem .5rem;
+      border-radius: 4px;
+      font-size: 1.2rem;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -2.6rem;
+      margin: 0;
+
+      &:hover {
+        background-color: darken($white, 3);
+      }
     }
   }
 
