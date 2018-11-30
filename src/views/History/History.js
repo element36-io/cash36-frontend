@@ -28,6 +28,7 @@ class History extends Component {
       return <div>
         <HistoryFilters
           fetchingFilters={fetchingFilters}
+          historyFiltered={historyFiltered}
         />
         <div className='history__filter-loader-wrapper'>
           <div className='history__filter-no-results paper' style={fetchingFilters ? { opacity: '.3' } : null}>
@@ -49,6 +50,7 @@ class History extends Component {
       return <div>
         <HistoryFilters
           fetchingFilters={fetchingFilters}
+          historyFiltered={historyFiltered}
         />
         <div className='history__filter-loader-wrapper'>
           <div style={fetchingFilters ? { opacity: '.3' } : null}>

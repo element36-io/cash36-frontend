@@ -1,11 +1,9 @@
 import axios from 'axios';
-import runtimeEnv from '@mars/heroku-js-runtime-env';
 import store from '../store';
 import { logout } from '../store/auth/auth.actions';
 
-const env = runtimeEnv();
-let apiEnv = env.REACT_APP_ENV;
-console.log('Environment: ' + apiEnv);
+let apiEnv = process.env.NODE_ENV
+console.log('Environment: ' + apiEnv)
 
 let url = 'http://localhost:9090';
 let web3NodeUrl = 'http://167.99.243.81:8866/';
@@ -15,8 +13,8 @@ if (apiEnv === 'staging') {
   web3NodeUrl = 'http://167.99.243.81:8866/';
 }
 if (apiEnv === 'production') {
-  url = 'http://167.99.243.81:9090';
-  web3NodeUrl = 'http://167.99.243.81:8866/';
+  url = 'https://app-t.element36.io/api';
+  web3NodeUrl = 'https://app-t.element36.io/geth';
 }
 
 export const API_ROOT = url;
