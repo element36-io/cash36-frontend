@@ -30,8 +30,8 @@ docker-build:
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   - docker push $CI_REGISTRY_IMAGE
   retry: 1
-  #only:
-  #- master
+  only:
+    - master
 
 deploy:
   stage: deploy
@@ -39,5 +39,5 @@ deploy:
   - apk add --update --no-cache openssh sshpass
   - ./deploy.sh $DO_PASS $GITLAB_PW_MAIK
   retry: 1
-  #only:
-  #- master
+  only:
+    - master
