@@ -30,9 +30,9 @@ class HeaderMobile extends Component {
       return (
         <div>
           <Verification isVisible={showVerification} user={user} close={this.closeVerification} />
-          <HeaderAlerts alertsCount={3} />
+          <HeaderAlerts />
           <NavBtn isActive={activeNav} clickHandler={this.toggleNav} />
-          <HeaderMobileDropdown user={user} logout={logout} isActive={activeNav} clickCallback={this.toggleNav} openVerification={this.openVerification} />
+          <HeaderMobileDropdown logout={logout} isActive={activeNav} clickCallback={this.toggleNav} openVerification={this.openVerification} />
         </div>
       );
     }

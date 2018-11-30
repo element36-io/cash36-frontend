@@ -1,50 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import requireAuth from '../../components/requireAuth';
-import BalanceCard from '../../components/BalanceCard';
 import QuickActions from './QuickActions';
 import ActivityTable from '../../components/ActivityTable';
 import UserProfile from '../../components/UserProfile';
-import Verification from '../../components/Verification';
-import { getTokens, getUserActivity } from '../../store/tokens/tokens.actions';
+import { getUserActivity } from '../../store/tokens/tokens.actions';
+import BalanceCards from '../../components/BalanceCards';
 
 import './Home.scss';
 
 class Home extends Component {
-  state = {
-    showVerification: false
-  };
-
   componentDidMount () {
-    this.props.getTokens();
     this.props.getUserActivity();
   }
 
-  toggleVerification = () => {
-    this.setState({ showVerification: !this.state.showVerification });
-  };
-
-  closeVerification = () => {
-    this.setState({ showVerification: false });
-  };
-
   render () {
-    const { showVerification } = this.state;
-    const { user, tokens, userActivity } = this.props;
+    const { userActivity } = this.props;
 
     const lastActivity = userActivity.slice(0, 5);
 
     return (
       <div className='home-page'>
         <div className='wrapper'>
-          <Verification isVisible={showVerification} user={user} close={this.closeVerification} />
           <div className='home-page__user-actions'>
-            <UserProfile user={user} clickCallback={this.toggleVerification} />
+            <UserProfile clickCallback={this.toggleVerification} />
             <QuickActions />
           </div>
           <div className='home-page__balance-cards'>
-            {tokens.map(({ symbol, name, balance }) =>
-              <BalanceCard key={name} name={name} symbol={symbol} balance={balance} />)}
+            <BalanceCards />
           </div>
           <div className='home-page__activity'>
             <h2>Last Activity</h2>
@@ -62,10 +44,6 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = ({ auth: { user }, tokens: { tokens = [], userActivity = [] } }) => ({
-  user,
-  tokens,
-  userActivity
-});
+const mapStateToProps = ({ tokens: { userActivity = [] } }) => ({ userActivity });
 
-export default requireAuth(connect(mapStateToProps, { getTokens, getUserActivity })(Home));
+export default connect(mapStateToProps, { getUserActivity })(Home);

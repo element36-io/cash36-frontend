@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import requireAuth from '../../components/requireAuth';
 import API from '../../config/api';
 import BuyTokens from './BuyTokens';
 import { getTokens } from '../../store/tokens/tokens.actions';
@@ -123,4 +122,4 @@ const mapStateToProps = ({ auth: { user } }) => {
   else return { iban: '' };
 };
 
-export default requireAuth(connect(mapStateToProps, { getTokens })(Buy));
+export default connect(mapStateToProps, { getTokens })(Buy);

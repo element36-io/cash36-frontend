@@ -1,0 +1,57 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/settings.scss';
+
+
+.contacts__search-box {
+  position: relative;
+  width: 57rem;
+  max-width: 57rem;
+  margin-right: 1rem;
+  border-radius: 10px;
+  box-shadow: $box-shadow-1;
+  background: #fff;
+  overflow: hidden;
+
+  &:before {
+    position: absolute;
+    display: block;
+    border-right: 2px solid $grey-border;
+    background: url('../../../assets/icons/search.svg') no-repeat left center;
+    content: '';
+  }
+
+  input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+  }
+
+  @include desktop {
+    &:before {
+      top: 12px;
+      bottom: 12px;
+      left: 1.6rem;
+      width: 3.9rem;
+    }
+
+    input {
+      padding: 2.3rem 1.5rem 2.3rem 7.4rem;
+    }
+  }
+
+  @include mobile {
+    &:before {
+      top: .9rem;
+      bottom: .9rem;
+      left: 1.2rem;
+      width: 3rem;
+      background-size: 1.8rem 1.8rem;
+    }
+
+    input {
+      padding: 1.4rem 1rem 1.4rem 5.3rem;
+    }
+  }
+}

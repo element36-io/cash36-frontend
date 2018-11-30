@@ -1,0 +1,32 @@
+@import '../../../styles/settings.scss';
+
+.arrow-btn {
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  transform: translateY(-50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.8rem;
+  height: 4.8rem;
+  margin-right: 2.6rem;
+  background: $white;
+  border: 1px solid $border-light-grey-1;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  cursor: pointer;
+
+  .arrow-btn__icon {
+    color: $primary-main;
+  }
+
+  &.arrow-btn--alt {
+    left: 100%;
+    right: auto;
+    margin-left: 2.6rem;
+    margin-right: 0;
+    transform: translateY(-50%) rotate(180deg);
+  }
+}

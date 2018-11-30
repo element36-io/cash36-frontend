@@ -1,0 +1,13 @@
+@import '../../../styles/settings.scss';
+
+.contact-form__response {
+  button {
+    width: 100%;
+    padding: 1rem;
+    color: $white;
+    border-radius: 4px;
+    background: $gradient-primary;
+    font-size: 1.8rem;
+    text-align: center;
+  }
+}

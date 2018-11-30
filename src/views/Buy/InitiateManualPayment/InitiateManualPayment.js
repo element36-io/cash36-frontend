@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactCountryFlag from 'react-country-flag';
-import { getCountryCode } from '../../../helpers/text.helpers';
 
 import './InitiateManualPayment.scss';
 import TransactionFooter from '../../../components/TransactionFooter';
@@ -40,7 +39,7 @@ const InitiateManualPayment = ({ handleOrderSubmit, transferData, goToHistory, g
         <span>Bank Country</span>
         <span className='initiate-manual-payment__info-field--country'>
           <ReactCountryFlag
-            code={getCountryCode(transferData.bankCountry)}
+            code={transferData.bankCountryCode}
             svg
             styleProps={{
               width: '2rem',

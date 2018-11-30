@@ -28,9 +28,12 @@ $text-black-1: #01152C;
 $text-light-grey-1: rgba(1,21,44, .5);
 $text-light-grey-2: rgba(1,21,44, .75);
 $text-light-grey-3: rgba(1,21,44, 1);
+$text-light-grey-4: rgba(1,21,44, .2);
 
 $green-1: rgba(72,214,182,0.1);
 $green-2: rgba(72,214,182, 1);
+
+$background-grey-1: #F8F9FB;
 
 $border-light-grey-1: rgba(179,198,213, .25);
 
@@ -40,6 +43,8 @@ $darkGrey: #949CA8;
 $headerGrey: #F7F8FB;
 $lightGrey: #ededed;
 $backgroundGrey: #FCFCFC;
+$notificationsGrey: #f9f7ff;
+$notificationsBorder: #e5effa;
 $grey-blue:  #ECF6FE;
 $red-light: #FFEDED;
 
@@ -51,6 +56,7 @@ $red-1: #FF2525;
 $gradient-primary: linear-gradient(to left bottom, $primary-dark, $primary-light);
 $gradient-secondary: linear-gradient(180deg, rgba(99,180,245, .1) 0%, rgba(1,126,229,.1) 100%);
 $gradient-3: linear-gradient(225.95deg, rgba(105,184,242,1) 0%, rgba(1,126,229,1) 100%);
+$gradient-4: linear-gradient(217.42deg, #63B4F5 0%, #017EE5 100%);
 $gradient-green-1: linear-gradient(225.95deg, #48D6B6 0%, #32B396 100%);
 $gradient-red-1: linear-gradient(225.95deg, #FF2525 0%, #FD6767 100%);
 
