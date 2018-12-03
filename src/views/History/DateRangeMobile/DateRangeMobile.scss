@@ -1,10 +1,38 @@
+@import '../../../styles/settings.scss';
+
 .date-range-mobile {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 1.6rem;
 
+
   > * {
     opacity: .5;
+    position: relative;
+  }
+
+  .rdr-DateRange {
+    position: absolute;
+    z-index: 15;
+    left: 0;
+    top: 6.1rem;
+    opacity: 1;
+    box-shadow: $box-shadow-1;
+    border-radius: 10px !important;
+    overflow: hidden;
+    border: 1px solid $grey-border;
+  }
+
+  .rdr-Day.is-inRange {
+    background-color: $primary-light-4 !important;
+  }
+
+  .rdr-Day.is-selected.is-inRange {
+    background-color: $primary-main !important;
+  }
+
+  .rdr-Day.is-selected {
+    background-color: $primary-main !important;
   }
 }

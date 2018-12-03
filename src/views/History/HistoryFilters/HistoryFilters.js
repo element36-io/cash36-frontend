@@ -16,6 +16,7 @@ class HistoryFilters extends Component {
     startDate: null,
     endDate: null,
     filterByStatus: 'All',
+    mobileFiltersVisible: false,
     filters: {
       filterValue: '',
       from: '',
@@ -88,6 +89,30 @@ class HistoryFilters extends Component {
     }
   }
 
+  handleMobileRangeDateChange = (range) => {
+    console.log(range);
+    // An object with two keys,
+    // 'startDate' and 'endDate' which are Momentjs objects.
+    if (range.startDate && range.endDate) {
+      this.setState({
+        filters: {
+          ...this.state.filters,
+          from: range.startDate.format('DD.MM.YYYY'),
+          to: range.endDate.format('DD.MM.YYYY')
+        }
+      }, () => {
+        this.props.getUserActivity(this.state.filters);
+        this.setState({ mobileFiltersVisible: false });
+      });
+    }
+  }
+
+  toggleFiltersVisible = () => {
+    if (!this.props.fetchingFilters) {
+      this.setState((prevState) => ({ mobileFiltersVisible: !prevState.mobileFiltersVisible }));
+    }
+  }
+
   resetFilters = () => {
     this.setState({
       startDate: null,
@@ -105,7 +130,7 @@ class HistoryFilters extends Component {
   }
 
   render () {
-    const { startDate, endDate, filterByStatus, filters } = this.state;
+    const { startDate, endDate, filterByStatus, filters, mobileFiltersVisible } = this.state;
     const { fetchingFilters, historyFiltered } = this.props;
     return (
       <div className='history__filters'>
@@ -137,11 +162,18 @@ class HistoryFilters extends Component {
           <ExportData />
         </Responsive>
         <Responsive isTablet>
-          <DateRangeMobile />
+          <DateRangeMobile
+            startDate={startDate}
+            endDate={endDate}
+            handleMobileRangeDateChange={this.handleMobileRangeDateChange}
+            visible={mobileFiltersVisible}
+            toggleFiltersVisible={this.toggleFiltersVisible}
+          />
           <FilterByStatusMobile
             filterByStatus={filterByStatus}
             handleFilterByStatusChange={this.handleFilterByStatusChange}
             fetchingFilters={fetchingFilters}
+            toggleFiltersVisible={this.toggleFiltersVisible}
           />
           <SearchBox
             searchTerm={filters.filterValue}
