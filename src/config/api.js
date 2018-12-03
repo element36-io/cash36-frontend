@@ -2,8 +2,8 @@ import axios from 'axios';
 import store from '../store';
 import { logout } from '../store/auth/auth.actions';
 
-let apiEnv = process.env.NODE_ENV
-console.log('Environment: ' + apiEnv)
+let apiEnv = process.env.NODE_ENV;
+console.log('Environment: ' + apiEnv);
 
 let url = 'http://localhost:9090';
 let web3NodeUrl = 'http://167.99.243.81:8866/';

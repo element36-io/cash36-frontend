@@ -34,6 +34,13 @@
       bottom: -2.6rem;
       margin: 0;
 
+      @include mobile {
+        bottom: -2.8rem;
+        font-size: 1.4rem;
+        left: calc(100% - 5.4rem);
+        white-space: nowrap;
+      }
+
       &:hover {
         background-color: darken($white, 3);
       }
