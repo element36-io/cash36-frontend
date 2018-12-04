@@ -40,7 +40,7 @@ class History extends Component {
           >
             <CircularProgress
               color='primary'
-              size={75}
+              size={65}
             />
           </div>}
         </div>

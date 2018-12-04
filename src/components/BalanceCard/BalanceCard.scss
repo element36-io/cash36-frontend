@@ -69,17 +69,9 @@
       display: flex;
     }
 
-    > div:first-child {
-      justify-content: space-between;
-    }
-
     > div:last-child {
       align-items: center;
     }
-
-  &__menu-icon {
-    color: $text-secondary;
-  }
 
   &__icon {
     margin-right: .5rem;

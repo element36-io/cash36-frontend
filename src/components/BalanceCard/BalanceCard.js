@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import TokenIcon from '../TokenIcon';
 import { formatAmount } from '../../helpers/currencies.helpers';
 
@@ -14,7 +13,6 @@ class BalanceCard extends Component {
       <div className={`balance-card paper balance-card--${symbol}`}>
         <div>
           <Typography variant='body1' color='textSecondary'>{name} Balance</Typography>
-          <MoreVertIcon className='balance-card__menu-icon' />
         </div>
         <div>
           <span className='balance-card__icon'>

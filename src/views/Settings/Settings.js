@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import UserProfile from '../../components/UserProfile';
-import DefaultButton from '../../components/Buttons/DefaultButton';
 import BalanceCards from '../../components/BalanceCards';
 import PersonalInformation from './PersonalInformation';
 import { getTokens } from '../../store/tokens/tokens.actions';
 import { getCountries } from '../../store/countries/countries.actions';
-import plusIcon from '../../assets/icons/plus-icon.svg';
 
 import './Settings.scss';
 
@@ -16,9 +14,6 @@ class Settings extends Component {
     this.props.getCountries();
   }
 
-  handleAddCurrencyClick = () => {
-    console.log('Add Currency Clicked');
-  }
   render () {
     const { user } = this.props;
     const { kycLevel } = user;
@@ -30,12 +25,6 @@ class Settings extends Component {
           </div>
           <div className='settings__buttons'>
             <BalanceCards />
-            <DefaultButton
-              onClick={this.handleAddCurrencyClick}
-            >
-              <img src={plusIcon} alt='' />
-              Add Currency
-            </DefaultButton>
           </div>
           <div className='settings__personal-information'>
             {kycLevel === 'Tier_0' &&
