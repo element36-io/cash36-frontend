@@ -1,7 +1,6 @@
 const Web3 = require('web3');
 const React = require('react');
 const PropTypes = require('prop-types');
-const net = require('net');
 
 const WEB3_NODE = require('../config/api.js').WEB3_NODE;
 
@@ -67,11 +66,7 @@ class Web3ProviderNew extends React.Component {
 
       // window.web3.setProvider(this.uport.getProvider());
 
-      if (WEB3_NODE.indexOf('ipc') > 0) {
-        web3.setProvider(new web3.providers.IpcProvider(WEB3_NODE, net));
-      } else {
-        web3.setProvider(new web3.providers.HttpProvider(WEB3_NODE));
-      }
+      web3.setProvider(new web3.providers.HttpProvider(WEB3_NODE));
 
       window.web3 = web3;
 
