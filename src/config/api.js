@@ -14,7 +14,7 @@ if (apiEnv === 'staging') {
 }
 if (apiEnv === 'production') {
   url = '/api';
-  web3NodeUrl = '/geth';
+  web3NodeUrl = '/root/.ethereum/rinkeby/geth.ipc';
 }
 
 export const API_ROOT = url;
@@ -36,7 +36,7 @@ const getRefreshedToken = async (refreshToken) => {
   try {
     const response = await axios.post(`${API_ROOT}/oauth/token`, config.data, {
       headers: config.headers
-    });
+    })
 
     const token = response.data;
 
