@@ -14,7 +14,7 @@ if (apiEnv === 'staging') {
 }
 if (apiEnv === 'production') {
   url = '/api';
-  web3NodeUrl = '/root/.ethereum/rinkeby/geth.ipc';
+  web3NodeUrl = 'https://app-t.element36.io:38866/';
 }
 
 export const API_ROOT = url;
