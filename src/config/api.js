@@ -14,7 +14,7 @@ if (apiEnv === 'staging') {
 }
 if (apiEnv === 'production') {
   url = '/api';
-  web3NodeUrl = 'https://eth.element36.io';
+  web3NodeUrl = 'https://rinkeby.infura.io/v3/4cf538c6b0bb4562bdc2f31430327c08';
 }
 
 export const API_ROOT = url;
