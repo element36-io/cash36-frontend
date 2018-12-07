@@ -14,7 +14,7 @@ if (apiEnv === 'staging') {
 }
 if (apiEnv === 'production') {
   url = '/api';
-  web3NodeUrl = 'https://app-t.element36.io:38866/';
+  web3NodeUrl = 'https://eth.element36.io';
 }
 
 export const API_ROOT = url;
