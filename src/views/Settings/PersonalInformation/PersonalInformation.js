@@ -110,8 +110,12 @@ class PersonalInformation extends Component {
   };
 
   renderFormHeader = () => {
-    if (this.props.user.currentLevel === 'Tier_1') { return 'Tier 1 Verification - Complete'; }
-    if (this.props.user.currentLevel === 'Tier_2') { return 'Tier 2 Verification - Complete'; }
+    if (this.props.user.currentLevel === 'Tier_1') {
+      return 'Tier 1 Verification - Complete';
+    }
+    if (this.props.user.currentLevel === 'Tier_2') {
+      return 'Tier 2 Verification - Complete';
+    }
     return null;
   };
 
@@ -225,7 +229,7 @@ class PersonalInformation extends Component {
   render () {
     const { formDisabled, userInfo, bankInfo, errorMessage } = this.state;
     const {
-      user: { kycLevel }
+      user: { currentLevel }
     } = this.props;
 
     return (
@@ -234,7 +238,7 @@ class PersonalInformation extends Component {
         <form className="paper" onSubmit={this.handleFormSubmit}>
           <div>
             <h3>{this.renderFormHeader()}</h3>
-            {kycLevel === 'Tier_1' && (
+            {currentLevel === 'Tier_1' && (
               <button type="button" onClick={this.toggleEdit}>
                 <img src={editIcon} alt="" />
               </button>
