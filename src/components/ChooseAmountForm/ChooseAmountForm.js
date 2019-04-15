@@ -8,12 +8,12 @@ import { isNumeric } from 'validator';
 import './ChooseAmountForm.scss';
 
 class ChooseAmountForm extends PureComponent {
-  handleAmountChange = (event) => {
+  handleAmountChange = event => {
     const { value } = event.target;
     if (isNumeric(value) || value === '') {
       this.props.handleChange(event);
     }
-  }
+  };
   render () {
     const { tokenSymbols } = this.props;
     return (
@@ -53,7 +53,11 @@ class ChooseAmountForm extends PureComponent {
             shrink: true
           }}
         >
-          {tokenSymbols.map(symbol => <MenuItem key={symbol} value={symbol}>{symbol}</MenuItem>)}
+          {tokenSymbols.map(symbol => (
+            <MenuItem key={symbol} value={symbol}>
+              {symbol}
+            </MenuItem>
+          ))}
         </TextField>
       </div>
     );
