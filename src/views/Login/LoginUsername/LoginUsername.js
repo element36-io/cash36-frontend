@@ -5,7 +5,7 @@ import { MNID } from 'uport-connect';
 const LoginUsername = props => {
   const { networkAddress } = props;
   return (
-    <div className='login__field login__field--username'>
+    <div className="login__field login__field--username">
       <label>
         <span>Username (uPort ID)</span>
         {MNID.decode(networkAddress).address}

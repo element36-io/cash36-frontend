@@ -31,7 +31,7 @@ class Buy extends Component {
   };
 
   previousStep = () => {
-    this.setState((prevState) => {
+    this.setState(prevState => {
       return { step: Math.round(prevState.step - 1) };
     });
   };
@@ -58,7 +58,7 @@ class Buy extends Component {
     this.setState({ step: 2.2 });
   };
 
-  handleChange = (event) => {
+  handleChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
@@ -71,45 +71,52 @@ class Buy extends Component {
     const { step, manualTransferData } = this.state;
     const { iban } = this.props;
     return (
-      <div className='wrapper'>
-        <div className='buy paper'>
-          {step > 0 && step !== 2.1 && <BackButton onClick={this.previousStep} />}
-          <div className='buy__content'>
-            {step === 0 &&
-            <BuyTokens
-              handleChange={this.handleChange}
-              amount={this.state.amount}
-              symbol={this.state.symbol}
-              nextStep={this.nextStep}
-            />}
-            {step === 1 &&
-            <PaymentMethod
-              next={this.nextStep}
-              handleManualTransferClick={this.handleManualTransferClick}
-              handleAutoTransferClick={this.handleAutoTransferClick}
-            />}
-            {step === 2.1 &&
-            <InitiateManualPayment
-              next={this.nextStep}
-              handleOrderSubmit={this.handleOrderSubmit}
-              transferData={manualTransferData}
-            />}
-            {step === 2.2 &&
-            <InitiateAutoPayment
-              next={this.nextStep}
-            />}
+      <div className="wrapper">
+        <div className="buy paper">
+          {step > 0 && step !== 2.1 && (
+            <BackButton onClick={this.previousStep} />
+          )}
+          <div className="buy__content">
+            {step === 0 && (
+              <BuyTokens
+                handleChange={this.handleChange}
+                amount={this.state.amount}
+                symbol={this.state.symbol}
+                nextStep={this.nextStep}
+              />
+            )}
+            {step === 1 && (
+              <PaymentMethod
+                next={this.nextStep}
+                handleManualTransferClick={this.handleManualTransferClick}
+                handleAutoTransferClick={this.handleAutoTransferClick}
+              />
+            )}
+            {step === 2.1 && (
+              <InitiateManualPayment
+                next={this.nextStep}
+                handleOrderSubmit={this.handleOrderSubmit}
+                transferData={manualTransferData}
+              />
+            )}
+            {step === 2.2 && <InitiateAutoPayment next={this.nextStep} />}
           </div>
-          <div className='buy__footer'>
-            {(step < 2) &&
-            <span style={{ fontSize: '1.2rem' }}>
-              Buying cash36 Tokens is as simple as a bank transfer. First, choose amount and type of Token you wish to buy.
-              <br />
-              After that you will receive the transfer instructions. Once we receive the amount, the tokens will be credited to your account.
-            </span>}
-            {step > 2 &&
-            <span style={{ fontSize: '1.6rem' }}>
-              Please make sure your payment will be triggered from your registered bank account{iban ? `: IBAN ${iban}` : '.'}
-            </span>}
+          <div className="buy__footer">
+            {step < 2 && (
+              <span style={{ fontSize: '1.2rem' }}>
+                Buying cash36 Tokens is as simple as a bank transfer. First,
+                choose amount and type of Token you wish to buy.
+                <br />
+                After that you will receive the transfer instructions. Once we
+                receive the amount, the tokens will be credited to your account.
+              </span>
+            )}
+            {step > 2 && (
+              <span style={{ fontSize: '1.6rem' }}>
+                Please make sure your payment will be triggered from your
+                registered bank account{iban ? `: IBAN ${iban}` : '.'}
+              </span>
+            )}
           </div>
         </div>
       </div>
@@ -122,4 +129,7 @@ const mapStateToProps = ({ auth: { user } }) => {
   else return { iban: '' };
 };
 
-export default connect(mapStateToProps, { getTokens })(Buy);
+export default connect(
+  mapStateToProps,
+  { getTokens }
+)(Buy);

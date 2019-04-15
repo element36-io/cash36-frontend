@@ -27,7 +27,7 @@ export const SelectInput = ({ classes, name, label, value, onChange, countryData
       IconComponent: KeyboardArrowDownIcon
     }}
   >
-    <MenuItem value='' disabled>
+    <MenuItem value="" disabled>
       <div className={classes.placeholder}>
         <span className={classes.placeholderIcon}>?</span>
         <span className={classes.placeholderText}>Select your {name}</span>

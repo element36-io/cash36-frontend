@@ -24,23 +24,23 @@ class HeaderMenu extends Component {
     const { open } = this.state;
 
     return (
-      <div className='header__menu'>
-        <span className='header__menu__image'>
+      <div className="header__menu">
+        <span className="header__menu__image">
           {
             avatarUri
               ? <img src={avatarUri} alt={name} />
-              : <i className='fas fa-user' />
+              : <i className="fas fa-user" />
           }
         </span>
         <ClickAwayListener onClickAway={this.closeMenu}>
-          <span className='header__menu__anchor'>
+          <span className="header__menu__anchor">
             <MenuIcon
               onClick={this.toggleMenu}
-              className='header__menu__icon'
+              className="header__menu__icon"
             />
             <div className={`paper header__menu__content${open ? ' header__menu__content--active' : ''}`}>
               <MenuItem>
-                <Link to='/settings' onClick={this.closeMenu}>
+                <Link to="/settings" onClick={this.closeMenu}>
                     Settings
                 </Link>
               </MenuItem>

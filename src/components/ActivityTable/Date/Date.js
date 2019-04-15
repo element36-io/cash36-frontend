@@ -5,11 +5,11 @@ import { formatDate } from '../../../helpers/dates.helpers';
 import './Date.scss';
 
 const Date = ({ date }) => (
-  <div className='activity-table-date'>
-    <div color='textPrimary'>
+  <div className="activity-table-date">
+    <div color="textPrimary">
       {formatDate(date, 'MMM')}
     </div>
-    <div color='textPrimary'>
+    <div color="textPrimary">
       {formatDate(date, 'DD')}
     </div>
   </div>

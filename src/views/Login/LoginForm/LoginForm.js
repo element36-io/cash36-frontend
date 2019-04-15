@@ -42,24 +42,24 @@ class LoginForm extends Component {
     const firstName = uportCreds.name.split(' ')[0];
 
     return (
-      <form className='login__form' onSubmit={this.handleFormSubmit}>
+      <form className="login__form" onSubmit={this.handleFormSubmit}>
         <h2>Welcome</h2>
         <p>
           Welcome back, {firstName}<br />
           Please, enter your password
         </p>
-        <div className='login__field-wrapper'>
+        <div className="login__field-wrapper">
           <LoginUsername networkAddress={uportCreds.networkAddress} />
-          <LoginField name='password' value={password} changeHandler={this.handleInputChange} label='Password' />
+          <LoginField name="password" value={password} changeHandler={this.handleInputChange} label="Password" />
         </div>
-        {error && <p className='login__form__error'>{error}</p>}
+        {error && <p className="login__form__error">{error}</p>}
         <StepButton
-          variant='raised'
-          color='primary'
-          type='submit'
-          size='large'
+          variant="raised"
+          color="primary"
+          type="submit"
+          size="large"
           fullWidth
-          text='Log in'
+          text="Log in"
           onClick={this.handleFormSubmit}
           disabled={!password || isSubmitting}
         />

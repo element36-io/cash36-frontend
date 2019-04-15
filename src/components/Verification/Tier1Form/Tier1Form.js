@@ -138,24 +138,24 @@ export class Tier1Form extends Component {
       const { firstName, lastName, dateOfBirth, city, country, nationality, street, streetNr, zip, iban, bankLine1, bankLine2, accountNr, email, errorMessage } = this.state;
 
       return (
-        <form className='verification-form__tier1' onSubmit={this.handleFormSubmit} noValidate>
-          <CloseIcon onClick={close} className='verification-form__close' />
-          <VerificationHeader title='Tier 1 Verification'
-            subtitle='Please, enter your personal information so you can remove certain limits from your account' />
-          <h3 className='verification-form__heading'>Personal Information</h3>
-          <div className='verification-form__content'>
+        <form className="verification-form__tier1" onSubmit={this.handleFormSubmit} noValidate>
+          <CloseIcon onClick={close} className="verification-form__close" />
+          <VerificationHeader title="Tier 1 Verification"
+            subtitle="Please, enter your personal information so you can remove certain limits from your account" />
+          <h3 className="verification-form__heading">Personal Information</h3>
+          <div className="verification-form__content">
             <TextInput
-              name='firstName'
+              name="firstName"
               value={firstName}
-              label='First Name'
-              placeholder='First Name'
+              label="First Name"
+              placeholder="First Name"
               onChange={this.handleTextChange}
             />
             <TextInput
-              name='lastName'
+              name="lastName"
               value={lastName}
-              label='Last Name'
-              placeholder='Last Name'
+              label="Last Name"
+              placeholder="Last Name"
               onChange={this.handleTextChange}
             />
             <DatePicker
@@ -163,103 +163,103 @@ export class Tier1Form extends Component {
               onChange={this.handleDateChange}
             />
             <TextInput
-              name='email'
+              name="email"
               value={email}
-              label='Email'
-              type='email'
-              placeholder='Enter Your Email'
+              label="Email"
+              type="email"
+              placeholder="Enter Your Email"
               onChange={this.handleTextChange}
             />
             <TextInput
-              name='street'
+              name="street"
               value={street}
-              label='Street'
-              placeholder='Enter Your Address'
+              label="Street"
+              placeholder="Enter Your Address"
               onChange={this.handleTextChange}
             />
             <TextInput
-              name='streetNr'
+              name="streetNr"
               value={streetNr}
-              label='Street Number'
-              placeholder='Enter Your Address'
+              label="Street Number"
+              placeholder="Enter Your Address"
               onChange={this.handleTextChange}
             />
             <TextInput
-              name='zip'
+              name="zip"
               value={zip}
-              label='ZIP Code'
-              placeholder='00000'
+              label="ZIP Code"
+              placeholder="00000"
               onChange={this.handleTextChange}
             />
             <TextInput
-              name='city'
+              name="city"
               value={city}
-              label='Town/City'
-              placeholder='Enter Your City'
+              label="Town/City"
+              placeholder="Enter Your City"
               onChange={this.handleTextChange}
             />
             <SelectInput
-              name='country'
-              label='Country of Residence'
+              name="country"
+              label="Country of Residence"
               value={country}
               countryData={countries}
               onChange={this.handleTextChange}
             />
             <SelectInput
-              name='nationality'
-              label='Nationality'
+              name="nationality"
+              label="Nationality"
               value={nationality}
               countryData={nationalities}
               onChange={this.handleTextChange}
             />
           </div>
-          <h3 className='verification-form__heading'>Bank Account</h3>
-          <div className='verification-form__content'>
+          <h3 className="verification-form__heading">Bank Account</h3>
+          <div className="verification-form__content">
             <TextInput
-              name='iban'
+              name="iban"
               value={iban}
-              label='IBAN'
-              placeholder='Enter Your IBAN'
+              label="IBAN"
+              placeholder="Enter Your IBAN"
               onChange={this.handleTextChange}
             />
             <TextInput
-              name='bankLine1'
+              name="bankLine1"
               value={bankLine1}
-              label='Bank Address Line 1'
-              placeholder='Enter Bank Address Line 1'
+              label="Bank Address Line 1"
+              placeholder="Enter Bank Address Line 1"
               onChange={this.handleTextChange}
             />
             <TextInput
-              name='accountNr'
+              name="accountNr"
               value={accountNr}
-              label='Account Number'
-              placeholder='Enter Your Account Number'
+              label="Account Number"
+              placeholder="Enter Your Account Number"
               onChange={this.handleTextChange}
             />
             <TextInput
-              name='bankLine2'
+              name="bankLine2"
               value={bankLine2}
-              label='Bank Address Line 2'
-              placeholder='Enter Bank Address Line 2'
+              label="Bank Address Line 2"
+              placeholder="Enter Bank Address Line 2"
               onChange={this.handleTextChange}
             />
           </div>
           <VerificationActions close={close} buttonCallback={this.handleFormSubmit}
-            buttonText='Submit & Continue' />
-          {errorMessage && <p className='verification-form__tier1--error'>{errorMessage}</p>}
+            buttonText="Submit & Continue" />
+          {errorMessage && <p className="verification-form__tier1--error">{errorMessage}</p>}
         </form>
       );
     };
 
     renderProgress = () => {
-      return <VerificationProgress tier='Tier 1' />;
+      return <VerificationProgress tier="Tier 1" />;
     };
 
     renderSuccess = () => {
       const { close, nextStep } = this.props;
       return (
         <Fragment>
-          <CloseIcon onClick={close} className='verification-form__close' />
+          <CloseIcon onClick={close} className="verification-form__close" />
           <VerificationSuccess close={close} next={nextStep} />
         </Fragment>
       );

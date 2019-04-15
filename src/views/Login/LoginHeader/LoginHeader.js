@@ -9,7 +9,7 @@ const LoginHeader = props => {
   const { step } = props;
 
   return (
-    <div className='login__header'>
+    <div className="login__header">
       <Responsive>
         <Logo />
       </Responsive>

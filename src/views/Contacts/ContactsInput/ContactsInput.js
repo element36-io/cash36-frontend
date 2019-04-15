@@ -6,8 +6,8 @@ const ContactsInput = props => {
   const { label, placeholder, value, name, changeHandler } = props;
 
   return (
-    <div className='contact-input-wrapper'>
-      <div className='contact-input'>
+    <div className="contact-input-wrapper">
+      <div className="contact-input">
         <label>{label}</label>
         <input name={name} value={value} onChange={changeHandler} placeholder={placeholder} />
         <span />

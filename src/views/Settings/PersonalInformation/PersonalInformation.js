@@ -198,18 +198,18 @@ class PersonalInformation extends Component {
     const { user: { kycLevel } } = this.props;
 
     return (
-      <div className='personal-information'>
+      <div className="personal-information">
         <h2>Personal Information</h2>
-        <form className='paper' onSubmit={this.handleFormSubmit}>
+        <form className="paper" onSubmit={this.handleFormSubmit}>
           <div>
             <h3>{this.renderFormHeader()}</h3>
             {kycLevel === 'Tier_1' &&
-              <button type='button' onClick={this.toggleEdit}>
-                <img src={editIcon} alt='' />
+              <button type="button" onClick={this.toggleEdit}>
+                <img src={editIcon} alt="" />
               </button>
             }
           </div>
-          <div className='personal-information__content'>
+          <div className="personal-information__content">
             <div>
               {Object.keys(userInfo).map(field => this.renderField('userInfo', field))}
             </div>
@@ -219,10 +219,10 @@ class PersonalInformation extends Component {
             </div>
           </div>
           {!formDisabled &&
-          <DefaultButton fullWidth type='submit' className='personal-information__submit-button'>
+          <DefaultButton fullWidth type="submit" className="personal-information__submit-button">
             Submit
           </DefaultButton>}
-          <span className='personal-information__error-message'>{errorMessage}</span>
+          <span className="personal-information__error-message">{errorMessage}</span>
         </form>
       </div>
     );

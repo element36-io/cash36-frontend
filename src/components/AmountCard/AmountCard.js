@@ -10,7 +10,7 @@ const AmountCard = ({ amount, symbol }) => (
     <TokenIcon token={symbol} />
     <div>
       -{formatAmount(amount)}
-      <span className='amount-card__symbol'>{symbol}</span>
+      <span className="amount-card__symbol">{symbol}</span>
     </div>
   </div>
 );

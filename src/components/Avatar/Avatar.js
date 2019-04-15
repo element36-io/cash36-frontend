@@ -7,7 +7,7 @@ const Avatar = props => {
 
   return (
     <div className={`avatar ${cssClass || ''}`}>
-      {avatarUrl ? <img src={avatarUrl} alt={alt} /> : <i className='fas fa-user' />}
+      {avatarUrl ? <img src={avatarUrl} alt={alt} /> : <i className="fas fa-user" />}
     </div>
   );
 };

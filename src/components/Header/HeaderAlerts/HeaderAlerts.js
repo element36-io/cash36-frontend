@@ -38,9 +38,9 @@ class HeaderAlerts extends Component {
 
     return (
       <ClickAwayListener onClickAway={this.closeNotifications}>
-        <div className='header__alerts'>
-          <span className='header__alerts__icon' onClick={this.toggleNotification} />
-          {!!badgeCount && <span className='header__alerts__counter'>{badgeCount}</span>}
+        <div className="header__alerts">
+          <span className="header__alerts__icon" onClick={this.toggleNotification} />
+          {!!badgeCount && <span className="header__alerts__counter">{badgeCount}</span>}
           {notifications && !!notifications.length && (
             <div className={`header__alerts__content ${open ? 'header__alerts--active' : ''}`}>
               {notifications && notifications.map(n => (

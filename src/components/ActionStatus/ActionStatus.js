@@ -21,7 +21,7 @@ const ActionStatus = props => {
   }
 
   return (
-    <div className='action-status'>
+    <div className="action-status">
       <div className={`action-status__icon-wrapper action-status__icon-wrapper--${type}`}>
         {icon}
       </div>

@@ -52,28 +52,28 @@ class FileInput extends PureComponent {
     const { title } = this.props;
 
     return (
-      <div className='verification-form__file-input__container'>
+      <div className="verification-form__file-input__container">
         <div className={`verification-form__file-input ${name ? 'active' : ''} ${error ? 'error' : ''}`}>
-          <div className='verification-form__file-input__header'>
-            <i className='fas fa-file' />
+          <div className="verification-form__file-input__header">
+            <i className="fas fa-file" />
             {title}
           </div>
-          <div className='verification-form__file-input__body'>
+          <div className="verification-form__file-input__body">
             {
               !name
                 ? 'Upload a document or an image'
                 : <Fragment>
-                  <DeleteIcon onClick={this.removeItem} className='x' /> <span>{name}</span>
+                  <DeleteIcon onClick={this.removeItem} className="x" /> <span>{name}</span>
                 </Fragment>
             }
           </div>
           <label>
-            <i className='fas fa-upload' />
-            <input type='file' ref={this.fileInput} onChange={this.handleChange} />
+            <i className="fas fa-upload" />
+            <input type="file" ref={this.fileInput} onChange={this.handleChange} />
           </label>
           {
             name && (
-              <div className='verification-form__file-input__progress'>
+              <div className="verification-form__file-input__progress">
                 <span style={{ width: `${progress}%` }} />
               </div>
             )

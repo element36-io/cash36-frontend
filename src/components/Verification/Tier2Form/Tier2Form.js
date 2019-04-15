@@ -85,13 +85,13 @@ class Tier2Form extends Component {
       const disabled = Object.values(types).some(t => !t.file);
 
       return (
-        <div className='verification-form__tier2'>
-          <VerificationHeader title='Tier 2 Verification'
-            subtitle='Please, upload the following information to be able to use most of your account' />
+        <div className="verification-form__tier2">
+          <VerificationHeader title="Tier 2 Verification"
+            subtitle="Please, upload the following information to be able to use most of your account" />
           <h3>
               Please, upload the following
           </h3>
-          <div className='verification-form__file-wrapper'>
+          <div className="verification-form__file-wrapper">
             {Object.keys(types).map(type => (
               <FileInput changeCallback={this.changeCallback} removeCallback={this.removeItem}
                 title={types[type].title}

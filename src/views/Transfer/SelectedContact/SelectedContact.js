@@ -8,7 +8,7 @@ const SelectedContact = props => {
 
   return (
     <div className={`transfer__selected-contact`}>
-      <Avatar avatarUrl={avatarUrl} cssClass='transfer__selected-contact__avatar' />
+      <Avatar avatarUrl={avatarUrl} cssClass="transfer__selected-contact__avatar" />
       <span>{contactName}</span>
     </div>
   );

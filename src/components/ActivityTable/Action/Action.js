@@ -13,7 +13,7 @@ const renderActionName = type => {
 
 const Action = ({ type, targetAddress }) => {
   return (
-    <div className='activity-table-action'>
+    <div className="activity-table-action">
       <div>{renderActionName(type)}</div>
       <span><TruncateString text={targetAddress} /></span>
     </div>

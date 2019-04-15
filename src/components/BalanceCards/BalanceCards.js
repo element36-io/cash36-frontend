@@ -12,7 +12,7 @@ class BalanceCards extends Component {
   render () {
     const { tokens } = this.props;
     return (
-      <div className='balance-cards'>
+      <div className="balance-cards">
         {tokens.map(({ symbol, name, balance }) =>
           <BalanceCard key={name} name={name} symbol={symbol} balance={balance} />)}
       </div>

@@ -125,9 +125,9 @@ class Transfer extends Component {
   render () {
     const { step } = this.state;
     return (
-      <div className='wrapper'>
-        <div className='transfer paper'>
-          <div className='transfer__content'>
+      <div className="wrapper">
+        <div className="transfer paper">
+          <div className="transfer__content">
             {step === 1 && <BackButton onClick={this.previousStep} />}
             {this.renderStep()}
           </div>

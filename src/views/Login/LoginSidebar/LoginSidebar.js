@@ -3,7 +3,7 @@ import LoginNav from '../LoginNav';
 import './LoginSidebar.scss';
 
 const LoginSidebar = () => (
-  <div className='login__sidebar'>
+  <div className="login__sidebar">
     <LoginNav />
   </div>
 );

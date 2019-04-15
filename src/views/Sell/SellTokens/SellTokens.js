@@ -9,7 +9,7 @@ const SellTokens = props => {
   const { handleChange, amount, symbol, nextStep, token } = props;
 
   return (
-    <div className='sell__sell-tokens'>
+    <div className="sell__sell-tokens">
       <h2>Sell Tokens</h2>
       <ChooseAmountForm handleChange={handleChange} symbol={symbol} amount={amount} />
       {token
@@ -17,7 +17,7 @@ const SellTokens = props => {
         : <AvailableBalance balance={0} symbol={symbol} />}
       <p>Exchange Fee (2%) <span>{amount ? `${-(amount * 0.02).toFixed(2)}` : 0}</span></p>
       <p>You Will Receive <span>{amount ? (amount * 0.98).toFixed(2) : 0}</span></p>
-      <StepButton text='Next Step' onClick={nextStep} disabled={!amount.length} />
+      <StepButton text="Next Step" onClick={nextStep} disabled={!amount.length} />
     </div>
   );
 };

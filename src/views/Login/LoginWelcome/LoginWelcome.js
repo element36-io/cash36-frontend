@@ -23,25 +23,25 @@ const LoginWelcome = props => {
   const { uPortUri } = props;
 
   return (
-    <div className='login__welcome'>
+    <div className="login__welcome">
       <Responsive isMobile>
-        <img src={backgroundImage} alt='element36' />
+        <img src={backgroundImage} alt="element36" />
       </Responsive>
       <h2>Welcome</h2>
       <p>
         Welcome to <strong>element36!</strong> <br />
         <span>
-            In order to use our website, please log in with <img src={uportLogo} alt='UPORT' />
+            In order to use our website, please log in with <img src={uportLogo} alt="UPORT" />
         </span>
       </p>
-      <div className='login__qrcode'>
+      <div className="login__qrcode">
         {uPortUri && <QRCode value={uPortUri} size={250} />}
       </div>
       <p>
         Need a uPort Account?
       </p>
-      <div className='login__apps'>
-        {appStoreUrl.map(app => <a href={app.url} target='_blank' rel='noopener noreferrer' key={app.alt}><img
+      <div className="login__apps">
+        {appStoreUrl.map(app => <a href={app.url} target="_blank" rel="noopener noreferrer" key={app.alt}><img
           src={app.icon} alt={app.alt} /></a>)}
       </div>
     </div>

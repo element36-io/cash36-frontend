@@ -7,8 +7,8 @@ const SellError = props => {
   const { message } = props;
 
   return (
-    <div className='sell__sell-status'>
-      <ActionStatus type='error' title='Selling unsuccessful' />
+    <div className="sell__sell-status">
+      <ActionStatus type="error" title="Selling unsuccessful" />
       <p>
         {message}
       </p>

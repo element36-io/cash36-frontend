@@ -4,13 +4,13 @@ import DefaultButton from '../Buttons/DefaultButton';
 import './TransactionFooter.scss';
 
 const TransactionFooter = () => (
-  <div className='transaction-footer'>
-    <Link to='/history'>
+  <div className="transaction-footer">
+    <Link to="/history">
       <DefaultButton fullWidth>
           Go to account history
       </DefaultButton>
     </Link>
-    <Link to='/'>
+    <Link to="/">
         Back to homepage
     </Link>
   </div>

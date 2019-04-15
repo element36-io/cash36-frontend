@@ -11,7 +11,7 @@ export const TextInput = ({ classes, name, label, onChange, placeholder, value, 
     type={type}
     onChange={onChange}
     placeholder={placeholder}
-    autoComplete='off'
+    autoComplete="off"
     value={value}
     fullWidth
     className={classes.root}

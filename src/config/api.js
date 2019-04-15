@@ -36,7 +36,7 @@ const getRefreshedToken = async (refreshToken) => {
   try {
     const response = await axios.post(`${API_ROOT}/oauth/token`, config.data, {
       headers: config.headers
-    })
+    });
 
     const token = response.data;
 

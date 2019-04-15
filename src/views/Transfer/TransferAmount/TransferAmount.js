@@ -36,10 +36,10 @@ class TransferAmount extends Component {
     const selectedToken = tokens.filter(token => token.symbol === symbol)[0];
 
     return (
-      <div className='transfer-amount'>
-        <div className='transfer-amount__header'>
+      <div className="transfer-amount">
+        <div className="transfer-amount__header">
           <h4>Sending to</h4>
-          <Avatar avatarUrl={target.avatarUrl} cssClass='transfer-amount__avatar' />
+          <Avatar avatarUrl={target.avatarUrl} cssClass="transfer-amount__avatar" />
           {target.contactName && <span>{target.contactName}</span>}
           <TruncateString text={target.contactAddress} />
         </div>

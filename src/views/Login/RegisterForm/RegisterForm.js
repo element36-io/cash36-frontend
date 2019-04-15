@@ -36,23 +36,23 @@ class RegisterForm extends Component {
     const { uportCreds } = this.props;
     const { error, password, confirmPassword, isSubmitting } = this.state;
     return (
-      <form className='login__form' onSubmit={this.handleFormSubmit}>
+      <form className="login__form" onSubmit={this.handleFormSubmit}>
         <h2>Welcome</h2>
         <p>Welcome aboard, <br /> please, choose a password</p>
-        <div className='login__field-wrapper'>
+        <div className="login__field-wrapper">
           <LoginUsername networkAddress={uportCreds.networkAddress} />
-          <LoginField name='password' value={password} changeHandler={this.handleInputChange} label='Password' />
-          <LoginField name='confirmPassword' value={confirmPassword} changeHandler={this.handleInputChange}
-            label='Confirm Password' />
+          <LoginField name="password" value={password} changeHandler={this.handleInputChange} label="Password" />
+          <LoginField name="confirmPassword" value={confirmPassword} changeHandler={this.handleInputChange}
+            label="Confirm Password" />
         </div>
-        {error && <p className='login__form__error'>{error}</p>}
+        {error && <p className="login__form__error">{error}</p>}
         <StepButton
-          variant='raised'
-          color='primary'
-          type='submit'
-          size='large'
+          variant="raised"
+          color="primary"
+          type="submit"
+          size="large"
           fullWidth
-          text='Register'
+          text="Register"
           onClick={this.handleFormSubmit}
           disabled={!password.length || !confirmPassword.length || isSubmitting || password !== confirmPassword}
         />

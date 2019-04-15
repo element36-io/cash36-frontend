@@ -6,8 +6,8 @@ const SearchBox = props => {
   const { changeHandler, value } = props;
 
   return (
-    <div className='contacts__search-box'>
-      <input type='text' name='search' placeholder='Search Contacts' value={value} onChange={changeHandler} />
+    <div className="contacts__search-box">
+      <input type="text" name="search" placeholder="Search Contacts" value={value} onChange={changeHandler} />
     </div>
   );
 };
