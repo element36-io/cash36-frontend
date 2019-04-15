@@ -11,27 +11,27 @@ class PaymentMethod extends Component {
   render () {
     const { handleManualTransferClick, handleAutoTransferClick } = this.props;
     return (
-      <div className='payment-method'>
+      <div className="payment-method">
         <Responsive isMobile>
           <h2>Payment method</h2>
         </Responsive>
         <Responsive>
           <h2>Select your payment method</h2>
         </Responsive>
-        <div className='payment-method__buttons'>
+        <div className="payment-method__buttons">
           <DefaultButton onClick={handleManualTransferClick}>
-            <span className='payment-method__buttons--heading'>Manual Bank Transfer</span>
-            <span className='payment-method__buttons--icon'><img src={ManualTransferIcon} alt='' /></span>
+            <span className="payment-method__buttons--heading">Manual Bank Transfer</span>
+            <span className="payment-method__buttons--icon"><img src={ManualTransferIcon} alt="" /></span>
           </DefaultButton>
-          <span className='payment-method__separator'>Or</span>
+          <span className="payment-method__separator">Or</span>
           <DefaultButton onClick={handleAutoTransferClick}>
-            <span className='payment-method__buttons--heading'>Automated Bank Transfer</span>
-            <span className='payment-method__buttons--icon'>
+            <span className="payment-method__buttons--heading">Automated Bank Transfer</span>
+            <span className="payment-method__buttons--icon">
               <Responsive>
-                <QRCode value='#' size={72} />
+                <QRCode value="#" size={72} />
               </Responsive>
               <Responsive isMobile>
-                <QRCode value='#' size={32} />
+                <QRCode value="#" size={32} />
               </Responsive>
             </span>
           </DefaultButton>

@@ -6,10 +6,10 @@ const LoginField = props => {
   const { value, changeHandler, label, name } = props;
 
   return (
-    <div className='login__field'>
+    <div className="login__field">
       <label>
         {label && <span>{label}</span>}
-        <input type='password' name={name} value={value} onChange={changeHandler} />
+        <input type="password" name={name} value={value} onChange={changeHandler} />
         <span />
       </label>
     </div>

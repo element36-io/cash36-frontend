@@ -6,7 +6,7 @@ const VerificationHeader = props => {
   const { title, subtitle } = props;
 
   return (
-    <div className='verification-header'>
+    <div className="verification-header">
       <h2>{title}</h2>
       <p>{subtitle}</p>
     </div>

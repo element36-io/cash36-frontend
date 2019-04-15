@@ -17,7 +17,7 @@ class History extends Component {
     const { userActivity, historyFiltered, fetchingFilters } = this.props;
 
     if (userActivity.length === 0 && historyFiltered === false) {
-      return <div className='paper history__no-activity'>
+      return <div className="paper history__no-activity">
         <h3>No Activity History</h3>
         <p>Keep track of your most recent transactions here when you sell, buy or transfer cash36
                 currencies.</p>
@@ -30,16 +30,16 @@ class History extends Component {
           fetchingFilters={fetchingFilters}
           historyFiltered={historyFiltered}
         />
-        <div className='history__filter-loader-wrapper'>
-          <div className='history__filter-no-results paper' style={fetchingFilters ? { opacity: '.3' } : null}>
+        <div className="history__filter-loader-wrapper">
+          <div className="history__filter-no-results paper" style={fetchingFilters ? { opacity: '.3' } : null}>
             <p>No results for this selected filter.</p>
           </div>
           {fetchingFilters &&
           <div
-            className='history__filter-loader'
+            className="history__filter-loader"
           >
             <CircularProgress
-              color='primary'
+              color="primary"
               size={65}
             />
           </div>}
@@ -52,16 +52,16 @@ class History extends Component {
           fetchingFilters={fetchingFilters}
           historyFiltered={historyFiltered}
         />
-        <div className='history__filter-loader-wrapper'>
+        <div className="history__filter-loader-wrapper">
           <div style={fetchingFilters ? { opacity: '.3' } : null}>
             <ActivityTable userActivity={userActivity} />
           </div>
           {fetchingFilters &&
             <div
-              className='history__filter-loader'
+              className="history__filter-loader"
             >
               <CircularProgress
-                color='primary'
+                color="primary"
                 size={75}
               />
             </div>}
@@ -73,13 +73,13 @@ class History extends Component {
   render () {
     const { userActivity } = this.props;
     return (
-      <div className='wrapper'>
-        <div className='history'>
-          <div className='history__content'>
+      <div className="wrapper">
+        <div className="history">
+          <div className="history__content">
             {userActivity === undefined
               ? (
-                <div className='history__loader'>
-                  <CircularProgress color='primary' size={75} />
+                <div className="history__loader">
+                  <CircularProgress color="primary" size={75} />
                 </div>
               )
               : this.renderHistory()

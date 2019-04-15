@@ -9,7 +9,7 @@ const ContactResponse = props => {
   const { onClick, title, btnText, type } = props;
 
   return (
-    <div className='contact-form__response'>
+    <div className="contact-form__response">
       <ActionStatus type={type} title={title} />
       <BaseButton onClick={onClick}>
         {btnText}

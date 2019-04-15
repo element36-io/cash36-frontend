@@ -9,7 +9,7 @@ const ArrowBtn = props => {
 
   return (
     <span className={`arrow-btn ${alt ? 'arrow-btn--alt' : ''}`} onClick={onClick}>
-      <Arrow className='arrow-btn__icon' />
+      <Arrow className="arrow-btn__icon" />
       <Ink duration={500} />
     </span>
   );

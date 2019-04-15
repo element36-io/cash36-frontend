@@ -15,7 +15,7 @@ const DatePicker = ({ classes, dateOfBirth, onChange, disabled = false, editable
       format={'DD/MM/YYYY'}
       value={dateOfBirth ? moment(dateOfBirth, 'DD/MM/YYYY') : null}
       onChange={onChange}
-      label='Date of Birth'
+      label="Date of Birth"
       disableFuture
       fullWidth
       disabled={disabled}

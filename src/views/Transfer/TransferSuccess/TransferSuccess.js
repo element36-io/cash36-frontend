@@ -12,8 +12,8 @@ const TransferSuccess = props => {
   const sentTo = contactName ? <span>{contactName}</span> : <TruncateString text={contactAddress} />;
 
   return (
-    <div className='transfer__transfer-success'>
-      <ActionStatus type='success' title='Transfer Successful' />
+    <div className="transfer__transfer-success">
+      <ActionStatus type="success" title="Transfer Successful" />
       <AmountCard amount={amount} symbol={symbol} />
       <p>
           You've succesfuly transfered {`${amount} ${symbol}`} to {sentTo}

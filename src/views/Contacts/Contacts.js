@@ -56,16 +56,16 @@ class Contacts extends Component {
     const { search, showForm } = this.state;
 
     return (
-      <div className='wrapper contacts'>
+      <div className="wrapper contacts">
         <ContactFormContainer closeForm={this.closeForm} submitCallback={addContact}
           isActive={showForm} contactsList={contactsList} />
-        <div className='contacts__actions'>
+        <div className="contacts__actions">
           <SearchBox changeHandler={this.searchChangeHandler} value={search} />
           <AddContact clickHandler={this.showForm} />
         </div>
         {fetching
-          ? <div className='contacts__loader'><CircularProgress color='primary' size={75} /></div>
-          : <div className='contacts__list'>{this.renderList()}</div>
+          ? <div className="contacts__loader"><CircularProgress color="primary" size={75} /></div>
+          : <div className="contacts__list">{this.renderList()}</div>
         }
       </div>
     );

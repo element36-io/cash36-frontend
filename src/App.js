@@ -11,8 +11,8 @@ class App extends Component {
       <MuiThemeProvider theme={theme}>
         <Router>
           <Switch>
-            <Route exact path='/login' component={Login} />
-            <Route path='' component={Wallet} />
+            <Route exact path="/login" component={Login} />
+            <Route path="" component={Wallet} />
           </Switch>
         </Router>
       </MuiThemeProvider>

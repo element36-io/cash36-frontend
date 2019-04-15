@@ -8,7 +8,7 @@ const VerificationActions = props => {
   const { close, buttonCallback, buttonText, isSubmitting, disabled } = props;
 
   return (
-    <div className='verification-form__actions'>
+    <div className="verification-form__actions">
       <DefaultButton
         onClick={close}
       >
@@ -18,7 +18,7 @@ const VerificationActions = props => {
         onClick={buttonCallback}
         disabled={disabled || isSubmitting}
       >
-        {isSubmitting ? <CircularProgress color='secondary' size={20} /> : buttonText}
+        {isSubmitting ? <CircularProgress color="secondary" size={20} /> : buttonText}
       </DefaultButton>
     </div>
   );

@@ -12,20 +12,20 @@ const HeaderMobileDropdown = props => {
   return (
     <div className={`header__mobile-dropdown ${isActive ? 'active' : ''}`}>
       <UserProfile alt clickCallback={openVerification} />
-      <ul className='paper'>
+      <ul className="paper">
         {navLinks.map(link => <li key={link.label}>
-          <NavLink exact activeClassName='selected'
+          <NavLink exact activeClassName="selected"
             to={link.url} onClick={clickCallback}>{link.label}
             <RightArrowIcon
-              className='header__mobile-dropdown__icon'
+              className="header__mobile-dropdown__icon"
             />
           </NavLink></li>
         )}
         <li>
-          <NavLink to='settings' onClick={clickCallback}>
+          <NavLink to="settings" onClick={clickCallback}>
                         Settings
             <RightArrowIcon
-              className='header__mobile-dropdown__icon'
+              className="header__mobile-dropdown__icon"
             />
           </NavLink>
         </li>
@@ -33,7 +33,7 @@ const HeaderMobileDropdown = props => {
           <span>
                         Logout
             <RightArrowIcon
-              className='header__mobile-dropdown__icon'
+              className="header__mobile-dropdown__icon"
             />
           </span>
         </li>

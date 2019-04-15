@@ -133,9 +133,9 @@ class HistoryFilters extends Component {
     const { startDate, endDate, filterByStatus, filters, mobileFiltersVisible } = this.state;
     const { fetchingFilters, historyFiltered } = this.props;
     return (
-      <div className='history__filters'>
+      <div className="history__filters">
         {historyFiltered && !fetchingFilters && <BaseButton
-          className='history__filters__reset-btn'
+          className="history__filters__reset-btn"
           onClick={this.resetFilters}
         >
         Reset all filters

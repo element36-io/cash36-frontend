@@ -7,12 +7,12 @@ import './StepButton.scss';
 
 const StepButton = ({ text, onClick, disabled }) => (
   <DefaultButton
-    variant='raised'
-    type='button'
-    size='large'
+    variant="raised"
+    type="button"
+    size="large"
     fullWidth
     disabled={disabled}
-    className='step-button'
+    className="step-button"
     onClick={onClick}
     style={disabled && { opacity: '0.5' }}
   >

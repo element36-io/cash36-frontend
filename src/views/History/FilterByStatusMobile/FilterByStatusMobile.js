@@ -8,9 +8,9 @@ import './FilterByStatusMobile.scss';
 const filters = ['All', 'Open', 'Completed', 'Processing', 'On Hold'];
 
 const FilterByStatusMobile = ({ filterByStatus, handleFilterByStatusChange, fetchingFilters }) => (
-  <div className='history__filter-by-status-mobile paper'>
+  <div className="history__filter-by-status-mobile paper">
     <TextField
-      name='filterByStatus'
+      name="filterByStatus"
       select
       value={filterByStatus}
       onChange={handleFilterByStatusChange}

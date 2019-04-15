@@ -114,9 +114,9 @@ class Web3ProviderNew extends React.Component {
 
     render () {
       if (this.state.loading) {
-        return <div className='loading-full'>Connecting to Ethereum node...</div>;
+        return <div className="loading-full">Connecting to Ethereum node...</div>;
       } else if (this.state.networkError) {
-        return <div className='error-full'>Error connecting to Ethereum node!</div>;
+        return <div className="error-full">Error connecting to Ethereum node!</div>;
       } else {
         return this.props.children;
       }

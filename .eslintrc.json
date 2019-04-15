@@ -4,34 +4,27 @@
   "env": {
     "browser": true
   },
-  "plugins": [
-    "react"
-  ],
+  "plugins": ["react", "react-hooks"],
   "globals": {
     "describe": true,
     "it": true,
     "expect": true,
     "beforeEach": true,
+    "afterEach": true,
     "jest": true
   },
   "rules": {
     "react/jsx-filename-extension": [
       2,
       {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
+        "extensions": [".js", ".jsx"]
       }
     ],
-    "react/forbid-prop-types": [
-      0
-    ],
-    "react/require-default-props": [
-      0
-    ],
-    "global-require": [
-      0
-    ]
+    "jsx-quotes": ["error", "prefer-double"],
+    "react/forbid-prop-types": [0],
+    "react/require-default-props": [0],
+    "react-hooks/rules-of-hooks": "error",
+    "global-require": [0],
+    "standard/computed-property-even-spacing": 0
   }
 }

@@ -7,8 +7,8 @@ const VerificationProgress = props => {
   const { tier, children } = props;
 
   return (
-    <div className='verification-form__progress'>
-      <ActionStatus type='progress' />
+    <div className="verification-form__progress">
+      <ActionStatus type="progress" />
       <h2>{tier} Verification - In Progress</h2>
       <h2>Verification in progress</h2>
       <p>

@@ -18,7 +18,16 @@ import './PersonalInformation.scss';
 class PersonalInformation extends Component {
   state = {
     userInfo: {
-      ..._.pick(this.props.user, ['firstName', 'lastName', 'dateOfBirth', 'email', 'street', 'streetNr', 'zip', 'city']),
+      ..._.pick(this.props.user, [
+        'firstName',
+        'lastName',
+        'dateOfBirth',
+        'email',
+        'street',
+        'streetNr',
+        'zip',
+        'city'
+      ]),
       nationality: this.props.user.nationality.code,
       country: this.props.user.country.code
     },
@@ -49,7 +58,16 @@ class PersonalInformation extends Component {
     if (!this.state.formDisabled) {
       this.setState({
         userInfo: {
-          ..._.pick(this.props.user, ['firstName', 'lastName', 'dateOfBirth', 'email', 'street', 'streetNr', 'zip', 'city']),
+          ..._.pick(this.props.user, [
+            'firstName',
+            'lastName',
+            'dateOfBirth',
+            'email',
+            'street',
+            'streetNr',
+            'zip',
+            'city'
+          ]),
           nationality: this.props.user.nationality.code,
           country: this.props.user.country.code
         },
@@ -70,7 +88,7 @@ class PersonalInformation extends Component {
         [name]: value
       }
     });
-  }
+  };
 
   bankInfoTextChange = evt => {
     const { name, value } = evt.target;
@@ -80,7 +98,7 @@ class PersonalInformation extends Component {
         [name]: value
       }
     });
-  }
+  };
 
   handleDateChange = date => {
     this.setState({
@@ -92,12 +110,12 @@ class PersonalInformation extends Component {
   };
 
   renderFormHeader = () => {
-    if (this.props.user.kycLevel === 'Tier_1') return 'Tier 1 Verification - Complete';
-    if (this.props.user.kycLevel === 'Tier_2') return 'Tier 2 Verification - Complete';
+    if (this.props.user.currentLevel === 'Tier_1') { return 'Tier 1 Verification - Complete'; }
+    if (this.props.user.currentLevel === 'Tier_2') { return 'Tier 2 Verification - Complete'; }
     return null;
   };
 
-  handleFormSubmit = async (evt) => {
+  handleFormSubmit = async evt => {
     evt.preventDefault();
 
     const payload = {
@@ -117,13 +135,16 @@ class PersonalInformation extends Component {
       iban: this.state.bankInfo.iban
     };
 
-    const isFormFilled = Object.values(payload).filter(value => value).length > 13;
+    const isFormFilled =
+      Object.values(payload).filter(value => value).length > 13;
     const isEmailValid = isEmail(payload.email);
     const isIbanValid = IBAN.isValid(payload.iban);
-    const userAge = (moment().year() - moment(payload.dateOfBirth).year());
+    const userAge = moment().year() - moment(payload.dateOfBirth).year();
 
     if (!isFormFilled) {
-      this.setState({ errorMessage: 'One or more fields are empty. Please recheck.' });
+      this.setState({
+        errorMessage: 'One or more fields are empty. Please recheck.'
+      });
       return;
     }
     if (userAge < 18) {
@@ -141,7 +162,7 @@ class PersonalInformation extends Component {
 
     try {
       // check if date has been changed TODO - handle this better
-      if (typeof (payload.dateOfBirth) === 'object') {
+      if (typeof payload.dateOfBirth === 'object') {
         payload.dateOfBirth = moment(payload.dateOfBirth).format('DD.MM.YYYY');
       }
       await API.post('/cash36/user/update-tier-1', payload);
@@ -162,78 +183,104 @@ class PersonalInformation extends Component {
 
     switch (filedName) {
       case 'dateOfBirth':
-        return <DatePicker
-          dateOfBirth={this.state[dataType][filedName]}
-          onChange={this.handleDateChange}
-          disabled={formDisabled}
-          editable
-          key={filedName}
-        />;
+        return (
+          <DatePicker
+            dateOfBirth={this.state[dataType][filedName]}
+            onChange={this.handleDateChange}
+            disabled={formDisabled}
+            editable
+            key={filedName}
+          />
+        );
       case 'country':
       case 'nationality':
-        return <EditableSelect
-          name={filedName}
-          label={this.labels[filedName]}
-          disabled={formDisabled}
-          value={this.state[dataType][filedName]}
-          countryData={filedName === 'nationality' ? nationalities : countries}
-          onChange={this[`${dataType}TextChange`]}
-          key={filedName}
-        />;
+        return (
+          <EditableSelect
+            name={filedName}
+            label={this.labels[filedName]}
+            disabled={formDisabled}
+            value={this.state[dataType][filedName]}
+            countryData={
+              filedName === 'nationality' ? nationalities : countries
+            }
+            onChange={this[`${dataType}TextChange`]}
+            key={filedName}
+          />
+        );
       default:
-        return <EditableInput
-          name={filedName}
-          label={this.labels[filedName]}
-          disabled={formDisabled}
-          value={this.state[dataType][filedName]}
-          onChange={this[`${dataType}TextChange`]}
-          key={filedName}
-          data={dataType}
-        />;
+        return (
+          <EditableInput
+            name={filedName}
+            label={this.labels[filedName]}
+            disabled={formDisabled}
+            value={this.state[dataType][filedName]}
+            onChange={this[`${dataType}TextChange`]}
+            key={filedName}
+            data={dataType}
+          />
+        );
     }
   };
 
   render () {
     const { formDisabled, userInfo, bankInfo, errorMessage } = this.state;
-    const { user: { kycLevel } } = this.props;
+    const {
+      user: { kycLevel }
+    } = this.props;
 
     return (
-      <div className='personal-information'>
+      <div className="personal-information">
         <h2>Personal Information</h2>
-        <form className='paper' onSubmit={this.handleFormSubmit}>
+        <form className="paper" onSubmit={this.handleFormSubmit}>
           <div>
             <h3>{this.renderFormHeader()}</h3>
-            {kycLevel === 'Tier_1' &&
-              <button type='button' onClick={this.toggleEdit}>
-                <img src={editIcon} alt='' />
+            {kycLevel === 'Tier_1' && (
+              <button type="button" onClick={this.toggleEdit}>
+                <img src={editIcon} alt="" />
               </button>
-            }
+            )}
           </div>
-          <div className='personal-information__content'>
+          <div className="personal-information__content">
             <div>
-              {Object.keys(userInfo).map(field => this.renderField('userInfo', field))}
+              {Object.keys(userInfo).map(field =>
+                this.renderField('userInfo', field)
+              )}
             </div>
             <h3>Bank Account</h3>
             <div>
-              {Object.keys(bankInfo).map(field => this.renderField('bankInfo', field))}
+              {Object.keys(bankInfo).map(field =>
+                this.renderField('bankInfo', field)
+              )}
             </div>
           </div>
-          {!formDisabled &&
-          <DefaultButton fullWidth type='submit' className='personal-information__submit-button'>
-            Submit
-          </DefaultButton>}
-          <span className='personal-information__error-message'>{errorMessage}</span>
+          {!formDisabled && (
+            <DefaultButton
+              fullWidth
+              type="submit"
+              className="personal-information__submit-button"
+            >
+              Submit
+            </DefaultButton>
+          )}
+          <span className="personal-information__error-message">
+            {errorMessage}
+          </span>
         </form>
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ countries: { countries = [], nationalities = [] } }) => ({ countries, nationalities });
+const mapStateToProps = ({
+  countries: { countries = [], nationalities = [] }
+}) => ({ countries, nationalities });
 
 PersonalInformation.propTypes = {
   user: PropTypes.object.isRequired,
   getKyc: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, { getKyc })(PersonalInformation);
+export default connect(
+  mapStateToProps,
+  { getKyc }
+)(PersonalInformation);

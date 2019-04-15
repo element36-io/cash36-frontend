@@ -15,27 +15,27 @@ const tooltipText = `Once you've completed the payment, click the "Submit Order"
 
 const InitiateAutoPayment = ({ classes }) => (
   <div>
-    <div className='initiate-auto-payment'>
-      <div className='initiate-auto-payment__heading'>
+    <div className="initiate-auto-payment">
+      <div className="initiate-auto-payment__heading">
         <h2>Initiate the payment</h2>
         <Tooltip
           title={tooltipText}
           classes={{ tooltip: classes.tooltip }}
-          placement='right-start'
+          placement="right-start"
         >
           <ErrorIcon />
         </Tooltip>
       </div>
       <Responsive>
-        <div className='initiate-auto-payment__qrcode'>
-          <QRCode value='#' size={256} />
+        <div className="initiate-auto-payment__qrcode">
+          <QRCode value="#" size={256} />
         </div>
       </Responsive>
       <Responsive isMobile>
-        <div className='initiate-auto-payment__mobile'>
+        <div className="initiate-auto-payment__mobile">
           <p>You can initiate digital bank transfer using a Banking App on your device</p>
           <p>When the transfer is complete, make sure to submit your order!</p>
-          <div className='initiate-auto-payment__mobile-buttons'>
+          <div className="initiate-auto-payment__mobile-buttons">
             <DefaultButton
               fullWidth
               onClick={() => { console.log('Open banking app clicked'); }}>

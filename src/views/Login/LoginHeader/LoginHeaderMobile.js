@@ -18,11 +18,11 @@ class LoginHeaderMobile extends Component {
     const { step } = this.props;
 
     return (
-      <div className='login__header'>
+      <div className="login__header">
         {step !== 0 && <Logo />}
         <NavBtn clickHandler={this.toggleNav} alt={step === 0 && !isActiveNav} isActive={isActiveNav} />
         <div className={`login__header__dropdown ${isActiveNav ? 'active' : ''}`}>
-          <div className='paper'><LoginNav /></div>
+          <div className="paper"><LoginNav /></div>
         </div>
       </div>
     );

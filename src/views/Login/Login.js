@@ -58,10 +58,10 @@ class Login extends Component {
     const { auth: { isAuthenticated } } = this.props;
     const { step } = this.state;
 
-    if (isAuthenticated) return <Redirect to='/' />;
+    if (isAuthenticated) return <Redirect to="/" />;
 
     return (
-      <div className='login'>
+      <div className="login">
         <div>
           <LoginHeader step={step} />
           {this.renderStep()}

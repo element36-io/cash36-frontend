@@ -17,14 +17,14 @@ class ChooseAmountForm extends PureComponent {
   render () {
     const { tokenSymbols } = this.props;
     return (
-      <div className='choose-amount-form'>
+      <div className="choose-amount-form">
         <TextField
-          name='amount'
-          label='Choose Amount'
-          type='text'
+          name="amount"
+          label="Choose Amount"
+          type="text"
           onChange={this.handleAmountChange}
-          placeholder='0'
-          autoComplete='off'
+          placeholder="0"
+          autoComplete="off"
           value={this.props.amount}
           fullWidth
           InputProps={{
@@ -36,8 +36,8 @@ class ChooseAmountForm extends PureComponent {
           }}
         />
         <TextField
-          name='symbol'
-          label='Select Token'
+          name="symbol"
+          label="Select Token"
           value={this.props.symbol}
           onChange={this.props.handleChange}
           select

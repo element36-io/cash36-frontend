@@ -81,9 +81,9 @@ class TransferContacts extends Component {
     const { listOffset, numOfPages, currentPage, itemsPerPage } = this.state;
 
     return (
-      <div className='transfer__contacts-container'>
+      <div className="transfer__contacts-container">
         <h4>Contacts</h4>
-        <div className='transfer__contacts__slider'>
+        <div className="transfer__contacts__slider">
           <Responsive>
             {contactsList.length > itemsPerPage && (
               <Fragment>
@@ -92,7 +92,7 @@ class TransferContacts extends Component {
               </Fragment>
             )}
           </Responsive>
-          <div className='transfer__contacts__list-wrapper'>
+          <div className="transfer__contacts__list-wrapper">
             <div className={`transfer__contacts-list ${contactsList.length < itemsPerPage ? 'transfer__contacts-list--center' : ''}`}
               style={{ 'transform': `translateX(${listOffset}%)` }}>
               {contactsList.map(c => (
@@ -102,7 +102,7 @@ class TransferContacts extends Component {
           </div>
         </div>
         {contactsList.length > itemsPerPage && (
-          <ul className='transfer__contacts-container__pager'>
+          <ul className="transfer__contacts-container__pager">
             {[...Array(numOfPages).keys()].map((item, i) =>
               <li className={currentPage === i ? 'active' : ''} onClick={() => {
                 this.goToPage(i);

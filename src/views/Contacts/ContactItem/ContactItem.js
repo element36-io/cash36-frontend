@@ -36,11 +36,11 @@ class ContactItem extends PureComponent {
     const { showActions } = this.state;
 
     return (
-      <div className='contact__list-item'>
+      <div className="contact__list-item">
 
         <ClickAwayListener onClickAway={this.closeActions}>
-          <div className='contacts__list-item__actions'>
-            <IconButton onClick={this.toggleActions} className='contacts__list-item__actions__icon'>
+          <div className="contacts__list-item__actions">
+            <IconButton onClick={this.toggleActions} className="contacts__list-item__actions__icon">
               <MoreVertIcon />
             </IconButton>
             <div className={`paper contacts__list-item__actions__content ${showActions ? '--active' : ''}`}>
@@ -50,12 +50,12 @@ class ContactItem extends PureComponent {
             </div>
           </div>
         </ClickAwayListener>
-        <Avatar avatarUrl={avatarUrl} cssClass='contact__item__image-wrapper' alt={contactName} />
-        <div className='contacts__item__info'>
+        <Avatar avatarUrl={avatarUrl} cssClass="contact__item__image-wrapper" alt={contactName} />
+        <div className="contacts__item__info">
           <h4>{contactName}</h4>
           <span>{contactAddress}</span>
         </div>
-        <BaseButton className='contact__list-item__btn' onClick={this.quickTransfer}>
+        <BaseButton className="contact__list-item__btn" onClick={this.quickTransfer}>
           <span>
             <span>Quick</span> Transfer
           </span>

@@ -10,7 +10,7 @@ export const EditableInput = ({ classes, name, label, onChange, value, disabled,
     label={label}
     type={type}
     onChange={onChange}
-    autoComplete='off'
+    autoComplete="off"
     value={value}
     fullWidth
     disabled={disabled}

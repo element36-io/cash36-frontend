@@ -12,7 +12,7 @@ const HeaderDesktop = props => {
     <Fragment>
       <ul>
         {navLinks.map(link => <li key={link.label}>
-          <NavLink exact activeClassName='selected'
+          <NavLink exact activeClassName="selected"
             to={link.url}>{link.label}</NavLink></li>
         )}
       </ul>
