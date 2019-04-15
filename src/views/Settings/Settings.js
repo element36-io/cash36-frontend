@@ -16,7 +16,7 @@ class Settings extends Component {
 
   render () {
     const { user } = this.props;
-    const { kycLevel } = user;
+    const { currentLevel } = user;
     return (
       <div className="settings">
         <div className="wrapper">
@@ -27,14 +27,13 @@ class Settings extends Component {
             <BalanceCards />
           </div>
           <div className="settings__personal-information">
-            {kycLevel === 'Tier_0' &&
+            {currentLevel === 'Tier_0' && (
               <div className="paper settings__personal-information--tier0">
-                In order to see and edit your personal data, please verify your account.
+                In order to see and edit your personal data, please verify your
+                account.
               </div>
-            }
-            {kycLevel !== 'Tier_0' &&
-              <PersonalInformation user={user} />
-            }
+            )}
+            {currentLevel !== 'Tier_0' && <PersonalInformation user={user} />}
           </div>
         </div>
       </div>
@@ -42,6 +41,12 @@ class Settings extends Component {
   }
 }
 
-const mapStateToProps = ({ auth: { user }, tokens: { tokens = [] } }) => ({ tokens, user });
+const mapStateToProps = ({ auth: { user }, tokens: { tokens = [] } }) => ({
+  tokens,
+  user
+});
 
-export default connect(mapStateToProps, { getTokens, getCountries })(Settings);
+export default connect(
+  mapStateToProps,
+  { getTokens, getCountries }
+)(Settings);
