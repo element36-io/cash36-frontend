@@ -87,15 +87,9 @@ class UserProfile extends PureComponent {
   render () {
     const {
       user,
-      user: {
-        username,
-        avatarUri,
-        name,
-        currentLevel,
-        kycProcessStatus,
-        currentProcessStatus
-      },
-      alt
+      user: { username, avatarUri, name, currentLevel, kycProcessStatus },
+      alt,
+      currentProcessStatus
     } = this.props;
     const { showVerification } = this.state;
 
@@ -155,9 +149,10 @@ class UserProfile extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ auth: { user, attesting } }) => ({
-  user,
-  attesting
+const mapStateToProps = state => ({
+  user: state.auth.user,
+  attesting: state.auth.attesting,
+  currentProcessStatus: state.kyc.currentProcessStatus
 });
 
 UserProfile.propTypes = {
