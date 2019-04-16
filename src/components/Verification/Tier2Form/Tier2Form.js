@@ -6,7 +6,7 @@ import VerificationActions from '../VerificationActions';
 import FileInput from '../FileInput';
 import API from '../../../config/api';
 import './Tier2Form.scss';
-import { getKyc } from '../../../store/auth/auth.actions';
+import { getUserInfo } from '../../../store/auth/auth.actions';
 
 class Tier2Form extends Component {
     state = {
@@ -62,7 +62,7 @@ class Tier2Form extends Component {
     submitFiles = async () => {
       let formData = new FormData();
       const { types } = this.state;
-      const { getKyc, successCallback } = this.props;
+      const { getUserInfo, successCallback } = this.props;
 
       Object.keys(types).forEach(type => {
         formData.append(`files`, types[type].file);
@@ -73,7 +73,7 @@ class Tier2Form extends Component {
         this.setState({ submitting: true });
         await API.post('/cash36/user/tier-2', formData);
         successCallback();
-        getKyc();
+        getUserInfo();
       } catch (error) {
         console.log(error);
       }
@@ -108,8 +108,8 @@ class Tier2Form extends Component {
 
 Tier2Form.propTypes = {
   close: PropTypes.func.isRequired,
-  getKyc: PropTypes.func.isRequired,
+  getUserInfo: PropTypes.func.isRequired,
   successCallback: PropTypes.func.isRequired
 };
 
-export default connect(null, { getKyc })(Tier2Form);
+export default connect(null, { getUserInfo })(Tier2Form);

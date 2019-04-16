@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { CircularProgress } from '@material-ui/core';
+
 import tiers from './tiers';
 import DefaultButton from '../Buttons/DefaultButton';
 import Verification from '../Verification';
@@ -85,7 +87,14 @@ class UserProfile extends PureComponent {
   render () {
     const {
       user,
-      user: { username, avatarUri, name, currentLevel, kycProcessStatus },
+      user: {
+        username,
+        avatarUri,
+        name,
+        currentLevel,
+        kycProcessStatus,
+        currentProcessStatus
+      },
       alt
     } = this.props;
     const { showVerification } = this.state;
@@ -127,12 +136,11 @@ class UserProfile extends PureComponent {
             {currentLevel &&
               currentLevel !== 'Tier_2' &&
               kycProcessStatus !== 'AWAITING_VERIFICATION' && (
-              <DefaultButton
-                variant="raised"
-                onClick={this.toggleVerification}
-              >
-                {tiers[currentLevel].btnText}
-              </DefaultButton>
+              <Link to={`/kyc/${currentProcessStatus}`}>
+                <DefaultButton variant="raised">
+                  {tiers[currentLevel].btnText}
+                </DefaultButton>
+              </Link>
             )}
             {kycProcessStatus === 'AWAITING_VERIFICATION' && (
               <div className="user-profile__buttons--awaiting">

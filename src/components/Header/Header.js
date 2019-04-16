@@ -7,8 +7,11 @@ import Logo from '../Logo';
 import Responsive from '../Responsive';
 import HeaderDesktop from './HeaderDesktop';
 import HeaderMobile from './HeaderMobile';
-import { logout, getKyc } from '../../store/auth/auth.actions';
-import { fetchNotifications, newNotification } from '../../store/notifications/notifications.actions';
+import { logout, getUserInfo } from '../../store/auth/auth.actions';
+import {
+  fetchNotifications,
+  newNotification
+} from '../../store/notifications/notifications.actions';
 import { getTokens, getUserActivity } from '../../store/tokens/tokens.actions';
 import './Header.scss';
 
@@ -31,34 +34,50 @@ class Header extends Component {
   }
 
   connectWs = () => {
-    const { auth: { user }, newNotification, getKyc, getTokens, getUserActivity } = this.props;
+    const {
+      auth: { user },
+      newNotification,
+      getUserInfo,
+      getTokens,
+      getUserActivity
+    } = this.props;
     let socket = new SockJS(`${API_ROOT}/ws`);
     this.eventSource = Stomp.over(socket);
-    this.eventSource.connect({}, () => {
-      this.eventSource.subscribe(`/topics/updates/${user.username}`, (message) => {
-        const messageBody = JSON.parse(message.body);
-        newNotification(messageBody);
-        const { type } = messageBody;
+    this.eventSource.connect(
+      {},
+      () => {
+        this.eventSource.subscribe(
+          `/topics/updates/${user.username}`,
+          message => {
+            const messageBody = JSON.parse(message.body);
+            newNotification(messageBody);
+            const { type } = messageBody;
 
-        if (type === 'PAYMENT' || type === 'PAYOUT') {
-          getTokens();
-          getUserActivity();
-        }
+            if (type === 'PAYMENT' || type === 'PAYOUT') {
+              getTokens();
+              getUserActivity();
+            }
 
-        if (type === 'TIER_2_CONFIRMED') {
-          getKyc();
+            if (type === 'TIER_2_CONFIRMED') {
+              getUserInfo();
+            }
+          }
+        );
+      },
+      err => {
+        console.error(err, 'Connection lost');
+        if (err.startsWith('Whoops!')) {
+          // this.setState({ message: e, snackOpen: true, actionEnabled: true, autoHideDuration: null });
         }
-      });
-    }, (err) => {
-      console.error(err, 'Connection lost');
-      if (err.startsWith('Whoops!')) {
-        // this.setState({ message: e, snackOpen: true, actionEnabled: true, autoHideDuration: null });
       }
-    });
+    );
   };
 
   render () {
-    const { auth: { user }, logout } = this.props;
+    const {
+      auth: { user },
+      logout
+    } = this.props;
 
     return (
       <header>
@@ -76,11 +95,16 @@ class Header extends Component {
 
 const mapStateToProps = ({ auth, notifications }) => ({ auth, notifications });
 
-export default connect(mapStateToProps, {
-  logout,
-  fetchNotifications,
-  newNotification,
-  getTokens,
-  getUserActivity,
-  getKyc
-}, null, { pure: false })(Header);
+export default connect(
+  mapStateToProps,
+  {
+    logout,
+    fetchNotifications,
+    newNotification,
+    getTokens,
+    getUserActivity,
+    getUserInfo
+  },
+  null,
+  { pure: false }
+)(Header);

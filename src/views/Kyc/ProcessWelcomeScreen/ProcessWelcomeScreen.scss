@@ -1,0 +1,87 @@
+@import '../../../styles/settings.scss';
+@import '../../../styles/mixins.scss';
+
+.process-welcome-screen {
+  > h2 {
+    font-weight: 400;
+  }
+
+  > hr {
+    margin: 4.4rem 0;
+    border-bottom: 1px solid $grey-border;
+    border-top: none;
+  }
+
+  > p,
+  ul {
+    font-size: 1.8rem;
+    margin-bottom: 3.2rem;
+    line-height: 2.4rem;
+  }
+
+  &__buttons {
+    display: flex;
+    width: 100%;
+
+    button {
+      padding: 1.6rem 3.2rem;
+    }
+
+    > button:first-of-type {
+      margin-right: 1.6rem;
+    }
+
+    button:nth-of-type(2) {
+      flex: 1;
+    }
+  }
+
+  @include desktop {
+    padding: 5.2rem 22.4rem 0.8rem 22.4rem;
+
+    &__buttons {
+      margin-top: 11rem;
+    }
+  }
+
+  @include tablet {
+    padding: 5.2rem 5.4rem 0.8rem 5.4rem;
+
+    &__buttons {
+      margin-top: 6rem;
+    }
+  }
+
+  @include mobile {
+    padding: 3.2rem 1rem 0.2rem 1rem;
+    height: 100%;
+
+    > hr {
+      display: none;
+    }
+
+    > h2 {
+      font-weight: 400;
+      line-height: 2.2rem;
+      text-align: center;
+      margin-bottom: 3.2rem;
+    }
+
+    > p,
+    ul {
+      line-height: 1.8rem;
+      margin-bottom: 2.4rem;
+      line-height: 2.4rem;
+    }
+
+    &__buttons {
+      margin-top: 3rem;
+      flex-direction: column-reverse;
+
+      > button:first-of-type {
+        background: $white !important;
+        margin-right: 0;
+      }
+    }
+  }
+}

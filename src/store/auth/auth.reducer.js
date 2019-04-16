@@ -1,13 +1,15 @@
 import {
   AUTH_USER,
-  GET_KYC,
+  GET_USER_INFO,
   CONFIRM_ATTESTATION,
   ATTESTATION_PROGRESS
 } from './auth.actions';
 
 const initialState = {
   isAuthenticated: !!localStorage.getItem('access_token'),
-  user: JSON.parse(localStorage.getItem('state')) ? JSON.parse(localStorage.getItem('state')).user : undefined,
+  user: JSON.parse(localStorage.getItem('state'))
+    ? JSON.parse(localStorage.getItem('state')).user
+    : undefined,
   attesting: false
 };
 
@@ -21,7 +23,7 @@ export default (state = initialState, action) => {
         user,
         errorMessage: ''
       };
-    case GET_KYC:
+    case GET_USER_INFO:
       return {
         ...state,
         user: {
@@ -39,10 +41,7 @@ export default (state = initialState, action) => {
         ...state,
         user: {
           ...state.user,
-          verified: [
-            ...state.user.verified,
-            action.payload
-          ]
+          verified: [...state.user.verified, action.payload]
         },
         attesting: false
       };
