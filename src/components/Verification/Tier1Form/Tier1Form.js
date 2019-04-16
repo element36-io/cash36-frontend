@@ -10,7 +10,7 @@ import VerificationActions from '../VerificationActions';
 import VerificationProgress from '../VerificationProgress/VerificationProgress';
 import VerificationSuccess from '../VerificationSuccess/VerificationSuccess';
 import { getCountries } from '../../../store/countries/countries.actions';
-import { getKyc } from '../../../store/auth/auth.actions';
+import { getUserInfo } from '../../../store/auth/auth.actions';
 import DatePicker from '../DatePicker';
 import TextInput from '../TextInput';
 import SelectInput from '../SelectInput';
@@ -70,7 +70,7 @@ export class Tier1Form extends Component {
         accountNr,
         email
       } = this.state;
-      const { getKyc, toggleModalBlock } = this.props;
+      const { getUserInfo, toggleModalBlock } = this.props;
       // check if all values in the form are filled
       const isFormFilled = Object.values(this.state).filter(value => value).length > 13;
       const isEmailValid = isEmail(email);
@@ -121,7 +121,7 @@ export class Tier1Form extends Component {
         await API.post('/cash36/user/tier-1', data);
         this.setState({ submitting: false, submitted: true });
         toggleModalBlock();
-        getKyc();
+        getUserInfo();
       } catch (error) {
         this.setState({
           errorMessage: 'There was an error with your request',
@@ -285,4 +285,4 @@ Tier1Form.propTypes = {
 
 const mapStateToProps = ({ countries: { countries = [], nationalities = [] } }) => ({ countries, nationalities });
 
-export default connect(mapStateToProps, { getCountries, getKyc })(Tier1Form);
+export default connect(mapStateToProps, { getCountries, getUserInfo })(Tier1Form);

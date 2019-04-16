@@ -21,11 +21,16 @@ class Login extends Component {
   };
 
   componentDidMount () {
-    uPort.requestCredentials({
-      requested: ['name', 'avatar'],
-      verified: ['element36Tier1', 'element36Tier2'],
-      notifications: true
-    }, this.uPortURIHandler).then(this.checkIfUserExists);
+    uPort
+      .requestCredentials(
+        {
+          requested: ['name', 'avatar'],
+          verified: ['element36Tier1', 'element36Tier2'],
+          notifications: true
+        },
+        this.uPortURIHandler
+      )
+      .then(this.checkIfUserExists);
   }
 
   uPortURIHandler = uPortUri => {
@@ -55,7 +60,9 @@ class Login extends Component {
   };
 
   render () {
-    const { auth: { isAuthenticated } } = this.props;
+    const {
+      auth: { isAuthenticated }
+    } = this.props;
     const { step } = this.state;
 
     if (isAuthenticated) return <Redirect to="/" />;

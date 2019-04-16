@@ -7,7 +7,7 @@ import moment from 'moment';
 import IBAN from 'iban';
 import editIcon from '../../../assets/icons/edit-icon.svg';
 import API from '../../../config/api';
-import { getKyc } from '../../../store/auth/auth.actions';
+import { getUserInfo } from '../../../store/auth/auth.actions';
 import DefaultButton from '../../../components/Buttons/DefaultButton';
 import EditableInput from '../EditableInput';
 import EditableSelect from '../EditableSelect';
@@ -171,7 +171,7 @@ class PersonalInformation extends Component {
       }
       await API.post('/cash36/user/update-tier-1', payload);
       this.setState({ errorMessage: '', formDisabled: true });
-      this.props.getKyc();
+      this.props.getUserInfo();
       console.log('submitted!');
     } catch (error) {
       this.setState({
@@ -281,10 +281,10 @@ const mapStateToProps = ({
 
 PersonalInformation.propTypes = {
   user: PropTypes.object.isRequired,
-  getKyc: PropTypes.func.isRequired
+  getUserInfo: PropTypes.func.isRequired
 };
 
 export default connect(
   mapStateToProps,
-  { getKyc }
+  { getUserInfo }
 )(PersonalInformation);
