@@ -17,11 +17,18 @@
     bottom: 0;
     height: 8px;
     background: linear-gradient(180deg, #63b4f5 0%, #017ee5 100%);
+    transition: width 0.3s;
   }
 }
 
-[data-status='REGISTERED'] {
+[data-status='WELCOME_SCREEN'] {
   &::before {
-    width: 0%;
+    width: 4%;
+  }
+}
+
+[data-status='USER_DATA'] {
+  &::before {
+    width: 20%;
   }
 }

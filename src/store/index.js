@@ -10,6 +10,7 @@ import tokensReducer from './tokens/tokens.reducer';
 import countriesReducer from './countries/countries.reducer';
 import notificationsReducer from './notifications/notifications.reducer';
 import contactsReducer from './contacts/contacts.reducer';
+import kycReducer from './kyc/kyc.reducer';
 
 const loggerMiddleware = createLogger();
 
@@ -20,7 +21,8 @@ const reducers = combineReducers({
   tokens: tokensReducer,
   countries: countriesReducer,
   notifications: notificationsReducer,
-  contacts: contactsReducer
+  contacts: contactsReducer,
+  kyc: kycReducer
 });
 
 const store = createStore(
@@ -31,7 +33,8 @@ const store = createStore(
 store.subscribe(
   throttle(() => {
     saveState({
-      user: store.getState().auth.user
+      user: store.getState().auth.user,
+      kyc: store.getState().kyc
     });
   }, 1000)
 );
