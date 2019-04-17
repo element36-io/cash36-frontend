@@ -9,6 +9,8 @@ import Step1Tier1Form from './Step1Tier1Form';
 import Step1aConfirmTier1 from './Step1aConfirmTier1';
 import Step2BeneficialOwner from './Step2BeneficialOwner';
 
+import Step1 from './ProcessWelcomeScreen/Step1Form';
+
 import './Kyc.scss';
 import Step3Documents from './Step3Documents';
 
@@ -54,6 +56,7 @@ const Kyc = ({ currentProcessStatus, getCurrentProcessStatus }) => {
 
   return (
     <div className="wrapper paper kyc" data-status={currentProcessStatus}>
+      <Step1 />
       {renderStep()}
     </div>
   );

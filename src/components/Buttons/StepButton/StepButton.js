@@ -5,16 +5,15 @@ import DefaultButton from '../DefaultButton';
 
 import './StepButton.scss';
 
-const StepButton = ({ text, onClick, disabled }) => (
+const StepButton = ({ text, onClick, disabled, type }) => (
   <DefaultButton
     variant="raised"
-    type="button"
+    type={type}
     size="large"
     fullWidth
     disabled={disabled}
     className="step-button"
     onClick={onClick}
-    style={disabled && { opacity: '0.5' }}
   >
     <span>{text}</span>
     <ArrowForwardIcon />
@@ -23,6 +22,7 @@ const StepButton = ({ text, onClick, disabled }) => (
 
 StepButton.propTypes = {
   buttonText: PropTypes.string,
+  type: PropTypes.string,
   onClick: PropTypes.func.isRequired,
   disabled: PropTypes.bool
 };
