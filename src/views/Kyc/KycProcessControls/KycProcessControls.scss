@@ -1,0 +1,33 @@
+@import '../../../styles/settings.scss';
+@import '../../../styles/mixins.scss';
+
+.kyc-process-controls {
+  display: flex;
+  width: 100%;
+
+  button {
+    padding: 1.6rem 3.2rem;
+  }
+
+  > a {
+    margin-right: 1.6rem;
+  }
+
+  > button:first-of-type {
+    flex: 1;
+  }
+
+  @include mobile {
+    margin-top: 3rem;
+    flex-direction: column-reverse;
+
+    > a {
+      margin-right: 0;
+
+      > button {
+        background: $white !important;
+        width: 100%;
+      }
+    }
+  }
+}

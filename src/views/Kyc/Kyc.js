@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import API from '../../config/api';
-import { getCurrentProcessStatus } from '../../store/kyc/kyc.actions';
-import Step1ProcessWelcomeScreen from './Step1ProcessWelcomeScreen';
-import Step2Tier1Form from './Step2Tier1Form';
+import { getCurrentProcessStatus } from '../../store/auth/auth.actions';
+import Step0ProcessWelcomeScreen from './Step0ProcessWelcomeScreen';
+import Step1Tier1Form from './Step1Tier1Form';
+import Step1aConfirmTier1 from './Step1aConfirmTier1';
+import Step2BeneficialOwner from './Step2BeneficialOwner';
 
 import './Kyc.scss';
 
@@ -13,6 +15,8 @@ const Kyc = ({ currentProcessStatus, getCurrentProcessStatus }) => {
   useEffect(() => {
     getCurrentProcessStatus();
   }, [currentProcessStatus]);
+
+  console.log(currentProcessStatus);
 
   const changeSteps = async (step, payload) => {
     try {
@@ -28,12 +32,18 @@ const Kyc = ({ currentProcessStatus, getCurrentProcessStatus }) => {
     }
   };
 
+  // const testProcessStatus = 'CONFIRM_TIER_1';
+
   const renderStep = () => {
     switch (currentProcessStatus) {
       case 'WELCOME_SCREEN':
-        return <Step1ProcessWelcomeScreen changeSteps={changeSteps} />;
+        return <Step0ProcessWelcomeScreen changeSteps={changeSteps} />;
       case 'USER_DATA':
-        return <Step2Tier1Form />;
+        return <Step1Tier1Form />;
+      case 'CONFIRM_TIER_1':
+        return <Step1aConfirmTier1 changeSteps={changeSteps} />;
+      case 'BENEFICIAL_OWNER':
+        return <Step2BeneficialOwner changeSteps={changeSteps} />;
       default:
         return null;
     }
@@ -47,7 +57,7 @@ const Kyc = ({ currentProcessStatus, getCurrentProcessStatus }) => {
 };
 
 const mapStateToProps = state => ({
-  currentProcessStatus: state.kyc.currentProcessStatus
+  currentProcessStatus: state.auth.user.currentProcessStatus
 });
 
 Kyc.propTypes = {

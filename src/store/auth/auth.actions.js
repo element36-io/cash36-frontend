@@ -6,19 +6,35 @@ export const AUTH_USER = 'AUTH_USER';
 export const GET_USER_INFO = 'GET_USER_INFO';
 export const ATTESTATION_PROGRESS = 'ATTESTATION_PROGRESS';
 export const CONFIRM_ATTESTATION = 'CONFIRM_ATTESTATION';
+export const GET_CURRENT_PROCESS_STATUS = 'GET_CURRENT_PROCESS_STATUS';
 
 export const checkUserAddress = address =>
   API.get(`/public/is-user/${address}`);
 
 export const logout = () => {
+  localStorage.removeItem('state');
   localStorage.removeItem('access_token');
   localStorage.removeItem('refresh_token');
   localStorage.removeItem('expires_at');
-  localStorage.removeItem('state');
   return {
     type: AUTH_USER,
-    payload: { isAuthenticated: false, user: {} }
+    payload: { isAuthenticated: false, user: null }
   };
+};
+
+export const getCurrentProcessStatus = () => async dispatch => {
+  try {
+    const response = await API.get('/cash36/kyc/get-step');
+
+    const processStatus = response.data.result;
+
+    dispatch({
+      type: GET_CURRENT_PROCESS_STATUS,
+      payload: processStatus
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const getUserInfo = () => async dispatch => {
@@ -30,10 +46,6 @@ export const getUserInfo = () => async dispatch => {
       payload: response.data
     });
   } catch (error) {
-    if (error.response.status === 401) {
-      console.log('Access unauthorized');
-      return;
-    }
     console.log(error);
   }
 };

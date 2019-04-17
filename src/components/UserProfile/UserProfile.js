@@ -152,7 +152,7 @@ class UserProfile extends PureComponent {
 const mapStateToProps = state => ({
   user: state.auth.user,
   attesting: state.auth.attesting,
-  currentProcessStatus: state.kyc.currentProcessStatus
+  currentProcessStatus: state.auth.user.currentProcessStatus
 });
 
 UserProfile.propTypes = {
