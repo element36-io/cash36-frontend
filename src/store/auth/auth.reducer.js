@@ -2,7 +2,8 @@ import {
   AUTH_USER,
   GET_USER_INFO,
   CONFIRM_ATTESTATION,
-  ATTESTATION_PROGRESS
+  ATTESTATION_PROGRESS,
+  GET_CURRENT_PROCESS_STATUS
 } from './auth.actions';
 
 const initialState = {
@@ -29,6 +30,14 @@ export default (state = initialState, action) => {
         user: {
           ...state.user,
           ...action.payload
+        }
+      };
+    case GET_CURRENT_PROCESS_STATUS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          currentProcessStatus: action.payload
         }
       };
     case ATTESTATION_PROGRESS:

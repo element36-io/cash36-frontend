@@ -125,7 +125,10 @@ class Buy extends Component {
 }
 
 const mapStateToProps = ({ auth: { user } }) => {
-  if (user.currentLevel !== 'Tier_0') { return { iban: user.bankAccounts[0].iban }; } else return { iban: '' };
+  // if (user.currentLevel !== 'Tier_0') { return { iban: user.bankAccounts[0].iban }; } else return { iban: '' };
+  if (user.currentLevel !== 'Tier_0') {
+    return { iban: 'PLACEHOLDER FOR IBAN' };
+  } else return { iban: '' };
 };
 
 export default connect(

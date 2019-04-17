@@ -1,21 +1,15 @@
-import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import React from 'react';
 
+import KycProcessControls from '../KycProcessControls';
 import Responsive from '../../../components/Responsive';
-import DefaultButton from '../../../components/Buttons/DefaultButton';
-import SecondaryButton from '../../../components/Buttons/SecondaryButton/SecondaryButton';
 
-import './Step1ProcessWelcomeScreen.scss';
+import './Step0ProcessWelcomeScreen.scss';
 
-const Step1ProcessWelcomeScreen = ({ changeSteps }) => {
-  const [toHome, redirectToHome] = useState(false);
-
-  if (toHome) return <Redirect to="/" />;
-
+const Step0ProcessWelcomeScreen = ({ changeSteps }) => {
   return (
     <div className="process-welcome-screen">
       <h2>Welcome to element36</h2>
-      <hr />
+      <hr className="hr-light" />
       <p>Thank you for choosing element36!</p>
       <p>
         Having your account fully verified allows you to cross the limits of
@@ -37,20 +31,13 @@ const Step1ProcessWelcomeScreen = ({ changeSteps }) => {
           <li>- A Piece of Paper and a Pen</li>
         </Responsive>
       </ul>
-      <div className="process-welcome-screen__buttons">
-        <SecondaryButton
-          onClick={() => {
-            redirectToHome(true);
-          }}
-        >
-          Verify Later
-        </SecondaryButton>
-        <DefaultButton onClick={() => changeSteps(0, {})}>
-          Start Verification Process
-        </DefaultButton>
-      </div>
+
+      <KycProcessControls
+        submitLabel="Start Verification Process"
+        submitCallback={() => changeSteps('0', {})}
+      />
     </div>
   );
 };
 
-export default Step1ProcessWelcomeScreen;
+export default Step0ProcessWelcomeScreen;
