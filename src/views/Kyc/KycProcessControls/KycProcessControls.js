@@ -7,18 +7,29 @@ import SecondaryButton from '../../../components/Buttons/SecondaryButton/Seconda
 
 import './KycProcessControls.scss';
 
-const KycProcessControls = ({ submitLabel, submitCallback }) => {
+const KycProcessControls = ({
+  submitLabel,
+  submitCallback,
+  disabled = false
+}) => {
   return (
     <div className="kyc-process-controls">
       <Link to="/">
         <SecondaryButton>Verify Later</SecondaryButton>
       </Link>
-      <DefaultButton onClick={submitCallback}>{submitLabel}</DefaultButton>
+      <DefaultButton
+        onClick={submitCallback}
+        disabled={disabled}
+        style={disabled && { opacity: '0.5' }}
+      >
+        {submitLabel}
+      </DefaultButton>
     </div>
   );
 };
 
 KycProcessControls.propTypes = {
+  disabled: PropTypes.bool,
   submitLabel: PropTypes.string.isRequired,
   submitCallback: PropTypes.func
 };

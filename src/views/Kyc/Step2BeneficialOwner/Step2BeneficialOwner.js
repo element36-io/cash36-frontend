@@ -42,6 +42,7 @@ const Step2BeneficialOwner = ({ changeSteps }) => {
           </p>
         </div>
         <KycProcessControls
+          disabled={!checked}
           submitLabel="Submit & Continue"
           submitCallback={() => {
             changeSteps(2, {});

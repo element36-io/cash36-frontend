@@ -89,7 +89,7 @@ class UserProfile extends PureComponent {
       user,
       user: { username, avatarUri, name, currentLevel, kycProcessStatus },
       alt,
-      currentProcessStatus
+      caseId
     } = this.props;
     const { showVerification } = this.state;
 
@@ -130,7 +130,7 @@ class UserProfile extends PureComponent {
             {currentLevel &&
               currentLevel !== 'Tier_2' &&
               kycProcessStatus !== 'AWAITING_VERIFICATION' && (
-              <Link to={`/kyc/${currentProcessStatus}`}>
+              <Link to={`/kyc/${caseId}`}>
                 <DefaultButton variant="raised">
                   {tiers[currentLevel].btnText}
                 </DefaultButton>
@@ -152,7 +152,7 @@ class UserProfile extends PureComponent {
 const mapStateToProps = state => ({
   user: state.auth.user,
   attesting: state.auth.attesting,
-  currentProcessStatus: state.auth.user.currentProcessStatus
+  caseId: state.auth.user.caseId
 });
 
 UserProfile.propTypes = {
