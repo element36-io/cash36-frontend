@@ -10,6 +10,7 @@ import Step1aConfirmTier1 from './Step1aConfirmTier1';
 import Step2BeneficialOwner from './Step2BeneficialOwner';
 
 import './Kyc.scss';
+import Step3Documents from './Step3Documents';
 
 const Kyc = ({ currentProcessStatus, getCurrentProcessStatus }) => {
   useEffect(() => {
@@ -44,6 +45,8 @@ const Kyc = ({ currentProcessStatus, getCurrentProcessStatus }) => {
         return <Step1aConfirmTier1 changeSteps={changeSteps} />;
       case 'BENEFICIAL_OWNER':
         return <Step2BeneficialOwner changeSteps={changeSteps} />;
+      case 'UPLOAD_DOCUMENTS':
+        return <Step3Documents changeSteps={changeSteps} />;
       default:
         return null;
     }
