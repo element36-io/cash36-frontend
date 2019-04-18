@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import ActionStatus from '../../../components/ActionStatus';
 import KycProcessControls from '../KycProcessControls';
@@ -22,6 +23,10 @@ const Step1aConfirmTier1 = ({ changeSteps }) => {
       />
     </div>
   );
+};
+
+Step1aConfirmTier1.propTypes = {
+  changeSteps: PropTypes.func.isRequired
 };
 
 export default Step1aConfirmTier1;

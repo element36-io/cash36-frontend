@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import KycProcessControls from '../KycProcessControls';
 import Responsive from '../../../components/Responsive';
@@ -38,6 +39,10 @@ const Step0ProcessWelcomeScreen = ({ changeSteps }) => {
       />
     </div>
   );
+};
+
+Step0ProcessWelcomeScreen.propTypes = {
+  changeSteps: PropTypes.func.isRequired
 };
 
 export default Step0ProcessWelcomeScreen;

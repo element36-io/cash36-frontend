@@ -29,18 +29,36 @@
 
 [data-status='USER_DATA'] {
   &::before {
-    width: 15%;
+    width: 20%;
   }
 }
 
 [data-status='CONFIRM_TIER_1'] {
   &::before {
-    width: 25%;
+    width: 30%;
   }
 }
 
 [data-status='BENEFICIAL_OWNER'] {
   &::before {
-    width: 35%;
+    width: 40%;
+  }
+}
+
+[data-status='UPLOAD_DOCUMENTS'] {
+  &::before {
+    width: 60%;
+  }
+}
+
+[data-status='USER_PROFILE'] {
+  &::before {
+    width: 80%;
+  }
+}
+
+[data-status='AWAITING_VERIFICATION'] {
+  &::before {
+    width: 80%;
   }
 }

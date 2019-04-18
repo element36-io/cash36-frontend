@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Checkbox from '@material-ui/core/Checkbox';
 
 import KycProcessControls from '../KycProcessControls';
@@ -51,6 +52,10 @@ const Step2BeneficialOwner = ({ changeSteps }) => {
       </div>
     </div>
   );
+};
+
+Step2BeneficialOwner.propTypes = {
+  changeSteps: PropTypes.func.isRequired
 };
 
 export default Step2BeneficialOwner;
