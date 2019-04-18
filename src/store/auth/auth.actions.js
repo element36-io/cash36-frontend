@@ -1,5 +1,5 @@
 import axios from 'axios';
-// import { MNID } from 'uport-connect';
+import { MNID } from 'uport-connect';
 import API, { API_ROOT } from '../../config/api';
 
 export const AUTH_USER = 'AUTH_USER';
@@ -109,8 +109,8 @@ export const login = (username, password, user) => async dispatch => {
 };
 
 export const createUserObject = uportCreds => {
-  // const username = MNID.decode(uportCreds.networkAddress).address;
-  const username = uportCreds.networkAddress;
+  const username = MNID.decode(uportCreds.networkAddress).address;
+  // const username = uportCreds.networkAddress;
   const user = {
     username,
     name: uportCreds.name,
