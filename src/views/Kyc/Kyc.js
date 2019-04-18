@@ -1,20 +1,25 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
-import API from '../../config/api';
-import { getCurrentProcessStatus } from '../../store/auth/auth.actions';
+import {
+  getCurrentProcessStatus,
+  updateProcessStatus
+} from '../../store/auth/auth.actions';
 import Step0ProcessWelcomeScreen from './Step0ProcessWelcomeScreen';
 import Step1Tier1Form from './Step1Tier1Form';
 import Step1aConfirmTier1 from './Step1aConfirmTier1';
 import Step2BeneficialOwner from './Step2BeneficialOwner';
 
-import Step1 from './ProcessWelcomeScreen/Step1Form';
+// import Step1 from './ProcessWelcomeScreen/Step1Form';
 
 import './Kyc.scss';
 import Step3Documents from './Step3Documents';
 
-const Kyc = ({ currentProcessStatus, getCurrentProcessStatus }) => {
+const Kyc = ({
+  currentProcessStatus,
+  getCurrentProcessStatus,
+  updateProcessStatus
+}) => {
   useEffect(() => {
     getCurrentProcessStatus();
   }, [currentProcessStatus]);
@@ -23,15 +28,9 @@ const Kyc = ({ currentProcessStatus, getCurrentProcessStatus }) => {
 
   const changeSteps = async (step, payload) => {
     try {
-      await API.post(`/cash36/kyc/step-${step}`, payload);
-
-      getCurrentProcessStatus();
+      updateProcessStatus(step, payload);
     } catch (error) {
-      if (error.response.status === 401) {
-        console.log('Access unauthorized');
-        return;
-      }
-      console.log(error);
+      console.warn(error);
     }
   };
 
@@ -56,7 +55,7 @@ const Kyc = ({ currentProcessStatus, getCurrentProcessStatus }) => {
 
   return (
     <div className="wrapper paper kyc" data-status={currentProcessStatus}>
-      <Step1 />
+      {/* <Step1 /> */}
       {renderStep()}
     </div>
   );
@@ -72,5 +71,5 @@ Kyc.propTypes = {
 
 export default connect(
   mapStateToProps,
-  { getCurrentProcessStatus }
+  { getCurrentProcessStatus, updateProcessStatus }
 )(Kyc);

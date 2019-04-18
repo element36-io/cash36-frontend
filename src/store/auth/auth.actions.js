@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { MNID } from 'uport-connect';
+// import { MNID } from 'uport-connect';
 import API, { API_ROOT } from '../../config/api';
 
 export const AUTH_USER = 'AUTH_USER';
@@ -37,6 +37,15 @@ export const getCurrentProcessStatus = () => async dispatch => {
   }
 };
 
+export const updateProcessStatus = (step, payload) => async dispatch => {
+  try {
+    await API.post(`/cash36/kyc/step-${step}`, payload);
+    getCurrentProcessStatus()(dispatch);
+  } catch (error) {
+    console.warn(error);
+  }
+};
+
 export const getUserInfo = () => async dispatch => {
   try {
     const response = await API.get('/cash36/user/current-user');
@@ -46,7 +55,7 @@ export const getUserInfo = () => async dispatch => {
       payload: response.data
     });
   } catch (error) {
-    console.log(error);
+    console.warn(error);
   }
 };
 
