@@ -1,0 +1,47 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/settings.scss';
+
+.verification-user-profile {
+  .verification-user-profile__source-of-funds {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @include desktop {
+    padding: 5.2rem 11.4rem 0.8rem 11.4rem;
+
+    .verification-user-profile__row {
+      display: flex;
+      width: 100%;
+      margin-bottom: 4rem;
+
+      > div:first-child {
+        margin-right: 7.2rem;
+      }
+
+      > div {
+        width: 50%;
+      }
+    }
+
+    .kyc-process-controls {
+      margin-top: 3.4rem;
+    }
+  }
+
+  @include tablet {
+    padding: 3.2rem 4rem 0.8rem 4rem;
+  }
+
+  @include mobile {
+    padding: 2.1rem 1.2rem 0.8rem 1.2rem;
+
+    .verification-user-profile__row {
+      margin-bottom: 3.2rem;
+
+      > div:first-child {
+        margin-bottom: 3.2rem;
+      }
+    }
+  }
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ActionStatus from '../../../components/ActionStatus';
-import KycProcessControls from '../KycProcessControls';
+import ProcessControls from '../ProcessControls';
 
 import './Step1aConfirmTier1.scss';
 
@@ -17,7 +17,7 @@ const Step1aConfirmTier1 = ({ changeSteps }) => {
           limit, continue with the verification process.
         </p>
       </div>
-      <KycProcessControls
+      <ProcessControls
         submitLabel="Continue Verification Process"
         submitCallback={() => changeSteps('1a', {})}
       />

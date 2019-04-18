@@ -4,7 +4,8 @@ export default theme => ({
     '& input': {
       fontSize: '1.6rem',
       '&::placeholder': {
-        color: '#01152C'
+        color: '#01152C',
+        opacity: '0.5'
       }
     }
   }

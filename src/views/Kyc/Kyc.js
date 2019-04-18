@@ -35,7 +35,7 @@ const Kyc = ({
     }
   };
 
-  const testProcessStatus = 'USER_DATA';
+  const testProcessStatus = 'USER_PROFILE';
 
   const renderStep = () => {
     switch (testProcessStatus) {

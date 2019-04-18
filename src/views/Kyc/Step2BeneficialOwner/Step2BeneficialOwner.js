@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Checkbox from '@material-ui/core/Checkbox';
 
-import KycProcessControls from '../KycProcessControls';
+import ProcessControls from '../ProcessControls';
 import Responsive from '../../../components/Responsive';
 
 import './Step2BeneficialOwner.scss';
@@ -42,7 +42,7 @@ const Step2BeneficialOwner = ({ changeSteps }) => {
             element36 without prior request.
           </p>
         </div>
-        <KycProcessControls
+        <ProcessControls
           disabled={!checked}
           submitLabel="Submit & Continue"
           submitCallback={() => {

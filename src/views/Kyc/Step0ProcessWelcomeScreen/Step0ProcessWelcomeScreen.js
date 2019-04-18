@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import KycProcessControls from '../KycProcessControls';
+
 import ProcessHeader from '../ProcessHeader';
+import ProcessControls from '../ProcessControls';
 import Responsive from '../../../components/Responsive';
 
 import './Step0ProcessWelcomeScreen.scss';
@@ -34,7 +35,8 @@ const Step0ProcessWelcomeScreen = ({ changeSteps }) => {
           <li>- eBanking</li>
         </Responsive>
       </ul>
-      <KycProcessControls
+
+      <ProcessControls
         submitLabel="Start Verification Process"
         submitCallback={nextStep}
         submitting={submitting}

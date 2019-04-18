@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Form from '../../../components/Form';
 import FormField from '../../../components/Form/FormField';
 import ProcessHeader from '../ProcessHeader';
-import KycProcessControls from '../KycProcessControls';
+import ProcessControls from '../ProcessControls';
 import { getCountries } from '../../../store/countries/countries.actions';
 import validationSchema from './validation-schema';
 import {
@@ -17,10 +17,11 @@ import {
 import './Step1Tier1Form.scss';
 
 const Step1Tier1Form = props => {
-  const { countries, nationalities, getCountries, changeStep } = props;
+  const { countries, nationalities, getCountries, changeSteps } = props;
 
   const submit = values => {
     console.log(values);
+    console.log(changeSteps);
   };
 
   useEffect(() => {
@@ -74,7 +75,7 @@ const Step1Tier1Form = props => {
             </div>
             <h3>Bank Account</h3>
             <FormField formField={ibanModel} formProps={formProps} />
-            <KycProcessControls
+            <ProcessControls
               submitLabel="Submit & Continue"
               disabled={!formProps.isValid || submitting}
               submitting={submitting}
