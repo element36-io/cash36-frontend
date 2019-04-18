@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import DefaultButton from '../../../components/Buttons/DefaultButton';
 import SecondaryButton from '../../../components/Buttons/SecondaryButton/SecondaryButton';
 
-import './KycProcessControls.scss';
+import './ProcessControls.scss';
 
-const KycProcessControls = ({
+const ProcessControls = ({
   submitLabel,
   submitCallback,
   submitting = false,
@@ -28,11 +28,11 @@ const KycProcessControls = ({
   );
 };
 
-KycProcessControls.propTypes = {
+ProcessControls.propTypes = {
   disabled: PropTypes.bool,
   submitting: PropTypes.bool,
   submitLabel: PropTypes.string.isRequired,
   submitCallback: PropTypes.func
 };
 
-export default KycProcessControls;
+export default ProcessControls;

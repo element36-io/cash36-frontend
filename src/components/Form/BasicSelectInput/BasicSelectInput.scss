@@ -1,0 +1,17 @@
+@import '../../../styles/settings.scss';
+
+.basic-select {
+  height: 100% !important;
+  > div {
+    height: 100%;
+
+    > div {
+      height: 100%;
+    }
+  }
+  .basic-select__placeholder {
+    .basic-select__placeholder-text {
+      opacity: 0.5;
+    }
+  }
+}
