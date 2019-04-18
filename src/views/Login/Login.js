@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { MNID } from 'uport-connect';
+// import { MNID } from 'uport-connect';
 import { uPort, uportUri, setUportUri } from '../../config/uport.config';
 import Responsive from '../../components/Responsive';
 import LoginSidebar from './LoginSidebar';
@@ -40,7 +40,9 @@ class Login extends Component {
 
   checkIfUserExists = async uportCreds => {
     try {
-      await checkUserAddress(MNID.decode(uportCreds.networkAddress).address);
+      uportCreds.networkAddress = uportCreds.did.split(':').pop();
+      // await checkUserAddress(MNID.decode(uportCreds.networkAddress).address);
+      await checkUserAddress(uportCreds.networkAddress);
       this.setState({ step: 1, uportCreds });
     } catch (err) {
       this.setState({ step: 2, uportCreds });

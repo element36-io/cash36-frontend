@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MNID } from 'uport-connect';
+// import { MNID } from 'uport-connect';
 
 const LoginUsername = props => {
   const { networkAddress } = props;
@@ -8,7 +8,8 @@ const LoginUsername = props => {
     <div className="login__field login__field--username">
       <label>
         <span>Username (uPort ID)</span>
-        {MNID.decode(networkAddress).address}
+        {/* {MNID.decode(networkAddress).address} */}
+        {networkAddress}
       </label>
     </div>
   );

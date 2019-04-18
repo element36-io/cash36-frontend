@@ -100,7 +100,8 @@ export const login = (username, password, user) => async dispatch => {
 };
 
 export const createUserObject = uportCreds => {
-  const username = MNID.decode(uportCreds.networkAddress).address;
+  // const username = MNID.decode(uportCreds.networkAddress).address;
+  const username = uportCreds.networkAddress;
   const user = {
     username,
     name: uportCreds.name,
