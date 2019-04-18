@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactCountryFlag from 'react-country-flag';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { TextField, MenuItem, withStyles } from '@material-ui/core';
 import styles from './MuiStyles';
@@ -15,10 +16,13 @@ export const SelectInput = props => {
     onBlur,
     isTouched,
     placeholder,
+    countryList,
     classes
   } = props;
   return (
-    <div className={`element-form__input-wrapper ${name}`}>
+    <div
+      className={`element-form__input-wrapper element-form__input-wrapper--select  ${name}`}
+    >
       <TextField
         name={name}
         label={label}
@@ -45,9 +49,24 @@ export const SelectInput = props => {
             <span className={classes.placeholderText}>{placeholder}</span>
           </div>
         </MenuItem>
-        {list.map(token => (
-          <MenuItem key={token.label} value={token.value}>
-            {token.label}
+        {list.map(item => (
+          <MenuItem
+            key={item.code || item.value}
+            value={item.code || item.value}
+          >
+            {countryList && (
+              <ReactCountryFlag
+                code={item.code}
+                svg
+                styleProps={{
+                  width: '2rem',
+                  height: '1.3rem',
+                  backgroundSize: 'cover',
+                  marginRight: '.5rem'
+                }}
+              />
+            )}{' '}
+            {item.name || item.label}
           </MenuItem>
         ))}
       </TextField>
@@ -66,7 +85,8 @@ SelectInput.propTypes = {
   error: PropTypes.string,
   placeholder: PropTypes.string,
   isTouched: PropTypes.bool,
-  classes: PropTypes.object
+  classes: PropTypes.object,
+  countryList: PropTypes.bool
 };
 
 SelectInput.defaultProps = {

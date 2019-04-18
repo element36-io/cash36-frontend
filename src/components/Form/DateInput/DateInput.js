@@ -31,7 +31,7 @@ const DateInput = props => {
   }, [setFieldTouched]);
 
   return (
-    <div className={`invest-form__input-wrapper ${name}`}>
+    <div className={`element-form__input-wrapper ${name}`}>
       <InlineDatePicker
         value={selectedDate}
         onChange={handleChange}

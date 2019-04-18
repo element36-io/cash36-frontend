@@ -3,12 +3,7 @@
 @import '../../styles/mixins.scss';
 
 .element-form-wrapper {
-  width: 100vw;
-  max-width: 60rem;
-
   @include mobile {
-    height: 100%;
-    max-width: 100%;
     display: flex;
     flex-direction: column;
   }
@@ -22,13 +17,7 @@
     margin-bottom: 3rem;
 
     &.element-form__input-wrapper--select {
-      transform: translateY(-0.3rem);
-    }
-
-    .element-select {
-      > div > div {
-        padding-bottom: 3px;
-      }
+      transform: translateY(-0.2rem);
     }
 
     input[type='number']::-webkit-inner-spin-button,

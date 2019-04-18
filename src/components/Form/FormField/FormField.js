@@ -16,7 +16,8 @@ const FormField = props => {
       setFieldTouched
     },
     formField,
-    disabled
+    disabled,
+    countryList
   } = props;
 
   switch (formField.type) {
@@ -50,6 +51,7 @@ const FormField = props => {
           error={errors[formField.name]}
           list={formField.list}
           disabled={disabled}
+          countryList={countryList}
         />
       );
     default:
@@ -74,7 +76,8 @@ const FormField = props => {
 FormField.propTypes = {
   formField: PropTypes.object.isRequired,
   formProps: PropTypes.object.isRequired,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  countryList: PropTypes.bool
 };
 
 export default FormField;
