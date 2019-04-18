@@ -9,11 +9,12 @@ import Step0ProcessWelcomeScreen from './Step0ProcessWelcomeScreen';
 import Step1Tier1Form from './Step1Tier1Form';
 import Step1aConfirmTier1 from './Step1aConfirmTier1';
 import Step2BeneficialOwner from './Step2BeneficialOwner';
+import Step3Documents from './Step3Documents';
+import Step4UserProfile from './Step4UserProfile';
 
 // import Step1 from './ProcessWelcomeScreen/Step1Form';
 
 import './Kyc.scss';
-import Step3Documents from './Step3Documents';
 
 const Kyc = ({
   currentProcessStatus,
@@ -34,20 +35,22 @@ const Kyc = ({
     }
   };
 
-  // const testProcessStatus = 'CONFIRM_TIER_1';
+  const testProcessStatus = 'USER_PROFILE';
 
   const renderStep = () => {
-    switch (currentProcessStatus) {
+    switch (testProcessStatus) {
       case 'WELCOME_SCREEN':
         return <Step0ProcessWelcomeScreen changeSteps={changeSteps} />;
       case 'USER_DATA':
-        return <Step1Tier1Form />;
+        return <Step1Tier1Form changeSteps={changeSteps} />;
       case 'CONFIRM_TIER_1':
         return <Step1aConfirmTier1 changeSteps={changeSteps} />;
       case 'BENEFICIAL_OWNER':
         return <Step2BeneficialOwner changeSteps={changeSteps} />;
       case 'UPLOAD_DOCUMENTS':
         return <Step3Documents changeSteps={changeSteps} />;
+      case 'USER_PROFILE':
+        return <Step4UserProfile changeSteps={changeSteps} />;
       default:
         return null;
     }

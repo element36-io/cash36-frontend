@@ -45,7 +45,7 @@ const Step0ProcessWelcomeScreen = ({ changeSteps }) => {
 };
 
 Step0ProcessWelcomeScreen.propTypes = {
-  changeSteps: PropTypes.func
+  changeSteps: PropTypes.func.isRequired
 };
 
 export default Step0ProcessWelcomeScreen;
