@@ -33,8 +33,6 @@ const Kyc = ({
     }
   };
 
-  // const testProcessStatus = 'USER_DATA';
-
   const renderStep = () => {
     switch (currentProcessStatus) {
       case 'WELCOME_SCREEN':

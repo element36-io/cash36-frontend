@@ -2,11 +2,6 @@
 @import '../../../styles/settings.scss';
 
 .verification-user-profile {
-  .verification-user-profile__source-of-funds {
-    display: flex;
-    flex-direction: column;
-  }
-
   @include desktop {
     padding: 5.2rem 11.4rem 0.8rem 11.4rem;
 

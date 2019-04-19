@@ -6,21 +6,20 @@ import parseValue from './parseValue';
 
 import './RadioButtons.scss';
 
-const RadioButtons = ({ title, choices, value, handleChange }) => {
-  const parsedChoices = choices.map(choice => parseValue(choice));
-
+const RadioButtons = ({ title, choices, value, onChange }) => {
   return (
     <div className="radio-buttons-group">
       <h4>{title}</h4>
-      <RadioGroup value={value} onChange={handleChange}>
-        {parsedChoices.map(choice => {
+      <RadioGroup value={value} onChange={onChange}>
+        {choices.map(choice => {
+          const parsedChoice = parseValue(choice);
           return (
             <FormControlLabel
               key={choice}
               value={choice}
               control={<Radio color="primary" />}
               labelPlacement="end"
-              label={choice}
+              label={parsedChoice}
               style={{
                 height: '3.3rem'
               }}
@@ -34,7 +33,9 @@ const RadioButtons = ({ title, choices, value, handleChange }) => {
 
 RadioButtons.propTypes = {
   title: PropTypes.string,
-  choices: PropTypes.array
+  choices: PropTypes.array,
+  checkbox: PropTypes.bool,
+  parseValue: PropTypes.func
 };
 
 export default RadioButtons;

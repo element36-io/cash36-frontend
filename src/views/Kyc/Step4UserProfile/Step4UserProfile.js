@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Checkbox } from '@material-ui/core';
 
 import ProcessHeader from '../ProcessHeader';
 import ProcessControls from '../ProcessControls';
 import RadioButtons from './RadioButtons';
+import CheckboxButtons from './CheckboxButtons';
 import TextInput from '../../../components/Form/TextInput';
 import BasicSelectInput from '../../../components/Form/BasicSelectInput';
 
@@ -34,14 +34,31 @@ const industryValues = [
   'Marketing'
 ];
 
+const sourcesOfFunds = [
+  'SavingsFromWork',
+  'Inheritance',
+  'Lottery',
+  'Donation',
+  'Other'
+];
+
 const Step4UserProfile = ({ changeSteps }) => {
-  const [transactionVolume, setTransactionVolume] = useState(null);
-  const [yearlyIncome, setYearlyIncome] = useState(null);
+  const [transactionVolume, setTransactionVolume] = useState('');
+  const [incomeVolume, setIncomeVolume] = useState('');
   const [profession, setProfession] = useState('');
   const [industry, setIndustry] = useState('');
+  const [sourceOfFunds, setSourceOfFunds] = useState('');
+  const [sourceOfFundsOther, setSourceOfFundsOther] = useState('');
+
+  const otherSelected = sourceOfFunds === 'Other';
 
   const buttonDisabled =
-    !yearlyIncome || !transactionVolume || !profession || !industry;
+    !incomeVolume ||
+    !transactionVolume ||
+    !profession ||
+    !industry ||
+    !sourceOfFunds ||
+    (otherSelected && !sourceOfFundsOther);
 
   return (
     <div className="verification-user-profile">
@@ -54,13 +71,13 @@ const Step4UserProfile = ({ changeSteps }) => {
           title="What transaction volume per year do you expect?"
           choices={transactionVolumeValues}
           value={transactionVolume}
-          handleChange={event => setTransactionVolume(event.target.value)}
+          onChange={event => setTransactionVolume(event.target.value)}
         />
         <RadioButtons
           title="Declare your yearly income:"
           choices={yearlyIncomeValues}
-          value={yearlyIncome}
-          handleChange={event => setYearlyIncome(event.target.value)}
+          value={incomeVolume}
+          onChange={event => setIncomeVolume(event.target.value)}
         />
       </div>
       <div className="verification-user-profile__row">
@@ -82,19 +99,37 @@ const Step4UserProfile = ({ changeSteps }) => {
           onChange={event => setIndustry(event.target.value)}
         />
       </div>
-      <div className="verification-user-profile__row verification-user-profile__source-of-funds">
-        <h4>Source of Funds</h4>
-        <div className="">
-          <Checkbox color="primary" />
-        </div>
+      <h4>Source of Funds</h4>
+      <div className="verification-user-profile__row">
+        <CheckboxButtons
+          sourceOfFunds={sourceOfFunds}
+          sourcesOfFunds={sourcesOfFunds}
+          sourceOfFundsOther={sourceOfFundsOther}
+          otherSelected={otherSelected}
+          onRadioChange={event => {
+            if (sourceOfFundsOther) {
+              setSourceOfFundsOther('');
+            }
+            setSourceOfFunds(event.target.value);
+          }}
+          onTextChange={event => {
+            setSourceOfFundsOther(event.target.value);
+          }}
+        />
       </div>
 
       <ProcessControls
         submitLabel="Submit & Continue"
         submitCallback={() => {
-          console.log('submit payload to step 4');
-          console.log(profession);
-          // changeSteps(4, {});
+          const payload = {
+            incomeVolume,
+            transactionVolume,
+            profession,
+            industry,
+            sourceOfFundsOther,
+            sourceOfFunds
+          };
+          changeSteps(4, payload);
         }}
         disabled={buttonDisabled}
       />
