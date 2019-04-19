@@ -1,3 +1,4 @@
+// Parsing function for incoming income values
 export default function parseValue (value) {
   if (value.includes('LessThan')) {
     const parsedValue = value.split('LessThan')[1].split('k')[0] + '.000';
