@@ -7,7 +7,6 @@ import Buy from '../Buy';
 import Sell from '../Sell';
 import Transfer from '../Transfer';
 import History from '../History';
-import Settings from '../Settings';
 import Contacts from '../Contacts';
 import Kyc from '../Kyc';
 
@@ -25,7 +24,6 @@ const Wallet = props => {
         <Route exact path="/sell" component={Sell} />
         <Route exact path="/transfer" component={Transfer} />
         <Route exact path="/history" component={History} />
-        <Route exact path="/settings" component={Settings} />
         <Route exact path="/contacts" component={Contacts} />
         <Route path="/kyc/:id" component={Kyc} />
       </Switch>
