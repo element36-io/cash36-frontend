@@ -33,7 +33,7 @@ export const getCurrentProcessStatus = () => async dispatch => {
       payload: processStatus
     });
   } catch (error) {
-    console.log(error);
+    return Promise.reject(error);
   }
 };
 
@@ -42,7 +42,7 @@ export const updateProcessStatus = (step, payload) => async dispatch => {
     await API.post(`/cash36/kyc/step-${step}`, payload);
     getCurrentProcessStatus()(dispatch);
   } catch (error) {
-    console.warn(error);
+    return Promise.reject(error);
   }
 };
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Checkbox from '@material-ui/core/Checkbox';
-
+import ProcessHeader from '../ProcessHeader';
 import ProcessControls from '../ProcessControls';
 import Responsive from '../../../components/Responsive';
 
@@ -11,11 +11,10 @@ const Step2BeneficialOwner = ({ changeSteps }) => {
   const [checked, setChecked] = useState(false);
   return (
     <div className="beneficial-owner">
-      <div className="beneficial-owner__heading">
-        <h2>Verification Process - Step 2</h2>
-        <h4>Please confirm that you're the Beneficial Owner</h4>
-      </div>
-      <hr className="hr-light" />
+      <ProcessHeader
+        title="Verification Process - Step 2"
+        subtitle="Please confirm that you're the Beneficial Owner"
+      />
       <div className="beneficial-owner__body">
         <Responsive>
           <p>

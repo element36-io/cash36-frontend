@@ -9,9 +9,13 @@ import './Step0ProcessWelcomeScreen.scss';
 
 const Step0ProcessWelcomeScreen = ({ changeSteps }) => {
   const [submitting, setSubmitting] = useState(false);
-  const nextStep = () => {
-    setSubmitting(true);
-    changeSteps('0', {});
+  const nextStep = async () => {
+    try {
+      setSubmitting(true);
+      changeSteps('0', {});
+    } catch (error) {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -40,7 +44,6 @@ const Step0ProcessWelcomeScreen = ({ changeSteps }) => {
         submitLabel="Start Verification Process"
         submitCallback={nextStep}
         submitting={submitting}
-        disabled
       />
     </div>
   );

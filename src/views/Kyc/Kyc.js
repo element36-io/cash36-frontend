@@ -12,8 +12,6 @@ import Step2BeneficialOwner from './Step2BeneficialOwner';
 import Step3Documents from './Step3Documents';
 import Step4UserProfile from './Step4UserProfile';
 
-// import Step1 from './ProcessWelcomeScreen/Step1Form';
-
 import './Kyc.scss';
 
 const Kyc = ({
@@ -29,16 +27,16 @@ const Kyc = ({
 
   const changeSteps = async (step, payload) => {
     try {
-      updateProcessStatus(step, payload);
+      await updateProcessStatus(step, payload);
     } catch (error) {
-      console.warn(error);
+      return Promise.reject(error);
     }
   };
 
-  const testProcessStatus = 'USER_PROFILE';
+  // const testProcessStatus = 'USER_DATA';
 
   const renderStep = () => {
-    switch (testProcessStatus) {
+    switch (currentProcessStatus) {
       case 'WELCOME_SCREEN':
         return <Step0ProcessWelcomeScreen changeSteps={changeSteps} />;
       case 'USER_DATA':
@@ -58,7 +56,6 @@ const Kyc = ({
 
   return (
     <div className="wrapper paper kyc" data-status={currentProcessStatus}>
-      {/* <Step1 /> */}
       {renderStep()}
     </div>
   );

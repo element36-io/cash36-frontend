@@ -50,16 +50,15 @@ export const formModel = [
     type: 'text',
     label: 'ZIP Code',
     placeholder: '000000'
+  },
+  {
+    name: 'country',
+    type: 'select',
+    label: 'Select your country',
+    list: [],
+    placeholder: 'Select your country'
   }
 ];
-
-export const countriesModel = {
-  name: 'country',
-  type: 'select',
-  label: 'Select your country',
-  list: [],
-  placeholder: 'Select your country'
-};
 
 export const nationalityModel = [
   {

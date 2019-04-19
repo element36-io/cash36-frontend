@@ -27,7 +27,7 @@
   @include desktop {
     padding: 5.2rem 11.4rem 0.8rem 11.4rem;
 
-    > hr {
+    .process-header {
       margin-bottom: 13.8rem;
     }
 
@@ -47,14 +47,9 @@
 
   @include mobile {
     padding: 2.1rem 1.2rem 0.8rem 1.2rem;
-    > hr {
-      margin: 1.6rem 0;
-    }
 
-    .beneficial-owner__heading {
-      > h4 {
-        margin-top: 1.8rem;
-      }
+    .process-header {
+      margin: 1.6rem 0;
     }
 
     .beneficial-owner__body {

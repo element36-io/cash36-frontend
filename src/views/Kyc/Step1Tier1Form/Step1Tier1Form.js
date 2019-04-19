@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import Form from '../../../components/Form';
 import FormField from '../../../components/Form/FormField';
 import ProcessHeader from '../ProcessHeader';
@@ -10,7 +11,6 @@ import validationSchema from './validation-schema';
 import {
   initialValues,
   formModel,
-  countriesModel,
   ibanModel,
   nationalityModel
 } from './formModel';
@@ -19,9 +19,16 @@ import './Step1Tier1Form.scss';
 const Step1Tier1Form = props => {
   const { countries, nationalities, getCountries, changeSteps } = props;
 
-  const submit = values => {
-    console.log(values);
-    console.log(changeSteps);
+  const submit = async values => {
+    try {
+      const payload = {
+        ...values,
+        dateOfBirth: moment(values.dateOfBirth).format('DD.MM.YYYY')
+      };
+      await changeSteps(1, payload);
+    } catch (error) {
+      return Promise.reject(error);
+    }
   };
 
   useEffect(() => {
@@ -30,7 +37,11 @@ const Step1Tier1Form = props => {
     }
   }, []);
 
-  const countriesSelect = { ...countriesModel, list: countries };
+  // const countriesSelect = { ...countriesModel, list: countries };
+  const fieldGroup = formModel.map(field => {
+    if (field.name === 'country') field.list = countries;
+    return field;
+  });
   const nationalitySelects = nationalityModel.map(item => {
     item.list = nationalities;
     return item;
@@ -50,18 +61,14 @@ const Step1Tier1Form = props => {
           <form autoComplete="off" onSubmit={formProps.handleSubmit}>
             <h3>Personal Information</h3>
             <div className="tier1-form__field-group">
-              {formModel.map(field => (
+              {fieldGroup.map(field => (
                 <FormField
                   key={field.name}
                   formField={field}
                   formProps={formProps}
+                  countryList={field.name === 'country'}
                 />
               ))}
-              <FormField
-                formField={countriesSelect}
-                formProps={formProps}
-                countryList
-              />
             </div>
             <div className="tier1-form__field-group">
               {nationalitySelects.map(field => (
