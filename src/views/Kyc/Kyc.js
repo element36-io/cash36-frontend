@@ -11,6 +11,7 @@ import Step1aConfirmTier1 from './Step1aConfirmTier1';
 import Step2BeneficialOwner from './Step2BeneficialOwner';
 import Step3Documents from './Step3Documents';
 import Step4UserProfile from './Step4UserProfile';
+import Step5AwaitingVerification from './Step5AwaitingVerification';
 
 import './Kyc.scss';
 
@@ -23,8 +24,6 @@ const Kyc = ({
     getCurrentProcessStatus();
   }, [currentProcessStatus]);
 
-  console.log(currentProcessStatus);
-
   const changeSteps = async (step, payload) => {
     try {
       await updateProcessStatus(step, payload);
@@ -33,8 +32,10 @@ const Kyc = ({
     }
   };
 
+  const testProcessStatus = 'AWAITING_VERIFICATION';
+
   const renderStep = () => {
-    switch (currentProcessStatus) {
+    switch (testProcessStatus) {
       case 'WELCOME_SCREEN':
         return <Step0ProcessWelcomeScreen changeSteps={changeSteps} />;
       case 'USER_DATA':
@@ -47,6 +48,8 @@ const Kyc = ({
         return <Step3Documents changeSteps={changeSteps} />;
       case 'USER_PROFILE':
         return <Step4UserProfile changeSteps={changeSteps} />;
+      case 'AWAITING_VERIFICATION':
+        return <Step5AwaitingVerification />;
       default:
         return null;
     }
