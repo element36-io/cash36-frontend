@@ -32,10 +32,8 @@ const Kyc = ({
     }
   };
 
-  const testProcessStatus = 'AWAITING_VERIFICATION';
-
   const renderStep = () => {
-    switch (testProcessStatus) {
+    switch (currentProcessStatus) {
       case 'WELCOME_SCREEN':
         return <Step0ProcessWelcomeScreen changeSteps={changeSteps} />;
       case 'USER_DATA':
