@@ -5,35 +5,40 @@ import NavBtn from '../NavBtn';
 import HeaderMobileDropdown from './HeaderMobileDropdown';
 
 class HeaderMobile extends Component {
-    state = {
-      activeNav: false,
-      showVerification: false
-    };
+  state = {
+    activeNav: false,
+    showVerification: false
+  };
 
-    toggleNav = () => {
-      this.setState({ activeNav: !this.state.activeNav });
-    };
+  toggleNav = () => {
+    this.setState({ activeNav: !this.state.activeNav });
+  };
 
-    openVerification = () => {
-      this.setState({ showVerification: true });
-    };
+  openVerification = () => {
+    this.setState({ showVerification: true });
+  };
 
-    closeVerification = () => {
-      this.setState({ showVerification: false });
-    };
+  closeVerification = () => {
+    this.setState({ showVerification: false });
+  };
 
-    render () {
-      const { activeNav, showVerification } = this.state;
-      const { logout, user } = this.props;
+  render () {
+    const { activeNav } = this.state;
+    const { logout } = this.props;
 
-      return (
-        <div>
-          <HeaderAlerts />
-          <NavBtn isActive={activeNav} clickHandler={this.toggleNav} />
-          <HeaderMobileDropdown logout={logout} isActive={activeNav} clickCallback={this.toggleNav} openVerification={this.openVerification} />
-        </div>
-      );
-    }
+    return (
+      <div>
+        <HeaderAlerts />
+        <NavBtn isActive={activeNav} clickHandler={this.toggleNav} />
+        <HeaderMobileDropdown
+          logout={logout}
+          isActive={activeNav}
+          clickCallback={this.toggleNav}
+          openVerification={this.openVerification}
+        />
+      </div>
+    );
+  }
 }
 
 HeaderMobile.propTypes = {
