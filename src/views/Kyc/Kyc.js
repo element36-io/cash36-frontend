@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-  getCurrentProcessStatus,
-  updateProcessStatus
+  getCurrentKycStep,
+  updateKycStep
 } from '../../store/auth/auth.actions';
 import Step0ProcessWelcomeScreen from './Step0ProcessWelcomeScreen';
 import Step1Tier1Form from './Step1Tier1Form';
@@ -15,25 +15,21 @@ import Step5AwaitingVerification from './Step5AwaitingVerification';
 
 import './Kyc.scss';
 
-const Kyc = ({
-  currentProcessStatus,
-  getCurrentProcessStatus,
-  updateProcessStatus
-}) => {
+const Kyc = ({ currentKycStep, getCurrentKycStep, updateKycStep }) => {
   useEffect(() => {
-    getCurrentProcessStatus();
-  }, [currentProcessStatus]);
+    getCurrentKycStep();
+  }, [currentKycStep]);
 
   const changeSteps = async (step, payload) => {
     try {
-      await updateProcessStatus(step, payload);
+      await updateKycStep(step, payload);
     } catch (error) {
       return Promise.reject(error);
     }
   };
 
   const renderStep = () => {
-    switch (currentProcessStatus) {
+    switch (currentKycStep) {
       case 'WELCOME_SCREEN':
         return <Step0ProcessWelcomeScreen changeSteps={changeSteps} />;
       case 'USER_DATA':
@@ -49,26 +45,26 @@ const Kyc = ({
       case 'AWAITING_VERIFICATION':
         return <Step5AwaitingVerification />;
       default:
-        return null;
+        return <div>Loading...</div>;
     }
   };
 
   return (
-    <div className="wrapper paper kyc" data-status={currentProcessStatus}>
+    <div className="wrapper paper kyc" data-status={currentKycStep}>
       {renderStep()}
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  currentProcessStatus: state.auth.user.currentProcessStatus
+  currentKycStep: state.auth.kyc.currentStep
 });
 
 Kyc.propTypes = {
-  currentProcessStatus: PropTypes.string.isRequired
+  currentKycStep: PropTypes.string
 };
 
 export default connect(
   mapStateToProps,
-  { getCurrentProcessStatus, updateProcessStatus }
+  { getCurrentKycStep, updateKycStep }
 )(Kyc);

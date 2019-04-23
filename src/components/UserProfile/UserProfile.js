@@ -27,6 +27,30 @@ class UserProfile extends PureComponent {
     this.setState({ showVerification: false });
   };
 
+  renderVerificationButton = () => {
+    const { currentProcessStatus, caseId } = this.props.user;
+
+    if (currentProcessStatus !== 'AWAITING_VERIFICATION') {
+      return (
+        <Link to={`/kyc/${caseId}`}>
+          <DefaultButton variant="raised">
+            {currentProcessStatus === 'NOT_STARTED'
+              ? 'Verify Account'
+              : 'Continue Verification'}
+          </DefaultButton>
+        </Link>
+      );
+    }
+
+    if (currentProcessStatus === 'AWAITING_VERIFICATION') {
+      return (
+        <div className="user-profile__buttons--awaiting">
+          Awaiting Verification
+        </div>
+      );
+    }
+  };
+
   renderAttestUser = () => {
     const {
       user: { currentLevel, verified },
@@ -85,9 +109,8 @@ class UserProfile extends PureComponent {
 
   render () {
     const {
-      user: { username, avatarUri, name, currentLevel, kycProcessStatus },
-      alt,
-      caseId
+      user: { username, avatarUri, name, currentLevel },
+      alt
     } = this.props;
 
     return (
@@ -119,20 +142,7 @@ class UserProfile extends PureComponent {
           </p>
           <p>{username}</p>
           <div className="user-profile__buttons">
-            {currentLevel &&
-              currentLevel !== 'Tier_2' &&
-              kycProcessStatus !== 'AWAITING_VERIFICATION' && (
-              <Link to={`/kyc/${caseId}`}>
-                <DefaultButton variant="raised">
-                  {tiers[currentLevel].btnText}
-                </DefaultButton>
-              </Link>
-            )}
-            {kycProcessStatus === 'AWAITING_VERIFICATION' && (
-              <div className="user-profile__buttons--awaiting">
-                Awaiting Verification
-              </div>
-            )}
+            {this.renderVerificationButton()}
             {this.renderAttestUser()}
           </div>
         </div>
@@ -143,8 +153,7 @@ class UserProfile extends PureComponent {
 
 const mapStateToProps = state => ({
   user: state.auth.user,
-  attesting: state.auth.attesting,
-  caseId: state.auth.user.caseId
+  attesting: state.auth.attesting
 });
 
 UserProfile.propTypes = {

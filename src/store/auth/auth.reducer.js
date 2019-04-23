@@ -3,7 +3,7 @@ import {
   GET_USER_INFO,
   CONFIRM_ATTESTATION,
   ATTESTATION_PROGRESS,
-  GET_CURRENT_PROCESS_STATUS
+  GET_CURRENT_KYC_STEP
 } from './auth.actions';
 
 const initialState = {
@@ -11,7 +11,8 @@ const initialState = {
   user: JSON.parse(localStorage.getItem('state'))
     ? JSON.parse(localStorage.getItem('state')).user
     : undefined,
-  attesting: false
+  attesting: false,
+  kyc: {}
 };
 
 export default (state = initialState, action) => {
@@ -32,12 +33,12 @@ export default (state = initialState, action) => {
           ...action.payload
         }
       };
-    case GET_CURRENT_PROCESS_STATUS:
+    case GET_CURRENT_KYC_STEP:
       return {
         ...state,
-        user: {
-          ...state.user,
-          currentProcessStatus: action.payload
+        kyc: {
+          ...state.kyc,
+          currentStep: action.payload
         }
       };
     case ATTESTATION_PROGRESS:

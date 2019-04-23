@@ -6,7 +6,7 @@ export const AUTH_USER = 'AUTH_USER';
 export const GET_USER_INFO = 'GET_USER_INFO';
 export const ATTESTATION_PROGRESS = 'ATTESTATION_PROGRESS';
 export const CONFIRM_ATTESTATION = 'CONFIRM_ATTESTATION';
-export const GET_CURRENT_PROCESS_STATUS = 'GET_CURRENT_PROCESS_STATUS';
+export const GET_CURRENT_KYC_STEP = 'GET_CURRENT_KYC_STEP';
 
 export const checkUserAddress = address =>
   API.get(`/public/is-user/${address}`);
@@ -35,14 +35,14 @@ export const getUserInfo = () => async dispatch => {
   }
 };
 
-export const getCurrentProcessStatus = () => async dispatch => {
+export const getCurrentKycStep = () => async dispatch => {
   try {
     const response = await API.get('/cash36/kyc/get-step');
 
     const processStatus = response.data.result;
 
     dispatch({
-      type: GET_CURRENT_PROCESS_STATUS,
+      type: GET_CURRENT_KYC_STEP,
       payload: processStatus
     });
   } catch (error) {
@@ -50,10 +50,10 @@ export const getCurrentProcessStatus = () => async dispatch => {
   }
 };
 
-export const updateProcessStatus = (step, payload) => async dispatch => {
+export const updateKycStep = (step, payload) => async dispatch => {
   try {
     await API.post(`/cash36/kyc/step-${step}`, payload);
-    dispatch(getCurrentProcessStatus());
+    dispatch(getCurrentKycStep());
     dispatch(getUserInfo());
   } catch (error) {
     return Promise.reject(error);
