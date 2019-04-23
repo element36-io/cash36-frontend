@@ -6,7 +6,6 @@ import { CircularProgress } from '@material-ui/core';
 
 import tiers from './tiers';
 import DefaultButton from '../Buttons/DefaultButton';
-import Verification from '../Verification';
 import { uPort } from '../../config/uport.config';
 import {
   confirmAttestation,
@@ -86,20 +85,13 @@ class UserProfile extends PureComponent {
 
   render () {
     const {
-      user,
       user: { username, avatarUri, name, currentLevel, kycProcessStatus },
       alt,
       caseId
     } = this.props;
-    const { showVerification } = this.state;
 
     return (
       <div className={`user-profile ${alt ? 'user-profile--alt' : ''}`}>
-        <Verification
-          isVisible={showVerification}
-          user={user}
-          close={this.closeVerification}
-        />
         <div className="user-profile__avatar">
           {avatarUri ? (
             <img src={avatarUri} alt={name} />

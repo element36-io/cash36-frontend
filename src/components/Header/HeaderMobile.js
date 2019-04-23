@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import HeaderAlerts from './HeaderAlerts';
 import NavBtn from '../NavBtn';
 import HeaderMobileDropdown from './HeaderMobileDropdown';
-import Verification from '../Verification/Verification';
 
 class HeaderMobile extends Component {
     state = {
@@ -29,7 +28,6 @@ class HeaderMobile extends Component {
 
       return (
         <div>
-          <Verification isVisible={showVerification} user={user} close={this.closeVerification} />
           <HeaderAlerts />
           <NavBtn isActive={activeNav} clickHandler={this.toggleNav} />
           <HeaderMobileDropdown logout={logout} isActive={activeNav} clickCallback={this.toggleNav} openVerification={this.openVerification} />
