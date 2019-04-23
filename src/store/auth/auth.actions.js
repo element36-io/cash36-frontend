@@ -22,6 +22,19 @@ export const logout = () => {
   };
 };
 
+export const getUserInfo = () => async dispatch => {
+  try {
+    const response = await API.get('/cash36/user/current-user');
+
+    dispatch({
+      type: GET_USER_INFO,
+      payload: response.data
+    });
+  } catch (error) {
+    console.warn(error);
+  }
+};
+
 export const getCurrentProcessStatus = () => async dispatch => {
   try {
     const response = await API.get('/cash36/kyc/get-step');
@@ -40,22 +53,10 @@ export const getCurrentProcessStatus = () => async dispatch => {
 export const updateProcessStatus = (step, payload) => async dispatch => {
   try {
     await API.post(`/cash36/kyc/step-${step}`, payload);
-    getCurrentProcessStatus()(dispatch);
+    dispatch(getCurrentProcessStatus());
+    dispatch(getUserInfo());
   } catch (error) {
     return Promise.reject(error);
-  }
-};
-
-export const getUserInfo = () => async dispatch => {
-  try {
-    const response = await API.get('/cash36/user/current-user');
-
-    dispatch({
-      type: GET_USER_INFO,
-      payload: response.data
-    });
-  } catch (error) {
-    console.warn(error);
   }
 };
 
@@ -66,7 +67,7 @@ export const register = (username, password, user) => async dispatch => {
       password,
       avatarUrl: user.avatarUri
     });
-    login(username, password, user)(dispatch);
+    dispatch(login(username, password, user));
   } catch (error) {
     return Promise.reject(
       error.response.data.message || 'An error has occured'
