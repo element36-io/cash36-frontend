@@ -15,18 +15,6 @@ import {
 import './UserProfile.scss';
 
 class UserProfile extends PureComponent {
-  state = {
-    showVerification: false
-  };
-
-  toggleVerification = () => {
-    this.setState({ showVerification: !this.state.showVerification });
-  };
-
-  closeVerification = () => {
-    this.setState({ showVerification: false });
-  };
-
   renderVerificationButton = () => {
     const { currentProcessStatus, caseId } = this.props.user;
 

@@ -37,7 +37,6 @@ const Step1Tier1Form = props => {
     }
   }, []);
 
-  // const countriesSelect = { ...countriesModel, list: countries };
   const fieldGroup = formModel.map(field => {
     if (field.name === 'country') field.list = countries;
     return field;

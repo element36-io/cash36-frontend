@@ -17,8 +17,13 @@ const FileInput = props => {
 
     const isValidFileType = fileTypes.includes(files[0].name.split('.').pop());
     setProgress(0);
-    setName(files[0].name);
+    setName(isValidFileType ? files[0].name : null);
     setError(!isValidFileType);
+
+    if (!isValidFileType) {
+      removeCallback(documentType);
+      return;
+    }
 
     let reader = new FileReader();
 
@@ -30,17 +35,12 @@ const FileInput = props => {
     };
     reader.readAsDataURL(files[0]);
 
-    if (!isValidFileType) {
-      removeCallback(documentType);
-      return;
-    }
-
     changeCallback(files[0], documentType);
   };
 
   return (
     <div className="tier2-form__file-input__container">
-      <div
+      <label
         className={`tier2-form__file-input ${name ? 'active' : ''} ${
           error ? 'error' : ''
         }`}
@@ -54,16 +54,16 @@ const FileInput = props => {
             </Fragment>
           )}
         </div>
-        <label>
+        <span className="tier2-form__file-input__upload-icon">
           <i className="fas fa-upload" />
-          <input type="file" ref={fileInput} onChange={handleChange} />
-        </label>
+        </span>
         {name && (
           <div className="tier2-form__file-input__progress">
             <span style={{ width: `${progress}%` }} />
           </div>
         )}
-      </div>
+        <input type="file" ref={fileInput} onChange={handleChange} />
+      </label>
       {error && <p>Only png, jpg, jpeg and pdf files are allowed</p>}
     </div>
   );

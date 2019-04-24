@@ -20,6 +20,13 @@
 
   .documents-upload__document-wrapper__content {
     flex: 1;
+    display: flex;
+    align-items: flex-start;
+
+    img {
+      width: 7rem;
+      margin: 0.5rem 3.5rem 0 2rem;
+    }
   }
 
   h3 {
@@ -70,6 +77,10 @@
     }
   }
 
+  @include tablet {
+    padding: 3.2rem 1rem 0 1rem;
+  }
+
   @include mobile {
     padding: 3.2rem 1rem 0 1rem;
 
@@ -80,6 +91,10 @@
       .documents-upload__document-wrapper__content {
         margin-bottom: 3rem;
       }
+    }
+
+    .tier2-form__file-input__container {
+      width: 100%;
     }
   }
 }

@@ -6,20 +6,11 @@ import HeaderMobileDropdown from './HeaderMobileDropdown';
 
 class HeaderMobile extends Component {
   state = {
-    activeNav: false,
-    showVerification: false
+    activeNav: false
   };
 
   toggleNav = () => {
     this.setState({ activeNav: !this.state.activeNav });
-  };
-
-  openVerification = () => {
-    this.setState({ showVerification: true });
-  };
-
-  closeVerification = () => {
-    this.setState({ showVerification: false });
   };
 
   render () {
@@ -34,7 +25,6 @@ class HeaderMobile extends Component {
           logout={logout}
           isActive={activeNav}
           clickCallback={this.toggleNav}
-          openVerification={this.openVerification}
         />
       </div>
     );

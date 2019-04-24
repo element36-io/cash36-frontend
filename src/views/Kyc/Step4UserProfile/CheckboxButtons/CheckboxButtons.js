@@ -14,58 +14,34 @@ const CheckboxButtons = ({
   onRadioChange,
   onTextChange
 }) => {
+  const source = [...sourcesOfFunds];
+  const sourceOther = source.pop();
+
   return (
     <div className="checkbox-buttons">
       <div>
         <RadioGroup value={sourceOfFunds} onChange={onRadioChange}>
-          <FormControlLabel
-            name={sourcesOfFunds[0]}
-            value={sourcesOfFunds[0]}
-            label="Savings from Work"
-            control={<Checkbox color="primary" />}
-            labelPlacement="end"
-            style={{
-              height: '3.3rem'
-            }}
-          />
-          <FormControlLabel
-            name={sourcesOfFunds[1]}
-            value={sourcesOfFunds[1]}
-            label={sourcesOfFunds[1]}
-            control={<Checkbox color="primary" />}
-            labelPlacement="end"
-            style={{
-              height: '3.3rem'
-            }}
-          />
-          <FormControlLabel
-            name={sourcesOfFunds[2]}
-            value={sourcesOfFunds[2]}
-            label={sourcesOfFunds[2]}
-            control={<Checkbox color="primary" />}
-            labelPlacement="end"
-            style={{
-              height: '3.3rem'
-            }}
-          />
-          <FormControlLabel
-            name={sourcesOfFunds[3]}
-            value={sourcesOfFunds[3]}
-            label={sourcesOfFunds[3]}
-            control={<Checkbox color="primary" />}
-            labelPlacement="end"
-            style={{
-              height: '3.3rem'
-            }}
-          />
+          {source.map(item => (
+            <FormControlLabel
+              key={item}
+              name={item}
+              value={item}
+              label={item === 'SavingsFromWork' ? 'Savings from Work' : item}
+              control={<Checkbox color="primary" />}
+              labelPlacement="end"
+              style={{
+                height: '3.3rem'
+              }}
+            />
+          ))}
         </RadioGroup>
       </div>
       <div>
         <RadioGroup value={sourceOfFunds} onChange={onRadioChange}>
           <FormControlLabel
-            name={sourcesOfFunds[4]}
-            value={sourcesOfFunds[4]}
-            label={sourcesOfFunds[4]}
+            name={sourceOther}
+            value={sourceOther}
+            label={sourceOther}
             control={<Checkbox color="primary" />}
             labelPlacement="end"
             style={{

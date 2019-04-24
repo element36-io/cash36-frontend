@@ -10,6 +10,7 @@
   }
 
   .tier2-form__file-input {
+    display: flex;
     position: relative;
     padding: 1.4rem 5rem 1.4rem 1.6rem;
     background: #fff;
@@ -17,6 +18,7 @@
     border: 1px solid rgba(1, 21, 44, 0.1);
     color: $text-light-grey-1;
     overflow: hidden;
+    cursor: pointer;
 
     input {
       display: none;
@@ -30,7 +32,7 @@
       }
     }
 
-    label {
+    .tier2-form__file-input__upload-icon {
       display: flex;
       align-items: center;
       justify-content: center;
