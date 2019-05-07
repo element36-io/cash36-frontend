@@ -36,15 +36,16 @@ const Step3Documents = props => {
     try {
       setSubmitting(true);
       let formData = new FormData();
-      Object.keys(types).forEach(type => {
-        formData.append('files', types[type].file);
-        formData.append('documentTypes', types[type].documentType);
+      Object.values(types).forEach(doc => {
+        if (!doc.file) return;
+        formData.append('documentTypes', doc.documentType);
+        formData.append('files', doc.file);
       });
       await changeSteps(3, formData);
     } catch (error) {
       console.warn(error);
-      setSubmitting(false);
     }
+    setSubmitting(false);
   };
 
   const addDocument = (file, documentType) => {
