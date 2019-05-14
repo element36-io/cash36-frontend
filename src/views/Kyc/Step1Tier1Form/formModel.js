@@ -5,13 +5,13 @@ export const formModel = [
     name: 'firstName',
     type: 'text',
     label: 'First Name(s)',
-    placeholder: 'Enter Your First Name'
+    placeholder: 'Enter your First Name'
   },
   {
     name: 'lastName',
     type: 'text',
     label: 'Last Name',
-    placeholder: 'Enter Your Last Name'
+    placeholder: 'Enter your Last Name'
   },
   {
     name: 'dateOfBirth',
@@ -25,30 +25,30 @@ export const formModel = [
     name: 'email',
     type: 'text',
     label: 'Email Address',
-    placeholder: 'Enter Your Email Address'
+    placeholder: 'Enter your Email Address'
   },
   {
     name: 'street',
     type: 'text',
     label: 'Street',
-    placeholder: 'Enter Your Street'
+    placeholder: 'Enter your Street'
   },
   {
     name: 'streetNr',
     type: 'text',
     label: 'Street Number',
-    placeholder: 'Enter Your Street Number'
+    placeholder: 'Enter your Street Number'
   },
   {
     name: 'city',
     type: 'text',
     label: 'Town/City',
-    placeholder: 'Enter Your City'
+    placeholder: 'Enter your City'
   },
   {
     name: 'zip',
     type: 'text',
-    label: 'ZIP Code',
+    label: 'Enter your ZIP Code',
     placeholder: '000000'
   },
   {

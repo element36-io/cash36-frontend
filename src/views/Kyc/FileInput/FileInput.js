@@ -15,7 +15,12 @@ const FileInput = props => {
 
     if (!files[0]) return;
 
-    const isValidFileType = fileTypes.includes(files[0].name.split('.').pop());
+    const isValidFileType = fileTypes.includes(
+      files[0].name
+        .split('.')
+        .pop()
+        .toLowerCase()
+    );
     setProgress(0);
     setName(isValidFileType ? files[0].name : null);
     setError(!isValidFileType);
