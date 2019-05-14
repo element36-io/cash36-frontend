@@ -49,14 +49,15 @@ const CheckboxButtons = ({
             }}
           />
         </RadioGroup>
-        <TextInput
-          name="other-sources"
-          label="Other"
-          placeholder="Describe Your Source of Funds"
-          onChange={onTextChange}
-          value={sourceOfFundsOther}
-          disabled={!otherSelected}
-        />
+        {otherSelected && (
+          <TextInput
+            name="other-sources"
+            label="Other"
+            placeholder="Describe Your Source of Funds"
+            onChange={onTextChange}
+            value={sourceOfFundsOther}
+          />
+        )}
       </div>
     </div>
   );

@@ -134,7 +134,7 @@ const Step3Documents = props => {
             <h3>Verified Proof of Residence</h3>
             <p>
               Please upload the full document and blackout any sensitive
-              information! The documen must include your full name, your address
+              information! The document must include your full name, your address
               and a date not older than 3 months.
             </p>
             <p>The following documents among others are accepted:</p>
