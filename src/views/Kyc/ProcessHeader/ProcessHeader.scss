@@ -1,0 +1,31 @@
+@import '../../../styles/settings.scss';
+@import '../../../styles/mixins.scss';
+
+.process-header {
+  margin-bottom: 4.4rem;
+  border-bottom: 1px solid $border-light-grey-1;
+
+  p {
+    color: $text-light-grey-1;
+    font-size: 1.4rem;
+    line-height: 1.7rem;
+  }
+
+  @include desktop {
+    padding-bottom: 2.5rem;
+  }
+
+  @include mobile {
+    margin-bottom: 1.6rem;
+    padding-bottom: 1.6rem;
+
+    p {
+      margin-top: 1.6rem;
+    }
+
+    &.alt {
+      text-align: center;
+      border-bottom: none;
+    }
+  }
+}

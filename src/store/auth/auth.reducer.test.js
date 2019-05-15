@@ -67,7 +67,7 @@ it('should set proper Kyc status state', () => {
   const action = {
     type: GET_KYC,
     payload: {
-      kycLevel: 'Tier_0',
+      currentLevel: 'Tier_0',
       kycProcessStatus: null
     }
   };

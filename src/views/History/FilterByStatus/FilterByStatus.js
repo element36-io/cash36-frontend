@@ -8,10 +8,10 @@ import './FilterByStatus.scss';
 const filters = ['All', 'Open', 'Completed', 'Processing', 'On Hold'];
 
 const FilterByStatus = ({ filterByStatus, handleFilterByStatusChange, fetchingFilters }) => (
-  <div className='history__filter-by-status paper'>
+  <div className="history__filter-by-status paper">
     <span>Filter by status:</span>
     <TextField
-      name='filterByStatus'
+      name="filterByStatus"
       select
       value={filterByStatus}
       onChange={handleFilterByStatusChange}

@@ -12,13 +12,13 @@ class BalanceCard extends Component {
     return (
       <div className={`balance-card paper balance-card--${symbol}`}>
         <div>
-          <Typography variant='body1' color='textSecondary'>{name} Balance</Typography>
+          <Typography variant="body1" color="textSecondary">{name} Balance</Typography>
         </div>
         <div>
-          <span className='balance-card__icon'>
+          <span className="balance-card__icon">
             <TokenIcon token={symbol} />
           </span>
-          <div className='balance-card__balance'>
+          <div className="balance-card__balance">
             {formatAmount(balance)} <span>{symbol}</span>
           </div>
         </div>

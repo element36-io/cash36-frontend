@@ -5,8 +5,8 @@ import TransactionFooter from '../../../components/TransactionFooter';
 
 const TransferError = ({ message }) => {
   return (
-    <div className='transfer__transfer-status'>
-      <ActionStatus type='error' title='Transfer Unsuccessful' />
+    <div className="transfer__transfer-status">
+      <ActionStatus type="error" title="Transfer Unsuccessful" />
       <p>
         {message}
       </p>

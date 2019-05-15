@@ -17,7 +17,7 @@ class TransferContact extends PureComponent {
     return (
       <div className={`transfer__contact ${alt ? 'transfer__contact--alt' : ''}`} onClick={this.clickHandler}>
         <Avatar avatarUrl={contact.avatarUrl} alt={contact.contactName}
-          cssClass='transfer__contact__avatar' />
+          cssClass="transfer__contact__avatar" />
         <span>{contact.contactName}</span>
         <Ink duration={500} />
       </div>

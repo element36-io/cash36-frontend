@@ -35,11 +35,11 @@ const Notification = props => {
   return (
     <div className={`notification ${creationDate > lastRead ? 'notification--unread' : ''}`}>
       {renderIcon(type)}
-      <div className='notification__content'>
+      <div className="notification__content">
         <span>{header}</span>
         <span>{message}</span>
       </div>
-      <div className='notification__time'>
+      <div className="notification__time">
         {calculateTime(creationDate)}
       </div>
     </div>

@@ -9,7 +9,7 @@ class DateRangeMobile extends Component {
   render () {
     const { startDate, endDate, handleMobileRangeDateChange, visible, toggleFiltersVisible } = this.props;
     return (
-      <div className='date-range-mobile paper' >
+      <div className="date-range-mobile paper" >
         <TodayIcon onClick={toggleFiltersVisible} />
         <DateRange
           calendars={1}

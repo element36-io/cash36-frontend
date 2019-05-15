@@ -86,9 +86,9 @@ class Sell extends Component {
 
   render () {
     return (
-      <div className='wrapper'>
-        <div className='sell paper'>
-          <div className='sell__content'>
+      <div className="wrapper">
+        <div className="sell paper">
+          <div className="sell__content">
             {this.renderStep()}
           </div>
         </div>

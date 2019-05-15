@@ -9,19 +9,19 @@ import Amount from './Amount';
 import './ActivityTable.scss';
 
 const ActivityTable = ({ userActivity }) => (
-  <div className='activity-table'>
+  <div className="activity-table">
     <Responsive>
-      <div className='activity-table__head activity-table__row'>
+      <div className="activity-table__head activity-table__row">
         <div>Date</div>
         <div>Action</div>
         <div>Status</div>
         <div>Amount</div>
       </div>
     </Responsive>
-    <div className='activity-table__body paper'>
+    <div className="activity-table__body paper">
       {userActivity.map((activity, index) => {
         return (
-          <div key={index} className='activity-table__row'>
+          <div key={index} className="activity-table__row">
             <div><Date date={activity.date} /></div>
             <div><Action type={activity.action} targetAddress={activity.targetAddress} /></div>
             <div><Status status={activity.status} /></div>

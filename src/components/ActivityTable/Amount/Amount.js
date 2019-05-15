@@ -6,7 +6,7 @@ import './Amount.scss';
 
 const Amount = ({ type, amount, symbol }) => {
   return (
-    <div className='activity-table-amount'>
+    <div className="activity-table-amount">
       <div>{type === 'BUY' || type === 'RECEIVED' ? '+' : '-'}{formatAmount(amount)}</div>
       <div>{symbol}</div>
     </div>

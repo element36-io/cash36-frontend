@@ -9,8 +9,8 @@ const SellSuccess = props => {
   const { amount, symbol } = props;
 
   return (
-    <div className='sell__sell-success'>
-      <ActionStatus type='success' title='Success!' />
+    <div className="sell__sell-success">
+      <ActionStatus type="success" title="Success!" />
       <AmountCard amount={amount} symbol={symbol} />
       <p>
           You've succesfuly sold {`${amount} ${symbol}`}

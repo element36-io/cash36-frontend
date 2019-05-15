@@ -93,7 +93,7 @@ class ContactsFormContainer extends Component {
           <BackButton onClick={this.closeForm} />
         </Responsive>
         <Responsive>
-          <CloseIcon className='contact-form__close' onClick={this.closeForm} />
+          <CloseIcon className="contact-form__close" onClick={this.closeForm} />
         </Responsive>
         {showResponse
           ? <ContactResponse onClick={this.showForm} type={type} btnText={btnText} title={msg} />

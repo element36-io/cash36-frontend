@@ -60,6 +60,21 @@ export default createMuiTheme({
           background: 'none'
         }
       }
+    },
+    MuiInput: {
+      underline: {
+        '&&&&:hover:before': {
+          borderBottom: '2px solid #EDF0F4'
+        },
+        '&:before': {
+          borderBottom: '1px solid #EDF0F4'
+        },
+        '&:after': {
+          borderBottom: 'none',
+          height: '2px',
+          background: 'linear-gradient(to right, #69B8F2, #017EE5)'
+        }
+      }
     }
   }
 });

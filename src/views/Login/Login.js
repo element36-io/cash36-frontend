@@ -21,11 +21,16 @@ class Login extends Component {
   };
 
   componentDidMount () {
-    uPort.requestCredentials({
-      requested: ['name', 'avatar'],
-      verified: ['element36Tier1', 'element36Tier2'],
-      notifications: true
-    }, this.uPortURIHandler).then(this.checkIfUserExists);
+    uPort
+      .requestCredentials(
+        {
+          requested: ['name', 'avatar'],
+          verified: ['element36Tier1', 'element36Tier2'],
+          notifications: true
+        },
+        this.uPortURIHandler
+      )
+      .then(this.checkIfUserExists);
   }
 
   uPortURIHandler = uPortUri => {
@@ -35,7 +40,9 @@ class Login extends Component {
 
   checkIfUserExists = async uportCreds => {
     try {
+      // uportCreds.networkAddress = uportCreds.did.split(':').pop();
       await checkUserAddress(MNID.decode(uportCreds.networkAddress).address);
+      // await checkUserAddress(uportCreds.networkAddress);
       this.setState({ step: 1, uportCreds });
     } catch (err) {
       this.setState({ step: 2, uportCreds });
@@ -55,13 +62,15 @@ class Login extends Component {
   };
 
   render () {
-    const { auth: { isAuthenticated } } = this.props;
+    const {
+      auth: { isAuthenticated }
+    } = this.props;
     const { step } = this.state;
 
-    if (isAuthenticated) return <Redirect to='/' />;
+    if (isAuthenticated) return <Redirect to="/" />;
 
     return (
-      <div className='login'>
+      <div className="login">
         <div>
           <LoginHeader step={step} />
           {this.renderStep()}
@@ -77,6 +86,6 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => ({ auth });
+const mapStateToProps = state => ({ auth: state.auth });
 
 export default connect(mapStateToProps)(Login);

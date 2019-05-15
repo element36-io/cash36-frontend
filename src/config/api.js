@@ -5,7 +5,7 @@ import { logout } from '../store/auth/auth.actions';
 let apiEnv = process.env.NODE_ENV;
 console.log('Environment: ' + apiEnv);
 
-let url = 'http://localhost:9090';
+let url = 'http://localhost:8080';
 let web3NodeUrl = 'http://167.99.243.81:8866/';
 
 if (apiEnv === 'staging') {
@@ -24,11 +24,11 @@ const api = axios.create({
   baseURL: API_ROOT
 });
 
-const getRefreshedToken = async (refreshToken) => {
+const getRefreshedToken = async refreshToken => {
   const config = {
     data: `grant_type=refresh_token&refresh_token=${refreshToken}`,
     headers: {
-      'Authorization': 'Basic Y2FzaDM2LWNsaWVudDpjYXNoMzYtc2VjcmV0',
+      Authorization: 'Basic Y2FzaDM2LWNsaWVudDpjYXNoMzYtc2VjcmV0',
       'Content-Type': 'application/x-www-form-urlencoded'
     }
   };
@@ -36,13 +36,16 @@ const getRefreshedToken = async (refreshToken) => {
   try {
     const response = await axios.post(`${API_ROOT}/oauth/token`, config.data, {
       headers: config.headers
-    })
+    });
 
     const token = response.data;
 
     localStorage.setItem('access_token', token.access_token);
     localStorage.setItem('refresh_token', token.refresh_token);
-    localStorage.setItem('expires_at', new Date().getTime() + (token.expires_in * 1000));
+    localStorage.setItem(
+      'expires_at',
+      new Date().getTime() + token.expires_in * 1000
+    );
 
     return token.access_token;
   } catch (error) {

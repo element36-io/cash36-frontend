@@ -54,18 +54,18 @@ class TransferAddress extends Component {
     const { contactsList } = this.props;
 
     return (
-      <div className='transfer-address'>
+      <div className="transfer-address">
         <h2>Transfer Tokens</h2>
         <h4>Transfer tokens to</h4>
         {/* <span>{inputError}</span> */}
         <ClickAwayListener onClickAway={this.hideSuggestions}>
-          <div className='transfer-address__search-container'>
-            <div className='transfer-address__input-wrapper'>
+          <div className="transfer-address__search-container">
+            <div className="transfer-address__input-wrapper">
               {selectedContact && <SelectedContact contact={selectedContact} />}
 
-              <input onChange={this.handleChange} placeholder='Address'
+              <input onChange={this.handleChange} placeholder="Address"
                 className={`${selectedContact ? 'selected-contact' : ''}`}
-                name='address' value={address} autoComplete='off'
+                name="address" value={address} autoComplete="off"
                 onFocus={this.showSuggestions}
               />
               <span />

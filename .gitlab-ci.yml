@@ -37,7 +37,7 @@ deploy:
   stage: deploy
   script:
   - apk add --update --no-cache openssh sshpass
-  - ./deploy.sh $DO_PASS $GITLAB_PW_MAIK
+  - ./deploy.sh $DO_PASS
   retry: 1
   only:
     - master

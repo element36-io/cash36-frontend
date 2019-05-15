@@ -8,7 +8,7 @@ import styles from './MuiStyles';
 const BackButton = ({ onClick, classes }) => (
   <Button
     className={classes.root}
-    variant='raised'
+    variant="raised"
     onClick={onClick}
   >
     <ArrowBackwardIcon />

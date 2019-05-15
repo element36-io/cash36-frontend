@@ -1,0 +1,62 @@
+@import '../../../styles/settings.scss';
+@import '../../../styles/mixins.scss';
+
+.awaiting-verification {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > a {
+    width: 100%;
+    > button {
+      padding: 1.6rem 0;
+      width: 100%;
+    }
+  }
+
+  > p:first-of-type {
+    margin-top: 1rem;
+    margin-bottom: 3.2rem;
+  }
+
+  @include desktop {
+    padding: 11rem 11.4rem 0.8rem 11.4rem;
+
+    h4 {
+      font-size: 2.4rem;
+    }
+
+    p {
+      max-width: 70rem;
+      font-size: 1.8rem;
+      line-height: 2.4rem;
+    }
+
+    > a {
+      > button {
+        margin-top: 11rem;
+      }
+    }
+
+    .action-status {
+      .action-status__icon-wrapper {
+        margin-bottom: 7.8rem;
+      }
+    }
+  }
+
+  @include tablet {
+    padding: 6rem 4rem 0.8rem 4rem;
+  }
+
+  @include mobile {
+    padding: 4.6rem 1.2rem 0.8rem 1.2rem;
+
+    > a {
+      > button {
+        margin-top: 3.5rem;
+      }
+    }
+  }
+}

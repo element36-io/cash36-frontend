@@ -9,8 +9,10 @@
     "axios": "^0.18.0",
     "cash36-contracts": "^0.1.30",
     "classnames": "2.2.5",
+    "date-fns": "^1.30.1",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
+    "formik": "^1.5.2",
     "iban": "^0.0.11",
     "install": "^0.12.2",
     "jest-css-modules": "^1.1.0",
@@ -18,10 +20,10 @@
     "moment": "^2.22.2",
     "node-sass": "^4.9.3",
     "qrcode.react": "^0.8.0",
-    "react": "^16.4.0",
+    "react": "^16.8.6",
     "react-country-flag": "^1.0.1",
     "react-date-range": "^0.9.4",
-    "react-dom": "^16.4.0",
+    "react-dom": "^16.8.6",
     "react-ink": "^6.4.0",
     "react-redux": "^5.0.7",
     "react-responsive": "^5.0.0",
@@ -38,17 +40,22 @@
     "stompjs": "^2.3.3",
     "uport-connect": "^0.7.8",
     "validator": "^10.8.0",
-    "web3": "1.0.0-beta.34"
+    "web3": "1.0.0-beta.34",
+    "yup": "^0.27.0"
   },
   "devDependencies": {
+    "eslint-config-prettier": "^3.6.0",
     "eslint-config-semistandard": "^12.0.1",
     "eslint-config-standard": "^12.0.0",
     "eslint-config-standard-jsx": "^6.0.2",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-react": "^7.11.1",
-    "eslint-plugin-standard": "^4.0.0"
+    "eslint-plugin-react-hooks": "^1.6.0",
+    "eslint-plugin-standard": "^4.0.0",
+    "prettier": "^1.16.0"
   },
   "scripts": {
     "start": "react-scripts start",

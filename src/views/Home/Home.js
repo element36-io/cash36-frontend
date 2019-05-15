@@ -19,20 +19,20 @@ class Home extends Component {
     const lastActivity = userActivity.slice(0, 5);
 
     return (
-      <div className='home-page'>
-        <div className='wrapper'>
-          <div className='home-page__user-actions'>
+      <div className="home-page">
+        <div className="wrapper">
+          <div className="home-page__user-actions">
             <UserProfile clickCallback={this.toggleVerification} />
             <QuickActions />
           </div>
-          <div className='home-page__balance-cards'>
+          <div className="home-page__balance-cards">
             <BalanceCards />
           </div>
-          <div className='home-page__activity'>
+          <div className="home-page__activity">
             <h2>Last Activity</h2>
             {userActivity.length
               ? <ActivityTable userActivity={lastActivity} />
-              : <div className='paper home-page__no-activity'>
+              : <div className="paper home-page__no-activity">
                 <h3>No Recent Activity.</h3>
                 <p>Keep track of your most recent transactions here when you sell, buy or transfer cash36 currencies</p>
               </div>

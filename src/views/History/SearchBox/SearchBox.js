@@ -7,15 +7,15 @@ import './SearchBox.scss';
 const SearchBox = ({ searchTerm, handleSearchChange, handleSearchTextSubmit, fetchingFilters }) => (
   <form
     onSubmit={handleSearchTextSubmit}
-    className='history__search-box paper'
+    className="history__search-box paper"
   >
-    <button type='submit'>
+    <button type="submit">
       <SearchIcon />
     </button>
     <div>
       <TextField
-        type='text'
-        placeholder='Search'
+        type="text"
+        placeholder="Search"
         value={searchTerm}
         onChange={handleSearchChange}
         disabled={fetchingFilters}

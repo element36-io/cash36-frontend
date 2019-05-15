@@ -1,0 +1,70 @@
+@import '../../../styles/settings.scss';
+@import '../../../styles/mixins.scss';
+
+.confirm-tier-1 {
+  .action-status {
+    h2 {
+      font-weight: 400;
+    }
+  }
+  .confirm-tier-1__heading {
+    text-align: center;
+
+    h2 {
+      font-weight: 400;
+    }
+  }
+
+  .confirm-tier-1__buttons {
+    display: flex;
+    width: 100%;
+
+    button {
+      padding: 1.6rem 3.2rem;
+    }
+
+    > button:first-of-type {
+      margin-right: 1.6rem;
+    }
+
+    button:nth-of-type(2) {
+      flex: 1;
+    }
+  }
+
+  @include desktop {
+    padding: 11rem 11.4rem 0.8rem 11.4rem;
+    .confirm-tier-1__heading {
+      padding: 0 5rem;
+      margin-bottom: 18.5rem;
+
+      > p {
+        font-size: 1.8rem;
+        line-height: 2.4rem;
+      }
+    }
+
+    .action-status {
+      .action-status__icon-wrapper {
+        margin-bottom: 7.8rem;
+      }
+    }
+  }
+
+  @include tablet {
+    padding: 6rem 4rem 0.8rem 4rem;
+  }
+
+  @include mobile {
+    padding: 4.6rem 1.2rem 0.8rem 1.2rem;
+    &__buttons {
+      margin-top: 3rem;
+      flex-direction: column-reverse;
+
+      > button:first-of-type {
+        background: $white !important;
+        margin-right: 0;
+      }
+    }
+  }
+}

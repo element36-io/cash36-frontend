@@ -1,0 +1,64 @@
+.kyc {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    height: 8px;
+    width: 100%;
+    background: linear-gradient(180deg, #63b4f5 0%, #017ee5 100%);
+    opacity: 0.1;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    height: 8px;
+    background: linear-gradient(180deg, #63b4f5 0%, #017ee5 100%);
+    transition: width 0.3s;
+  }
+}
+
+[data-status='WELCOME_SCREEN'] {
+  &::before {
+    width: 0%;
+  }
+}
+
+[data-status='USER_DATA'] {
+  &::before {
+    width: 20%;
+  }
+}
+
+[data-status='CONFIRM_TIER_1'] {
+  &::before {
+    width: 30%;
+  }
+}
+
+[data-status='BENEFICIAL_OWNER'] {
+  &::before {
+    width: 40%;
+  }
+}
+
+[data-status='UPLOAD_DOCUMENTS'] {
+  &::before {
+    width: 60%;
+  }
+}
+
+[data-status='USER_PROFILE'] {
+  &::before {
+    width: 80%;
+  }
+}
+
+[data-status='AWAITING_VERIFICATION'] {
+  &::before {
+    width: 100%;
+  }
+}

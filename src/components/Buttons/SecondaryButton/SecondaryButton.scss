@@ -1,0 +1,7 @@
+@import '../../../styles/settings.scss';
+
+.secondary-button {
+  > span:first-child {
+    color: $primary-main;
+  }
+}

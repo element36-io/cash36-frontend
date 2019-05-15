@@ -10,13 +10,13 @@ const TokenIcon = props => {
 
   switch (token) {
     case 'EUR36':
-      return <img src={euroIcon} alt='EURO TOKEN' />;
+      return <img src={euroIcon} alt="EURO TOKEN" />;
     case 'USD36':
-      return <img src={dollarIcon} alt='DOLLAR TOKEN' />;
+      return <img src={dollarIcon} alt="DOLLAR TOKEN" />;
     case 'GBP36':
-      return <img src={poundIcon} alt='POUND TOKEN' />;
+      return <img src={poundIcon} alt="POUND TOKEN" />;
     case 'CHF36':
-      return <img src={francIcon} alt='FRANC TOKEN' />;
+      return <img src={francIcon} alt="FRANC TOKEN" />;
     default:
       return null;
   }

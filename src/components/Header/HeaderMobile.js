@@ -3,39 +3,32 @@ import PropTypes from 'prop-types';
 import HeaderAlerts from './HeaderAlerts';
 import NavBtn from '../NavBtn';
 import HeaderMobileDropdown from './HeaderMobileDropdown';
-import Verification from '../Verification/Verification';
 
 class HeaderMobile extends Component {
-    state = {
-      activeNav: false,
-      showVerification: false
-    };
+  state = {
+    activeNav: false
+  };
 
-    toggleNav = () => {
-      this.setState({ activeNav: !this.state.activeNav });
-    };
+  toggleNav = () => {
+    this.setState({ activeNav: !this.state.activeNav });
+  };
 
-    openVerification = () => {
-      this.setState({ showVerification: true });
-    };
+  render () {
+    const { activeNav } = this.state;
+    const { logout } = this.props;
 
-    closeVerification = () => {
-      this.setState({ showVerification: false });
-    };
-
-    render () {
-      const { activeNav, showVerification } = this.state;
-      const { logout, user } = this.props;
-
-      return (
-        <div>
-          <Verification isVisible={showVerification} user={user} close={this.closeVerification} />
-          <HeaderAlerts />
-          <NavBtn isActive={activeNav} clickHandler={this.toggleNav} />
-          <HeaderMobileDropdown logout={logout} isActive={activeNav} clickCallback={this.toggleNav} openVerification={this.openVerification} />
-        </div>
-      );
-    }
+    return (
+      <div>
+        <HeaderAlerts />
+        <NavBtn isActive={activeNav} clickHandler={this.toggleNav} />
+        <HeaderMobileDropdown
+          logout={logout}
+          isActive={activeNav}
+          clickCallback={this.toggleNav}
+        />
+      </div>
+    );
+  }
 }
 
 HeaderMobile.propTypes = {
