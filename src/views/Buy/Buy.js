@@ -69,7 +69,7 @@ class Buy extends Component {
 
   render () {
     const { step, manualTransferData } = this.state;
-    const { iban } = this.props;
+
     return (
       <div className="wrapper">
         <div className="buy paper">
@@ -114,7 +114,10 @@ class Buy extends Component {
             {step > 2 && (
               <span style={{ fontSize: '1.6rem' }}>
                 Please make sure your payment will be triggered from your
-                registered bank account{iban ? `: IBAN ${iban}` : '.'}
+                registered bank account
+                {manualTransferData.userIban
+                  ? `: IBAN ${manualTransferData.userIban}`
+                  : '.'}
               </span>
             )}
           </div>
@@ -124,14 +127,7 @@ class Buy extends Component {
   }
 }
 
-const mapStateToProps = ({ auth: { user } }) => {
-  // if (user.currentLevel !== 'Tier_0') { return { iban: user.bankAccounts[0].iban }; } else return { iban: '' };
-  if (user.currentLevel !== 'Tier_0') {
-    return { iban: 'PLACEHOLDER FOR IBAN' };
-  } else return { iban: '' };
-};
-
 export default connect(
-  mapStateToProps,
+  null,
   { getTokens }
 )(Buy);
