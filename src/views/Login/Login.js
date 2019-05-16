@@ -41,8 +41,8 @@ class Login extends Component {
   checkIfUserExists = async uportCreds => {
     try {
       // uportCreds.networkAddress = uportCreds.did.split(':').pop();
-      await checkUserAddress(MNID.decode(uportCreds.networkAddress).address);
       // await checkUserAddress(uportCreds.networkAddress);
+      await checkUserAddress(MNID.decode(uportCreds.networkAddress).address);
       this.setState({ step: 1, uportCreds });
     } catch (err) {
       this.setState({ step: 2, uportCreds });

@@ -48,8 +48,8 @@ export const formModel = [
   {
     name: 'zip',
     type: 'text',
-    label: 'Enter your ZIP Code',
-    placeholder: '000000'
+    label: 'ZIP Code',
+    placeholder: 'Enter your ZIP Code'
   },
   {
     name: 'country',
