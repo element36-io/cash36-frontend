@@ -9,7 +9,6 @@ const LoginUsername = props => {
       <label>
         <span>Username (uPort ID)</span>
         {MNID.decode(networkAddress).address}
-        {/* {networkAddress} */}
       </label>
     </div>
   );

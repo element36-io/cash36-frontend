@@ -18,6 +18,8 @@ class UserProfile extends PureComponent {
   renderVerificationButton = () => {
     const { currentProcessStatus, caseId } = this.props.user;
 
+    if (currentProcessStatus === 'CLOSED') return null;
+
     if (currentProcessStatus !== 'AWAITING_VERIFICATION') {
       return (
         <Link to={`/kyc/${caseId}`}>
