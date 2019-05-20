@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/KeyboardArrowDown';
@@ -20,17 +20,20 @@ class HeaderMenu extends Component {
   };
 
   render () {
-    const { logout, user: { avatarUri, name } } = this.props;
+    const {
+      logout,
+      user: { avatarUri, name }
+    } = this.props;
     const { open } = this.state;
 
     return (
       <div className="header__menu">
         <span className="header__menu__image">
-          {
-            avatarUri
-              ? <img src={avatarUri} alt={name} />
-              : <i className="fas fa-user" />
-          }
+          {avatarUri ? (
+            <img src={avatarUri} alt={name} />
+          ) : (
+            <i className="fas fa-user" />
+          )}
         </span>
         <ClickAwayListener onClickAway={this.closeMenu}>
           <span className="header__menu__anchor">
@@ -38,20 +41,21 @@ class HeaderMenu extends Component {
               onClick={this.toggleMenu}
               className="header__menu__icon"
             />
-            <div className={`paper header__menu__content${open ? ' header__menu__content--active' : ''}`}>
-              <MenuItem>
+            <div
+              className={`paper header__menu__content${
+                open ? ' header__menu__content--active' : ''
+              }`}
+            >
+              {/* <MenuItem>
                 <Link to="/settings" onClick={this.closeMenu}>
                     Settings
                 </Link>
-              </MenuItem>
-              <MenuItem onClick={logout}>
-                  Logout
-              </MenuItem>
+              </MenuItem> */}
+              <MenuItem onClick={logout}>Logout</MenuItem>
             </div>
           </span>
         </ClickAwayListener>
       </div>
-
     );
   }
 }
