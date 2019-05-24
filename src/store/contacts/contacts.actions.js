@@ -11,7 +11,7 @@ export const REMOVE_QUICK_TRANSFER = 'REMOVE_QUICK_TRANSFER';
 export const getContacts = () => async dispatch => {
   try {
     dispatch({ type: GET_CONTACTS });
-    const response = await API.get('/cash36/contacts');
+    const response = await API.get('/exchange/contacts');
 
     dispatch({
       type: GET_CONTACTS_SUCCESS,
@@ -26,7 +26,7 @@ export const getContacts = () => async dispatch => {
 
 export const removeContact = id => async dispatch => {
   try {
-    await API.delete(`/cash36/contacts/${id}`);
+    await API.delete(`/exchange/contacts/${id}`);
     dispatch({
       type: REMOVE_CONTACTS,
       payload: id
@@ -39,7 +39,7 @@ export const removeContact = id => async dispatch => {
 
 export const addContact = data => async dispatch => {
   try {
-    const response = await API.post('/cash36/contacts', data);
+    const response = await API.post('/exchange/contacts', data);
 
     dispatch({
       type: ADD_CONTACTS,
@@ -53,5 +53,8 @@ export const addContact = data => async dispatch => {
   }
 };
 
-export const addQuickTransfer = contact => ({ type: ADD_QUICK_TRANSFER, payload: contact });
+export const addQuickTransfer = contact => ({
+  type: ADD_QUICK_TRANSFER,
+  payload: contact
+});
 export const removeQuickTransfer = () => ({ type: REMOVE_QUICK_TRANSFER });

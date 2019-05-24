@@ -20,14 +20,21 @@ class UserProfile extends PureComponent {
 
     if (currentProcessStatus === 'CLOSED') return null;
 
-    if (currentProcessStatus !== 'AWAITING_VERIFICATION') {
+    if (currentProcessStatus === 'NOT_STARTED') {
+      return (
+        <Link to={`/kyc/start`}>
+          <DefaultButton variant="raised">Verify Account</DefaultButton>
+        </Link>
+      );
+    }
+
+    if (
+      currentProcessStatus !== 'AWAITING_VERIFICATION' &&
+      currentProcessStatus !== 'NOT_STARTED'
+    ) {
       return (
         <Link to={`/kyc/${caseId}`}>
-          <DefaultButton variant="raised">
-            {currentProcessStatus === 'NOT_STARTED'
-              ? 'Verify Account'
-              : 'Continue Verification'}
-          </DefaultButton>
+          <DefaultButton variant="raised">Continue Verification</DefaultButton>
         </Link>
       );
     }

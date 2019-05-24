@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
-import { API_ROOT } from '../../config/api';
+// import { API_ROOT } from '../../config/api';
 import Logo from '../Logo';
 import Responsive from '../Responsive';
 import HeaderDesktop from './HeaderDesktop';
@@ -41,7 +41,7 @@ class Header extends Component {
       getTokens,
       getUserActivity
     } = this.props;
-    let socket = new SockJS(`${API_ROOT}/ws`);
+    let socket = new SockJS(`http://localhost:8092/exchange/ws`); // TODO: change to a REAL api path
     this.eventSource = Stomp.over(socket);
     this.eventSource.connect(
       {},

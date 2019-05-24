@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
+  startKycProcess,
   getCurrentKycStep,
   updateKycStep
 } from '../../store/auth/auth.actions';
@@ -15,7 +16,14 @@ import Step5AwaitingVerification from './Step5AwaitingVerification';
 
 import './Kyc.scss';
 
-const Kyc = ({ currentKycStep, getCurrentKycStep, updateKycStep }) => {
+const Kyc = ({
+  currentKycStep,
+  getCurrentKycStep,
+  updateKycStep,
+  startKycProcess,
+  avatarUri,
+  username
+}) => {
   useEffect(() => {
     getCurrentKycStep();
   }, [currentKycStep]);
@@ -30,10 +38,16 @@ const Kyc = ({ currentKycStep, getCurrentKycStep, updateKycStep }) => {
 
   const renderStep = () => {
     switch (currentKycStep) {
-      case 'WELCOME_SCREEN':
-        return <Step0ProcessWelcomeScreen changeSteps={changeSteps} />;
+      case 'REGISTERED':
+        return <Step0ProcessWelcomeScreen startKycProcess={startKycProcess} />;
       case 'USER_DATA':
-        return <Step1Tier1Form changeSteps={changeSteps} />;
+        return (
+          <Step1Tier1Form
+            changeSteps={changeSteps}
+            avatarUri={avatarUri}
+            username={username}
+          />
+        );
       case 'CONFIRM_TIER_1':
         return <Step1aConfirmTier1 changeSteps={changeSteps} />;
       case 'BENEFICIAL_OWNER':
@@ -57,14 +71,18 @@ const Kyc = ({ currentKycStep, getCurrentKycStep, updateKycStep }) => {
 };
 
 const mapStateToProps = state => ({
-  currentKycStep: state.auth.kyc.currentStep
+  currentKycStep: state.auth.kyc.currentStep,
+  avatarUri: state.auth.user.avatarUri,
+  username: state.auth.user.username
 });
 
 Kyc.propTypes = {
-  currentKycStep: PropTypes.string
+  currentKycStep: PropTypes.string,
+  avatarUri: PropTypes.string,
+  username: PropTypes.string
 };
 
 export default connect(
   mapStateToProps,
-  { getCurrentKycStep, updateKycStep }
+  { getCurrentKycStep, updateKycStep, startKycProcess }
 )(Kyc);
