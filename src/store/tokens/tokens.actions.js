@@ -7,7 +7,7 @@ export const HISTORY_FILTERED = 'HISTORY_FILTERED';
 
 export const getTokens = () => async dispatch => {
   try {
-    const response = await API.get('/cash36/tokens');
+    const response = await API.get('/exchange/tokens');
 
     dispatch({
       type: GET_TOKENS,
@@ -21,12 +21,14 @@ export const getTokens = () => async dispatch => {
 export const getUserActivity = queryParams => async dispatch => {
   let params = '';
   if (queryParams) {
-    const keys = Object.keys(queryParams).reduce((acc, key) => {
-      if (queryParams[key]) {
-        acc.push(`${key}=${queryParams[key]}`);
-      }
-      return acc;
-    }, []).join('&');
+    const keys = Object.keys(queryParams)
+      .reduce((acc, key) => {
+        if (queryParams[key]) {
+          acc.push(`${key}=${queryParams[key]}`);
+        }
+        return acc;
+      }, [])
+      .join('&');
 
     params = `?${keys}`;
   }
@@ -36,7 +38,7 @@ export const getUserActivity = queryParams => async dispatch => {
       type: FETCHING_FILTERS,
       payload: true
     });
-    const response = await API.get(`/cash36/tokens/history${params}`);
+    const response = await API.get(`/exchange/tokens/history${params}`);
 
     dispatch({
       type: FETCHING_FILTERS,

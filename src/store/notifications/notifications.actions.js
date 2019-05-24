@@ -36,12 +36,16 @@ export function updateLastRead (lastRead) {
 }
 
 export function fetchNotifications (lastRead) {
-  return async (dispatch) => {
+  return async dispatch => {
     const actionResponse = await dispatch({
       [CALL_API]: {
-        url: `/cash36/notifications`,
+        url: `exchange/notifications`,
         method: 'GET',
-        types: [INIT_NOTIFICATIONS_REQUEST, INIT_NOTIFICATIONS_SUCCESS, INIT_NOTIFICATIONS_ERROR]
+        types: [
+          INIT_NOTIFICATIONS_REQUEST,
+          INIT_NOTIFICATIONS_SUCCESS,
+          INIT_NOTIFICATIONS_ERROR
+        ]
       }
     });
 

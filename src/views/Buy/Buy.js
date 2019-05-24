@@ -43,7 +43,7 @@ class Buy extends Component {
     };
 
     try {
-      const response = await API.post('/cash36/buy', data);
+      const response = await API.post('/exchange/buy', data);
       this.setState({
         manualTransferData: response.data,
         step: 2.1

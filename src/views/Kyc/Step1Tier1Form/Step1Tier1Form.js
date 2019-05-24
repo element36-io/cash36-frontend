@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import moment from 'moment';
 import Form from '../../../components/Form';
 import FormField from '../../../components/Form/FormField';
@@ -17,13 +18,22 @@ import {
 import './Step1Tier1Form.scss';
 
 const Step1Tier1Form = props => {
-  const { countries, nationalities, getCountries, changeSteps } = props;
+  const {
+    countries,
+    nationalities,
+    getCountries,
+    changeSteps,
+    username,
+    avatarUri
+  } = props;
 
   const submit = async values => {
     try {
       const payload = {
         ...values,
-        dateOfBirth: moment(values.dateOfBirth).format('DD.MM.YYYY')
+        dateOfBirth: moment(values.dateOfBirth).format('DD.MM.YYYY'),
+        avatarUrl: avatarUri,
+        accountAddress: username
       };
       await changeSteps(1, payload);
     } catch (error) {
@@ -96,7 +106,10 @@ const Step1Tier1Form = props => {
 
 Step1Tier1Form.propTypes = {
   changeSteps: PropTypes.func.isRequired,
-  getCountries: PropTypes.func.isRequired
+  getCountries: PropTypes.func.isRequired,
+  username: PropTypes.string,
+  avatarUri: PropTypes.string,
+  caseId: PropTypes.string
 };
 
 const mapStateToProps = ({

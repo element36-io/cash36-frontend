@@ -9,7 +9,7 @@ export const CONFIRM_ATTESTATION = 'CONFIRM_ATTESTATION';
 export const GET_CURRENT_KYC_STEP = 'GET_CURRENT_KYC_STEP';
 
 export const checkUserAddress = address =>
-  API.get(`/public/is-user/${address}`);
+  API.get(`/auth/user/is-user/${address}`);
 
 export const logout = () => {
   localStorage.removeItem('state');
@@ -24,7 +24,7 @@ export const logout = () => {
 
 export const getUserInfo = () => async dispatch => {
   try {
-    const response = await API.get('/cash36/user/current-user');
+    const response = await API.get('/compliance/current-user');
 
     dispatch({
       type: GET_USER_INFO,
@@ -37,7 +37,7 @@ export const getUserInfo = () => async dispatch => {
 
 export const getCurrentKycStep = () => async dispatch => {
   try {
-    const response = await API.get('/cash36/kyc/get-step');
+    const response = await API.get('/compliance/kyc/get-step');
 
     const processStatus = response.data.result;
 
@@ -50,9 +50,19 @@ export const getCurrentKycStep = () => async dispatch => {
   }
 };
 
+export const startKycProcess = () => async dispatch => {
+  try {
+    await API.post(`/compliance/kyc/start-process`, {});
+    dispatch(getCurrentKycStep());
+    dispatch(getUserInfo());
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const updateKycStep = (step, payload) => async dispatch => {
   try {
-    await API.post(`/cash36/kyc/step-${step}`, payload);
+    await API.post(`/compliance/kyc/step-${step}`, payload);
     dispatch(getCurrentKycStep());
     dispatch(getUserInfo());
   } catch (error) {
@@ -62,10 +72,9 @@ export const updateKycStep = (step, payload) => async dispatch => {
 
 export const register = (username, password, user) => async dispatch => {
   try {
-    await axios.post(`${API_ROOT}/public/register`, {
+    await axios.post(`${API_ROOT}/auth/user/register`, {
       username,
-      password,
-      avatarUrl: user.avatarUri
+      password
     });
     dispatch(login(username, password, user));
   } catch (error) {
@@ -85,9 +94,13 @@ export const login = (username, password, user) => async dispatch => {
   };
 
   try {
-    const response = await axios.post(`${API_ROOT}/oauth/token`, config.data, {
-      headers: config.headers
-    });
+    const response = await axios.post(
+      `${API_ROOT}/auth/oauth/token`,
+      config.data,
+      {
+        headers: config.headers
+      }
+    );
 
     const token = response.data;
 
