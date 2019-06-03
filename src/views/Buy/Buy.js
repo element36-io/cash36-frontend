@@ -7,6 +7,7 @@ import PaymentMethod from './PaymentMethod';
 import InitiateManualPayment from './InitiateManualPayment';
 import InitiateAutoPayment from './InitiateAutoPayment';
 import BackButton from '../../components/Buttons/BackButton';
+import BuyError from './BuyError';
 
 import './Buy.scss';
 
@@ -49,7 +50,8 @@ class Buy extends Component {
         step: 2.1
       });
     } catch (error) {
-      console.log(error); // TODO, handle the error
+      console.log(error);
+      this.setState({ step: 3 });
     }
   };
 
@@ -100,6 +102,7 @@ class Buy extends Component {
               />
             )}
             {step === 2.2 && <InitiateAutoPayment next={this.nextStep} />}
+            {step === 3 && <BuyError message="User not enabled or verified." />}
           </div>
           <div className="buy__footer">
             {step < 2 && (
@@ -111,7 +114,7 @@ class Buy extends Component {
                 receive the amount, the tokens will be credited to your account.
               </span>
             )}
-            {step > 2 && (
+            {step > 2 && step < 3 && (
               <span style={{ fontSize: '1.6rem' }}>
                 Please make sure your payment will be triggered from your
                 registered bank account
