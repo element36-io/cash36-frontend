@@ -11,10 +11,14 @@
 
   > a {
     margin-right: 1.6rem;
+    button {
+      margin-top: 0;
+    }
   }
 
   > button:first-of-type {
     flex: 1;
+    margin-top: 0;
   }
 
   @include mobile {
