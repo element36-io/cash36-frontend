@@ -91,9 +91,14 @@ const Step1Tier1Form = props => {
             </div>
             <h3>Bank Account</h3>
             <FormField formField={ibanModel} formProps={formProps} />
+            {!formProps.isValid && formProps.submitCount > 0 && (
+              <p className="form-error">
+                Please fill out all the required fields
+              </p>
+            )}
             <ProcessControls
               submitLabel="Submit & Continue"
-              disabled={!formProps.isValid || submitting}
+              disabled={submitting}
               submitting={submitting}
               submitCallback={formProps.handleSubmit}
             />

@@ -22,6 +22,8 @@ const Form = props => {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
+        validateOnBlur={false}
+        validateOnChange={false}
         onSubmit={onSubmit}
         render={formProps => render(formProps, submitting)}
       />
