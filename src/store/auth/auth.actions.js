@@ -138,11 +138,6 @@ export const createUserObject = uportCreds => {
     user
   };
 };
-export const attestationProgress = () => {
-  return {
-    type: ATTESTATION_PROGRESS
-  };
-};
 
 export const confirmAttestation = data => {
   return {

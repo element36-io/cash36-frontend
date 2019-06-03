@@ -7,14 +7,15 @@ import { CircularProgress } from '@material-ui/core';
 import tiers from './tiers';
 import DefaultButton from '../Buttons/DefaultButton';
 import { uPort } from '../../config/uport.config';
-import {
-  confirmAttestation,
-  attestationProgress
-} from '../../store/auth/auth.actions';
+import { confirmAttestation } from '../../store/auth/auth.actions';
 
 import './UserProfile.scss';
 
 class UserProfile extends PureComponent {
+  state = {
+    attesting: false,
+    attestingComplete: false
+  };
   renderVerificationButton = () => {
     const { currentProcessStatus, caseId } = this.props.user;
 
@@ -49,10 +50,11 @@ class UserProfile extends PureComponent {
   };
 
   renderAttestUser = () => {
-    const {
-      user: { currentLevel, verified },
-      attesting
+    let {
+      user: { currentLevel, verified }
     } = this.props;
+
+    if (verified === undefined) verified = [];
 
     const Tier1Attested =
       verified.filter(el => el.claim.element36Tier1).length > 0;
@@ -67,9 +69,9 @@ class UserProfile extends PureComponent {
         <DefaultButton
           variant="raised"
           onClick={this.handleAttestClick}
-          disabled={attesting}
+          disabled={this.state.attesting}
         >
-          {attesting ? (
+          {this.state.attesting ? (
             <CircularProgress color="secondary" size={20} />
           ) : (
             'Get uPort Attest'
@@ -82,11 +84,12 @@ class UserProfile extends PureComponent {
   };
 
   handleAttestClick = () => {
-    this.props.attestationProgress();
     const { currentLevel, name, uportAddress } = this.props.user;
     let tier = 1;
     if (currentLevel === 'Tier_2') tier = 2;
     const attestName = `element36Tier${tier}`;
+
+    this.setState(() => ({ attesting: true }));
 
     uPort
       .attestCredentials({
@@ -101,14 +104,22 @@ class UserProfile extends PureComponent {
       })
       .then(att => {
         this.props.confirmAttestation({ claim: { [attestName]: att } });
+        this.setState(() => ({ attesting: false }));
+      })
+      .catch(error => {
+        console.log(error);
+        this.setState(() => ({ attesting: false }));
       });
   };
 
   render () {
-    const {
+    let {
       user: { username, avatarUri, name, currentLevel },
       alt
     } = this.props;
+
+    // changed due to uPort.
+    if (!currentLevel) currentLevel = 'Tier_0';
 
     return (
       <div className={`user-profile ${alt ? 'user-profile--alt' : ''}`}>
@@ -149,18 +160,16 @@ class UserProfile extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  user: state.auth.user,
-  attesting: state.auth.attesting
+  user: state.auth.user
 });
 
 UserProfile.propTypes = {
   user: PropTypes.object.isRequired,
   alt: PropTypes.bool,
-  attestationProgress: PropTypes.func,
   confirmAttestation: PropTypes.func
 };
 
 export default connect(
   mapStateToProps,
-  { confirmAttestation, attestationProgress }
+  { confirmAttestation }
 )(UserProfile);
