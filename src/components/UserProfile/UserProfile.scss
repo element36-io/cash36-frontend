@@ -74,15 +74,22 @@
     min-width: 10.5rem;
     margin-right: 1.6rem;
 
-    div,
-    img {
+    > div:first-child {
+      img {
+        height: 10.5rem;
+        width: 10.5rem;
+        border-radius: 12px;
+      }
+
+      img {
+        object-fit: cover;
+      }
+    }
+
+    div {
       height: 10.5rem;
       width: 10.5rem;
       border-radius: 12px;
-    }
-
-    img {
-      object-fit: cover;
     }
 
     div {
@@ -138,6 +145,7 @@
       background: $primary-light-4;
       border-radius: 3px;
       overflow: hidden;
+      margin-top: 0.4rem;
 
       &.Tier_0:after {
         width: 9%;
