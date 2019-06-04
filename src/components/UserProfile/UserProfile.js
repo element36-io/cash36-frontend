@@ -6,6 +6,7 @@ import { CircularProgress } from '@material-ui/core';
 
 import tiers from './tiers';
 import DefaultButton from '../Buttons/DefaultButton';
+import Avatar from '../../components/Avatar';
 import { uPort } from '../../config/uport.config';
 import { confirmAttestation } from '../../store/auth/auth.actions';
 
@@ -124,13 +125,11 @@ class UserProfile extends PureComponent {
     return (
       <div className={`user-profile ${alt ? 'user-profile--alt' : ''}`}>
         <div className="user-profile__avatar">
-          {avatarUri ? (
-            <img src={avatarUri} alt={name} />
-          ) : (
-            <div>
-              <i className="fas fa-user" />
-            </div>
-          )}
+          <Avatar
+            avatarUrl={avatarUri}
+            alt={name}
+            cssClass="user-profile__avatar__image"
+          />
           {currentLevel && (
             <div
               className={`user-profile__avatar__badge ${

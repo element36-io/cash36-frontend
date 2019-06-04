@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/KeyboardArrowDown';
+import Avatar from '../../../components/Avatar';
+
 import './HeaderMenu.scss';
 
 class HeaderMenu extends Component {
@@ -28,13 +30,12 @@ class HeaderMenu extends Component {
 
     return (
       <div className="header__menu">
-        <span className="header__menu__image">
-          {avatarUri ? (
-            <img src={avatarUri} alt={name} />
-          ) : (
-            <i className="fas fa-user" />
-          )}
-        </span>
+        <Avatar
+          avatarUrl={avatarUri}
+          alt={name}
+          cssClass="header__menu__image"
+        />
+
         <ClickAwayListener onClickAway={this.closeMenu}>
           <span className="header__menu__anchor">
             <MenuIcon
