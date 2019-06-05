@@ -10,13 +10,16 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 import store from './store';
 import theme from './config/theme';
 import Web3ProviderNew from './components/Web3Provider';
+import AvatarProvider from './providers/avatar.provider';
 
 ReactDOM.render(
   <Provider store={store}>
     <Web3ProviderNew>
       <MuiThemeProvider theme={theme}>
         <MuiPickersUtilsProvider utils={MomentUtils}>
-          <App />
+          <AvatarProvider>
+            <App />
+          </AvatarProvider>
         </MuiPickersUtilsProvider>
       </MuiThemeProvider>
     </Web3ProviderNew>

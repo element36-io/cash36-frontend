@@ -4,11 +4,17 @@ import Avatar from '../../../components/Avatar';
 import './SelectedContact.scss';
 
 const SelectedContact = props => {
-  const { contact: { contactName, avatarUrl } } = props;
+  const {
+    contact: { contactName, avatarUrl, contactAddress }
+  } = props;
 
   return (
     <div className={`transfer__selected-contact`}>
-      <Avatar avatarUrl={avatarUrl} cssClass="transfer__selected-contact__avatar" />
+      <Avatar
+        avatarUrl={avatarUrl}
+        cssClass="transfer__selected-contact__avatar"
+        username={contactAddress}
+      />
       <span>{contactName}</span>
     </div>
   );

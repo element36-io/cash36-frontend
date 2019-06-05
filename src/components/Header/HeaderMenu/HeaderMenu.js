@@ -24,7 +24,7 @@ class HeaderMenu extends Component {
   render () {
     const {
       logout,
-      user: { avatarUri, name }
+      user: { avatarUri, name, username }
     } = this.props;
     const { open } = this.state;
 
@@ -34,6 +34,7 @@ class HeaderMenu extends Component {
           avatarUrl={avatarUri}
           alt={name}
           cssClass="header__menu__image"
+          username={username}
         />
 
         <ClickAwayListener onClickAway={this.closeMenu}>

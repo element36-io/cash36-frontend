@@ -129,6 +129,7 @@ class UserProfile extends PureComponent {
             avatarUrl={avatarUri}
             alt={name}
             cssClass="user-profile__avatar__image"
+            username={username}
           />
           {currentLevel && (
             <div

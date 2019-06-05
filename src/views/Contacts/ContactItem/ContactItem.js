@@ -27,35 +27,52 @@ class ContactItem extends PureComponent {
   };
 
   removeUser = () => {
-    const { contact: { id }, removeCallback } = this.props;
+    const {
+      contact: { id },
+      removeCallback
+    } = this.props;
     removeCallback(id);
   };
 
   render () {
-    const { contact: { contactName, contactAddress, avatarUrl } } = this.props;
+    const {
+      contact: { contactName, contactAddress, avatarUrl }
+    } = this.props;
     const { showActions } = this.state;
 
     return (
       <div className="contact__list-item">
-
         <ClickAwayListener onClickAway={this.closeActions}>
           <div className="contacts__list-item__actions">
-            <IconButton onClick={this.toggleActions} className="contacts__list-item__actions__icon">
+            <IconButton
+              onClick={this.toggleActions}
+              className="contacts__list-item__actions__icon"
+            >
               <MoreVertIcon />
             </IconButton>
-            <div className={`paper contacts__list-item__actions__content ${showActions ? '--active' : ''}`}>
-              <MenuItem onClick={this.removeUser}>
-                Remove
-              </MenuItem>
+            <div
+              className={`paper contacts__list-item__actions__content ${
+                showActions ? '--active' : ''
+              }`}
+            >
+              <MenuItem onClick={this.removeUser}>Remove</MenuItem>
             </div>
           </div>
         </ClickAwayListener>
-        <Avatar avatarUrl={avatarUrl} cssClass="contact__item__image-wrapper" alt={contactName} />
+        <Avatar
+          avatarUrl={avatarUrl}
+          cssClass="contact__item__image-wrapper"
+          alt={contactName}
+          username={contactAddress}
+        />
         <div className="contacts__item__info">
           <h4>{contactName}</h4>
           <span>{contactAddress}</span>
         </div>
-        <BaseButton className="contact__list-item__btn" onClick={this.quickTransfer}>
+        <BaseButton
+          className="contact__list-item__btn"
+          onClick={this.quickTransfer}
+        >
           <span>
             <span>Quick</span> Transfer
           </span>

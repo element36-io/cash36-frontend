@@ -17,18 +17,20 @@ class TransferAmount extends Component {
   handleChange = evt => {
     const { name, value } = evt.target;
     this.setState({ [name]: value });
-  }
+  };
 
   submitAmount = () => {
     const { amount, symbol } = this.state;
     this.props.submitCallback({ amount, symbol });
-  }
+  };
 
   isDisabled = () => {
     const { amount, symbol } = this.state;
-    const balance = this.props.tokens.filter(token => token.symbol === symbol)[0].balance;
+    const balance = this.props.tokens.filter(
+      token => token.symbol === symbol
+    )[0].balance;
     return !this.state.amount || amount > balance;
-  }
+  };
 
   render () {
     const { target, tokens } = this.props;
@@ -39,7 +41,11 @@ class TransferAmount extends Component {
       <div className="transfer-amount">
         <div className="transfer-amount__header">
           <h4>Sending to</h4>
-          <Avatar avatarUrl={target.avatarUrl} cssClass="transfer-amount__avatar" />
+          <Avatar
+            avatarUrl={target.avatarUrl}
+            cssClass="transfer-amount__avatar"
+            username={target.contactAddress}
+          />
           {target.contactName && <span>{target.contactName}</span>}
           <TruncateString text={target.contactAddress} />
         </div>
@@ -49,8 +55,15 @@ class TransferAmount extends Component {
           symbol={symbol}
           handleChange={this.handleChange}
         />
-        <AvailableBalance balance={selectedToken ? selectedToken.balance : 0} symbol={symbol} />
-        <StepButton text={'Send'} onClick={this.submitAmount} disabled={this.isDisabled()} />
+        <AvailableBalance
+          balance={selectedToken ? selectedToken.balance : 0}
+          symbol={symbol}
+        />
+        <StepButton
+          text={'Send'}
+          onClick={this.submitAmount}
+          disabled={this.isDisabled()}
+        />
       </div>
     );
   }

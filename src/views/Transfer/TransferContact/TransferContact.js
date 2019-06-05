@@ -15,9 +15,16 @@ class TransferContact extends PureComponent {
     const { contact, alt } = this.props;
 
     return (
-      <div className={`transfer__contact ${alt ? 'transfer__contact--alt' : ''}`} onClick={this.clickHandler}>
-        <Avatar avatarUrl={contact.avatarUrl} alt={contact.contactName}
-          cssClass="transfer__contact__avatar" />
+      <div
+        className={`transfer__contact ${alt ? 'transfer__contact--alt' : ''}`}
+        onClick={this.clickHandler}
+      >
+        <Avatar
+          avatarUrl={contact.avatarUrl}
+          alt={contact.contactName}
+          cssClass="transfer__contact__avatar"
+          username={contact.contactAddress}
+        />
         <span>{contact.contactName}</span>
         <Ink duration={500} />
       </div>

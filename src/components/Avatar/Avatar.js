@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { AvatarContext } from '../../providers/avatar.provider';
 import './Avatar.scss';
 
-const Avatar = ({ avatarUrl, cssClass, alt }) => {
-  avatarUrl = 'https://www.deadlink';
-  const [url, setUrl] = useState(null);
+const Avatar = ({ avatarUrl, cssClass, alt, username }) => {
+  const { state, actions } = useContext(AvatarContext);
 
   const fetchImage = async () => {
+    if (state[username]) return;
     try {
       const response = await fetch(avatarUrl);
-
       const blob = await response.blob();
-
       const imageUrl = URL.createObjectURL(blob);
-
-      setUrl(imageUrl);
+      actions.add(username, imageUrl);
     } catch (error) {
-      setUrl(null);
+      console.warn('Avatar does not exist.');
     }
   };
 
@@ -26,7 +24,11 @@ const Avatar = ({ avatarUrl, cssClass, alt }) => {
 
   return (
     <div className={`avatar ${cssClass || ''}`}>
-      {url ? <img src={url} alt={alt} /> : <i className="fas fa-user" />}
+      {state[username] ? (
+        <img src={state[username]} alt={alt} />
+      ) : (
+        <i className="fas fa-user" />
+      )}
     </div>
   );
 };
@@ -34,7 +36,8 @@ const Avatar = ({ avatarUrl, cssClass, alt }) => {
 Avatar.propTypes = {
   avatarUrl: PropTypes.string,
   cssClass: PropTypes.string,
-  alt: PropTypes.string
+  alt: PropTypes.string,
+  username: PropTypes.string
 };
 
 export default Avatar;
