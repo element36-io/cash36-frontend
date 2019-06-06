@@ -11,10 +11,7 @@ import { confirmAttestation } from '../../store/auth/auth.actions';
 import './UserProfile.scss';
 
 const UserProfile = ({ user, alt, confirmAttestation }) => {
-  const [attestState, setAttestState] = useState({
-    attesting: false,
-    attestingComplete: false
-  });
+  const [attesting, setAttesting] = useState(true);
 
   const handleAttestClick = () => {
     const { currentLevel, name, uportAddress } = user;
@@ -22,7 +19,7 @@ const UserProfile = ({ user, alt, confirmAttestation }) => {
     if (currentLevel === 'Tier_2') tier = 2;
     const attestName = `element36Tier${tier}`;
 
-    setAttestState({ attesting: true, attestingComplete: false });
+    setAttesting(true);
 
     uPort
       .attestCredentials({
@@ -37,11 +34,11 @@ const UserProfile = ({ user, alt, confirmAttestation }) => {
       })
       .then(att => {
         confirmAttestation({ claim: { [attestName]: att } });
-        setAttestState({ attesting: false, attestingComplete: false });
+        setAttesting(false);
       })
       .catch(error => {
         console.log(error);
-        setAttestState({ attesting: false, attestingComplete: false });
+        setAttesting(false);
       });
   };
 
@@ -81,7 +78,7 @@ const UserProfile = ({ user, alt, confirmAttestation }) => {
           <AttestButtton
             user={user}
             onClick={handleAttestClick}
-            attesting={attestState.attesting}
+            attesting={attesting}
           />
         </div>
       </div>
