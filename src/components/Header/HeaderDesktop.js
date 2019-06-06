@@ -5,25 +5,23 @@ import HeaderMenu from './HeaderMenu';
 import HeaderAlerts from './HeaderAlerts';
 import navLinks from './navLinks';
 
-const HeaderDesktop = props => {
-  const { logout, user } = props;
-
-  return (
-    <Fragment>
-      <ul>
-        {navLinks.map(link => <li key={link.label}>
-          <NavLink exact activeClassName="selected"
-            to={link.url}>{link.label}</NavLink></li>
-        )}
-      </ul>
-      <div>
-        <HeaderAlerts />
-        <HeaderMenu logout={logout} user={user}
-        />
-      </div>
-    </Fragment>
-  );
-};
+const HeaderDesktop = ({ logout, user }) => (
+  <Fragment>
+    <ul>
+      {navLinks.map(link => (
+        <li key={link.label}>
+          <NavLink exact activeClassName="selected" to={link.url}>
+            {link.label}
+          </NavLink>
+        </li>
+      ))}
+    </ul>
+    <div>
+      <HeaderAlerts />
+      <HeaderMenu logout={logout} user={user} />
+    </div>
+  </Fragment>
+);
 
 HeaderDesktop.propTypes = {
   logout: PropTypes.func.isRequired,

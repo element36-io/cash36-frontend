@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { TextField, MenuItem } from '@material-ui/core';
@@ -7,25 +7,25 @@ import { isNumeric } from 'validator';
 
 import './ChooseAmountForm.scss';
 
-class ChooseAmountForm extends PureComponent {
-  handleAmountChange = event => {
-    const { value } = event.target;
-    if (isNumeric(value) || value === '') {
-      this.props.handleChange(event);
-    }
-  };
-  render () {
-    const { tokenSymbols } = this.props;
+const ChooseAmountForm = React.memo(
+  ({ tokenSymbols, symbol, amount, handleChange }) => {
+    const handleAmountChange = event => {
+      const { value } = event.target;
+      if (isNumeric(value) || value === '') {
+        handleChange(event);
+      }
+    };
+
     return (
       <div className="choose-amount-form">
         <TextField
           name="amount"
           label="Choose Amount"
           type="text"
-          onChange={this.handleAmountChange}
+          onChange={handleAmountChange}
           placeholder="0"
           autoComplete="off"
-          value={this.props.amount}
+          value={amount}
           fullWidth
           InputProps={{
             disableUnderline: true,
@@ -38,8 +38,8 @@ class ChooseAmountForm extends PureComponent {
         <TextField
           name="symbol"
           label="Select Token"
-          value={this.props.symbol}
-          onChange={this.props.handleChange}
+          value={symbol}
+          onChange={handleChange}
           select
           fullWidth
           InputProps={{
@@ -62,7 +62,7 @@ class ChooseAmountForm extends PureComponent {
       </div>
     );
   }
-}
+);
 
 ChooseAmountForm.propTypes = {
   amount: PropTypes.string,

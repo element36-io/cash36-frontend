@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
-// import { API_ROOT } from '../../config/api';
 import Logo from '../Logo';
 import Responsive from '../Responsive';
 import HeaderDesktop from './HeaderDesktop';
@@ -15,38 +14,24 @@ import {
 import { getTokens, getUserActivity } from '../../store/tokens/tokens.actions';
 import './Header.scss';
 
-class Header extends Component {
-  eventSource = null;
+const Header = ({
+  auth: { user },
+  logout,
+  fetchNotifications,
+  newNotification,
+  getTokens,
+  getUserActivity,
+  getUserInfo
+}) => {
+  const eventSource = useRef(null);
 
-  componentDidMount () {
-    this.props.fetchNotifications(localStorage.getItem('lastRead'));
-    this.connectWs();
-  }
-
-  componentWillUnmount () {
-    if (this.eventSource != null) {
-      try {
-        this.eventSource.disconnect();
-      } catch (err) {
-        // ignore the case if not yet connected
-      }
-    }
-  }
-
-  connectWs = () => {
-    const {
-      auth: { user },
-      newNotification,
-      getUserInfo,
-      getTokens,
-      getUserActivity
-    } = this.props;
+  const connectWs = () => {
     let socket = new SockJS(`http://localhost:8092/exchange/ws`); // TODO: change to a REAL api path
-    this.eventSource = Stomp.over(socket);
-    this.eventSource.connect(
+    eventSource.current = Stomp.over(socket);
+    eventSource.current.connect(
       {},
       () => {
-        this.eventSource.subscribe(
+        eventSource.current.subscribe(
           `/topics/updates/${user.username}`,
           message => {
             const messageBody = JSON.parse(message.body);
@@ -66,32 +51,37 @@ class Header extends Component {
       },
       err => {
         console.error(err, 'Connection lost');
-        if (err.startsWith('Whoops!')) {
-          // this.setState({ message: e, snackOpen: true, actionEnabled: true, autoHideDuration: null });
-        }
       }
     );
   };
 
-  render () {
-    const {
-      auth: { user },
-      logout
-    } = this.props;
+  useEffect(() => {
+    fetchNotifications(localStorage.getItem('lastRead'));
+    connectWs();
 
-    return (
-      <header>
-        <Logo />
-        <Responsive>
-          <HeaderDesktop logout={logout} user={user} />
-        </Responsive>
-        <Responsive isMobile>
-          <HeaderMobile logout={logout} user={user} />
-        </Responsive>
-      </header>
-    );
-  }
-}
+    return () => {
+      if (eventSource.current != null) {
+        try {
+          eventSource.current.disconnect();
+        } catch (err) {
+          // ignore the case if not yet connected
+        }
+      }
+    };
+  }, []);
+
+  return (
+    <header>
+      <Logo />
+      <Responsive>
+        <HeaderDesktop logout={logout} user={user} />
+      </Responsive>
+      <Responsive isMobile>
+        <HeaderMobile logout={logout} user={user} />
+      </Responsive>
+    </header>
+  );
+};
 
 const mapStateToProps = ({ auth, notifications }) => ({ auth, notifications });
 
