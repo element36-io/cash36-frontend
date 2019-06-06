@@ -7,7 +7,7 @@ const Avatar = ({ avatarUrl, cssClass, alt, username }) => {
   const { state, actions } = useContext(AvatarContext);
 
   const fetchImage = async () => {
-    if (state[username]) return;
+    if (state[username] || !avatarUrl) return;
     try {
       const response = await fetch(avatarUrl);
       const blob = await response.blob();
