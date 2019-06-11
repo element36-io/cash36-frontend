@@ -8,8 +8,7 @@ export const ATTESTATION_PROGRESS = 'ATTESTATION_PROGRESS';
 export const CONFIRM_ATTESTATION = 'CONFIRM_ATTESTATION';
 export const GET_CURRENT_KYC_STEP = 'GET_CURRENT_KYC_STEP';
 
-export const checkUserAddress = address =>
-  API.get(`/auth/user/is-user/${address}`);
+export const checkUserId = id => API.get(`/auth/user/is-user/${id}`);
 
 export const logout = () => {
   localStorage.removeItem('state');

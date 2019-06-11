@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { MNID } from 'uport-connect';
 import { uPort, uportUri, setUportUri } from '../../config/uport.config';
 import Responsive from '../../components/Responsive';
 import LoginSidebar from './LoginSidebar';
@@ -10,17 +9,66 @@ import LoginHeader from './LoginHeader';
 import LoginWelcome from './LoginWelcome/LoginWelcome';
 import RegisterForm from './RegisterForm';
 import LoginForm from './LoginForm';
-import { checkUserAddress } from '../../store/auth/auth.actions';
+import LoginType from './LoginType';
+import MetamaskCheck from './MetamaskCheck';
+import { checkUserId } from '../../store/auth/auth.actions';
 import './Login.scss';
 
-class Login extends Component {
-  state = {
-    step: 0,
-    uPortUri: uportUri,
-    uportCreds: null
+const Login = ({ auth: { isAuthenticated } }) => {
+  const [step, setStep] = useState(0);
+  const [uPortUri, setUri] = useState(uportUri);
+  const [creds, setCreds] = useState(null);
+  const [newUser, setNewUser] = useState(false);
+  const [metamaskLogin, setMetamaskLogin] = useState(false);
+
+  const uPortURIHandler = uPortUri => {
+    setUportUri(uPortUri);
+    setUri(uPortUri);
   };
 
-  componentDidMount () {
+  const checkIfUserExists = async uportCreds => {
+    const creds = { ...uportCreds };
+    creds.id = creds.did.split(':').pop();
+    setCreds(creds);
+    try {
+      await checkUserId(creds.id);
+      setNewUser(false);
+      metamaskLogin ? setStep(2) : setStep(3);
+    } catch (err) {
+      setNewUser(true);
+      metamaskLogin ? setStep(2) : setStep(4);
+    }
+  };
+
+  const selectLoginType = useMetamask => {
+    setMetamaskLogin(useMetamask);
+    setStep(1);
+  };
+
+  const metamaskCheckSuccess = account => {
+    console.warn(account);
+    console.warn(creds);
+    setCreds({ ...creds, account });
+    newUser ? setStep(4) : setStep(3);
+  };
+
+  const renderStep = () => {
+    switch (step) {
+      case 1:
+        return <LoginWelcome uPortUri={uPortUri} />;
+      case 2:
+        return <MetamaskCheck callback={metamaskCheckSuccess} />;
+      case 3:
+        return <LoginForm uportCreds={creds} />;
+      case 4:
+        return <RegisterForm uportCreds={creds} />;
+      default:
+        return <LoginType selectLoginType={selectLoginType} />;
+    }
+  };
+
+  useEffect(() => {
+    if (step !== 1) return;
     uPort
       .requestCredentials(
         {
@@ -28,61 +76,28 @@ class Login extends Component {
           verified: ['element36Tier1', 'element36Tier2'],
           notifications: true
         },
-        this.uPortURIHandler
+        uPortURIHandler
       )
-      .then(this.checkIfUserExists);
-  }
+      .then(checkIfUserExists);
+  }, [step]);
 
-  uPortURIHandler = uPortUri => {
-    setUportUri(uPortUri);
-    this.setState({ uPortUri });
-  };
+  if (isAuthenticated) return <Redirect to="/" />;
 
-  checkIfUserExists = async uportCreds => {
-    try {
-      await checkUserAddress(MNID.decode(uportCreds.networkAddress).address);
-      this.setState({ step: 1, uportCreds });
-    } catch (err) {
-      this.setState({ step: 2, uportCreds });
-    }
-  };
-
-  renderStep = () => {
-    const { step, uPortUri, uportCreds } = this.state;
-    switch (step) {
-      case 1:
-        return <LoginForm uportCreds={uportCreds} />;
-      case 2:
-        return <RegisterForm uportCreds={uportCreds} />;
-      default:
-        return <LoginWelcome uPortUri={uPortUri} />;
-    }
-  };
-
-  render () {
-    const {
-      auth: { isAuthenticated }
-    } = this.props;
-    const { step } = this.state;
-
-    if (isAuthenticated) return <Redirect to="/" />;
-
-    return (
-      <div className="login">
-        <div>
-          <LoginHeader step={step} />
-          {this.renderStep()}
-          <Responsive>
-            <LoginTerms />
-          </Responsive>
-        </div>
+  return (
+    <div className="login">
+      <div>
+        <LoginHeader step={step} />
+        {renderStep()}
         <Responsive>
-          <LoginSidebar />
+          <LoginTerms />
         </Responsive>
       </div>
-    );
-  }
-}
+      <Responsive>
+        <LoginSidebar />
+      </Responsive>
+    </div>
+  );
+};
 
 const mapStateToProps = state => ({ auth: state.auth });
 
