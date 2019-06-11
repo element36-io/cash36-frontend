@@ -121,15 +121,16 @@ export const login = (username, password, user) => async dispatch => {
   }
 };
 
-export const createUserObject = uportCreds => {
-  const username = MNID.decode(uportCreds.networkAddress).address;
+export const createUserObject = (creds, useMetamask) => {
+  console.warn(creds, useMetamask);
+  const username = MNID.decode(creds.networkAddress).address;
   const user = {
     username,
-    name: uportCreds.name,
-    avatarUri: uportCreds.avatar ? uportCreds.avatar.uri : null,
+    name: creds.name,
+    avatarUri: creds.avatar ? creds.avatar.uri : null,
     lastLoggedIn: new Date().getTime(),
-    uportAddress: uportCreds.address,
-    verified: uportCreds.verified
+    uportAddress: creds.address,
+    verified: creds.verified
   };
 
   return {

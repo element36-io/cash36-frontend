@@ -6,7 +6,7 @@ import LoginField from '../LoginField';
 import { register, createUserObject } from '../../../store/auth/auth.actions';
 import StepButton from '../../../components/Buttons/StepButton/StepButton';
 
-const RegisterForm = ({ register, uportCreds }) => {
+const RegisterForm = ({ register, creds, useMetamask }) => {
   const [values, setValues] = useState({ password: '', confirmPassword: '' });
   const [error, setError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
@@ -19,7 +19,8 @@ const RegisterForm = ({ register, uportCreds }) => {
   const handleFormSubmit = evt => {
     evt.preventDefault();
     const { password } = values;
-    const { user, username } = createUserObject(uportCreds);
+    const { user, username } = createUserObject(creds, useMetamask);
+    // return;
     setSubmitting(true);
 
     register(username, password, user).catch(error => {
@@ -35,7 +36,7 @@ const RegisterForm = ({ register, uportCreds }) => {
         Welcome aboard, <br /> please, choose a password
       </p>
       <div className="login__field-wrapper">
-        <LoginUsername id={uportCreds.id} />
+        <LoginUsername id={creds.id} />
         <LoginField
           name="password"
           value={values.password}
@@ -71,7 +72,8 @@ const RegisterForm = ({ register, uportCreds }) => {
 
 RegisterForm.propTypes = {
   register: PropTypes.func.isRequired,
-  uportCreds: PropTypes.object.isRequired
+  creds: PropTypes.object.isRequired,
+  useMetamask: PropTypes.bool
 };
 
 export default connect(

@@ -6,7 +6,7 @@ import LoginUsername from '../LoginUsername';
 import LoginField from '../LoginField';
 import { login, createUserObject } from '../../../store/auth/auth.actions';
 
-const LoginForm = ({ login, uportCreds }) => {
+const LoginForm = ({ login, creds, useMetamask }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
@@ -18,8 +18,8 @@ const LoginForm = ({ login, uportCreds }) => {
 
   const handleFormSubmit = evt => {
     evt.preventDefault();
-    const { user, username } = createUserObject(uportCreds);
-
+    const { user, username } = createUserObject(creds, useMetamask);
+    // return;
     setSubmitting(true);
 
     login(username, password, user).catch(error => {
@@ -28,7 +28,7 @@ const LoginForm = ({ login, uportCreds }) => {
     });
   };
 
-  const firstName = uportCreds.name.split(' ')[0];
+  const firstName = creds.name.split(' ')[0];
 
   return (
     <form className="login__form" onSubmit={handleFormSubmit}>
@@ -39,7 +39,7 @@ const LoginForm = ({ login, uportCreds }) => {
         Please, enter your password
       </p>
       <div className="login__field-wrapper">
-        <LoginUsername id={uportCreds.id} />
+        <LoginUsername id={creds.id} />
         <LoginField
           name="password"
           value={password}
@@ -63,7 +63,9 @@ const LoginForm = ({ login, uportCreds }) => {
 };
 
 LoginForm.propTypes = {
-  uportCreds: PropTypes.object.isRequired
+  creds: PropTypes.object.isRequired,
+  login: PropTypes.func.isRequired,
+  useMetamask: PropTypes.bool
 };
 
 export default connect(

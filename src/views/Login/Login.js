@@ -46,7 +46,6 @@ const Login = ({ auth: { isAuthenticated } }) => {
   };
 
   const metamaskCheckSuccess = account => {
-    console.warn(account);
     console.warn(creds);
     setCreds({ ...creds, account });
     newUser ? setStep(4) : setStep(3);
@@ -59,9 +58,9 @@ const Login = ({ auth: { isAuthenticated } }) => {
       case 2:
         return <MetamaskCheck callback={metamaskCheckSuccess} />;
       case 3:
-        return <LoginForm uportCreds={creds} />;
+        return <LoginForm creds={creds} useMetamask={metamaskLogin} />;
       case 4:
-        return <RegisterForm uportCreds={creds} />;
+        return <RegisterForm creds={creds} useMetamask={metamaskLogin} />;
       default:
         return <LoginType selectLoginType={selectLoginType} />;
     }
