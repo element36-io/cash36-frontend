@@ -27,7 +27,7 @@ class Sell extends Component {
     this._isMounted = false;
   }
 
-  handleChange = (event) => {
+  handleChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
@@ -38,38 +38,55 @@ class Sell extends Component {
   };
 
   burnTokens = async () => {
-    let { web3, networkId, user: { username } } = this.props;
+    let {
+      web3,
+      networkId,
+      user: { account }
+    } = this.props;
     const { symbol, amount } = this.state;
 
-    const cash36Contract = new web3.eth.Contract(Cash36Contract.abi, Cash36Contract.networks[networkId].address);
-    const tokenAddress = await cash36Contract.methods.getTokenBySymbol(symbol).call();
-    const token36Contract = new web3.eth.Contract(Token36Contract.abi, tokenAddress);
+    const cash36Contract = new web3.eth.Contract(
+      Cash36Contract.abi,
+      Cash36Contract.networks[networkId].address
+    );
+    const tokenAddress = await cash36Contract.methods
+      .getTokenBySymbol(symbol)
+      .call();
+    const token36Contract = new web3.eth.Contract(
+      Token36Contract.abi,
+      tokenAddress
+    );
 
     // Calculate amount of gas needed and add extra margin of 10%
-    const estimate = await token36Contract.methods.burn(amount).estimateGas({ from: username });
+    const estimate = await token36Contract.methods
+      .burn(amount)
+      .estimateGas({ from: account });
     const data = await token36Contract.methods.burn(amount).encodeABI();
 
     const options = {
-      from: username,
+      from: account,
       to: tokenAddress,
       gas: estimate + Math.round(estimate * 0.1),
-      nonce: await web3.eth.getTransactionCount(username, 'pending'),
+      nonce: await web3.eth.getTransactionCount(account, 'pending'),
       data
     };
 
-    return web3.eth.sendTransaction(options)
+    return web3.eth
+      .sendTransaction(options)
       .on('receipt', () => {
         if (this._isMounted) this.setState({ step: 2 });
       })
       .on('error', () => {
         // Update with proper error message
-        if (this._isMounted) this.setState({ step: 3, error: 'Selling token was unsuccessful' });
+        if (this._isMounted) { this.setState({ step: 3, error: 'Selling token was unsuccessful' }); }
       });
   };
 
   renderStep = () => {
     const { amount, symbol, step, error } = this.state;
-    const selectedToken = this.props.tokens.filter(token => token.symbol === symbol)[0];
+    const selectedToken = this.props.tokens.filter(
+      token => token.symbol === symbol
+    )[0];
 
     switch (step) {
       case 1:
@@ -79,8 +96,15 @@ class Sell extends Component {
       case 3:
         return <SellError message={error} />;
       default:
-        return <SellTokens amount={amount} symbol={symbol} handleChange={this.handleChange} nextStep={this.nextStep}
-          token={selectedToken} />;
+        return (
+          <SellTokens
+            amount={amount}
+            symbol={symbol}
+            handleChange={this.handleChange}
+            nextStep={this.nextStep}
+            token={selectedToken}
+          />
+        );
     }
   };
 
@@ -88,9 +112,7 @@ class Sell extends Component {
     return (
       <div className="wrapper">
         <div className="sell paper">
-          <div className="sell__content">
-            {this.renderStep()}
-          </div>
+          <div className="sell__content">{this.renderStep()}</div>
         </div>
       </div>
     );
@@ -108,4 +130,9 @@ const mapStateToProps = ({ tokens: { tokens = [] }, auth: { user } }) => ({
   user
 });
 
-export default addCash36(connect(mapStateToProps, { getTokens })(Sell));
+export default addCash36(
+  connect(
+    mapStateToProps,
+    { getTokens }
+  )(Sell)
+);

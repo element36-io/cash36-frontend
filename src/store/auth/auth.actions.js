@@ -69,13 +69,13 @@ export const updateKycStep = (step, payload) => async dispatch => {
   }
 };
 
-export const register = (username, password, user) => async dispatch => {
+export const register = (creds, useMetamask, password) => async dispatch => {
   try {
     await axios.post(`${API_ROOT}/auth/user/register`, {
-      username,
+      username: creds.id,
       password
     });
-    dispatch(login(username, password, user));
+    dispatch(login(creds, useMetamask, password));
   } catch (error) {
     return Promise.reject(
       error.response.data.message || 'An error has occured'
@@ -83,7 +83,8 @@ export const register = (username, password, user) => async dispatch => {
   }
 };
 
-export const login = (username, password, user) => async dispatch => {
+export const login = (creds, useMetamask, password) => async dispatch => {
+  const { user, username } = createUserObject(creds, useMetamask);
   const config = {
     data: `username=${username}&password=${password}&grant_type=password`,
     headers: {
@@ -122,15 +123,18 @@ export const login = (username, password, user) => async dispatch => {
 };
 
 export const createUserObject = (creds, useMetamask) => {
-  console.warn(creds, useMetamask);
-  const username = MNID.decode(creds.networkAddress).address;
+  const username = creds.id;
+  const account = useMetamask
+    ? creds.account
+    : MNID.decode(creds.networkAddress).address;
+
   const user = {
     username,
-    name: creds.name,
+    account,
     avatarUri: creds.avatar ? creds.avatar.uri : null,
-    lastLoggedIn: new Date().getTime(),
-    uportAddress: creds.address,
-    verified: creds.verified
+    name: creds.name,
+    verified: creds.verified,
+    useMetamask
   };
 
   return {

@@ -46,7 +46,6 @@ const Login = ({ auth: { isAuthenticated } }) => {
   };
 
   const metamaskCheckSuccess = account => {
-    console.warn(creds);
     setCreds({ ...creds, account });
     newUser ? setStep(4) : setStep(3);
   };

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LoginUsername from '../LoginUsername';
 import LoginField from '../LoginField';
-import { register, createUserObject } from '../../../store/auth/auth.actions';
+import { register } from '../../../store/auth/auth.actions';
 import StepButton from '../../../components/Buttons/StepButton/StepButton';
 
 const RegisterForm = ({ register, creds, useMetamask }) => {
@@ -19,11 +19,9 @@ const RegisterForm = ({ register, creds, useMetamask }) => {
   const handleFormSubmit = evt => {
     evt.preventDefault();
     const { password } = values;
-    const { user, username } = createUserObject(creds, useMetamask);
-    // return;
     setSubmitting(true);
 
-    register(username, password, user).catch(error => {
+    register(creds, useMetamask, password).catch(error => {
       setError(error);
       setSubmitting(false);
     });

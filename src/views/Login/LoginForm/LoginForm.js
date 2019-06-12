@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import StepButton from '../../../components/Buttons/StepButton';
 import LoginUsername from '../LoginUsername';
 import LoginField from '../LoginField';
-import { login, createUserObject } from '../../../store/auth/auth.actions';
+import { login } from '../../../store/auth/auth.actions';
 
 const LoginForm = ({ login, creds, useMetamask }) => {
   const [password, setPassword] = useState('');
@@ -18,11 +18,9 @@ const LoginForm = ({ login, creds, useMetamask }) => {
 
   const handleFormSubmit = evt => {
     evt.preventDefault();
-    const { user, username } = createUserObject(creds, useMetamask);
-    // return;
     setSubmitting(true);
 
-    login(username, password, user).catch(error => {
+    login(creds, useMetamask, password).catch(error => {
       setError(error);
       setSubmitting(false);
     });

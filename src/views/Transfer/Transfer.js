@@ -6,7 +6,10 @@ import TransferAddress from './TransferAddress';
 import TransferAmount from './TransferAmount';
 import BackButton from '../../components/Buttons/BackButton';
 import { getTokens } from '../../store/tokens/tokens.actions';
-import { getContacts, removeQuickTransfer } from '../../store/contacts/contacts.actions';
+import {
+  getContacts,
+  removeQuickTransfer
+} from '../../store/contacts/contacts.actions';
 import TransferConfirmation from './TransferConfirmation';
 import TransferSuccess from './TransferSuccess';
 import TransferError from './TransferError';
@@ -16,7 +19,7 @@ import './Transfer.scss';
 class Transfer extends Component {
   constructor (props) {
     super(props);
-    console.log('======== TRANSFER', this.props);
+    console.warn('======== TRANSFER', this.props);
     this.state = {
       step: this.props.quickTransfer ? 1 : 0,
       symbol: 'EUR36',
@@ -38,11 +41,11 @@ class Transfer extends Component {
   }
 
   nextStep = () => {
-    this.setState((prevState) => ({ step: prevState.step + 1 }));
+    this.setState(prevState => ({ step: prevState.step + 1 }));
   };
 
   previousStep = () => {
-    this.setState((prevState) => {
+    this.setState(prevState => {
       return { step: prevState.step - 1 };
     });
   };
@@ -63,38 +66,64 @@ class Transfer extends Component {
   };
 
   transferTokens = async () => {
-    const { web3, networkId, username } = this.props;
-    const { target: { contactAddress }, amount, symbol } = this.state;
+    const { web3, networkId, account } = this.props;
+    const {
+      target: { contactAddress },
+      amount,
+      symbol
+    } = this.state;
 
-    const cash36Contract = new web3.eth.Contract(Cash36Contract.abi, Cash36Contract.networks[networkId].address);
-    const tokenAddress = await cash36Contract.methods.getTokenBySymbol(symbol).call();
-    const token36Contract = new web3.eth.Contract(Token36Contract.abi, tokenAddress);
+    const cash36Contract = new web3.eth.Contract(
+      Cash36Contract.abi,
+      Cash36Contract.networks[networkId].address
+    );
+    const tokenAddress = await cash36Contract.methods
+      .getTokenBySymbol(symbol)
+      .call();
+    const token36Contract = new web3.eth.Contract(
+      Token36Contract.abi,
+      tokenAddress
+    );
 
     // Calculate amount of gas needed and add extra margin of 10%
-    const estimate = await token36Contract.methods.transfer(contactAddress, amount).estimateGas({ from: username });
-    const data = await token36Contract.methods.transfer(contactAddress, amount).encodeABI();
+    const estimate = await token36Contract.methods
+      .transfer(contactAddress, amount)
+      .estimateGas({ from: account });
+    const data = await token36Contract.methods
+      .transfer(contactAddress, amount)
+      .encodeABI();
 
     const options = {
-      from: username,
+      from: account,
       to: tokenAddress,
       gas: estimate + Math.round(estimate * 0.1),
-      nonce: await web3.eth.getTransactionCount(username, 'pending'),
+      nonce: await web3.eth.getTransactionCount(account, 'pending'),
       data
     };
 
-    return web3.eth.sendTransaction(options)
+    return web3.eth
+      .sendTransaction(options)
       .once('transactionHash', hash => {
         if (this._isMounted) this.setState({ step: 3 });
       })
       .on('error', error => {
         console.log(error);
-        if (this._isMounted) this.setState({ step: 4, error: 'Transfer has been denied via mobile device' });
+        if (this._isMounted) {
+          this.setState({
+            step: 4,
+            error: 'Transfer has been denied via mobile device'
+          });
+        }
       });
   };
 
   renderStep = () => {
     const { amount, symbol, step, target, error } = this.state;
-    const { web3: { utils }, contactsList, tokens } = this.props;
+    const {
+      web3: { utils },
+      contactsList,
+      tokens
+    } = this.props;
 
     switch (step) {
       case 1:
@@ -108,7 +137,9 @@ class Transfer extends Component {
       case 2:
         return <TransferConfirmation target={target} />;
       case 3:
-        return <TransferSuccess amount={amount} target={target} symbol={symbol} />;
+        return (
+          <TransferSuccess amount={amount} target={target} symbol={symbol} />
+        );
       case 4:
         return <TransferError message={error} />;
       default:
@@ -137,11 +168,20 @@ class Transfer extends Component {
   }
 }
 
-const mapStateToProps = ({ tokens: { tokens = [] }, auth: { user }, contacts: { contactsList, quickTransfer } }) => ({
+const mapStateToProps = ({
+  tokens: { tokens = [] },
+  auth: { user },
+  contacts: { contactsList, quickTransfer }
+}) => ({
   tokens,
-  username: user.username,
+  account: user.account,
   contactsList,
   quickTransfer
 });
 
-export default addCash36(connect(mapStateToProps, { getTokens, getContacts, removeQuickTransfer })(Transfer));
+export default addCash36(
+  connect(
+    mapStateToProps,
+    { getTokens, getContacts, removeQuickTransfer }
+  )(Transfer)
+);
