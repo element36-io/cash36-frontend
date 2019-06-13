@@ -9,12 +9,12 @@ import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsPr
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import store from './store';
 import theme from './config/theme';
-import Web3ProviderNew from './components/Web3Provider';
+import Web3Provider from './providers/web3.provider';
 import AvatarProvider from './providers/avatar.provider';
 
 ReactDOM.render(
   <Provider store={store}>
-    <Web3ProviderNew>
+    <Web3Provider>
       <MuiThemeProvider theme={theme}>
         <MuiPickersUtilsProvider utils={MomentUtils}>
           <AvatarProvider>
@@ -22,7 +22,7 @@ ReactDOM.render(
           </AvatarProvider>
         </MuiPickersUtilsProvider>
       </MuiThemeProvider>
-    </Web3ProviderNew>
+    </Web3Provider>
   </Provider>,
   document.getElementById('root')
 );

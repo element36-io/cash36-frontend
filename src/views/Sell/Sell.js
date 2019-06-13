@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Cash36Contract, Token36Contract } from 'cash36-contracts';
@@ -7,60 +7,59 @@ import SellConfirmation from './SellConfirmation';
 import SellSuccess from './SellSuccess';
 import SellError from './SellError';
 import { getTokens } from '../../store/tokens/tokens.actions';
-import addCash36 from '../../components/cash36';
+import useCash36 from '../../hooks/useCash36';
 import './Sell.scss';
 
-class Sell extends Component {
-  state = {
-    step: 0,
-    amount: '',
-    symbol: 'EUR36',
-    error: null
-  };
+const Sell = ({ user, tokens, getTokens }) => {
+  const [step, setStep] = useState(0);
+  const [values, setValues] = useState({ amount: '', symbol: 'EUR36' });
+  const [error, setError] = useState(null);
+  const _isMounted = useRef(true);
+  const cash36 = useCash36();
 
-  componentDidMount () {
-    this.props.getTokens();
-    this._isMounted = true;
-  }
+  useEffect(() => {
+    getTokens();
 
-  componentWillUnmount () {
-    this._isMounted = false;
-  }
+    return () => {
+      _isMounted.current = false;
+    };
+  }, []);
 
-  handleChange = event => {
+  const handleChange = event => {
     const { name, value } = event.target;
-    this.setState({ [name]: value });
+    setValues({ ...values, [name]: value });
   };
 
-  nextStep = () => {
-    this.setState({ step: 1 });
-    this.burnTokens();
+  const confirmationStep = () => {
+    setStep(1);
+    burnTokens();
   };
 
-  burnTokens = async () => {
-    let {
-      web3,
-      networkId,
-      user: { account }
-    } = this.props;
-    const { symbol, amount } = this.state;
+  const burnTokens = async () => {
+    let { web3, networkId } = cash36;
+    const { account } = user;
+    const { symbol, amount } = values;
 
     const cash36Contract = new web3.eth.Contract(
       Cash36Contract.abi,
       Cash36Contract.networks[networkId].address
     );
+
     const tokenAddress = await cash36Contract.methods
       .getTokenBySymbol(symbol)
       .call();
+
     const token36Contract = new web3.eth.Contract(
       Token36Contract.abi,
       tokenAddress
     );
 
     // Calculate amount of gas needed and add extra margin of 10%
+
     const estimate = await token36Contract.methods
       .burn(amount)
       .estimateGas({ from: account });
+
     const data = await token36Contract.methods.burn(amount).encodeABI();
 
     const options = {
@@ -74,19 +73,20 @@ class Sell extends Component {
     return web3.eth
       .sendTransaction(options)
       .on('receipt', () => {
-        if (this._isMounted) this.setState({ step: 2 });
+        if (_isMounted) setStep(2);
       })
       .on('error', () => {
         // Update with proper error message
-        if (this._isMounted) { this.setState({ step: 3, error: 'Selling token was unsuccessful' }); }
+        if (_isMounted) {
+          setError('Selling token was unsuccessful');
+          setStep(3);
+        }
       });
   };
 
-  renderStep = () => {
-    const { amount, symbol, step, error } = this.state;
-    const selectedToken = this.props.tokens.filter(
-      token => token.symbol === symbol
-    )[0];
+  const renderStep = () => {
+    const { amount, symbol } = values;
+    const selectedToken = tokens.filter(token => token.symbol === symbol)[0];
 
     switch (step) {
       case 1:
@@ -100,29 +100,27 @@ class Sell extends Component {
           <SellTokens
             amount={amount}
             symbol={symbol}
-            handleChange={this.handleChange}
-            nextStep={this.nextStep}
+            handleChange={handleChange}
+            onClick={confirmationStep}
             token={selectedToken}
           />
         );
     }
   };
 
-  render () {
-    return (
-      <div className="wrapper">
-        <div className="sell paper">
-          <div className="sell__content">{this.renderStep()}</div>
-        </div>
+  return (
+    <div className="wrapper">
+      <div className="sell paper">
+        <div className="sell__content">{renderStep()}</div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 Sell.propTypes = {
   tokens: PropTypes.array,
   getTokens: PropTypes.func,
-  receiptCallback: PropTypes.func
+  user: PropTypes.object
 };
 
 const mapStateToProps = ({ tokens: { tokens = [] }, auth: { user } }) => ({
@@ -130,9 +128,7 @@ const mapStateToProps = ({ tokens: { tokens = [] }, auth: { user } }) => ({
   user
 });
 
-export default addCash36(
-  connect(
-    mapStateToProps,
-    { getTokens }
-  )(Sell)
-);
+export default connect(
+  mapStateToProps,
+  { getTokens }
+)(Sell);
