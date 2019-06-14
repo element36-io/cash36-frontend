@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
-import addCash36 from '../../components/cash36';
 import { Cash36Contract, Token36Contract } from 'cash36-contracts';
 import TransferAddress from './TransferAddress';
 import TransferAmount from './TransferAmount';
@@ -10,68 +9,70 @@ import {
   getContacts,
   removeQuickTransfer
 } from '../../store/contacts/contacts.actions';
+import useCash36 from '../../hooks/useCash36';
 import TransferConfirmation from './TransferConfirmation';
 import TransferSuccess from './TransferSuccess';
 import TransferError from './TransferError';
 
 import './Transfer.scss';
 
-class Transfer extends Component {
-  constructor (props) {
-    super(props);
-    console.warn('======== TRANSFER', this.props);
-    this.state = {
-      step: this.props.quickTransfer ? 1 : 0,
-      symbol: 'EUR36',
-      amount: '',
-      target: this.props.quickTransfer,
-      error: null
+const Transfer = ({
+  quickTransfer,
+  tokens,
+  account,
+  contactsList,
+  getTokens,
+  getContacts,
+  removeQuickTransfer
+}) => {
+  const [step, setStep] = useState(quickTransfer ? 1 : 0);
+  const [values, setValues] = useState({ amount: '', symbol: 'EUR36' });
+  const [error, setError] = useState(null);
+  const [target, setTarget] = useState(quickTransfer);
+  const _isMounted = useRef(true);
+  const cash36 = useCash36();
+
+  useEffect(() => {
+    getTokens();
+    getContacts();
+    if (quickTransfer) removeQuickTransfer();
+
+    return () => {
+      _isMounted.current = false;
     };
-  }
+  }, []);
 
-  componentDidMount () {
-    this.props.getTokens();
-    this.props.getContacts();
-    if (this.props.quickTransfer) this.props.removeQuickTransfer();
-    this._isMounted = true;
-  }
-
-  componentWillUnmount () {
-    this._isMounted = false;
-  }
-
-  nextStep = () => {
-    this.setState(prevState => ({ step: prevState.step + 1 }));
+  const nextStep = () => {
+    setStep(step + 1);
   };
 
-  previousStep = () => {
-    this.setState(prevState => {
-      return { step: prevState.step - 1 };
-    });
+  const previousStep = () => {
+    setStep(step - 1);
   };
 
-  addTarget = target => {
-    this.setState({ target });
-    this.nextStep();
+  const addTarget = target => {
+    setTarget(target);
+    nextStep();
   };
 
-  sendTransfer = amount => {
+  const sendTransfer = amount => {
     try {
-      this.setState({ step: 2, ...amount }, () => {
-        this.transferTokens();
-      });
+      setValues({ ...amount });
+      setStep(2);
+      // this.setState({ step: 2, ...amount }, () => {
+      //   transferTokens();
+      // });
     } catch (error) {
       console.log(error);
     }
   };
 
-  transferTokens = async () => {
-    const { web3, networkId, account } = this.props;
+  const transferTokens = async () => {
+    const { web3, networkId } = cash36;
     const {
-      target: { contactAddress },
-      amount,
-      symbol
-    } = this.state;
+      target: { contactAddress }
+    } = target;
+    const { amount, symbol } = values;
 
     const cash36Contract = new web3.eth.Contract(
       Cash36Contract.abi,
@@ -104,32 +105,28 @@ class Transfer extends Component {
     return web3.eth
       .sendTransaction(options)
       .once('transactionHash', hash => {
-        if (this._isMounted) this.setState({ step: 3 });
+        if (_isMounted.current) setStep(3);
       })
       .on('error', error => {
         console.log(error);
-        if (this._isMounted) {
-          this.setState({
-            step: 4,
-            error: 'Transfer has been denied via mobile device'
-          });
+        if (_isMounted.current) {
+          setError('Transfer has been denied via mobile device');
+          setStep(4);
         }
       });
   };
 
-  renderStep = () => {
-    const { amount, symbol, step, target, error } = this.state;
+  const renderStep = () => {
+    const { amount, symbol } = values;
     const {
-      web3: { utils },
-      contactsList,
-      tokens
-    } = this.props;
+      web3: { utils }
+    } = cash36;
 
     switch (step) {
       case 1:
         return (
           <TransferAmount
-            submitCallback={this.sendTransfer}
+            submitCallback={sendTransfer}
             target={target}
             tokens={tokens}
           />
@@ -145,7 +142,7 @@ class Transfer extends Component {
       default:
         return (
           <TransferAddress
-            submitCallback={this.addTarget}
+            submitCallback={addTarget}
             contactsList={contactsList}
             utils={utils}
           />
@@ -153,20 +150,17 @@ class Transfer extends Component {
     }
   };
 
-  render () {
-    const { step } = this.state;
-    return (
-      <div className="wrapper">
-        <div className="transfer paper">
-          <div className="transfer__content">
-            {step === 1 && <BackButton onClick={this.previousStep} />}
-            {this.renderStep()}
-          </div>
+  return (
+    <div className="wrapper">
+      <div className="transfer paper">
+        <div className="transfer__content">
+          {step === 1 && <BackButton onClick={previousStep} />}
+          {renderStep()}
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 const mapStateToProps = ({
   tokens: { tokens = [] },
@@ -179,9 +173,7 @@ const mapStateToProps = ({
   quickTransfer
 });
 
-export default addCash36(
-  connect(
-    mapStateToProps,
-    { getTokens, getContacts, removeQuickTransfer }
-  )(Transfer)
-);
+export default connect(
+  mapStateToProps,
+  { getTokens, getContacts, removeQuickTransfer }
+)(Transfer);

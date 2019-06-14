@@ -6,11 +6,10 @@ import { uPort } from '../config/uport.config';
 const useCash36 = () => {
   const { networkId, web3 } = useContext(Web3Context);
   const { user } = useSelector(({ auth }) => auth);
-  const [state, setState] = useState();
+  const [state] = useState({ networkId, web3 });
 
   useEffect(() => {
-    if (!user.useMetamask) web3.setProvider(uPort.getProvider());
-    setState({ web3, networkId });
+    if (!user.useMetamask) state.web3.setProvider(uPort.getProvider());
   }, []);
 
   const transactionHashCallback = action => {

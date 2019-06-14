@@ -16,6 +16,7 @@ const Sell = ({ user, tokens, getTokens }) => {
   const [error, setError] = useState(null);
   const _isMounted = useRef(true);
   const cash36 = useCash36();
+  console.warn(cash36);
 
   useEffect(() => {
     getTokens();

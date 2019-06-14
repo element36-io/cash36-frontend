@@ -1,77 +1,98 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { CircularProgress } from '@material-ui/core';
 import SearchBox from './SearchBox';
 import AddContact from './AddContact';
 import ContactItem from './ContactItem';
 import ContactFormContainer from './ContactFormContainer';
-import { getContacts, removeContact, addContact, addQuickTransfer } from '../../store/contacts/contacts.actions';
+import {
+  getContacts,
+  removeContact,
+  addContact,
+  addQuickTransfer
+} from '../../store/contacts/contacts.actions';
 import './Contacts.scss';
 
-class Contacts extends Component {
-  state = {
-    search: '',
-    showForm: false
+const Contacts = ({
+  contacts,
+  getContacts,
+  removeContact,
+  addContact,
+  addQuickTransfer,
+  history
+}) => {
+  const [search, setSearch] = useState('');
+  const [activeForm, setActiveForm] = useState(false);
+
+  useEffect(() => {
+    getContacts();
+  }, []);
+
+  const searchChangeHandler = evt => {
+    setSearch(evt.target.value);
   };
 
-  componentDidMount () {
-    this.props.getContacts();
-  }
-
-  searchChangeHandler = evt => {
-    const { name, value } = evt.target;
-    this.setState({ [name]: value });
+  const showForm = () => {
+    setActiveForm(true);
   };
 
-  showForm = () => {
-    this.setState({ showForm: true });
+  const closeForm = () => {
+    setActiveForm(false);
   };
 
-  closeForm = () => {
-    this.setState({ showForm: false });
+  const quickTransfer = contact => {
+    addQuickTransfer(contact);
+    history.push('/transfer');
   };
 
-  removeContact = id => {
-    this.props.removeContact(id);
-  };
-
-  quickTransfer = contact => {
-    this.props.addQuickTransfer(contact);
-    this.props.history.push('/transfer');
-  }
-
-  renderList = () => {
-    const { contacts: { contactsList } } = this.props;
-    const search = this.state.search.toLowerCase().trim();
+  const renderList = () => {
+    const { contactsList } = contacts;
 
     if (!contactsList.length) return null;
 
-    return contactsList.filter(c => {
-      return c.contactName.toLowerCase().includes(search) || c.contactAddress.toLowerCase().includes(search);
-    }).map(c => <ContactItem key={c.id} contact={c} removeCallback={this.removeContact} quickTransfer={this.quickTransfer} />);
+    return contactsList
+      .filter(c => {
+        return (
+          c.contactName.toLowerCase().includes(search.toLowerCase().trim()) ||
+          c.contactAddress.toLowerCase().includes(search.toLowerCase().trim())
+        );
+      })
+      .map(c => (
+        <ContactItem
+          key={c.id}
+          contact={c}
+          removeCallback={removeContact}
+          quickTransfer={quickTransfer}
+        />
+      ));
   };
 
-  render () {
-    const { contacts: { fetching, contactsList }, addContact } = this.props;
-    const { search, showForm } = this.state;
-
-    return (
-      <div className="wrapper contacts">
-        <ContactFormContainer closeForm={this.closeForm} submitCallback={addContact}
-          isActive={showForm} contactsList={contactsList} />
-        <div className="contacts__actions">
-          <SearchBox changeHandler={this.searchChangeHandler} value={search} />
-          <AddContact clickHandler={this.showForm} />
-        </div>
-        {fetching
-          ? <div className="contacts__loader"><CircularProgress color="primary" size={75} /></div>
-          : <div className="contacts__list">{this.renderList()}</div>
-        }
+  return (
+    <div className="wrapper contacts">
+      <ContactFormContainer
+        closeForm={closeForm}
+        onSubmit={addContact}
+        isActive={activeForm}
+        contactsList={contacts.contactsList}
+      />
+      <div className="contacts__actions">
+        <SearchBox changeHandler={searchChangeHandler} value={search} />
+        <AddContact clickHandler={showForm} />
       </div>
-    );
-  }
-}
+      {contacts.fetching ? (
+        <div className="contacts__loader">
+          <CircularProgress color="primary" size={75} />
+        </div>
+      ) : (
+        <div className="contacts__list">{renderList()}</div>
+      )}
+    </div>
+  );
+};
 
 const mapStateToProps = ({ contacts }) => ({ contacts });
 
-export default connect(mapStateToProps, { getContacts, removeContact, addContact, addQuickTransfer })(Contacts);
+export default connect(
+  mapStateToProps,
+  { getContacts, removeContact, addContact, addQuickTransfer }
+)(Contacts);
