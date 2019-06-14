@@ -17,7 +17,7 @@ export const formModel = [
     name: 'dateOfBirth',
     label: 'Date of Birth',
     type: 'date',
-    placeholder: 'DD/MM/YYYY',
+    placeholder: 'DD.MM.YYYY',
     maxDate: subYears(new Date(), 18),
     initialFocusedDate: subYears(new Date(), 25)
   },
