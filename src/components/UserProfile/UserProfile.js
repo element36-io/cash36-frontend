@@ -11,7 +11,7 @@ import { confirmAttestation } from '../../store/auth/auth.actions';
 import './UserProfile.scss';
 
 const UserProfile = ({ user, alt, confirmAttestation }) => {
-  const [attesting, setAttesting] = useState(true);
+  const [attesting, setAttesting] = useState(false);
 
   const handleAttestClick = () => {
     const { currentLevel, name, uportAddress } = user;
