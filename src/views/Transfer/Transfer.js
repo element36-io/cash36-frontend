@@ -5,10 +5,7 @@ import TransferAddress from './TransferAddress';
 import TransferAmount from './TransferAmount';
 import BackButton from '../../components/Buttons/BackButton';
 import { getTokens } from '../../store/tokens/tokens.actions';
-import {
-  getContacts,
-  removeQuickTransfer
-} from '../../store/contacts/contacts.actions';
+import { getContacts } from '../../store/contacts/contacts.actions';
 import useCash36 from '../../hooks/useCash36';
 import TransferConfirmation from './TransferConfirmation';
 import TransferSuccess from './TransferSuccess';
@@ -17,25 +14,35 @@ import TransferError from './TransferError';
 import './Transfer.scss';
 
 const Transfer = ({
-  quickTransfer,
   tokens,
   account,
   contactsList,
   getTokens,
   getContacts,
-  removeQuickTransfer
+  location,
+  history
 }) => {
-  const [step, setStep] = useState(quickTransfer ? 1 : 0);
+  const [step, setStep] = useState(
+    location.state && location.state.quickTransfer ? 1 : 0
+  );
   const [values, setValues] = useState({ amount: '', symbol: 'EUR36' });
   const [error, setError] = useState(null);
-  const [target, setTarget] = useState(quickTransfer);
+  const [target, setTarget] = useState(
+    (location.state && location.state.quickTransfer) || null
+  );
   const _isMounted = useRef(true);
   const cash36 = useCash36();
 
   useEffect(() => {
     getTokens();
     getContacts();
-    if (quickTransfer) removeQuickTransfer();
+
+    if (location.state) {
+      history.replace({
+        pathname: '/transfer',
+        state: null
+      });
+    }
 
     return () => {
       _isMounted.current = false;
@@ -59,20 +66,16 @@ const Transfer = ({
     try {
       setValues({ ...amount });
       setStep(2);
-      // this.setState({ step: 2, ...amount }, () => {
-      //   transferTokens();
-      // });
+      transferTokens(amount);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const transferTokens = async () => {
+  const transferTokens = async transferValues => {
     const { web3, networkId } = cash36;
-    const {
-      target: { contactAddress }
-    } = target;
-    const { amount, symbol } = values;
+    const { contactAddress } = target;
+    const { amount, symbol } = transferValues;
 
     const cash36Contract = new web3.eth.Contract(
       Cash36Contract.abi,
@@ -165,15 +168,14 @@ const Transfer = ({
 const mapStateToProps = ({
   tokens: { tokens = [] },
   auth: { user },
-  contacts: { contactsList, quickTransfer }
+  contacts: { contactsList }
 }) => ({
   tokens,
   account: user.account,
-  contactsList,
-  quickTransfer
+  contactsList
 });
 
 export default connect(
   mapStateToProps,
-  { getTokens, getContacts, removeQuickTransfer }
+  { getTokens, getContacts }
 )(Transfer);

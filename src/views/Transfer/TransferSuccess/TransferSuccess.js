@@ -7,16 +7,23 @@ import AmountCard from '../../../components/AmountCard';
 
 import './TransferSuccess.scss';
 
-const TransferSuccess = props => {
-  const { amount, symbol, target: { contactName, contactAddress } } = props;
-  const sentTo = contactName ? <span>{contactName}</span> : <TruncateString text={contactAddress} />;
+const TransferSuccess = ({
+  amount,
+  symbol,
+  target: { contactName, contactAddress }
+}) => {
+  const sentTo = contactName ? (
+    <span>{contactName}</span>
+  ) : (
+    <TruncateString text={contactAddress} />
+  );
 
   return (
     <div className="transfer__transfer-success">
       <ActionStatus type="success" title="Transfer Successful" />
       <AmountCard amount={amount} symbol={symbol} />
       <p>
-          You've succesfuly transfered {`${amount} ${symbol}`} to {sentTo}
+        You've succesfuly transfered {`${amount} ${symbol}`} to {sentTo}
       </p>
       <TransactionFooter />
     </div>

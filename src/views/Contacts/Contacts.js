@@ -8,8 +8,7 @@ import ContactFormContainer from './ContactFormContainer';
 import {
   getContacts,
   removeContact,
-  addContact,
-  addQuickTransfer
+  addContact
 } from '../../store/contacts/contacts.actions';
 import './Contacts.scss';
 
@@ -18,7 +17,6 @@ const Contacts = ({
   getContacts,
   removeContact,
   addContact,
-  addQuickTransfer,
   history
 }) => {
   const [search, setSearch] = useState('');
@@ -41,8 +39,7 @@ const Contacts = ({
   };
 
   const quickTransfer = contact => {
-    addQuickTransfer(contact);
-    history.push('/transfer');
+    history.push('/transfer', { quickTransfer: contact });
   };
 
   const renderList = () => {
@@ -94,5 +91,5 @@ const mapStateToProps = ({ contacts }) => ({ contacts });
 
 export default connect(
   mapStateToProps,
-  { getContacts, removeContact, addContact, addQuickTransfer }
+  { getContacts, removeContact, addContact }
 )(Contacts);

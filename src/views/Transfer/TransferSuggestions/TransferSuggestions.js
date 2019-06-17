@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import TransferContact from '../TransferContact';
 import './TransferSuggestions.scss';
 
-const TransferSuggestions = props => {
-  const { contacts, onClick, filter } = props;
+const TransferSuggestions = ({ contacts, onClick, filter }) => {
   const searchText = filter.trim().toLowerCase();
-  const list = contacts.filter(c => c.contactName.toLowerCase().includes(searchText) || c.contactAddress.toLowerCase().includes(searchText));
+  const list = contacts.filter(
+    c =>
+      c.contactName.toLowerCase().includes(searchText) ||
+      c.contactAddress.toLowerCase().includes(searchText)
+  );
 
   if (!list.length) return null;
 
