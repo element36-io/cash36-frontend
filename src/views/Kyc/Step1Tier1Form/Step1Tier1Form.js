@@ -1,21 +1,22 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-import moment from 'moment';
-import Form from '../../../components/Form';
-import FormField from '../../../components/Form/FormField';
-import ProcessHeader from '../ProcessHeader';
-import ProcessControls from '../ProcessControls';
-import { getCountries } from '../../../store/countries/countries.actions';
-import validationSchema from './validation-schema';
+import moment from 'moment'
+import Form from '../../../components/Form'
+import FormField from '../../../components/Form/FormField'
+import ProcessHeader from '../ProcessHeader'
+import ProcessControls from '../ProcessControls'
+import { getCountries } from '../../../store/countries/countries.actions'
+import validationSchema from './validation-schema'
 import {
   initialValues,
   formModel,
   ibanModel,
   nationalityModel
-} from './formModel';
-import './Step1Tier1Form.scss';
+} from './formModel'
+import './Step1Tier1Form.scss'
+
 
 const Step1Tier1Form = props => {
   const {
@@ -23,9 +24,9 @@ const Step1Tier1Form = props => {
     nationalities,
     getCountries,
     changeSteps,
-    username,
-    avatarUri
-  } = props;
+    avatarUri,
+    user
+  } = props
 
   const submit = async values => {
     try {
@@ -33,28 +34,28 @@ const Step1Tier1Form = props => {
         ...values,
         dateOfBirth: moment(values.dateOfBirth).format('DD.MM.YYYY'),
         avatarUrl: avatarUri,
-        accountAddress: username
-      };
-      await changeSteps(1, payload);
+        accountAddress: user.account
+      }
+      await changeSteps(1, payload)
     } catch (error) {
-      return Promise.reject(error);
+      return Promise.reject(error)
     }
-  };
+  }
 
   useEffect(() => {
     if (!countries.length || !nationalities.length) {
-      getCountries();
+      getCountries()
     }
-  }, []);
+  }, [])
 
   const fieldGroup = formModel.map(field => {
-    if (field.name === 'country') field.list = countries;
-    return field;
-  });
+    if (field.name === 'country') field.list = countries
+    return field
+  })
   const nationalitySelects = nationalityModel.map(item => {
-    item.list = nationalities;
-    return item;
-  });
+    item.list = nationalities
+    return item
+  })
 
   return (
     <div className="tier1-form">
@@ -90,7 +91,7 @@ const Step1Tier1Form = props => {
               ))}
             </div>
             <h3>Bank Account</h3>
-            <FormField formField={ibanModel} formProps={formProps} />
+            <FormField formField={ibanModel} formProps={formProps}/>
             {!formProps.isValid && formProps.submitCount > 0 && (
               <p className="form-error">
                 Please fill out all the required fields
@@ -106,8 +107,8 @@ const Step1Tier1Form = props => {
         )}
       />
     </div>
-  );
-};
+  )
+}
 
 Step1Tier1Form.propTypes = {
   changeSteps: PropTypes.func.isRequired,
@@ -115,13 +116,14 @@ Step1Tier1Form.propTypes = {
   username: PropTypes.string,
   avatarUri: PropTypes.string,
   caseId: PropTypes.string
-};
+}
 
 const mapStateToProps = ({
-  countries: { countries = [], nationalities = [] }
-}) => ({ countries, nationalities });
+  auth: {user},
+  countries: {countries = [], nationalities = []}
+}) => ({countries, nationalities, user})
 
 export default connect(
   mapStateToProps,
-  { getCountries }
-)(Step1Tier1Form);
+  {getCountries}
+)(Step1Tier1Form)
