@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { InlineDatePicker } from 'material-ui-pickers';
 import RightArrowIcon from '@material-ui/icons/KeyboardArrowRight';
 import LeftArrowIcon from '@material-ui/icons/KeyboardArrowLeft';
+import TodayIcon from '@material-ui/icons/Today';
 
 const DateInput = props => {
   const {
@@ -43,13 +44,21 @@ const DateInput = props => {
         rightArrowIcon={<RightArrowIcon />}
         leftArrowIcon={<LeftArrowIcon />}
         label={label}
-        format={'DD/MM/YYYY'}
+        format={'DD.MM.YYYY'}
         InputProps={{
-          placeholder: 'DD/MM/YYYY'
+          placeholder: 'DD.MM.YYYY'
         }}
         InputLabelProps={{
           shrink: true
         }}
+        clearable
+        keyboard
+        mask={value =>
+          value
+            ? [/\d/, /\d/, '.', /\d/, /\d/, '.', /\d/, /\d/, /\d/, /\d/]
+            : []
+        }
+        keyboardIcon={<TodayIcon />}
       />
       {isTouched && error && <p className="form-error">{error}</p>}
     </div>
