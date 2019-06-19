@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import ProcessHeader from '../ProcessHeader';
 import ProcessControls from '../ProcessControls';
 import RadioButtons from './RadioButtons';
-import CheckboxButtons from './CheckboxButtons';
-import TextInput from '../../../components/Form/TextInput';
-import BasicSelectInput from '../../../components/Form/BasicSelectInput';
+import IndustryFields from './IndustryFields';
+import SourceOfFunds from './SourceOfFunds';
+import DetailsSource from './DetailsSource';
 
 import './Step4UserProfile.scss';
 
@@ -24,47 +24,97 @@ const yearlyIncomeValues = [
   'MoreThan200k'
 ];
 
-const industryValues = [
-  'Education',
-  'Internet',
-  'Computer Software',
-  'Aviation',
-  'Office',
-  'Retail',
-  'Marketing'
-];
-
-const sourcesOfFunds = [
-  'SavingsFromWork',
-  'Inheritance',
-  'Lottery',
-  'Donation',
-  'Other'
-];
-
 const Step4UserProfile = ({ changeSteps }) => {
+  const [industry, setIndustry] = useState({
+    profession: '',
+    industry: '',
+    other: ''
+  });
   const [transactionVolume, setTransactionVolume] = useState('');
   const [incomeVolume, setIncomeVolume] = useState('');
-  const [profession, setProfession] = useState('');
-  const [industry, setIndustry] = useState('');
   const [sourceOfFunds, setSourceOfFunds] = useState('');
   const [sourceOfFundsOther, setSourceOfFundsOther] = useState('');
+  const [sourceDetails, setSourceDetails] = useState('');
 
-  const otherSelected = sourceOfFunds === 'Other';
+  const updateIndustry = useCallback(
+    evt => {
+      const { name, value } = evt.target;
+      setIndustry({ ...industry, [name]: value });
+    },
+    [industry]
+  );
 
-  const buttonDisabled =
+  const updateSource = useCallback(
+    evt => setSourceOfFunds(evt.target.value),
+    []
+  );
+
+  const updateSourceOther = useCallback(
+    evt => setSourceOfFundsOther(evt.target.value),
+    []
+  );
+
+  const updateSourceDetails = useCallback(
+    evt => setSourceDetails(evt.target.value),
+    []
+  );
+
+  const submit = () => {
+    console.warn(industry);
+    console.warn(sourceOfFunds);
+    console.warn(sourceOfFundsOther);
+    console.warn(transactionVolume);
+    console.warn(incomeVolume);
+    console.warn(sourceDetails);
+  };
+
+  useEffect(() => {
+    if (transactionVolume === 'LessThan10k') setSourceDetails('');
+  }, [transactionVolume]);
+
+  // () => {
+  //   const payload = {
+  //     incomeVolume,
+  //     transactionVolume,
+  //     industry,
+  //     sourceOfFundsOther,
+  //     sourceOfFunds
+  //   };
+  //   changeSteps(4, payload);
+  // }
+
+  const isDisabled =
     !incomeVolume ||
     !transactionVolume ||
-    !profession ||
-    !industry ||
+    !industry.profession ||
+    !industry.industry ||
     !sourceOfFunds ||
-    (otherSelected && !sourceOfFundsOther);
+    (industry.industry.toLowerCase() === 'other' && !industry.other) ||
+    (sourceOfFunds.toLowerCase() === 'other' && !sourceOfFundsOther) ||
+    (transactionVolume !== 'LessThan10k' && !sourceDetails);
 
   return (
     <div className="verification-user-profile">
       <ProcessHeader
         title="Verification Process - Step 4"
         subtitle="For smooth operations, we need to comply with international Anti-Money-Laundering standards. We need to monitor constantly if your used funds match the declared source of funds."
+      />
+      <h4>Business and Financial Conditions</h4>
+      <div className="verification-user-profile__row">
+        <IndustryFields values={industry} changeHandler={updateIndustry} />
+        <RadioButtons
+          className="test"
+          title="Declare your yearly income:"
+          choices={yearlyIncomeValues}
+          value={incomeVolume}
+          onChange={event => setIncomeVolume(event.target.value)}
+        />
+      </div>
+      <SourceOfFunds
+        value={sourceOfFunds}
+        otherValue={sourceOfFundsOther}
+        updateValue={updateSource}
+        updateOtherValue={updateSourceOther}
       />
       <div className="verification-user-profile__row">
         <RadioButtons
@@ -73,65 +123,17 @@ const Step4UserProfile = ({ changeSteps }) => {
           value={transactionVolume}
           onChange={event => setTransactionVolume(event.target.value)}
         />
-        <RadioButtons
-          title="Declare your yearly income:"
-          choices={yearlyIncomeValues}
-          value={incomeVolume}
-          onChange={event => setIncomeVolume(event.target.value)}
-        />
       </div>
-      <div className="verification-user-profile__row">
-        <TextInput
-          name="profession"
-          label="Profession"
-          placeholder="Enter Your Profession"
-          onChange={event => {
-            setProfession(event.target.value);
-          }}
-          value={profession}
+      {transactionVolume && transactionVolume !== 'LessThan10k' && (
+        <DetailsSource
+          sourceDetails={sourceDetails}
+          updateSourceDetails={updateSourceDetails}
         />
-        <BasicSelectInput
-          list={industryValues}
-          name="industry"
-          label="Industry"
-          placeholder="Enter Your Industry"
-          value={industry}
-          onChange={event => setIndustry(event.target.value)}
-        />
-      </div>
-      <h4>Source of Funds</h4>
-      <div className="verification-user-profile__row">
-        <CheckboxButtons
-          sourceOfFunds={sourceOfFunds}
-          sourcesOfFunds={sourcesOfFunds}
-          sourceOfFundsOther={sourceOfFundsOther}
-          otherSelected={otherSelected}
-          onRadioChange={event => {
-            if (sourceOfFundsOther) {
-              setSourceOfFundsOther('');
-            }
-            setSourceOfFunds(event.target.value);
-          }}
-          onTextChange={event => {
-            setSourceOfFundsOther(event.target.value);
-          }}
-        />
-      </div>
-
+      )}
       <ProcessControls
         submitLabel="Submit & Continue"
-        submitCallback={() => {
-          const payload = {
-            incomeVolume,
-            transactionVolume,
-            profession,
-            industry,
-            sourceOfFundsOther,
-            sourceOfFunds
-          };
-          changeSteps(4, payload);
-        }}
-        disabled={buttonDisabled}
+        submitCallback={submit}
+        disabled={isDisabled}
       />
     </div>
   );

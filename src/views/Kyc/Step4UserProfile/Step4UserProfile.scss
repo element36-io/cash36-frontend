@@ -2,6 +2,10 @@
 @import '../../../styles/settings.scss';
 
 .verification-user-profile {
+  h4 {
+    margin-bottom: 1.5rem;
+  }
+
   @include desktop {
     padding: 5.2rem 11.4rem 0.8rem 11.4rem;
 

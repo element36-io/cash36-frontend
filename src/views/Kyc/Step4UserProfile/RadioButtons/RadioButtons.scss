@@ -1,12 +1,21 @@
 @import '../../../../styles/mixins.scss';
 
 .radio-buttons-group {
-  > h4 {
+  > h5 {
     margin-bottom: 1rem;
+    font-size: 1.6rem;
+  }
+
+  > div > label {
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   @include mobile {
-    > h4 {
+    > h5 {
       font-size: 1.8rem;
     }
     > div {
