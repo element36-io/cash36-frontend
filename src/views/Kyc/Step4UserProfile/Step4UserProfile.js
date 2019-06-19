@@ -28,13 +28,19 @@ const Step4UserProfile = ({ changeSteps }) => {
   const [industry, setIndustry] = useState({
     profession: '',
     industry: '',
-    other: ''
+    industryOther: ''
   });
   const [transactionVolume, setTransactionVolume] = useState('');
   const [incomeVolume, setIncomeVolume] = useState('');
-  const [sourceOfFunds, setSourceOfFunds] = useState('');
+  const [sourceOfFunds, setSourceOfFunds] = useState({
+    SavingsFromWork: false,
+    Inheritance: false,
+    Donation: false,
+    Lottery: false,
+    Other: false
+  });
   const [sourceOfFundsOther, setSourceOfFundsOther] = useState('');
-  const [sourceDetails, setSourceDetails] = useState('');
+  const [sourceOfFundsDescription, setSourceOfFundsDescription] = useState('');
 
   const updateIndustry = useCallback(
     evt => {
@@ -45,8 +51,12 @@ const Step4UserProfile = ({ changeSteps }) => {
   );
 
   const updateSource = useCallback(
-    evt => setSourceOfFunds(evt.target.value),
-    []
+    evt =>
+      setSourceOfFunds({
+        ...sourceOfFunds,
+        [evt.target.name]: evt.target.checked
+      }),
+    [sourceOfFunds]
   );
 
   const updateSourceOther = useCallback(
@@ -55,43 +65,47 @@ const Step4UserProfile = ({ changeSteps }) => {
   );
 
   const updateSourceDetails = useCallback(
-    evt => setSourceDetails(evt.target.value),
+    evt => setSourceOfFundsDescription(evt.target.value),
     []
   );
 
   const submit = () => {
-    console.warn(industry);
-    console.warn(sourceOfFunds);
-    console.warn(sourceOfFundsOther);
-    console.warn(transactionVolume);
-    console.warn(incomeVolume);
-    console.warn(sourceDetails);
+    const sources = Object.keys(sourceOfFunds).reduce((acc, val) => {
+      if (sourceOfFunds[val]) acc.push(val);
+      return acc;
+    }, []);
+    const payload = {
+      ...industry,
+      transactionVolume,
+      incomeVolume,
+      sourceOfFundsDescription,
+      sourceOfFundsOther,
+      sourceOfFunds: sources
+    };
+    changeSteps(4, payload);
   };
 
   useEffect(() => {
-    if (transactionVolume === 'LessThan10k') setSourceDetails('');
+    if (transactionVolume === 'LessThan10k') setSourceOfFundsDescription('');
   }, [transactionVolume]);
 
-  // () => {
-  //   const payload = {
-  //     incomeVolume,
-  //     transactionVolume,
-  //     industry,
-  //     sourceOfFundsOther,
-  //     sourceOfFunds
-  //   };
-  //   changeSteps(4, payload);
-  // }
+  useEffect(() => {
+    if (industry.industry.toLowerCase() !== 'other') { setIndustry({ ...industry, industryOther: '' }); }
+  }, [industry]);
+
+  useEffect(() => {
+    if (!sourceOfFunds.Other) setSourceOfFundsOther('');
+  }, [sourceOfFunds]);
 
   const isDisabled =
     !incomeVolume ||
     !transactionVolume ||
     !industry.profession ||
     !industry.industry ||
-    !sourceOfFunds ||
-    (industry.industry.toLowerCase() === 'other' && !industry.other) ||
-    (sourceOfFunds.toLowerCase() === 'other' && !sourceOfFundsOther) ||
-    (transactionVolume !== 'LessThan10k' && !sourceDetails);
+    !Object.values(sourceOfFunds).some(e => e) ||
+    (industry.industry.toLowerCase() === 'other' && !industry.industryOther) ||
+    (sourceOfFunds.Other && !sourceOfFundsOther) ||
+    (transactionVolume !== 'LessThan10k' && !sourceOfFundsDescription);
 
   return (
     <div className="verification-user-profile">
@@ -111,7 +125,7 @@ const Step4UserProfile = ({ changeSteps }) => {
         />
       </div>
       <SourceOfFunds
-        value={sourceOfFunds}
+        values={sourceOfFunds}
         otherValue={sourceOfFundsOther}
         updateValue={updateSource}
         updateOtherValue={updateSourceOther}
@@ -126,7 +140,7 @@ const Step4UserProfile = ({ changeSteps }) => {
       </div>
       {transactionVolume && transactionVolume !== 'LessThan10k' && (
         <DetailsSource
-          sourceDetails={sourceDetails}
+          sourceDetails={sourceOfFundsDescription}
           updateSourceDetails={updateSourceDetails}
         />
       )}

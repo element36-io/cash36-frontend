@@ -16,6 +16,7 @@ export const TextInput = ({
   disabled,
   isTouched,
   multiline,
+  rows = 3,
   onBlur = () => {}
 }) => (
   <div className={`element-form__input-wrapper ${name}`}>
@@ -29,7 +30,7 @@ export const TextInput = ({
       autoComplete="off"
       value={value}
       fullWidth
-      rows={3}
+      rows={rows}
       multiline={multiline}
       className={classes.root}
       disabled={disabled}
@@ -51,7 +52,8 @@ TextInput.propTypes = {
   disabled: PropTypes.bool,
   error: PropTypes.string,
   isTouched: PropTypes.bool,
-  multiline: PropTypes.bool
+  multiline: PropTypes.bool,
+  rows: PropTypes.number
 };
 
 export default withStyles(styles)(TextInput);

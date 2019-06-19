@@ -1,16 +1,16 @@
 .verification-user-profile__source {
   > div {
     p {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
     }
 
     p:first-child {
       margin-bottom: 1.5rem;
-      color: lightgreen;
+      color: #499729;
     }
 
     p:last-child {
-      color: rgba(255, 0, 0, 0.6);
+      color: #ff6262;
     }
   }
 }

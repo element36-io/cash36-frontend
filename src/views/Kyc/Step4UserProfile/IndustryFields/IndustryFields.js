@@ -16,7 +16,7 @@ const industryValues = [
 ];
 
 const IndustryFields = React.memo(
-  ({ changeHandler, values: { profession, industry, other } }) => (
+  ({ changeHandler, values: { profession, industry, industryOther } }) => (
     <div className="verification-user-profile__industry">
       <TextInput
         name="profession"
@@ -35,12 +35,11 @@ const IndustryFields = React.memo(
       />
       {industry.toLowerCase() === 'other' && (
         <TextInput
-          name="other"
+          name="industryOther"
           label="Other"
           placeholder="Enter Your Industry"
           onChange={changeHandler}
-          value={other}
-          disabled={industry.toLowerCase() !== 'other'}
+          value={industryOther}
         />
       )}
     </div>

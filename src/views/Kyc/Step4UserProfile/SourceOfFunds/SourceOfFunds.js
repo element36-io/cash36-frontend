@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Checkbox, FormControlLabel, RadioGroup } from '@material-ui/core';
+import { Checkbox, FormControlLabel, FormGroup } from '@material-ui/core';
 import TextInput from '../../../../components/Form/TextInput';
 import './SourceOfFunds.scss';
 
@@ -8,42 +8,53 @@ const sources = ['SavingsFromWork', 'Inheritance', 'Donation'];
 const sources2 = ['Lottery', 'Other'];
 
 const SourceOfFunds = React.memo(
-  ({ value, otherValue, updateValue, updateOtherValue }) => (
+  ({ values, otherValue, updateValue, updateOtherValue }) => (
     <div className="verification-user-profile__source">
       <h4>Source of Funds</h4>
       <div className="verification-user-profile__row --alt">
-        <RadioGroup value={value} onChange={updateValue}>
+        <FormGroup>
           {sources.map(item => (
             <FormControlLabel
               key={item}
               name={item}
-              value={item}
               label={item === 'SavingsFromWork' ? 'Savings from Work' : item}
-              control={<Checkbox color="primary" />}
-              labelPlacement="end"
+              control={
+                <Checkbox
+                  color="primary"
+                  checked={values[item]}
+                  value={item}
+                  onChange={updateValue}
+                />
+              }
               style={{
                 height: '3.3rem'
               }}
             />
           ))}
-        </RadioGroup>
+        </FormGroup>
         <div>
-          <RadioGroup value={value} onChange={updateValue}>
+          <FormGroup>
             {sources2.map(item => (
               <FormControlLabel
                 key={item}
                 name={item}
                 value={item}
                 label={item}
-                control={<Checkbox color="primary" />}
-                labelPlacement="end"
+                control={
+                  <Checkbox
+                    color="primary"
+                    checked={values[item]}
+                    value={item}
+                    onChange={updateValue}
+                  />
+                }
                 style={{
                   height: '3.3rem'
                 }}
               />
             ))}
-          </RadioGroup>
-          {value.toLowerCase() === 'other' && (
+          </FormGroup>
+          {values.Other && (
             <TextInput
               name="other-sources"
               label="Other"
@@ -59,7 +70,7 @@ const SourceOfFunds = React.memo(
 );
 
 SourceOfFunds.propTypes = {
-  value: PropTypes.string,
+  values: PropTypes.string,
   otherValue: PropTypes.string,
   updateValue: PropTypes.func,
   updateOtherValue: PropTypes.func
