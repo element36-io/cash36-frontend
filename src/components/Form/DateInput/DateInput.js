@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { InlineDatePicker } from 'material-ui-pickers';
+import { DatePicker } from '@material-ui/pickers';
 import RightArrowIcon from '@material-ui/icons/KeyboardArrowRight';
 import LeftArrowIcon from '@material-ui/icons/KeyboardArrowLeft';
 import TodayIcon from '@material-ui/icons/Today';
@@ -33,10 +33,11 @@ const DateInput = props => {
 
   return (
     <div className={`element-form__input-wrapper ${name}`}>
-      <InlineDatePicker
+      <DatePicker
         value={selectedDate}
         onChange={handleChange}
         fullWidth
+        variant="inline"
         autoOk
         maxDate={maxDate}
         initialFocusedDate={initialFocusedDate}

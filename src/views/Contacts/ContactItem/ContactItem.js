@@ -11,12 +11,12 @@ import './ContactItem.scss';
 const ContactItem = React.memo(({ contact, removeCallback, quickTransfer }) => {
   const [showActions, setShowActions] = useState(false);
 
-  const toggleActions = () => {
-    setShowActions(!showActions);
+  const openActions = () => {
+    setShowActions(true);
   };
 
   const closeActions = () => {
-    if (showActions) return;
+    if (!showActions) return;
     setShowActions(false);
   };
 
@@ -33,7 +33,7 @@ const ContactItem = React.memo(({ contact, removeCallback, quickTransfer }) => {
       <ClickAwayListener onClickAway={closeActions}>
         <div className="contacts__list-item__actions">
           <IconButton
-            onClick={toggleActions}
+            onClick={openActions}
             className="contacts__list-item__actions__icon"
           >
             <MoreVertIcon />

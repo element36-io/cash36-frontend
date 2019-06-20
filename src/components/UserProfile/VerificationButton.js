@@ -9,7 +9,7 @@ const VerificationButton = ({ user: { currentProcessStatus, caseId } }) => {
   if (currentProcessStatus === 'NOT_STARTED') {
     return (
       <Link to={`/kyc/start`}>
-        <DefaultButton variant="raised">Verify Account</DefaultButton>
+        <DefaultButton variant="contained">Verify Account</DefaultButton>
       </Link>
     );
   }
@@ -20,7 +20,7 @@ const VerificationButton = ({ user: { currentProcessStatus, caseId } }) => {
   ) {
     return (
       <Link to={`/kyc/${caseId}`}>
-        <DefaultButton variant="raised">Continue Verification</DefaultButton>
+        <DefaultButton variant="contained">Continue Verification</DefaultButton>
       </Link>
     );
   }

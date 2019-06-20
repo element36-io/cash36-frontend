@@ -1,4 +1,6 @@
-export default theme => ({
+import { makeStyles } from '@material-ui/styles';
+
+export default makeStyles(theme => ({
   root: {
     padding: '1.2rem 1.6rem',
     display: 'inline-flex',
@@ -55,4 +57,4 @@ export default theme => ({
       right: 0
     }
   }
-});
+}));
