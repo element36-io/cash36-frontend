@@ -42,7 +42,7 @@ const UserProfile = ({ user, alt, confirmAttestation }) => {
       });
   };
 
-  let { username, avatarUri, name, currentLevel } = user;
+  let { username, avatarUri, name, currentLevel, account } = user;
 
   // changed due to uPort.
   if (!currentLevel) currentLevel = 'Tier_0';
@@ -72,7 +72,8 @@ const UserProfile = ({ user, alt, confirmAttestation }) => {
             <i className="fas fa-exclamation-triangle" />
           )}
         </p>
-        <p>{username}</p>
+        <p>ID: {username}</p>
+        <p>Account: {account}</p>
         <div className="user-profile__buttons">
           <VerificationButton user={user} />
           <AttestButtton

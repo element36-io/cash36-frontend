@@ -31,7 +31,8 @@ const Step1Tier1Form = ({
         ...values,
         dateOfBirth: moment(values.dateOfBirth).format('DD.MM.YYYY'),
         avatarUrl: avatarUri,
-        accountAddress: user.account
+        accountAddress: user.account,
+        isMetaMask: user.useMetamask
       };
       await changeSteps(1, payload);
     } catch (error) {
