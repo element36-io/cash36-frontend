@@ -34,7 +34,7 @@ const FormField = props => {
           setFieldTouched={setFieldTouched}
           placeholder={formField.placeholder}
           isTouched={touched[formField.name]}
-          error={errors[formField.name]}
+          error={errors}
           disabled={disabled}
         />
       );

@@ -1,11 +1,16 @@
 import * as Yup from 'yup';
 import IBAN from 'iban';
+import { isValid } from 'date-fns';
 
 export default Yup.object().shape({
   firstName: Yup.string().required('This field is required'),
   lastName: Yup.string().required('This field is required'),
   dateOfBirth: Yup.string()
     .required('This field is required')
+    .test('isValidDate', 'Please enter a valid date', function (value) {
+      const d = new Date(value);
+      return isValid(d);
+    })
     .nullable(),
   email: Yup.string()
     .email('Please enter a valid email')

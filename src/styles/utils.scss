@@ -30,3 +30,9 @@
   border-bottom: 1px solid $grey-border;
   border-top: none;
 }
+
+.MuiPickersToolbar-toolbar {
+  button {
+    background: transparent;
+  }
+}

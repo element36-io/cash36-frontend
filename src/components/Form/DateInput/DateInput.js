@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { DatePicker } from '@material-ui/pickers';
+import { KeyboardDatePicker } from '@material-ui/pickers';
 import RightArrowIcon from '@material-ui/icons/KeyboardArrowRight';
 import LeftArrowIcon from '@material-ui/icons/KeyboardArrowLeft';
 import TodayIcon from '@material-ui/icons/Today';
@@ -21,8 +21,8 @@ const DateInput = props => {
   const handleChange = useCallback(
     date => {
       setSelectedDate(date);
-      setFieldValue(name, date, true);
       setFieldTouched(name, true, true);
+      setFieldValue(name, date, true);
     },
     [selectedDate]
   );
@@ -33,35 +33,30 @@ const DateInput = props => {
 
   return (
     <div className={`element-form__input-wrapper ${name}`}>
-      <DatePicker
+      <KeyboardDatePicker
         value={selectedDate}
         onChange={handleChange}
+        onClose={onClose}
         fullWidth
         variant="inline"
         autoOk
         maxDate={maxDate}
         initialFocusedDate={initialFocusedDate}
-        onClose={onClose}
         rightArrowIcon={<RightArrowIcon />}
         leftArrowIcon={<LeftArrowIcon />}
         label={label}
-        format={'DD.MM.YYYY'}
+        error={!!error[name]}
+        FormHelperTextProps={{ disabled: true }}
+        format={'dd.MM.yyyy'}
         InputProps={{
           placeholder: 'DD.MM.YYYY'
         }}
         InputLabelProps={{
           shrink: true
         }}
-        clearable
-        keyboard
-        mask={value =>
-          value
-            ? [/\d/, /\d/, '.', /\d/, /\d/, '.', /\d/, /\d/, /\d/, /\d/]
-            : []
-        }
         keyboardIcon={<TodayIcon />}
       />
-      {isTouched && error && <p className="form-error">{error}</p>}
+      {isTouched && error[name] && <p className="form-error">{error[name]}</p>}
     </div>
   );
 };
@@ -72,7 +67,7 @@ DateInput.propTypes = {
   setFieldTouched: PropTypes.func.isRequired,
   label: PropTypes.string,
   disablePast: PropTypes.bool,
-  error: PropTypes.string,
+  error: PropTypes.object,
   isTouched: PropTypes.any,
   maxDate: PropTypes.instanceOf(Date),
   minDate: PropTypes.instanceOf(Date),

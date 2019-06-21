@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
-import moment from 'moment';
+import { format } from 'date-fns';
 import Form from '../../../components/Form';
 import FormField from '../../../components/Form/FormField';
 import ProcessHeader from '../ProcessHeader';
@@ -29,7 +28,7 @@ const Step1Tier1Form = ({
     try {
       const payload = {
         ...values,
-        dateOfBirth: moment(values.dateOfBirth).format('DD.MM.YYYY'),
+        dateOfBirth: format(values.dateOfBirth, 'dd.MM.yyyy'),
         avatarUrl: avatarUri,
         accountAddress: user.account,
         isMetaMask: user.useMetamask
