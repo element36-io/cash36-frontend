@@ -22,10 +22,25 @@ const ActivityTable = ({ userActivity }) => (
       {userActivity.map((activity, index) => {
         return (
           <div key={index} className="activity-table__row">
-            <div><Date date={activity.date} /></div>
-            <div><Action type={activity.action} targetAddress={activity.targetAddress} /></div>
-            <div><Status status={activity.status} /></div>
-            <div><Amount type={activity.action} amount={activity.amount} symbol={activity.symbol} /></div>
+            <div>
+              <Date date={activity.date} />
+            </div>
+            <div>
+              <Action
+                type={activity.action}
+                targetAddress={activity.targetAddress}
+              />
+            </div>
+            <div>
+              <Status status={activity.status} />
+            </div>
+            <div>
+              <Amount
+                type={activity.action}
+                amount={activity.amount}
+                symbol={activity.symbol}
+              />
+            </div>
           </div>
         );
       })}

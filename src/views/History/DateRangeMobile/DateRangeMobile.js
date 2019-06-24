@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import moment from 'moment';
 import { DateRange } from 'react-date-range';
 import TodayIcon from '@material-ui/icons/Today';
 
@@ -7,16 +6,22 @@ import './DateRangeMobile.scss';
 
 class DateRangeMobile extends Component {
   render () {
-    const { startDate, endDate, handleMobileRangeDateChange, visible, toggleFiltersVisible } = this.props;
+    const {
+      startDate,
+      endDate,
+      handleMobileRangeDateChange,
+      visible,
+      toggleFiltersVisible
+    } = this.props;
     return (
-      <div className="date-range-mobile paper" >
+      <div className="date-range-mobile paper">
         <TodayIcon onClick={toggleFiltersVisible} />
         <DateRange
           calendars={1}
           rangedCalendars
           onChange={handleMobileRangeDateChange}
           onInit={handleMobileRangeDateChange}
-          maxDate={moment()}
+          maxDate={new Date()}
           startDate={startDate}
           endDate={endDate}
           twoStepChange

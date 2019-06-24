@@ -29,7 +29,7 @@ const DateRange = ({
             onChange={handleStartDateChange}
             autoOk
             variant="inline"
-            format={'DD/MM/YYYY'}
+            format={'dd/MM/yyyy'}
             disabled={fetchingFilters}
             rightArrowIcon={<RightArrowIcon />}
             leftArrowIcon={<LeftArrowIcon />}
@@ -54,7 +54,7 @@ const DateRange = ({
             onChange={handleEndDateChange}
             autoOk
             variant="inline"
-            format={'DD/MM/YYYY'}
+            format={'dd/MM/yyyy'}
             disabled={fetchingFilters}
             rightArrowIcon={<RightArrowIcon />}
             leftArrowIcon={<LeftArrowIcon />}
