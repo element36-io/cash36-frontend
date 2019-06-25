@@ -5,13 +5,12 @@ import BasicSelectInput from '../../../../components/Form/BasicSelectInput';
 import './IndustryFields.scss';
 
 const industryValues = [
-  'Education',
-  'Internet',
-  'Computer Software',
-  'Aviation',
-  'Office',
-  'Retail',
-  'Marketing',
+  'Arms and armaments trade',
+  'Gemstones and diamond trade',
+  'Jewellery trade',
+  'International trade in exotic animals',
+  'Casino and lottery industry',
+  'Sex industry',
   'Other'
 ];
 
