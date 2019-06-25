@@ -5,17 +5,16 @@ import RightArrowIcon from '@material-ui/icons/KeyboardArrowRight';
 import LeftArrowIcon from '@material-ui/icons/KeyboardArrowLeft';
 import TodayIcon from '@material-ui/icons/Today';
 
-const DateInput = props => {
-  const {
-    name,
-    label,
-    error,
-    setFieldValue,
-    setFieldTouched,
-    isTouched,
-    maxDate,
-    initialFocusedDate
-  } = props;
+const DateInput = ({
+  name,
+  label,
+  error,
+  setFieldValue,
+  setFieldTouched,
+  isTouched,
+  maxDate,
+  initialFocusedDate
+}) => {
   const [selectedDate, setSelectedDate] = useState(null);
 
   const handleChange = useCallback(
@@ -47,7 +46,7 @@ const DateInput = props => {
         label={label}
         error={!!error[name]}
         FormHelperTextProps={{ disabled: true }}
-        format={'dd.MM.yyyy'}
+        format={'DD.MM.YYYY'}
         InputProps={{
           placeholder: 'DD.MM.YYYY'
         }}

@@ -1,7 +1,4 @@
-import { format } from 'date-fns';
+import moment from 'moment';
 
-export const formatDate = (date, dateFormat) => {
-  const d = date.split('.').reverse();
-  d[1] = d[1] - 1;
-  return format(new Date(...d), dateFormat);
-};
+export const formatDate = (date, dateFormat) =>
+  moment(date, 'DD-MM-YYYY').format(dateFormat);

@@ -1,4 +1,4 @@
-import { subYears } from 'date-fns';
+import moment from 'moment';
 
 export const formModel = [
   {
@@ -18,8 +18,16 @@ export const formModel = [
     label: 'Date of Birth',
     type: 'date',
     placeholder: 'DD.MM.YYYY',
-    maxDate: subYears(new Date(), 18),
-    initialFocusedDate: subYears(new Date(), 25)
+    maxDate: new Date(
+      moment()
+        .subtract(18, 'years')
+        .format()
+    ),
+    initialFocusedDate: new Date(
+      moment()
+        .subtract(25, 'years')
+        .format()
+    )
   },
   {
     name: 'email',

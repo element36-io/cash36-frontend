@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { format } from 'date-fns';
 import { getUserActivity } from '../../../store/tokens/tokens.actions';
 import Responsive from '../../../components/Responsive';
 import DateRange from '../DateRange';
@@ -74,7 +73,7 @@ class HistoryFilters extends Component {
           {
             filters: {
               ...this.state.filters,
-              from: format(date, 'dd.MM.yyyy')
+              from: this.state.startDate.format('DD.MM.YYYY')
             }
           },
           () => {
@@ -92,7 +91,7 @@ class HistoryFilters extends Component {
           {
             filters: {
               ...this.state.filters,
-              to: format(date, 'dd.MM.yyyy')
+              to: this.state.endDate.format('DD.MM.YYYY')
             }
           },
           () => {
