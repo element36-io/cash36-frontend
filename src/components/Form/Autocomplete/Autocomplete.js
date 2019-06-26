@@ -75,6 +75,7 @@ const Autocomplete = ({
                 value={inputValue}
                 fullWidth
                 onChange={inputProps.onChange}
+                onBlur={inputProps.onBlur}
                 className={classes.root}
                 disabled={disabled}
                 InputLabelProps={{
