@@ -61,7 +61,7 @@ export const formModel = [
   },
   {
     name: 'country',
-    type: 'select',
+    type: 'autocomplete',
     label: 'Select your country',
     list: [],
     placeholder: 'Select your country'
@@ -71,28 +71,28 @@ export const formModel = [
 export const nationalityModel = [
   {
     name: 'nationality',
-    type: 'select',
+    type: 'autocomplete',
     label: 'Select your nationality 1',
     list: [],
     placeholder: 'Select your nationality'
   },
   {
     name: 'nationality2',
-    type: 'select',
+    type: 'autocomplete',
     label: 'Select your nationality 2',
     list: [],
     placeholder: 'Select your nationality'
   },
   {
     name: 'nationality3',
-    type: 'select',
+    type: 'autocomplete',
     label: 'Select your nationality 3',
     list: [],
     placeholder: 'Select your nationality'
   },
   {
     name: 'nationality4',
-    type: 'select',
+    type: 'autocomplete',
     label: 'Select your nationality 4',
     list: [],
     placeholder: 'Select your nationality'
