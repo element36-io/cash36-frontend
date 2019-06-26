@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Downshift from 'downshift';
 import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import ReactCountryFlag from 'react-country-flag';
 import useStyles from './MuiStyles';
@@ -84,7 +83,7 @@ const Autocomplete = ({
               />
               <div {...getMenuProps()}>
                 {isOpen && (
-                  <Paper className={classes.paper} square>
+                  <div className="paper autocomplete-suggestions" square>
                     {getSuggestions(inputValue, list).map((item, index) =>
                       renderItem({
                         item,
@@ -92,7 +91,7 @@ const Autocomplete = ({
                         itemProps: getItemProps({ item })
                       })
                     )}
-                  </Paper>
+                  </div>
                 )}
               </div>
             </div>

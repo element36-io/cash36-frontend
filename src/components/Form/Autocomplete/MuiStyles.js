@@ -10,12 +10,5 @@ export default makeStyles({
         opacity: '0.5'
       }
     }
-  },
-  paper: {
-    position: 'absolute',
-    zIndex: 1,
-    marginTop: '1rem',
-    left: 0,
-    right: 0
   }
 });
