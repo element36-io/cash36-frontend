@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Web3 from 'web3';
+import { WEB3_NODE } from '../config/api';
 
 export const Web3Context = React.createContext();
 
@@ -21,6 +22,7 @@ const Web3Provider = ({ children }) => {
       );
     } else {
       web3js = new Web3();
+      web3js.setProvider(new web3js.providers.HttpProvider(WEB3_NODE));
     }
 
     window.web3 = web3js;
