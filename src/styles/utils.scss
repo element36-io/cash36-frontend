@@ -16,6 +16,10 @@
   box-shadow: $box-shadow-1;
   border-radius: 10px;
   overflow: hidden;
+
+  &.no-radius {
+    border-radius: 0;
+  }
 }
 
 .abs-center {

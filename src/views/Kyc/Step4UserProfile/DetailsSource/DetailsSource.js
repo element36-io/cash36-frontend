@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import TextInput from '../../../../components/Form/TextInput';
 import './DetailsSource.scss';
 
-const DetailsSource = React.memo(({ sourceDetails, updateSourceDetails }) => (
+const DetailsSource = React.memo(({ sourceDetails, updateSourceDetails, hasError }) => (
   <div className="verification-user-profile__row verification-user-profile__source">
     <div>
       <TextInput
@@ -15,6 +15,7 @@ const DetailsSource = React.memo(({ sourceDetails, updateSourceDetails }) => (
         onChange={updateSourceDetails}
         value={sourceDetails}
       />
+      {hasError && <p className="verification-user-profile_error">This field is required</p>}
     </div>
     <div>
       <p>
@@ -35,7 +36,8 @@ const DetailsSource = React.memo(({ sourceDetails, updateSourceDetails }) => (
 
 DetailsSource.propTypes = {
   updateSourceDetails: PropTypes.func.isRequired,
-  sourceDetails: PropTypes.string
+  sourceDetails: PropTypes.string,
+  hasError: PropTypes.bool
 };
 
 export default DetailsSource;

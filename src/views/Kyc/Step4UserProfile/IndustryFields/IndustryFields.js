@@ -15,7 +15,11 @@ const industryValues = [
 ];
 
 const IndustryFields = React.memo(
-  ({ changeHandler, values: { profession, industry, industryOther } }) => (
+  ({
+    changeHandler,
+    values: { profession, industry, industryOther },
+    hasError
+  }) => (
     <div className="verification-user-profile__industry">
       <TextInput
         name="profession"
@@ -41,13 +45,19 @@ const IndustryFields = React.memo(
           value={industryOther}
         />
       )}
+      {hasError && (
+        <p className="verification-user-profile_error">
+          These fields are required
+        </p>
+      )}
     </div>
   )
 );
 
 IndustryFields.propTypes = {
   changeHandler: PropTypes.func.isRequired,
-  values: PropTypes.object.isRequired
+  values: PropTypes.object.isRequired,
+  hasError: PropTypes.bool
 };
 
 export default IndustryFields;

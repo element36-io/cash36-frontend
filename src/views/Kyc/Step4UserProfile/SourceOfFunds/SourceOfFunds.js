@@ -8,7 +8,7 @@ const sources = ['SavingsFromWork', 'Inheritance', 'Donation'];
 const sources2 = ['Lottery', 'Other'];
 
 const SourceOfFunds = React.memo(
-  ({ values, otherValue, updateValue, updateOtherValue }) => (
+  ({ values, otherValue, updateValue, updateOtherValue, hasError }) => (
     <div className="verification-user-profile__source">
       <h4>Source of Funds</h4>
       <div className="verification-user-profile__row --alt">
@@ -64,16 +64,22 @@ const SourceOfFunds = React.memo(
             />
           )}
         </div>
+        {hasError && (
+          <p className="verification-user-profile_error">
+            These fields are required
+          </p>
+        )}
       </div>
     </div>
   )
 );
 
 SourceOfFunds.propTypes = {
-  values: PropTypes.string,
+  values: PropTypes.object,
   otherValue: PropTypes.string,
   updateValue: PropTypes.func,
-  updateOtherValue: PropTypes.func
+  updateOtherValue: PropTypes.func,
+  hasError: PropTypes.bool
 };
 
 export default SourceOfFunds;

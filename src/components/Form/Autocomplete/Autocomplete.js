@@ -18,9 +18,10 @@ function getSuggestions (value, list) {
   return suggestions;
 }
 
-function renderItem ({ item, itemProps }) {
+function renderItem ({ item, itemProps, index, highlightedIndex }) {
+  const isHighlighted = highlightedIndex === index;
   return (
-    <MenuItem key={item.code} {...itemProps}>
+    <MenuItem key={item.code} {...itemProps} selected={isHighlighted}>
       <ReactCountryFlag
         code={item.code}
         svg
@@ -62,6 +63,8 @@ const Autocomplete = ({
           getItemProps,
           getMenuProps,
           isOpen,
+          highlightedIndex,
+          selectedItem,
           inputValue
         }) => {
           const inputProps = getInputProps();
@@ -74,26 +77,26 @@ const Autocomplete = ({
                 autoComplete="off"
                 value={inputValue}
                 fullWidth
-                onChange={inputProps.onChange}
-                onBlur={inputProps.onBlur}
                 className={classes.root}
                 disabled={disabled}
                 InputLabelProps={{
                   shrink: true
                 }}
+                {...inputProps}
               />
-              <div {...getMenuProps()}>
-                {isOpen && (
-                  <div className="paper autocomplete-suggestions" square>
-                    {getSuggestions(inputValue, list).map((item, index) =>
-                      renderItem({
-                        item,
-                        index,
-                        itemProps: getItemProps({ item })
-                      })
-                    )}
-                  </div>
-                )}
+              <div
+                {...getMenuProps()}
+                className="paper no-radius autocomplete-suggestions"
+              >
+                {isOpen &&
+                  getSuggestions(inputValue, list).map((item, index) =>
+                    renderItem({
+                      item,
+                      index,
+                      itemProps: getItemProps({ item }),
+                      highlightedIndex
+                    })
+                  )}
               </div>
             </div>
           );

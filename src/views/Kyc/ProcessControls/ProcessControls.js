@@ -19,7 +19,7 @@ const ProcessControls = ({
       </Link>
       <DefaultButton
         onClick={submitCallback}
-        disabled={disabled}
+        disabled={disabled || submitting}
         submitting={submitting}
       >
         {submitLabel}
