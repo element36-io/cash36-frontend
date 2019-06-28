@@ -32,7 +32,7 @@
       display: block;
     }
     span:first-child {
-      margin-bottom: .6rem;
+      margin-bottom: 0.6rem;
     }
   }
 
@@ -55,7 +55,7 @@
       height: 3px;
       width: 0;
       background: $gradient-primary;
-      transition: width .3s;
+      transition: width 0.3s;
     }
   }
 
@@ -70,10 +70,13 @@
         line-height: 1.7rem;
       }
     }
-
   }
 
   @include mobile {
+    input {
+      font-size: 16px;
+    }
+
     label {
       padding: 1rem;
       font-size: 1.6rem;
