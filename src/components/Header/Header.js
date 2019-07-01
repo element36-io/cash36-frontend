@@ -1,72 +1,37 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import SockJS from 'sockjs-client';
-import Stomp from 'stompjs';
 import Logo from '../Logo';
 import Responsive from '../Responsive';
 import HeaderDesktop from './HeaderDesktop';
 import HeaderMobile from './HeaderMobile';
 import { logout, getUserInfo } from '../../store/auth/auth.actions';
-import {
-  fetchNotifications,
-  newNotification
-} from '../../store/notifications/notifications.actions';
+import { fetchNotifications } from '../../store/notifications/notifications.actions';
 import { getTokens, getUserActivity } from '../../store/tokens/tokens.actions';
 import './Header.scss';
 
 const Header = ({
   auth: { user },
+  notifications: { badgeCount },
   logout,
   fetchNotifications,
-  newNotification,
   getTokens,
-  getUserActivity,
-  getUserInfo
+  getUserActivity
 }) => {
-  const eventSource = useRef(null);
-
-  const connectWs = () => {
-    let socket = new SockJS(`http://localhost:8092/exchange/ws`); // TODO: change to a REAL api path
-    eventSource.current = Stomp.over(socket);
-    eventSource.current.connect(
-      {},
-      () => {
-        eventSource.current.subscribe(
-          `/topics/updates/${user.username}`,
-          message => {
-            const messageBody = JSON.parse(message.body);
-            newNotification(messageBody);
-            const { type } = messageBody;
-
-            if (type === 'PAYMENT' || type === 'PAYOUT') {
-              getTokens();
-              getUserActivity();
-            }
-
-            if (type === 'TIER_2_CONFIRMED') {
-              getUserInfo();
-            }
-          }
-        );
-      },
-      err => {
-        console.error(err, 'Connection lost');
-      }
-    );
-  };
+  useEffect(() => {
+    if (badgeCount === 0) return;
+    getTokens();
+    getUserActivity();
+  }, [badgeCount]);
 
   useEffect(() => {
-    fetchNotifications(localStorage.getItem('lastRead'));
-    connectWs();
+    fetchNotifications();
+    const notificationsInterval = setInterval(
+      () => fetchNotifications(),
+      60000
+    );
 
     return () => {
-      if (eventSource.current != null) {
-        try {
-          eventSource.current.disconnect();
-        } catch (err) {
-          // ignore the case if not yet connected
-        }
-      }
+      clearInterval(notificationsInterval);
     };
   }, []);
 
@@ -90,7 +55,6 @@ export default connect(
   {
     logout,
     fetchNotifications,
-    newNotification,
     getTokens,
     getUserActivity,
     getUserInfo

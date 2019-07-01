@@ -2,7 +2,6 @@ import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import throttle from 'lodash/throttle';
-import { apiCall } from './middleware/api.middleware';
 import { saveState } from './localStorage';
 
 import authReducer from './auth/auth.reducer';
@@ -25,7 +24,7 @@ const reducers = combineReducers({
 
 const store = createStore(
   reducers,
-  composeEnhancers(applyMiddleware(thunkMiddleware, loggerMiddleware, apiCall))
+  composeEnhancers(applyMiddleware(thunkMiddleware, loggerMiddleware))
 );
 
 store.subscribe(

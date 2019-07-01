@@ -1,18 +1,7 @@
-import { CALL_API } from '../middleware/api.middleware';
-
-export const INIT_NOTIFICATIONS_REQUEST = 'INIT_NOTIFICATIONS_REQUEST';
-export const INIT_NOTIFICATIONS_SUCCESS = 'INIT_NOTIFICATIONS_SUCCESS';
-export const INIT_NOTIFICATIONS_ERROR = 'INIT_NOTIFICATIONS_ERROR';
-export const NEW_NOTIFICATION = 'NEW_NOTIFICATION';
+import API from '../../config/api';
+export const FETCH_NOTIFICATIONS = 'FETCH_NOTIFICATIONS';
 export const UPDATE_BADGE_COUNT = 'UPDATE_BADGE_COUNT';
 export const UPDATE_LAST_READ = 'UPDATE_LAST_READ';
-
-export function newNotification (payload) {
-  return {
-    type: NEW_NOTIFICATION,
-    payload
-  };
-}
 
 export function resetBadgeCount () {
   return {
@@ -35,31 +24,27 @@ export function updateLastRead (lastRead) {
   };
 }
 
-export function fetchNotifications (lastRead) {
+export function fetchNotifications () {
   return async dispatch => {
-    const actionResponse = await dispatch({
-      [CALL_API]: {
-        url: `exchange/notifications`,
-        method: 'GET',
-        types: [
-          INIT_NOTIFICATIONS_REQUEST,
-          INIT_NOTIFICATIONS_SUCCESS,
-          INIT_NOTIFICATIONS_ERROR
-        ]
-      }
+    const response = await API.get('/exchange/notifications');
+    dispatch({
+      type: FETCH_NOTIFICATIONS,
+      payload: response.data
     });
 
-    if (actionResponse.error) return;
+    if (response.error) return;
 
+    const lastRead = localStorage.getItem('lastRead');
     let badgeCount = 0;
-    actionResponse.payload.map(n => {
-      n.new = lastRead < new Date(n.creationDate);
-      if (lastRead < new Date(n.creationDate)) {
+    response.data.map(n => {
+      const isNew =
+        new Date(lastRead).getTime() < new Date(n.creationDate).getTime();
+      if (isNew) {
         badgeCount++;
       }
       return n;
     });
 
-    await dispatch(updateBadgeCount(badgeCount));
+    dispatch(updateBadgeCount(badgeCount));
   };
 }

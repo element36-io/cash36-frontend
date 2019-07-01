@@ -24,9 +24,8 @@ const HeaderAlerts = ({
   };
 
   const toggleNotification = () => {
-    if (open) {
-      updateLastReadAndBadgeCount();
-    }
+    if (!notifications.length) return;
+    if (open) updateLastReadAndBadgeCount();
     setOpen(!open);
   };
 
