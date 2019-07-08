@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { uPort, uportUri, setUportUri } from '../../config/uport.config';
 import Responsive from '../../components/Responsive';
 import LoginSidebar from './LoginSidebar';
 import LoginTerms from './LoginTerms';
 import LoginHeader from './LoginHeader';
-import LoginWelcome from './LoginWelcome/LoginWelcome';
+import LoginQr from './LoginQr';
 import RegisterForm from './RegisterForm';
 import LoginForm from './LoginForm';
 import LoginType from './LoginType';
@@ -16,20 +15,15 @@ import './Login.scss';
 
 const Login = ({ auth: { isAuthenticated } }) => {
   const [step, setStep] = useState(0);
-  const [uPortUri, setUri] = useState(uportUri);
   const [creds, setCreds] = useState(null);
   const [newUser, setNewUser] = useState(false);
   const [metamaskLogin, setMetamaskLogin] = useState(false);
-
-  const uPortURIHandler = uPortUri => {
-    setUportUri(uPortUri);
-    setUri(uPortUri);
-  };
 
   const checkIfUserExists = async uportCreds => {
     const creds = { ...uportCreds };
     creds.id = creds.did.split(':').pop();
     setCreds(creds);
+    console.warn(creds);
     try {
       await checkUserId(creds.id);
       setNewUser(false);
@@ -53,7 +47,7 @@ const Login = ({ auth: { isAuthenticated } }) => {
   const renderStep = () => {
     switch (step) {
       case 1:
-        return <LoginWelcome uPortUri={uPortUri} />;
+        return <LoginQr scanCallback={checkIfUserExists} />;
       case 2:
         return <MetamaskCheck callback={metamaskCheckSuccess} />;
       case 3:
@@ -64,20 +58,6 @@ const Login = ({ auth: { isAuthenticated } }) => {
         return <LoginType selectLoginType={selectLoginType} />;
     }
   };
-
-  useEffect(() => {
-    if (step !== 1) return;
-    uPort
-      .requestCredentials(
-        {
-          requested: ['name', 'avatar'],
-          verified: ['element36Tier1', 'element36Tier2'],
-          notifications: true
-        },
-        uPortURIHandler
-      )
-      .then(checkIfUserExists);
-  }, [step]);
 
   if (isAuthenticated) return <Redirect to="/" />;
 

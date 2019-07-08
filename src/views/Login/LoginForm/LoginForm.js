@@ -21,6 +21,7 @@ const LoginForm = ({ login, creds, useMetamask }) => {
     setSubmitting(true);
 
     login(creds, useMetamask, password).catch(error => {
+      console.warn(error);
       setError(error);
       setSubmitting(false);
     });
