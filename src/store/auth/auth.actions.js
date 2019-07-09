@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { MNID } from 'uport-connect';
 import API, { API_ROOT } from '../../config/api';
 
 export const AUTH_USER = 'AUTH_USER';
@@ -124,9 +123,7 @@ export const login = (creds, useMetamask, password) => async dispatch => {
 
 export const createUserObject = (creds, useMetamask) => {
   const username = creds.id;
-  const account = useMetamask
-    ? creds.account
-    : MNID.decode(creds.networkAddress).address;
+  const account = useMetamask ? creds.account : creds.address;
 
   const user = {
     username,
@@ -134,7 +131,10 @@ export const createUserObject = (creds, useMetamask) => {
     avatarUri: creds.avatar ? creds.avatar.uri : null,
     name: creds.name,
     verified: creds.verified,
-    useMetamask
+    useMetamask,
+    pushToken: creds.pushToken,
+    boxPub: creds.boxPub,
+    did: creds.did
   };
 
   return {

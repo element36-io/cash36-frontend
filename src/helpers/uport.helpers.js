@@ -25,7 +25,7 @@ export const verifyResponse = accessToken => {
 };
 
 export const attestUser = ({ did, pushToken, boxPub, claim }) => {
-  return axios.post(`${baseUrl}/attest`, {
+  return axios.post(`${baseUrl}/attest-creds`, {
     did,
     pushToken,
     boxPub,

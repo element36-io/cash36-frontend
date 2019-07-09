@@ -5,41 +5,35 @@ import tiers from './tiers';
 import Avatar from '../../components/Avatar';
 import VerificationButton from './VerificationButton';
 import AttestButtton from './AttestButton';
-import { uPort } from '../../config/uport.config';
 import { confirmAttestation } from '../../store/auth/auth.actions';
+import { attestUser } from '../../helpers/uport.helpers';
 
 import './UserProfile.scss';
 
 const UserProfile = ({ user, alt, confirmAttestation }) => {
   const [attesting, setAttesting] = useState(false);
 
-  const handleAttestClick = () => {
-    const { currentLevel, name, uportAddress } = user;
+  const handleAttestClick = async () => {
+    const { currentLevel, name, did, pushToken, boxPub } = user;
     let tier = 1;
     if (currentLevel === 'Tier_2') tier = 2;
     const attestName = `element36Tier${tier}`;
+    const claim = {
+      [attestName]: {
+        Name: name,
+        Tier: tier,
+        'verified on': new Date()
+      }
+    };
 
     setAttesting(true);
-
-    uPort
-      .attestCredentials({
-        sub: uportAddress,
-        claim: {
-          [attestName]: {
-            Name: name,
-            Tier: tier,
-            'verified on': new Date()
-          }
-        }
-      })
-      .then(att => {
-        confirmAttestation({ claim: { [attestName]: att } });
-        setAttesting(false);
-      })
-      .catch(error => {
-        console.log(error);
-        setAttesting(false);
-      });
+    try {
+      await attestUser({ did, pushToken, boxPub, claim });
+      confirmAttestation({ claim: { [attestName]: att } });
+    } catch (error) {
+      console.warn(error);
+    }
+    setAttesting(false);
   };
 
   let { username, avatarUri, name, currentLevel, account } = user;

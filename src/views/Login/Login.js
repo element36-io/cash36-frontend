@@ -11,6 +11,7 @@ import LoginForm from './LoginForm';
 import LoginType from './LoginType';
 import MetamaskCheck from './MetamaskCheck';
 import { checkUserId } from '../../store/auth/auth.actions';
+
 import './Login.scss';
 
 const Login = ({ auth: { isAuthenticated } }) => {
