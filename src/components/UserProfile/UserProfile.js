@@ -29,7 +29,7 @@ const UserProfile = ({ user, alt, confirmAttestation }) => {
     setAttesting(true);
     try {
       await attestUser({ did, pushToken, boxPub, claim });
-      confirmAttestation({ claim: { [attestName]: att } });
+      confirmAttestation({ claim: { [attestName]: claim } });
     } catch (error) {
       console.warn(error);
     }

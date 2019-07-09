@@ -24,7 +24,7 @@ const Login = ({ auth: { isAuthenticated } }) => {
     const creds = { ...uportCreds };
     creds.id = creds.did.split(':').pop();
     setCreds(creds);
-    console.warn(creds);
+
     try {
       await checkUserId(creds.id);
       setNewUser(false);
