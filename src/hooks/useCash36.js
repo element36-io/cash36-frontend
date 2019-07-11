@@ -1,17 +1,24 @@
 import { useState, useContext, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Web3Context } from '../providers/web3.provider';
+import E36Provider from '../helpers/e36.provider';
+import { transactionRequest } from '../helpers/uport.helpers';
 import { UportSubprovider } from 'uport-connect';
 import { network as networkUtils } from 'uport-transports';
-import { transactionRequest } from '../helpers/uport.helpers';
 
 const useCash36 = () => {
   const { networkId, web3 } = useContext(Web3Context);
-  const { user } = useSelector(({ auth }) => auth);
+  const {
+    user: { useMetamask, account, pushToken, boxPub }
+  } = useSelector(({ auth }) => auth);
   const [state] = useState({ networkId, web3 });
 
   useEffect(() => {
-    if (user.useMetamask) return;
+    if (useMetamask) return;
+
+    const provider = new E36Provider({ networkId, account });
+    console.warn(provider);
+    console.warn(provider.getProvider());
 
     const networksList = networkUtils.defaults.networks;
     const networkName = Object.keys(networksList).filter(
@@ -19,23 +26,24 @@ const useCash36 = () => {
     )[0];
     const network = networkUtils.config.network(networkName);
 
-    const provider = new UportSubprovider({
+    const uportProvider = new UportSubprovider({
       requestAddress: () => {
         console.warn('fetching uport address');
-        return user.account;
+        return account;
       },
       sendTransaction: txObj => {
         delete txObj['from'];
         return transactionRequest({
           txObj,
           networkId: network.id,
-          pushToken: user.pushToken,
-          boxPub: user.boxPub
+          pushToken: pushToken,
+          boxPub: boxPub
         });
       },
-      provider: state.web3.givenProvider,
       network
     });
+
+    console.warn(uportProvider);
 
     state.web3.setProvider(provider);
   }, []);

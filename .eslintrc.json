@@ -25,6 +25,7 @@
     "react/require-default-props": [0],
     "react-hooks/rules-of-hooks": "error",
     "global-require": [0],
-    "standard/computed-property-even-spacing": 0
+    "standard/computed-property-even-spacing": 0,
+    "standard/no-callback-literal": [0, ["cb", "callback"]]
   }
 }
