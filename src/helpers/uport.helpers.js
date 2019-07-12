@@ -39,19 +39,26 @@ export const transactionRequest = async ({
   pushToken,
   boxPub
 }) => {
-  const callbackUrl = await axios.post(`${baseUrl}/transaction-request`, {
-    txObj,
-    networkId,
-    pushToken,
-    boxPub
-  });
-  return initInterval(async () => {
-    const response = await axios(callbackUrl.data);
-    console.log('=====');
-    console.log(response.data.message);
-    console.log('=====');
-    return null;
-  });
+  try {
+    const txRequest = await axios.post(`${baseUrl}/transaction-request`, {
+      txObj,
+      networkId,
+      pushToken,
+      boxPub
+    });
+
+    const transactionStatus = await initInterval(async () => {
+      const response = await axios(txRequest.data);
+      if (response.data.message.error) {
+        return Promise.reject(Error(response.data.message.error));
+      }
+      return response.data.message.tx || null;
+    });
+
+    return transactionStatus;
+  } catch (error) {
+    return Promise.reject(error);
+  }
 };
 
 const initInterval = (callback, cancel = () => false) =>
