@@ -1,16 +1,12 @@
 import HttpProvider from 'ethjs-provider-http';
 import { network as networkUtils } from 'uport-transports';
-try {
-  throw new Error({ message: 'TEST' });
-} catch (e) {
-  console.warn(e.message);
-}
 
 class e36Provider {
-  constructor ({ networkId, account, successCallback, errorCallback }) {
+  constructor ({ networkId, account, isActive }) {
     this._setNetwork(networkId);
     this.account = account;
     this.provider = new HttpProvider(this.network.rpcUrl);
+    this.isActive = isActive;
   }
 
   _setNetwork = networkId => {
@@ -29,9 +25,14 @@ class e36Provider {
     cb(null, this.account);
   };
 
-  sendTransaction = async (params, cb) => {
+  sendTransaction = async (txObj, cb) => {
     console.warn('========== TRANSACTION PARAMS');
-    console.warn(params);
+    console.warn(txObj);
+
+    setInterval(() => {
+      console.warn('Is Mounted', this.isActive());
+    }, 2000);
+
     // cb(new Error('PUKO TRANSACTIoN')');
   };
 
