@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import QRCode from 'qrcode.react';
 import Responsive from '../../../components/Responsive';
@@ -10,21 +10,32 @@ import './LoginQr.scss';
 
 const LoginQr = ({ scanCallback }) => {
   const [qr, setQr] = useState(null);
+  const _isMounted = useRef(true);
+
+  const isActive = () => {
+    return _isMounted.current;
+  };
 
   const getQr = async () => {
     try {
       const requestResponse = await getLoginQr();
       const { callbackUrl, uri } = requestResponse.data;
       setQr(uri);
-      const creds = await checkRequestStatus(callbackUrl);
+      const creds = await checkRequestStatus(callbackUrl, () => !isActive());
       scanCallback(creds);
     } catch (error) {
-      throw new Error(error);
+      console.warn(error);
+      // TODO: catch error1
+      // throw new Error(error);
     }
   };
 
   useEffect(() => {
     getQr();
+
+    return () => {
+      _isMounted.current = false;
+    };
   }, []);
 
   return (

@@ -3,7 +3,7 @@ import { network as networkUtils } from 'uport-transports';
 import { transactionRequest } from './uport.helpers';
 
 class e36Provider {
-  constructor ({ networkId, account, pushToken, boxPub, isActive }) {
+  constructor ({ networkId, account, pushToken, boxPub, cancel }) {
     const networksList = networkUtils.defaults.networks;
     const networkName = Object.keys(networksList).filter(
       key => networksList[key].id === `0x${networkId}`
@@ -14,7 +14,7 @@ class e36Provider {
     this.provider = new HttpProvider(this.network.rpcUrl);
     this.pushToken = pushToken;
     this.boxPub = boxPub;
-    this.isActive = isActive;
+    this.cancel = cancel;
   }
 
   getProvider = () => this.provider;
@@ -29,7 +29,8 @@ class e36Provider {
         txObj,
         pushToken: this.pushToken,
         boxPub: this.boxPub,
-        networkId: this.network.id
+        networkId: this.network.id,
+        cancel: this.cancel
       });
       cb(null, response);
     } catch (error) {

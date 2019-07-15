@@ -51,4 +51,16 @@
       }
     }
   }
+
+  @include mobile {
+    margin-top: -9.7rem;
+
+    .login__types {
+      justify-content: center;
+    }
+
+    img {
+      margin-bottom: 2rem;
+    }
+  }
 }

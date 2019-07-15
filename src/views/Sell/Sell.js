@@ -73,11 +73,11 @@ const Sell = ({ user, tokens, getTokens }) => {
     return web3.eth
       .sendTransaction(options)
       .on('receipt', () => {
-        if (_isMounted) setStep(2);
+        if (_isMounted.current) setStep(2);
       })
       .on('error', () => {
         // Update with proper error message
-        if (_isMounted) {
+        if (_isMounted.current) {
           setError('Selling token was unsuccessful');
           setStep(3);
         }

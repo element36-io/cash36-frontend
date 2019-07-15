@@ -7,12 +7,12 @@ export const getLoginQr = () => {
   return axios(baseUrl);
 };
 
-export const checkRequestStatus = async callbackUrl => {
+export const checkRequestStatus = async (callbackUrl, cancel) => {
   try {
     const accessToken = await initInterval(async () => {
       const response = await axios(callbackUrl);
       return response.data.message.access_token || null;
-    });
+    }, cancel);
     const creds = await verifyResponse(accessToken);
     return creds.data;
   } catch (error) {
@@ -37,7 +37,8 @@ export const transactionRequest = async ({
   txObj,
   networkId,
   pushToken,
-  boxPub
+  boxPub,
+  cancel
 }) => {
   try {
     const txRequest = await axios.post(`${baseUrl}/transaction-request`, {
@@ -53,7 +54,7 @@ export const transactionRequest = async ({
         return Promise.reject(Error(response.data.message.error));
       }
       return response.data.message.tx || null;
-    });
+    }, cancel);
 
     return transactionStatus;
   } catch (error) {
@@ -66,7 +67,9 @@ const initInterval = (callback, cancel = () => false) =>
     let interval = setInterval(async () => {
       if (cancel()) {
         reject('Request aborted');
+        clearInterval(interval);
       }
+
       try {
         const data = await callback();
         if (data) {

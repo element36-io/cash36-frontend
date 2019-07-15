@@ -27,7 +27,7 @@ const Header = ({
     fetchNotifications();
     const notificationsInterval = setInterval(
       () => fetchNotifications(),
-      6000000
+      60000
     );
 
     return () => {
