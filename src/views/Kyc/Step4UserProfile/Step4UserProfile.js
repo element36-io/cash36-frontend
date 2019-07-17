@@ -42,6 +42,8 @@ const Step4UserProfile = ({ changeSteps }) => {
   const [sourceOfFundsDescription, setSourceOfFundsDescription] = useState('');
   const [errors, setErrors] = useState({
     industry: false,
+    profession: false,
+    industryOther: false,
     income: false,
     sourceOfFunds: false,
     sourceOfFundsDescription: false,
@@ -77,10 +79,10 @@ const Step4UserProfile = ({ changeSteps }) => {
   );
 
   const validateFields = () => ({
-    industry:
-      !industry.profession ||
-      !industry.industry ||
-      (industry.industry.toLowerCase() === 'other' && !industry.industryOther),
+    industry: !industry.industry,
+    industryOther:
+      industry.industry.toLowerCase() === 'other' && !industry.industryOther,
+    profession: !industry.profession,
     income: !incomeVolume,
     sourceOfFunds:
       !Object.values(sourceOfFunds).some(e => e) ||
@@ -144,7 +146,9 @@ const Step4UserProfile = ({ changeSteps }) => {
         <IndustryFields
           values={industry}
           changeHandler={updateIndustry}
-          hasError={errors.industry}
+          industryError={errors.industry}
+          professionError={errors.profession}
+          industryOtherError={errors.industryOther}
         />
         <div>
           <RadioButtons

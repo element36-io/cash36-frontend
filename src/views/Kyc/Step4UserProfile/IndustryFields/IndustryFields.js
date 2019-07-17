@@ -18,7 +18,9 @@ const IndustryFields = React.memo(
   ({
     changeHandler,
     values: { profession, industry, industryOther },
-    hasError
+    professionError,
+    industryError,
+    industryOtherError
   }) => (
     <div className="verification-user-profile__industry">
       <TextInput
@@ -27,6 +29,8 @@ const IndustryFields = React.memo(
         placeholder="Enter Your Profession"
         onChange={changeHandler}
         value={profession}
+        isTouched
+        error={professionError ? 'This field is required' : null}
       />
       <BasicSelectInput
         list={industryValues}
@@ -35,6 +39,8 @@ const IndustryFields = React.memo(
         placeholder="Enter Your Industry"
         value={industry}
         onChange={changeHandler}
+        isTouched
+        error={industryError ? 'This field is required' : null}
       />
       {industry.toLowerCase() === 'other' && (
         <TextInput
@@ -43,13 +49,15 @@ const IndustryFields = React.memo(
           placeholder="Enter Your Industry"
           onChange={changeHandler}
           value={industryOther}
+          isTouched
+          error={industryOtherError ? 'This field is required' : null}
         />
       )}
-      {hasError && (
+      {/* {hasError && (
         <p className="verification-user-profile_error">
           These fields are required
         </p>
-      )}
+      )} */}
     </div>
   )
 );
@@ -57,7 +65,9 @@ const IndustryFields = React.memo(
 IndustryFields.propTypes = {
   changeHandler: PropTypes.func.isRequired,
   values: PropTypes.object.isRequired,
-  hasError: PropTypes.bool
+  industryError: PropTypes.bool,
+  professionError: PropTypes.bool,
+  industryOtherError: PropTypes.bool
 };
 
 export default IndustryFields;
