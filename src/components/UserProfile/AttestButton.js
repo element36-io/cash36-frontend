@@ -20,7 +20,7 @@ const AttestButton = ({
     (currentLevel === 'Tier_2' && !Tier2Attested)
   ) {
     return (
-      <DefaultButton variant="raised" onClick={onClick} disabled={attesting}>
+      <DefaultButton variant="contained" onClick={onClick} disabled={attesting}>
         {attesting ? (
           <CircularProgress color="secondary" size={20} />
         ) : (
