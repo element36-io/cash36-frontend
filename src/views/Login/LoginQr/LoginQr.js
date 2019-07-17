@@ -8,7 +8,7 @@ import uportLogo from '../../../assets/Login/uport-logo.png';
 import backgroundImage from '../../../assets/Login/background-image.jpg';
 import './LoginQr.scss';
 
-const LoginQr = ({ scanCallback }) => {
+const LoginQr = ({ scanCallback, metamaskLogin }) => {
   const [qr, setQr] = useState(null);
   const _isMounted = useRef(true);
 
@@ -18,7 +18,7 @@ const LoginQr = ({ scanCallback }) => {
 
   const getQr = async () => {
     try {
-      const requestResponse = await getLoginQr();
+      const requestResponse = await getLoginQr(metamaskLogin);
       const { callbackUrl, uri } = requestResponse.data;
       setQr(uri);
       const creds = await checkRequestStatus(callbackUrl, () => !isActive());
@@ -60,7 +60,8 @@ const LoginQr = ({ scanCallback }) => {
 };
 
 LoginQr.propTypes = {
-  scanCallback: PropTypes.func
+  scanCallback: PropTypes.func,
+  metamaskLogin: PropTypes.bool
 };
 
 export default LoginQr;

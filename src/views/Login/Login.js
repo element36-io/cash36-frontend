@@ -48,7 +48,7 @@ const Login = ({ auth: { isAuthenticated } }) => {
   const renderStep = () => {
     switch (step) {
       case 1:
-        return <LoginQr scanCallback={checkIfUserExists} />;
+        return <LoginQr scanCallback={checkIfUserExists} metamaskLogin={metamaskLogin}/>;
       case 2:
         return <MetamaskCheck callback={metamaskCheckSuccess} />;
       case 3:
