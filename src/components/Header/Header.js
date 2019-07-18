@@ -11,16 +11,29 @@ import './Header.scss';
 
 const Header = ({
   auth: { user },
-  notifications: { badgeCount },
+  notifications: { badgeCount, notifications },
   logout,
   fetchNotifications,
   getTokens,
-  getUserActivity
+  getUserActivity,
+  getUserInfo
 }) => {
   useEffect(() => {
     if (badgeCount === 0) return;
-    getTokens();
-    getUserActivity();
+
+    const newNotifications = notifications.slice(0, badgeCount);
+    const newTransaction = newNotifications.some(
+      n => n.type === 'PAYMENT' || n.type === 'PAYOUT'
+    );
+    const tier2Notification = newNotifications.some(
+      n => n.type === 'TIER_2_CONFIRMED'
+    );
+
+    if (newTransaction) {
+      getTokens();
+      getUserActivity();
+    }
+    if (tier2Notification) getUserInfo();
   }, [badgeCount]);
 
   useEffect(() => {

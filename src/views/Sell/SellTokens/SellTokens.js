@@ -4,6 +4,7 @@ import ChooseAmountForm from '../../../components/ChooseAmountForm';
 import StepButton from '../../../components/Buttons/StepButton';
 import './SellTokens.scss';
 import AvailableBalance from '../../../components/AvailableBalance';
+import UnavailableBalance from '../../../components/UnavailableBalance';
 
 const SellTokens = ({ handleChange, amount, symbol, onClick, token }) => (
   <div className="sell__sell-tokens">
@@ -13,6 +14,7 @@ const SellTokens = ({ handleChange, amount, symbol, onClick, token }) => (
       symbol={symbol}
       amount={amount}
     />
+    {amount && token && token.balance < amount && <UnavailableBalance />}
     {token ? (
       <AvailableBalance balance={token.balance} symbol={symbol} />
     ) : (
@@ -25,7 +27,11 @@ const SellTokens = ({ handleChange, amount, symbol, onClick, token }) => (
     <p>
       You Will Receive <span>{amount ? (amount * 0.98).toFixed(2) : 0}</span>
     </p>
-    <StepButton text="Next Step" onClick={onClick} disabled={!amount.length} />
+    <StepButton
+      text="Next Step"
+      onClick={onClick}
+      disabled={!amount.length || !token ? true : amount > token.balance}
+    />
   </div>
 );
 
