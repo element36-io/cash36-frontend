@@ -4,6 +4,7 @@ import ChooseAmountForm from '../../../components/ChooseAmountForm';
 import Avatar from '../../../components/Avatar';
 import TruncateString from 'react-truncate-string';
 import AvailableBalance from '../../../components/AvailableBalance';
+import UnavailableBalance from '../../../components/UnavailableBalance';
 import StepButton from '../../../components/Buttons/StepButton';
 
 import './TransferAmount.scss';
@@ -46,6 +47,7 @@ const TransferAmount = ({ target, tokens, submitCallback }) => {
         symbol={values.symbol}
         handleChange={handleChange}
       />
+      {values.amount > selectedToken.balance && <UnavailableBalance />}
       <AvailableBalance
         balance={selectedToken ? selectedToken.balance : 0}
         symbol={values.symbol}

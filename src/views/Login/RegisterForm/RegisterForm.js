@@ -50,7 +50,7 @@ const RegisterForm = ({ register, creds, useMetamask }) => {
       </div>
       {error && <p className="login__form__error">{error}</p>}
       <StepButton
-        variant="raised"
+        variant="contained"
         color="primary"
         type="submit"
         size="large"

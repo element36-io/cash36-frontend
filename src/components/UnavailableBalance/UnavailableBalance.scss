@@ -1,0 +1,10 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/settings.scss';
+
+.unavailable-balance {
+  padding-top: 1.2rem;
+  color: $red-1;
+  text-align: center;
+  font-size: 1.4rem;
+  line-height: 1.7rem;
+}

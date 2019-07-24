@@ -6,7 +6,6 @@ import Responsive from '../../../components/Responsive';
 import DateRange from '../DateRange';
 import SearchBox from '../SearchBox';
 import FilterByStatus from '../FilterByStatus';
-import ExportData from '../ExportData';
 import DateRangeMobile from '../DateRangeMobile';
 import FilterByStatusMobile from '../FilterByStatusMobile';
 import BaseButton from '../../../components/Buttons/BaseButton';
@@ -187,7 +186,6 @@ class HistoryFilters extends Component {
             handleFilterByStatusChange={this.handleFilterByStatusChange}
             fetchingFilters={fetchingFilters}
           />
-          <ExportData />
         </Responsive>
         <Responsive isTablet>
           <DateRangeMobile
