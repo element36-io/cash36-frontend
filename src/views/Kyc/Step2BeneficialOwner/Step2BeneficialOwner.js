@@ -7,7 +7,7 @@ import Responsive from '../../../components/Responsive';
 
 import './Step2BeneficialOwner.scss';
 
-const Step2BeneficialOwner = ({ changeSteps }) => {
+const Step2BeneficialOwner = ({ changeSteps, stepError }) => {
   const [checked, setChecked] = useState(false);
   return (
     <div className="beneficial-owner">
@@ -47,6 +47,7 @@ const Step2BeneficialOwner = ({ changeSteps }) => {
           submitCallback={() => {
             changeSteps(2, {});
           }}
+          error={stepError}
         />
       </div>
     </div>
@@ -54,7 +55,8 @@ const Step2BeneficialOwner = ({ changeSteps }) => {
 };
 
 Step2BeneficialOwner.propTypes = {
-  changeSteps: PropTypes.func.isRequired
+  changeSteps: PropTypes.func.isRequired,
+  stepError: PropTypes.string
 };
 
 export default Step2BeneficialOwner;

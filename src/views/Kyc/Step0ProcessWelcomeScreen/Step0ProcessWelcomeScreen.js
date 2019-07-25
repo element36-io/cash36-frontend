@@ -9,12 +9,16 @@ import './Step0ProcessWelcomeScreen.scss';
 
 const Step0ProcessWelcomeScreen = ({ startKycProcess }) => {
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
+
   const nextStep = async () => {
+    setSubmitting(true);
     try {
-      setSubmitting(true);
       await startKycProcess();
+      setSubmitting(false);
     } catch (error) {
       setSubmitting(false);
+      setError(error);
     }
   };
 
@@ -44,6 +48,7 @@ const Step0ProcessWelcomeScreen = ({ startKycProcess }) => {
         submitLabel="Start Verification Process"
         submitCallback={nextStep}
         submitting={submitting}
+        error={error}
       />
     </div>
   );

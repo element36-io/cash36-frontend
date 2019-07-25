@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
@@ -6,6 +6,8 @@ import {
   getCurrentKycStep,
   updateKycStep
 } from '../../store/auth/auth.actions';
+import { CircularProgress } from '@material-ui/core';
+
 import Step0ProcessWelcomeScreen from './Step0ProcessWelcomeScreen';
 import Step1Tier1Form from './Step1Tier1Form';
 import Step1aConfirmTier1 from './Step1aConfirmTier1';
@@ -24,14 +26,26 @@ const Kyc = ({
   avatarUri,
   username
 }) => {
+  const [processError, setProcessError] = useState('');
+  const [stepError, setStepError] = useState('');
+
   useEffect(() => {
-    getCurrentKycStep();
+    getCurrentStep();
   }, [currentKycStep]);
+
+  const getCurrentStep = async () => {
+    try {
+      await getCurrentKycStep();
+    } catch (error) {
+      setProcessError(error);
+    }
+  };
 
   const changeSteps = async (step, payload) => {
     try {
       await updateKycStep(step, payload);
     } catch (error) {
+      setStepError(error);
       return Promise.reject(error);
     }
   };
@@ -46,22 +60,49 @@ const Kyc = ({
             changeSteps={changeSteps}
             avatarUri={avatarUri}
             username={username}
+            stepError={stepError}
           />
         );
       case 'CONFIRM_TIER_1':
-        return <Step1aConfirmTier1 changeSteps={changeSteps} />;
+        return (
+          <Step1aConfirmTier1 changeSteps={changeSteps} stepError={stepError} />
+        );
       case 'BENEFICIAL_OWNER':
-        return <Step2BeneficialOwner changeSteps={changeSteps} />;
+        return (
+          <Step2BeneficialOwner
+            changeSteps={changeSteps}
+            stepError={stepError}
+          />
+        );
       case 'UPLOAD_DOCUMENTS':
-        return <Step3Documents changeSteps={changeSteps} />;
+        return (
+          <Step3Documents changeSteps={changeSteps} stepError={stepError} />
+        );
       case 'USER_PROFILE':
-        return <Step4UserProfile changeSteps={changeSteps} />;
+        return (
+          <Step4UserProfile changeSteps={changeSteps} stepError={stepError} />
+        );
       case 'AWAITING_VERIFICATION':
         return <Step5AwaitingVerification />;
       default:
-        return <div>Loading...</div>;
+        return (
+          <div className="kyc__empty-container">
+            <CircularProgress size={20} />
+          </div>
+        );
     }
   };
+
+  if (processError) {
+    return (
+      <div
+        className="wrapper paper kyc kyc__empty-container"
+        data-status="REGISTERED"
+      >
+        <div className="error-text">{processError}</div>
+      </div>
+    );
+  }
 
   return (
     <div className="wrapper paper kyc" data-status={currentKycStep}>

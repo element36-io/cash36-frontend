@@ -3,7 +3,7 @@
   margin-bottom: 4.3rem;
 
   &.wrapper.paper {
-    overflow: visible;
+    // overflow: visible;
   }
 
   &::after {
@@ -24,6 +24,15 @@
     background: linear-gradient(180deg, #63b4f5 0%, #017ee5 100%);
     transition: width 0.3s;
   }
+}
+
+.kyc__empty-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  height: calc(100% - 20rem);
+  font-size: 2.2rem;
 }
 
 [data-status='REGISTERED'] {

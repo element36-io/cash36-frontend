@@ -1,4 +1,5 @@
 import API from '../../config/api';
+import { handleError } from '../../helpers/error.helpers';
 
 export const GET_CONTACTS = 'GET_CONTACTS';
 export const GET_CONTACTS_SUCCESS = 'GET_CONTACTS_SUCCESS';
@@ -18,7 +19,7 @@ export const getContacts = () => async dispatch => {
   } catch (error) {
     // Do better error handling
     dispatch({ type: CONTACTS_ERROR, payload: error });
-    return Promise.reject(error);
+    return handleError(error);
   }
 };
 
@@ -31,7 +32,7 @@ export const removeContact = id => async dispatch => {
     });
   } catch (error) {
     dispatch({ type: CONTACTS_ERROR, payload: error });
-    return Promise.reject(error);
+    return handleError(error);
   }
 };
 
@@ -47,6 +48,6 @@ export const addContact = data => async dispatch => {
     return Promise.resolve();
   } catch (error) {
     dispatch({ type: CONTACTS_ERROR, payload: error });
-    return Promise.reject(error);
+    return handleError(error);
   }
 };

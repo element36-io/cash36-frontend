@@ -28,7 +28,7 @@ export default (state = initialState, action) => {
     case CONTACTS_ERROR:
       return {
         ...state,
-        feching: false,
+        fetching: false,
         error: action.payload
       };
     case REMOVE_CONTACTS:

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import API, { API_ROOT } from '../../config/api';
+import { handleError } from '../../helpers/error.helpers';
 
 export const AUTH_USER = 'AUTH_USER';
 export const GET_USER_INFO = 'GET_USER_INFO';
@@ -29,7 +30,7 @@ export const getUserInfo = () => async dispatch => {
       payload: response.data
     });
   } catch (error) {
-    console.warn(error);
+    return handleError(error);
   }
 };
 
@@ -44,7 +45,7 @@ export const getCurrentKycStep = () => async dispatch => {
       payload: processStatus
     });
   } catch (error) {
-    return Promise.reject(error);
+    return handleError(error);
   }
 };
 
@@ -54,7 +55,7 @@ export const startKycProcess = () => async dispatch => {
     dispatch(getCurrentKycStep());
     dispatch(getUserInfo());
   } catch (error) {
-    console.log(error);
+    return handleError(error);
   }
 };
 
@@ -64,7 +65,7 @@ export const updateKycStep = (step, payload) => async dispatch => {
     dispatch(getCurrentKycStep());
     dispatch(getUserInfo());
   } catch (error) {
-    return Promise.reject(error);
+    return handleError(error);
   }
 };
 
