@@ -21,10 +21,19 @@ const Contacts = ({
 }) => {
   const [search, setSearch] = useState('');
   const [activeForm, setActiveForm] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    getContacts();
+    callGetContacts();
   }, []);
+
+  const callGetContacts = async () => {
+    try {
+      await getContacts();
+    } catch (error) {
+      setError(error);
+    }
+  };
 
   const searchChangeHandler = evt => {
     setSearch(evt.target.value);
@@ -63,6 +72,14 @@ const Contacts = ({
         />
       ));
   };
+
+  if (error) {
+    return (
+      <div className="wrapper contacts">
+        <div className="error-text">Fetching data error: {error}</div>
+      </div>
+    );
+  }
 
   return (
     <div className="wrapper contacts">

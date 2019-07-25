@@ -1,4 +1,5 @@
 import api from '../../config/api';
+import { handleError } from '../../helpers/error.helpers';
 
 export const GET_COUNTRIES = 'GET_COUNTRIES';
 
@@ -17,6 +18,6 @@ export const getCountries = () => async dispatch => {
       }
     });
   } catch (error) {
-    console.log(error);
+    return handleError(error);
   }
 };

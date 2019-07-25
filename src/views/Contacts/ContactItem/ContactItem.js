@@ -10,6 +10,7 @@ import './ContactItem.scss';
 
 const ContactItem = React.memo(({ contact, removeCallback, quickTransfer }) => {
   const [showActions, setShowActions] = useState(false);
+  const [error, setError] = useState('');
 
   const openActions = () => {
     setShowActions(true);
@@ -24,8 +25,12 @@ const ContactItem = React.memo(({ contact, removeCallback, quickTransfer }) => {
     quickTransfer(contact);
   };
 
-  const removeUser = () => {
-    removeCallback(contact.id);
+  const removeUser = async () => {
+    try {
+      await removeCallback(contact.id);
+    } catch (error) {
+      setError(error);
+    }
   };
 
   return (
@@ -62,6 +67,7 @@ const ContactItem = React.memo(({ contact, removeCallback, quickTransfer }) => {
           <span>Quick</span> Transfer
         </span>
       </BaseButton>
+      <div className="error-text">{error}</div>
     </div>
   );
 });

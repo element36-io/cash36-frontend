@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
@@ -22,8 +22,10 @@ const Step1Tier1Form = ({
   getCountries,
   changeSteps,
   avatarUri,
-  user
+  user,
+  stepError
 }) => {
+  const [error, setError] = useState('');
   const submit = async values => {
     try {
       const payload = {
@@ -35,15 +37,24 @@ const Step1Tier1Form = ({
       };
       await changeSteps(1, payload);
     } catch (error) {
+      setError(error);
       return Promise.reject(error);
     }
   };
 
   useEffect(() => {
     if (!countries.length || !nationalities.length) {
-      getCountries();
+      callGetCountries();
     }
   }, []);
+
+  const callGetCountries = async () => {
+    try {
+      await getCountries();
+    } catch (error) {
+      setError(error);
+    }
+  };
 
   const fieldGroup = formModel.map(field => {
     if (field.name === 'country') field.list = countries;
@@ -99,6 +110,7 @@ const Step1Tier1Form = ({
               disabled={submitting}
               submitting={submitting}
               submitCallback={formProps.handleSubmit}
+              error={error || stepError}
             />
           </form>
         )}
@@ -113,7 +125,8 @@ Step1Tier1Form.propTypes = {
   username: PropTypes.string,
   avatarUri: PropTypes.string,
   caseId: PropTypes.string,
-  user: PropTypes.object
+  user: PropTypes.object,
+  stepError: PropTypes.string
 };
 
 const mapStateToProps = ({

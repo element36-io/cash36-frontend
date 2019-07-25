@@ -23,7 +23,7 @@ const yearlyIncomeValues = [
   'MoreThan200k'
 ];
 
-const Step4UserProfile = ({ changeSteps }) => {
+const Step4UserProfile = ({ changeSteps, stepError }) => {
   const [industry, setIndustry] = useState({
     profession: '',
     industry: '',
@@ -92,7 +92,7 @@ const Step4UserProfile = ({ changeSteps }) => {
     transactionVolume: !transactionVolume
   });
 
-  const submit = () => {
+  const submit = async () => {
     const sources = Object.keys(sourceOfFunds).reduce((acc, val) => {
       if (sourceOfFunds[val]) acc.push(val);
       return acc;
@@ -113,9 +113,10 @@ const Step4UserProfile = ({ changeSteps }) => {
     };
     setSubmitting(true);
     try {
-      changeSteps(4, payload);
-    } catch (e) {
+      await changeSteps(4, payload);
+    } catch (error) {
       setSubmitting(false);
+      return Promise.reject(error);
     }
   };
 
@@ -201,13 +202,15 @@ const Step4UserProfile = ({ changeSteps }) => {
         submitLabel="Submit & Continue"
         submitCallback={submit}
         submitting={submitting}
+        error={stepError}
       />
     </div>
   );
 };
 
 Step4UserProfile.propTypes = {
-  changeSteps: PropTypes.func.isRequired
+  changeSteps: PropTypes.func.isRequired,
+  stepError: PropTypes.string
 };
 
 export default Step4UserProfile;

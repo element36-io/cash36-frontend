@@ -1,4 +1,5 @@
 import API from '../../config/api';
+import { handleError } from '../../helpers/error.helpers';
 
 export const GET_TOKENS = 'GET_TOKENS';
 export const GET_USER_ACTIVITY = 'GET_USER_ACTIVITY';
@@ -14,7 +15,7 @@ export const getTokens = () => async dispatch => {
       payload: response.data
     });
   } catch (error) {
-    console.log(error);
+    return handleError(error);
   }
 };
 
@@ -64,6 +65,6 @@ export const getUserActivity = queryParams => async dispatch => {
       }
     }
   } catch (error) {
-    console.log(error);
+    return handleError(error);
   }
 };
