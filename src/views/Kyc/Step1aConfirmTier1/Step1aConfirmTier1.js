@@ -6,7 +6,7 @@ import ProcessControls from '../ProcessControls';
 
 import './Step1aConfirmTier1.scss';
 
-const Step1aConfirmTier1 = ({ changeSteps }) => {
+const Step1aConfirmTier1 = ({ changeSteps, stepError }) => {
   return (
     <div className="confirm-tier-1">
       <div className="confirm-tier-1__heading">
@@ -20,13 +20,15 @@ const Step1aConfirmTier1 = ({ changeSteps }) => {
       <ProcessControls
         submitLabel="Continue Verification Process"
         submitCallback={() => changeSteps('1a', {})}
+        error={stepError}
       />
     </div>
   );
 };
 
 Step1aConfirmTier1.propTypes = {
-  changeSteps: PropTypes.func.isRequired
+  changeSteps: PropTypes.func.isRequired,
+  error: PropTypes.string
 };
 
 export default Step1aConfirmTier1;

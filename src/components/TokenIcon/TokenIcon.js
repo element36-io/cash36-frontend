@@ -5,9 +5,7 @@ import dollarIcon from '../../assets/BalanceCard/dollar-icon.svg';
 import poundIcon from '../../assets/BalanceCard/pound-icon.svg';
 import francIcon from '../../assets/BalanceCard/franc-icon.svg';
 
-const TokenIcon = props => {
-  const { token } = props;
-
+const TokenIcon = ({ token }) => {
   switch (token) {
     case 'EUR36':
       return <img src={euroIcon} alt="EURO TOKEN" />;

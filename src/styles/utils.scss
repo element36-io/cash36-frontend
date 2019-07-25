@@ -16,6 +16,10 @@
   box-shadow: $box-shadow-1;
   border-radius: 10px;
   overflow: hidden;
+
+  &.no-radius {
+    border-radius: 0;
+  }
 }
 
 .abs-center {
@@ -29,4 +33,14 @@
   margin: 4.4rem 0;
   border-bottom: 1px solid $grey-border;
   border-top: none;
+}
+
+.MuiPickersToolbar-toolbar {
+  button {
+    background: transparent;
+  }
+}
+
+.error-text {
+  color: $red-1;
 }

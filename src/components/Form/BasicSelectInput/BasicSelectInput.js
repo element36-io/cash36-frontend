@@ -12,7 +12,8 @@ const BasicSelectInput = ({
   onChange,
   label,
   disabled = false,
-  placeholder
+  placeholder,
+  error
 }) => {
   return (
     <div>
@@ -52,6 +53,7 @@ const BasicSelectInput = ({
           </MenuItem>
         ))}
       </TextField>
+      {error && <p className="form-error">{error}</p>}
     </div>
   );
 };
@@ -61,7 +63,8 @@ BasicSelectInput.propTypes = {
   name: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  error: PropTypes.string
 };
 
 export default BasicSelectInput;

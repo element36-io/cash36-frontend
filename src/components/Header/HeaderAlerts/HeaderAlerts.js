@@ -1,58 +1,63 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import { updateLastRead, resetBadgeCount } from '../../../store/notifications/notifications.actions';
+import {
+  updateLastRead,
+  resetBadgeCount
+} from '../../../store/notifications/notifications.actions';
 import Notification from '../Notification';
 import './HeaderAlerts.scss';
 
-class HeaderAlerts extends Component {
-  state = {
-    open: false
-  };
+const HeaderAlerts = ({
+  notifications: { badgeCount, notifications, lastRead },
+  updateLastRead,
+  resetBadgeCount
+}) => {
+  const [open, setOpen] = useState(false);
 
-  toggleNotification = evt => {
-    if (this.state.open) {
-      this.updateLastReadAndBadgeCount();
-    }
-    this.setState({ open: !this.state.open });
-  };
-
-  closeNotifications = (e) => {
-    if (!this.state.open) return;
-    this.setState({ open: false });
-    this.updateLastReadAndBadgeCount();
-  };
-
-  updateLastReadAndBadgeCount = () => {
+  const updateLastReadAndBadgeCount = () => {
     const lastRead = new Date().toISOString();
-    const { resetBadgeCount, updateLastRead } = this.props;
     updateLastRead(lastRead);
     resetBadgeCount();
     localStorage.setItem('lastRead', lastRead);
-  }
+  };
 
-  render () {
-    const { notifications: { badgeCount, notifications, lastRead } } = this.props;
-    const { open } = this.state;
+  const toggleNotification = () => {
+    if (!notifications.length) return;
+    if (open) updateLastReadAndBadgeCount();
+    setOpen(!open);
+  };
 
-    return (
-      <ClickAwayListener onClickAway={this.closeNotifications}>
-        <div className="header__alerts">
-          <span className="header__alerts__icon" onClick={this.toggleNotification} />
-          {!!badgeCount && <span className="header__alerts__counter">{badgeCount}</span>}
-          {notifications && !!notifications.length && (
-            <div className={`header__alerts__content ${open ? 'header__alerts--active' : ''}`}>
-              {notifications && notifications.map(n => (
+  const closeNotifications = () => {
+    if (!open) return;
+    setOpen(false);
+    updateLastReadAndBadgeCount();
+  };
+
+  return (
+    <ClickAwayListener onClickAway={closeNotifications}>
+      <div className="header__alerts">
+        <span className="header__alerts__icon" onClick={toggleNotification} />
+        {!!badgeCount && (
+          <span className="header__alerts__counter">{badgeCount}</span>
+        )}
+        {notifications && !!notifications.length && (
+          <div
+            className={`header__alerts__content ${
+              open ? 'header__alerts--active' : ''
+            }`}
+          >
+            {notifications &&
+              notifications.map(n => (
                 <Notification {...n} lastRead={lastRead} key={n.creationDate} />
               ))}
-            </div>
-          )}
-        </div>
-      </ClickAwayListener>
-    );
-  }
-}
+          </div>
+        )}
+      </div>
+    </ClickAwayListener>
+  );
+};
 
 HeaderAlerts.propTypes = {
   notifications: PropTypes.object,
@@ -62,4 +67,7 @@ HeaderAlerts.propTypes = {
 
 const mapStateToProps = ({ notifications }) => ({ notifications });
 
-export default connect(mapStateToProps, { updateLastRead, resetBadgeCount })(HeaderAlerts);
+export default connect(
+  mapStateToProps,
+  { updateLastRead, resetBadgeCount }
+)(HeaderAlerts);

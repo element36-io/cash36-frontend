@@ -4,23 +4,26 @@ import './styles/base.scss';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
-import MomentUtils from 'material-ui-pickers/utils/moment-utils';
-import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import MomentUtils from '@date-io/moment';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { ThemeProvider } from '@material-ui/styles';
 import store from './store';
 import theme from './config/theme';
-import Web3ProviderNew from './components/Web3Provider';
+import Web3Provider from './providers/web3.provider';
+import AvatarProvider from './providers/avatar.provider';
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Web3ProviderNew>
-      <MuiThemeProvider theme={theme}>
-        <MuiPickersUtilsProvider utils={MomentUtils}>
-          <App />
-        </MuiPickersUtilsProvider>
-      </MuiThemeProvider>
-    </Web3ProviderNew>
-  </Provider>,
+  <MuiPickersUtilsProvider utils={MomentUtils}>
+    <Provider store={store}>
+      <Web3Provider>
+        <ThemeProvider theme={theme}>
+          <AvatarProvider>
+            <App />
+          </AvatarProvider>
+        </ThemeProvider>
+      </Web3Provider>
+    </Provider>
+  </MuiPickersUtilsProvider>,
   document.getElementById('root')
 );
 

@@ -7,7 +7,7 @@ import './StepButton.scss';
 
 const StepButton = ({ text, onClick, disabled, type }) => (
   <DefaultButton
-    variant="raised"
+    variant="contained"
     type={type}
     size="large"
     fullWidth

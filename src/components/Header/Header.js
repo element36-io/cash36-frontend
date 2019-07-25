@@ -1,97 +1,65 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import SockJS from 'sockjs-client';
-import Stomp from 'stompjs';
-import { API_ROOT } from '../../config/api';
 import Logo from '../Logo';
 import Responsive from '../Responsive';
 import HeaderDesktop from './HeaderDesktop';
 import HeaderMobile from './HeaderMobile';
 import { logout, getUserInfo } from '../../store/auth/auth.actions';
-import {
-  fetchNotifications,
-  newNotification
-} from '../../store/notifications/notifications.actions';
+import { fetchNotifications } from '../../store/notifications/notifications.actions';
 import { getTokens, getUserActivity } from '../../store/tokens/tokens.actions';
 import './Header.scss';
 
-class Header extends Component {
-  eventSource = null;
+const Header = ({
+  auth: { user },
+  notifications: { badgeCount, notifications },
+  logout,
+  fetchNotifications,
+  getTokens,
+  getUserActivity,
+  getUserInfo
+}) => {
+  useEffect(() => {
+    if (badgeCount === 0) return;
 
-  componentDidMount () {
-    this.props.fetchNotifications(localStorage.getItem('lastRead'));
-    this.connectWs();
-  }
+    const newNotifications = notifications.slice(0, badgeCount);
+    const newTransaction = newNotifications.some(
+      n => n.type === 'PAYMENT' || n.type === 'PAYOUT'
+    );
+    const tier2Notification = newNotifications.some(
+      n => n.type === 'TIER_2_CONFIRMED'
+    );
 
-  componentWillUnmount () {
-    if (this.eventSource != null) {
-      try {
-        this.eventSource.disconnect();
-      } catch (err) {
-        // ignore the case if not yet connected
-      }
+    if (newTransaction) {
+      getTokens();
+      getUserActivity();
     }
-  }
+    if (tier2Notification) getUserInfo();
+  }, [badgeCount]);
 
-  connectWs = () => {
-    const {
-      auth: { user },
-      newNotification,
-      getUserInfo,
-      getTokens,
-      getUserActivity
-    } = this.props;
-    let socket = new SockJS(`${API_ROOT}/ws`);
-    this.eventSource = Stomp.over(socket);
-    this.eventSource.connect(
-      {},
-      () => {
-        this.eventSource.subscribe(
-          `/topics/updates/${user.username}`,
-          message => {
-            const messageBody = JSON.parse(message.body);
-            newNotification(messageBody);
-            const { type } = messageBody;
-
-            if (type === 'PAYMENT' || type === 'PAYOUT') {
-              getTokens();
-              getUserActivity();
-            }
-
-            if (type === 'TIER_2_CONFIRMED') {
-              getUserInfo();
-            }
-          }
-        );
-      },
-      err => {
-        console.error(err, 'Connection lost');
-        if (err.startsWith('Whoops!')) {
-          // this.setState({ message: e, snackOpen: true, actionEnabled: true, autoHideDuration: null });
-        }
-      }
+  useEffect(() => {
+    fetchNotifications();
+    const notificationsInterval = setInterval(
+      () => fetchNotifications(),
+      60000
     );
-  };
 
-  render () {
-    const {
-      auth: { user },
-      logout
-    } = this.props;
+    return () => {
+      clearInterval(notificationsInterval);
+    };
+  }, []);
 
-    return (
-      <header>
-        <Logo />
-        <Responsive>
-          <HeaderDesktop logout={logout} user={user} />
-        </Responsive>
-        <Responsive isMobile>
-          <HeaderMobile logout={logout} user={user} />
-        </Responsive>
-      </header>
-    );
-  }
-}
+  return (
+    <header>
+      <Logo />
+      <Responsive>
+        <HeaderDesktop logout={logout} user={user} />
+      </Responsive>
+      <Responsive isMobile>
+        <HeaderMobile logout={logout} user={user} />
+      </Responsive>
+    </header>
+  );
+};
 
 const mapStateToProps = ({ auth, notifications }) => ({ auth, notifications });
 
@@ -100,7 +68,6 @@ export default connect(
   {
     logout,
     fetchNotifications,
-    newNotification,
     getTokens,
     getUserActivity,
     getUserInfo

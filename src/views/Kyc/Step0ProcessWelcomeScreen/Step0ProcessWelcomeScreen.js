@@ -7,14 +7,18 @@ import Responsive from '../../../components/Responsive';
 
 import './Step0ProcessWelcomeScreen.scss';
 
-const Step0ProcessWelcomeScreen = ({ changeSteps }) => {
+const Step0ProcessWelcomeScreen = ({ startKycProcess }) => {
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
+
   const nextStep = async () => {
+    setSubmitting(true);
     try {
-      setSubmitting(true);
-      changeSteps('0', {});
+      await startKycProcess();
+      setSubmitting(false);
     } catch (error) {
       setSubmitting(false);
+      setError(error);
     }
   };
 
@@ -44,13 +48,15 @@ const Step0ProcessWelcomeScreen = ({ changeSteps }) => {
         submitLabel="Start Verification Process"
         submitCallback={nextStep}
         submitting={submitting}
+        error={error}
       />
     </div>
   );
 };
 
 Step0ProcessWelcomeScreen.propTypes = {
-  changeSteps: PropTypes.func.isRequired
+  startKycProcess: PropTypes.func.isRequired,
+  caseId: PropTypes.any
 };
 
 export default Step0ProcessWelcomeScreen;

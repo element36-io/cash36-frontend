@@ -1,22 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { InlineDatePicker } from 'material-ui-pickers/DatePicker';
-import { withStyles } from '@material-ui/core/styles';
+import { DatePicker } from '@material-ui/pickers';
 import EventIcon from '@material-ui/icons/Event';
 import TodayIcon from '@material-ui/icons/Today';
 import RightArrowIcon from '@material-ui/icons/KeyboardArrowRight';
 import LeftArrowIcon from '@material-ui/icons/KeyboardArrowLeft';
 import DownArrowIcon from '@material-ui/icons/KeyboardArrowDown';
-import styles from './MuiStyles';
+import useStyles from './MuiStyles';
 
 const DateRange = ({
-  classes,
   startDate,
   endDate,
   handleStartDateChange,
   handleEndDateChange,
   fetchingFilters
 }) => {
+  const classes = useStyles();
   return (
     <div className={`${classes.root} paper`}>
       <div className={classes.picker}>
@@ -25,12 +24,12 @@ const DateRange = ({
           <span>Start</span>
         </div>
         <div className={classes.pickerInputBox}>
-          <InlineDatePicker
-            autoOk
+          <DatePicker
             value={startDate}
             onChange={handleStartDateChange}
+            autoOk
+            variant="inline"
             format={'DD/MM/YYYY'}
-            onlyCalendar
             disabled={fetchingFilters}
             rightArrowIcon={<RightArrowIcon />}
             leftArrowIcon={<LeftArrowIcon />}
@@ -50,12 +49,12 @@ const DateRange = ({
           <span>End</span>
         </div>
         <div className={classes.pickerInputBox}>
-          <InlineDatePicker
-            autoOk
+          <DatePicker
             value={endDate}
             onChange={handleEndDateChange}
+            autoOk
+            variant="inline"
             format={'DD/MM/YYYY'}
-            onlyCalendar
             disabled={fetchingFilters}
             rightArrowIcon={<RightArrowIcon />}
             leftArrowIcon={<LeftArrowIcon />}
@@ -74,7 +73,6 @@ const DateRange = ({
 };
 
 DateRange.propTypes = {
-  classes: PropTypes.object,
   startDate: PropTypes.any,
   endDate: PropTypes.any,
   handleStartDateChange: PropTypes.func.isRequired,
@@ -82,4 +80,4 @@ DateRange.propTypes = {
   fetchingFilters: PropTypes.bool.isRequired
 };
 
-export default withStyles(styles)(DateRange);
+export default DateRange;

@@ -49,8 +49,8 @@
       padding: 0.8rem 1.6rem;
       line-height: 1.4rem;
       margin-right: 1rem;
-      min-height: 36px;
-      min-width: 64px;
+      min-height: 3.6rem;
+      min-width: 6.4rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -74,15 +74,22 @@
     min-width: 10.5rem;
     margin-right: 1.6rem;
 
-    div,
-    img {
+    > div:first-child {
+      img {
+        height: 10.5rem;
+        width: 10.5rem;
+        border-radius: 12px;
+      }
+
+      img {
+        object-fit: cover;
+      }
+    }
+
+    div {
       height: 10.5rem;
       width: 10.5rem;
       border-radius: 12px;
-    }
-
-    img {
-      object-fit: cover;
     }
 
     div {
@@ -105,8 +112,8 @@
       left: 8.3rem;
       top: 8rem;
       display: block;
-      width: 34px;
-      height: 41px;
+      width: 3.4rem;
+      height: 4.1rem;
 
       span {
         position: absolute;
@@ -138,6 +145,7 @@
       background: $primary-light-4;
       border-radius: 3px;
       overflow: hidden;
+      margin-top: 0.4rem;
 
       &.Tier_0:after {
         width: 9%;
@@ -166,7 +174,7 @@
 
   &__info {
     p {
-      margin: 0 0 10px;
+      margin: 0 0 1rem;
       color: $darkGrey;
       font-size: 1.4rem;
 
@@ -179,7 +187,11 @@
         font-size: 2rem;
       }
 
-      &:last-of-type {
+      &:nth-of-type(2) {
+        margin-bottom: 0.5rem;
+      }
+
+      &:not(:first-of-type) {
         text-decoration: underline;
         word-break: break-all;
       }

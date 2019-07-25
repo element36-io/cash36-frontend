@@ -2,7 +2,6 @@ import {
   AUTH_USER,
   GET_USER_INFO,
   CONFIRM_ATTESTATION,
-  ATTESTATION_PROGRESS,
   GET_CURRENT_KYC_STEP
 } from './auth.actions';
 
@@ -41,20 +40,25 @@ export default (state = initialState, action) => {
           currentStep: action.payload
         }
       };
-    case ATTESTATION_PROGRESS:
-      return {
-        ...state,
-        attesting: true
-      };
     case CONFIRM_ATTESTATION:
-      return {
-        ...state,
-        user: {
-          ...state.user,
-          verified: [...state.user.verified, action.payload]
-        },
-        attesting: false
-      };
+      if (state.user.verified) {
+        return {
+          ...state,
+          user: {
+            ...state.user,
+            verified: [...state.user.verified, action.payload]
+          }
+        };
+      } else {
+        return {
+          ...state,
+          user: {
+            ...state.user,
+            verified: [action.payload]
+          }
+        };
+      }
+
     default:
       return state;
   }

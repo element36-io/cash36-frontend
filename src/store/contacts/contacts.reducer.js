@@ -3,16 +3,13 @@ import {
   GET_CONTACTS_SUCCESS,
   CONTACTS_ERROR,
   REMOVE_CONTACTS,
-  ADD_CONTACTS,
-  REMOVE_QUICK_TRANSFER,
-  ADD_QUICK_TRANSFER
+  ADD_CONTACTS
 } from './contacts.actions';
 
 const initialState = {
   contactsList: [],
   fetching: false,
-  error: null,
-  quickTransfer: null
+  error: null
 };
 
 export default (state = initialState, action) => {
@@ -31,11 +28,13 @@ export default (state = initialState, action) => {
     case CONTACTS_ERROR:
       return {
         ...state,
-        feching: false,
+        fetching: false,
         error: action.payload
       };
     case REMOVE_CONTACTS:
-      const contactsList = state.contactsList.filter(c => c.id !== action.payload);
+      const contactsList = state.contactsList.filter(
+        c => c.id !== action.payload
+      );
       return {
         ...state,
         error: null,
@@ -43,21 +42,8 @@ export default (state = initialState, action) => {
       };
     case ADD_CONTACTS:
       return {
-        contactsList: [
-          ...state.contactsList,
-          action.payload
-        ],
+        contactsList: [...state.contactsList, action.payload],
         error: false
-      };
-    case ADD_QUICK_TRANSFER:
-      return {
-        ...state,
-        quickTransfer: action.payload
-      };
-    case REMOVE_QUICK_TRANSFER:
-      return {
-        ...state,
-        quickTransfer: null
       };
     default:
       return state;

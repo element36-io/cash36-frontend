@@ -1,4 +1,6 @@
-export default {
+import { makeStyles } from '@material-ui/styles';
+
+export default makeStyles({
   root: {
     backgroundImage: 'none',
     backgroundColor: '#fff',
@@ -18,4 +20,4 @@ export default {
     left: '2.7rem',
     zIndex: 3
   }
-};
+});

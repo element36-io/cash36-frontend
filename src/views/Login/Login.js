@@ -1,88 +1,82 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { MNID } from 'uport-connect';
-import { uPort, uportUri, setUportUri } from '../../config/uport.config';
 import Responsive from '../../components/Responsive';
 import LoginSidebar from './LoginSidebar';
 import LoginTerms from './LoginTerms';
 import LoginHeader from './LoginHeader';
-import LoginWelcome from './LoginWelcome/LoginWelcome';
+import LoginQr from './LoginQr';
 import RegisterForm from './RegisterForm';
 import LoginForm from './LoginForm';
-import { checkUserAddress } from '../../store/auth/auth.actions';
+import LoginType from './LoginType';
+import MetamaskCheck from './MetamaskCheck';
+import { checkUserId } from '../../store/auth/auth.actions';
+
 import './Login.scss';
 
-class Login extends Component {
-  state = {
-    step: 0,
-    uPortUri: uportUri,
-    uportCreds: null
-  };
+const Login = ({ auth: { isAuthenticated } }) => {
+  const [step, setStep] = useState(0);
+  const [creds, setCreds] = useState(null);
+  const [newUser, setNewUser] = useState(false);
+  const [metamaskLogin, setMetamaskLogin] = useState(false);
 
-  componentDidMount () {
-    uPort
-      .requestCredentials(
-        {
-          requested: ['name', 'avatar'],
-          verified: ['element36Tier1', 'element36Tier2'],
-          notifications: true
-        },
-        this.uPortURIHandler
-      )
-      .then(this.checkIfUserExists);
-  }
+  const checkIfUserExists = async uportCreds => {
+    const creds = { ...uportCreds };
+    creds.id = creds.did.split(':').pop();
+    setCreds(creds);
 
-  uPortURIHandler = uPortUri => {
-    setUportUri(uPortUri);
-    this.setState({ uPortUri });
-  };
-
-  checkIfUserExists = async uportCreds => {
     try {
-      await checkUserAddress(MNID.decode(uportCreds.networkAddress).address);
-      this.setState({ step: 1, uportCreds });
+      await checkUserId(creds.id);
+      setNewUser(false);
+      metamaskLogin ? setStep(2) : setStep(3);
     } catch (err) {
-      this.setState({ step: 2, uportCreds });
+      setNewUser(true);
+      metamaskLogin ? setStep(2) : setStep(4);
     }
   };
 
-  renderStep = () => {
-    const { step, uPortUri, uportCreds } = this.state;
+  const selectLoginType = useMetamask => {
+    setMetamaskLogin(useMetamask);
+    setStep(1);
+  };
+
+  const metamaskCheckSuccess = account => {
+    setCreds({ ...creds, account });
+    newUser ? setStep(4) : setStep(3);
+  };
+
+  const renderStep = () => {
     switch (step) {
       case 1:
-        return <LoginForm uportCreds={uportCreds} />;
+        return <LoginQr scanCallback={checkIfUserExists} metamaskLogin={metamaskLogin}/>;
       case 2:
-        return <RegisterForm uportCreds={uportCreds} />;
+        return <MetamaskCheck callback={metamaskCheckSuccess} />;
+      case 3:
+        return <LoginForm creds={creds} useMetamask={metamaskLogin} />;
+      case 4:
+        return <RegisterForm creds={creds} useMetamask={metamaskLogin} />;
       default:
-        return <LoginWelcome uPortUri={uPortUri} />;
+        return <LoginType selectLoginType={selectLoginType} />;
     }
   };
 
-  render () {
-    const {
-      auth: { isAuthenticated }
-    } = this.props;
-    const { step } = this.state;
+  if (isAuthenticated) return <Redirect to="/" />;
 
-    if (isAuthenticated) return <Redirect to="/" />;
-
-    return (
-      <div className="login">
-        <div>
-          <LoginHeader step={step} />
-          {this.renderStep()}
-          <Responsive>
-            <LoginTerms />
-          </Responsive>
-        </div>
+  return (
+    <div className="login">
+      <div>
+        <LoginHeader step={step} />
+        {renderStep()}
         <Responsive>
-          <LoginSidebar />
+          <LoginTerms />
         </Responsive>
       </div>
-    );
-  }
-}
+      <Responsive>
+        <LoginSidebar />
+      </Responsive>
+    </div>
+  );
+};
 
 const mapStateToProps = state => ({ auth: state.auth });
 

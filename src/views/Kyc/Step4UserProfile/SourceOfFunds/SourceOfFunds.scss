@@ -1,0 +1,13 @@
+@import '../../../../styles/mixins.scss';
+
+.verification-user-profile__source {
+  .element-form__input-wrapper {
+    margin-top: 0.5rem;
+  }
+
+  @include mobile {
+    .verification-user-profile__row.--alt > div:first-child {
+      margin-bottom: 0;
+    }
+  }
+}

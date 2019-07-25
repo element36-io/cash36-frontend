@@ -8,10 +8,7 @@ import idBack from '../../../assets/icons/ID Back Icon.svg';
 import selfie from '../../../assets/icons/Selfie Icon.svg';
 import './Step3Documents.scss';
 
-console.log(idFront, idBack, selfie);
-
-const Step3Documents = props => {
-  const { changeSteps } = props;
+const Step3Documents = ({ changeSteps, stepError }) => {
   const [types, updateTypes] = useState({
     ID_Front: {
       documentType: 'ID_Front',
@@ -31,6 +28,7 @@ const Step3Documents = props => {
     }
   });
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
   const onSubmit = async () => {
     try {
@@ -43,7 +41,7 @@ const Step3Documents = props => {
       });
       await changeSteps(3, formData);
     } catch (error) {
-      console.warn(error);
+      setError(error);
     }
     setSubmitting(false);
   };
@@ -134,8 +132,8 @@ const Step3Documents = props => {
             <h3>Verified Proof of Residence</h3>
             <p>
               Please upload the full document and blackout any sensitive
-              information! The document must include your full name, your address
-              and a date not older than 3 months.
+              information! The document must include your full name, your
+              address and a date not older than 3 months.
             </p>
             <p>The following documents among others are accepted:</p>
             <ul>
@@ -156,13 +154,15 @@ const Step3Documents = props => {
         disabled={disabled || submitting}
         submitting={submitting}
         submitCallback={onSubmit}
+        error={error || stepError}
       />
     </div>
   );
 };
 
 Step3Documents.propTypes = {
-  changeSteps: PropTypes.func.isRequired
+  changeSteps: PropTypes.func.isRequired,
+  stepError: PropTypes.string
 };
 
 export default Step3Documents;

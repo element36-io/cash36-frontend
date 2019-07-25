@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import TextInput from '../TextInput';
 import SelectInput from '../SelectInput';
 import DateInput from '../DateInput';
+import Autocomplete from '../Autocomplete';
 
 const FormField = props => {
   const {
@@ -34,7 +35,7 @@ const FormField = props => {
           setFieldTouched={setFieldTouched}
           placeholder={formField.placeholder}
           isTouched={touched[formField.name]}
-          error={errors[formField.name]}
+          error={errors}
           disabled={disabled}
         />
       );
@@ -52,6 +53,20 @@ const FormField = props => {
           list={formField.list}
           disabled={disabled}
           countryList={countryList}
+        />
+      );
+    case 'autocomplete':
+      return (
+        <Autocomplete
+          name={formField.name}
+          label={formField.label}
+          placeholder={formField.placeholder}
+          setFieldValue={setFieldValue}
+          setFieldTouched={setFieldTouched}
+          isTouched={touched[formField.name]}
+          error={errors[formField.name]}
+          list={formField.list}
+          disabled={disabled}
         />
       );
     default:

@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { MNID } from 'uport-connect';
 import API, { API_ROOT } from '../../config/api';
+import { handleError } from '../../helpers/error.helpers';
 
 export const AUTH_USER = 'AUTH_USER';
 export const GET_USER_INFO = 'GET_USER_INFO';
@@ -8,8 +8,7 @@ export const ATTESTATION_PROGRESS = 'ATTESTATION_PROGRESS';
 export const CONFIRM_ATTESTATION = 'CONFIRM_ATTESTATION';
 export const GET_CURRENT_KYC_STEP = 'GET_CURRENT_KYC_STEP';
 
-export const checkUserAddress = address =>
-  API.get(`/public/is-user/${address}`);
+export const checkUserId = id => API.get(`/auth/user/is-user/${id}`);
 
 export const logout = () => {
   localStorage.removeItem('state');
@@ -24,20 +23,20 @@ export const logout = () => {
 
 export const getUserInfo = () => async dispatch => {
   try {
-    const response = await API.get('/cash36/user/current-user');
+    const response = await API.get('/compliance/current-user');
 
     dispatch({
       type: GET_USER_INFO,
       payload: response.data
     });
   } catch (error) {
-    console.warn(error);
+    return handleError(error);
   }
 };
 
 export const getCurrentKycStep = () => async dispatch => {
   try {
-    const response = await API.get('/cash36/kyc/get-step');
+    const response = await API.get('/compliance/kyc/get-step');
 
     const processStatus = response.data.result;
 
@@ -46,28 +45,37 @@ export const getCurrentKycStep = () => async dispatch => {
       payload: processStatus
     });
   } catch (error) {
-    return Promise.reject(error);
+    return handleError(error);
+  }
+};
+
+export const startKycProcess = () => async dispatch => {
+  try {
+    await API.post(`/compliance/kyc/start-process`, {});
+    dispatch(getCurrentKycStep());
+    dispatch(getUserInfo());
+  } catch (error) {
+    return handleError(error);
   }
 };
 
 export const updateKycStep = (step, payload) => async dispatch => {
   try {
-    await API.post(`/cash36/kyc/step-${step}`, payload);
+    await API.post(`/compliance/kyc/step-${step}`, payload);
     dispatch(getCurrentKycStep());
     dispatch(getUserInfo());
   } catch (error) {
-    return Promise.reject(error);
+    return handleError(error);
   }
 };
 
-export const register = (username, password, user) => async dispatch => {
+export const register = (creds, useMetamask, password) => async dispatch => {
   try {
-    await axios.post(`${API_ROOT}/public/register`, {
-      username,
-      password,
-      avatarUrl: user.avatarUri
+    await axios.post(`${API_ROOT}/auth/user/register`, {
+      username: creds.id,
+      password
     });
-    dispatch(login(username, password, user));
+    dispatch(login(creds, useMetamask, password));
   } catch (error) {
     return Promise.reject(
       error.response.data.message || 'An error has occured'
@@ -75,7 +83,8 @@ export const register = (username, password, user) => async dispatch => {
   }
 };
 
-export const login = (username, password, user) => async dispatch => {
+export const login = (creds, useMetamask, password) => async dispatch => {
+  const { user, username } = createUserObject(creds, useMetamask);
   const config = {
     data: `username=${username}&password=${password}&grant_type=password`,
     headers: {
@@ -85,9 +94,13 @@ export const login = (username, password, user) => async dispatch => {
   };
 
   try {
-    const response = await axios.post(`${API_ROOT}/oauth/token`, config.data, {
-      headers: config.headers
-    });
+    const response = await axios.post(
+      `${API_ROOT}/auth/oauth/token`,
+      config.data,
+      {
+        headers: config.headers
+      }
+    );
 
     const token = response.data;
 
@@ -109,25 +122,25 @@ export const login = (username, password, user) => async dispatch => {
   }
 };
 
-export const createUserObject = uportCreds => {
-  const username = MNID.decode(uportCreds.networkAddress).address;
+export const createUserObject = (creds, useMetamask) => {
+  const username = creds.id;
+  const account = useMetamask ? creds.account : creds.address;
+
   const user = {
     username,
-    name: uportCreds.name,
-    avatarUri: uportCreds.avatar ? uportCreds.avatar.uri : null,
-    lastLoggedIn: new Date().getTime(),
-    uportAddress: uportCreds.address,
-    verified: uportCreds.verified
+    account,
+    avatarUri: creds.avatar ? creds.avatar.uri : null,
+    name: creds.name,
+    verified: creds.verified,
+    useMetamask,
+    pushToken: creds.pushToken,
+    boxPub: creds.boxPub,
+    did: creds.did
   };
 
   return {
     username,
     user
-  };
-};
-export const attestationProgress = () => {
-  return {
-    type: ATTESTATION_PROGRESS
   };
 };
 

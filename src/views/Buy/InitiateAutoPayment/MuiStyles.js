@@ -1,4 +1,6 @@
-export default {
+import { makeStyles } from '@material-ui/styles';
+
+export default makeStyles({
   tooltip: {
     backgroundColor: '#fff',
     fontSize: '1.8rem',
@@ -7,4 +9,4 @@ export default {
     borderRadius: '4px',
     boxShadow: '0 5px 6px 0 rgba(0,0,0,0.08)'
   }
-};
+});

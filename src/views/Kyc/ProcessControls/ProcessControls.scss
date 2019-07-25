@@ -11,10 +11,15 @@
 
   > a {
     margin-right: 1.6rem;
+    button {
+      margin-top: 0;
+      padding: 1.6rem 3.2rem;
+    }
   }
 
   > button:first-of-type {
     flex: 1;
+    margin-top: 0;
   }
 
   @include mobile {
@@ -30,4 +35,9 @@
       }
     }
   }
+}
+
+.kyc-process-controls__error {
+  display: flex;
+  margin-top: 0.5rem;
 }

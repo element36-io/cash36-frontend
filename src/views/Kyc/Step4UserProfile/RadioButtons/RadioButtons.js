@@ -9,7 +9,7 @@ import './RadioButtons.scss';
 const RadioButtons = ({ title, choices, value, onChange }) => {
   return (
     <div className="radio-buttons-group">
-      <h4>{title}</h4>
+      <h5>{title}</h5>
       <RadioGroup value={value} onChange={onChange}>
         {choices.map(choice => {
           const parsedChoice = parseValue(choice);

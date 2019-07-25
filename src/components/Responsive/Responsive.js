@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MediaQuery from 'react-responsive';
 
-const Responsive = props => {
-  const { isMobile, isTablet, isDesktop, children } = props;
-
+const Responsive = ({ isMobile, isTablet, isDesktop, children }) => {
   const renderQuery = () => {
     if (isMobile) return '(max-width: 767px)';
     if (isTablet) return '(max-width: 967px)';
@@ -12,11 +10,7 @@ const Responsive = props => {
     else return '(min-width: 768px)';
   };
 
-  return (
-    <MediaQuery query={renderQuery()}>
-      {children}
-    </MediaQuery>
-  );
+  return <MediaQuery query={renderQuery()}>{children}</MediaQuery>;
 };
 
 Responsive.propTypes = {

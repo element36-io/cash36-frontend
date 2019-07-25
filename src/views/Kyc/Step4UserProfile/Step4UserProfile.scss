@@ -2,11 +2,17 @@
 @import '../../../styles/settings.scss';
 
 .verification-user-profile {
+  h4 {
+    margin-bottom: 1.5rem;
+  }
+
   @include desktop {
     padding: 5.2rem 11.4rem 0.8rem 11.4rem;
 
     .verification-user-profile__row {
       display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
       width: 100%;
       margin-bottom: 4rem;
 
@@ -15,13 +21,20 @@
       }
 
       > div {
-        width: 50%;
+        width: calc(50% - 3.6rem);
       }
     }
 
     .kyc-process-controls {
       margin-top: 3.4rem;
     }
+  }
+
+  p.verification-user-profile_error,
+  p.form-error {
+    min-width: 100%;
+    color: #ff6262;
+    font-size: 1.4rem;
   }
 
   @include tablet {

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
@@ -16,26 +16,45 @@ import {
 } from './formModel';
 import './Step1Tier1Form.scss';
 
-const Step1Tier1Form = props => {
-  const { countries, nationalities, getCountries, changeSteps } = props;
-
+const Step1Tier1Form = ({
+  countries,
+  nationalities,
+  getCountries,
+  changeSteps,
+  avatarUri,
+  user,
+  stepError
+}) => {
+  const [error, setError] = useState('');
   const submit = async values => {
     try {
       const payload = {
         ...values,
-        dateOfBirth: moment(values.dateOfBirth).format('DD.MM.YYYY')
+        dateOfBirth: moment(values.dateOfBirth).format('DD.MM.YYYY'),
+        avatarUrl: avatarUri,
+        accountAddress: user.account,
+        metaMask: user.useMetamask
       };
       await changeSteps(1, payload);
     } catch (error) {
+      setError(error);
       return Promise.reject(error);
     }
   };
 
   useEffect(() => {
     if (!countries.length || !nationalities.length) {
-      getCountries();
+      callGetCountries();
     }
   }, []);
+
+  const callGetCountries = async () => {
+    try {
+      await getCountries();
+    } catch (error) {
+      setError(error);
+    }
+  };
 
   const fieldGroup = formModel.map(field => {
     if (field.name === 'country') field.list = countries;
@@ -81,11 +100,17 @@ const Step1Tier1Form = props => {
             </div>
             <h3>Bank Account</h3>
             <FormField formField={ibanModel} formProps={formProps} />
+            {!formProps.isValid && formProps.submitCount > 0 && (
+              <p className="form-error">
+                Please fill out all the required fields
+              </p>
+            )}
             <ProcessControls
               submitLabel="Submit & Continue"
-              disabled={!formProps.isValid || submitting}
+              disabled={submitting}
               submitting={submitting}
               submitCallback={formProps.handleSubmit}
+              error={error || stepError}
             />
           </form>
         )}
@@ -96,12 +121,18 @@ const Step1Tier1Form = props => {
 
 Step1Tier1Form.propTypes = {
   changeSteps: PropTypes.func.isRequired,
-  getCountries: PropTypes.func.isRequired
+  getCountries: PropTypes.func.isRequired,
+  username: PropTypes.string,
+  avatarUri: PropTypes.string,
+  caseId: PropTypes.string,
+  user: PropTypes.object,
+  stepError: PropTypes.string
 };
 
 const mapStateToProps = ({
+  auth: { user },
   countries: { countries = [], nationalities = [] }
-}) => ({ countries, nationalities });
+}) => ({ countries, nationalities, user });
 
 export default connect(
   mapStateToProps,

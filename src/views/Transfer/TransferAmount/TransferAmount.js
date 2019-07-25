@@ -1,60 +1,69 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ChooseAmountForm from '../../../components/ChooseAmountForm';
 import Avatar from '../../../components/Avatar';
 import TruncateString from 'react-truncate-string';
 import AvailableBalance from '../../../components/AvailableBalance';
+import UnavailableBalance from '../../../components/UnavailableBalance';
 import StepButton from '../../../components/Buttons/StepButton';
 
 import './TransferAmount.scss';
 
-class TransferAmount extends Component {
-  state = {
+const TransferAmount = ({ target, tokens, submitCallback }) => {
+  const [values, setValues] = useState({
     amount: '',
     symbol: 'EUR36'
+  });
+
+  const selectedToken = tokens.filter(
+    token => token.symbol === values.symbol
+  )[0];
+
+  const handleChange = evt => {
+    const { name, value } = evt.target;
+    setValues({ ...values, [name]: value });
   };
 
-  handleChange = evt => {
-    const { name, value } = evt.target;
-    this.setState({ [name]: value });
-  }
+  const submitAmount = () => {
+    const { amount, symbol } = values;
+    submitCallback({ amount, symbol });
+  };
 
-  submitAmount = () => {
-    const { amount, symbol } = this.state;
-    this.props.submitCallback({ amount, symbol });
-  }
-
-  isDisabled = () => {
-    const { amount, symbol } = this.state;
-    const balance = this.props.tokens.filter(token => token.symbol === symbol)[0].balance;
-    return !this.state.amount || amount > balance;
-  }
-
-  render () {
-    const { target, tokens } = this.props;
-    const { amount, symbol } = this.state;
-    const selectedToken = tokens.filter(token => token.symbol === symbol)[0];
-
-    return (
-      <div className="transfer-amount">
-        <div className="transfer-amount__header">
-          <h4>Sending to</h4>
-          <Avatar avatarUrl={target.avatarUrl} cssClass="transfer-amount__avatar" />
-          {target.contactName && <span>{target.contactName}</span>}
-          <TruncateString text={target.contactAddress} />
-        </div>
-        <hr />
-        <ChooseAmountForm
-          amount={amount}
-          symbol={symbol}
-          handleChange={this.handleChange}
+  return (
+    <div className="transfer-amount">
+      <div className="transfer-amount__header">
+        <h4>Sending to</h4>
+        <Avatar
+          avatarUrl={target.avatarUrl}
+          cssClass="transfer-amount__avatar"
+          username={target.contactAddress}
         />
-        <AvailableBalance balance={selectedToken ? selectedToken.balance : 0} symbol={symbol} />
-        <StepButton text={'Send'} onClick={this.submitAmount} disabled={this.isDisabled()} />
+        {target.contactName && <span>{target.contactName}</span>}
+        <TruncateString text={target.contactAddress} />
       </div>
-    );
-  }
-}
+      <hr />
+      <ChooseAmountForm
+        amount={values.amount}
+        symbol={values.symbol}
+        handleChange={handleChange}
+      />
+      {values.amount > selectedToken.balance && <UnavailableBalance />}
+      <AvailableBalance
+        balance={selectedToken ? selectedToken.balance : 0}
+        symbol={values.symbol}
+      />
+      <StepButton
+        text={'Send'}
+        onClick={submitAmount}
+        disabled={
+          !selectedToken ||
+          !values.amount ||
+          values.amount > selectedToken.balance
+        }
+      />
+    </div>
+  );
+};
 
 TransferAmount.propTypes = {
   target: PropTypes.object.isRequired,

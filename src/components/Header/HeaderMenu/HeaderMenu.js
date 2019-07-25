@@ -1,64 +1,47 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/KeyboardArrowDown';
+import Avatar from '../../../components/Avatar';
+
 import './HeaderMenu.scss';
 
-class HeaderMenu extends Component {
-  state = {
-    open: false
+const HeaderMenu = ({ logout, user: { avatarUri, name, username } }) => {
+  const [open, setOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setOpen(!open);
   };
 
-  toggleMenu = () => {
-    this.setState({ open: !this.state.open });
+  const closeMenu = () => {
+    setOpen(false);
   };
 
-  closeMenu = () => {
-    this.setState({ open: false });
-  };
+  return (
+    <div className="header__menu">
+      <Avatar
+        avatarUrl={avatarUri}
+        alt={name}
+        cssClass="header__menu__image"
+        username={username}
+      />
 
-  render () {
-    const {
-      logout,
-      user: { avatarUri, name }
-    } = this.props;
-    const { open } = this.state;
-
-    return (
-      <div className="header__menu">
-        <span className="header__menu__image">
-          {avatarUri ? (
-            <img src={avatarUri} alt={name} />
-          ) : (
-            <i className="fas fa-user" />
-          )}
+      <ClickAwayListener onClickAway={closeMenu}>
+        <span className="header__menu__anchor">
+          <MenuIcon onClick={toggleMenu} className="header__menu__icon" />
+          <div
+            className={`paper header__menu__content${
+              open ? ' header__menu__content--active' : ''
+            }`}
+          >
+            <MenuItem onClick={logout}>Logout</MenuItem>
+          </div>
         </span>
-        <ClickAwayListener onClickAway={this.closeMenu}>
-          <span className="header__menu__anchor">
-            <MenuIcon
-              onClick={this.toggleMenu}
-              className="header__menu__icon"
-            />
-            <div
-              className={`paper header__menu__content${
-                open ? ' header__menu__content--active' : ''
-              }`}
-            >
-              {/* <MenuItem>
-                <Link to="/settings" onClick={this.closeMenu}>
-                    Settings
-                </Link>
-              </MenuItem> */}
-              <MenuItem onClick={logout}>Logout</MenuItem>
-            </div>
-          </span>
-        </ClickAwayListener>
-      </div>
-    );
-  }
-}
+      </ClickAwayListener>
+    </div>
+  );
+};
 
 HeaderMenu.propTypes = {
   logout: PropTypes.func.isRequired,

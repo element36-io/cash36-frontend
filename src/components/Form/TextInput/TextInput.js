@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
-import { withStyles } from '@material-ui/core/styles';
-import styles from './MuiStyles';
+import useStyles from './MuiStyles';
 
 export const TextInput = ({
-  classes,
   name,
   label,
   onChange,
@@ -16,30 +14,35 @@ export const TextInput = ({
   disabled,
   isTouched,
   multiline,
+  rows = 3,
   onBlur = () => {}
-}) => (
-  <div className={`element-form__input-wrapper ${name}`}>
-    <TextField
-      name={name}
-      label={label}
-      type={type}
-      onChange={onChange}
-      onBlur={onBlur}
-      placeholder={placeholder}
-      autoComplete="off"
-      value={value}
-      fullWidth
-      rows={3}
-      multiline={multiline}
-      className={classes.root}
-      disabled={disabled}
-      InputLabelProps={{
-        shrink: true
-      }}
-    />
-    {isTouched && error && <p className="form-error">{error}</p>}
-  </div>
-);
+}) => {
+  const classes = useStyles();
+
+  return (
+    <div className={`element-form__input-wrapper ${name}`}>
+      <TextField
+        name={name}
+        label={label}
+        type={type}
+        onChange={onChange}
+        onBlur={onBlur}
+        placeholder={placeholder}
+        autoComplete="off"
+        value={value}
+        fullWidth
+        rows={rows}
+        multiline={multiline}
+        className={classes.root}
+        disabled={disabled}
+        InputLabelProps={{
+          shrink: true
+        }}
+      />
+      {isTouched && error && <p className="form-error">{error}</p>}
+    </div>
+  );
+};
 
 TextInput.propTypes = {
   name: PropTypes.string.isRequired,
@@ -51,7 +54,8 @@ TextInput.propTypes = {
   disabled: PropTypes.bool,
   error: PropTypes.string,
   isTouched: PropTypes.bool,
-  multiline: PropTypes.bool
+  multiline: PropTypes.bool,
+  rows: PropTypes.number
 };
 
-export default withStyles(styles)(TextInput);
+export default TextInput;

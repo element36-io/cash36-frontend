@@ -1,0 +1,21 @@
+@import '../../../../styles/mixins.scss';
+
+.verification-user-profile__industry {
+  > div {
+    margin-bottom: 3rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .verification-user-profile_error {
+    margin-top: -2.5rem;
+  }
+
+  @include desktop {
+    & + .radio-buttons-group {
+      padding-left: 4rem;
+    }
+  }
+}

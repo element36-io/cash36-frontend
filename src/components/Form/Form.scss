@@ -13,6 +13,7 @@
   }
 
   .element-form__input-wrapper {
+    position: relative;
     width: 100%;
     margin-bottom: 3rem;
 
@@ -25,11 +26,15 @@
       -webkit-appearance: none;
       margin: 0;
     }
+  }
 
-    p.form-error {
-      font-size: 1.2rem;
-      color: red;
-    }
+  p.form-error {
+    font-size: 1.2rem;
+    color: red;
+  }
+
+  p.Mui-disabled {
+    display: none;
   }
 
   .element-form__actions {
@@ -48,5 +53,20 @@
 
   textarea {
     height: auto;
+  }
+
+  .dateOfBirth {
+    button {
+      margin-top: 0;
+      margin-bottom: 0.6rem;
+      color: $primary-main;
+    }
+  }
+
+  .autocomplete-suggestions {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    margin-top: 1rem;
   }
 }

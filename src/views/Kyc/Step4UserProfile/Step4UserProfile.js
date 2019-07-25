@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import ProcessHeader from '../ProcessHeader';
 import ProcessControls from '../ProcessControls';
 import RadioButtons from './RadioButtons';
-import CheckboxButtons from './CheckboxButtons';
-import TextInput from '../../../components/Form/TextInput';
-import BasicSelectInput from '../../../components/Form/BasicSelectInput';
-
+import IndustryFields from './IndustryFields';
+import SourceOfFunds from './SourceOfFunds';
+import DetailsSource from './DetailsSource';
 import './Step4UserProfile.scss';
 
 const transactionVolumeValues = [
@@ -24,41 +23,118 @@ const yearlyIncomeValues = [
   'MoreThan200k'
 ];
 
-const industryValues = [
-  'Education',
-  'Internet',
-  'Computer Software',
-  'Aviation',
-  'Office',
-  'Retail',
-  'Marketing'
-];
-
-const sourcesOfFunds = [
-  'SavingsFromWork',
-  'Inheritance',
-  'Lottery',
-  'Donation',
-  'Other'
-];
-
-const Step4UserProfile = ({ changeSteps }) => {
+const Step4UserProfile = ({ changeSteps, stepError }) => {
+  const [industry, setIndustry] = useState({
+    profession: '',
+    industry: '',
+    industryOther: ''
+  });
   const [transactionVolume, setTransactionVolume] = useState('');
   const [incomeVolume, setIncomeVolume] = useState('');
-  const [profession, setProfession] = useState('');
-  const [industry, setIndustry] = useState('');
-  const [sourceOfFunds, setSourceOfFunds] = useState('');
+  const [sourceOfFunds, setSourceOfFunds] = useState({
+    SavingsFromWork: false,
+    Inheritance: false,
+    Donation: false,
+    Lottery: false,
+    Other: false
+  });
   const [sourceOfFundsOther, setSourceOfFundsOther] = useState('');
+  const [sourceOfFundsDescription, setSourceOfFundsDescription] = useState('');
+  const [errors, setErrors] = useState({
+    industry: false,
+    profession: false,
+    industryOther: false,
+    income: false,
+    sourceOfFunds: false,
+    sourceOfFundsDescription: false,
+    transactionVolume: false
+  });
+  const [submitting, setSubmitting] = useState(false);
 
-  const otherSelected = sourceOfFunds === 'Other';
+  const updateIndustry = useCallback(
+    evt => {
+      const { name, value } = evt.target;
+      setIndustry({ ...industry, [name]: value });
+    },
+    [industry]
+  );
 
-  const buttonDisabled =
-    !incomeVolume ||
-    !transactionVolume ||
-    !profession ||
-    !industry ||
-    !sourceOfFunds ||
-    (otherSelected && !sourceOfFundsOther);
+  const updateSource = useCallback(
+    evt =>
+      setSourceOfFunds({
+        ...sourceOfFunds,
+        [evt.target.name]: evt.target.checked
+      }),
+    [sourceOfFunds]
+  );
+
+  const updateSourceOther = useCallback(
+    evt => setSourceOfFundsOther(evt.target.value),
+    []
+  );
+
+  const updateSourceDetails = useCallback(
+    evt => setSourceOfFundsDescription(evt.target.value),
+    []
+  );
+
+  const validateFields = () => ({
+    industry: !industry.industry,
+    industryOther:
+      industry.industry.toLowerCase() === 'other' && !industry.industryOther,
+    profession: !industry.profession,
+    income: !incomeVolume,
+    sourceOfFunds:
+      !Object.values(sourceOfFunds).some(e => e) ||
+      (sourceOfFunds.Other && !sourceOfFundsOther),
+    sourceOfFundsDescription:
+      transactionVolume !== 'LessThan10k' && !sourceOfFundsDescription,
+    transactionVolume: !transactionVolume
+  });
+
+  const submit = async () => {
+    const sources = Object.keys(sourceOfFunds).reduce((acc, val) => {
+      if (sourceOfFunds[val]) acc.push(val);
+      return acc;
+    }, []);
+
+    const formErrors = validateFields();
+    setErrors(formErrors);
+    const hasErrors = Object.values(formErrors).filter(error => error).length;
+    if (hasErrors) return;
+
+    const payload = {
+      ...industry,
+      transactionVolume,
+      incomeVolume,
+      sourceOfFundsDescription,
+      sourceOfFundsOther,
+      sourceOfFunds: sources
+    };
+    setSubmitting(true);
+    try {
+      await changeSteps(4, payload);
+    } catch (error) {
+      setSubmitting(false);
+      return Promise.reject(error);
+    }
+  };
+
+  useEffect(() => {
+    if (transactionVolume === 'LessThan10k') setSourceOfFundsDescription('');
+  }, [transactionVolume]);
+
+  useEffect(() => {
+    if (industry.industry.toLowerCase() !== 'other') {
+      setIndustry({ ...industry, industryOther: '' });
+    }
+  }, [industry]);
+
+  useEffect(() => {
+    if (!sourceOfFunds.Other) setSourceOfFundsOther('');
+  }, [sourceOfFunds]);
+
+  const isInvalid = Object.values(errors).filter(error => error).length;
 
   return (
     <div className="verification-user-profile">
@@ -66,79 +142,75 @@ const Step4UserProfile = ({ changeSteps }) => {
         title="Verification Process - Step 4"
         subtitle="For smooth operations, we need to comply with international Anti-Money-Laundering standards. We need to monitor constantly if your used funds match the declared source of funds."
       />
+      <h4>Business and Financial Conditions</h4>
       <div className="verification-user-profile__row">
-        <RadioButtons
-          title="What transaction volume per year do you expect?"
-          choices={transactionVolumeValues}
-          value={transactionVolume}
-          onChange={event => setTransactionVolume(event.target.value)}
+        <IndustryFields
+          values={industry}
+          changeHandler={updateIndustry}
+          industryError={errors.industry}
+          professionError={errors.profession}
+          industryOtherError={errors.industryOther}
         />
-        <RadioButtons
-          title="Declare your yearly income:"
-          choices={yearlyIncomeValues}
-          value={incomeVolume}
-          onChange={event => setIncomeVolume(event.target.value)}
-        />
+        <div>
+          <RadioButtons
+            className="test"
+            title="Declare your yearly income:"
+            choices={yearlyIncomeValues}
+            value={incomeVolume}
+            onChange={event => setIncomeVolume(event.target.value)}
+          />
+          {errors.income && (
+            <p className="verification-user-profile_error">Please select one</p>
+          )}
+        </div>
       </div>
+      <SourceOfFunds
+        hasError={errors.sourceOfFunds}
+        values={sourceOfFunds}
+        otherValue={sourceOfFundsOther}
+        updateValue={updateSource}
+        updateOtherValue={updateSourceOther}
+      />
       <div className="verification-user-profile__row">
-        <TextInput
-          name="profession"
-          label="Profession"
-          placeholder="Enter Your Profession"
-          onChange={event => {
-            setProfession(event.target.value);
-          }}
-          value={profession}
-        />
-        <BasicSelectInput
-          list={industryValues}
-          name="industry"
-          label="Industry"
-          placeholder="Enter Your Industry"
-          value={industry}
-          onChange={event => setIndustry(event.target.value)}
-        />
+        <div>
+          <RadioButtons
+            title="What transaction volume per year do you expect?"
+            choices={transactionVolumeValues}
+            value={transactionVolume}
+            onChange={event => setTransactionVolume(event.target.value)}
+          />
+          {errors.transactionVolume && (
+            <p className="verification-user-profile_error">
+              These fields are required
+            </p>
+          )}
+        </div>
       </div>
-      <h4>Source of Funds</h4>
-      <div className="verification-user-profile__row">
-        <CheckboxButtons
-          sourceOfFunds={sourceOfFunds}
-          sourcesOfFunds={sourcesOfFunds}
-          sourceOfFundsOther={sourceOfFundsOther}
-          otherSelected={otherSelected}
-          onRadioChange={event => {
-            if (sourceOfFundsOther) {
-              setSourceOfFundsOther('');
-            }
-            setSourceOfFunds(event.target.value);
-          }}
-          onTextChange={event => {
-            setSourceOfFundsOther(event.target.value);
-          }}
+      {transactionVolume && transactionVolume !== 'LessThan10k' && (
+        <DetailsSource
+          hasError={errors.sourceOfFundsDescription}
+          sourceDetails={sourceOfFundsDescription}
+          updateSourceDetails={updateSourceDetails}
         />
-      </div>
-
+      )}
+      {isInvalid > 0 && (
+        <p className="verification-user-profile_error">
+          Please fill out all the required fields
+        </p>
+      )}
       <ProcessControls
         submitLabel="Submit & Continue"
-        submitCallback={() => {
-          const payload = {
-            incomeVolume,
-            transactionVolume,
-            profession,
-            industry,
-            sourceOfFundsOther,
-            sourceOfFunds
-          };
-          changeSteps(4, payload);
-        }}
-        disabled={buttonDisabled}
+        submitCallback={submit}
+        submitting={submitting}
+        error={stepError}
       />
     </div>
   );
 };
 
 Step4UserProfile.propTypes = {
-  changeSteps: PropTypes.func.isRequired
+  changeSteps: PropTypes.func.isRequired,
+  stepError: PropTypes.string
 };
 
 export default Step4UserProfile;

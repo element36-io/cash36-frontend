@@ -1,4 +1,4 @@
-import { subYears } from 'date-fns';
+import moment from 'moment';
 
 export const formModel = [
   {
@@ -17,9 +17,17 @@ export const formModel = [
     name: 'dateOfBirth',
     label: 'Date of Birth',
     type: 'date',
-    placeholder: 'DD/MM/YYYY',
-    maxDate: subYears(new Date(), 18),
-    initialFocusedDate: subYears(new Date(), 25)
+    placeholder: 'DD.MM.YYYY',
+    maxDate: new Date(
+      moment()
+        .subtract(18, 'years')
+        .format()
+    ),
+    initialFocusedDate: new Date(
+      moment()
+        .subtract(25, 'years')
+        .format()
+    )
   },
   {
     name: 'email',
@@ -53,7 +61,7 @@ export const formModel = [
   },
   {
     name: 'country',
-    type: 'select',
+    type: 'autocomplete',
     label: 'Select your country',
     list: [],
     placeholder: 'Select your country'
@@ -63,28 +71,28 @@ export const formModel = [
 export const nationalityModel = [
   {
     name: 'nationality',
-    type: 'select',
+    type: 'autocomplete',
     label: 'Select your nationality 1',
     list: [],
     placeholder: 'Select your nationality'
   },
   {
     name: 'nationality2',
-    type: 'select',
+    type: 'autocomplete',
     label: 'Select your nationality 2',
     list: [],
     placeholder: 'Select your nationality'
   },
   {
     name: 'nationality3',
-    type: 'select',
+    type: 'autocomplete',
     label: 'Select your nationality 3',
     list: [],
     placeholder: 'Select your nationality'
   },
   {
     name: 'nationality4',
-    type: 'select',
+    type: 'autocomplete',
     label: 'Select your nationality 4',
     list: [],
     placeholder: 'Select your nationality'

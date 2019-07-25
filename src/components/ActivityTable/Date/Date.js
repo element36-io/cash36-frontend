@@ -6,12 +6,8 @@ import './Date.scss';
 
 const Date = ({ date }) => (
   <div className="activity-table-date">
-    <div color="textPrimary">
-      {formatDate(date, 'MMM')}
-    </div>
-    <div color="textPrimary">
-      {formatDate(date, 'DD')}
-    </div>
+    <div color="textPrimary">{formatDate(date, 'MMM')}</div>
+    <div color="textPrimary">{formatDate(date, 'DD')}</div>
   </div>
 );
 

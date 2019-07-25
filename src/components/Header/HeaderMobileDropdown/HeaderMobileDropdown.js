@@ -6,47 +6,37 @@ import UserProfile from '../../UserProfile';
 import navLinks from '../navLinks';
 import './HeaderMobileDropdown.scss';
 
-const HeaderMobileDropdown = props => {
-  const { isActive, logout, clickCallback, openVerification } = props;
-
-  return (
-    <div className={`header__mobile-dropdown ${isActive ? 'active' : ''}`}>
-      <UserProfile alt clickCallback={openVerification} />
-      <ul className="paper">
-        {navLinks.map(link => <li key={link.label}>
-          <NavLink exact activeClassName="selected"
-            to={link.url} onClick={clickCallback}>{link.label}
-            <RightArrowIcon
-              className="header__mobile-dropdown__icon"
-            />
-          </NavLink></li>
-        )}
-        <li>
-          <NavLink to="settings" onClick={clickCallback}>
-                        Settings
-            <RightArrowIcon
-              className="header__mobile-dropdown__icon"
-            />
+const HeaderMobileDropdown = ({ isActive, logout, clickCallback }) => (
+  <div className={`header__mobile-dropdown ${isActive ? 'active' : ''}`}>
+    <UserProfile alt />
+    <ul className="paper">
+      {navLinks.map(link => (
+        <li key={link.label}>
+          <NavLink
+            exact
+            activeClassName="selected"
+            to={link.url}
+            onClick={clickCallback}
+          >
+            {link.label}
+            <RightArrowIcon className="header__mobile-dropdown__icon" />
           </NavLink>
         </li>
-        <li onClick={logout}>
-          <span>
-                        Logout
-            <RightArrowIcon
-              className="header__mobile-dropdown__icon"
-            />
-          </span>
-        </li>
-      </ul>
-    </div>
-  );
-};
+      ))}
+      <li onClick={logout}>
+        <span>
+          Logout
+          <RightArrowIcon className="header__mobile-dropdown__icon" />
+        </span>
+      </li>
+    </ul>
+  </div>
+);
 
 HeaderMobileDropdown.propTypes = {
   isActive: PropTypes.bool,
   logout: PropTypes.func.isRequired,
-  clickCallback: PropTypes.func.isRequired,
-  openVerification: PropTypes.func
+  clickCallback: PropTypes.func.isRequired
 };
 
 export default HeaderMobileDropdown;
