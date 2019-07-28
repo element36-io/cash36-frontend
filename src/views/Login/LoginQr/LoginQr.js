@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import QRCode from 'qrcode.react';
+import mobile from 'is-mobile';
 import Responsive from '../../../components/Responsive';
 import { getLoginQr, checkRequestStatus } from '../../../helpers/uport.helpers';
 import AppLinks from '../AppLinks';
@@ -10,7 +11,10 @@ import './LoginQr.scss';
 
 const LoginQr = ({ scanCallback, metamaskLogin }) => {
   const [qr, setQr] = useState(null);
+  const [isMobile] = useState(mobile());
   const _isMounted = useRef(true);
+
+  console.warn(isMobile);
 
   const isActive = () => {
     return _isMounted.current;
@@ -19,7 +23,14 @@ const LoginQr = ({ scanCallback, metamaskLogin }) => {
   const getQr = async () => {
     try {
       const requestResponse = await getLoginQr(metamaskLogin);
-      const { callbackUrl, uri } = requestResponse.data;
+      const { callbackUrl, uri, mobileUri } = requestResponse.data;
+      console.log(uri);
+
+      if (isMobile) {
+        // setQr(mobileUri);
+        setQr(uri);
+        return;
+      }
       setQr(uri);
       const creds = await checkRequestStatus(callbackUrl, () => !isActive());
       scanCallback(creds);
@@ -52,7 +63,8 @@ const LoginQr = ({ scanCallback, metamaskLogin }) => {
         </span>
       </p>
       <div className="login__qrcode">
-        {qr && <QRCode value={qr} size={250} />}
+        {!isMobile && qr && <QRCode value={qr} size={250} />}
+        {isMobile && qr && <a href={qr}> Login With Uport</a>}
       </div>
       <AppLinks />
     </div>

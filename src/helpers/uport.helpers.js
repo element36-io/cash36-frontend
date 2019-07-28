@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:3005';
+const baseUrl = 'http://localhost:3008';
 
 // Response last 600sec, refresh after 600sec with new qr code or increase duration on node server
 export const getLoginQr = metamaskLogin => {
