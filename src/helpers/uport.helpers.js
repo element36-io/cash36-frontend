@@ -1,6 +1,16 @@
 import axios from 'axios';
 
+let apiEnv = process.env.NODE_ENV;
+console.log('Environment: ' + apiEnv);
+
 const baseUrl = 'http://localhost:3005';
+
+if (apiEnv === 'staging') {
+  baseUrl = 'http://localhost:3005';
+}
+if (apiEnv === 'production') {
+  baseUrl = '/uport'
+}
 
 // Response last 600sec, refresh after 600sec with new qr code or increase duration on node server
 export const getLoginQr = metamaskLogin => {
