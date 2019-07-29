@@ -3,7 +3,7 @@ import axios from 'axios';
 let apiEnv = process.env.NODE_ENV;
 console.log('Environment: ' + apiEnv);
 
-const baseUrl = 'http://localhost:3005';
+let baseUrl = 'http://localhost:3005';
 
 if (apiEnv === 'staging') {
   baseUrl = 'http://localhost:3005';
