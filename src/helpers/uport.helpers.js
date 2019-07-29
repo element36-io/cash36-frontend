@@ -14,6 +14,7 @@ if (apiEnv === 'production') {
 
 // Response last 600sec, refresh after 600sec with new qr code or increase duration on node server
 export const getLoginQr = metamaskLogin => {
+  axios.get(baseUrl).then(result => console.log(result));
   return axios.post(baseUrl, { metamaskLogin });
 };
 
