@@ -40,7 +40,7 @@ export const transactionRequest = async ({
   cancel
 }) => {
   try {
-    const txRequest = await e.post(`${baseUrl}/transaction-request`, {
+    const txRequest = await axios.post(`${baseUrl}/transaction-request`, {
       txObj,
       networkId,
       pushToken,
