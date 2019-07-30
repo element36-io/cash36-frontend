@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Responsive from '../../components/Responsive';
+import MobileDetect from 'mobile-detect';
 import LoginSidebar from './LoginSidebar';
 import LoginTerms from './LoginTerms';
 import LoginHeader from './LoginHeader';
@@ -11,14 +12,16 @@ import LoginForm from './LoginForm';
 import LoginType from './LoginType';
 import MetamaskCheck from './MetamaskCheck';
 import { checkUserId } from '../../store/auth/auth.actions';
+import { verifyResponse } from '../../helpers/uport.helpers';
 
 import './Login.scss';
 
-const Login = ({ auth: { isAuthenticated } }) => {
+const Login = ({ location, auth: { isAuthenticated } }) => {
   const [step, setStep] = useState(0);
   const [creds, setCreds] = useState(null);
   const [newUser, setNewUser] = useState(false);
   const [metamaskLogin, setMetamaskLogin] = useState(false);
+  const md = useRef(new MobileDetect(window.navigator.userAgent));
 
   const checkIfUserExists = async uportCreds => {
     const creds = { ...uportCreds };
@@ -48,7 +51,12 @@ const Login = ({ auth: { isAuthenticated } }) => {
   const renderStep = () => {
     switch (step) {
       case 1:
-        return <LoginQr scanCallback={checkIfUserExists} metamaskLogin={metamaskLogin}/>;
+        return (
+          <LoginQr
+            scanCallback={checkIfUserExists}
+            metamaskLogin={metamaskLogin}
+          />
+        );
       case 2:
         return <MetamaskCheck callback={metamaskCheckSuccess} />;
       case 3:
@@ -59,6 +67,28 @@ const Login = ({ auth: { isAuthenticated } }) => {
         return <LoginType selectLoginType={selectLoginType} />;
     }
   };
+
+  const getMobileCreds = async () => {
+    if (!md.current.phone() || !location.hash.includes('access_token')) return;
+
+    const accessToken = location.hash.substring(1).split('=')[1];
+    const useMetamask = location.search.substring(1).split('=')[1] === 'true';
+
+    setMetamaskLogin(useMetamask);
+
+    try {
+      const creds = await verifyResponse(accessToken);
+      await checkIfUserExists(creds.data);
+    } catch (error) {
+      console.warn(error);
+      // TODO: catch error
+      // throw new Error(error);
+    }
+  };
+
+  useEffect(() => {
+    getMobileCreds();
+  }, []);
 
   if (isAuthenticated) return <Redirect to="/" />;
 
