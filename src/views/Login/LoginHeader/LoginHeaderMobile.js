@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import NavBtn from '../../../components/NavBtn';
-import Logo from '../../../components/Logo';
 import LoginNav from '../LoginNav';
 
 class LoginHeaderMobile extends Component {

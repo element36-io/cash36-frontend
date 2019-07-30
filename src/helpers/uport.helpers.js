@@ -1,11 +1,10 @@
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:3008';
+const baseUrl = 'http://192.168.0.101:3008';
 
 // Response last 600sec, refresh after 600sec with new qr code or increase duration on node server
-export const getLoginQr = metamaskLogin => {
-  return axios.post(baseUrl, { metamaskLogin });
-};
+export const getLoginQr = metamaskLogin =>
+  axios.post(baseUrl, { metamaskLogin });
 
 export const checkRequestStatus = async (callbackUrl, cancel) => {
   try {
@@ -41,7 +40,7 @@ export const transactionRequest = async ({
   cancel
 }) => {
   try {
-    const txRequest = await axios.post(`${baseUrl}/transaction-request`, {
+    const txRequest = await e.post(`${baseUrl}/transaction-request`, {
       txObj,
       networkId,
       pushToken,

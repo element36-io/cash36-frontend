@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { verifyJWT, decodeJWT } from 'did-jwt';
 import Responsive from '../../components/Responsive';
+import { isMobile } from 'is-mobile';
 import LoginSidebar from './LoginSidebar';
 import LoginTerms from './LoginTerms';
 import LoginHeader from './LoginHeader';
@@ -14,7 +16,7 @@ import { checkUserId } from '../../store/auth/auth.actions';
 
 import './Login.scss';
 
-const Login = ({ auth: { isAuthenticated } }) => {
+const Login = ({ location, auth: { isAuthenticated } }) => {
   const [step, setStep] = useState(0);
   const [creds, setCreds] = useState(null);
   const [newUser, setNewUser] = useState(false);
@@ -48,7 +50,12 @@ const Login = ({ auth: { isAuthenticated } }) => {
   const renderStep = () => {
     switch (step) {
       case 1:
-        return <LoginQr scanCallback={checkIfUserExists} metamaskLogin={metamaskLogin}/>;
+        return (
+          <LoginQr
+            scanCallback={checkIfUserExists}
+            metamaskLogin={metamaskLogin}
+          />
+        );
       case 2:
         return <MetamaskCheck callback={metamaskCheckSuccess} />;
       case 3:
@@ -59,6 +66,23 @@ const Login = ({ auth: { isAuthenticated } }) => {
         return <LoginType selectLoginType={selectLoginType} />;
     }
   };
+
+  const getMobileCreds = async () => {
+    if (!isMobile() || !location.hash.includes('access_token')) return;
+
+    const accessToken = location.hash.substring(1).split('=')[1];
+    const useMetamask = location.search.substring(1).split('=')[1] === 'true';
+    const payload = await decodeJWT(accessToken);
+    console.warn(payload);
+
+    // const verify = await verifyJWT(accessToken, { audience: payload.aud });
+
+    // console.warn(verify);
+  };
+
+  useEffect(() => {
+    getMobileCreds();
+  }, []);
 
   if (isAuthenticated) return <Redirect to="/" />;
 

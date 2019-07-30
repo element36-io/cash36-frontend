@@ -24,13 +24,12 @@ const LoginQr = ({ scanCallback, metamaskLogin }) => {
     try {
       const requestResponse = await getLoginQr(metamaskLogin);
       const { callbackUrl, uri, mobileUri } = requestResponse.data;
-      console.log(uri);
 
       if (isMobile) {
-        // setQr(mobileUri);
-        setQr(uri);
+        window.location.assign(mobileUri);
         return;
       }
+
       setQr(uri);
       const creds = await checkRequestStatus(callbackUrl, () => !isActive());
       scanCallback(creds);
@@ -64,7 +63,6 @@ const LoginQr = ({ scanCallback, metamaskLogin }) => {
       </p>
       <div className="login__qrcode">
         {!isMobile && qr && <QRCode value={qr} size={250} />}
-        {isMobile && qr && <a href={qr}> Login With Uport</a>}
       </div>
       <AppLinks />
     </div>
