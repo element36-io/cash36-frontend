@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { verifyJWT, decodeJWT } from 'did-jwt';
 import Responsive from '../../components/Responsive';
-import { isMobile } from 'is-mobile';
+import MobileDetect from 'mobile-detect';
 import LoginSidebar from './LoginSidebar';
 import LoginTerms from './LoginTerms';
 import LoginHeader from './LoginHeader';
@@ -13,6 +12,7 @@ import LoginForm from './LoginForm';
 import LoginType from './LoginType';
 import MetamaskCheck from './MetamaskCheck';
 import { checkUserId } from '../../store/auth/auth.actions';
+import { verifyResponse } from '../../helpers/uport.helpers';
 
 import './Login.scss';
 
@@ -21,6 +21,7 @@ const Login = ({ location, auth: { isAuthenticated } }) => {
   const [creds, setCreds] = useState(null);
   const [newUser, setNewUser] = useState(false);
   const [metamaskLogin, setMetamaskLogin] = useState(false);
+  const md = useRef(new MobileDetect(window.navigator.userAgent));
 
   const checkIfUserExists = async uportCreds => {
     const creds = { ...uportCreds };
@@ -68,16 +69,21 @@ const Login = ({ location, auth: { isAuthenticated } }) => {
   };
 
   const getMobileCreds = async () => {
-    if (!isMobile() || !location.hash.includes('access_token')) return;
+    if (!md.current.phone() || !location.hash.includes('access_token')) return;
 
     const accessToken = location.hash.substring(1).split('=')[1];
     const useMetamask = location.search.substring(1).split('=')[1] === 'true';
-    const payload = await decodeJWT(accessToken);
-    console.warn(payload);
 
-    // const verify = await verifyJWT(accessToken, { audience: payload.aud });
+    setMetamaskLogin(useMetamask);
 
-    // console.warn(verify);
+    try {
+      const creds = await verifyResponse(accessToken);
+      await checkIfUserExists(creds.data);
+    } catch (error) {
+      console.warn(error);
+      // TODO: catch error
+      // throw new Error(error);
+    }
   };
 
   useEffect(() => {

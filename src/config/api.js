@@ -6,6 +6,7 @@ let apiEnv = process.env.NODE_ENV;
 console.log('Environment: ' + apiEnv);
 
 let url = 'http://localhost:8090/cash36';
+let authUrl = 'http://localhost:8090/uport';
 let web3NodeUrl = 'http://167.99.243.81:8866/';
 
 if (apiEnv === 'staging') {
@@ -15,10 +16,12 @@ if (apiEnv === 'staging') {
 if (apiEnv === 'production') {
   url = '/api';
   web3NodeUrl = 'https://rinkeby.infura.io/v3/4cf538c6b0bb4562bdc2f31430327c08';
+  authUrl = '/uport';
 }
 
 export const API_ROOT = url;
 export const WEB3_NODE = web3NodeUrl;
+export const AUTH_URL = authUrl;
 
 const api = axios.create({
   baseURL: API_ROOT
