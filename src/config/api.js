@@ -6,7 +6,7 @@ let apiEnv = process.env.NODE_ENV;
 console.log('Environment: ' + apiEnv);
 
 let url = 'http://localhost:8090/cash36';
-let authUrl = 'http://localhost:8090/uport';
+let authUrl = 'http://localhost:3005';
 let web3NodeUrl = 'http://167.99.243.81:8866/';
 
 if (apiEnv === 'staging') {
