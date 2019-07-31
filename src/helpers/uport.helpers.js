@@ -18,9 +18,8 @@ export const checkRequestStatus = async (callbackUrl, cancel) => {
   }
 };
 
-export const verifyResponse = accessToken => {
-  return axios.post(`${AUTH_URL}/verify-request`, { accessToken });
-};
+export const verifyResponse = accessToken =>
+  axios.post(`${AUTH_URL}/verify-request`, { accessToken });
 
 export const attestUser = ({ did, pushToken, boxPub, claim }) => {
   return axios.post(`${AUTH_URL}/attest-creds`, {

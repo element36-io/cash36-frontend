@@ -69,7 +69,12 @@ const Login = ({ location, auth: { isAuthenticated } }) => {
   };
 
   const getMobileCreds = async () => {
-    if (!md.current.phone() || !location.hash.includes('access_token')) return;
+    if (
+      !(md.current.mobile() && !md.current.tablet()) ||
+      !location.hash.includes('access_token')
+    ) {
+      return;
+    }
 
     const accessToken = location.hash.substring(1).split('=')[1];
     const useMetamask = location.search.substring(1).split('=')[1] === 'true';
@@ -80,7 +85,7 @@ const Login = ({ location, auth: { isAuthenticated } }) => {
       const creds = await verifyResponse(accessToken);
       await checkIfUserExists(creds.data);
     } catch (error) {
-      console.warn(error);
+      console.warn(error.response);
       // TODO: catch error
       // throw new Error(error);
     }
