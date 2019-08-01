@@ -23,7 +23,7 @@ const LoginQr = ({ scanCallback, metamaskLogin }) => {
       const requestResponse = await getLoginQr(metamaskLogin);
       const { callbackUrl, uri, mobileUri } = requestResponse.data;
 
-      if (md.current.phone()) {
+      if (md.current.mobile() && !md.current.tablet()) {
         window.location.assign(mobileUri);
         return;
       }
