@@ -114,7 +114,7 @@ class Buy extends Component {
                 receive the amount, the tokens will be credited to your account.
               </span>
             )}
-            {step > 2 && step < 3 && (
+            {step > 2 && step < 2.2 && (
               <span style={{ fontSize: '1.6rem' }}>
                 Please make sure your payment will be triggered from your
                 registered bank account
