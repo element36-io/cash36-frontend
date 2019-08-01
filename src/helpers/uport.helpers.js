@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { AUTH_URL } from '../config/api';
+import { API_ROOT } from '../config/api';
 
 // Response last 600sec, refresh after 600sec with new qr code or increase duration on node server
 export const getLoginQr = metamaskLogin =>
-  axios(`${AUTH_URL}?metamask=${metamaskLogin}`);
+  axios(`${API_ROOT}/credentials/?metamask=${metamaskLogin}`);
 
 export const checkRequestStatus = async (callbackUrl, cancel) => {
   try {
@@ -18,12 +18,11 @@ export const checkRequestStatus = async (callbackUrl, cancel) => {
   }
 };
 
-export const verifyResponse = accessToken => {
-  return axios.post(`${AUTH_URL}/verify-request`, { accessToken });
-};
+export const verifyResponse = accessToken =>
+  axios.post(`${API_ROOT}/credentials/verify-request`, { accessToken });
 
 export const attestUser = ({ did, pushToken, boxPub, claim }) => {
-  return axios.post(`${AUTH_URL}/attest-creds`, {
+  return axios.post(`${API_ROOT}/credentials/attest-creds`, {
     did,
     pushToken,
     boxPub,
@@ -39,12 +38,15 @@ export const transactionRequest = async ({
   cancel
 }) => {
   try {
-    const txRequest = await axios.post(`${AUTH_URL}/transaction-request`, {
-      txObj,
-      networkId,
-      pushToken,
-      boxPub
-    });
+    const txRequest = await axios.post(
+      `${API_ROOT}/credentials/transaction-request`,
+      {
+        txObj,
+        networkId,
+        pushToken,
+        boxPub
+      }
+    );
 
     const transactionStatus = await initInterval(async () => {
       const response = await axios(txRequest.data);
