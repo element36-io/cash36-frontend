@@ -66,6 +66,7 @@ const initInterval = (callback, cancel = () => false) =>
   new Promise((resolve, reject) => {
     let interval = setInterval(async () => {
       if (cancel()) {
+        // eslint-disable-next-line prefer-promise-reject-errors
         reject('Request aborted');
         clearInterval(interval);
       }
