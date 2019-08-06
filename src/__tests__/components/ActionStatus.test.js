@@ -26,3 +26,9 @@ test('should render a component with time-icon when type is "progress"', () => {
 
   expect(getByTestId('time-icon')).toBeVisible();
 });
+
+test('should render a title if there is one', () => {
+  const { getByText } = render(<ActionStatus type="" title="title" />);
+
+  expect(getByText('title')).toBeVisible();
+});
