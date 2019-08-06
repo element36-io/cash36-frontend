@@ -5,8 +5,8 @@ import dollarIcon from '../../assets/BalanceCard/dollar-icon.svg';
 import poundIcon from '../../assets/BalanceCard/pound-icon.svg';
 import francIcon from '../../assets/BalanceCard/franc-icon.svg';
 
-const TokenIcon = ({ token }) => {
-  switch (token) {
+const TokenIcon = ({ symbol }) => {
+  switch (symbol) {
     case 'EUR36':
       return <img src={euroIcon} alt="EURO TOKEN" />;
     case 'USD36':
@@ -21,7 +21,7 @@ const TokenIcon = ({ token }) => {
 };
 
 TokenIcon.propTypes = {
-  token: PropTypes.string
+  symbol: PropTypes.string
 };
 
 export default TokenIcon;

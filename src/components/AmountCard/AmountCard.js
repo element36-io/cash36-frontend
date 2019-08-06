@@ -7,7 +7,7 @@ import './AmountCard.scss';
 
 const AmountCard = ({ amount, symbol }) => (
   <div className={`amount-card amount-card--${symbol}`}>
-    <TokenIcon token={symbol} />
+    <TokenIcon symbol={symbol} />
     <div>
       -{formatAmount(amount)}
       <span className="amount-card__symbol">{symbol}</span>
