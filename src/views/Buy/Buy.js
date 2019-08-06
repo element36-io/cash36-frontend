@@ -16,7 +16,8 @@ class Buy extends Component {
     step: 0,
     amount: '',
     symbol: 'EUR36',
-    manualTransferData: null
+    manualTransferData: null,
+    manualTransferStarted: false
   };
 
   componentDidMount () {
@@ -38,6 +39,9 @@ class Buy extends Component {
   };
 
   handleManualTransferClick = async () => {
+    if (this.state.manualTransferStarted) return;
+
+    this.setState({ manualTransferStarted: true });
     const data = {
       amount: parseInt(this.state.amount),
       symbol: this.state.symbol
