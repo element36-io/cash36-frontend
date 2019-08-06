@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { Web3Context } from '../providers/web3.provider';
-import E36Provider from '../helpers/E36.provider';
+import E36Provider from '../helpers/e36.provider';
 
 const useCash36 = () => {
   const { networkId, web3 } = useContext(Web3Context);
