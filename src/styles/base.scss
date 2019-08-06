@@ -32,11 +32,13 @@ body {
 
   @media screen and (min-width: 768px) and (max-width: 1169px) {
     padding: 0 2rem;
+    -webkit-overflow-scrolling: touch;
   }
 
   @include mobile {
     background: none;
     background-color: $headerGrey;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
