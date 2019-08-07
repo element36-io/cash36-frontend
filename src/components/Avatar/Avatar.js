@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { AvatarContext } from '../../providers/avatar.provider';
+import { checkIfUrlContainsImage } from '../../helpers/image.helpers';
 import './Avatar.scss';
 
 const Avatar = ({ avatarUrl, cssClass, alt, username }) => {
@@ -9,9 +10,7 @@ const Avatar = ({ avatarUrl, cssClass, alt, username }) => {
   const fetchImage = async () => {
     if (state[username] || !avatarUrl) return;
     try {
-      const response = await fetch(avatarUrl);
-      const blob = await response.blob();
-      const imageUrl = URL.createObjectURL(blob);
+      const imageUrl = await checkIfUrlContainsImage(avatarUrl);
       actions.add(username, imageUrl);
     } catch (error) {
       console.warn('Avatar does not exist.');
@@ -27,7 +26,7 @@ const Avatar = ({ avatarUrl, cssClass, alt, username }) => {
       {state[username] ? (
         <img src={state[username]} alt={alt} />
       ) : (
-        <i className="fas fa-user" />
+        <i className="fas fa-user" data-testid="avatar__icon" />
       )}
     </div>
   );
