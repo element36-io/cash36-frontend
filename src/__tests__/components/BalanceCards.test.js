@@ -2,7 +2,7 @@ import React from 'react';
 // import { render } from '@testing-library/react';
 
 import BalanceCards from '../../components/BalanceCards';
-import { renderWithRedux, createReduxStore } from '../../helpers/tests.helpers';
+import { renderWithRedux } from '../../helpers/tests.helpers';
 import store from '../../store';
 
 // const store = createReduxStore({

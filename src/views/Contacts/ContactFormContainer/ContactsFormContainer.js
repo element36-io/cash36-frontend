@@ -26,7 +26,15 @@ const ContactsFormContainer = ({
   const cash36 = useCash36();
 
   useEffect(() => {
-    if (isActive) setValues({ contactName: '', contactAddress: '' });
+    if (isActive) {
+      setValues({ contactName: '', contactAddress: '' });
+      setResponse({
+        showResponse: false,
+        type: 'success',
+        msg: '',
+        btnText: ''
+      });
+    }
   }, [isActive]);
 
   const changeHandler = evt => {
