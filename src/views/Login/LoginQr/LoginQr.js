@@ -59,9 +59,18 @@ const LoginQr = ({ scanCallback, metamaskLogin }) => {
           <img src={uportLogo} alt="UPORT" />
         </span>
       </p>
-      <div className="login__qrcode">
-        {!md.current.phone() && qr && <QRCode value={qr} size={250} />}
-      </div>
+      {!md.current.mobile() && (
+        <div className="login__qrcode">
+          {qr ? (
+            <QRCode value={qr} size={250} />
+          ) : (
+            <div className="blur">
+              <QRCode size={250} value={''} />
+            </div>
+          )}
+        </div>
+      )}
+
       <AppLinks />
     </div>
   );
