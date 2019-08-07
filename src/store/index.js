@@ -14,7 +14,7 @@ const loggerMiddleware = createLogger();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const reducers = combineReducers({
+export const reducers = combineReducers({
   auth: authReducer,
   tokens: tokensReducer,
   countries: countriesReducer,

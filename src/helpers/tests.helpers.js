@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 
 import { render, cleanup } from '@testing-library/react';
 
-import reducers from '../reducers';
+import { reducers } from '../store';
 
 afterEach(cleanup);
 

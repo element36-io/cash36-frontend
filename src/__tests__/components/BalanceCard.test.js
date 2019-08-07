@@ -10,13 +10,13 @@ const props = {
   balance: 1000
 };
 
-test('should render a component', () => {
+test('renders the component', () => {
   const { container } = render(<BalanceCard {...props} />);
 
   expect(container.firstChild).toBeVisible();
 });
 
-test('should show token info', () => {
+test('shows token info', () => {
   const { getByText } = render(<BalanceCard {...props} />);
 
   expect(getByText(props.symbol)).toBeVisible();
@@ -24,7 +24,7 @@ test('should show token info', () => {
   expect(getByText(formatAmount(props.balance))).toBeVisible();
 });
 
-test('should show token icon', () => {
+test('shows token icon', () => {
   const { getByAltText } = render(<BalanceCard {...props} />);
 
   expect(getByAltText('FRANC TOKEN')).toBeVisible();

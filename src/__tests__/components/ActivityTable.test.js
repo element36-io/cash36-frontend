@@ -17,14 +17,14 @@ const userActivity = [
   }
 ];
 
-test('should render a component', () => {
+test('renders the component', () => {
   const { container } = render(<ActivityTable userActivity={userActivity} />);
 
   expect(container.firstChild).toBeVisible();
 });
 
 describe('date', () => {
-  test('should show proper date format', () => {
+  test('shows proper date format', () => {
     const { getByText } = render(<ActivityTable userActivity={userActivity} />);
 
     expect(getByText('Aug')).toBeVisible();
@@ -33,34 +33,34 @@ describe('date', () => {
 });
 
 describe('action', () => {
-  test('should show proper status on BUY tokens', () => {
+  test('shows proper status on BUY tokens', () => {
     const { getByText } = render(<ActivityTable userActivity={userActivity} />);
 
     expect(getByText('Bought Tokens')).toBeVisible();
   });
 
-  test('should show proper status on SELL tokens', () => {
+  test('shows proper status on SELL tokens', () => {
     userActivity[0].action = 'SELL';
     const { getByText } = render(<ActivityTable userActivity={userActivity} />);
 
     expect(getByText('Sold Tokens')).toBeVisible();
   });
 
-  test('should show proper status on SENT tokens', () => {
+  test('shows proper status on SENT tokens', () => {
     userActivity[0].action = 'SENT';
     const { getByText } = render(<ActivityTable userActivity={userActivity} />);
 
     expect(getByText('Sent to')).toBeVisible();
   });
 
-  test('should show proper status on TRANSFERED tokens', () => {
+  test('shows proper status on TRANSFERED tokens', () => {
     userActivity[0].action = 'RECEIVED';
     const { getByText } = render(<ActivityTable userActivity={userActivity} />);
 
     expect(getByText('Bought Tokens')).toBeVisible();
   });
 
-  test('should show proper address', () => {
+  test('shows proper address', () => {
     const { getByText } = render(<ActivityTable userActivity={userActivity} />);
 
     expect(getByText(userActivity[0].targetAddress)).toBeVisible();
@@ -68,13 +68,13 @@ describe('action', () => {
 });
 
 describe('status', () => {
-  test('should show proper status on COMPLETED', () => {
+  test('shows proper status on COMPLETED', () => {
     const { getByText } = render(<ActivityTable userActivity={userActivity} />);
 
     expect(getByText('Completed')).toBeVisible();
   });
 
-  test('should show proper status on PROCESSING', () => {
+  test('shows proper status on PROCESSING', () => {
     userActivity[0].status = 'PROCESSING';
 
     const { getByText } = render(<ActivityTable userActivity={userActivity} />);
@@ -82,7 +82,7 @@ describe('status', () => {
     expect(getByText('Processing')).toBeVisible();
   });
 
-  test('should show proper status on OPEN', () => {
+  test('shows proper status on OPEN', () => {
     userActivity[0].status = 'OPEN';
 
     const { getByText } = render(<ActivityTable userActivity={userActivity} />);
@@ -90,7 +90,7 @@ describe('status', () => {
     expect(getByText('Open')).toBeVisible();
   });
 
-  test('should show proper status on ON HOLD', () => {
+  test('shows proper status on ON HOLD', () => {
     userActivity[0].status = 'ON_HOLD';
 
     const { getByText } = render(<ActivityTable userActivity={userActivity} />);
@@ -100,33 +100,33 @@ describe('status', () => {
 });
 
 describe('amount', () => {
-  test('should show the proper symbol', () => {
+  test('shows the proper symbol', () => {
     const { getByText } = render(<ActivityTable userActivity={userActivity} />);
 
     expect(getByText('CHF36')).toBeVisible();
   });
 
-  test('should show the proper amount if BUY', () => {
+  test('shows the proper amount if BUY', () => {
     const { getByText } = render(<ActivityTable userActivity={userActivity} />);
 
     expect(getByText(`+${formatAmount(userActivity[0].amount)}`)).toBeVisible();
   });
 
-  test('should show the proper amount if RECEIVED', () => {
+  test('shows the proper amount if RECEIVED', () => {
     userActivity[0].action = 'RECEIVED';
     const { getByText } = render(<ActivityTable userActivity={userActivity} />);
 
     expect(getByText(`+${formatAmount(userActivity[0].amount)}`)).toBeVisible();
   });
 
-  test('should show the proper amount if SELL', () => {
+  test('shows the proper amount if SELL', () => {
     userActivity[0].action = 'SELL';
     const { getByText } = render(<ActivityTable userActivity={userActivity} />);
 
     expect(getByText(`-${formatAmount(userActivity[0].amount)}`)).toBeVisible();
   });
 
-  test('should show the proper amount if SENT', () => {
+  test('shows the proper amount if SENT', () => {
     userActivity[0].action = 'SENT';
     const { getByText } = render(<ActivityTable userActivity={userActivity} />);
 
