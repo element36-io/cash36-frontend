@@ -23,3 +23,9 @@ test('should show token info', () => {
   expect(getByText(`${props.name} Balance`)).toBeVisible();
   expect(getByText(formatAmount(props.balance))).toBeVisible();
 });
+
+test('should show token icon', () => {
+  const { getByAltText } = render(<BalanceCard {...props} />);
+
+  expect(getByAltText('FRANC TOKEN')).toBeVisible();
+});

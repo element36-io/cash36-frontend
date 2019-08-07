@@ -15,7 +15,7 @@ const BalanceCard = ({ symbol, name, balance }) => (
     </div>
     <div>
       <span className="balance-card__icon">
-        <TokenIcon token={symbol} />
+        <TokenIcon symbol={symbol} />
       </span>
       <div className="balance-card__balance">
         {formatAmount(balance)} <span>{symbol}</span>
