@@ -10,13 +10,13 @@ const ActionStatus = ({ type, title }) => {
 
   switch (type) {
     case 'success':
-      icon = <DoneIcon />;
+      icon = <DoneIcon data-testid="done-icon" />;
       break;
     case 'progress':
-      icon = <TimeIcon />;
+      icon = <TimeIcon data-testid="time-icon" />;
       break;
     default:
-      icon = <ErrorIcon />;
+      icon = <ErrorIcon data-testid="error-icon" />;
   }
 
   return (

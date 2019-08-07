@@ -2,7 +2,7 @@ import HttpProvider from 'ethjs-provider-http';
 import { network as networkUtils } from 'uport-transports';
 import { transactionRequest } from './uport.helpers';
 
-class e36Provider {
+class E36Provider {
   constructor ({ networkId, account, pushToken, boxPub, cancel }) {
     const networksList = networkUtils.defaults.networks;
     const networkName = Object.keys(networksList).filter(
@@ -64,4 +64,4 @@ class e36Provider {
   };
 }
 
-export default e36Provider;
+export default E36Provider;
