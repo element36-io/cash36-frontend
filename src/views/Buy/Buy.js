@@ -4,9 +4,10 @@ import API from '../../config/api';
 import BuyTokens from './BuyTokens';
 import { getTokens } from '../../store/tokens/tokens.actions';
 import PaymentMethod from './PaymentMethod';
-import InitiateManualPayment from './InitiateManualPayment';
 import InitiateAutoPayment from './InitiateAutoPayment';
 import BackButton from '../../components/Buttons/BackButton';
+import PaymentInfo from '../../components/PaymentInfo';
+import TransactionFooter from '../../components/TransactionFooter';
 import BuyError from './BuyError';
 
 import './Buy.scss';
@@ -16,13 +17,14 @@ class Buy extends Component {
     step: 0,
     amount: '',
     symbol: 'EUR36',
-    manualTransferData: null,
-    manualTransferStarted: false
+    manualTransferData: null
   };
 
   componentDidMount () {
     this.props.getTokens();
   }
+
+  manualTransferStarted = false;
 
   nextStep = () => {
     if (this.state.step === 0) {
@@ -39,9 +41,10 @@ class Buy extends Component {
   };
 
   handleManualTransferClick = async () => {
-    if (this.state.manualTransferStarted) return;
+    if (this.manualTransferStarted) return;
 
-    this.setState({ manualTransferStarted: true });
+    this.manualTransferStarted = true;
+
     const data = {
       amount: parseInt(this.state.amount),
       symbol: this.state.symbol
@@ -98,12 +101,17 @@ class Buy extends Component {
                 handleAutoTransferClick={this.handleAutoTransferClick}
               />
             )}
-            {step === 2.1 && (
-              <InitiateManualPayment
-                next={this.nextStep}
-                handleOrderSubmit={this.handleOrderSubmit}
-                transferData={manualTransferData}
-              />
+            {step === 2.1 && (  
+              <PaymentInfo info={manualTransferData} title="Trigger your payment">
+                <div className="payment-info__message--credit">
+                  <p>
+                    Tokens will be credited to your account as soon as the transfer is
+                    complete. <br /> You can always check your order status in your account
+                    history.
+                  </p>
+                </div>
+                <TransactionFooter />
+              </PaymentInfo>
             )}
             {step === 2.2 && <InitiateAutoPayment next={this.nextStep} />}
             {step === 3 && <BuyError message="User not enabled or verified." />}
