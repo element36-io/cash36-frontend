@@ -43,6 +43,7 @@ export const ChooseAmountForm = React.memo(
           label="Select Token"
           value={symbol}
           onChange={handleChange}
+          placeholder="TOKEN36"
           select
           fullWidth
           InputProps={{

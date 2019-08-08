@@ -51,3 +51,30 @@ describe('numeric input change', () => {
     expect(handleChange).not.toHaveBeenCalled();
   });
 });
+
+describe('select input', () => {
+  test('displays the correct value of select input', () => {
+    const { getByPlaceholderText } = render(<ChooseAmountForm {...props} />);
+
+    const input = getByPlaceholderText('TOKEN36');
+
+    expect(input.value).toBe('CHF36');
+  });
+
+  test('changes the value of select input on change', () => {
+    const handleChange = jest.fn();
+    const { getByPlaceholderText } = render(
+      <ChooseAmountForm {...props} handleChange={handleChange} />
+    );
+
+    const input = getByPlaceholderText('TOKEN36');
+
+    fireEvent.input(input, {
+      target: {
+        value: 'EUR36'
+      }
+    });
+
+    expect(input.value).toBe('EUR36');
+  });
+});
