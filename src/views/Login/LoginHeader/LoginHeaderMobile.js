@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import NavBtn from '../../../components/NavBtn';
+import NavButton from '../../../components/NavButton';
 import LoginNav from '../LoginNav';
 
 class LoginHeaderMobile extends Component {
@@ -18,7 +18,7 @@ class LoginHeaderMobile extends Component {
 
     return (
       <div className="login__header">
-        <NavBtn
+        <NavButton
           clickHandler={this.toggleNav}
           alt={step === 0 && !isActiveNav}
           isActive={isActiveNav}
