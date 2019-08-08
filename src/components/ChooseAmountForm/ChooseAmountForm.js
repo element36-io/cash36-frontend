@@ -7,7 +7,7 @@ import { isNumeric, toInt } from 'validator';
 
 import './ChooseAmountForm.scss';
 
-const ChooseAmountForm = React.memo(
+export const ChooseAmountForm = React.memo(
   ({ tokenSymbols, symbol, amount, handleChange }) => {
     const handleAmountChange = event => {
       const { value } = event.target;
@@ -68,6 +68,7 @@ const ChooseAmountForm = React.memo(
 );
 
 ChooseAmountForm.propTypes = {
+  tokenSymbols: PropTypes.array,
   amount: PropTypes.string,
   symbol: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired

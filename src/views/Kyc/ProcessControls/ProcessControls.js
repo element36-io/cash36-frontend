@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import DefaultButton from '../../../components/Buttons/DefaultButton';
-import SecondaryButton from '../../../components/Buttons/SecondaryButton/SecondaryButton';
+import SecondaryButton from '../../../components/Buttons/SecondaryButton';
 
 import './ProcessControls.scss';
 

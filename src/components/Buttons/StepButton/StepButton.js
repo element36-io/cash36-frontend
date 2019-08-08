@@ -16,7 +16,7 @@ const StepButton = ({ text, onClick, disabled, type }) => (
     onClick={onClick}
   >
     <span>{text}</span>
-    <ArrowForwardIcon />
+    <ArrowForwardIcon data-testid="step-button__arrow" />
   </DefaultButton>
 );
 
