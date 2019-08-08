@@ -7,7 +7,7 @@ import BalanceCard from '../BalanceCard';
 
 import './BalanceCards.scss';
 
-const BalanceCards = ({ tokens, getTokens }) => {
+export const BalanceCards = ({ tokens, getTokens }) => {
   const [error, setError] = useState('');
   useEffect(() => {
     callGetTokens();

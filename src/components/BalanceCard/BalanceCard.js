@@ -7,7 +7,10 @@ import { formatAmount } from '../../helpers/currencies.helpers';
 import './BalanceCard.scss';
 
 const BalanceCard = ({ symbol, name, balance }) => (
-  <div className={`balance-card paper balance-card--${symbol}`}>
+  <div
+    data-testid="balance-card"
+    className={`balance-card paper balance-card--${symbol}`}
+  >
     <div>
       <Typography variant="body1" color="textSecondary">
         {name} Balance

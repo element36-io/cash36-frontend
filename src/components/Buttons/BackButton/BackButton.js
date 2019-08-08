@@ -8,8 +8,13 @@ const BackButton = ({ onClick }) => {
   const classes = useStyles();
 
   return (
-    <Button className={classes.root} variant="contained" onClick={onClick}>
-      <ArrowBackwardIcon />
+    <Button
+      data-testid="back-button"
+      className={classes.root}
+      variant="contained"
+      onClick={onClick}
+    >
+      <ArrowBackwardIcon data-testid="back-button__arrow" />
     </Button>
   );
 };
