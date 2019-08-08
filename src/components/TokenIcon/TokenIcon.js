@@ -21,7 +21,7 @@ const TokenIcon = ({ symbol }) => {
 };
 
 TokenIcon.propTypes = {
-  symbol: PropTypes.string
+  symbol: PropTypes.string.isRequired
 };
 
 export default TokenIcon;
