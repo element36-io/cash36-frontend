@@ -2,7 +2,7 @@ import React from 'react';
 import { renderWithRouter } from '../../helpers/tests.helpers';
 
 import TransactionFooter from '../../components/TransactionFooter';
-import { fireEvent, waitForDomChange } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
 
 test('renders the component with the image tag', () => {
   const { container } = renderWithRouter(<TransactionFooter />);
