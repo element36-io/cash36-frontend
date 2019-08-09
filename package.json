@@ -10,7 +10,7 @@
     "@material-ui/pickers": "^3.1.1",
     "@material-ui/styles": "^4.1.1",
     "axios": "^0.18.0",
-    "cash36-contracts": "^0.1.30",
+    "cash36-contracts": "0.3.2",
     "classnames": "2.2.5",
     "downshift": "^3.2.10",
     "ethjs-provider-http": "^0.1.6",
