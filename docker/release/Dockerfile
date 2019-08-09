@@ -1,7 +1,7 @@
 # Stage 1
 FROM node:8 as react-build
 WORKDIR /app
-COPY ./../../ ./
+COPY . ./
 RUN yarn --registry http://167.99.243.81:4873/
 RUN yarn build
 
