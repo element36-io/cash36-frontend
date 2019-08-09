@@ -20,8 +20,8 @@ build:
     - yarn --registry http://167.99.243.81:4873/
     - yarn build
   retry: 1
-  except:
-    - tags
+  only:
+    - develop
 
 docker-debug-build:
   stage: package
@@ -64,9 +64,7 @@ deploy:
 #    - kubectl config set-credentials cluster-admin --username="$KUBE_USER" --password="$KUBE_PASSWORD"
 #    - kubectl config set-context default --cluster=$KUBE_NAME --user=cluster-admin
 #    - kubectl config use-context default
-    - kubectl set image deployment/cash36-frontend cash36-frontend=${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME} \
-        --namespace="element36-io" \
-        --insecure-skip-tls-verify=true
+    - kubectl set image deployment/cash36-frontend cash36-frontend="${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}"
     - kubectl rollout status deployment/cash36-frontend
   retry: 1
   only:
