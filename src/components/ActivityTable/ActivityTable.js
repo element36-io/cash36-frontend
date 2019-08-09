@@ -16,8 +16,8 @@ const ActivityTable = ({ userActivity }) => (
       </div>
     </Responsive>
     <div className="activity-table__body paper">
-      {userActivity.map((activity, index) => (
-        <Row activity={activity} key={index} />
+      {userActivity.map(activity => (
+        <Row activity={activity} key={activity.id} />
       ))}
     </div>
   </div>
