@@ -66,8 +66,6 @@ deploy:
 #    - kubectl config use-context default
     - kubectl set image deployment/cash36-frontend cash36-frontend=${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME} \
         --namespace="element36-io" \
-#        --server="${KUBE_URL}" \
-#        --token="${KUBE_TOKEN}" \
         --insecure-skip-tls-verify=true
     - kubectl rollout status deployment/cash36-frontend
   retry: 1
