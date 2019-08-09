@@ -1,10 +1,25 @@
-@import '../../../styles/mixins.scss';
-@import '../../../styles/settings.scss';
+@import '../../styles/mixins.scss';
+@import '../../styles/settings.scss';
 
-.initiate-manual-payment {
+.payment-info {
   text-align: center;
 
-  &__info {
+  &.__alt{
+    padding: 2.4rem;
+    max-width: 65rem;
+  }
+
+  .payment-info__close {
+    position: absolute;
+    top: 2.4rem;
+    right: 2.4rem;
+    z-index: 5;
+    color: rgba(1, 21, 44, 0.2);
+    font-size: 2.4rem;
+    cursor: pointer;
+  }
+
+  &__content {
     text-align: left;
     margin-top: 2.4rem;
     margin-bottom: 3.2rem;
@@ -40,7 +55,7 @@
     }
   }
 
-  &__info-field {
+  &__field {
     display: flex;
     flex-direction: column;
 
@@ -70,6 +85,10 @@
     p {
       font-size: 1.6rem;
     }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   @include mobile {
@@ -81,7 +100,7 @@
       top: 2.5rem;
       left: 0;
     }
-    &__info {
+    &__content {
       grid-template-columns: 1fr;
       grid-template-rows: auto;
       grid-auto-flow: row;
