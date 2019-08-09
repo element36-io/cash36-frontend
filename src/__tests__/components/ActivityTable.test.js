@@ -1,7 +1,9 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import ActivityTable from '../../components/ActivityTable';
+import Status from '../../components/ActivityTable/Status';
+import Row from '../../components/ActivityTable/Row';
 import { formatAmount } from '../../helpers/currencies.helpers';
 
 const userActivity = [
@@ -18,9 +20,10 @@ const userActivity = [
 ];
 
 test('renders the component', () => {
-  const { container } = render(<ActivityTable userActivity={userActivity} />);
+  const { getByText } = render(<ActivityTable userActivity={userActivity} />);
 
-  expect(container.firstChild).toBeVisible();
+  expect(getByText('CHF36')).toBeVisible();
+  expect(getByText('0x95ff342a3db1a7dd6cd81ff02a4bd6dcba68f3f0')).toBeVisible();
 });
 
 describe('date', () => {
@@ -90,6 +93,26 @@ describe('status', () => {
     expect(getByText('Open')).toBeVisible();
   });
 
+  test('shows transaction info icon on OPEN', () => {
+    userActivity[0].status = 'OPEN';
+
+    const { getByTestId } = render(
+      <ActivityTable userActivity={userActivity} />
+    );
+
+    expect(getByTestId('activity-table-status__info')).toBeVisible();
+  });
+  test('calls openModal on click', () => {
+    const openModal = jest.fn();
+    const { getByTestId } = render(
+      <Status status={'OPEN'} openModal={openModal} />
+    );
+
+    fireEvent.click(getByTestId('activity-table-status__info'));
+
+    expect(openModal).toHaveBeenCalled();
+  });
+
   test('shows proper status on ON HOLD', () => {
     userActivity[0].status = 'ON_HOLD';
 
@@ -131,5 +154,27 @@ describe('amount', () => {
     const { getByText } = render(<ActivityTable userActivity={userActivity} />);
 
     expect(getByText(`-${formatAmount(userActivity[0].amount)}`)).toBeVisible();
+  });
+});
+
+describe('row', () => {
+  const activity = {
+    action: 'BUY',
+    amount: 15,
+    date: '06.08.2019',
+    paymentInfo: null,
+    status: 'COMPLETED',
+    symbol: 'CHF36',
+    targetAddress: '0x95ff342a3db1a7dd6cd81ff02a4bd6dcba68f3f0',
+    txHash: '0xc49ca0c54824c440139ddfcc161458345e98f45f7326c0bd0c9ffc2758c96573'
+  };
+
+  test('renders the Row component', () => {
+    const { getByText } = render(<Row activity={activity} />);
+
+    expect(getByText('CHF36')).toBeVisible();
+    expect(
+      getByText('0x95ff342a3db1a7dd6cd81ff02a4bd6dcba68f3f0')
+    ).toBeVisible();
   });
 });

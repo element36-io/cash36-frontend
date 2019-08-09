@@ -15,7 +15,7 @@ test('renders the component', () => {
 test('calls onClick on click', () => {
   const { getByText } = render(
     <StepButton onClick={onClick} text={text}>
-      children
+      submit
     </StepButton>
   );
 

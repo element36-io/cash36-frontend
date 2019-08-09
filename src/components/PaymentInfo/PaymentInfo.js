@@ -6,8 +6,14 @@ import './PaymentInfo.scss';
 
 const PaymentInfo = ({ info, title, children, isModal, closeModal }) => (
   <div className={`payment-info ${isModal ? '__alt' : ''}`}>
-    {isModal && <CloseIcon className="payment-info__close" onClick={closeModal} />}
-    {title && <h2>{title}</h2>}
+    {isModal && (
+      <CloseIcon
+        data-testid="payment-info__close-icon"
+        className="payment-info__close"
+        onClick={closeModal}
+      />
+    )}
+    {title && <h2 data-testid="payment-info__title">{title}</h2>}
     <div className="payment-info__content">
       <div className="payment-info__field">
         <span>Bank Name</span>

@@ -5,7 +5,7 @@ import Avatar from '../../components/Avatar';
 import { AvatarContext } from '../../providers/avatar.provider';
 import * as imageHelpers from '../../helpers/image.helpers';
 
-test('should render a component', () => {
+test('renders the component', () => {
   const { container } = render(
     <AvatarContext.Provider
       value={{
@@ -20,7 +20,7 @@ test('should render a component', () => {
   expect(container.firstChild).toBeVisible();
 });
 
-test('should render an avatar if url is present in the context', () => {
+test('renders an avatar if url is present in the context', () => {
   const username = '0x0000000000000000000000000000000000000001';
   const { getByAltText } = render(
     <AvatarContext.Provider
@@ -38,7 +38,7 @@ test('should render an avatar if url is present in the context', () => {
   expect(getByAltText('altText')).toBeVisible();
 });
 
-test('should render an icon if avatarUrl and context url is not present', () => {
+test('renders an icon if avatarUrl and context url is not present', () => {
   const { getByTestId } = render(
     <AvatarContext.Provider
       value={{
@@ -53,7 +53,7 @@ test('should render an icon if avatarUrl and context url is not present', () => 
   expect(getByTestId('avatar__icon')).toBeVisible();
 });
 
-test('should call fetchImage if no context url and avatar is present', async () => {
+test('calls fetchImage if no context url and avatar is present', async () => {
   const username = '0x0000000000000000000000000000000000000001';
   const avatarUrl = 'avatarUrl';
 

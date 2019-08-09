@@ -6,9 +6,9 @@ import BackButton from '../../../components/Buttons/BackButton';
 const onClick = jest.fn();
 
 test('renders the component', () => {
-  const { container } = render(<BackButton onClick={onClick} />);
+  const { getByTestId } = render(<BackButton onClick={onClick} />);
 
-  expect(container.firstChild).toBeVisible();
+  expect(getByTestId('back-button')).toBeVisible();
 });
 
 test('calls onClick on click', () => {

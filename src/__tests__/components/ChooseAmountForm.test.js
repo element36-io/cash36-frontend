@@ -11,9 +11,9 @@ const props = {
 };
 
 test('renders the component', () => {
-  const { container } = render(<ChooseAmountForm {...props} />);
+  const { getByText } = render(<ChooseAmountForm {...props} />);
 
-  expect(container.firstChild).toBeVisible();
+  expect(getByText('CHF36')).toBeVisible();
 });
 
 describe('numeric input change', () => {

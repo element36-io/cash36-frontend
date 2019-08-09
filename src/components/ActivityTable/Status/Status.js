@@ -10,10 +10,15 @@ const Status = ({ status, openModal }) => {
     <div className="activity-table-status-wrapper">
       <div className={`activity-table-status ${statuses[status].cssClass}`}>
         {statuses[status].Icon}
-        <div className="activity-table-status__text">{statuses[status].text}</div>
+        <div className="activity-table-status__text">
+          {statuses[status].text}
+        </div>
       </div>
-      {status === 'OPEN' && <span onClick={openModal}><AccountBalance /></span>}
-       
+      {status === 'OPEN' && (
+        <span onClick={openModal} data-testid="activity-table-status__info">
+          <AccountBalance />
+        </span>
+      )}
     </div>
   );
 };

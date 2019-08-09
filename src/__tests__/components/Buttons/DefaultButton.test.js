@@ -4,12 +4,9 @@ import { render } from '@testing-library/react';
 import DefaultButton from '../../../components/Buttons/DefaultButton';
 
 test('renders the component with children', () => {
-  const { container, getByText } = render(
-    <DefaultButton>children</DefaultButton>
-  );
+  const { getByText } = render(<DefaultButton>submit</DefaultButton>);
 
-  expect(container.firstChild).toBeVisible();
-  expect(getByText('children')).toBeVisible();
+  expect(getByText('submit')).toBeVisible();
 });
 
 test('displays the spinner when submitting is true', () => {

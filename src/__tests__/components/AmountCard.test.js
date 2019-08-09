@@ -8,9 +8,9 @@ const symbol = 'CHF36';
 const amount = '15';
 
 test('renders the component', () => {
-  const { container } = render(<AmountCard amount={amount} symbol={symbol} />);
+  const { getByText } = render(<AmountCard amount={amount} symbol={symbol} />);
 
-  expect(container.firstChild).toBeVisible();
+  expect(getByText('CHF36')).toBeVisible();
 });
 
 test('shows the correct amount', () => {

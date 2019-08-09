@@ -10,13 +10,7 @@ const props = {
   balance: 1000
 };
 
-test('renders the component', () => {
-  const { container } = render(<BalanceCard {...props} />);
-
-  expect(container.firstChild).toBeVisible();
-});
-
-test('shows token info', () => {
+test('renders the component and shows token info', () => {
   const { getByText } = render(<BalanceCard {...props} />);
 
   expect(getByText(props.symbol)).toBeVisible();

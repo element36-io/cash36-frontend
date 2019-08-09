@@ -7,15 +7,7 @@ import { formatAmount } from '../../helpers/currencies.helpers';
 const symbol = 'CHF36';
 const balance = 15;
 
-test('renders the component', () => {
-  const { container } = render(
-    <AvailableBalance symbol={symbol} balance={balance} />
-  );
-
-  expect(container.firstChild).toBeVisible();
-});
-
-test('shows appropriate message', () => {
+test('renders the component and shows appropriate message', () => {
   const { getByText } = render(
     <AvailableBalance symbol={symbol} balance={balance} />
   );

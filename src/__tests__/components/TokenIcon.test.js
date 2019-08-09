@@ -3,12 +3,6 @@ import { render } from '@testing-library/react';
 
 import TokenIcon from '../../components/TokenIcon';
 
-test('renders the component', () => {
-  const { container } = render(<TokenIcon symbol={'CHF36'} />);
-
-  expect(container.firstChild).toBeVisible();
-});
-
 test('renders a CHF36 icon', () => {
   const { getByAltText } = render(<TokenIcon symbol={'CHF36'} />);
 
