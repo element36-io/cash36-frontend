@@ -38,10 +38,12 @@ const HeaderAlerts = ({
   return (
     <ClickAwayListener onClickAway={closeNotifications}>
       <div className="header__alerts">
-        <span className="header__alerts__icon" onClick={toggleNotification} />
-        {!!badgeCount && (
-          <span className="header__alerts__counter">{badgeCount}</span>
-        )}
+        <span className="header__alerts__icon" onClick={toggleNotification}>
+          {!!badgeCount && (
+            <span className="header__alerts__counter">{badgeCount}</span>
+          )}
+        </span>
+
         {notifications && !!notifications.length && (
           <div
             className={`header__alerts__content ${

@@ -1,37 +1,59 @@
 @import '../../../styles/settings';
 
-.activity-table-status {
+.activity-table-status-wrapper {
   display: inline-flex;
-  padding: .3rem;
-  padding-right: 1rem;
-  border-radius: 4px;
 
-  &__icon {
-    border-right: 1px solid $lightGrey;
-    margin-right: .5rem;
+  .activity-table-status {
+    display: inline-flex;
+    flex: 1;
     padding: .3rem;
+    padding-right: 1rem;
+    border-radius: 4px;
+
+    &__icon {
+      border-right: 1px solid $lightGrey;
+      margin-right: .5rem;
+      padding: .3rem;
+    }
+
+    &__text {
+      text-transform: uppercase;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+    }
+
+    &__complete {
+      background-color: $green-light;
+    }
+
+    &__processing {
+      background-color: $yellow-light;
+    }
+
+    &__on-hold {
+      background-color: $red-light;
+    }
+
+    &__open {
+      background-color: $headerGrey;
+    }
   }
 
-  &__text {
-    text-transform: uppercase;
-    font-size: 1.4rem;
+  > span {
     display: flex;
     align-items: center;
-  }
-
-  &__complete {
-    background-color: $green-light;
-  }
-
-  &__processing {
-    background-color: $yellow-light;
-  }
-
-  &__on-hold {
-    background-color: $red-light;
-  }
-
-  &__open {
+    margin-left: .5rem;
+    padding: 0 .5rem;
     background-color: $headerGrey;
+    color: $primary-main;
+    border-radius: 4px;
+    line-height: 1;
+    cursor: pointer;
+    
+    svg {
+      width: 2rem;
+    }
   }
+
 }

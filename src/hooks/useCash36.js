@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { Web3Context } from '../providers/web3.provider';
-import e36Provider from '../helpers/e36.provider';
+import E36Provider from '../helpers/e36.provider';
 
 const useCash36 = () => {
   const { networkId, web3 } = useContext(Web3Context);
@@ -18,7 +18,7 @@ const useCash36 = () => {
   useEffect(() => {
     if (useMetamask) return;
 
-    const provider = new e36Provider({
+    const provider = new E36Provider({
       networkId,
       account,
       pushToken,

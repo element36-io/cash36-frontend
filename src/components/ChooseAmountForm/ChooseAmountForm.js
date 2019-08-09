@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { TextField, MenuItem } from '@material-ui/core';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import { isNumeric } from 'validator';
+import { isNumeric, toInt } from 'validator';
 
 import './ChooseAmountForm.scss';
 
@@ -11,6 +11,9 @@ const ChooseAmountForm = React.memo(
   ({ tokenSymbols, symbol, amount, handleChange }) => {
     const handleAmountChange = event => {
       const { value } = event.target;
+
+      if (value.length === 1 && toInt(value) === 0) return;
+
       if (isNumeric(value) || value === '') {
         handleChange(event);
       }

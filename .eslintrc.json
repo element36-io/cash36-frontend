@@ -2,7 +2,8 @@
   "extends": ["standard", "standard-jsx", "eslint-config-semistandard"],
   "parser": "babel-eslint",
   "env": {
-    "browser": true
+    "browser": true,
+    "jest": true
   },
   "plugins": ["react", "react-hooks"],
   "globals": {
