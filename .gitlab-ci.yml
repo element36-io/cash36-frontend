@@ -56,15 +56,15 @@ docker-release-build:
 deploy:
   stage: deploy
   environment: production
-  image: txn2/docker-kubectl
+  image: google/cloud-sdk
   script:
 #    - kubectl config set-cluster $KUBE_NAME --server="$KUBE_URL" --insecure-skip-tls-verify=true
 #    - kubectl config set-credentials cluster-admin --username="$KUBE_USER" --password="$KUBE_PASSWORD"
 #    - kubectl config set-context default --cluster=$KUBE_NAME --user=cluster-admin
 #    - kubectl config use-context default
     - kubectl set image deployment/cash36-frontend cash36-frontend=${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME} --namespace="element36-io"
+    - kubectl rollout status deployment/cash36-frontend
   retry: 1
   only:
     - tags
-  when:
-    - manual
+  when: manual
