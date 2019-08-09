@@ -15,38 +15,49 @@ const Row = ({ activity }) => {
   const closeModal = () => setActiveModal(false);
 
   useEffect(() => {
-    if(activity.paymentInfo) setBuyInfo(activity.paymentInfo)
+    if (activity.paymentInfo) setBuyInfo(activity.paymentInfo);
   }, [activity.paymentInfo]);
 
   return (
     <Fragment>
-    <div className="activity-table__row">
-      <div>
-        <Date date={activity.date} />
+      <div className="activity-table__row">
+        <div>
+          <Date date={activity.date} />
+        </div>
+        <div>
+          <Action
+            type={activity.action}
+            targetAddress={activity.targetAddress}
+          />
+        </div>
+        <div>
+          <Status status={activity.status} openModal={openModal} />
+        </div>
+        <div>
+          <Amount
+            type={activity.action}
+            amount={activity.amount}
+            symbol={activity.symbol}
+          />
+        </div>
       </div>
-      <div>
-        <Action type={activity.action} targetAddress={activity.targetAddress} />
-      </div>
-      <div>
-        <Status status={activity.status} openModal={openModal}/>
-      </div>
-      <div>
-        <Amount
-          type={activity.action}
-          amount={activity.amount}
-          symbol={activity.symbol}
-        />
-      </div>
-    </div>
-    {buyInfo && <Dialog onClose={closeModal} open={activeModal} maxWidth={false}>
-          <PaymentInfo title="Payment Information" info={buyInfo} isModal closeModal={closeModal}>
+      {buyInfo && (
+        <Dialog onClose={closeModal} open={activeModal} maxWidth={false}>
+          <PaymentInfo
+            title="Payment Information"
+            info={buyInfo}
+            isModal
+            closeModal={closeModal}
+          >
             <div className="payment-info__message--credit">
-                  <p>
-                    Please make sure your payment will be triggered from your registered bank account: IBAN {buyInfo.userIban}
-                  </p>
-                </div>
+              <p>
+                Please make sure your payment will be triggered from your
+                registered bank account: IBAN {buyInfo.userIban}
+              </p>
+            </div>
           </PaymentInfo>
-        </Dialog>}
+        </Dialog>
+      )}
     </Fragment>
   );
 };
