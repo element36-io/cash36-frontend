@@ -31,9 +31,6 @@ docker-debug-build:
     - docker build -t $CI_REGISTRY_IMAGE:dev-latest -f ./docker/debug/Dockerfile .
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker push $CI_REGISTRY_IMAGE
-    - kubectl apply -f 02_cash36-frontend.yml
-    - kubectl apply -f 03_ingress_service.yml
-    - kubectl rollout status deployment/cash36-frontend
   retry: 1
   only:
     - master
@@ -41,9 +38,13 @@ docker-debug-build:
 deploy-test:
   stage: deploy
   environment: test
+  image: lachlanevenson/k8s-kubectl:latest
   script:
     - apk add --update --no-cache openssh sshpass
 #    - ./deploy.sh $DO_PASS
+    - kubectl apply -f 02_cash36-frontend.yml
+    - kubectl apply -f 03_ingress_service.yml
+    - kubectl rollout status deployment/cash36-frontend
   only:
     - master
 
