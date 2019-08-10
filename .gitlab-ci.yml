@@ -39,7 +39,7 @@ docker-debug-build:
 deploy-test:
   stage: deploy
   environment: test
-  image: lachlanevenson/k8s-kubectl:latest
+  image: google/cloud-sdk
   script:
 #    - apk add --update --no-cache openssh sshpass
 #    - ./deploy.sh $DO_PASS
