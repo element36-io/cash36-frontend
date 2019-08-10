@@ -43,7 +43,7 @@ deploy-test:
   script:
 #    - apk add --update --no-cache openssh sshpass
 #    - ./deploy.sh $DO_PASS
-    - kubectl apply -f 02_cash36-frontend.yml
+    - kubectl apply -f 02-cash36-frontend.yml
     - kubectl apply -f 03_ingress_service.yml
     - kubectl rollout status deployment/cash36-frontend
   only:
