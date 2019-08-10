@@ -58,15 +58,12 @@ docker-release-build:
 deploy:
   stage: deploy
   environment: production
-  image: google/cloud-sdk
+  image: lachlanevenson/k8s-kubectl:latest
   tags:
     - kubernetes
   script:
-#    - kubectl config set-cluster $KUBE_NAME --server="$KUBE_URL" --insecure-skip-tls-verify=true
-#    - kubectl config set-credentials cluster-admin --username="$KUBE_USER" --password="$KUBE_PASSWORD"
-#    - kubectl config set-context default --cluster=$KUBE_NAME --user=cluster-admin
-#    - kubectl config use-context default
-    - kubectl set image deployment/cash36-frontend cash36-frontend="${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}" --namespace="element36-io" --insecure-skip-tls-verify=true
+    - kubectl apply -f 02_cash36-frontend.yml
+    - kubectl apply -f 03_ingress_service.yml
     - kubectl rollout status deployment/cash36-frontend
   retry: 1
   only:
