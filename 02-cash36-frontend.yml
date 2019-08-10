@@ -32,7 +32,7 @@ spec:
         - env:
             - name: NODE_ENV
               value: development
-          image: registry.gitlab.com/cash36/cash36-frontend
+          image: registry.gitlab.com/cash36/cash36-frontend:dev-latest
           imagePullPolicy: Always
           name: cash36-frontend
           ports:
