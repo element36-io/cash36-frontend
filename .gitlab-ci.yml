@@ -28,6 +28,7 @@ docker-debug-build:
   stage: package
   image: docker:dind
   script:
+    - echo "docker"
 #    - docker build -t $CI_REGISTRY_IMAGE:dev-latest -f ./docker/debug/Dockerfile .
 #    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
 #    - docker push $CI_REGISTRY_IMAGE
