@@ -24,6 +24,7 @@ test('renders the component', () => {
   expect(getByText('Switzerland')).toBeVisible();
   expect(getByText('123456')).toBeVisible();
   expect(getByText('KESSQE')).toBeVisible();
+  expect(getByText('Philadelphia Bank')).toBeVisible();
 });
 
 test('renders the warning message', () => {
