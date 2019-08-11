@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+
 import DefaultButton from '../Buttons/DefaultButton';
 
-const VerificationButton = ({ user: { currentProcessStatus, caseId } }) => {
+const VerificationButton = ({ currentProcessStatus, caseId }) => {
   if (currentProcessStatus === 'CLOSED') return null;
 
   if (currentProcessStatus === 'NOT_STARTED') {
@@ -35,7 +36,8 @@ const VerificationButton = ({ user: { currentProcessStatus, caseId } }) => {
 };
 
 VerificationButton.propTypes = {
-  user: PropTypes.object.isRequired
+  currentProcessStatus: PropTypes.string.isRequired,
+  caseId: PropTypes.string.isRequired
 };
 
 export default VerificationButton;
