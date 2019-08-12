@@ -18,7 +18,7 @@ build:
   script:
     - kubectl config set-cluster cash36-production-cluster --server="K8S_API_URL" --insecure-skip-tls-verify=true
     - kubectl config set-credentials gitlab-ci --token=$K8S_TOKEN
-    - kubectl config set-context --current --cluster=cash36-production-cluster --user=gitlab-ci
+    #- kubectl config set-context --current --cluster=cash36-production-cluster --user=gitlab-ci
     - kubectl get all -n element36-io
 #    - apk add --no-cache nodejs nodejs-npm git python g++ make
 #    - npm install -g yarn
