@@ -49,6 +49,14 @@ describe('renders user profile', () => {
 
     expect(getByText(`ID: ${user.username}`)).toBeVisible();
   });
+
+  test('renders the user badge', () => {
+    const { getByTestId } = renderWithAvatarContext(
+      <UserProfile user={user} />
+    );
+
+    expect(getByTestId('tier-badge')).toBeVisible();
+  });
 });
 
 describe('renders different tier levels', () => {

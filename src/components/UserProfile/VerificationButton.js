@@ -9,7 +9,7 @@ const VerificationButton = ({ currentProcessStatus, caseId }) => {
 
   if (currentProcessStatus === 'NOT_STARTED') {
     return (
-      <Link to={`/kyc/start`}>
+      <Link to={`/kyc/start`} data-testid="verification-button">
         <DefaultButton variant="contained">Verify Account</DefaultButton>
       </Link>
     );
@@ -20,7 +20,7 @@ const VerificationButton = ({ currentProcessStatus, caseId }) => {
     currentProcessStatus !== 'NOT_STARTED'
   ) {
     return (
-      <Link to={`/kyc/${caseId}`}>
+      <Link to={`/kyc/${caseId}`} data-testid="verification-button">
         <DefaultButton variant="contained">Continue Verification</DefaultButton>
       </Link>
     );
@@ -28,7 +28,10 @@ const VerificationButton = ({ currentProcessStatus, caseId }) => {
 
   if (currentProcessStatus === 'AWAITING_VERIFICATION') {
     return (
-      <div className="user-profile__buttons--awaiting">
+      <div
+        className="user-profile__buttons--awaiting"
+        data-testid="verification-button"
+      >
         Awaiting Verification
       </div>
     );
