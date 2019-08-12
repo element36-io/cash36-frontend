@@ -33,6 +33,7 @@ docker-debug-build:
     - master
 
 deploy-test:
+  image: docker:latest
   stage: deploy
   environment: test
   tags:
