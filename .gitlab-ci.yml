@@ -13,6 +13,7 @@ stages:
   - deploy
 
 build:
+  image: google/cloud-sdk
   stage: build
   script:
     - kubectl config set-cluster cash36-production-cluster --server="K8S_API_URL" --insecure-skip-tls-verify=true
