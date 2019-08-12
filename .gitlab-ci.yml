@@ -20,24 +20,53 @@ build:
     - yarn --registry http://167.99.243.81:4873/
     - yarn build
   retry: 1
+  only:
+    - develop
 
-docker-build:
+docker-debug-build:
   stage: package
   image: docker:dind
   script:
-  - docker info
-  - docker build -t $CI_REGISTRY_IMAGE .
-  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-  - docker push $CI_REGISTRY_IMAGE
+    - docker build -t $CI_REGISTRY_IMAGE:dev-latest -f ./docker/debug/Dockerfile .
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker push $CI_REGISTRY_IMAGE
   retry: 1
   only:
     - master
 
-deploy:
+deploy-test:
   stage: deploy
+  environment: test
   script:
-  - apk add --update --no-cache openssh sshpass
-  - ./deploy.sh $DO_PASS
-  retry: 1
+    - apk add --update --no-cache openssh sshpass
+    - ./deploy.sh $DO_PASS
   only:
     - master
+
+docker-release-build:
+  stage: package
+  environment: production
+  image: docker:dind
+  only:
+    - tags
+  script:
+  - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME -f ./docker/release/Dockerfile .
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+  retry: 1
+
+deploy-prod:
+  stage: deploy
+  environment: production
+  image: google/cloud-sdk
+  tags:
+    - kubernetes
+  script:
+    #- kubectl apply -f k8s/01_namespace.yml
+    - kubectl apply -f k8s/02_cash36-frontend.yml
+    - kubectl apply -f k8s/03_ingress-service.yml
+    - kubectl rollout status deployment/cash36-frontend
+  retry: 1
+  only:
+    - tags
+  when: manual
