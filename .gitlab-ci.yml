@@ -15,8 +15,9 @@ stages:
 build:
   image: google/cloud-sdk
   stage: build
+  tags:
+    - kubernetes
   script:
-    - echo $K8S_API_URL
     - kubectl config set-cluster cash36-production-cluster --server="$K8S_API_URL" --insecure-skip-tls-verify=true
     - kubectl config set-credentials gitlab-ci --token=$K8S_TOKEN
     - kubectl config set-context default --cluster=cash36-production-cluster --user=gitlab-ci
@@ -25,7 +26,6 @@ build:
 #    - npm install -g yarn
 #    - yarn --registry http://167.99.243.81:4873/
 #    - yarn build
-  retry: 1
   only:
     - develop
 
@@ -36,7 +36,6 @@ docker-debug-build:
     - docker build -t $CI_REGISTRY_IMAGE:dev-latest -f ./docker/debug/Dockerfile .
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker push $CI_REGISTRY_IMAGE
-  retry: 1
   only:
     - master
 
@@ -59,7 +58,6 @@ docker-release-build:
   - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME -f ./docker/release/Dockerfile .
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
-  retry: 1
 
 deploy-prod:
   stage: deploy
@@ -82,7 +80,6 @@ deploy-prod:
     - kubectl config set-context --current --namespace=element36-io
     - kubectl get all -n element36-io
 #    - kubectl rollout status deployment/cash36-frontend
-  retry: 1
   only:
     - tags
   when: manual
