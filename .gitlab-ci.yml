@@ -15,10 +15,15 @@ stages:
 build:
   stage: build
   script:
-    - apk add --no-cache nodejs nodejs-npm git python g++ make
-    - npm install -g yarn
-    - yarn --registry http://167.99.243.81:4873/
-    - yarn build
+    - kubectl config set-cluster cash36-production-cluster --server="K8S_API_URL" --insecure-skip-tls-verify=true
+    - kubectl config set-credentials gitlab-ci --token=$K8S_TOKEN
+    - kubectl config set-context default --cluster=cash36-production-cluster --user=gitlab-ci
+    - kubectl config set-context --current --namespace=element36-io
+    - kubectl get all -n element36-io
+#    - apk add --no-cache nodejs nodejs-npm git python g++ make
+#    - npm install -g yarn
+#    - yarn --registry http://167.99.243.81:4873/
+#    - yarn build
   retry: 1
   only:
     - develop
@@ -62,10 +67,20 @@ deploy-prod:
   tags:
     - kubernetes
   script:
-    #- kubectl apply -f k8s/01_namespace.yml
-    - kubectl apply -f k8s/02_cash36-frontend.yml
-    - kubectl apply -f k8s/03_ingress-service.yml
-    - kubectl rollout status deployment/cash36-frontend
+    # Authenticate with GKE
+#    — echo "$SERVICE_ACCOUNT_KEY" > key.json
+#    — gcloud auth activate-service-account --key-file=key.json
+#    — gcloud config set project my-project
+#    — gcloud config set container/cluster my-cluster
+#    — gcloud config set compute/zone europe-west2-a
+#    — gcloud container clusters get-credentials my-cluster --zone europe-west2-a
+
+    - kubectl config set-cluster cash36-production-cluster --server="K8S_API_URL" --insecure-skip-tls-verify=true
+    - kubectl config set-credentials gitlab-ci --token=$K8S_TOKEN
+    - kubectl config set-context default --cluster=cash36-production-cluster --user=gitlab-ci
+    - kubectl config set-context --current --namespace=element36-io
+    - kubectl get all -n element36-io
+#    - kubectl rollout status deployment/cash36-frontend
   retry: 1
   only:
     - tags
