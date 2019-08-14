@@ -7,7 +7,7 @@ RUN yarn build
 
 # Stage 2 - the production environment
 FROM nginx:alpine
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./docker/debug/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=react-build /app/build /usr/share/nginx/html
 ENV NODE_ENV=production
 EXPOSE 3000
