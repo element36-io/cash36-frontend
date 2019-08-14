@@ -1,7 +1,7 @@
 import API from '../../config/api';
 import { handleError } from '../../helpers/error.helpers';
 
-export const GET_COUNTRIES = 'GET_COUNTRIES';
+import { GET_COUNTRIES } from './countries.types';
 
 export const getCountries = () => async dispatch => {
   try {
