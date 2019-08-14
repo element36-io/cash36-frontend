@@ -1,4 +1,9 @@
-import { GET_TOKENS, GET_USER_ACTIVITY, FETCHING_FILTERS, HISTORY_FILTERED } from './tokens.actions';
+import {
+  GET_TOKENS,
+  GET_USER_ACTIVITY,
+  FETCHING_FILTERS,
+  HISTORY_FILTERED
+} from './tokens.types';
 
 const initialState = {
   historyFiltered: false,
