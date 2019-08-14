@@ -10,10 +10,6 @@
     }
   }
 
-  .balance-cards {
-    justify-content: space-between;
-  }
-
   &__no-activity {
     border-radius: 12px;
     margin: 3rem 0;
@@ -28,7 +24,14 @@
   }
 
   @include desktop {
-    background: linear-gradient(to bottom, $headerGrey 0, $headerGrey 209px, $backgroundGrey 209px, $backgroundGrey 100%) no-repeat;
+    background: linear-gradient(
+        to bottom,
+        $headerGrey 0,
+        $headerGrey 209px,
+        $backgroundGrey 209px,
+        $backgroundGrey 100%
+      )
+      no-repeat;
 
     &__user-actions {
       display: flex;
@@ -48,5 +51,4 @@
       align-items: flex-start;
     }
   }
-
 }
