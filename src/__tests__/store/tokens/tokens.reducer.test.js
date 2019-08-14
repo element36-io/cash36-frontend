@@ -6,7 +6,7 @@ import {
   HISTORY_FILTERED
 } from '../../../store/tokens/tokens.types';
 
-test('updates the state after getTokens action was called', () => {
+test('updates the state after GET_TOKENS was called', () => {
   const tokens = [
     {
       symbol: 'CHF36'
@@ -21,4 +21,41 @@ test('updates the state after getTokens action was called', () => {
   const state = tokensReducer({}, action);
 
   expect(state.tokens).toEqual(action.payload);
+});
+
+test('updates the state after GET_USER_ACTIVITY was called', () => {
+  const userActivity = {
+    activity: 'activity'
+  };
+
+  const action = {
+    type: GET_USER_ACTIVITY,
+    payload: userActivity
+  };
+
+  const state = tokensReducer({}, action);
+
+  expect(state.userActivity).toEqual(action.payload);
+});
+
+test('updates the state after FETCHING_FILTERS was called', () => {
+  const action = {
+    type: FETCHING_FILTERS,
+    payload: true
+  };
+
+  const state = tokensReducer({ fetchingFilters: false }, action);
+
+  expect(state.fetchingFilters).toBe(true);
+});
+
+test('updates the state after HISTORY_FILTERED was called', () => {
+  const action = {
+    type: HISTORY_FILTERED,
+    payload: true
+  };
+
+  const state = tokensReducer({ historyFiltered: false }, action);
+
+  expect(state.historyFiltered).toBe(true);
 });
