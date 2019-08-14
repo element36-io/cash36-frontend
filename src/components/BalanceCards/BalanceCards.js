@@ -30,7 +30,7 @@ export const BalanceCards = ({ tokens, getTokens }) => {
   }
 
   return (
-    <div className="balance-cards">
+    <div className={`balance-cards ${tokens.length > 3 ? '--space-between' : ''}`}>
       {tokens.map(({ symbol, name, balance }) => (
         <BalanceCard key={name} name={name} symbol={symbol} balance={balance} />
       ))}
