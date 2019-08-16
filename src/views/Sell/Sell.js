@@ -8,7 +8,7 @@ import SellSuccess from './SellSuccess';
 import SellError from './SellError';
 import { getTokens } from '../../store/tokens/tokens.actions';
 import useCash36 from '../../hooks/useCash36';
-import Token from '../../contracts/ERC20Token';
+import Token from '../../contracts/ERC20Burnable';
 import './Sell.scss';
 
 console.warn(Token);
@@ -54,8 +54,12 @@ const Sell = ({ user, tokens, getTokens }) => {
     //   .call();
 
     console.warn(tokenAddress);
+    console.warn(amount);
+    console.warn(account);
 
     const token36Contract = new web3.eth.Contract(Token.abi, tokenAddress);
+
+    console.warn(token36Contract);
 
     // Calculate amount of gas needed and add extra margin of 10%
 
@@ -65,12 +69,12 @@ const Sell = ({ user, tokens, getTokens }) => {
     const estimate = await burnT.estimateGas({ from: account });
     console.warn('===== ESTIMATE', estimate);
 
-    const data = await token36Contract.methods.burn(amount).encodeABI();
+    const data = await burnT.encodeABI();
 
     const options = {
       from: account,
       to: tokenAddress,
-      gas: estimate,
+      gas: 24000,
       nonce: await web3.eth.getTransactionCount(account, 'pending'),
       data
     };
