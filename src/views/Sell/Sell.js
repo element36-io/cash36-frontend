@@ -59,16 +59,18 @@ const Sell = ({ user, tokens, getTokens }) => {
 
     // Calculate amount of gas needed and add extra margin of 10%
 
-    const estimate = await token36Contract.methods
-      .burn(amount)
-      .estimateGas({ from: account });
+    const burnT = await token36Contract.methods.burn(amount);
+    console.warn('====== BURN', burnT);
+
+    const estimate = await burnT.estimateGas({ from: account });
+    console.warn('===== ESTIMATE', estimate);
 
     const data = await token36Contract.methods.burn(amount).encodeABI();
 
     const options = {
       from: account,
       to: tokenAddress,
-      gas: estimate + Math.round(estimate * 0.1),
+      gas: estimate,
       nonce: await web3.eth.getTransactionCount(account, 'pending'),
       data
     };
