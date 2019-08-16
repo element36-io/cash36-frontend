@@ -1,14 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Cash36Contract, Token36Contract } from 'cash36-contracts';
+// import { Cash36Contract } from 'cash36-contracts';
 import SellTokens from './SellTokens';
 import SellConfirmation from './SellConfirmation';
 import SellSuccess from './SellSuccess';
 import SellError from './SellError';
 import { getTokens } from '../../store/tokens/tokens.actions';
 import useCash36 from '../../hooks/useCash36';
+import Token from '../../contracts/ERC20Token';
 import './Sell.scss';
+
+console.warn(Token);
 
 const Sell = ({ user, tokens, getTokens }) => {
   const [step, setStep] = useState(0);
@@ -39,20 +42,20 @@ const Sell = ({ user, tokens, getTokens }) => {
     let { web3, networkId } = cash36;
     const { account } = user;
     const { symbol, amount } = values;
+    const { tokenAddress } = tokens.filter(token => token.symbol === symbol)[0];
 
-    const cash36Contract = new web3.eth.Contract(
-      Cash36Contract.abi,
-      Cash36Contract.networks[networkId].address
-    );
+    // const cash36Contract = new web3.eth.Contract(
+    //   Cash36Contract.abi,
+    //   Cash36Contract.networks[networkId].address
+    // );
 
-    const tokenAddress = await cash36Contract.methods
-      .getTokenBySymbol(symbol)
-      .call();
+    // const tokenAddress = await cash36Contract.methods
+    //   .getTokenBySymbol(symbol)
+    //   .call();
 
-    const token36Contract = new web3.eth.Contract(
-      Token36Contract.abi,
-      tokenAddress
-    );
+    console.warn(tokenAddress);
+
+    const token36Contract = new web3.eth.Contract(Token.abi, tokenAddress);
 
     // Calculate amount of gas needed and add extra margin of 10%
 
