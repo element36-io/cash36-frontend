@@ -17,7 +17,7 @@ import {
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-test('dispatches GET_TOKENS action', async () => {
+test('dispatches getTokens action', async () => {
   const tokens = [
     {
       symbol: 'CHF36'
@@ -37,7 +37,7 @@ test('dispatches GET_TOKENS action', async () => {
   mockAxios.get.mockRestore();
 });
 
-test('dispatches GET_USER_ACTIVITY with no queryParams', async () => {
+test('dispatches getUserActivity with no queryParams', async () => {
   const userActivity = [{ activity: 'activity' }];
 
   mockAxios.get.mockImplementationOnce(() =>
@@ -59,7 +59,7 @@ test('dispatches GET_USER_ACTIVITY with no queryParams', async () => {
   mockAxios.get.mockRestore();
 });
 
-test('dispatches GET_USER_ACTIVITY with empty queryParams', async () => {
+test('dispatches getUserActivity with empty queryParams', async () => {
   const userActivity = [{ activity: 'activity' }];
 
   const queryParams = {
@@ -90,7 +90,7 @@ test('dispatches GET_USER_ACTIVITY with empty queryParams', async () => {
   mockAxios.get.mockRestore();
 });
 
-test('dispatches GET_USER_ACTIVITY with queryParams', async () => {
+test('dispatches getUserActivity with queryParams', async () => {
   const userActivity = [{ activity: 'activity' }];
 
   const queryParams = {

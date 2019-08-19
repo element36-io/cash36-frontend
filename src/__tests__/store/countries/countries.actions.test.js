@@ -9,7 +9,7 @@ import { getCountries } from '../../../store/countries/countries.actions';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-test('dispatches GET_COUNTRIES action', async () => {
+test('dispatches getCountries action', async () => {
   const countries = [{ code: 'CH', name: 'Switzerland' }];
   const nationalities = [{ code: 'CH', name: 'Switzerland' }];
 
