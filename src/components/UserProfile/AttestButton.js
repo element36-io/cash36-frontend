@@ -4,8 +4,8 @@ import { CircularProgress } from '@material-ui/core';
 import DefaultButton from '../Buttons/DefaultButton';
 
 const AttestButton = ({
-  user: { currentLevel, verified },
-  onClick,
+  user: { currentLevel, verified, name },
+  clickCallback,
   attesting
 }) => {
   if (verified === undefined) verified = [];
@@ -15,12 +15,30 @@ const AttestButton = ({
   const Tier2Attested =
     verified.filter(el => el.claim.element36Tier2).length > 0;
 
+  const clickHandler = () => {
+    let tier = 1;
+    if (currentLevel === 'Tier_2') tier = 2;
+    const attestName = `element36Tier${tier}`;
+    const claim = {
+      [attestName]: {
+        Name: name,
+        Tier: tier,
+        'verified on': new Date()
+      }
+    };
+    clickCallback(claim, attestName);
+  };
+
   if (
     (currentLevel === 'Tier_1' && !Tier1Attested) ||
     (currentLevel === 'Tier_2' && !Tier2Attested)
   ) {
     return (
-      <DefaultButton variant="contained" onClick={onClick} disabled={attesting}>
+      <DefaultButton
+        variant="contained"
+        onClick={clickHandler}
+        disabled={attesting}
+      >
         {attesting ? (
           <CircularProgress color="secondary" size={20} />
         ) : (
@@ -35,7 +53,7 @@ const AttestButton = ({
 
 AttestButton.propTypes = {
   user: PropTypes.object.isRequired,
-  onClick: PropTypes.func.isRequired,
+  clickCallback: PropTypes.func.isRequired,
   attesting: PropTypes.bool
 };
 
