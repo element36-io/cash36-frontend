@@ -28,7 +28,21 @@ test('dispatches getTokens action', async () => {
 
   const store = mockStore();
 
-  const expectedActions = [{ type: GET_TOKENS, payload: tokens }];
+  const expectedActions = [
+    {
+      type: GET_TOKENS,
+      payload: {
+        fetchingTokens: true
+      }
+    },
+    {
+      type: GET_TOKENS,
+      payload: {
+        tokens,
+        fetchingTokens: false
+      }
+    }
+  ];
 
   await store.dispatch(getTokens());
 
