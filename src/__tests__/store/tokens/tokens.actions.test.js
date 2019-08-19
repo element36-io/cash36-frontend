@@ -26,7 +26,7 @@ test('dispatches GET_TOKENS action', async () => {
 
   mockAxios.get.mockImplementationOnce(() => Promise.resolve({ data: tokens }));
 
-  const store = mockStore({});
+  const store = mockStore();
 
   const expectedActions = [{ type: GET_TOKENS, payload: tokens }];
 
