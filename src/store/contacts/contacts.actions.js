@@ -1,11 +1,13 @@
 import API from '../../config/api';
 import { handleError } from '../../helpers/error.helpers';
 
-export const GET_CONTACTS = 'GET_CONTACTS';
-export const GET_CONTACTS_SUCCESS = 'GET_CONTACTS_SUCCESS';
-export const CONTACTS_ERROR = 'CONTACTS_ERROR';
-export const ADD_CONTACTS = 'ADD_CONTACTS';
-export const REMOVE_CONTACTS = 'REMOVE_CONTACTS';
+import {
+  GET_CONTACTS,
+  GET_CONTACTS_SUCCESS,
+  ADD_CONTACTS,
+  REMOVE_CONTACTS,
+  CONTACTS_ERROR
+} from './contacts.types';
 
 export const getContacts = () => async dispatch => {
   try {
@@ -17,7 +19,6 @@ export const getContacts = () => async dispatch => {
       payload: response.data
     });
   } catch (error) {
-    // Do better error handling
     dispatch({ type: CONTACTS_ERROR, payload: error });
     return handleError(error);
   }

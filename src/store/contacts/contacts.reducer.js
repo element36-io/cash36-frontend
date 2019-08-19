@@ -4,7 +4,7 @@ import {
   CONTACTS_ERROR,
   REMOVE_CONTACTS,
   ADD_CONTACTS
-} from './contacts.actions';
+} from './contacts.types';
 
 const initialState = {
   contactsList: [],
@@ -42,6 +42,7 @@ export default (state = initialState, action) => {
       };
     case ADD_CONTACTS:
       return {
+        ...state,
         contactsList: [...state.contactsList, action.payload],
         error: false
       };
