@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { Cash36Contract } from 'cash36-contracts';
 import SellTokens from './SellTokens';
 import SellConfirmation from './SellConfirmation';
 import SellSuccess from './SellSuccess';
@@ -10,8 +9,6 @@ import { getTokens } from '../../store/tokens/tokens.actions';
 import useCash36 from '../../hooks/useCash36';
 import Token from '../../contracts/ERC20Burnable';
 import './Sell.scss';
-
-console.warn(Token);
 
 const Sell = ({ user, tokens, getTokens }) => {
   const [step, setStep] = useState(0);
@@ -38,59 +35,44 @@ const Sell = ({ user, tokens, getTokens }) => {
     burnTokens();
   };
 
+  const catchError = error => {
+    if (!_isMounted.current) return;
+    setError(error.message ? error.message : 'Selling token was unsuccessful');
+    setStep(3);
+  };
+
   const burnTokens = async () => {
-    let { web3, networkId } = cash36;
+    let { web3 } = cash36;
     const { account } = user;
     const { symbol, amount } = values;
     const { tokenAddress } = tokens.filter(token => token.symbol === symbol)[0];
-
-    // const cash36Contract = new web3.eth.Contract(
-    //   Cash36Contract.abi,
-    //   Cash36Contract.networks[networkId].address
-    // );
-
-    // const tokenAddress = await cash36Contract.methods
-    //   .getTokenBySymbol(symbol)
-    //   .call();
-
-    console.warn(tokenAddress);
-    console.warn(amount);
-    console.warn(account);
-
     const token36Contract = new web3.eth.Contract(Token.abi, tokenAddress);
 
-    console.warn(token36Contract);
+    try {
+      const estimate = await token36Contract.methods
+        .burn(amount)
+        .estimateGas({ from: account });
+      const data = await token36Contract.methods.burn(amount).encodeABI();
 
-    // Calculate amount of gas needed and add extra margin of 10%
+      const options = {
+        from: account,
+        to: tokenAddress,
+        gas: estimate,
+        nonce: await web3.eth.getTransactionCount(account, 'pending'),
+        data
+      };
 
-    const burnT = await token36Contract.methods.burn(amount);
-    console.warn('====== BURN', burnT);
-
-    const estimate = await burnT.estimateGas({ from: account });
-    console.warn('===== ESTIMATE', estimate);
-
-    const data = await burnT.encodeABI();
-
-    const options = {
-      from: account,
-      to: tokenAddress,
-      gas: 24000,
-      nonce: await web3.eth.getTransactionCount(account, 'pending'),
-      data
-    };
-
-    return web3.eth
-      .sendTransaction(options)
-      .on('receipt', () => {
-        if (_isMounted.current) setStep(2);
-      })
-      .on('error', () => {
-        // Update with proper error message
-        if (_isMounted.current) {
-          setError('Selling token was unsuccessful');
-          setStep(3);
-        }
-      });
+      return web3.eth
+        .sendTransaction(options)
+        .on('receipt', () => {
+          if (_isMounted.current) setStep(2);
+        })
+        .on('error', error => {
+          catchError(error);
+        });
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const renderStep = () => {
