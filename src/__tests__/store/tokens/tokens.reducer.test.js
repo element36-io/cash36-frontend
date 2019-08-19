@@ -44,7 +44,7 @@ test('updates the state after GET_USER_ACTIVITY was called', () => {
     payload: userActivity
   };
 
-  const state = tokensReducer({}, action);
+  const state = tokensReducer(initialState, action);
 
   expect(state).toEqual({
     ...initialState,
