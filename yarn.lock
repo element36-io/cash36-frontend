@@ -2503,10 +2503,10 @@ caseless@~0.12.0:
   resolved "http://167.99.243.81:4873/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
   integrity sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
 
-cash36-contracts@0.3.2:
-  version "0.3.2"
-  resolved "http://167.99.243.81:4873/cash36-contracts/-/cash36-contracts-0.3.2.tgz#8f790fac75a91bb9c7786c5c3c67b3b3a8ed7259"
-  integrity sha512-NsK6/0/JEfLDWalI2NjkeY5S/c/PJ26PhGYSxuTivIw2XOvTskHJhr4NMzU6pB3GOe03SXB83M5C+C4XAPEHng==
+cash36-contracts@0.3.4:
+  version "0.3.4"
+  resolved "http://167.99.243.81:4873/cash36-contracts/-/cash36-contracts-0.3.4.tgz#bb416b8caee023db1f4dd749550053dd16e4d5b8"
+  integrity sha512-xwyloa8Dp9VEoiudUbW63HbfqTMKyDslV5ib360rEmG2MRpanIjrERb9CXRHixTjiruM3r8dZAs8oFGeA21Lig==
   dependencies:
     openzeppelin-solidity "2.3.0"
     truffle "5.0.22"

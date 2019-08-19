@@ -10,13 +10,26 @@ import {
 
 export const getTokens = () => async dispatch => {
   try {
+    dispatch({
+      type: GET_TOKENS,
+      payload: {
+        fetchingTokens: true
+      }
+    });
+
     const response = await API.get('/exchange/tokens');
 
     dispatch({
       type: GET_TOKENS,
-      payload: response.data
+      payload: { tokens: response.data, fetchingTokens: false }
     });
   } catch (error) {
+    dispatch({
+      type: GET_TOKENS,
+      payload: {
+        fetchingTokens: false
+      }
+    });
     return handleError(error);
   }
 };

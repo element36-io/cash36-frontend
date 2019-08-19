@@ -7,7 +7,8 @@ import {
 
 const initialState = {
   historyFiltered: false,
-  fetchingFilters: false
+  fetchingFilters: false,
+  fetchingTokens: false
 };
 
 export default (state = initialState, action) => {
@@ -15,7 +16,7 @@ export default (state = initialState, action) => {
     case GET_TOKENS:
       return {
         ...state,
-        tokens: action.payload
+        ...action.payload
       };
     case FETCHING_FILTERS:
       return {
@@ -32,6 +33,7 @@ export default (state = initialState, action) => {
         ...state,
         userActivity: action.payload
       };
+
     default:
       return state;
   }
