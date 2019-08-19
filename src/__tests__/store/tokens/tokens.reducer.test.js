@@ -6,6 +6,12 @@ import {
   HISTORY_FILTERED
 } from '../../../store/tokens/tokens.types';
 
+const initialState = {
+  historyFiltered: false,
+  fetchingFilters: false,
+  fetchingTokens: false
+};
+
 test('updates the state after GET_TOKENS was called', () => {
   const tokens = [
     {
@@ -15,12 +21,17 @@ test('updates the state after GET_TOKENS was called', () => {
 
   const action = {
     type: GET_TOKENS,
-    payload: tokens
+    payload: {
+      tokens
+    }
   };
 
-  const state = tokensReducer({}, action);
+  const state = tokensReducer(initialState, action);
 
-  expect(state.tokens).toEqual(action.payload);
+  expect(state).toEqual({
+    ...initialState,
+    tokens: action.payload.tokens
+  });
 });
 
 test('updates the state after GET_USER_ACTIVITY was called', () => {
@@ -35,7 +46,10 @@ test('updates the state after GET_USER_ACTIVITY was called', () => {
 
   const state = tokensReducer({}, action);
 
-  expect(state.userActivity).toEqual(action.payload);
+  expect(state).toEqual({
+    ...initialState,
+    userActivity: action.payload
+  });
 });
 
 test('updates the state after FETCHING_FILTERS was called', () => {
