@@ -3,6 +3,10 @@
 .balance-cards {
   padding-bottom: .5rem;
 
+  &.--space-between {
+    justify-content: space-between;
+  }
+
   @include desktop {
     display: flex;
     flex-wrap: wrap;
