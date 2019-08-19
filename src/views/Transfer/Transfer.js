@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
-import { Cash36Contract, Token36Contract } from 'cash36-contracts';
 import TransferAddress from './TransferAddress';
 import TransferAmount from './TransferAmount';
 import BackButton from '../../components/Buttons/BackButton';
 import { getTokens } from '../../store/tokens/tokens.actions';
 import { getContacts } from '../../store/contacts/contacts.actions';
 import useCash36 from '../../hooks/useCash36';
+import Token from '../../contracts/ERC20Burnable';
 import TransferConfirmation from './TransferConfirmation';
 import TransferSuccess from './TransferSuccess';
 import TransferError from './TransferError';
@@ -63,60 +63,55 @@ const Transfer = ({
   };
 
   const sendTransfer = amount => {
-    try {
-      setValues({ ...amount });
-      setStep(2);
-      transferTokens(amount);
-    } catch (error) {
-      console.log(error);
-    }
+    setValues({ ...amount });
+    setStep(2);
+    transferTokens(amount);
+  };
+
+  const catchError = error => {
+    if (!_isMounted.current) return;
+    setError(
+      error.message
+        ? error.message
+        : 'Transfer has been denied via mobile device'
+    );
+    setStep(4);
   };
 
   const transferTokens = async transferValues => {
-    const { web3, networkId } = cash36;
+    const { web3 } = cash36;
     const { contactAddress } = target;
     const { amount, symbol } = transferValues;
+    const { tokenAddress } = tokens.filter(token => token.symbol === symbol)[0];
+    const token36Contract = new web3.eth.Contract(Token.abi, tokenAddress);
 
-    const cash36Contract = new web3.eth.Contract(
-      Cash36Contract.abi,
-      Cash36Contract.networks[networkId].address
-    );
-    const tokenAddress = await cash36Contract.methods
-      .getTokenBySymbol(symbol)
-      .call();
-    const token36Contract = new web3.eth.Contract(
-      Token36Contract.abi,
-      tokenAddress
-    );
+    try {
+      const estimate = await token36Contract.methods
+        .transfer(contactAddress, amount)
+        .estimateGas({ from: account });
+      const data = await token36Contract.methods
+        .transfer(contactAddress, amount)
+        .encodeABI();
 
-    // Calculate amount of gas needed and add extra margin of 10%
-    const estimate = await token36Contract.methods
-      .transfer(contactAddress, amount)
-      .estimateGas({ from: account });
-    const data = await token36Contract.methods
-      .transfer(contactAddress, amount)
-      .encodeABI();
+      const options = {
+        from: account,
+        to: tokenAddress,
+        gas: estimate + Math.round(estimate * 0.1),
+        nonce: await web3.eth.getTransactionCount(account, 'pending'),
+        data
+      };
 
-    const options = {
-      from: account,
-      to: tokenAddress,
-      gas: estimate + Math.round(estimate * 0.1),
-      nonce: await web3.eth.getTransactionCount(account, 'pending'),
-      data
-    };
-
-    return web3.eth
-      .sendTransaction(options)
-      .once('transactionHash', hash => {
-        if (_isMounted.current) setStep(3);
-      })
-      .on('error', error => {
-        console.log(error);
-        if (_isMounted.current) {
-          setError('Transfer has been denied via mobile device');
-          setStep(4);
-        }
-      });
+      return web3.eth
+        .sendTransaction(options)
+        .once('transactionHash', hash => {
+          if (_isMounted.current) setStep(3);
+        })
+        .on('error', error => {
+          catchError(error);
+        });
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const renderStep = () => {

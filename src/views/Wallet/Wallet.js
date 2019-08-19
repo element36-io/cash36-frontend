@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 import Header from '../../components/Header';
+import PageLoader from '../../components/PageLoader';
 import Home from '../Home';
 import Buy from '../Buy';
 import Sell from '../Sell';
@@ -10,11 +11,19 @@ import History from '../History';
 import Contacts from '../Contacts';
 import Kyc from '../Kyc';
 
-const Wallet = ({ isAuthenticated }) => {
+const Wallet = () => {
+  const { isAuthenticated } = useSelector(
+    ({ auth }) => ({
+      isAuthenticated: auth.isAuthenticated
+    }),
+    shallowEqual
+  );
+
   if (!isAuthenticated) return <Redirect to="/login" />;
 
   return (
     <Fragment>
+      <PageLoader />
       <Header />
       <Switch>
         <Route exact path="/" component={Home} />
@@ -29,8 +38,4 @@ const Wallet = ({ isAuthenticated }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
-});
-
-export default connect(mapStateToProps)(Wallet);
+export default Wallet;

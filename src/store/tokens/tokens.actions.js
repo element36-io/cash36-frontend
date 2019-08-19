@@ -2,19 +2,33 @@ import API from '../../config/api';
 import { handleError } from '../../helpers/error.helpers';
 
 export const GET_TOKENS = 'GET_TOKENS';
+
 export const GET_USER_ACTIVITY = 'GET_USER_ACTIVITY';
 export const FETCHING_FILTERS = 'FETCHING_FILTERS';
 export const HISTORY_FILTERED = 'HISTORY_FILTERED';
 
 export const getTokens = () => async dispatch => {
   try {
+    dispatch({
+      type: GET_TOKENS,
+      payload: {
+        fetchingTokens: true
+      }
+    });
+
     const response = await API.get('/exchange/tokens');
 
     dispatch({
       type: GET_TOKENS,
-      payload: response.data
+      payload: { tokens: response.data, fetchingTokens: false }
     });
   } catch (error) {
+    dispatch({
+      type: GET_TOKENS,
+      payload: {
+        fetchingTokens: false
+      }
+    });
     return handleError(error);
   }
 };

@@ -7,11 +7,11 @@ import ActionStatus from '../../../components/ActionStatus';
 const TransferConfirmation = ({ target: { contactAddress, contactName } }) => (
   <div className="transfer__transfer-status">
     <ActionStatus type="progress" title="Awaiting Confirmation" />
-    <p>
+    <div>
       Before we transfer your money to{' '}
       <span>{contactName || <TruncateString text={contactAddress} />}</span> you
       need to approve the transaction on your mobile device.
-    </p>
+    </div>
     <TransactionFooter />
   </div>
 );
