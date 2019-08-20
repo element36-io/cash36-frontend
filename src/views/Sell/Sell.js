@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Cash36Contract, Token36Contract } from 'cash36-contracts';
 import SellTokens from './SellTokens';
 import SellConfirmation from './SellConfirmation';
 import SellSuccess from './SellSuccess';
 import SellError from './SellError';
 import { getTokens } from '../../store/tokens/tokens.actions';
 import useCash36 from '../../hooks/useCash36';
+import Token from '../../contracts/ERC20Burnable';
 import './Sell.scss';
 
 const Sell = ({ user, tokens, getTokens }) => {
@@ -35,53 +35,44 @@ const Sell = ({ user, tokens, getTokens }) => {
     burnTokens();
   };
 
+  const catchError = error => {
+    if (!_isMounted.current) return;
+    setError(error.message ? error.message : 'Selling token was unsuccessful');
+    setStep(3);
+  };
+
   const burnTokens = async () => {
-    let { web3, networkId } = cash36;
+    let { web3 } = cash36;
     const { account } = user;
     const { symbol, amount } = values;
+    const { tokenAddress } = tokens.filter(token => token.symbol === symbol)[0];
+    const token36Contract = new web3.eth.Contract(Token.abi, tokenAddress);
 
-    const cash36Contract = new web3.eth.Contract(
-      Cash36Contract.abi,
-      Cash36Contract.networks[networkId].address
-    );
+    try {
+      const estimate = await token36Contract.methods
+        .burn(amount)
+        .estimateGas({ from: account });
+      const data = await token36Contract.methods.burn(amount).encodeABI();
 
-    const tokenAddress = await cash36Contract.methods
-      .getTokenBySymbol(symbol)
-      .call();
+      const options = {
+        from: account,
+        to: tokenAddress,
+        gas: estimate,
+        nonce: await web3.eth.getTransactionCount(account, 'pending'),
+        data
+      };
 
-    const token36Contract = new web3.eth.Contract(
-      Token36Contract.abi,
-      tokenAddress
-    );
-
-    // Calculate amount of gas needed and add extra margin of 10%
-
-    const estimate = await token36Contract.methods
-      .burn(amount)
-      .estimateGas({ from: account });
-
-    const data = await token36Contract.methods.burn(amount).encodeABI();
-
-    const options = {
-      from: account,
-      to: tokenAddress,
-      gas: estimate + Math.round(estimate * 0.1),
-      nonce: await web3.eth.getTransactionCount(account, 'pending'),
-      data
-    };
-
-    return web3.eth
-      .sendTransaction(options)
-      .on('receipt', () => {
-        if (_isMounted.current) setStep(2);
-      })
-      .on('error', () => {
-        // Update with proper error message
-        if (_isMounted.current) {
-          setError('Selling token was unsuccessful');
-          setStep(3);
-        }
-      });
+      return web3.eth
+        .sendTransaction(options)
+        .on('receipt', () => {
+          if (_isMounted.current) setStep(2);
+        })
+        .on('error', error => {
+          catchError(error);
+        });
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const renderStep = () => {

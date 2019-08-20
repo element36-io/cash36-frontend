@@ -6,7 +6,8 @@ const FileInput = props => {
   const { documentType, changeCallback, removeCallback } = props;
   const [progress, setProgress] = useState(0);
   const [name, setName] = useState(null);
-  const [error, setError] = useState(false);
+  const [typeError, setTypeError] = useState(false);
+  const [sizeError, setSizeError] = useState(false);
   const fileInput = React.createRef();
 
   const handleChange = evt => {
@@ -21,11 +22,14 @@ const FileInput = props => {
         .pop()
         .toLowerCase()
     );
-    setProgress(0);
-    setName(isValidFileType ? files[0].name : null);
-    setError(!isValidFileType);
+    const isValidSize = files[0].size < 10485760;
 
-    if (!isValidFileType) {
+    setProgress(0);
+    setName(isValidFileType && isValidSize ? files[0].name : null);
+    setTypeError(!isValidFileType);
+    setSizeError(!isValidSize);
+
+    if (!isValidFileType || !isValidSize) {
       removeCallback(documentType);
       return;
     }
@@ -47,7 +51,7 @@ const FileInput = props => {
     <div className="tier2-form__file-input__container">
       <label
         className={`tier2-form__file-input ${name ? 'active' : ''} ${
-          error ? 'error' : ''
+          typeError || sizeError ? 'error' : ''
         }`}
       >
         <div className="tier2-form__file-input__body">
@@ -69,7 +73,8 @@ const FileInput = props => {
         )}
         <input type="file" ref={fileInput} onChange={handleChange} />
       </label>
-      {error && <p>Only png, jpg, jpeg and pdf files are allowed</p>}
+      {typeError && <p>Only png, jpg, jpeg and pdf files are allowed</p>}
+      {sizeError && <p>Max file size is 10MB</p>}
     </div>
   );
 };

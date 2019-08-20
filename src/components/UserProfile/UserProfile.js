@@ -13,18 +13,8 @@ import './UserProfile.scss';
 const UserProfile = ({ user, alt, confirmAttestation }) => {
   const [attesting, setAttesting] = useState(false);
 
-  const handleAttestClick = async () => {
-    const { currentLevel, name, did, pushToken, boxPub } = user;
-    let tier = 1;
-    if (currentLevel === 'Tier_2') tier = 2;
-    const attestName = `element36Tier${tier}`;
-    const claim = {
-      [attestName]: {
-        Name: name,
-        Tier: tier,
-        'verified on': new Date()
-      }
-    };
+  const handleAttestClick = async (claim, attestName) => {
+    const { did, pushToken, boxPub } = user;
 
     setAttesting(true);
     try {
@@ -72,7 +62,7 @@ const UserProfile = ({ user, alt, confirmAttestation }) => {
           <VerificationButton user={user} />
           <AttestButtton
             user={user}
-            onClick={handleAttestClick}
+            clickCallback={handleAttestClick}
             attesting={attesting}
           />
         </div>
