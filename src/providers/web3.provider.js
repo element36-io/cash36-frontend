@@ -21,8 +21,7 @@ const Web3Provider = ({ children }) => {
         'Injected web3 detected. We will override web3 provider. Your plugin might not work anymore.'
       );
     } else {
-      web3js = new Web3();
-      web3js.setProvider(new web3js.providers.HttpProvider(WEB3_NODE));
+      web3js = new Web3(WEB3_NODE);
     }
 
     window.web3 = web3js;

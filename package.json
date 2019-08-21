@@ -10,7 +10,6 @@
     "@material-ui/pickers": "^3.1.1",
     "@material-ui/styles": "^4.1.1",
     "axios": "^0.18.0",
-    "cash36-contracts": "0.3.4",
     "classnames": "2.2.5",
     "downshift": "^3.2.10",
     "ethjs-provider-http": "^0.1.6",
@@ -43,7 +42,7 @@
     "redux-thunk": "^2.2.0",
     "uport-transports": "^0.2.6",
     "validator": "^10.8.0",
-    "web3": "1.0.0-beta.34",
+    "web3": "1.2.1",
     "yup": "^0.27.0"
   },
   "devDependencies": {
