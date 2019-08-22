@@ -42,7 +42,7 @@
     "redux-thunk": "^2.2.0",
     "uport-transports": "^0.2.6",
     "validator": "^10.8.0",
-    "web3": "1.2.1",
+    "web3": "2.0.0-alpha.1",
     "yup": "^0.27.0"
   },
   "devDependencies": {
