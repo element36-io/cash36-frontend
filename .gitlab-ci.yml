@@ -19,7 +19,7 @@ build:
     - apk add --no-cache nodejs nodejs-npm git python g++ make
     - npm install -g yarn
     - yarn --registry http://167.99.243.81:4873/
-    - yarn build
+    - CI=false yarn build
   only:
     - develop
 
