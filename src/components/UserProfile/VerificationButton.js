@@ -39,7 +39,7 @@ const VerificationButton = ({ currentProcessStatus, caseId }) => {
 };
 
 VerificationButton.propTypes = {
-  currentProcessStatus: PropTypes.string.isRequired,
+  currentProcessStatus: PropTypes.string,
   caseId: PropTypes.string
 };
 
