@@ -4,6 +4,7 @@ import {
   UPDATE_BADGE_COUNT,
   UPDATE_LAST_READ
 } from './notifications.types';
+import { handleError } from '../../helpers/error.helpers';
 
 export const resetBadgeCount = () => {
   return {
@@ -26,15 +27,14 @@ export const updateLastRead = lastRead => {
   };
 };
 
-export const fetchNotifications = () => {
-  return async dispatch => {
+export const fetchNotifications = () => async dispatch => {
+  try {
     const response = await API.get('/exchange/notifications');
+
     dispatch({
       type: FETCH_NOTIFICATIONS,
       payload: response.data
     });
-
-    if (response.error) return;
 
     const lastRead = localStorage.getItem('lastRead');
     let badgeCount = 0;
@@ -48,5 +48,7 @@ export const fetchNotifications = () => {
     });
 
     dispatch(updateBadgeCount(badgeCount));
-  };
+  } catch (error) {
+    return handleError(error);
+  }
 };
