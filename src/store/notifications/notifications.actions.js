@@ -1,30 +1,32 @@
 import API from '../../config/api';
-export const FETCH_NOTIFICATIONS = 'FETCH_NOTIFICATIONS';
-export const UPDATE_BADGE_COUNT = 'UPDATE_BADGE_COUNT';
-export const UPDATE_LAST_READ = 'UPDATE_LAST_READ';
+import {
+  FETCH_NOTIFICATIONS,
+  UPDATE_BADGE_COUNT,
+  UPDATE_LAST_READ
+} from './notifications.types';
 
-export function resetBadgeCount () {
+export const resetBadgeCount = () => {
   return {
     type: UPDATE_BADGE_COUNT,
-    badgeCount: 0
+    payload: 0
   };
-}
+};
 
-export function updateBadgeCount (badgeCount) {
+export const updateBadgeCount = badgeCount => {
   return {
     type: UPDATE_BADGE_COUNT,
-    badgeCount: badgeCount
+    payload: badgeCount
   };
-}
+};
 
-export function updateLastRead (lastRead) {
+export const updateLastRead = lastRead => {
   return {
     type: UPDATE_LAST_READ,
-    lastRead
+    payload: lastRead
   };
-}
+};
 
-export function fetchNotifications () {
+export const fetchNotifications = () => {
   return async dispatch => {
     const response = await API.get('/exchange/notifications');
     dispatch({
@@ -47,4 +49,4 @@ export function fetchNotifications () {
 
     dispatch(updateBadgeCount(badgeCount));
   };
-}
+};

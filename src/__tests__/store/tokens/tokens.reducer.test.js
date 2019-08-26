@@ -12,7 +12,7 @@ const initialState = {
   fetchingTokens: false
 };
 
-test('updates the state after GET_TOKENS was called', () => {
+test('updates the state after GET_TOKENS was dispatched', () => {
   const tokens = [
     {
       symbol: 'CHF36'
@@ -34,7 +34,7 @@ test('updates the state after GET_TOKENS was called', () => {
   });
 });
 
-test('updates the state after GET_USER_ACTIVITY was called', () => {
+test('updates the state after GET_USER_ACTIVITY was dispatched', () => {
   const userActivity = {
     activity: 'activity'
   };
@@ -52,7 +52,7 @@ test('updates the state after GET_USER_ACTIVITY was called', () => {
   });
 });
 
-test('updates the state after FETCHING_FILTERS was called', () => {
+test('updates the state after FETCHING_FILTERS was dispatched', () => {
   const action = {
     type: FETCHING_FILTERS,
     payload: true
@@ -63,7 +63,7 @@ test('updates the state after FETCHING_FILTERS was called', () => {
   expect(state.fetchingFilters).toBe(true);
 });
 
-test('updates the state after HISTORY_FILTERED was called', () => {
+test('updates the state after HISTORY_FILTERED was dispatched', () => {
   const action = {
     type: HISTORY_FILTERED,
     payload: true

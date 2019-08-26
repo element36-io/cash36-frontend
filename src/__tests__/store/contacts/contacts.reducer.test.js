@@ -13,7 +13,7 @@ const initialState = {
   error: null
 };
 
-test('updates the state after GET_CONTACTS was called', () => {
+test('updates the state after GET_CONTACTS was dispatched', () => {
   const action = {
     type: GET_CONTACTS
   };
@@ -26,7 +26,7 @@ test('updates the state after GET_CONTACTS was called', () => {
   });
 });
 
-test('updates the state after GET_CONTACTS_SUCCESS was called', () => {
+test('updates the state after GET_CONTACTS_SUCCESS was dispatched', () => {
   const contacts = [{ id: '1' }, { id: '2' }];
 
   const action = {
@@ -43,7 +43,7 @@ test('updates the state after GET_CONTACTS_SUCCESS was called', () => {
   });
 });
 
-test('updates the state after CONTACTS_ERROR was called', () => {
+test('updates the state after CONTACTS_ERROR was dispatched', () => {
   const error = {
     message: 'error message'
   };
@@ -62,7 +62,7 @@ test('updates the state after CONTACTS_ERROR was called', () => {
   });
 });
 
-test('updates the state after REMOVE_CONTACTS was called', () => {
+test('updates the state after REMOVE_CONTACTS was dispatched', () => {
   const initialState = {
     contactsList: [{ id: '1' }, { id: '2' }],
     fetching: false,
@@ -85,7 +85,7 @@ test('updates the state after REMOVE_CONTACTS was called', () => {
   });
 });
 
-test('updates the state after ADD_CONTACTS was called', () => {
+test('updates the state after ADD_CONTACTS was dispatched', () => {
   const initialState = {
     contactsList: [{ id: '1' }, { id: '2' }],
     fetching: false,

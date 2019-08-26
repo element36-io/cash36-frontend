@@ -101,7 +101,7 @@ class Buy extends Component {
                 handleAutoTransferClick={this.handleAutoTransferClick}
               />
             )}
-            {step === 2.1 && (  
+            {step === 2.1 && (
               <PaymentInfo info={manualTransferData} title="Trigger your payment">
                 <div className="payment-info__message--credit">
                   <p>

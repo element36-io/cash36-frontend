@@ -40,7 +40,7 @@ const VerificationButton = ({ currentProcessStatus, caseId }) => {
 
 VerificationButton.propTypes = {
   currentProcessStatus: PropTypes.string.isRequired,
-  caseId: PropTypes.string.isRequired
+  caseId: PropTypes.string
 };
 
 export default VerificationButton;

@@ -3,7 +3,7 @@ import {
   FETCH_NOTIFICATIONS,
   UPDATE_BADGE_COUNT,
   UPDATE_LAST_READ
-} from './notifications.actions';
+} from './notifications.types';
 
 // Maybe store last read on backend ?
 const initialState = {
@@ -24,13 +24,13 @@ export default (state = initialState, action) => {
     case UPDATE_BADGE_COUNT:
       return {
         ...state,
-        badgeCount: action.badgeCount
+        badgeCount: action.payload
       };
 
     case UPDATE_LAST_READ:
       return {
         ...state,
-        lastRead: action.lastRead
+        lastRead: action.payload
       };
 
     default:
