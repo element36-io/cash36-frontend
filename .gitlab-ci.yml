@@ -8,6 +8,7 @@ services:
 
 stages:
   - build
+  - test
   - package
   - deploy
 
@@ -20,8 +21,17 @@ build:
     - npm install -g yarn
     - yarn --registry http://167.99.243.81:4873/
     - CI=false yarn build
-  only:
-    - develop
+  except:
+    - master
+
+test:
+  state: test
+  tags:
+    - dokcer
+  script:
+    - yarn test
+  except:
+    - master
 
 docker-debug-build:
   stage: package

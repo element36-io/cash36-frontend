@@ -12,7 +12,7 @@ test('renders the component', () => {
 test('renders the component with error-icon when type is undefined', () => {
   const { getByTestId } = render(<ActionStatus type="" />);
 
-  expect(getByTestId('error-icon')).toBeVisible();
+  expect(getByTestId('error-icon')).not.toBeVisible();
 });
 
 test('renders the component with done-icon when type is "success"', () => {
