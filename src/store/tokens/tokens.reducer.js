@@ -3,7 +3,7 @@ import {
   GET_USER_ACTIVITY,
   FETCHING_FILTERS,
   HISTORY_FILTERED
-} from './tokens.actions';
+} from './tokens.types';
 
 const initialState = {
   historyFiltered: false,

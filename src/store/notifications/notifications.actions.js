@@ -1,38 +1,40 @@
 import API from '../../config/api';
-export const FETCH_NOTIFICATIONS = 'FETCH_NOTIFICATIONS';
-export const UPDATE_BADGE_COUNT = 'UPDATE_BADGE_COUNT';
-export const UPDATE_LAST_READ = 'UPDATE_LAST_READ';
+import {
+  FETCH_NOTIFICATIONS,
+  UPDATE_BADGE_COUNT,
+  UPDATE_LAST_READ
+} from './notifications.types';
+import { handleError } from '../../helpers/error.helpers';
 
-export function resetBadgeCount () {
+export const resetBadgeCount = () => {
   return {
     type: UPDATE_BADGE_COUNT,
-    badgeCount: 0
+    payload: 0
   };
-}
+};
 
-export function updateBadgeCount (badgeCount) {
+export const updateBadgeCount = badgeCount => {
   return {
     type: UPDATE_BADGE_COUNT,
-    badgeCount: badgeCount
+    payload: badgeCount
   };
-}
+};
 
-export function updateLastRead (lastRead) {
+export const updateLastRead = lastRead => {
   return {
     type: UPDATE_LAST_READ,
-    lastRead
+    payload: lastRead
   };
-}
+};
 
-export function fetchNotifications () {
-  return async dispatch => {
+export const fetchNotifications = () => async dispatch => {
+  try {
     const response = await API.get('/exchange/notifications');
+
     dispatch({
       type: FETCH_NOTIFICATIONS,
       payload: response.data
     });
-
-    if (response.error) return;
 
     const lastRead = localStorage.getItem('lastRead');
     let badgeCount = 0;
@@ -46,5 +48,7 @@ export function fetchNotifications () {
     });
 
     dispatch(updateBadgeCount(badgeCount));
-  };
-}
+  } catch (error) {
+    return handleError(error);
+  }
+};

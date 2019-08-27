@@ -1,11 +1,12 @@
 import API from '../../config/api';
 import { handleError } from '../../helpers/error.helpers';
 
-export const GET_TOKENS = 'GET_TOKENS';
-
-export const GET_USER_ACTIVITY = 'GET_USER_ACTIVITY';
-export const FETCHING_FILTERS = 'FETCHING_FILTERS';
-export const HISTORY_FILTERED = 'HISTORY_FILTERED';
+import {
+  GET_TOKENS,
+  GET_USER_ACTIVITY,
+  FETCHING_FILTERS,
+  HISTORY_FILTERED
+} from './tokens.types';
 
 export const getTokens = () => async dispatch => {
   try {

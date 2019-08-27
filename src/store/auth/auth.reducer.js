@@ -1,9 +1,9 @@
 import {
   AUTH_USER,
   GET_USER_INFO,
-  CONFIRM_ATTESTATION,
-  GET_CURRENT_KYC_STEP
-} from './auth.actions';
+  GET_CURRENT_KYC_STEP,
+  CONFIRM_ATTESTATION
+} from './auth.types';
 
 const initialState = {
   isAuthenticated: !!localStorage.getItem('access_token'),
@@ -21,8 +21,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated,
-        user,
-        errorMessage: ''
+        user
       };
     case GET_USER_INFO:
       return {

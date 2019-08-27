@@ -2,11 +2,12 @@ import axios from 'axios';
 import API, { API_ROOT } from '../../config/api';
 import { handleError } from '../../helpers/error.helpers';
 
-export const AUTH_USER = 'AUTH_USER';
-export const GET_USER_INFO = 'GET_USER_INFO';
-export const ATTESTATION_PROGRESS = 'ATTESTATION_PROGRESS';
-export const CONFIRM_ATTESTATION = 'CONFIRM_ATTESTATION';
-export const GET_CURRENT_KYC_STEP = 'GET_CURRENT_KYC_STEP';
+import {
+  AUTH_USER,
+  GET_USER_INFO,
+  CONFIRM_ATTESTATION,
+  GET_CURRENT_KYC_STEP
+} from './auth.types';
 
 export const checkUserId = id => API.get(`/auth/user/is-user/${id}`);
 
@@ -106,7 +107,7 @@ export const login = (creds, useMetamask, password) => async dispatch => {
 
     localStorage.setItem('access_token', token.access_token);
     localStorage.setItem('refresh_token', token.refresh_token);
-    let expiresAt = new Date().getTime() + token.expires_in * 1000;
+    const expiresAt = new Date().getTime() + token.expires_in * 1000;
     localStorage.setItem('expires_at', expiresAt);
 
     dispatch({
