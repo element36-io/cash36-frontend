@@ -107,7 +107,7 @@ export const login = (creds, useMetamask, password) => async dispatch => {
 
     localStorage.setItem('access_token', token.access_token);
     localStorage.setItem('refresh_token', token.refresh_token);
-    let expiresAt = new Date().getTime() + token.expires_in * 1000;
+    const expiresAt = new Date().getTime() + token.expires_in * 1000;
     localStorage.setItem('expires_at', expiresAt);
 
     dispatch({
