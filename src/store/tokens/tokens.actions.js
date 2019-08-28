@@ -80,6 +80,10 @@ export const getUserActivity = queryParams => async dispatch => {
       }
     }
   } catch (error) {
+    dispatch({
+      type: FETCHING_FILTERS,
+      payload: false
+    });
     return handleError(error);
   }
 };

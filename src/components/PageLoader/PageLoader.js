@@ -18,9 +18,10 @@ const PageLoader = () => {
     shallowEqual
   );
 
-  useEffect(() => {
+  const hideLoader = () => {
     if (
       _isMounted.current &&
+      loaderStatus.active &&
       !fetchingContacts &&
       !fetchingFilters &&
       !fetchingTokens
@@ -30,10 +31,20 @@ const PageLoader = () => {
         setLoaderStatus({ ...loaderStatus, active: false });
       }, 1000);
     }
+  };
+
+  useEffect(() => {
+    hideLoader();
   }, [fetchingContacts, fetchingFilters, fetchingTokens]);
 
   useEffect(() => {
     _isMounted.current = true;
+
+    setTimeout(() => {
+      hideLoader();
+    }, 3000);
+
+    return () => (_isMounted.current = false);
   }, []);
 
   return loaderStatus.active ? (
