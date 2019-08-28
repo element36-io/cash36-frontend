@@ -48,7 +48,10 @@ const PageLoader = () => {
   }, []);
 
   return loaderStatus.active ? (
-    <div className={`page-loader ${loaderStatus.visible ? '--active' : ''}`}>
+    <div
+      data-testid="page-loader"
+      className={`page-loader ${loaderStatus.visible ? '--active' : ''}`}
+    >
       <CircularProgress color="secondary" size={50} />
     </div>
   ) : null;
