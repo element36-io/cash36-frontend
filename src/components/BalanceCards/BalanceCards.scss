@@ -21,7 +21,7 @@
   @include mobile {
     display: flex;
     flex-wrap: nowrap;
-    overflow: auto;
-    justify-content: space-between;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: auto;
   }
 }
