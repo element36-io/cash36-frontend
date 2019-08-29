@@ -14,7 +14,7 @@ export function renderWithRedux (
   component,
   {
     initialState,
-    store = createStore(reducers, initialState, applyMiddleware[thunk])
+    store = createStore(reducers, initialState, applyMiddleware(thunk))
   } = {}
 ) {
   return {

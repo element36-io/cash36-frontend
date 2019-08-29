@@ -23,6 +23,7 @@ export const ChooseAmountForm = React.memo(
       <div className="choose-amount-form">
         <TextField
           name="amount"
+          id="amount"
           label="Choose Amount"
           type="text"
           onChange={handleAmountChange}
@@ -40,6 +41,7 @@ export const ChooseAmountForm = React.memo(
         />
         <TextField
           name="symbol"
+          id="symbol"
           label="Select Token"
           value={symbol}
           onChange={handleChange}

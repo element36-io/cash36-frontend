@@ -2666,6 +2666,11 @@ color-convert@^1.9.0, color-convert@^1.9.1:
   dependencies:
     color-name "1.1.3"
 
+color-convert@~0.5.0:
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-0.5.3.tgz#bdb6c69ce660fadffe0b0007cc447e1b9f7282bd"
+  integrity sha1-vbbGnOZg+t/+CwAHzER+G59ygr0=
+
 color-name@1.1.3:
   version "1.1.3"
   resolved "http://167.99.243.81:4873/color-name/-/color-name-1.1.3.tgz#a7d0558bd89c42f795dd42328f740831ca53bc25"
@@ -3174,6 +3179,11 @@ cssesc@^1.0.1:
   version "1.0.1"
   resolved "http://167.99.243.81:4873/cssesc/-/cssesc-1.0.1.tgz#ef7bd8d0229ed6a3a7051ff7771265fe7330e0a8"
   integrity sha512-S2hzrpWvE6G/rW7i7IxJfWBYn27QWfOIncUW++8Rbo1VB5zsJDSVPcnI+Q8z7rhxT6/yZeLOCja4cZnghJrNGA==
+
+cssfontparser@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/cssfontparser/-/cssfontparser-1.2.1.tgz#f4022fc8f9700c68029d542084afbaf425a3f3e3"
+  integrity sha1-9AIvyPlwDGgCnVQghK+69CWj8+M=
 
 cssnano-preset-default@^4.0.2:
   version "4.0.2"
@@ -6243,6 +6253,14 @@ istanbul-reports@^1.5.1:
   dependencies:
     handlebars "^4.0.3"
 
+jest-canvas-mock@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/jest-canvas-mock/-/jest-canvas-mock-2.1.1.tgz#fc59b16b093620345c7865f34ef1a16940eec784"
+  integrity sha512-FK/xAFYJmMwyY8IpVrpoHq8Od/99Jmc3g6pnmkhFkYQJoq1Y0ZtEZjs80cREKlxjQxcTMvPpoyGLOmt8KLjlSQ==
+  dependencies:
+    cssfontparser "^1.2.1"
+    parse-color "^1.0.0"
+
 jest-changed-files@^23.4.2:
   version "23.4.2"
   resolved "http://167.99.243.81:4873/jest-changed-files/-/jest-changed-files-23.4.2.tgz#1eed688370cd5eebafe4ae93d34bb3b64968fe83"
@@ -8272,6 +8290,13 @@ parse-asn1@^5.0.0:
     evp_bytestokey "^1.0.0"
     pbkdf2 "^3.0.3"
 
+parse-color@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/parse-color/-/parse-color-1.0.0.tgz#7b748b95a83f03f16a94f535e52d7f3d94658619"
+  integrity sha1-e3SLlag/A/FqlPU15S1/PZRlhhk=
+  dependencies:
+    color-convert "~0.5.0"
+
 parse-glob@^3.0.4:
   version "3.0.4"
   resolved "http://167.99.243.81:4873/parse-glob/-/parse-glob-3.0.4.tgz#b2c376cfb11f35513badd173ef0bb6e3a388391c"
@@ -9586,10 +9611,10 @@ react-resize-detector@~2.3.0:
     prop-types "^15.6.0"
     resize-observer-polyfill "^1.5.0"
 
-react-responsive@^5.0.0:
-  version "5.0.0"
-  resolved "http://167.99.243.81:4873/react-responsive/-/react-responsive-5.0.0.tgz#b6e559b2ce8c4d82b0d47a7a78a74645b977e4af"
-  integrity sha512-oEimZ0FTCC3/pjGDEBHOz06nWbBNDIbMGOdRYp6K9SBUmrqgNAX77hTiqvmRQeLyI97zz4F4kiaFRxFspDxE+w==
+react-responsive@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/react-responsive/-/react-responsive-7.0.0.tgz#0abde0ccbb50e5e8407e3d61dd4696447e7ebd3c"
+  integrity sha512-RukaKD+UI/MIR+P8eUgVGURfiCafRvvcVnq41scT0eEQWHwDGliH/OAlrwIr1oyz8aKLGroZa+U8mTZV5ihPfA==
   dependencies:
     hyphenate-style-name "^1.0.0"
     matchmediaquery "^0.3.0"
