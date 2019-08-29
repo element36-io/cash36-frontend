@@ -65,16 +65,16 @@
     }
   }
 
-    > div {
-      display: flex;
-    }
+  > div {
+    display: flex;
+  }
 
-    > div:last-child {
-      align-items: center;
-    }
+  > div:last-child {
+    align-items: center;
+  }
 
   &__icon {
-    margin-right: .5rem;
+    margin-right: 0.5rem;
   }
 
   &__balance {
