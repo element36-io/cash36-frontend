@@ -72,13 +72,11 @@ export const Buy = ({ getTokens }) => {
       setManualTransferData(response.data);
       setStep(2.1);
     } catch (error) {
-      console.log(error);
       setStep(3);
     }
   };
 
   const handleAutoTransferClick = () => {
-    console.log('auto transfer chosen');
     setStep(2.2);
   };
 
