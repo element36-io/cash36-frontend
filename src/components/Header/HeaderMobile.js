@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import HeaderAlerts from './HeaderAlerts';
-import NavBtn from '../NavBtn';
+import NavButton from '../NavButton';
 import HeaderMobileDropdown from './HeaderMobileDropdown';
 
 const HeaderMobile = ({ logout }) => {
@@ -14,7 +14,7 @@ const HeaderMobile = ({ logout }) => {
   return (
     <div>
       <HeaderAlerts />
-      <NavBtn isActive={activeNav} clickHandler={toggleNav} />
+      <NavButton isActive={activeNav} clickHandler={toggleNav} />
       <HeaderMobileDropdown
         logout={logout}
         isActive={activeNav}

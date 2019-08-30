@@ -1,13 +1,13 @@
-import api from '../../config/api';
+import API from '../../config/api';
 import { handleError } from '../../helpers/error.helpers';
 
-export const GET_COUNTRIES = 'GET_COUNTRIES';
+import { GET_COUNTRIES } from './countries.types';
 
 export const getCountries = () => async dispatch => {
   try {
     const response = await Promise.all([
-      api.get('/compliance/data/countries'),
-      api.get('/compliance/data/nationalities')
+      API.get('/compliance/data/countries'),
+      API.get('/compliance/data/nationalities')
     ]);
 
     dispatch({

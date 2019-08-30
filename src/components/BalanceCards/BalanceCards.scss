@@ -1,7 +1,7 @@
 @import '../../styles/mixins.scss';
 
 .balance-cards {
-  padding-bottom: .5rem;
+  padding-bottom: 0.5rem;
 
   &.--space-between {
     justify-content: space-between;
@@ -16,13 +16,12 @@
     display: flex;
     overflow: auto;
     flex-wrap: nowrap;
-    justify-content: space-between;
   }
 
   @include mobile {
     display: flex;
     flex-wrap: nowrap;
-    overflow: auto;
-    justify-content: space-between;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: auto;
   }
 }

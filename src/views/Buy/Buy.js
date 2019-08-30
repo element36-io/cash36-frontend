@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import API from '../../config/api';
 import BuyTokens from './BuyTokens';
 import { getTokens } from '../../store/tokens/tokens.actions';
@@ -12,135 +14,138 @@ import BuyError from './BuyError';
 
 import './Buy.scss';
 
-class Buy extends Component {
-  state = {
-    step: 0,
-    amount: '',
-    symbol: 'EUR36',
-    manualTransferData: null
+export const Buy = ({ getTokens }) => {
+  const [error, setError] = useState('');
+  const [step, setStep] = useState(0);
+  const [amount, setAmount] = useState('');
+  const [symbol, setSymbol] = useState('EUR36');
+  const [manualTransferData, setManualTransferData] = useState(null);
+
+  const callGetTokens = async () => {
+    try {
+      await getTokens();
+    } catch (error) {
+      setError(error);
+    }
   };
 
-  componentDidMount () {
-    this.props.getTokens();
-  }
+  useEffect(() => {
+    callGetTokens();
+  }, []);
 
-  manualTransferStarted = false;
+  let manualTransferStarted = false;
 
-  nextStep = () => {
-    if (this.state.step === 0) {
-      if (this.state.amount && this.state.symbol) {
-        this.setState({ step: 1 });
+  const nextStep = () => {
+    if (step === 0) {
+      if (amount && symbol) {
+        setStep(1);
       }
     }
   };
 
-  previousStep = () => {
-    this.setState(prevState => {
-      return { step: Math.round(prevState.step - 1) };
-    });
+  const previousStep = () => {
+    setStep(prevState => Math.round(prevState - 1));
   };
 
-  handleManualTransferClick = async () => {
-    if (this.manualTransferStarted) return;
+  const handleChange = event => {
+    const { name, value } = event.target;
 
-    this.manualTransferStarted = true;
+    if (name === 'amount') {
+      setAmount(value);
+    } else if (name === 'symbol') {
+      setSymbol(value);
+    }
+  };
+
+  const handleManualTransferClick = async () => {
+    if (manualTransferStarted) return;
+
+    manualTransferStarted = true;
 
     const data = {
-      amount: parseInt(this.state.amount),
-      symbol: this.state.symbol
+      amount: parseInt(amount),
+      symbol: symbol
     };
 
     try {
       const response = await API.post('/exchange/buy', data);
-      this.setState({
-        manualTransferData: response.data,
-        step: 2.1
-      });
+      setManualTransferData(response.data);
+      setStep(2.1);
     } catch (error) {
-      console.log(error);
-      this.setState({ step: 3 });
+      setStep(3);
     }
   };
 
-  handleAutoTransferClick = () => {
-    console.log('auto transfer chosen');
-    this.setState({ step: 2.2 });
+  const handleAutoTransferClick = () => {
+    setStep(2.2);
   };
 
-  handleChange = event => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
-  };
-
-  handleOrderSubmit = () => {
-    console.log('order submitted');
-  };
-
-  render () {
-    const { step, manualTransferData } = this.state;
-
-    return (
-      <div className="wrapper">
-        <div className="buy paper">
-          {step > 0 && step !== 2.1 && (
-            <BackButton onClick={this.previousStep} />
-          )}
-          <div className="buy__content">
-            {step === 0 && (
+  return (
+    <div className="wrapper">
+      <div className="buy paper">
+        {step > 0 && step !== 2.1 && <BackButton onClick={previousStep} />}
+        <div className="buy__content">
+          {step === 0 && (
+            <Fragment>
               <BuyTokens
-                handleChange={this.handleChange}
-                amount={this.state.amount}
-                symbol={this.state.symbol}
-                nextStep={this.nextStep}
+                handleChange={handleChange}
+                amount={amount}
+                symbol={symbol}
+                nextStep={nextStep}
               />
-            )}
-            {step === 1 && (
-              <PaymentMethod
-                next={this.nextStep}
-                handleManualTransferClick={this.handleManualTransferClick}
-                handleAutoTransferClick={this.handleAutoTransferClick}
-              />
-            )}
-            {step === 2.1 && (  
-              <PaymentInfo info={manualTransferData} title="Trigger your payment">
-                <div className="payment-info__message--credit">
-                  <p>
-                    Tokens will be credited to your account as soon as the transfer is
-                    complete. <br /> You can always check your order status in your account
-                    history.
-                  </p>
-                </div>
-                <TransactionFooter />
-              </PaymentInfo>
-            )}
-            {step === 2.2 && <InitiateAutoPayment next={this.nextStep} />}
-            {step === 3 && <BuyError message="User not enabled or verified." />}
-          </div>
-          <div className="buy__footer">
-            {step < 2 && (
-              <span style={{ fontSize: '1.2rem' }}>
-                Buying cash36 Tokens is as simple as a bank transfer. First,
-                choose amount and type of Token you wish to buy.
-                <br />
-                After that you will receive the transfer instructions. Once we
-                receive the amount, the tokens will be credited to your account.
-              </span>
-            )}
-            {step > 2 && step < 2.2 && (
-              <span style={{ fontSize: '1.6rem' }}>
-                Please make sure your payment will be triggered from your
-                registered bank account
-                {manualTransferData.userIban
-                  ? `: IBAN ${manualTransferData.userIban}`
-                  : '.'}
-              </span>
-            )}
-          </div>
+              <div className="error-text">{error}</div>
+            </Fragment>
+          )}
+          {step === 1 && (
+            <PaymentMethod
+              next={nextStep}
+              handleManualTransferClick={handleManualTransferClick}
+              handleAutoTransferClick={handleAutoTransferClick}
+            />
+          )}
+          {step === 2.1 && (
+            <PaymentInfo info={manualTransferData} title="Trigger your payment">
+              <div className="payment-info__message--credit">
+                <p>
+                  Tokens will be credited to your account as soon as the
+                  transfer is complete. <br /> You can always check your order
+                  status in your account history.
+                </p>
+              </div>
+              <TransactionFooter />
+            </PaymentInfo>
+          )}
+          {step === 2.2 && <InitiateAutoPayment next={nextStep} />}
+          {step === 3 && <BuyError message="User not enabled or verified." />}
+        </div>
+        <div className="buy__footer">
+          {step < 2 && (
+            <span style={{ fontSize: '1.2rem' }}>
+              Buying cash36 Tokens is as simple as a bank transfer. First,
+              choose amount and type of Token you wish to buy.
+              <br />
+              After that you will receive the transfer instructions. Once we
+              receive the amount, the tokens will be credited to your account.
+            </span>
+          )}
+          {step > 2 && step < 2.2 && (
+            <span style={{ fontSize: '1.6rem' }}>
+              Please make sure your payment will be triggered from your
+              registered bank account
+              {manualTransferData.userIban
+                ? `: IBAN ${manualTransferData.userIban}`
+                : '.'}
+            </span>
+          )}
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+Buy.propTypes = {
+  getTokens: PropTypes.func.isRequired
+};
 
 export default connect(
   null,

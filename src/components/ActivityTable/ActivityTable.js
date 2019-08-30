@@ -24,7 +24,7 @@ const ActivityTable = ({ userActivity }) => (
 );
 
 ActivityTable.propTypes = {
-  userActivity: PropTypes.array
+  userActivity: PropTypes.array.isRequired
 };
 
 export default ActivityTable;

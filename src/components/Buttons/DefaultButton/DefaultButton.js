@@ -17,7 +17,15 @@ const DefaultButton = props => {
         opacity: disabled ? '.5' : 1
       }}
     >
-      {submitting ? <CircularProgress color="secondary" size={20} /> : children}
+      {submitting ? (
+        <CircularProgress
+          data-testid="default-button__spinner"
+          color="secondary"
+          size={20}
+        />
+      ) : (
+        children
+      )}
     </Button>
   );
 };

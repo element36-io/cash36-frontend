@@ -7,7 +7,7 @@ import { isNumeric, toInt } from 'validator';
 
 import './ChooseAmountForm.scss';
 
-const ChooseAmountForm = React.memo(
+export const ChooseAmountForm = React.memo(
   ({ tokenSymbols, symbol, amount, handleChange }) => {
     const handleAmountChange = event => {
       const { value } = event.target;
@@ -23,6 +23,7 @@ const ChooseAmountForm = React.memo(
       <div className="choose-amount-form">
         <TextField
           name="amount"
+          id="amount"
           label="Choose Amount"
           type="text"
           onChange={handleAmountChange}
@@ -40,9 +41,11 @@ const ChooseAmountForm = React.memo(
         />
         <TextField
           name="symbol"
+          id="symbol"
           label="Select Token"
           value={symbol}
           onChange={handleChange}
+          placeholder="TOKEN36"
           select
           fullWidth
           InputProps={{
@@ -68,6 +71,7 @@ const ChooseAmountForm = React.memo(
 );
 
 ChooseAmountForm.propTypes = {
+  tokenSymbols: PropTypes.array,
   amount: PropTypes.string,
   symbol: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired

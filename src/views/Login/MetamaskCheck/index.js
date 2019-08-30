@@ -1,1 +1,1 @@
-export {default} from './MetamaskCheck';
+export { default } from './MetamaskCheck';

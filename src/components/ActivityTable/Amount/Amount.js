@@ -5,9 +5,19 @@ import { formatAmount } from '../../../helpers/currencies.helpers';
 import './Amount.scss';
 
 const Amount = ({ type, amount, symbol }) => {
+  const renderType = () => {
+    if (type === 'BUY' || type === 'RECEIVED') return '+';
+
+    if (type === 'SELL' || type === 'SENT') return '-';
+
+    return '';
+  };
   return (
     <div className="activity-table-amount">
-      <div>{type === 'BUY' || type === 'RECEIVED' ? '+' : '-'}{formatAmount(amount)}</div>
+      <div>
+        {renderType()}
+        {formatAmount(amount)}
+      </div>
       <div>{symbol}</div>
     </div>
   );

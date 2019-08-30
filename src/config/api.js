@@ -3,7 +3,7 @@ import store from '../store';
 import { logout } from '../store/auth/auth.actions';
 
 let apiEnv = process.env.NODE_ENV;
-console.log('Environment: ' + apiEnv);
+// console.log('Environment: ' + apiEnv);
 
 let url = 'http://localhost:8090/cash36';
 // let authUrl = 'http://localhost:8090/cash36';

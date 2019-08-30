@@ -17,11 +17,31 @@ import { verifyResponse } from '../../helpers/uport.helpers';
 import './Login.scss';
 
 const Login = ({ location, auth: { isAuthenticated } }) => {
-  const [step, setStep] = useState(0);
-  const [creds, setCreds] = useState(null);
+  let [step, setStep] = useState(0);
+  let [creds, setCreds] = useState(null);
   const [newUser, setNewUser] = useState(false);
   const [metamaskLogin, setMetamaskLogin] = useState(false);
   const md = useRef(new MobileDetect(window.navigator.userAgent));
+
+  // if (process.env.NODE_ENV === 'test') {
+  //   step = 3;
+
+  //   creds = {
+  //     address: '0x4f6f13571eb636915cde42f6101e59067bc98bcd',
+  //     avatar: {
+  //       uri:
+  //         'https://ipfs.infura.io/ipfs/QmY4btiNiJwkBZb4KtqYCt2WjjW31VjBe7JhJ8Gf2v4QH7'
+  //     },
+  //     boxPub: '+mKhe2acG/ekkgvUXbz/vPMi+XrVX4v5TYCIvaHksXw=',
+  //     did: 'did:ethr:0x89b5c95edf8aeca1366f83043e805aebe1992cce',
+  //     id: '0x89b5c95edf8aeca1366f83043e805aebe1992cce',
+  //     mnid: '2ok7qT3zyKJwfSKAnkzgYzhP7AEagRergEH',
+  //     name: 'Tester Testerson',
+  //     pushToken:
+  //       'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NkstUiJ9.eyJpYXQiOjE1NjcxNjIzNTAsImV4cCI6MTU5ODY5ODM1MCwiYXVkIjoiZGlkOmV0aHI6MHhiZTg1MDBmYmRiYTE5OTQ5ZWYyOTI4OTg0NThiYWI5YTQ4Mzg4M2MwIiwidHlwZSI6Im5vdGlmaWNhdGlvbnMiLCJ2YWx1ZSI6ImFybjphd3M6c25zOnVzLXdlc3QtMjoxMTMxOTYyMTY1NTg6ZW5kcG9pbnQvR0NNL3VQb3J0LzRiMTFlZjQ3LWJhZGMtMzlhZS1hMTBkLWUyM2FlYWU2YzNmMiIsImlzcyI6ImRpZDpldGhyOjB4ODliNWM5NWVkZjhhZWNhMTM2NmY4MzA0M2U4MDVhZWJlMTk5MmNjZSJ9.hPE6VW1tKRFKGfzW2tH8FuVNGJ0bqmSuIbJ1UNpd0rU5xgpkFNln_p8F5sd6o5JCHj45ov4l6K-Gq_nnS35eSgE',
+  //     username: '0x89b5c95edf8aeca1366f83043e805aebe1992cce'
+  //   };
+  // }
 
   const checkIfUserExists = async uportCreds => {
     const creds = { ...uportCreds };

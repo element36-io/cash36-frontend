@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+
 import DefaultButton from '../Buttons/DefaultButton';
 
-const VerificationButton = ({ user: { currentProcessStatus, caseId } }) => {
+const VerificationButton = ({ currentProcessStatus, caseId }) => {
   if (currentProcessStatus === 'CLOSED') return null;
 
   if (currentProcessStatus === 'NOT_STARTED') {
     return (
-      <Link to={`/kyc/start`}>
+      <Link to={`/kyc/start`} data-testid="verification-button">
         <DefaultButton variant="contained">Verify Account</DefaultButton>
       </Link>
     );
@@ -19,7 +20,7 @@ const VerificationButton = ({ user: { currentProcessStatus, caseId } }) => {
     currentProcessStatus !== 'NOT_STARTED'
   ) {
     return (
-      <Link to={`/kyc/${caseId}`}>
+      <Link to={`/kyc/${caseId}`} data-testid="verification-button">
         <DefaultButton variant="contained">Continue Verification</DefaultButton>
       </Link>
     );
@@ -27,7 +28,10 @@ const VerificationButton = ({ user: { currentProcessStatus, caseId } }) => {
 
   if (currentProcessStatus === 'AWAITING_VERIFICATION') {
     return (
-      <div className="user-profile__buttons--awaiting">
+      <div
+        className="user-profile__buttons--awaiting"
+        data-testid="verification-button"
+      >
         Awaiting Verification
       </div>
     );
@@ -35,7 +39,8 @@ const VerificationButton = ({ user: { currentProcessStatus, caseId } }) => {
 };
 
 VerificationButton.propTypes = {
-  user: PropTypes.object.isRequired
+  currentProcessStatus: PropTypes.string,
+  caseId: PropTypes.string
 };
 
 export default VerificationButton;

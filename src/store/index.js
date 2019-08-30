@@ -1,4 +1,4 @@
-import thunkMiddleware from 'redux-thunk';
+import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import throttle from 'lodash/throttle';
@@ -14,7 +14,7 @@ const loggerMiddleware = createLogger();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const reducers = combineReducers({
+export const reducers = combineReducers({
   auth: authReducer,
   tokens: tokensReducer,
   countries: countriesReducer,
@@ -24,7 +24,7 @@ const reducers = combineReducers({
 
 const store = createStore(
   reducers,
-  composeEnhancers(applyMiddleware(thunkMiddleware, loggerMiddleware))
+  composeEnhancers(applyMiddleware(thunk, loggerMiddleware))
 );
 
 store.subscribe(

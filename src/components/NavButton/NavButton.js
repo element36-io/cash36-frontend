@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './NavBtn.scss';
 
-const NavBtn = ({ isActive, clickHandler, alt }) => (
+import './NavButton.scss';
+
+const NavButton = ({ isActive, clickHandler, alt }) => (
   <div
     className={`nav-btn ${alt ? 'alt' : ''} ${isActive ? 'active' : ''}`}
     onClick={clickHandler}
+    data-testid="nav-button"
   >
     <div>
       {[...Array(4).keys()].map(s => (
@@ -15,10 +17,10 @@ const NavBtn = ({ isActive, clickHandler, alt }) => (
   </div>
 );
 
-NavBtn.propTypes = {
+NavButton.propTypes = {
   isActive: PropTypes.bool,
   clickHandler: PropTypes.func.isRequired,
   alt: PropTypes.bool
 };
 
-export default NavBtn;
+export default NavButton;

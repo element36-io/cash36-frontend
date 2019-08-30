@@ -23,10 +23,10 @@ const useAvatarReducer = () => {
 export const AvatarContext = React.createContext();
 
 const AvatarProvider = props => {
-  const authReducer = useAvatarReducer();
+  const avatarReducer = useAvatarReducer();
 
   return (
-    <AvatarContext.Provider value={{ ...authReducer }}>
+    <AvatarContext.Provider value={{ ...avatarReducer }}>
       {props.children}
     </AvatarContext.Provider>
   );

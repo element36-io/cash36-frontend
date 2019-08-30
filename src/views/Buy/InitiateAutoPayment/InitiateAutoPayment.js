@@ -61,10 +61,7 @@ const InitiateAutoPayment = () => {
             </div>
           </div>
         </Responsive>
-        <StepButton
-          onClick={() => console.log('clicked auto next')}
-          text={'Submit Order'}
-        />
+        <StepButton onClick={() => {}} text={'Submit Order'} />
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import tiers from './tiers';
 import Avatar from '../../components/Avatar';
 import VerificationButton from './VerificationButton';
@@ -10,7 +11,7 @@ import { attestUser } from '../../helpers/uport.helpers';
 
 import './UserProfile.scss';
 
-const UserProfile = ({ user, alt, confirmAttestation }) => {
+export const UserProfile = ({ user, alt, confirmAttestation }) => {
   const [attesting, setAttesting] = useState(false);
 
   const handleAttestClick = async (claim, attestName) => {
@@ -26,13 +27,24 @@ const UserProfile = ({ user, alt, confirmAttestation }) => {
     setAttesting(false);
   };
 
-  let { username, avatarUri, name, currentLevel, account } = user;
+  let {
+    username,
+    avatarUri,
+    name,
+    currentLevel,
+    account,
+    currentProcessStatus,
+    caseId
+  } = user;
 
   // changed due to uPort.
   if (!currentLevel) currentLevel = 'Tier_0';
 
   return (
-    <div className={`user-profile ${alt ? 'user-profile--alt' : ''}`}>
+    <div
+      data-testid="user-profile"
+      className={`user-profile ${alt ? 'user-profile--alt' : ''}`}
+    >
       <div className="user-profile__avatar">
         <Avatar
           avatarUrl={avatarUri}
@@ -42,6 +54,7 @@ const UserProfile = ({ user, alt, confirmAttestation }) => {
         />
         {currentLevel && (
           <div
+            data-testid="tier-badge"
             className={`user-profile__avatar__badge ${
               tiers[currentLevel].badgeClass
             }`}
@@ -59,7 +72,10 @@ const UserProfile = ({ user, alt, confirmAttestation }) => {
         <p>ID: {username}</p>
         <p>Account: {account}</p>
         <div className="user-profile__buttons">
-          <VerificationButton user={user} />
+          <VerificationButton
+            currentProcessStatus={currentProcessStatus}
+            caseId={caseId}
+          />
           <AttestButtton
             user={user}
             clickCallback={handleAttestClick}

@@ -40,7 +40,11 @@ const AttestButton = ({
         disabled={attesting}
       >
         {attesting ? (
-          <CircularProgress color="secondary" size={20} />
+          <CircularProgress
+            color="secondary"
+            size={20}
+            data-testid="attest-button__loader"
+          />
         ) : (
           'Get uPort Attest'
         )}

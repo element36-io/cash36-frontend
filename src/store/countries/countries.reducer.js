@@ -1,4 +1,4 @@
-import { GET_COUNTRIES } from './countries.actions';
+import { GET_COUNTRIES } from './countries.types';
 
 const initialState = {};
 
