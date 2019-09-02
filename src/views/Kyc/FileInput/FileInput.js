@@ -1,9 +1,9 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
+
 import './FileInput.scss';
 
-const FileInput = props => {
-  const { documentType, changeCallback, removeCallback } = props;
+const FileInput = ({ documentType, changeCallback, removeCallback }) => {
   const [progress, setProgress] = useState(0);
   const [name, setName] = useState(null);
   const [typeError, setTypeError] = useState(false);
@@ -71,7 +71,12 @@ const FileInput = props => {
             <span style={{ width: `${progress}%` }} />
           </div>
         )}
-        <input type="file" ref={fileInput} onChange={handleChange} />
+        <input
+          type="file"
+          ref={fileInput}
+          onChange={handleChange}
+          data-testid="file-input"
+        />
       </label>
       {typeError && <p>Only png, jpg, jpeg and pdf files are allowed</p>}
       {sizeError && <p>Max file size is 10MB</p>}
