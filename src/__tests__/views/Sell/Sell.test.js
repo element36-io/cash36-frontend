@@ -10,11 +10,13 @@ const initialState = {
   tokens: [
     {
       name: 'Swiss Franc',
-      symbol: 'CHF36'
+      symbol: 'CHF36',
+      balance: 100
     },
     {
       name: 'Euro',
-      symbol: 'EUR36'
+      symbol: 'EUR36',
+      balance: 100
     }
   ],
   auth: {
@@ -32,11 +34,11 @@ describe('step 0', () => {
       <Web3Context.Provider
         value={{
           networkId: '3',
-          network: 'Ropsten',
+          network: 'TestNetwork',
           web3: new Web3()
         }}
       >
-        <Sell />
+        <Sell getTokens={jest.fn()} />
       </Web3Context.Provider>,
       { initialState }
     );
