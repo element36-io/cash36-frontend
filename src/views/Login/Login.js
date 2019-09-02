@@ -23,7 +23,7 @@ const Login = ({ location, auth: { isAuthenticated } }) => {
   const [metamaskLogin, setMetamaskLogin] = useState(false);
   const md = useRef(new MobileDetect(window.navigator.userAgent));
 
-  // if (process.env.NODE_ENV === 'test') {
+  // if (process.env.NODE_ENV === 'testing') {
   //   step = 3;
 
   //   creds = {

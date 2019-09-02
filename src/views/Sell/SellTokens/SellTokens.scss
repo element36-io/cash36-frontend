@@ -2,7 +2,6 @@
 @import '../../../styles/settings.scss';
 
 .sell__sell-tokens {
-
   h2 {
     text-align: center;
   }
@@ -14,6 +13,10 @@
     &:first-of-type {
       color: $red-1;
     }
+  }
+
+  .error-text {
+    text-align: center;
   }
 
   @include desktop {
@@ -28,7 +31,7 @@
       line-height: 1.9rem;
 
       &:first-of-type {
-        margin-bottom: 1.6rem
+        margin-bottom: 1.6rem;
       }
 
       &:last-of-type {
@@ -49,7 +52,7 @@
       line-height: 1.4rem;
 
       &:first-of-type {
-        margin-bottom: 1.2rem
+        margin-bottom: 1.2rem;
       }
 
       &:last-of-type {
