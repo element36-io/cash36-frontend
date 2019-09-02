@@ -87,3 +87,17 @@ export const getUserActivity = queryParams => async dispatch => {
     return handleError(error);
   }
 };
+
+export const getExchangeFee = async () => {
+  try {
+    const response = await API.get('/compliance/users/fee');
+
+    if (response.status === 204) {
+      return false;
+    }
+
+    return response.data;
+  } catch (error) {
+    return handleError(error);
+  }
+};

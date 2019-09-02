@@ -1,24 +1,48 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import SellTokens from './SellTokens';
 import SellConfirmation from './SellConfirmation';
 import SellSuccess from './SellSuccess';
 import SellError from './SellError';
-import { getTokens } from '../../store/tokens/tokens.actions';
+import { getTokens, getExchangeFee } from '../../store/tokens/tokens.actions';
 import useCash36 from '../../hooks/useCash36';
 import Token from '../../contracts/ERC20Burnable';
+
 import './Sell.scss';
 
-const Sell = ({ user, tokens, getTokens }) => {
+export const Sell = ({ user, tokens, getTokens }) => {
   const [step, setStep] = useState(0);
   const [values, setValues] = useState({ amount: '', symbol: 'EUR36' });
-  const [error, setError] = useState(null);
+  const [sellError, setSellError] = useState(null);
+  const [exchangeFee, setExchangeFee] = useState(null);
+  const [exchangeFeeError, setExchangeFeeError] = useState('');
+  const [tokensError, setTokensError] = useState('');
   const _isMounted = useRef(true);
   const cash36 = useCash36();
 
+  const callGetExchangeFee = async () => {
+    try {
+      const exchangeFee = await getExchangeFee();
+
+      setExchangeFee(exchangeFee);
+    } catch (error) {
+      setExchangeFeeError(error);
+    }
+  };
+
+  const callGetTokens = async () => {
+    try {
+      await getTokens();
+    } catch (error) {
+      setTokensError(error);
+    }
+  };
+
   useEffect(() => {
-    getTokens();
+    callGetTokens();
+    callGetExchangeFee();
 
     return () => {
       _isMounted.current = false;
@@ -37,7 +61,9 @@ const Sell = ({ user, tokens, getTokens }) => {
 
   const catchError = error => {
     if (!_isMounted.current) return;
-    setError(error.message ? error.message : 'Selling token was unsuccessful');
+    setSellError(
+      error.message ? error.message : 'Selling token was unsuccessful'
+    );
     setStep(3);
   };
 
@@ -85,7 +111,7 @@ const Sell = ({ user, tokens, getTokens }) => {
       case 2:
         return <SellSuccess amount={amount} symbol={symbol} />;
       case 3:
-        return <SellError message={error} />;
+        return <SellError message={sellError} />;
       default:
         return (
           <SellTokens
@@ -94,6 +120,9 @@ const Sell = ({ user, tokens, getTokens }) => {
             handleChange={handleChange}
             onClick={confirmationStep}
             token={selectedToken}
+            exchangeFeeError={exchangeFeeError}
+            exchangeFee={exchangeFee}
+            tokensError={tokensError}
           />
         );
     }
