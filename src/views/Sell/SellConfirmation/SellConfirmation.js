@@ -1,4 +1,5 @@
 import React from 'react';
+
 import TransactionFooter from '../../../components/TransactionFooter';
 import ActionStatus from '../../../components/ActionStatus';
 
