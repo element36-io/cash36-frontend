@@ -153,7 +153,6 @@ const Step4UserProfile = ({ changeSteps, stepError }) => {
         />
         <div>
           <RadioButtons
-            className="test"
             title="Declare your yearly income:"
             choices={yearlyIncomeValues}
             value={incomeVolume}
