@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
@@ -26,13 +26,16 @@ const Kyc = ({
   avatarUri,
   username
 }) => {
+  const kycWrapper = useRef();
   const [processError, setProcessError] = useState('');
   const [stepError, setStepError] = useState('');
 
   useEffect(() => {
     getCurrentStep();
+    if (kycWrapper.current) {
+      kycWrapper.current.scrollIntoView({ behavior: 'smooth' });
+    }
   }, [currentKycStep]);
-
   const getCurrentStep = async () => {
     try {
       await getCurrentKycStep();
@@ -105,7 +108,11 @@ const Kyc = ({
   }
 
   return (
-    <div className="wrapper paper kyc" data-status={currentKycStep}>
+    <div
+      className="wrapper paper kyc"
+      data-status={currentKycStep}
+      ref={kycWrapper}
+    >
       {renderStep()}
     </div>
   );
