@@ -37,9 +37,13 @@ const getRefreshedToken = async refreshToken => {
   };
   // Tries to get a refresh token, if it fails, sends 401.
   try {
-    const response = await axios.post(`${API_ROOT}/oauth/token`, config.data, {
-      headers: config.headers
-    });
+    const response = await axios.post(
+      `${API_ROOT}/auth/oauth/token`,
+      config.data,
+      {
+        headers: config.headers
+      }
+    );
 
     const token = response.data;
 
