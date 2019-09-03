@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import bigInt from 'big-integer';
 
 import SellTokens from './SellTokens';
 import SellConfirmation from './SellConfirmation';
@@ -74,11 +75,13 @@ export const Sell = ({ user, tokens, getTokens }) => {
     const { tokenAddress } = tokens.filter(token => token.symbol === symbol)[0];
     const token36Contract = new web3.eth.Contract(Token.abi, tokenAddress);
 
+    const sellAmount = (bigInt(amount).value * bigInt('1e18').value).toString();
+
     try {
       const estimate = await token36Contract.methods
-        .burn(amount)
+        .burn(sellAmount)
         .estimateGas({ from: account });
-      const data = await token36Contract.methods.burn(amount).encodeABI();
+      const data = await token36Contract.methods.burn(sellAmount).encodeABI();
 
       const options = {
         from: account,

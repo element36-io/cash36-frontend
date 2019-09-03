@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
+import bigInt from 'big-integer';
+
 import TransferAddress from './TransferAddress';
 import TransferAmount from './TransferAmount';
 import BackButton from '../../components/Buttons/BackButton';
@@ -85,12 +87,16 @@ const Transfer = ({
     const { tokenAddress } = tokens.filter(token => token.symbol === symbol)[0];
     const token36Contract = new web3.eth.Contract(Token.abi, tokenAddress);
 
+    const transferAmount = (
+      bigInt(amount).value * bigInt('1e18').value
+    ).toString();
+
     try {
       const estimate = await token36Contract.methods
-        .transfer(contactAddress, amount)
+        .transfer(contactAddress, transferAmount)
         .estimateGas({ from: account });
       const data = await token36Contract.methods
-        .transfer(contactAddress, amount)
+        .transfer(contactAddress, transferAmount)
         .encodeABI();
 
       const options = {
