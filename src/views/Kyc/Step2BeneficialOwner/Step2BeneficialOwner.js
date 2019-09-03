@@ -28,6 +28,7 @@ const Step2BeneficialOwner = ({ changeSteps, stepError }) => {
 
         <div className="beneficial-owner__checkbox-container">
           <Checkbox
+            data-testid="beneficial-owner__checkbox"
             color="primary"
             onChange={() => {
               setChecked(prevChecked => !prevChecked);

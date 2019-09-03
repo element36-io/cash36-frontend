@@ -6,7 +6,6 @@ let apiEnv = process.env.NODE_ENV;
 // console.log('Environment: ' + apiEnv);
 
 let url = 'http://localhost:8090/cash36';
-// let authUrl = 'http://localhost:8090/cash36';
 let web3NodeUrl = 'http://167.99.243.81:8866/';
 
 if (apiEnv === 'staging') {
@@ -16,12 +15,10 @@ if (apiEnv === 'staging') {
 if (apiEnv === 'production') {
   url = '/api';
   web3NodeUrl = 'https://rinkeby.infura.io/v3/4cf538c6b0bb4562bdc2f31430327c08';
-  // authUrl = '/uport';
 }
 
 export const API_ROOT = url;
 export const WEB3_NODE = web3NodeUrl;
-// export const AUTH_URL = authUrl;
 
 const api = axios.create({
   baseURL: API_ROOT
@@ -37,9 +34,13 @@ const getRefreshedToken = async refreshToken => {
   };
   // Tries to get a refresh token, if it fails, sends 401.
   try {
-    const response = await axios.post(`${API_ROOT}/oauth/token`, config.data, {
-      headers: config.headers
-    });
+    const response = await axios.post(
+      `${API_ROOT}/auth/oauth/token`,
+      config.data,
+      {
+        headers: config.headers
+      }
+    );
 
     const token = response.data;
 

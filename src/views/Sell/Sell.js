@@ -1,24 +1,49 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import bigInt from 'big-integer';
+
 import SellTokens from './SellTokens';
 import SellConfirmation from './SellConfirmation';
 import SellSuccess from './SellSuccess';
 import SellError from './SellError';
-import { getTokens } from '../../store/tokens/tokens.actions';
+import { getTokens, getExchangeFee } from '../../store/tokens/tokens.actions';
 import useCash36 from '../../hooks/useCash36';
 import Token from '../../contracts/ERC20Burnable';
+
 import './Sell.scss';
 
-const Sell = ({ user, tokens, getTokens }) => {
+export const Sell = ({ user, tokens, getTokens }) => {
   const [step, setStep] = useState(0);
   const [values, setValues] = useState({ amount: '', symbol: 'EUR36' });
-  const [error, setError] = useState(null);
+  const [sellError, setSellError] = useState(null);
+  const [exchangeFee, setExchangeFee] = useState(null);
+  const [exchangeFeeError, setExchangeFeeError] = useState('');
+  const [tokensError, setTokensError] = useState('');
   const _isMounted = useRef(true);
   const cash36 = useCash36();
 
+  const callGetExchangeFee = async () => {
+    try {
+      const exchangeFee = await getExchangeFee();
+
+      setExchangeFee(exchangeFee);
+    } catch (error) {
+      setExchangeFeeError(error);
+    }
+  };
+
+  const callGetTokens = async () => {
+    try {
+      await getTokens();
+    } catch (error) {
+      setTokensError(error);
+    }
+  };
+
   useEffect(() => {
-    getTokens();
+    callGetTokens();
+    callGetExchangeFee();
 
     return () => {
       _isMounted.current = false;
@@ -37,7 +62,9 @@ const Sell = ({ user, tokens, getTokens }) => {
 
   const catchError = error => {
     if (!_isMounted.current) return;
-    setError(error.message ? error.message : 'Selling token was unsuccessful');
+    setSellError(
+      error.message ? error.message : 'Selling token was unsuccessful'
+    );
     setStep(3);
   };
 
@@ -48,11 +75,13 @@ const Sell = ({ user, tokens, getTokens }) => {
     const { tokenAddress } = tokens.filter(token => token.symbol === symbol)[0];
     const token36Contract = new web3.eth.Contract(Token.abi, tokenAddress);
 
+    const sellAmount = (bigInt(amount).value * bigInt('1e18').value).toString();
+
     try {
       const estimate = await token36Contract.methods
-        .burn(amount)
+        .burn(sellAmount)
         .estimateGas({ from: account });
-      const data = await token36Contract.methods.burn(amount).encodeABI();
+      const data = await token36Contract.methods.burn(sellAmount).encodeABI();
 
       const options = {
         from: account,
@@ -85,7 +114,7 @@ const Sell = ({ user, tokens, getTokens }) => {
       case 2:
         return <SellSuccess amount={amount} symbol={symbol} />;
       case 3:
-        return <SellError message={error} />;
+        return <SellError message={sellError} />;
       default:
         return (
           <SellTokens
@@ -94,6 +123,9 @@ const Sell = ({ user, tokens, getTokens }) => {
             handleChange={handleChange}
             onClick={confirmationStep}
             token={selectedToken}
+            exchangeFeeError={exchangeFeeError}
+            exchangeFee={exchangeFee}
+            tokensError={tokensError}
           />
         );
     }

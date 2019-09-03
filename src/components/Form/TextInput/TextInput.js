@@ -22,6 +22,7 @@ export const TextInput = ({
   return (
     <div className={`element-form__input-wrapper ${name}`}>
       <TextField
+        id={`text-field-${name}`}
         name={name}
         label={label}
         type={type}

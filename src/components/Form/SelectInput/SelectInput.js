@@ -5,25 +5,25 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { TextField, MenuItem, withStyles } from '@material-ui/core';
 import styles from './MuiStyles';
 
-export const SelectInput = props => {
-  const {
-    name,
-    label,
-    value,
-    onChange,
-    list,
-    error,
-    onBlur,
-    isTouched,
-    placeholder,
-    countryList,
-    classes
-  } = props;
+export const SelectInput = ({
+  name,
+  label,
+  value,
+  onChange,
+  list,
+  error,
+  onBlur,
+  isTouched,
+  placeholder,
+  countryList,
+  classes
+}) => {
   return (
     <div
       className={`element-form__input-wrapper element-form__input-wrapper--select  ${name}`}
     >
       <TextField
+        id={`text-field-${name}`}
         name={name}
         label={label}
         value={value}

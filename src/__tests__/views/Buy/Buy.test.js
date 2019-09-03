@@ -32,8 +32,8 @@ describe('step 0', () => {
     );
   });
 
-  test('renders the component with step 0', () => {
-    const { getByText, getByPlaceholderText, getByLabelText } = component;
+  test('renders the component', () => {
+    const { getByText, getByLabelText } = component;
 
     expect(getByText(/buy tokens/i)).toBeInTheDocument();
     expect(getByText(/next step/i)).toBeInTheDocument();
@@ -42,17 +42,17 @@ describe('step 0', () => {
     expect(
       getByText(/buying cash36 tokens is as simple as a bank transfer/i)
     ).toBeInTheDocument();
-    expect(getByPlaceholderText('TOKEN36').value).toBe('EUR36');
+    expect(getByLabelText(/select token/i).value).toBe('EUR36');
   });
 
-  test('goes to step 1 then user updates amount and clicks on next step button', () => {
+  test('goes to step 1 when user updates amount and clicks on next step button', () => {
     const { getByText, getByLabelText } = component;
 
-    const button = getByText(/next step/i);
+    const nextStepButton = getByText(/next step/i);
     const amountInput = getByLabelText(/choose amount/i);
 
     fireEvent.change(amountInput, { target: { value: 23 } });
-    fireEvent.click(button);
+    fireEvent.click(nextStepButton);
 
     expect(getByText(/payment method/i)).toBeInTheDocument();
     expect(getByText(/manual bank transfer/i)).toBeInTheDocument();

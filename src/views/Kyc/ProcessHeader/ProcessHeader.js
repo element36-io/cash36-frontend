@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './ProcessHeader.scss';
 
-const ProcessHeader = props => {
-  const { title, subtitle } = props;
+const ProcessHeader = ({ title, subtitle }) => {
   return (
     <div className="process-header">
       <h2>{title}</h2>
