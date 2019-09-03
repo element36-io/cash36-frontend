@@ -21,7 +21,7 @@ test('calls changeCallback on file input', async () => {
     <FileInput {...props} changeCallback={changeCallback} />
   );
 
-  const fileInput = getByTestId('file-input');
+  const fileInput = getByTestId('kyc__file-input');
   const file = new File(['(⌐□_□)'], 'johndoe.png', { type: 'image/png' });
 
   fireEvent.change(fileInput, { target: { files: [file] } });

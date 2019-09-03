@@ -75,7 +75,7 @@ const FileInput = ({ documentType, changeCallback, removeCallback }) => {
           type="file"
           ref={fileInput}
           onChange={handleChange}
-          data-testid="file-input"
+          data-testid="kyc__file-input"
         />
       </label>
       {typeError && <p>Only png, jpg, jpeg and pdf files are allowed</p>}
