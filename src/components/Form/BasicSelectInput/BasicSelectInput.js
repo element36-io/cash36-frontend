@@ -18,6 +18,7 @@ const BasicSelectInput = ({
   return (
     <div>
       <TextField
+        id={`text-field-${name}`}
         name={name}
         select
         label={label}

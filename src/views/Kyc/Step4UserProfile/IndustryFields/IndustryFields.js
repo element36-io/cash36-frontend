@@ -33,8 +33,8 @@ const IndustryFields = React.memo(
         error={professionError ? 'This field is required' : null}
       />
       <BasicSelectInput
-        list={industryValues}
         name="industry"
+        list={industryValues}
         label="Industry"
         placeholder="Enter Your Industry"
         value={industry}
@@ -53,11 +53,6 @@ const IndustryFields = React.memo(
           error={industryOtherError ? 'This field is required' : null}
         />
       )}
-      {/* {hasError && (
-        <p className="verification-user-profile_error">
-          These fields are required
-        </p>
-      )} */}
     </div>
   )
 );
