@@ -60,11 +60,20 @@ export const startKycProcess = () => async dispatch => {
   }
 };
 
-export const updateKycStep = (step, payload) => async dispatch => {
+export const updateKycStep = (step, payload, params) => async dispatch => {
   try {
-    await API.post(`/compliance/kyc/step-${step}`, payload);
+    await API.post(`/compliance/kyc/step-${step}`, payload, {params});
     dispatch(getCurrentKycStep());
     dispatch(getUserInfo());
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const getSelfieCode = async () => {
+  try {
+    const res = await API.get(`/compliance/kyc/get-step3-code`);
+    return res.data.result;
   } catch (error) {
     return handleError(error);
   }
