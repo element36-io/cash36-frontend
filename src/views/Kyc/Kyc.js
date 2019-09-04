@@ -44,9 +44,9 @@ const Kyc = ({
     }
   };
 
-  const changeSteps = async (step, payload) => {
+  const changeSteps = async (step, payload, params) => {
     try {
-      await updateKycStep(step, payload);
+      await updateKycStep(step, payload, params);
     } catch (error) {
       setStepError(error);
       return Promise.reject(error);
