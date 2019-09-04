@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+
 import ProcessHeader from '../ProcessHeader';
 import ProcessControls from '../ProcessControls';
 import FileInput from '../FileInput';
@@ -7,9 +8,11 @@ import { getSelfieCode } from '../../../store/auth/auth.actions';
 import idFront from '../../../assets/icons/ID Front Icon.svg';
 import idBack from '../../../assets/icons/ID Back Icon.svg';
 import selfie from '../../../assets/icons/Selfie Icon.svg';
+
 import './Step3Documents.scss';
 
 const Step3Documents = ({ changeSteps, stepError }) => {
+  const _isMounted = useRef(false);
   const [types, updateTypes] = useState({
     ID_Front: {
       documentType: 'ID_Front',
@@ -72,7 +75,15 @@ const Step3Documents = ({ changeSteps, stepError }) => {
   };
 
   useEffect(() => {
-    fetchSelfieCode();
+    _isMounted.current = true;
+
+    if (_isMounted.current) {
+      fetchSelfieCode();
+    }
+
+    return () => {
+      _isMounted.current = false;
+    };
   }, []);
 
   const disabled = Object.values(types)

@@ -9,10 +9,15 @@
   p {
     display: flex;
     justify-content: space-between;
+  }
 
-    &:first-of-type {
-      color: $red-1;
-    }
+  .exchange-fee {
+    color: $red-1;
+  }
+
+  .no-exchange-fee {
+    color: $red-1;
+    justify-content: center;
   }
 
   .error-text {
