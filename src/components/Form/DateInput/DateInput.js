@@ -33,6 +33,7 @@ const DateInput = ({
   return (
     <div className={`element-form__input-wrapper ${name}`}>
       <KeyboardDatePicker
+        id={`date-picker-${name}`}
         value={selectedDate}
         onChange={handleChange}
         onClose={onClose}

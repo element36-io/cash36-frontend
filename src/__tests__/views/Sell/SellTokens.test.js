@@ -14,7 +14,7 @@ const props = {
   },
   tokensError: '',
   exchangeFeeError: null,
-  exchangeFee: 1
+  exchangeFee: null
 };
 
 test('renders the component', () => {
@@ -24,4 +24,18 @@ test('renders the component', () => {
   expect(getByText(/choose amount/i)).toBeInTheDocument();
   expect(getByText(/select token/i)).toBeInTheDocument();
   expect(getByText(/next step/i)).toBeInTheDocument();
+});
+
+test('renders the exchangeFee', () => {
+  const { getByText } = renderWithRedux(
+    <SellTokens {...props} exchangeFee={1} />
+  );
+
+  expect(getByText(/exchange fee/i)).toBeInTheDocument();
+});
+
+test('doeenst render the exchangeFee nothing if exchangeFee is null', () => {
+  const { queryByText } = renderWithRedux(<SellTokens {...props} />);
+
+  expect(queryByText(/exchange fee/i)).toBeNull();
 });
