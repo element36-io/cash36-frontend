@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+
 import ProcessHeader from '../ProcessHeader';
 import ProcessControls from '../ProcessControls';
 import FileInput from '../FileInput';
+import { getSelfieCode } from '../../../store/auth/auth.actions';
 import idFront from '../../../assets/icons/ID Front Icon.svg';
 import idBack from '../../../assets/icons/ID Back Icon.svg';
 import selfie from '../../../assets/icons/Selfie Icon.svg';
+
 import './Step3Documents.scss';
 
 const Step3Documents = ({ changeSteps, stepError }) => {
+  const _isMounted = useRef(false);
   const [types, updateTypes] = useState({
     ID_Front: {
       documentType: 'ID_Front',
@@ -29,6 +33,7 @@ const Step3Documents = ({ changeSteps, stepError }) => {
   });
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [selfieCode, setSelfieCode] = useState('');
 
   const onSubmit = async () => {
     try {
@@ -39,7 +44,7 @@ const Step3Documents = ({ changeSteps, stepError }) => {
         formData.append('documentTypes', doc.documentType);
         formData.append('files', doc.file);
       });
-      await changeSteps(3, formData);
+      await changeSteps(3, formData, { code: selfieCode });
     } catch (error) {
       setError(error);
     }
@@ -59,6 +64,27 @@ const Step3Documents = ({ changeSteps, stepError }) => {
       [documentType]: { ...types[documentType], file: null }
     });
   };
+
+  const fetchSelfieCode = async () => {
+    try {
+      const code = await getSelfieCode();
+      setSelfieCode(code);
+    } catch (error) {
+      setError(error);
+    }
+  };
+
+  useEffect(() => {
+    _isMounted.current = true;
+
+    if (_isMounted.current) {
+      fetchSelfieCode();
+    }
+
+    return () => {
+      _isMounted.current = false;
+    };
+  }, []);
 
   const disabled = Object.values(types)
     .filter(t => t.documentType !== 'ID_Back')
@@ -113,7 +139,10 @@ const Step3Documents = ({ changeSteps, stepError }) => {
             <p>A selfie where you hold next to your face</p>
             <ul>
               <li>Your ID Document</li>
-              <li>A piece of paper written "element36" and the current date</li>
+              <li>
+                A piece of paper written "<strong>{selfieCode}</strong>" and the
+                current date
+              </li>
             </ul>
             <p>
               Make sure your not hidding your face nor information on the card!

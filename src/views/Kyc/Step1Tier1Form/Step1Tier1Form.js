@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
+
 import Form from '../../../components/Form';
 import FormField from '../../../components/Form/FormField';
 import ProcessHeader from '../ProcessHeader';
@@ -14,9 +15,10 @@ import {
   ibanModel,
   nationalityModel
 } from './formModel';
+
 import './Step1Tier1Form.scss';
 
-const Step1Tier1Form = ({
+export const Step1Tier1Form = ({
   countries,
   nationalities,
   getCountries,
