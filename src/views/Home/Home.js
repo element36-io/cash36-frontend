@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import QuickActions from './QuickActions';
 import ActivityTable from '../../components/ActivityTable';
@@ -10,9 +10,18 @@ import './Home.scss';
 
 const Home = ({ getUserActivity, userActivity }) => {
   const lastActivity = userActivity.slice(0, 5);
+  const [error, setError] = useState('');
+
+  const fetchUserActivity = async () => {
+    try {
+      await getUserActivity();
+    } catch (error) {
+      setError(error);
+    }
+  };
 
   useEffect(() => {
-    getUserActivity();
+    fetchUserActivity();
   }, []);
 
   return (
@@ -31,11 +40,17 @@ const Home = ({ getUserActivity, userActivity }) => {
             <ActivityTable userActivity={lastActivity} />
           ) : (
             <div className="paper home-page__no-activity">
-              <h3>No Recent Activity.</h3>
-              <p>
-                Keep track of your most recent transactions here when you sell,
-                buy or transfer cash36 currencies
-              </p>
+              {error ? (
+                <div className="error-text">{error}</div>
+              ) : (
+                <Fragment>
+                  <h3>No Recent Activity.</h3>
+                  <p>
+                    Keep track of your most recent transactions here when you
+                    sell, buy or transfer cash36 currencies
+                  </p>
+                </Fragment>
+              )}
             </div>
           )}
         </div>
