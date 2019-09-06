@@ -1,10 +1,11 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import QuickActions from './QuickActions';
 import ActivityTable from '../../components/ActivityTable';
 import UserProfile from '../../components/UserProfile';
 import { getUserActivity } from '../../store/tokens/tokens.actions';
 import BalanceCards from '../../components/BalanceCards';
+import useGet from '../../hooks/useGet';
 
 import './Home.scss';
 
@@ -12,17 +13,7 @@ const Home = ({ getUserActivity, userActivity }) => {
   const lastActivity = userActivity.slice(0, 5);
   const [error, setError] = useState('');
 
-  const fetchUserActivity = async () => {
-    try {
-      await getUserActivity();
-    } catch (error) {
-      setError(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchUserActivity();
-  }, []);
+  useGet(getUserActivity, setError);
 
   return (
     <div className="home-page">

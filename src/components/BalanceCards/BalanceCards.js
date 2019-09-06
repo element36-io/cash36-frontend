@@ -10,10 +10,10 @@ import './BalanceCards.scss';
 export const BalanceCards = ({ tokens, getTokens }) => {
   const [error, setError] = useState('');
   useEffect(() => {
-    callGetTokens();
+    fetchTokens();
   }, []);
 
-  const callGetTokens = async () => {
+  const fetchTokens = async () => {
     try {
       await getTokens();
     } catch (error) {
@@ -30,7 +30,9 @@ export const BalanceCards = ({ tokens, getTokens }) => {
   }
 
   return (
-    <div className={`balance-cards ${tokens.length > 3 ? '--space-between' : ''}`}>
+    <div
+      className={`balance-cards ${tokens.length > 3 ? '--space-between' : ''}`}
+    >
       {tokens.map(({ symbol, name, balance }) => (
         <BalanceCard key={name} name={name} symbol={symbol} balance={balance} />
       ))}

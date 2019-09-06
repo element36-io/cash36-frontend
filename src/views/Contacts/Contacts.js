@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { CircularProgress } from '@material-ui/core';
+
 import SearchBox from './SearchBox';
 import AddContact from './AddContact';
 import ContactItem from './ContactItem';
@@ -10,6 +11,8 @@ import {
   removeContact,
   addContact
 } from '../../store/contacts/contacts.actions';
+import useGet from '../../hooks/useGet';
+
 import './Contacts.scss';
 
 const Contacts = ({
@@ -23,17 +26,7 @@ const Contacts = ({
   const [activeForm, setActiveForm] = useState(false);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    callGetContacts();
-  }, []);
-
-  const callGetContacts = async () => {
-    try {
-      await getContacts();
-    } catch (error) {
-      setError(error);
-    }
-  };
+  useGet(getContacts, setError);
 
   const searchChangeHandler = evt => {
     setSearch(evt.target.value);
