@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
-import bigInt from 'big-integer';
 
 import TransferAddress from './TransferAddress';
 import TransferAmount from './TransferAmount';
@@ -87,9 +86,7 @@ const Transfer = ({
     const { tokenAddress } = tokens.filter(token => token.symbol === symbol)[0];
     const token36Contract = new web3.eth.Contract(Token.abi, tokenAddress);
 
-    const transferAmount = (
-      bigInt(amount).value * bigInt('1e18').value
-    ).toString();
+    const transferAmount = web3.utils.toWei(amount, 'ether');
 
     try {
       const estimate = await token36Contract.methods
