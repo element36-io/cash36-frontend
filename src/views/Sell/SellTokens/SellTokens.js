@@ -5,6 +5,7 @@ import ChooseAmountForm from '../../../components/ChooseAmountForm';
 import StepButton from '../../../components/Buttons/StepButton';
 import AvailableBalance from '../../../components/AvailableBalance';
 import UnavailableBalance from '../../../components/UnavailableBalance';
+import { formatSymbolToCurrency } from '../../../helpers/currencies.helpers';
 
 import './SellTokens.scss';
 
@@ -27,13 +28,15 @@ const SellTokens = ({
           <p className="exchange-fee">
             Exchange Fee ({exchangeFee}%){' '}
             <span>
-              {amount ? `${-(amount * exchangeFeeModifier).toFixed(2)}` : 0}
+              {amount ? `${-(amount * exchangeFeeModifier).toFixed(2)}` : 0}{' '}
+              {formatSymbolToCurrency(symbol)}
             </span>
           </p>
           <p>
             You Will Receive{' '}
             <span>
-              {amount ? (amount * (1 - exchangeFeeModifier)).toFixed(2) : 0}
+              {amount ? (amount * (1 - exchangeFeeModifier)).toFixed(2) : 0}{' '}
+              {formatSymbolToCurrency(symbol)}
             </span>
           </p>
         </Fragment>
