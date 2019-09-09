@@ -18,7 +18,7 @@ test('renders the component', async () => {
     <BrowserRouter>
       <AvatarContext.Provider value={{ state: {} }}>
         <Home />
-      </AvatarContext.Provider>{' '}
+      </AvatarContext.Provider>
     </BrowserRouter>,
     {
       initialState
