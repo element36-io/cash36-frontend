@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TruncateString from 'react-truncate-string';
+
 import TransactionFooter from '../../../components/TransactionFooter';
 import ActionStatus from '../../../components/ActionStatus';
 

@@ -23,7 +23,7 @@ const TransferSuccess = ({
       <ActionStatus type="success" title="Transfer Successful" />
       <AmountCard amount={amount} symbol={symbol} />
       <p>
-        You've succesfuly transfered {`${amount} ${symbol}`} to {sentTo}
+        You've successfully transfered {`${amount} ${symbol}`} to {sentTo}
       </p>
       <TransactionFooter />
     </div>

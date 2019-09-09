@@ -10,18 +10,20 @@ const TransferContact = React.memo(({ contact, clickCallback, alt }) => {
     clickCallback(contact);
   };
 
+  const { avatarUrl, contactName, contactAddress } = contact;
+
   return (
     <div
       className={`transfer__contact ${alt ? 'transfer__contact--alt' : ''}`}
       onClick={clickHandler}
     >
       <Avatar
-        avatarUrl={contact.avatarUrl}
-        alt={contact.contactName}
+        avatarUrl={avatarUrl}
+        alt={contactName}
         cssClass="transfer__contact__avatar"
-        username={contact.contactAddress}
+        username={contactAddress}
       />
-      <span>{contact.contactName}</span>
+      <span>{contactName}</span>
       <Ink duration={500} />
     </div>
   );
