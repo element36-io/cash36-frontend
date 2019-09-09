@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import ProcessHeader from '../ProcessHeader';
@@ -8,11 +8,11 @@ import { getSelfieCode } from '../../../store/auth/auth.actions';
 import idFront from '../../../assets/icons/ID Front Icon.svg';
 import idBack from '../../../assets/icons/ID Back Icon.svg';
 import selfie from '../../../assets/icons/Selfie Icon.svg';
+import useGetWithState from '../../../hooks/useGetWithState';
 
 import './Step3Documents.scss';
 
 const Step3Documents = ({ changeSteps, stepError }) => {
-  const _isMounted = useRef(false);
   const [types, updateTypes] = useState({
     ID_Front: {
       documentType: 'ID_Front',
@@ -65,26 +65,7 @@ const Step3Documents = ({ changeSteps, stepError }) => {
     });
   };
 
-  const fetchSelfieCode = async () => {
-    try {
-      const code = await getSelfieCode();
-      setSelfieCode(code);
-    } catch (error) {
-      setError(error);
-    }
-  };
-
-  useEffect(() => {
-    _isMounted.current = true;
-
-    if (_isMounted.current) {
-      fetchSelfieCode();
-    }
-
-    return () => {
-      _isMounted.current = false;
-    };
-  }, []);
+  useGetWithState(getSelfieCode, setError, setSelfieCode);
 
   const disabled = Object.values(types)
     .filter(t => t.documentType !== 'ID_Back')

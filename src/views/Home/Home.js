@@ -16,7 +16,7 @@ const Home = ({ getUserActivity, userActivity }) => {
   useGet(getUserActivity, setError);
 
   return (
-    <div className="home-page">
+    <div className="home-page" data-testid="home-page">
       <div className="wrapper">
         <div className="home-page__user-actions">
           <UserProfile />
