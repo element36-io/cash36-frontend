@@ -4,7 +4,7 @@ import Arrow from '@material-ui/icons/KeyboardArrowLeft';
 import Ink from 'react-ink';
 import './ArrowBtn.scss';
 
-const ArrowBtn = ({ alt, onClick }) => (
+const ArrowButton = ({ alt, onClick }) => (
   <span
     className={`arrow-btn ${alt ? 'arrow-btn--alt' : ''}`}
     onClick={onClick}
@@ -14,9 +14,9 @@ const ArrowBtn = ({ alt, onClick }) => (
   </span>
 );
 
-ArrowBtn.propTypes = {
+ArrowButton.propTypes = {
   alt: PropTypes.bool,
   onClick: PropTypes.func
 };
 
-export default ArrowBtn;
+export default ArrowButton;
