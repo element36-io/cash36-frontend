@@ -39,12 +39,11 @@ export const fetchNotifications = () => async dispatch => {
 
     const lastRead = moment(localStorage.getItem('lastRead'));
     let badgeCount = 0;
-    response.data.map(n => {
+
+    response.data.forEach(n => {
       const isNew = lastRead.isSameOrBefore(n.creationDate);
-      if (isNew) {
-        badgeCount++;
-      }
-      return n;
+
+      if (isNew) badgeCount++;
     });
 
     dispatch(updateBadgeCount(badgeCount));

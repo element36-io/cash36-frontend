@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Arrow from '@material-ui/icons/KeyboardArrowLeft';
 import Ink from 'react-ink';
-import './ArrowBtn.scss';
+
+import './ArrowButton.scss';
 
 const ArrowButton = ({ alt, onClick }) => (
   <span
     className={`arrow-btn ${alt ? 'arrow-btn--alt' : ''}`}
     onClick={onClick}
+    data-testid="arrow-button"
   >
     <Arrow className="arrow-btn__icon" />
     <Ink duration={500} />

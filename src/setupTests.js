@@ -2,6 +2,7 @@ import '@testing-library/react/cleanup-after-each';
 import '@testing-library/jest-dom/extend-expect';
 
 import 'jest-canvas-mock';
+// import 'jest-localstorage-mock';
 
 // this is just a little hack to silence a warning that we'll get until react
 // fixes and releases this: https://github.com/facebook/react/pull/14853
