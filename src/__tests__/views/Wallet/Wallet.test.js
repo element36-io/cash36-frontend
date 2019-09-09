@@ -2,7 +2,6 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import mockAxios from 'axios';
 
 import { AvatarContext } from '../../../providers/avatar.provider';
 import { renderWithRouter } from '../../../helpers/tests.helpers';
@@ -12,7 +11,6 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 test('stays on the / route if user is authenticated', async () => {
-  mockAxios.get.mockImplementation(() => ({ data: {} }));
   const store = mockStore({
     contacts: {
       fetching: false
