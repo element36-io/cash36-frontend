@@ -28,7 +28,6 @@ test('stays on the / route if user is authenticated', async () => {
       badgeCount: 0
     }
   });
-
   const { history } = renderWithRouter(
     <Provider store={store}>
       <AvatarContext.Provider value={{ state: {} }}>
