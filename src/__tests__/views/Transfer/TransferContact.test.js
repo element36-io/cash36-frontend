@@ -1,8 +1,8 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
 
+import { renderWithAvatarContext } from '../../../helpers/tests.helpers';
 import TransferContact from '../../../views/Transfer/TransferContact';
-import { AvatarContext } from '../../../providers/avatar.provider';
 
 const props = {
   contact: {
@@ -14,10 +14,8 @@ const props = {
 };
 
 test('renders the component', () => {
-  const { getByText, getByTestId } = render(
-    <AvatarContext.Provider value={{ state: {} }}>
-      <TransferContact {...props} />
-    </AvatarContext.Provider>
+  const { getByText, getByTestId } = renderWithAvatarContext(
+    <TransferContact {...props} />
   );
 
   expect(getByText('John')).toBeInTheDocument();
@@ -27,10 +25,8 @@ test('renders the component', () => {
 test('calls clickCallback when clicked', () => {
   const clickCallback = jest.fn();
 
-  const { getByText } = render(
-    <AvatarContext.Provider value={{ state: {} }}>
-      <TransferContact {...props} clickCallback={clickCallback} />
-    </AvatarContext.Provider>
+  const { getByText } = renderWithAvatarContext(
+    <TransferContact {...props} clickCallback={clickCallback} />
   );
 
   fireEvent.click(getByText('John'));

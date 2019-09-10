@@ -1,8 +1,7 @@
 import React from 'react';
-import { render } from '@testing-library/react';
 
+import { renderWithAvatarContext } from '../../../helpers/tests.helpers';
 import SelectedContact from '../../../views/Transfer/SelectedContact';
-import { AvatarContext } from '../../../providers/avatar.provider';
 
 const contact = {
   contactName: 'John',
@@ -11,10 +10,8 @@ const contact = {
 };
 
 test('renders the component', () => {
-  const { getByText } = render(
-    <AvatarContext.Provider value={{ state: {} }}>
-      <SelectedContact contact={contact} />
-    </AvatarContext.Provider>
+  const { getByText } = renderWithAvatarContext(
+    <SelectedContact contact={contact} />
   );
 
   expect(getByText(/john/i)).toBeInTheDocument();

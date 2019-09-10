@@ -14,7 +14,10 @@ const TransferSuggestions = ({ contacts, onClick, filter }) => {
   if (!list.length) return null;
 
   return (
-    <div className="transfer-address__transfer-suggestions">
+    <div
+      className="transfer-address__transfer-suggestions"
+      data-testid="transfer-suggestions"
+    >
       {list.map(c => (
         <TransferContact contact={c} clickCallback={onClick} key={c.id} />
       ))}

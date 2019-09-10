@@ -53,11 +53,12 @@ const TransferAddress = ({ submitCallback, contactsList, utils }) => {
     return utils.isAddress(address);
   };
 
+  console.log(contactsList);
+
   return (
     <div className="transfer-address">
       <h2>Transfer Tokens</h2>
       <h4>Transfer tokens to</h4>
-      {/* <span>{inputError}</span> */}
       <ClickAwayListener onClickAway={hideSuggestions}>
         <div className="transfer-address__search-container">
           <div className="transfer-address__input-wrapper">
