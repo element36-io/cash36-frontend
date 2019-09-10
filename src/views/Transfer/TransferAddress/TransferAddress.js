@@ -53,8 +53,6 @@ const TransferAddress = ({ submitCallback, contactsList, utils }) => {
     return utils.isAddress(address);
   };
 
-  console.log(contactsList);
-
   return (
     <div className="transfer-address">
       <h2>Transfer Tokens</h2>
