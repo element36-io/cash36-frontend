@@ -5,7 +5,7 @@ import {
   renderWithRedux
 } from '../../../helpers/tests.helpers';
 import TransferAmount from '../../../views/Transfer/TransferAmount';
-import { fireEvent, getByLabelText } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
 
 const props = {
   target: {
