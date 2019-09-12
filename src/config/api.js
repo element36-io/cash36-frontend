@@ -2,23 +2,8 @@ import axios from 'axios';
 import store from '../store';
 import { logout } from '../store/auth/auth.actions';
 
-let apiEnv = process.env.NODE_ENV;
-// console.log('Environment: ' + apiEnv);
-
-let url = 'http://localhost:8090/cash36';
-let web3NodeUrl = 'http://167.99.243.81:8866/';
-
-if (apiEnv === 'staging') {
-  url = 'http://cash36-backend.herokuapp.com';
-  web3NodeUrl = 'http://167.99.243.81:8866/';
-}
-if (apiEnv === 'production') {
-  url = '/api';
-  web3NodeUrl = 'https://rinkeby.infura.io/v3/4cf538c6b0bb4562bdc2f31430327c08';
-}
-
-export const API_ROOT = url;
-export const WEB3_NODE = web3NodeUrl;
+export const API_ROOT = process.env.REACT_APP_API_URL;
+export const WEB3_NODE = process.env.REACT_APP_WEB3_URL;
 
 const api = axios.create({
   baseURL: API_ROOT
