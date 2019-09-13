@@ -7,22 +7,9 @@ services:
   - docker:dind
 
 stages:
-  - build
   - test
   - package
   - deploy
-
-build:
-  stage: build
-  tags:
-    - dokcer
-  script:
-    - apk add --no-cache nodejs nodejs-npm git python g++ make
-    - npm install -g yarn
-    - yarn --registry http://167.99.243.81:4873/
-    - CI=false yarn build
-  except:
-    - master
 
 test:
   stage: test
