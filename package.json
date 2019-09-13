@@ -65,10 +65,10 @@
     "redux-mock-store": "^1.5.3"
   },
   "scripts": {
-    "start": "env-cmd -f ./.env.development react-scripts start",
+    "start": "react-scripts start",
     "start:test": "env-cmd -f ./.env.test react-scripts start",
     "build:staging": "env-cmd -f ./.env.staging react-scripts build",
-    "build": "env-cmd -f ./.env react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint src/",
