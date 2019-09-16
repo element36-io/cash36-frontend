@@ -5,8 +5,6 @@ import { logout } from '../store/auth/auth.actions';
 export const API_ROOT = process.env.REACT_APP_API_URL;
 export const WEB3_NODE = process.env.REACT_APP_WEB3_URL;
 
-console.warn(WEB3_NODE, API_ROOT)
-
 const api = axios.create({
   baseURL: API_ROOT
 });
