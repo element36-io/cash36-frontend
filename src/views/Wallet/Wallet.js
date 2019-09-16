@@ -11,7 +11,7 @@ import History from '../History';
 import Contacts from '../Contacts';
 import Kyc from '../Kyc';
 
-const Wallet = ({ isAuthenticated }) => {
+export const Wallet = ({ isAuthenticated }) => {
   if (!isAuthenticated) return <Redirect to="/login" />;
 
   return (

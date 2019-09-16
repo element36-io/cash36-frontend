@@ -36,10 +36,18 @@ const Header = ({
     if (tier2Notification) getUserInfo();
   }, [badgeCount]);
 
+  const callFetchNotifications = async () => {
+    try {
+      await fetchNotifications();
+    } catch (error) {
+      // TODO: handle the notification error
+    }
+  };
+
   useEffect(() => {
-    fetchNotifications();
+    callFetchNotifications();
     const notificationsInterval = setInterval(
-      () => fetchNotifications(),
+      () => callFetchNotifications(),
       60000
     );
 

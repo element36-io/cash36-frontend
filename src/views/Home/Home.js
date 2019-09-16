@@ -1,22 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import QuickActions from './QuickActions';
 import ActivityTable from '../../components/ActivityTable';
 import UserProfile from '../../components/UserProfile';
 import { getUserActivity } from '../../store/tokens/tokens.actions';
 import BalanceCards from '../../components/BalanceCards';
+import useGet from '../../hooks/useGet';
 
 import './Home.scss';
 
 const Home = ({ getUserActivity, userActivity }) => {
   const lastActivity = userActivity.slice(0, 5);
+  const [error, setError] = useState('');
 
-  useEffect(() => {
-    getUserActivity();
-  }, []);
+  useGet(getUserActivity, setError);
 
   return (
-    <div className="home-page">
+    <div className="home-page" data-testid="home-page">
       <div className="wrapper">
         <div className="home-page__user-actions">
           <UserProfile />
@@ -31,11 +31,17 @@ const Home = ({ getUserActivity, userActivity }) => {
             <ActivityTable userActivity={lastActivity} />
           ) : (
             <div className="paper home-page__no-activity">
-              <h3>No Recent Activity.</h3>
-              <p>
-                Keep track of your most recent transactions here when you sell,
-                buy or transfer cash36 currencies
-              </p>
+              {error ? (
+                <div className="error-text">{error}</div>
+              ) : (
+                <Fragment>
+                  <h3>No Recent Activity.</h3>
+                  <p>
+                    Keep track of your most recent transactions here when you
+                    sell, buy or transfer cash36 currencies
+                  </p>
+                </Fragment>
+              )}
             </div>
           )}
         </div>

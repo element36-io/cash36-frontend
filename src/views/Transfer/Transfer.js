@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import bigInt from 'big-integer';
 
 import TransferAddress from './TransferAddress';
 import TransferAmount from './TransferAmount';
@@ -8,6 +8,7 @@ import BackButton from '../../components/Buttons/BackButton';
 import { getTokens } from '../../store/tokens/tokens.actions';
 import { getContacts } from '../../store/contacts/contacts.actions';
 import useCash36 from '../../hooks/useCash36';
+import useGet from '../../hooks/useGet';
 import Token from '../../contracts/ERC20Burnable';
 import TransferConfirmation from './TransferConfirmation';
 import TransferSuccess from './TransferSuccess';
@@ -28,17 +29,18 @@ const Transfer = ({
     location.state && location.state.quickTransfer ? 1 : 0
   );
   const [values, setValues] = useState({ amount: '', symbol: 'EUR36' });
-  const [error, setError] = useState(null);
+  const [transferError, setTransferError] = useState(null);
+  const [error, setError] = useState('');
   const [target, setTarget] = useState(
     (location.state && location.state.quickTransfer) || null
   );
-  const _isMounted = useRef(true);
+  const mounted = useRef(true);
   const cash36 = useCash36();
 
-  useEffect(() => {
-    getTokens();
-    getContacts();
+  useGet(getTokens, setError);
+  useGet(getContacts, setError);
 
+  useEffect(() => {
     if (location.state) {
       history.replace({
         pathname: '/transfer',
@@ -47,7 +49,7 @@ const Transfer = ({
     }
 
     return () => {
-      _isMounted.current = false;
+      mounted.current = false;
     };
   }, []);
 
@@ -71,8 +73,8 @@ const Transfer = ({
   };
 
   const catchError = error => {
-    if (!_isMounted.current) return;
-    setError(
+    if (!mounted.current) return;
+    setTransferError(
       error.message
         ? error.message
         : 'Transfer has been denied via mobile device'
@@ -87,9 +89,7 @@ const Transfer = ({
     const { tokenAddress } = tokens.filter(token => token.symbol === symbol)[0];
     const token36Contract = new web3.eth.Contract(Token.abi, tokenAddress);
 
-    const transferAmount = (
-      bigInt(amount).value * bigInt('1e18').value
-    ).toString();
+    const transferAmount = web3.utils.toWei(amount, 'ether');
 
     try {
       const estimate = await token36Contract.methods
@@ -110,7 +110,7 @@ const Transfer = ({
       return web3.eth
         .sendTransaction(options)
         .once('transactionHash', hash => {
-          if (_isMounted.current) setStep(3);
+          if (mounted.current) setStep(3);
         })
         .on('error', error => {
           catchError(error);
@@ -142,7 +142,7 @@ const Transfer = ({
           <TransferSuccess amount={amount} target={target} symbol={symbol} />
         );
       case 4:
-        return <TransferError message={error} />;
+        return <TransferError message={transferError} />;
       default:
         return (
           <TransferAddress
@@ -160,6 +160,7 @@ const Transfer = ({
         <div className="transfer__content">
           {step === 1 && <BackButton onClick={previousStep} />}
           {renderStep()}
+          <div className="error-text">{error}</div>
         </div>
       </div>
     </div>
@@ -175,6 +176,16 @@ const mapStateToProps = ({
   account: user.account,
   contactsList
 });
+
+Transfer.propTypes = {
+  getTokens: PropTypes.func,
+  getContacts: PropTypes.func,
+  tokens: PropTypes.array,
+  account: PropTypes.string,
+  contactsList: PropTypes.array,
+  location: PropTypes.object,
+  history: PropTypes.object
+};
 
 export default connect(
   mapStateToProps,

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import bigInt from 'big-integer';
 
 import SellTokens from './SellTokens';
 import SellConfirmation from './SellConfirmation';
@@ -10,6 +9,8 @@ import SellError from './SellError';
 import { getTokens, getExchangeFee } from '../../store/tokens/tokens.actions';
 import useCash36 from '../../hooks/useCash36';
 import Token from '../../contracts/ERC20Burnable';
+import useGet from '../../hooks/useGet';
+import useGetWithState from '../../hooks/useGetWithState';
 
 import './Sell.scss';
 
@@ -20,33 +21,16 @@ export const Sell = ({ user, tokens, getTokens }) => {
   const [exchangeFee, setExchangeFee] = useState(null);
   const [exchangeFeeError, setExchangeFeeError] = useState('');
   const [tokensError, setTokensError] = useState('');
-  const _isMounted = useRef(true);
+  const mounted = useRef(true);
   const cash36 = useCash36();
 
-  const callGetExchangeFee = async () => {
-    try {
-      const exchangeFee = await getExchangeFee();
+  useGetWithState(getExchangeFee, setExchangeFeeError, setExchangeFee);
 
-      setExchangeFee(exchangeFee);
-    } catch (error) {
-      setExchangeFeeError(error);
-    }
-  };
-
-  const callGetTokens = async () => {
-    try {
-      await getTokens();
-    } catch (error) {
-      setTokensError(error);
-    }
-  };
+  useGet(getTokens, setTokensError);
 
   useEffect(() => {
-    callGetTokens();
-    callGetExchangeFee();
-
     return () => {
-      _isMounted.current = false;
+      mounted.current = false;
     };
   }, []);
 
@@ -61,7 +45,7 @@ export const Sell = ({ user, tokens, getTokens }) => {
   };
 
   const catchError = error => {
-    if (!_isMounted.current) return;
+    if (!mounted.current) return;
     setSellError(
       error.message ? error.message : 'Selling token was unsuccessful'
     );
@@ -75,7 +59,7 @@ export const Sell = ({ user, tokens, getTokens }) => {
     const { tokenAddress } = tokens.filter(token => token.symbol === symbol)[0];
     const token36Contract = new web3.eth.Contract(Token.abi, tokenAddress);
 
-    const sellAmount = (bigInt(amount).value * bigInt('1e18').value).toString();
+    const sellAmount = web3.utils.toWei(amount, 'ether');
 
     try {
       const estimate = await token36Contract.methods
@@ -94,7 +78,7 @@ export const Sell = ({ user, tokens, getTokens }) => {
       return web3.eth
         .sendTransaction(options)
         .on('receipt', () => {
-          if (_isMounted.current) setStep(2);
+          if (mounted.current) setStep(2);
         })
         .on('error', error => {
           catchError(error);

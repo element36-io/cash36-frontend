@@ -1,3 +1,4 @@
+import moment from 'moment';
 import API from '../../config/api';
 import {
   FETCH_NOTIFICATIONS,
@@ -36,15 +37,13 @@ export const fetchNotifications = () => async dispatch => {
       payload: response.data
     });
 
-    const lastRead = localStorage.getItem('lastRead');
+    const lastRead = moment(localStorage.getItem('lastRead'));
     let badgeCount = 0;
-    response.data.map(n => {
-      const isNew =
-        new Date(lastRead).getTime() < new Date(n.creationDate).getTime();
-      if (isNew) {
-        badgeCount++;
-      }
-      return n;
+
+    response.data.forEach(n => {
+      const isNew = lastRead.isSameOrBefore(n.creationDate);
+
+      if (isNew) badgeCount++;
     });
 
     dispatch(updateBadgeCount(badgeCount));

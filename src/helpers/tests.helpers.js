@@ -7,6 +7,7 @@ import { createMemoryHistory } from 'history';
 import { render, cleanup } from '@testing-library/react';
 
 import { reducers } from '../store';
+import { AvatarContext } from '../providers/avatar.provider';
 
 afterEach(cleanup);
 
@@ -33,4 +34,17 @@ export function renderWithRouter (
     ...render(<Router history={history}>{component}</Router>),
     history
   };
+}
+
+export function renderWithAvatarContext (
+  component,
+  renderFunction = render,
+  state = {},
+  actions = {}
+) {
+  return renderFunction(
+    <AvatarContext.Provider value={{ state, actions }}>
+      {component}
+    </AvatarContext.Provider>
+  );
 }

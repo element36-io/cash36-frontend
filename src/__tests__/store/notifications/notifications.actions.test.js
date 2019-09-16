@@ -70,6 +70,8 @@ test('dispatches fetchNotifications success', async () => {
     }
   ];
 
+  localStorage.setItem('lastRead', '2018-07-26T08:53:23.432+0000');
+
   mockAxios.get.mockImplementationOnce(() =>
     Promise.resolve({ data: notifications })
   );
@@ -91,6 +93,8 @@ test('dispatches fetchNotifications success', async () => {
 
   expect(store.getActions()).toEqual(expectedActions);
   expect(mockAxios.get).toHaveBeenCalledTimes(1);
+
+  localStorage.removeItem('lastRead');
   mockAxios.get.mockRestore();
 });
 

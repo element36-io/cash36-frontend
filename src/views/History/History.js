@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { CircularProgress } from '@material-ui/core';
+
 import ActivityTable from '../../components/ActivityTable';
 import { getUserActivity } from '../../store/tokens/tokens.actions';
 import HistoryFilters from './HistoryFilters';
+import useGet from '../../hooks/useGet';
 
 import './History.scss';
 
@@ -16,17 +18,7 @@ const History = ({
 }) => {
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    callGetUserActivity();
-  }, []);
-
-  const callGetUserActivity = async () => {
-    try {
-      await getUserActivity();
-    } catch (error) {
-      setError(error);
-    }
-  };
+  useGet(getUserActivity, setError);
 
   const renderHistory = () => {
     if (userActivity.length === 0 && historyFiltered === false) {

@@ -12,10 +12,10 @@
 
   .header__alerts__icon {
     display: inline-block;
-    width: 1.6rem;
-    height: 2rem;
+    width: 2.6rem;
+    height: 3rem;
     background: url('../../../assets/icons/bell-icon.svg') no-repeat center;
-    background-size: 100% 100%;
+    background-size: 1.6rem 2rem;
   }
 
   .header__alerts__counter {
@@ -54,7 +54,7 @@
       max-height: 40rem;
       box-shadow: $box-shadow-1;
       border-radius: 10px;
-      transition: all .2s ease-in;
+      transition: all 0.2s ease-in;
     }
   }
 

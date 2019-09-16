@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
@@ -15,6 +15,7 @@ import {
   ibanModel,
   nationalityModel
 } from './formModel';
+import useGet from '../../../hooks/useGet';
 
 import './Step1Tier1Form.scss';
 
@@ -44,19 +45,7 @@ export const Step1Tier1Form = ({
     }
   };
 
-  useEffect(() => {
-    if (!countries.length || !nationalities.length) {
-      callGetCountries();
-    }
-  }, []);
-
-  const callGetCountries = async () => {
-    try {
-      await getCountries();
-    } catch (error) {
-      setError(error);
-    }
-  };
+  useGet(getCountries, setError);
 
   const fieldGroup = formModel.map(field => {
     if (field.name === 'country') field.list = countries;

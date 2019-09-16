@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -11,6 +11,7 @@ import BackButton from '../../components/Buttons/BackButton';
 import PaymentInfo from '../../components/PaymentInfo';
 import TransactionFooter from '../../components/TransactionFooter';
 import BuyError from './BuyError';
+import useGet from '../../hooks/useGet';
 
 import './Buy.scss';
 
@@ -21,17 +22,7 @@ export const Buy = ({ getTokens }) => {
   const [symbol, setSymbol] = useState('EUR36');
   const [manualTransferData, setManualTransferData] = useState(null);
 
-  const callGetTokens = async () => {
-    try {
-      await getTokens();
-    } catch (error) {
-      setError(error);
-    }
-  };
-
-  useEffect(() => {
-    callGetTokens();
-  }, []);
+  useGet(getTokens, setError);
 
   let manualTransferStarted = false;
 

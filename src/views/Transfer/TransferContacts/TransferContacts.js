@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Responsive from '../../../components/Responsive';
 import TransferContact from '../TransferContact';
-import ArrowBtn from '../ArrowBtn';
+import ArrowButton from '../ArrowButton';
 import './TransferContacts.scss';
 
 function getItemsPerPage () {
@@ -78,8 +78,8 @@ const TransferContacts = ({ contactsList, clickCallback }) => {
         <Responsive>
           {contactsList.length > itemsPerPage && (
             <Fragment>
-              <ArrowBtn onClick={prevPage} />
-              <ArrowBtn alt onClick={nextPage} />
+              <ArrowButton onClick={prevPage} />
+              <ArrowButton alt onClick={nextPage} />
             </Fragment>
           )}
         </Responsive>
