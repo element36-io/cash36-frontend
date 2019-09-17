@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import Web3 from 'web3';
 import { WEB3_NODE } from '../config/api';
 
 export const Web3Context = React.createContext();
 
-const Web3Provider = ({ children }) => {
+const Web3Provider = ({ children, user }) => {
   const [loading, setLoading] = useState(true);
   const [networkId, setNetworkId] = useState(null);
   const [network, setNetwork] = useState(null);
@@ -14,7 +15,7 @@ const Web3Provider = ({ children }) => {
     let { ethereum } = window;
     let web3js;
 
-    if (ethereum !== undefined) {
+    if (ethereum !== undefined && user && user.useMetamask) {
       // Use Mist/MetaMask's provider.
       web3js = new Web3(ethereum);
       console.info(
@@ -69,7 +70,12 @@ const Web3Provider = ({ children }) => {
   useEffect(() => {
     initWeb3();
     getNetworkId();
-  }, []);
+  }, [user]);
+
+  // useEffect(() => {
+  //   initWeb3();
+  //   getNetworkId();
+  // }, []);
 
   if (loading) {
     return <div className="loading-full">Connecting to Ethereum node...</div>;
@@ -86,4 +92,8 @@ const Web3Provider = ({ children }) => {
   );
 };
 
-export default Web3Provider;
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
+
+export default connect(mapStateToProps)(Web3Provider);

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from '../../components/Header';
@@ -15,7 +15,7 @@ export const Wallet = ({ isAuthenticated }) => {
   if (!isAuthenticated) return <Redirect to="/login" />;
 
   return (
-    <Fragment>
+    <>
       <PageLoader />
       <Header />
       <Switch>
@@ -27,7 +27,7 @@ export const Wallet = ({ isAuthenticated }) => {
         <Route exact path="/contacts" component={Contacts} />
         <Route path="/kyc/:id" component={Kyc} />
       </Switch>
-    </Fragment>
+    </>
   );
 };
 
