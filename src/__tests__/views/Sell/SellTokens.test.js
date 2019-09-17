@@ -49,8 +49,16 @@ test('renders partial exchangeFee if exchangeFee is === 0', () => {
 });
 
 test("doesn't render the exchangeFee if exchangeFee is null", () => {
-  const { queryByText, getByText } = renderWithRedux(<SellTokens {...props} />);
+  const { queryByText } = renderWithRedux(<SellTokens {...props} />);
+
+  expect(queryByText(/couldn't determine exchange fee/i)).toBeNull();
+  expect(queryByText(/you will receive/i)).toBeNull();
+});
+
+test('renders a paragraph if exchangeFee is false', () => {
+  const { getByText } = renderWithRedux(
+    <SellTokens {...props} exchangeFee={false} />
+  );
 
   expect(getByText(/couldn't determine exchange fee/i)).toBeInTheDocument();
-  expect(queryByText(/you will receive/i)).toBeNull();
 });

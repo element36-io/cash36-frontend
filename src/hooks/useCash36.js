@@ -4,19 +4,23 @@ import { Web3Context } from '../providers/web3.provider';
 import E36Provider from '../helpers/e36.provider';
 
 const useCash36 = () => {
-  const { networkId, web3 } = useContext(Web3Context);
   const _isMounted = useRef(true);
-  const {
-    user: { useMetamask, account, pushToken, boxPub }
-  } = useSelector(({ auth }) => auth);
+  const { networkId, web3 } = useContext(Web3Context);
   const [state] = useState({ networkId, web3 });
+  const { user } = useSelector(({ auth }) => auth);
 
   const isActive = () => {
     return _isMounted.current;
   };
 
-  useEffect(() => {
-    if (useMetamask) return;
+  const setProvider = () => {
+    if (!user && !user.useMetamask) return;
+
+    console.warn(user);
+    const { account, pushToken, boxPub } = user;
+    console.warn('========== useCash36');
+    console.warn(web3);
+    console.warn(pushToken);
 
     const provider = new E36Provider({
       networkId,
@@ -27,34 +31,16 @@ const useCash36 = () => {
     });
 
     state.web3.setProvider(provider);
+  };
 
+  useEffect(() => {
+    setProvider();
     return () => {
       _isMounted.current = false;
     };
   }, []);
 
-  const transactionHashCallback = action => {
-    return hash => {
-      console.log('transactionHashCallback - ' + action);
-      // this.props.dispatch(info(Messages.transactionSent(action)));
-    };
-  };
-
-  const receiptCallback = action => {
-    // return (receipt) => {
-    console.log('receiptCallback - ' + action);
-    // this.props.dispatch(success(Messages.transactionMined(action)));
-    // };
-  };
-
-  const errorCallback = action => {
-    return async err => {
-      // this.props.dispatch(error(Messages.error(action, err.message)));
-      console.log(`ERROR: ${err.message}`);
-    };
-  };
-
-  return { ...state, transactionHashCallback, receiptCallback, errorCallback };
+  return { ...state };
 };
 
 export default useCash36;
