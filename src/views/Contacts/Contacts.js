@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { CircularProgress } from '@material-ui/core';
 
@@ -75,7 +76,7 @@ const Contacts = ({
   }
 
   return (
-    <div className="wrapper contacts">
+    <div className="wrapper contacts" data-testid="contacts">
       <ContactFormContainer
         closeForm={closeForm}
         onSubmit={addContact}
@@ -98,6 +99,14 @@ const Contacts = ({
 };
 
 const mapStateToProps = ({ contacts }) => ({ contacts });
+
+Contacts.propTypes = {
+  contacts: PropTypes.object,
+  getContacts: PropTypes.func,
+  removeContact: PropTypes.func,
+  addContact: PropTypes.func,
+  history: PropTypes.object
+};
 
 export default connect(
   mapStateToProps,

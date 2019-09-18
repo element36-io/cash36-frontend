@@ -5,8 +5,9 @@ import './ContactsInput.scss';
 const ContactsInput = ({ label, placeholder, value, name, changeHandler }) => (
   <div className="contact-input-wrapper">
     <div className="contact-input">
-      <label>{label}</label>
+      <label htmlFor={`contact-input-${name}`}>{label}</label>
       <input
+        id={`contact-input-${name}`}
         name={name}
         value={value}
         onChange={changeHandler}
