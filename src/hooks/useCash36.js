@@ -17,7 +17,6 @@ const useCash36 = () => {
     if (!user && !user.useMetamask) return;
 
     const { account, pushToken, boxPub } = user;
-
     const provider = new E36Provider({
       account,
       pushToken,
