@@ -16,14 +16,8 @@ const useCash36 = () => {
   const setProvider = () => {
     if (!user && !user.useMetamask) return;
 
-    console.warn(user);
     const { account, pushToken, boxPub } = user;
-    console.warn('========== useCash36');
-    console.warn(web3);
-    console.warn(pushToken);
-
     const provider = new E36Provider({
-      networkId,
       account,
       pushToken,
       boxPub,

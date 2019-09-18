@@ -70,7 +70,7 @@ export const Sell = ({ user, tokens, getTokens }) => {
       const options = {
         from: account,
         to: tokenAddress,
-        gas: estimate,
+        gas: estimate + Math.round(estimate * 0.1),
         nonce: await web3.eth.getTransactionCount(account, 'pending'),
         data
       };
