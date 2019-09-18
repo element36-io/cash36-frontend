@@ -32,7 +32,6 @@ export const attestUser = ({ did, pushToken, boxPub, claim }) => {
 
 export const transactionRequest = async ({
   txObj,
-  networkId,
   pushToken,
   boxPub,
   cancel
@@ -42,7 +41,6 @@ export const transactionRequest = async ({
       `${API_ROOT}/credentials/transaction-request`,
       {
         txObj,
-        networkId,
         pushToken,
         boxPub
       }
