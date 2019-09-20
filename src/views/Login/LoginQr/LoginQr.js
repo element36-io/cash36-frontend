@@ -13,6 +13,8 @@ const LoginQr = ({ scanCallback, metamaskLogin }) => {
   const [qr, setQr] = useState(null);
   const md = useRef(new MobileDetect(window.navigator.userAgent));
   const _isMounted = useRef(true);
+  const showQr =
+    !md.current.mobile() || (md.current.mobile() && md.current.tablet());
 
   const isActive = () => {
     return _isMounted.current;
@@ -59,7 +61,7 @@ const LoginQr = ({ scanCallback, metamaskLogin }) => {
           <img src={uportLogo} alt="UPORT" />
         </span>
       </p>
-      {!md.current.mobile() && (
+      {showQr && (
         <div className="login__qrcode">
           {qr ? (
             <QRCode value={qr} size={250} />

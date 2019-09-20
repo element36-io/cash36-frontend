@@ -92,7 +92,11 @@ const ContactsFormContainer = ({
           <BackButton onClick={closeForm} />
         </Responsive>
         <Responsive>
-          <CloseIcon className="contact-form__close" onClick={closeForm} />
+          <CloseIcon
+            className="contact-form__close"
+            onClick={closeForm}
+            data-testid="contact-form__close"
+          />
         </Responsive>
         {showResponse ? (
           <ContactResponse
