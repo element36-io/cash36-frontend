@@ -15,7 +15,9 @@ const userActivity = [
     status: 'COMPLETED',
     symbol: 'CHF36',
     targetAddress: '0x95ff342a3db1a7dd6cd81ff02a4bd6dcba68f3f0',
-    txHash: '0xc49ca0c54824c440139ddfcc161458345e98f45f7326c0bd0c9ffc2758c96573'
+    txHash:
+      '0xc49ca0c54824c440139ddfcc161458345e98f45f7326c0bd0c9ffc2758c96573',
+    id: '1'
   }
 ];
 
@@ -166,11 +168,13 @@ describe('row', () => {
     status: 'COMPLETED',
     symbol: 'CHF36',
     targetAddress: '0x95ff342a3db1a7dd6cd81ff02a4bd6dcba68f3f0',
-    txHash: '0xc49ca0c54824c440139ddfcc161458345e98f45f7326c0bd0c9ffc2758c96573'
+    txHash:
+      '0xc49ca0c54824c440139ddfcc161458345e98f45f7326c0bd0c9ffc2758c96573',
+    id: '1'
   };
 
   test('renders the Row component', () => {
-    const { getByText } = render(<Row activity={activity} />);
+    const { getByText } = render(<Row activity={activity} id={activity.id} />);
 
     expect(getByText('CHF36')).toBeVisible();
     expect(
