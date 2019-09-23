@@ -47,6 +47,7 @@ const ContactItem = React.memo(({ contact, removeCallback, quickTransfer }) => {
             className={`paper contacts__list-item__actions__content ${
               showActions ? '--active' : ''
             }`}
+            data-testid="contact__item__menu-button"
           >
             <MenuItem onClick={removeUser}>Remove</MenuItem>
           </div>
