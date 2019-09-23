@@ -20,8 +20,6 @@
 
   @include mobile {
     display: flex;
-    flex-wrap: nowrap;
-    overflow-x: scroll;
-    -webkit-overflow-scrolling: auto;
+    flex-wrap: wrap;
   }
 }
