@@ -32,15 +32,11 @@ body {
 
   @include tablet {
     padding: 0 2rem;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
   }
 
   @include mobile {
     background: none;
     background-color: $headerGrey;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
   }
 }
 
@@ -56,8 +52,12 @@ body > div[role='tooltip'] {
   margin: 0 auto;
   height: 100%;
   overflow: scroll;
+
   @include mobile {
+    -webkit-overflow-scrolling: touch;
+
     padding-top: 87px;
+    overflow: auto;
   }
 }
 

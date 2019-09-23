@@ -10,9 +10,10 @@
   padding: 3rem 1rem;
   background: #f6f7fa;
   overflow: scroll;
-  transition: all .2s;
+  transition: all 0.2s;
   transform: scale(0);
   transform-origin: 50% 0;
+  // -webkit-overflow-scrolling: touch;
 
   &.active {
     transform: scale(1);
@@ -24,10 +25,11 @@
 
     li:not(:last-child) {
       margin-bottom: 1rem;
-      border-bottom: 1px solid $lightGrey
+      border-bottom: 1px solid $lightGrey;
     }
 
-    a, span {
+    a,
+    span {
       position: relative;
       display: block;
       padding-right: 3rem;
