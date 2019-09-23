@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/base.scss';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
@@ -11,6 +10,9 @@ import store from './store';
 import theme from './config/theme';
 import Web3Provider from './providers/web3.provider';
 import AvatarProvider from './providers/avatar.provider';
+
+import 'typeface-rubik';
+import './styles/base.scss';
 
 ReactDOM.render(
   <MuiPickersUtilsProvider utils={MomentUtils}>
