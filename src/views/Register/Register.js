@@ -7,20 +7,18 @@ import AuthForm from '../../components/AuthWrapper/AuthForm';
 import { formFields, initialValues } from './form-model';
 import validationSchema from './validation-schema';
 
-import { login } from '../../store/auth/auth.actions';
+import { register } from '../../store/auth/auth.actions';
 
-const Login = ({ isAuthenticated, login }) => {
+const Register = ({ isAuthenticated, register }) => {
   const [error, setError] = useState(null);
   const submitCallback = async values => {
     try {
-      await login(values.username, values.password);
-    } catch (err) {
-      setError(err);
-      return Promise.reject(err);
+      await register(values.username, values.password);
+    } catch (e) {
+      setError(e);
+      return Promise.reject(e);
     }
   };
-
-  console.warn(isAuthenticated);
 
   if (isAuthenticated) return <Redirect to="/" />;
 
@@ -28,20 +26,18 @@ const Login = ({ isAuthenticated, login }) => {
     <AuthWrapper>
       <div>
         <p>
-          Welcome back,
-          <br />
-          Please, enter your eamil & password
+          Welcome aboard, <br /> Please, enter your email & choose a password
         </p>
         <AuthForm
           submitCallback={submitCallback}
           validationSchema={validationSchema}
           initialValues={initialValues}
           formFields={formFields}
-          buttonLabel="Login"
+          buttonLabel="Register"
           errorMsg={error}
         >
           <p>
-            New to element36? <Link to="/register">Sign up now</Link>
+            Already a member? <Link to="/login">Sign in</Link>
           </p>
         </AuthForm>
       </div>
@@ -49,16 +45,16 @@ const Login = ({ isAuthenticated, login }) => {
   );
 };
 
-Login.propTypes = {
-  login: PropTypes.func,
-  isAuthenticated: PropTypes.bool
-};
-
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
+Register.propTypes = {
+  register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
+};
+
 export default connect(
   mapStateToProps,
-  { login }
-)(Login);
+  { register }
+)(Register);

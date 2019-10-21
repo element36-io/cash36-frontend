@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import './Form.scss';
 
-const Form = props => {
+const Form = ({ render, submitCallback, initialValues, validationSchema }) => {
   const [submitting, toggleSubmitting] = useState(false);
-
-  const { render, submitCallback, initialValues, validationSchema } = props;
 
   const onSubmit = useCallback(async formValues => {
     toggleSubmitting(true);
