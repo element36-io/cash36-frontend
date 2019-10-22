@@ -1,0 +1,52 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/settings.scss';
+
+.add-wallet-dialog {
+  .add-wallet-dialog__button {
+    display: flex;
+    align-items: center;
+
+    img {
+      margin-right: 0.8rem;
+
+      @include mobile {
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+  }
+}
+
+.add-wallet-dialog__content {
+  position: relative;
+
+  svg {
+    position: absolute;
+    right: 2.5rem;
+    top: 2.5rem;
+    fill: $darkGrey;
+    cursor: pointer;
+  }
+
+  @include mobile {
+    position: fixed;
+    top: 8.7rem;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    background: #fff;
+    transition: transform 255ms;
+    transform: translateX(-100%);
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    &.--open {
+      transform: translateX(0);
+    }
+  }
+}

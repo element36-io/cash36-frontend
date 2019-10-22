@@ -5,8 +5,7 @@ import mockAxios from 'axios';
 import {
   AUTH_USER,
   GET_USER_INFO,
-  GET_CURRENT_KYC_STEP,
-  CONFIRM_ATTESTATION
+  GET_CURRENT_KYC_STEP
 } from '../../../store/auth/auth.types';
 
 import {
@@ -18,8 +17,7 @@ import {
   updateKycStep,
   register,
   login,
-  createUserObject,
-  confirmAttestation
+  createUserObject
 } from '../../../store/auth/auth.actions';
 
 const middlewares = [thunk];
@@ -178,13 +176,4 @@ test('dispatches login', async () => {
   expect(mockAxios.get).toHaveBeenCalledTimes(1);
   mockAxios.post.mockRestore();
   mockAxios.get.mockRestore();
-});
-
-test('dispatches confirmAttestation', () => {
-  const action = confirmAttestation('attest1');
-
-  expect(action).toEqual({
-    type: CONFIRM_ATTESTATION,
-    payload: 'attest1'
-  });
 });

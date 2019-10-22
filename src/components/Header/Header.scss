@@ -29,7 +29,7 @@ header {
       left: 0;
       right: 0;
       height: 200px;
-      background: linear-gradient(to bottom, $headerGrey 0,$headerGrey 100%);
+      background: linear-gradient(to bottom, $headerGrey 0, $headerGrey 100%);
       content: '';
       z-index: -1;
     }
@@ -44,11 +44,18 @@ header {
           margin-right: 4rem;
         }
 
+        > span {
+          color: $darkGrey;
+          font-weight: 500;
+          opacity: 0.5;
+        }
+
         a {
           color: $darkGrey;
-          transition: all .3s;
+          transition: all 0.3s;
           font-weight: 500;
-          &:hover, &.selected {
+          &:hover,
+          &.selected {
             color: $black;
           }
         }

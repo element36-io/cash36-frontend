@@ -14,8 +14,8 @@ export default [
     label: 'Sell'
   },
   {
-    link: '/transfer',
+    link: '/buy',
     Icon: ArrowForwardIcon,
-    label: 'Transfer'
+    label: 'Send'
   }
 ];
