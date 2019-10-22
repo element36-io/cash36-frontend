@@ -18,7 +18,6 @@ import {
   updateKycStep,
   register,
   login,
-  createUserObject,
   confirmAttestation
 } from '../../../store/auth/auth.actions';
 
@@ -126,15 +125,14 @@ test('dispatches updateKycStep', async () => {
 });
 
 test('dispatches register', async () => {
-  const creds = {};
-  const useMetamask = false;
+  const username = 'test@test.com';
   const password = 'password';
 
   mockAxios.post.mockImplementation(() => Promise.resolve());
 
   const store = mockStore();
 
-  await store.dispatch(register(creds, useMetamask, password));
+  await store.dispatch(register(username, password));
 
   expect(mockAxios.post).toHaveBeenCalledTimes(2);
 
@@ -142,11 +140,11 @@ test('dispatches register', async () => {
 });
 
 test('dispatches login', async () => {
-  const creds = {};
-  const useMetamask = false;
+  const username = 'test@test.com';
   const password = 'password';
-
-  const { user } = createUserObject(creds, useMetamask);
+  const user = {
+    username
+  };
 
   mockAxios.post.mockImplementation(() =>
     Promise.resolve({
