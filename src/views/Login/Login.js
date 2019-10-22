@@ -28,7 +28,7 @@ const Login = ({ isAuthenticated, login }) => {
         <p>
           Welcome back,
           <br />
-          Please, enter your eamil & password
+          Please, enter your email & password
         </p>
         <AuthForm
           submitCallback={submitCallback}

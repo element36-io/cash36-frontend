@@ -169,7 +169,7 @@ test('dispatches login', async () => {
     }
   ];
 
-  await store.dispatch(login(creds, useMetamask, password));
+  await store.dispatch(login(username, password));
 
   expect(store.getActions()).toEqual(expectedActions);
   expect(mockAxios.post).toHaveBeenCalledTimes(1);
