@@ -1,0 +1,67 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/settings.scss';
+
+.auth__header {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+
+  @include desktop {
+    width: 100%;
+    min-height: 4.8rem;
+  }
+
+  @include mobile {
+    > * {
+      position: fixed;
+      z-index: 20;
+      top: 1.6rem;
+      left: 1rem;
+    }
+
+    .nav-btn {
+      right: 1rem;
+      left: auto;
+    }
+
+    .auth__header__dropdown {
+      z-index: 15;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      padding: 10rem 1rem 1rem;
+      background: $backgroundGrey;
+      opacity: 0;
+      transform: scale(0);
+      transform-origin: 50% 0;
+      transition: all 0.2s;
+
+      &.active {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      ul {
+        padding: 1.5rem;
+        text-align: left;
+
+        li:not(:last-child) {
+          margin-bottom: 1rem;
+          border-bottom: 1px solid $lightGrey;
+
+          a {
+            padding-bottom: 1rem;
+          }
+        }
+
+        a {
+          position: relative;
+          display: block;
+          color: #272727;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

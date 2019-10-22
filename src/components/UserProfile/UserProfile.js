@@ -15,7 +15,6 @@ export const UserProfile = ({ user, alt }) => {
     avatarUri,
     name,
     currentLevel,
-    account,
     currentProcessStatus,
     caseId
   } = user;
@@ -51,7 +50,6 @@ export const UserProfile = ({ user, alt }) => {
           )}
         </p>
         <p>ID: {username}</p>
-        <p>Account: {account}</p>
         <div className="user-profile__buttons">
           <VerificationButton
             currentProcessStatus={currentProcessStatus}
