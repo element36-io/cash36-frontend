@@ -15,7 +15,9 @@ const AuthForm = ({
   const renderErrors = useCallback(
     errors =>
       Object.values(errors).map(err => (
-        <p className="auth__form__error">{err}</p>
+        <p className="auth__form__error" key={err}>
+          {err}
+        </p>
       )),
     []
   );
@@ -49,7 +51,7 @@ const AuthForm = ({
             ))}
           </div>
           {renderErrors(formProps.errors)}
-          <p className="auth__form__error">{errorMsg}</p>
+          {errorMsg && <p className="auth__form__error">{errorMsg}</p>}
           <StepButton
             variant="contained"
             color="primary"

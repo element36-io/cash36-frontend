@@ -20,8 +20,6 @@ const Login = ({ isAuthenticated, login }) => {
     }
   };
 
-  console.warn(isAuthenticated);
-
   if (isAuthenticated) return <Redirect to="/" />;
 
   return (
