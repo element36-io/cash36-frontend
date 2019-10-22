@@ -2,12 +2,7 @@ import axios from 'axios';
 import API, { API_ROOT } from '../../config/api';
 import { handleError } from '../../helpers/error.helpers';
 
-import {
-  AUTH_USER,
-  GET_USER_INFO,
-  CONFIRM_ATTESTATION,
-  GET_CURRENT_KYC_STEP
-} from './auth.types';
+import { AUTH_USER, GET_USER_INFO, GET_CURRENT_KYC_STEP } from './auth.types';
 
 export const checkUserId = id => API.get(`/auth/user/is-user/${id}`);
 
@@ -138,9 +133,3 @@ export const login = (username, password) => async dispatch => {
   }
 };
 
-export const confirmAttestation = data => {
-  return {
-    type: CONFIRM_ATTESTATION,
-    payload: data
-  };
-};

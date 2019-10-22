@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import SellTokens from './SellTokens';
 import SellConfirmation from './SellConfirmation';
@@ -14,7 +15,7 @@ import useGetWithState from '../../hooks/useGetWithState';
 
 import './Sell.scss';
 
-export const Sell = ({ user, tokens, getTokens }) => {
+export const Sell = ({ user, tokens, getTokens, noWallet = true }) => {
   const [step, setStep] = useState(0);
   const [values, setValues] = useState({ amount: '', symbol: 'EUR36' });
   const [sellError, setSellError] = useState(null);
@@ -33,6 +34,8 @@ export const Sell = ({ user, tokens, getTokens }) => {
       mounted.current = false;
     };
   }, []);
+
+  if (noWallet) return <Redirect to="/" />;
 
   const handleChange = event => {
     const { name, value } = event.target;

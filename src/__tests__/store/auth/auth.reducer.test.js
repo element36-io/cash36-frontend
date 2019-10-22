@@ -2,7 +2,6 @@ import authReducer from '../../../store/auth/auth.reducer';
 import {
   AUTH_USER,
   GET_USER_INFO,
-  CONFIRM_ATTESTATION,
   GET_CURRENT_KYC_STEP
 } from '../../../store/auth/auth.types';
 
@@ -63,36 +62,6 @@ test('updates the state after GET_CURRENT_KYC_STEP was dispatched', () => {
     kyc: {
       ...initialState.kyc,
       currentStep: action.payload
-    }
-  });
-});
-
-test('updates the state after CONFIRM_ATTESTATION was dispatched', () => {
-  const action = {
-    type: CONFIRM_ATTESTATION,
-    payload: 'attest2'
-  };
-
-  initialState.user.verified = ['attest1'];
-
-  const stateWithVerified = authReducer(initialState, action);
-
-  expect(stateWithVerified).toEqual({
-    ...initialState,
-    user: {
-      ...initialState.user,
-      verified: [...initialState.user.verified, action.payload]
-    }
-  });
-
-  initialState.user.verified = null;
-  const stateWithoutVerified = authReducer(initialState, action);
-
-  expect(stateWithoutVerified).toEqual({
-    ...initialState,
-    user: {
-      ...initialState.user,
-      verified: [action.payload]
     }
   });
 });
