@@ -1,32 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import tiers from './tiers';
 import Avatar from '../../components/Avatar';
 import VerificationButton from './VerificationButton';
-import AttestButtton from './AttestButton';
-import { confirmAttestation } from '../../store/auth/auth.actions';
-import { attestUser } from '../../helpers/uport.helpers';
+import AddWalletDialog from '../AddWalletDialog';
 
 import './UserProfile.scss';
 
-export const UserProfile = ({ user, alt, confirmAttestation }) => {
-  const [attesting, setAttesting] = useState(false);
-
-  const handleAttestClick = async (claim, attestName) => {
-    const { did, pushToken, boxPub } = user;
-
-    setAttesting(true);
-    try {
-      await attestUser({ did, pushToken, boxPub, claim });
-      confirmAttestation({ claim: { [attestName]: claim } });
-    } catch (error) {
-      console.warn(error);
-    }
-    setAttesting(false);
-  };
-
+export const UserProfile = ({ user, alt }) => {
   let {
     username,
     avatarUri,
@@ -55,9 +38,7 @@ export const UserProfile = ({ user, alt, confirmAttestation }) => {
         {currentLevel && (
           <div
             data-testid="tier-badge"
-            className={`user-profile__avatar__badge ${
-              tiers[currentLevel].badgeClass
-            }`}
+            className={`user-profile__avatar__badge ${tiers[currentLevel].badgeClass}`}
           />
         )}
         <span className={currentLevel} />
@@ -76,11 +57,7 @@ export const UserProfile = ({ user, alt, confirmAttestation }) => {
             currentProcessStatus={currentProcessStatus}
             caseId={caseId}
           />
-          <AttestButtton
-            user={user}
-            clickCallback={handleAttestClick}
-            attesting={attesting}
-          />
+          <AddWalletDialog />
         </div>
       </div>
     </div>
@@ -93,11 +70,7 @@ const mapStateToProps = state => ({
 
 UserProfile.propTypes = {
   user: PropTypes.object.isRequired,
-  alt: PropTypes.bool,
-  confirmAttestation: PropTypes.func
+  alt: PropTypes.bool
 };
 
-export default connect(
-  mapStateToProps,
-  { confirmAttestation }
-)(UserProfile);
+export default connect(mapStateToProps)(UserProfile);

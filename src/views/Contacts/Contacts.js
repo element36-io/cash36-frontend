@@ -42,7 +42,8 @@ const Contacts = ({
   };
 
   const quickTransfer = contact => {
-    history.push('/transfer', { quickTransfer: contact });
+    // TODO: change the route to suite /buy step 2.2
+    history.push('/buy', { quickTransfer: contact });
   };
 
   const renderList = () => {

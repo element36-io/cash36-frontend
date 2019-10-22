@@ -6,23 +6,37 @@ import UserProfile from '../../UserProfile';
 import navLinks from '../navLinks';
 import './HeaderMobileDropdown.scss';
 
-const HeaderMobileDropdown = ({ isActive, logout, clickCallback }) => (
+const HeaderMobileDropdown = ({
+  isActive,
+  logout,
+  clickCallback,
+  noWallet = true
+}) => (
   <div className={`header__mobile-dropdown ${isActive ? 'active' : ''}`}>
     <UserProfile alt />
     <ul className="paper">
-      {navLinks.map(link => (
-        <li key={link.label}>
-          <NavLink
-            exact
-            activeClassName="selected"
-            to={link.url}
-            onClick={clickCallback}
-          >
-            {link.label}
-            <RightArrowIcon className="header__mobile-dropdown__icon" />
-          </NavLink>
-        </li>
-      ))}
+      {navLinks.map(link =>
+        noWallet && link.label === 'Sell' ? (
+          <li key={link.label} style={{ opacity: '0.5' }}>
+            <span>
+              {link.label}
+              <RightArrowIcon className="header__mobile-dropdown__icon" />
+            </span>
+          </li>
+        ) : (
+          <li key={link.label}>
+            <NavLink
+              exact
+              activeClassName="selected"
+              to={link.url}
+              onClick={clickCallback}
+            >
+              {link.label}
+              <RightArrowIcon className="header__mobile-dropdown__icon" />
+            </NavLink>
+          </li>
+        )
+      )}
       <li onClick={logout}>
         <span>
           Logout
@@ -34,6 +48,7 @@ const HeaderMobileDropdown = ({ isActive, logout, clickCallback }) => (
 );
 
 HeaderMobileDropdown.propTypes = {
+  noWallet: PropTypes.bool,
   isActive: PropTypes.bool,
   logout: PropTypes.func.isRequired,
   clickCallback: PropTypes.func.isRequired

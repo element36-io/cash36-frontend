@@ -9,17 +9,12 @@ test('renders the component', () => {
 
   expect(getByText(/buy/i)).toBeInTheDocument();
   expect(getByText(/sell/i)).toBeInTheDocument();
-  expect(getByText(/transfer/i)).toBeInTheDocument();
+  expect(getByText(/send/i)).toBeInTheDocument();
 });
 
 describe('routes', () => {
-  let component;
-  beforeEach(() => {
-    component = renderWithRouter(<QuickActions />, { route: '/' });
-  });
-
   test('routes to /buy', () => {
-    const { getByText, history } = component;
+    const { getByText, history } = renderWithRouter(<QuickActions />);
     const buyButton = getByText(/buy/i);
 
     expect(history.location.pathname).toBe('/');
@@ -27,8 +22,10 @@ describe('routes', () => {
     expect(history.location.pathname).toBe('/buy');
   });
 
-  test('routes to /sell', () => {
-    const { getByText, history } = component;
+  test('routes to /sell if there is a wallet', () => {
+    const { getByText, history } = renderWithRouter(
+      <QuickActions noWallet={false} />
+    );
     const sellButton = getByText(/sell/i);
 
     expect(history.location.pathname).toBe('/');
@@ -36,12 +33,22 @@ describe('routes', () => {
     expect(history.location.pathname).toBe('/sell');
   });
 
-  test('routes to /transfer', () => {
-    const { getByText, history } = component;
-    const transferButton = getByText(/transfer/i);
+  test("doesn't route if no wallet", () => {
+    const { getByText, history } = renderWithRouter(<QuickActions noWallet />);
+    const sellButton = getByText(/sell/i);
 
     expect(history.location.pathname).toBe('/');
-    fireEvent.click(transferButton);
-    expect(history.location.pathname).toBe('/transfer');
+    fireEvent.click(sellButton);
+    expect(history.location.pathname).toBe('/');
+  });
+
+  // TODO: Rewrite test when feature is implemented
+  test('routes to /buy, step 2.2', () => {
+    const { getByText, history } = renderWithRouter(<QuickActions />);
+    const sendButton = getByText(/send/i);
+
+    expect(history.location.pathname).toBe('/');
+    fireEvent.click(sendButton);
+    expect(history.location.pathname).toBe('/buy');
   });
 });
