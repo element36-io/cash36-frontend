@@ -1,13 +1,15 @@
 import React from 'react';
-import { renderWithRouter } from '../../helpers/tests.helpers';
 
 import { UserProfile } from '../../components/UserProfile/UserProfile';
-import { renderWithAvatarContext } from '../../helpers/tests.helpers';
+import {
+  renderWithAvatarContext,
+  renderWithRouter
+} from '../../helpers/tests.helpers';
 
 const user = {
-  username: '0x0000000000000000000000000000000000000001',
+  username: 'test@example.com',
   name: 'John Doe',
-  account: '0x0000000000000000000000000000000000000001',
+  account: 'test@example.com',
   avatarUri: null,
   currentProcessStatus: 'START',
   caseId: '1'

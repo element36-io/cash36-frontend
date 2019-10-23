@@ -56,6 +56,8 @@ const Header = ({
     };
   }, []);
 
+  const { currentLevel } = user;
+
   return (
     <header>
       <Logo />
@@ -63,7 +65,7 @@ const Header = ({
         <HeaderDesktop logout={logout} user={user} />
       </Responsive>
       <Responsive isMobile>
-        <HeaderMobile logout={logout} user={user} />
+        <HeaderMobile logout={logout} currentLevel={currentLevel} />
       </Responsive>
     </header>
   );

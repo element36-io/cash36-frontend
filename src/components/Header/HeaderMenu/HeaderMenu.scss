@@ -3,6 +3,7 @@
 .header__menu {
   display: flex;
   align-items: center;
+  text-align: center;
   margin-left: 2.8rem;
 
   .header__menu__image {
@@ -48,6 +49,11 @@
     border-radius: 4px;
     transform: scale(0) translate3d(0, -2rem, 0);
     transform-origin: 100% 0;
+
+    > li {
+      display: flex;
+      justify-content: center;
+    }
 
     &.header__menu__content--active {
       opacity: 1;
