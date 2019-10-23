@@ -4,7 +4,7 @@ import HeaderAlerts from './HeaderAlerts';
 import NavButton from '../NavButton';
 import HeaderMobileDropdown from './HeaderMobileDropdown';
 
-const HeaderMobile = ({ logout }) => {
+const HeaderMobile = ({ logout, currentLevel }) => {
   const [activeNav, setActiveNav] = useState(false);
 
   const toggleNav = () => {
@@ -19,6 +19,7 @@ const HeaderMobile = ({ logout }) => {
         logout={logout}
         isActive={activeNav}
         clickCallback={toggleNav}
+        currentLevel={currentLevel}
       />
     </div>
   );
@@ -26,7 +27,7 @@ const HeaderMobile = ({ logout }) => {
 
 HeaderMobile.propTypes = {
   logout: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired
+  currentLevel: PropTypes.string
 };
 
 export default HeaderMobile;
