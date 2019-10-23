@@ -15,7 +15,7 @@ const Web3Provider = ({ children, user }) => {
     let { ethereum } = window;
     let web3js;
 
-    if (ethereum !== undefined && user && user.useMetamask) {
+    if (ethereum !== undefined) {
       // Use Mist/MetaMask's provider.
       web3js = new Web3(ethereum);
       console.info(
@@ -26,8 +26,6 @@ const Web3Provider = ({ children, user }) => {
     }
 
     window.web3 = web3js;
-
-    console.info('web3 injected and ready.');
   };
 
   const getNetworkId = async () => {
@@ -35,14 +33,15 @@ const Web3Provider = ({ children, user }) => {
 
     try {
       const id = await web3.eth.net.getId();
-      console.info('set network ' + id);
       setNetworkId(id);
       setNetwork(getNetwork(id));
       setLoading(false);
+      setNetworkError(null);
       return id;
     } catch (error) {
-      console.info('Error: web3 not available ' + error);
-      setNetworkError(true);
+      setNetworkError(
+        `Network error: web3 not available ${error.message.replace('\\n', '')}`
+      );
       setLoading(false);
       return null;
     }
@@ -67,26 +66,20 @@ const Web3Provider = ({ children, user }) => {
     }
   };
 
+  //
   useEffect(() => {
     initWeb3();
     getNetworkId();
-  }, [user]);
+  }, []);
 
   // useEffect(() => {
-  //   initWeb3();
-  //   getNetworkId();
-  // }, []);
-
-  if (loading) {
-    return <div className="loading-full">Connecting to Ethereum node...</div>;
-  }
-
-  if (networkError) {
-    return <div className="error-full">Error connecting to Ethereum node!</div>;
-  }
+  //   if (user) window.web3.test = 'TEST';
+  // }, [user.wallet]);
 
   return (
-    <Web3Context.Provider value={{ network, networkId, web3: window.web3 }}>
+    <Web3Context.Provider
+      value={{ network, networkId, networkError, loading, web3: window.web3 }}
+    >
       {children}
     </Web3Context.Provider>
   );

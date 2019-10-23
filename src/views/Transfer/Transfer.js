@@ -35,7 +35,7 @@ const Transfer = ({
     (location.state && location.state.quickTransfer) || null
   );
   const mounted = useRef(true);
-  const cash36 = useCash36();
+  const web3 = useCash36();
 
   useGet(getTokens, setError);
   useGet(getContacts, setError);
@@ -83,7 +83,6 @@ const Transfer = ({
   };
 
   const transferTokens = async transferValues => {
-    const { web3 } = cash36;
     const { contactAddress } = target;
     const { amount, symbol } = transferValues;
     const { tokenAddress } = tokens.filter(token => token.symbol === symbol)[0];
