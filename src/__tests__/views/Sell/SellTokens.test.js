@@ -33,7 +33,9 @@ test('renders the full exchangeFee if exchangeFee is > 0', () => {
 
   expect(getByText(/exchange fee/i)).toBeInTheDocument();
   expect(getByText(/1%/i)).toBeInTheDocument();
-  expect(getByText(/you will receive/i)).toBeInTheDocument();
+  expect(
+    getByText(/amount that will be sent to your account/i)
+  ).toBeInTheDocument();
   expect(getByText(/9.90/i)).toBeInTheDocument();
 });
 
@@ -42,7 +44,9 @@ test('renders partial exchangeFee if exchangeFee is === 0', () => {
     <SellTokens {...props} exchangeFee={0} />
   );
 
-  expect(getByText(/you will receive/i)).toBeInTheDocument();
+  expect(
+    getByText(/amount that will be sent to your account/i)
+  ).toBeInTheDocument();
   expect(getByText(/10.00/i)).toBeInTheDocument();
   expect(queryByText(/1%/i)).toBeNull();
   expect(queryByText(/exchange fee/i)).toBeNull();
@@ -52,7 +56,7 @@ test("doesn't render the exchangeFee if exchangeFee is null", () => {
   const { queryByText } = renderWithRedux(<SellTokens {...props} />);
 
   expect(queryByText(/couldn't determine exchange fee/i)).toBeNull();
-  expect(queryByText(/you will receive/i)).toBeNull();
+  expect(queryByText(/amount that will be sent to your account/i)).toBeNull();
 });
 
 test('renders a paragraph if exchangeFee is false', () => {
