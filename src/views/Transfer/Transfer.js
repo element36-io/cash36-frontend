@@ -136,7 +136,7 @@ const Transfer = ({
           />
         );
       case 2:
-        return <TransferConfirmation target={target} />;
+        return <TransferConfirmation />;
       case 3:
         return (
           <TransferSuccess amount={amount} target={target} symbol={symbol} />

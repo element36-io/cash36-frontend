@@ -35,7 +35,7 @@ export const Sell = ({ user, tokens, getTokens, noWallet = true }) => {
     };
   }, []);
 
-  if (noWallet) return <Redirect to="/" />;
+  // if (noWallet) return <Redirect to="/" />;
 
   const handleChange = event => {
     const { name, value } = event.target;
