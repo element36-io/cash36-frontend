@@ -1,0 +1,48 @@
+@import '../../styles/settings.scss';
+@import '../../styles/utils.scss';
+@import '../../styles/mixins.scss';
+
+.add-mm-wallet {
+  img {
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin-bottom: 1rem;
+
+    &.error-text {
+      font-size: 1.2rem;
+    }
+  }
+
+  button {
+    display: flex;
+    margin: 2rem auto 0;
+  }
+
+  .add-mm-wallet__success {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2.5rem auto 0;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background: $gradient-green-1;
+    color: #fff;
+    font-size: 3.5rem;
+  }
+
+  @include desktop {
+    min-width: 50rem;
+    max-width: 50rem;
+
+    margin-top: -1.5rem;
+  }
+
+  @include mobile {
+    button {
+      width: 100%;
+    }
+  }
+}

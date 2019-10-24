@@ -6,6 +6,7 @@ import HeaderDesktop from './HeaderDesktop';
 import HeaderMobile from './HeaderMobile';
 import { logout, getUserInfo } from '../../store/auth/auth.actions';
 import { fetchNotifications } from '../../store/notifications/notifications.actions';
+import { getWallets } from '../../store/wallets/wallets.actions';
 import { getTokens, getUserActivity } from '../../store/tokens/tokens.actions';
 import './Header.scss';
 
@@ -16,7 +17,8 @@ const Header = ({
   fetchNotifications,
   getTokens,
   getUserActivity,
-  getUserInfo
+  getUserInfo,
+  getWallets
 }) => {
   useEffect(() => {
     if (badgeCount === 0) return;
@@ -45,7 +47,8 @@ const Header = ({
   };
 
   useEffect(() => {
-    callFetchNotifications();
+    fetchNotifications();
+    getWallets();
     const notificationsInterval = setInterval(
       () => callFetchNotifications(),
       60000
@@ -80,7 +83,8 @@ export default connect(
     fetchNotifications,
     getTokens,
     getUserActivity,
-    getUserInfo
+    getUserInfo,
+    getWallets
   },
   null,
   { pure: false }

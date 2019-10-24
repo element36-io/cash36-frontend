@@ -77,13 +77,13 @@ const Web3Provider = ({ children, user }) => {
   //   getNetworkId();
   // }, []);
 
-  if (loading) {
-    return <div className="loading-full">Connecting to Ethereum node...</div>;
-  }
+  // if (loading) {
+  //   return <div className="loading-full">Connecting to Ethereum node...</div>;
+  // }
 
-  if (networkError) {
-    return <div className="error-full">Error connecting to Ethereum node!</div>;
-  }
+  // if (networkError) {
+  //   return <div className="error-full">Error connecting to Ethereum node!</div>;
+  // }
 
   return (
     <Web3Context.Provider value={{ network, networkId, web3: window.web3 }}>

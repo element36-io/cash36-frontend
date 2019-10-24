@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import ChooseTypeOfWallet from '../../components/ChooseTypeOfWallet';
+import WalletType from '../../components/WalletType';
 
 test('renders the component', () => {
-  const { getByText } = render(<ChooseTypeOfWallet />);
+  const { getByText } = render(<WalletType />);
 
   expect(getByText(/uport/i)).toBeInTheDocument();
   expect(getByText(/metamask/i)).toBeInTheDocument();
