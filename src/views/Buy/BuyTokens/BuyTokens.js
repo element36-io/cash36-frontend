@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import StepButton from '../../../components/Buttons/StepButton';
 import ChooseAmountForm from '../../../components/ChooseAmountForm';
+import BuyFooter from '../BuyFooter';
 
 import './BuyTokens.scss';
 
@@ -14,6 +16,10 @@ const BuyTokens = ({ handleChange, amount, symbol, nextStep }) => (
       symbol={symbol}
     />
     <StepButton onClick={nextStep} text={'Next Step'} disabled={!amount} />
+    <BuyFooter
+      textline1="Buying cash36 Tokens is as simple as a bank transfer. First, choose amount and type of Token you wish to buy."
+      textline2="After that you will receive the transfer instructions. Once we receive the amount, the tokens will be credited to your account."
+    />
   </div>
 );
 

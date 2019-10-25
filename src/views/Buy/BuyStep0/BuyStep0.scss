@@ -4,6 +4,9 @@
 .buy-step0 {
   display: flex;
   flex-direction: column;
+  > div {
+    margin-bottom: 3.2rem;
+  }
 
   > h2 {
     text-align: center;
@@ -20,6 +23,7 @@
     padding: 2rem;
     cursor: pointer;
     transition: box-shadow 0.2s;
+    max-width: 30rem;
 
     > p {
       font-weight: 300;
@@ -27,10 +31,6 @@
 
     &:first-child {
       margin-right: 3.2rem;
-    }
-
-    &:last-child {
-      margin-left: 3.2rem;
     }
 
     > div:first-child {
