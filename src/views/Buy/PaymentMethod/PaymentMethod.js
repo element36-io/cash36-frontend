@@ -16,7 +16,7 @@ const PaymentMethod = ({
   setStep
 }) => {
   return (
-    <div className="payment-method">
+    <div className="payment-method" data-testid="payment-method">
       <BackButton onClick={() => setStep(0)} />
       <Responsive isMobile>
         <h2>Payment method</h2>

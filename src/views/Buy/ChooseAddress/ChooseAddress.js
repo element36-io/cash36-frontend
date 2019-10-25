@@ -9,16 +9,15 @@ import './ChooseAddress.scss';
 
 const ChooseAddress = ({ setStep, handleChange, address }) => {
   return (
-    <div className="send-tokens">
+    <div className="choose-address" data-testid="buy__choose-address">
       <BackButton onClick={() => setStep(0)} />
       <h2>Send tokens to</h2>
-      <div className="send-tokens__input-wrapper">
+      <div className="choose-address__input-wrapper">
         <input
           onChange={handleChange}
           placeholder="Address"
           name="address"
           value={address}
-          wef
           autoComplete="off"
         />
         <span />

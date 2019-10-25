@@ -5,7 +5,10 @@ import ReactCountryFlag from 'react-country-flag';
 import './PaymentInfo.scss';
 
 const PaymentInfo = ({ info, title, children, isModal, closeModal }) => (
-  <div className={`payment-info ${isModal ? '__alt' : ''}`}>
+  <div
+    className={`payment-info ${isModal ? '__alt' : ''}`}
+    data-testid="payment-info"
+  >
     {isModal && (
       <CloseIcon
         data-testid="payment-info__close-icon"

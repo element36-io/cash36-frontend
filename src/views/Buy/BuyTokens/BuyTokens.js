@@ -9,7 +9,7 @@ import BackButton from '../../../components/Buttons/BackButton';
 import './BuyTokens.scss';
 
 const BuyTokens = ({ handleChange, amount, symbol, setStep }) => (
-  <div className="buy-tokens">
+  <div className="buy-tokens" data-testid="buy-tokens">
     <BackButton onClick={() => setStep(0)} />
     <h2>Buy Tokens</h2>
     <ChooseAmountForm

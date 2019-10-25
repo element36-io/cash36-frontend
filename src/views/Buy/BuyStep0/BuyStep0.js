@@ -9,7 +9,7 @@ import './BuyStep0.scss';
 
 const BuyStep0 = ({ setStep }) => {
   return (
-    <div className="buy-step0">
+    <div className="buy-step0" data-testid="buy-step0">
       <h2>Buy Tokens</h2>
 
       <div className="buy-step0__options">
