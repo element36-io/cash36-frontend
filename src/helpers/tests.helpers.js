@@ -8,6 +8,7 @@ import { render, cleanup } from '@testing-library/react';
 
 import { reducers } from '../store';
 import { AvatarContext } from '../providers/avatar.provider';
+import { Web3Context } from '../providers/web3.provider';
 
 afterEach(cleanup);
 
@@ -46,5 +47,13 @@ export function renderWithAvatarContext (
     <AvatarContext.Provider value={{ state, actions }}>
       {component}
     </AvatarContext.Provider>
+  );
+}
+
+export function renderWithWeb3Context (component, renderFunction = render) {
+  return renderFunction(
+    <Web3Context.Provider value={{ networkId: 4 }}>
+      {component}
+    </Web3Context.Provider>
   );
 }

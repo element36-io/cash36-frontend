@@ -4,23 +4,14 @@ import TextInput from '../../../../components/Form/TextInput';
 import BasicSelectInput from '../../../../components/Form/BasicSelectInput';
 import './IndustryFields.scss';
 
-const industryValues = [
-  'Arms and armaments trade',
-  'Gemstones and diamond trade',
-  'Jewellery trade',
-  'International trade in exotic animals',
-  'Casino and lottery industry',
-  'Sex industry',
-  'Other'
-];
-
 const IndustryFields = React.memo(
   ({
     changeHandler,
     values: { profession, industry, industryOther },
     professionError,
     industryError,
-    industryOtherError
+    industryOtherError,
+    industryList
   }) => (
     <div className="verification-user-profile__industry">
       <TextInput
@@ -34,12 +25,11 @@ const IndustryFields = React.memo(
       />
       <BasicSelectInput
         name="industry"
-        list={industryValues}
+        list={industryList}
         label="Industry"
         placeholder="Enter Your Industry"
         value={industry}
         onChange={changeHandler}
-        isTouched
         error={industryError ? 'This field is required' : null}
       />
       {industry.toLowerCase() === 'other' && (
@@ -62,7 +52,8 @@ IndustryFields.propTypes = {
   values: PropTypes.object.isRequired,
   industryError: PropTypes.bool,
   professionError: PropTypes.bool,
-  industryOtherError: PropTypes.bool
+  industryOtherError: PropTypes.bool,
+  industryList: PropTypes.array
 };
 
 export default IndustryFields;

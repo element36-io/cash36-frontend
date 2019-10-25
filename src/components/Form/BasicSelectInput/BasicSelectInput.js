@@ -49,8 +49,8 @@ const BasicSelectInput = ({
           </div>
         </MenuItem>
         {list.map(item => (
-          <MenuItem key={item} value={item}>
-            {item}
+          <MenuItem key={item.id} value={item.id}>
+            {item.label}
           </MenuItem>
         ))}
       </TextField>
