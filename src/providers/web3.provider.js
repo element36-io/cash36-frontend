@@ -48,7 +48,7 @@ const Web3Provider = ({ children, user }) => {
   };
 
   const getNetwork = networkId => {
-    switch (networkId) {
+    switch (parseInt(networkId)) {
       case 1:
         return 'MainNet';
       case 2:
@@ -78,7 +78,14 @@ const Web3Provider = ({ children, user }) => {
 
   return (
     <Web3Context.Provider
-      value={{ network, networkId, networkError, loading, web3: window.web3 }}
+      value={{
+        network,
+        networkId,
+        networkError,
+        loading,
+        web3: window.web3,
+        getNetwork
+      }}
     >
       {children}
     </Web3Context.Provider>

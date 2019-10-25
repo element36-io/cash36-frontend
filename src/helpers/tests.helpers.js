@@ -52,7 +52,7 @@ export function renderWithAvatarContext (
 
 export function renderWithWeb3Context (component, renderFunction = render) {
   return renderFunction(
-    <Web3Context.Provider value={{ networkId: 4 }}>
+    <Web3Context.Provider value={{ networkId: 4, network: 'Rinkeby' }}>
       {component}
     </Web3Context.Provider>
   );

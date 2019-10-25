@@ -5,14 +5,6 @@ import { Web3Context } from '../../../providers/web3.provider';
 
 import './Action.scss';
 
-const networkUrls = {
-  1: '',
-  2: 'morden.',
-  3: 'ropsten.',
-  4: 'rinkeby.',
-  85588558: 'Local.'
-};
-
 const renderActionName = type => {
   if (type === 'BUY') return 'Bought Tokens';
   if (type === 'SELL') return 'Sold Tokens';
@@ -21,7 +13,7 @@ const renderActionName = type => {
 };
 
 const Action = ({ type, targetAddress, txHash }) => {
-  const { networkId } = useContext(Web3Context);
+  const { networkId, network } = useContext(Web3Context);
 
   return (
     <div className="activity-table-action">
@@ -29,7 +21,9 @@ const Action = ({ type, targetAddress, txHash }) => {
       <span>
         {txHash ? (
           <a
-            href={`https://${networkUrls[networkId]}etherscan.io/tx/${txHash}`}
+            href={`https://${
+              networkId !== 1 ? `${network.toLowerCase()}.` : ''
+            }etherscan.io/tx/${txHash}`}
             target="_blank"
             rel="noopener noreferrer"
           >

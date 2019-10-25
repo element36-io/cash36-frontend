@@ -1,18 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import metamaskLogo from '../../assets/icons/metamask.svg';
-import TextField from '@material-ui/core/TextField';
 import DoneIcon from '@material-ui/icons/Done';
-import DefaultButton from '../Buttons/DefaultButton';
-import './AddMmWallet.scss';
+import AddWalletForm from '../AddWalletForm';
+import { Web3Context } from '../../providers/web3.provider';
+import metamaskLogo from '../../assets/icons/metamask.svg';
 
-const networkUrls = {
-  1: 'Mainnet',
-  2: 'Morden',
-  3: 'Ropsten',
-  4: 'Rinkeby',
-  85588558: 'Local'
-};
+import './AddMmWallet.scss';
 
 const AddMmWallet = ({ addWallet, walletList }) => {
   const [checkCompleted, setCheckCompleted] = useState(false);
@@ -22,15 +15,12 @@ const AddMmWallet = ({ addWallet, walletList }) => {
   const [error, setError] = useState(null);
   const [submitting, setSubmitting] = useState(null);
   const [submitted, setSubmitted] = useState(null);
-  // const filteredWallet = walletList.filter(
-  //   wallet => wallet.accountAddress === account
-  // )[0];
-
-  // console.warn(filteredWallet);
+  const { getNetwork } = useContext(Web3Context);
 
   const changeDescription = event => setDescription(event.target.value);
 
-  const saveWallet = async () => {
+  const saveWallet = async evt => {
+    evt.preventDefault();
     setSubmitting(true);
     try {
       await addWallet(
@@ -71,9 +61,13 @@ const AddMmWallet = ({ addWallet, walletList }) => {
     checkForMetamask();
   }, []);
 
+  const filteredWallet = walletList.filter(
+    wallet => wallet.accountAddress === account
+  )[0];
+
   return (
     <div className="add-mm-wallet">
-      <img src={metamaskLogo} alt="MetaMask logo" />
+      <img src={metamaskLogo} alt="MetaMask" />
       <p>
         Checking for MetaMask...
         {(checkCompleted && hasMetamask && 'Successful') ||
@@ -88,28 +82,23 @@ const AddMmWallet = ({ addWallet, walletList }) => {
       {account && (
         <>
           <p>Wallet address: {account}</p>
-          <p>Network: {networkUrls[window.ethereum.networkVersion]}</p>
-          {!submitted && (
-            <>
-              <TextField
-                label="Wallet Name"
-                onChange={changeDescription}
-                value={description}
-                fullWidth
-              />
-              {!submitted && error && <p className="error-text">{error}</p>}
-              <DefaultButton
-                onClick={saveWallet}
-                disabled={submitting || !description.length}
-              >
-                Add Wallet
-              </DefaultButton>
-            </>
+          <p>Network: {getNetwork(window.ethereum.networkVersion)}</p>
+          {filteredWallet && !submitted && (
+            <p>Wallet already registered with user</p>
+          )}
+          {!submitted && !filteredWallet && (
+            <AddWalletForm
+              onChange={changeDescription}
+              value={description}
+              error={error}
+              onSubmit={saveWallet}
+              submitting={submitting}
+            />
           )}
         </>
       )}
       {submitted && (
-        <span className="add-mm-wallet__success">
+        <span className="add-wallet__success">
           <DoneIcon />
         </span>
       )}

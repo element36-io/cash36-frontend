@@ -1,8 +1,8 @@
 import {
-  GET_WALLETS,
-  REMOVE_WALLET,
-  UPDATE_WALLET_DESCRIPTION,
-  SET_MAIN_WALLET
+  GET_WALLETS
+  // REMOVE_WALLET,
+  // UPDATE_WALLET_DESCRIPTION,
+  // SET_MAIN_WALLET
 } from './wallets.types';
 
 const initialState = {

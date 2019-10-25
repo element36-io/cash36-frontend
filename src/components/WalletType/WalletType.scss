@@ -59,4 +59,8 @@
       }
     }
   }
+
+  @include mobile {
+    text-align: center;
+  }
 }

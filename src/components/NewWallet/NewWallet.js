@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import WalletType from '../WalletType';
 import AddMmWallet from '../AddMmWallet';
+import AddUportWallet from '../AddUportWallet';
 import { addWallet } from '../../store/wallets/wallets.actions';
 import './NewWallet.scss';
 
@@ -12,7 +13,7 @@ const NewWallet = ({ addWallet, walletList }) => {
   const renderStep = () => {
     switch (step) {
       case 1:
-        return 'uPort wallet';
+        return <AddUportWallet addWallet={addWallet} walletList={walletList} />;
       case 2:
         return <AddMmWallet addWallet={addWallet} walletList={walletList} />;
       default:

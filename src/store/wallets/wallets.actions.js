@@ -2,19 +2,18 @@ import API from '../../config/api';
 import { handleError } from '../../helpers/error.helpers';
 
 import {
-  GET_WALLETS,
-  REMOVE_WALLET,
-  UPDATE_WALLET_DESCRIPTION,
-  SET_MAIN_WALLET
+  GET_WALLETS
+  // REMOVE_WALLET,
+  // UPDATE_WALLET_DESCRIPTION,
+  // SET_MAIN_WALLET
 } from './wallets.types';
 
 export const getWallets = () => async dispatch => {
-  console.warn('========= GET WALLETS');
   try {
     const response = await API.get('/compliance/wallet/list');
     dispatch({
       type: GET_WALLETS,
-      payload: response.data
+      payload: response.data || []
     });
   } catch (error) {
     return handleError(error);
@@ -26,7 +25,7 @@ export const addWallet = (
   walletType,
   networkId,
   shortDescription,
-  contract
+  contractAddress
 ) => async dispatch => {
   try {
     await API.post('/compliance/wallet/add', {
@@ -34,7 +33,7 @@ export const addWallet = (
       walletType,
       networkId,
       shortDescription,
-      contract
+      contractAddress
     });
     dispatch(getWallets());
     return Promise.resolve();
