@@ -1,5 +1,6 @@
 @import '../../../styles/settings.scss';
 @import '../../../styles/utils.scss';
+@import '../../../styles/mixins.scss';
 
 .buy-step0 {
   display: flex;
@@ -15,7 +16,11 @@
 
   .buy-step0__options {
     display: flex;
-    margin-bottom: 5.4rem;
+    margin-bottom: 3.2rem;
+
+    @include mobile {
+      flex-direction: column;
+    }
   }
 
   .buy-step0__option {
@@ -24,13 +29,30 @@
     cursor: pointer;
     transition: box-shadow 0.2s;
     max-width: 30rem;
+    display: flex;
 
-    > p {
-      font-weight: 300;
+    @include mobile {
+      max-width: 100%;
+    }
+
+    > div {
+      > h3 {
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+      }
+
+      > p {
+        font-weight: 300;
+      }
     }
 
     &:first-child {
       margin-right: 3.2rem;
+
+      @include mobile {
+        margin-right: 0;
+        margin-bottom: 0.8rem;
+      }
     }
 
     > div:first-child {
@@ -41,7 +63,8 @@
 
     svg {
       fill: $primary-main;
-      margin-right: 0.8rem;
+      margin-right: 1.2rem;
+      font-size: 3.2rem;
     }
 
     &:hover {

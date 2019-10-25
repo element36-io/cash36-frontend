@@ -13,19 +13,21 @@ const BuyStep0 = ({ setStep }) => {
       <h2>Buy Tokens</h2>
 
       <div className="buy-step0__options">
-        <div className="buy-step0__option" onClick={() => setStep(1.1)}>
+        <div className="buy-step0__option" onClick={() => setStep(1)}>
+          <WalletIcon />
           <div>
-            <WalletIcon />
             <h3>Send to your Wallet</h3>
+
+            <p>The funds will be deposited to your e36 account.</p>
           </div>
-          <p>The funds will be deposited to your e36 account.</p>
         </div>
-        <div className="buy-step0__option">
+        <div className="buy-step0__option" onClick={() => setStep(2.1)}>
+          <ContactMailIcon />
           <div>
-            <ContactMailIcon />
             <h3>Send to an address</h3>
+
+            <p>The funds will be deposited to the address you specify.</p>
           </div>
-          <p>The funds will be deposited to the address you specify.</p>
         </div>
       </div>
       <BuyFooter

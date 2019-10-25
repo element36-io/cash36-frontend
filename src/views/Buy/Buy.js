@@ -6,9 +6,10 @@ import API from '../../config/api';
 import BuyTokens from './BuyTokens';
 import { getTokens } from '../../store/tokens/tokens.actions';
 import BuyStep0 from './BuyStep0';
+import SendTokens from './SendTokens';
+import ChooseAddress from './ChooseAddress';
 import PaymentMethod from './PaymentMethod';
 import InitiateAutoPayment from './InitiateAutoPayment';
-import BackButton from '../../components/Buttons/BackButton';
 import PaymentInfo from '../../components/PaymentInfo';
 import TransactionFooter from '../../components/TransactionFooter';
 import BuyError from './BuyError';
@@ -21,6 +22,7 @@ export const Buy = ({ getTokens }) => {
   const [step, setStep] = useState(0);
   const [amount, setAmount] = useState('');
   const [symbol, setSymbol] = useState('EUR36');
+  const [address, setAddress] = useState('');
   const [manualTransferData, setManualTransferData] = useState(null);
 
   useGet(getTokens, setError);
@@ -35,10 +37,6 @@ export const Buy = ({ getTokens }) => {
     }
   };
 
-  const previousStep = () => {
-    setStep(prevState => Math.round(prevState - 1));
-  };
-
   const handleChange = event => {
     const { name, value } = event.target;
 
@@ -46,6 +44,8 @@ export const Buy = ({ getTokens }) => {
       setAmount(value);
     } else if (name === 'symbol') {
       setSymbol(value);
+    } else if (name === 'address') {
+      setAddress(value);
     }
   };
 
@@ -62,41 +62,61 @@ export const Buy = ({ getTokens }) => {
     try {
       const response = await API.post('/exchange/buy', data);
       setManualTransferData(response.data);
-      setStep(3.1);
+      setStep(4.1);
     } catch (error) {
-      setStep(2);
+      setStep(5);
     }
   };
 
   const handleAutoTransferClick = () => {
-    setStep(3.2);
+    setStep(4.2);
   };
 
   return (
     <div className="wrapper">
       <div className="buy paper">
-        {step > 0 && step !== 3.1 && <BackButton onClick={previousStep} />}
         <div className="buy__content">
           {step === 0 && <BuyStep0 setStep={setStep} />}
-          {step === 1.1 && (
+          {step === 1 && (
             <Fragment>
               <BuyTokens
                 handleChange={handleChange}
                 amount={amount}
                 symbol={symbol}
-                nextStep={nextStep}
+                setStep={setStep}
               />
               <div className="error-text">{error}</div>
             </Fragment>
           )}
-          {step === 2 && (
+          {step === 2.1 && (
+            <Fragment>
+              <ChooseAddress
+                setStep={setStep}
+                address={address}
+                handleChange={handleChange}
+              />
+              <div className="error-text">{error}</div>
+            </Fragment>
+          )}
+          {step === 2.2 && (
+            <Fragment>
+              <SendTokens
+                symbol={symbol}
+                handleChange={handleChange}
+                amount={amount}
+                setStep={setStep}
+              />
+              <div className="error-text">{error}</div>
+            </Fragment>
+          )}
+          {step === 3 && (
             <PaymentMethod
-              next={nextStep}
+              setStep={setStep}
               handleManualTransferClick={handleManualTransferClick}
               handleAutoTransferClick={handleAutoTransferClick}
             />
           )}
-          {step === 3.1 && (
+          {step === 4.1 && (
             <PaymentInfo info={manualTransferData} title="Trigger your payment">
               <div className="payment-info__message--credit">
                 <p>
@@ -108,11 +128,11 @@ export const Buy = ({ getTokens }) => {
               <TransactionFooter />
             </PaymentInfo>
           )}
-          {step === 3.2 && <InitiateAutoPayment next={nextStep} />}
-          {step === 4 && <BuyError message="User not enabled or verified." />}
+          {step === 4.2 && <InitiateAutoPayment next={nextStep} />}
+          {step === 5 && <BuyError message="User not enabled or verified." />}
         </div>
         <div className="buy__footer">
-          {step > 3 && step < 3.2 && (
+          {step > 4 && step < 4.2 && (
             <span style={{ fontSize: '1.6rem' }}>
               Please make sure your payment will be triggered from your
               registered bank account
