@@ -56,6 +56,7 @@ export const startKycProcess = () => async dispatch => {
 };
 
 export const updateKycStep = (step, payload, params) => async dispatch => {
+  console.warn(step, payload, params);
   try {
     await API.post(`/compliance/kyc/step-${step}`, payload, { params });
     dispatch(getCurrentKycStep());
@@ -70,6 +71,15 @@ export const getSelfieCode = async () => {
     const response = await API.get(`/compliance/kyc/get-step3-code`);
 
     return response.data.result;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const getIndustries = async () => {
+  try {
+    const response = await API.get(`/compliance/data/industries`);
+    return response.data;
   } catch (error) {
     return handleError(error);
   }
@@ -132,4 +142,3 @@ export const login = (username, password) => async dispatch => {
     );
   }
 };
-

@@ -23,7 +23,7 @@ export const Sell = ({ user, tokens, getTokens, noWallet = true }) => {
   const [exchangeFeeError, setExchangeFeeError] = useState('');
   const [tokensError, setTokensError] = useState('');
   const mounted = useRef(true);
-  const cash36 = useCash36();
+  const web3 = useCash36();
 
   useGetWithState(getExchangeFee, setExchangeFeeError, setExchangeFee);
 
@@ -56,7 +56,6 @@ export const Sell = ({ user, tokens, getTokens, noWallet = true }) => {
   };
 
   const burnTokens = async () => {
-    let { web3 } = cash36;
     const { account } = user;
     const { symbol, amount } = values;
     const { tokenAddress } = tokens.filter(token => token.symbol === symbol)[0];

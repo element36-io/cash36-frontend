@@ -2,9 +2,8 @@
 @import '../../styles/utils.scss';
 @import '../../styles/mixins.scss';
 
-.choose-type-of-wallet {
-  padding: 3.2rem;
-  text-align: center;
+.wallet-type {
+  text-align: left;
 
   > h3 {
     margin-bottom: 2.4rem;
@@ -19,7 +18,7 @@
       flex-direction: column;
     }
 
-    .choose-type-of-wallet__type {
+    .wallet-type__item {
       cursor: pointer;
       white-space: nowrap;
       min-width: calc(50% - 2rem);
@@ -59,5 +58,9 @@
         box-shadow: $box-shadow-1-hover;
       }
     }
+  }
+
+  @include mobile {
+    text-align: center;
   }
 }

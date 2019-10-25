@@ -1,0 +1,24 @@
+@import '../../styles/settings.scss';
+@import '../../styles/utils.scss';
+@import '../../styles/mixins.scss';
+
+.add-mm-wallet {
+  img {
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin-bottom: 1rem;
+
+    &.error-text {
+      font-size: 1.2rem;
+    }
+  }
+
+  @include desktop {
+    min-width: 50rem;
+    max-width: 50rem;
+
+    margin-top: -1.5rem;
+  }
+}

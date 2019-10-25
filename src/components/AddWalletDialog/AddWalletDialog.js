@@ -4,7 +4,7 @@ import Dialog from '@material-ui/core/Dialog';
 
 import Responsive from '../../components/Responsive';
 import DefaultButton from '../Buttons/DefaultButton';
-import ChooseTypeOfWallet from '../ChooseTypeOfWallet';
+import NewWallet from '../NewWallet';
 import walletIcon from '../../assets/icons/wallet-plus-outline.svg';
 
 import './AddWalletDialog.scss';
@@ -31,7 +31,7 @@ const AddWalletDialog = () => {
             onClick={onClose}
             data-testid="add-wallet-dialog__close"
           />
-          <ChooseTypeOfWallet />
+          <NewWallet />
         </div>
       </Responsive>
       <Responsive>
@@ -46,7 +46,7 @@ const AddWalletDialog = () => {
             onClick={onClose}
             data-testid="add-wallet-dialog__close"
           />
-          <ChooseTypeOfWallet />
+          <NewWallet />
         </Dialog>
       </Responsive>
     </div>

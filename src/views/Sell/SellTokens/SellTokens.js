@@ -5,6 +5,8 @@ import ChooseAmountForm from '../../../components/ChooseAmountForm';
 import StepButton from '../../../components/Buttons/StepButton';
 import AvailableBalance from '../../../components/AvailableBalance';
 import UnavailableBalance from '../../../components/UnavailableBalance';
+import { parseAmount } from '../../../helpers/currencies.helpers';
+
 import ExchangeFee from '../ExchangeFee';
 
 import './SellTokens.scss';
@@ -27,13 +29,32 @@ const SellTokens = ({
         symbol={symbol}
         amount={amount}
       />
-      {amount && token && token.balance < amount && <UnavailableBalance />}
+      {amount && token && token.balance < parseAmount(amount) && (
+        <UnavailableBalance />
+      )}
       {token ? (
         <AvailableBalance balance={token.balance} symbol={symbol} />
       ) : (
         <AvailableBalance balance={0} symbol={symbol} />
       )}
-      <ExchangeFee amount={amount} exchangeFee={exchangeFee} symbol={symbol} />
+      <p className="sell__sell-tokes__exchange-msg">
+        If your bank account is using a different currency, the exchange rates
+        of{' '}
+        <a
+          href="https://www.hbl.ch/de/private/zahlen/reisen/waehrungsrechner/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Hypo Lenzburg
+        </a>{' '}
+        apply.
+      </p>
+      <ExchangeFee
+        amount={amount}
+        exchangeFee={exchangeFee}
+        symbol={symbol}
+        isSell
+      />
       {exchangeFeeError && (
         <div className="error-text">
           Exchange Fee error - {exchangeFeeError}
@@ -45,7 +66,7 @@ const SellTokens = ({
         disabled={
           !amount.length || !token
             ? true
-            : amount > token.balance || exchangeFee === false
+            : parseAmount(amount) > token.balance || exchangeFee === false
         }
       />
       {tokensError && <div className="error-text">{tokensError}</div>}

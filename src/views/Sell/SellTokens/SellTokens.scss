@@ -9,6 +9,13 @@
   p {
     display: flex;
     justify-content: space-between;
+
+    &.sell__sell-tokes__exchange-msg {
+      display: block;
+      a {
+        color: $link-blue-1;
+      }
+    }
   }
 
   .exchange-fee {

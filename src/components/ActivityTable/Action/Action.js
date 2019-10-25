@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import TruncateString from 'react-truncate-string';
+import { Web3Context } from '../../../providers/web3.provider';
 
 import './Action.scss';
 
@@ -11,17 +12,34 @@ const renderActionName = type => {
   if (type === 'RECEIVED') return 'Bought Tokens';
 };
 
-const Action = ({ type, targetAddress }) => {
+const Action = ({ type, targetAddress, txHash }) => {
+  const { networkId, network } = useContext(Web3Context);
+
   return (
     <div className="activity-table-action">
       <div>{renderActionName(type)}</div>
-      <span><TruncateString text={targetAddress} /></span>
+      <span>
+        {txHash ? (
+          <a
+            href={`https://${
+              networkId !== 1 ? `${network.toLowerCase()}.` : ''
+            }etherscan.io/tx/${txHash}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <TruncateString text={targetAddress} />
+          </a>
+        ) : (
+          <TruncateString text={targetAddress} />
+        )}
+      </span>
     </div>
   );
 };
 
 Action.propTypes = {
   type: PropTypes.string.isRequired,
+  txHash: PropTypes.string,
   targetAddress: PropTypes.string.isRequired
 };
 
