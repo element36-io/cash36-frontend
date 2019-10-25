@@ -9,6 +9,7 @@ import tokensReducer from './tokens/tokens.reducer';
 import countriesReducer from './countries/countries.reducer';
 import notificationsReducer from './notifications/notifications.reducer';
 import contactsReducer from './contacts/contacts.reducer';
+import walletsReducer from './wallets/wallets.reducer';
 
 const loggerMiddleware = createLogger();
 
@@ -19,7 +20,8 @@ export const reducers = combineReducers({
   tokens: tokensReducer,
   countries: countriesReducer,
   notifications: notificationsReducer,
-  contacts: contactsReducer
+  contacts: contactsReducer,
+  wallets: walletsReducer
 });
 
 const store = createStore(

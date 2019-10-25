@@ -2,8 +2,7 @@ import axios from 'axios';
 import { API_ROOT } from '../config/api';
 
 // Response last 600sec, refresh after 600sec with new qr code or increase duration on node server
-export const getLoginQr = metamaskLogin =>
-  axios(`${API_ROOT}/credentials/?metamask=${metamaskLogin}`);
+export const getLoginQr = () => axios(`${API_ROOT}/credentials`);
 
 export const checkRequestStatus = async (callbackUrl, cancel) => {
   try {

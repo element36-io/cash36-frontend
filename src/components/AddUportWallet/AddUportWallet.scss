@@ -1,0 +1,57 @@
+@import '../../styles/settings.scss';
+@import '../../styles/utils.scss';
+@import '../../styles/mixins.scss';
+
+.add-uport-wallet {
+  img {
+    width: 12rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin-bottom: 1rem;
+
+    &.error-text {
+      font-size: 1.2rem;
+    }
+  }
+
+  .add-uport-wallet__qr {
+    display: flex;
+    justify-content: center;
+    margin: 2rem;
+  }
+
+  .add-uport-wallet__stores {
+    text-align: center;
+
+    p {
+      font-size: 1.4rem;
+    }
+
+    a:first-of-type {
+      margin-right: 1rem;
+    }
+    a:last-of-type {
+      margin-left: 1rem;
+    }
+  }
+
+  @include desktop {
+    min-width: 50rem;
+    max-width: 50rem;
+
+    margin-top: -1rem;
+  }
+
+  @include mobile {
+    > img {
+      display: block;
+      margin: 0 auto 1rem;
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+}
