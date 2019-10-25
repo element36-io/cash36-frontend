@@ -1,12 +1,11 @@
-import { useState, useContext, useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { Web3Context } from '../providers/web3.provider';
 import E36Provider from '../helpers/e36.provider';
 
 const useCash36 = () => {
   const _isMounted = useRef(true);
-  const { networkId, web3 } = useContext(Web3Context);
-  const [state] = useState({ networkId, web3 });
+  const { web3 } = useContext(Web3Context);
   const { user } = useSelector(({ auth }) => auth);
 
   const isActive = () => {
@@ -24,7 +23,7 @@ const useCash36 = () => {
       cancel: () => !isActive()
     });
 
-    state.web3.setProvider(provider);
+    web3.setProvider(provider);
   };
 
   useEffect(() => {
@@ -34,7 +33,7 @@ const useCash36 = () => {
     };
   }, []);
 
-  return { ...state };
+  return web3;
 };
 
 export default useCash36;

@@ -7,6 +7,7 @@ import RadioButtons from './RadioButtons';
 import IndustryFields from './IndustryFields';
 import SourceOfFunds from './SourceOfFunds';
 import DetailsSource from './DetailsSource';
+import { getIndustries } from '../../../store/auth/auth.actions';
 import './Step4UserProfile.scss';
 
 const transactionVolumeValues = [
@@ -49,6 +50,7 @@ const Step4UserProfile = ({ changeSteps, stepError }) => {
     sourceOfFundsDescription: false,
     transactionVolume: false
   });
+  const [industryList, setIndustryList] = useState([]);
   const [submitting, setSubmitting] = useState(false);
 
   const updateIndustry = useCallback(
@@ -120,6 +122,13 @@ const Step4UserProfile = ({ changeSteps, stepError }) => {
     }
   };
 
+  const fetchIndustries = async () => {
+    try {
+      const list = await getIndustries();
+      setIndustryList(list);
+    } catch (err) {}
+  };
+
   useEffect(() => {
     if (transactionVolume === 'LessThan10k') setSourceOfFundsDescription('');
   }, [transactionVolume]);
@@ -133,6 +142,10 @@ const Step4UserProfile = ({ changeSteps, stepError }) => {
   useEffect(() => {
     if (!sourceOfFunds.Other) setSourceOfFundsOther('');
   }, [sourceOfFunds]);
+
+  useEffect(() => {
+    fetchIndustries();
+  }, []);
 
   const isInvalid = Object.values(errors).filter(error => error).length;
 
@@ -150,6 +163,7 @@ const Step4UserProfile = ({ changeSteps, stepError }) => {
           industryError={errors.industry}
           professionError={errors.profession}
           industryOtherError={errors.industryOther}
+          industryList={industryList}
         />
         <div>
           <RadioButtons
