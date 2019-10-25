@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import API from '../../config/api';
 import BuyTokens from './BuyTokens';
 import { getTokens } from '../../store/tokens/tokens.actions';
+import BuyStep0 from './BuyStep0';
 import PaymentMethod from './PaymentMethod';
 import InitiateAutoPayment from './InitiateAutoPayment';
 import BackButton from '../../components/Buttons/BackButton';
@@ -17,7 +18,7 @@ import './Buy.scss';
 
 export const Buy = ({ getTokens }) => {
   const [error, setError] = useState('');
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(10);
   const [amount, setAmount] = useState('');
   const [symbol, setSymbol] = useState('EUR36');
   const [manualTransferData, setManualTransferData] = useState(null);
@@ -76,6 +77,7 @@ export const Buy = ({ getTokens }) => {
       <div className="buy paper">
         {step > 0 && step !== 2.1 && <BackButton onClick={previousStep} />}
         <div className="buy__content">
+          {step === 10 && <BuyStep0 />}
           {step === 0 && (
             <Fragment>
               <BuyTokens
@@ -110,6 +112,14 @@ export const Buy = ({ getTokens }) => {
           {step === 3 && <BuyError message="User not enabled or verified." />}
         </div>
         <div className="buy__footer">
+          {step === 10 && (
+            <span style={{ fontSize: '1.2rem' }}>
+              Select the target of your Token purchase. You can either send the
+              Tokens to your wallet
+              <br />
+              or you can send to a wallet address you specify.
+            </span>
+          )}
           {step < 2 && (
             <span style={{ fontSize: '1.2rem' }}>
               Buying cash36 Tokens is as simple as a bank transfer. First,

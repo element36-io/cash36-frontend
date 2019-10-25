@@ -1,0 +1,51 @@
+@import '../../../styles/settings.scss';
+@import '../../../styles/utils.scss';
+
+.buy-step0 {
+  display: flex;
+  flex-direction: column;
+
+  > h2 {
+    text-align: center;
+    margin-bottom: 3.2rem;
+  }
+
+  .buy-step0__options {
+    display: flex;
+    margin-bottom: 5.4rem;
+  }
+
+  .buy-step0__option {
+    @extend .paper;
+    padding: 2rem;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+
+    > p {
+      font-weight: 300;
+    }
+
+    &:first-child {
+      margin-right: 3.2rem;
+    }
+
+    &:last-child {
+      margin-left: 3.2rem;
+    }
+
+    > div:first-child {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.6rem;
+    }
+
+    svg {
+      fill: $primary-main;
+      margin-right: 0.8rem;
+    }
+
+    &:hover {
+      box-shadow: $box-shadow-1-hover;
+    }
+  }
+}
