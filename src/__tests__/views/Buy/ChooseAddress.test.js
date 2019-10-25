@@ -20,7 +20,11 @@ test('calls setStep on click', () => {
   const setStep = jest.fn();
 
   const { getByText } = render(
-    <ChooseAddress {...props} setStep={setStep} address="0x000000000000001" />
+    <ChooseAddress
+      {...props}
+      setStep={setStep}
+      address="0xc1912fee45d61c87cc5ea59dae31190fffff232d"
+    />
   );
 
   fireEvent.click(getByText(/next step/i));

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Web3 from 'web3';
 
 import BuyFooter from '../BuyFooter';
 import BackButton from '../../../components/Buttons/BackButton';
@@ -8,6 +9,10 @@ import StepButton from '../../../components/Buttons/StepButton';
 import './ChooseAddress.scss';
 
 const ChooseAddress = ({ setStep, handleChange, address }) => {
+  const web3 = new Web3();
+
+  const validateAddress = address => web3.utils.isAddress(address);
+
   return (
     <div className="choose-address" data-testid="buy__choose-address">
       <BackButton onClick={() => setStep(0)} />
@@ -25,7 +30,7 @@ const ChooseAddress = ({ setStep, handleChange, address }) => {
       <StepButton
         onClick={() => setStep(2.2)}
         text={'Next Step'}
-        disabled={!address}
+        disabled={!validateAddress(address)}
       />
       <BuyFooter
         textline1="Sending cash36 Tokens is as simple as a bank transfer. First, add address you wish to send tokens to."
