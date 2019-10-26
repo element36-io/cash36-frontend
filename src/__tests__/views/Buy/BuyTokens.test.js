@@ -5,7 +5,7 @@ import BuyTokens from '../../../views/Buy/BuyTokens';
 import { fireEvent } from '@testing-library/react';
 
 const props = {
-  nextStep: jest.fn(),
+  setStep: jest.fn(),
   handleChange: jest.fn(),
   amount: '',
   symbol: 'CHF36'
@@ -18,30 +18,29 @@ test('renders the component', () => {
 
   expect(getByText(/buy tokens/i)).toBeInTheDocument();
   expect(getByText(/next step/i)).toBeInTheDocument();
-  expect(getByText(/choose amount/i)).toBeInTheDocument();
   expect(getByLabelText(/choose amount/i)).toBeInTheDocument();
   expect(getByLabelText(/select token/i)).toBeInTheDocument();
 });
 
 test('calls nextStep when amount and symbol supplied', () => {
-  const nextStep = jest.fn();
+  const setStep = jest.fn();
   const { getByText } = renderWithRedux(
-    <BuyTokens {...props} amount={'1'} nextStep={nextStep} />
+    <BuyTokens {...props} amount={'1'} setStep={setStep} />
   );
 
   fireEvent.click(getByText(/next step/i));
 
-  expect(nextStep).toHaveBeenCalledTimes(1);
+  expect(setStep).toHaveBeenCalledTimes(1);
 });
 
-test("doesn't call nextStep when amount is empty", () => {
-  const nextStep = jest.fn();
+test("doesn't call setStep when amount is empty", () => {
+  const setStep = jest.fn();
 
   const { getByText } = renderWithRedux(
-    <BuyTokens {...props} nextStep={nextStep} />
+    <BuyTokens {...props} setStep={setStep} />
   );
 
   fireEvent.click(getByText(/next step/i));
 
-  expect(nextStep).not.toHaveBeenCalled();
+  expect(setStep).not.toHaveBeenCalled();
 });
