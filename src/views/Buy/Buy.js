@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -24,10 +24,8 @@ export const Buy = ({ getTokens }) => {
   const [symbol, setSymbol] = useState('EUR36');
   const [address, setAddress] = useState('');
   const [manualTransferData, setManualTransferData] = useState(null);
-
+  const manualTransferStarted = useRef(false);
   useGet(getTokens, setError);
-
-  let manualTransferStarted = false;
 
   const nextStep = () => {
     if (step === 1.1) {
@@ -50,9 +48,9 @@ export const Buy = ({ getTokens }) => {
   };
 
   const handleManualTransferClick = async () => {
-    if (manualTransferStarted) return;
+    if (manualTransferStarted.current) return;
 
-    manualTransferStarted = true;
+    manualTransferStarted.current = true;
 
     const data = {
       amount: parseInt(amount),
