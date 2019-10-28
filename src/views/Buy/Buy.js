@@ -19,13 +19,17 @@ import './Buy.scss';
 
 export const Buy = ({ getTokens, location }) => {
   const [error, setError] = useState('');
-  const [step, setStep] = useState(location.state.fromQuickActions ? 2.1 : 0);
+  let [step, setStep] = useState(0);
   const [amount, setAmount] = useState('');
   const [symbol, setSymbol] = useState('EUR36');
   const [address, setAddress] = useState('');
   const [manualTransferData, setManualTransferData] = useState(null);
   const manualTransferStarted = useRef(false);
   useGet(getTokens, setError);
+
+  if (location.state) {
+    if (location.state.fromQuickActions) step = 2.1;
+  }
 
   const nextStep = () => {
     if (step === 1.1) {
