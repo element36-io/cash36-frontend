@@ -2,6 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import configureMockStore from 'redux-mock-store';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { render, cleanup } from '@testing-library/react';
@@ -33,6 +34,28 @@ export function renderWithRouter (
 ) {
   return {
     ...render(<Router history={history}>{component}</Router>),
+    history
+  };
+}
+
+export function renderWithRouterAndRedux (
+  component,
+  {
+    initialState = {},
+    route = '/',
+    history = createMemoryHistory({ initialEntries: [route] })
+  } = {}
+) {
+  const middlewares = [thunk];
+  const mockStore = configureMockStore(middlewares);
+  const store = mockStore(initialState);
+
+  return {
+    ...render(
+      <Router history={history}>
+        <Provider store={store}>{component}</Provider>
+      </Router>
+    ),
     history
   };
 }

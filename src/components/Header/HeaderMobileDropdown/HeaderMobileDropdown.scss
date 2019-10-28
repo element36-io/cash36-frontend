@@ -26,6 +26,7 @@
     li:not(:last-child) {
       margin-bottom: 1rem;
       border-bottom: 1px solid $lightGrey;
+      padding-bottom: 1rem;
     }
 
     a,
@@ -37,11 +38,7 @@
       cursor: pointer;
     }
 
-    span {
-      padding-bottom: 1rem;
-    }
-
-    a {
+    > span {
       padding-bottom: 1rem;
     }
   }

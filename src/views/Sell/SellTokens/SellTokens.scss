@@ -12,6 +12,9 @@
 
     &.sell__sell-tokes__exchange-msg {
       display: block;
+      font-size: 1.3rem;
+      text-align: center;
+      color: $text-secondary;
       a {
         color: $link-blue-1;
       }
@@ -20,6 +23,7 @@
 
   .exchange-fee {
     color: $red-1;
+    margin-bottom: 0.8rem;
   }
 
   .no-exchange-fee {

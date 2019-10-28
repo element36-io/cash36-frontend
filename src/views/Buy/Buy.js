@@ -17,9 +17,9 @@ import useGet from '../../hooks/useGet';
 
 import './Buy.scss';
 
-export const Buy = ({ getTokens }) => {
+export const Buy = ({ getTokens, location }) => {
   const [error, setError] = useState('');
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(location.state.fromQuickActions ? 2.1 : 0);
   const [amount, setAmount] = useState('');
   const [symbol, setSymbol] = useState('EUR36');
   const [address, setAddress] = useState('');
