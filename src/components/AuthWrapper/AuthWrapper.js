@@ -7,7 +7,7 @@ import AuthTerms from './AuthTerms';
 import './AuthWrapper.scss';
 
 const AuthWrapper = ({ children }) => (
-  <div className="auth__wrapper">
+  <div className="auth__wrapper" data-testid="auth__wrapper">
     <div>
       <AuthHeader />
       <Responsive isMobile>

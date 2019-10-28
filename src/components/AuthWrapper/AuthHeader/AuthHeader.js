@@ -5,7 +5,7 @@ import AuthHeaderMobile from './AuthHeaderMobile';
 import './AuthHeader.scss';
 
 const AuthHeader = () => (
-  <div className="auth__header">
+  <div className="auth__header" data-testid="auth__header">
     <Responsive>
       <Logo />
     </Responsive>

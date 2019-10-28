@@ -12,7 +12,10 @@ const AuthHeaderMobile = () => {
   return (
     <>
       <NavButton clickHandler={toggleNav} isActive={isActive} />
-      <div className={`auth__header__dropdown ${isActive ? 'active' : ''}`}>
+      <div
+        className={`auth__header__dropdown ${isActive ? 'active' : ''}`}
+        data-testid="auth__header__dropdown"
+      >
         <div className="paper">
           <AuthNav />
         </div>

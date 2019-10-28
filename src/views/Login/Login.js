@@ -24,7 +24,7 @@ const Login = ({ isAuthenticated, login }) => {
 
   return (
     <AuthWrapper>
-      <div>
+      <div data-testid="login_component">
         <p>
           Welcome back,
           <br />

@@ -3,7 +3,7 @@ import AuthNav from '../AuthNav';
 import './AuthSidebar.scss';
 
 const AuthSidebar = () => (
-  <div className="auth__sidebar">
+  <div className="auth__sidebar" data-testid="auth__sidebar">
     <AuthNav />
   </div>
 );
