@@ -29,6 +29,9 @@ const initialState = {
     user: {
       account: '0x89b5c95edf8aeca1366f83043e805aebe1992cce'
     }
+  },
+  wallets: {
+    walletList: ['1']
   }
 };
 
@@ -46,7 +49,7 @@ describe('step 0', () => {
         }}
       >
         <Provider store={store}>
-          <Sell getTokens={jest.fn()} noWallet={false} />
+          <Sell getTokens={jest.fn()} />
         </Provider>
       </Web3Context.Provider>,
       {
@@ -67,6 +70,7 @@ describe('step 0', () => {
   });
 
   test('redirects to / if there is no wallet', () => {
+    initialState.wallets.walletList = [];
     const { history } = renderWithRouter(
       <Web3Context.Provider
         value={{
@@ -76,7 +80,7 @@ describe('step 0', () => {
         }}
       >
         <Provider store={store}>
-          <Sell getTokens={jest.fn()} noWallet />
+          <Sell getTokens={jest.fn()} />
         </Provider>
       </Web3Context.Provider>,
       {

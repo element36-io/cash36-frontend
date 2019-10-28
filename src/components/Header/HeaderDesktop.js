@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Tooltip } from '@material-ui/core';
 
@@ -7,11 +8,11 @@ import HeaderMenu from './HeaderMenu';
 import HeaderAlerts from './HeaderAlerts';
 import navLinks from './navLinks';
 
-const HeaderDesktop = ({ logout, user, noWallet = true }) => (
+const HeaderDesktop = ({ logout, user, hasWallet }) => (
   <Fragment>
     <ul>
       {navLinks.map(link =>
-        noWallet && link.label === 'Sell' ? (
+        !hasWallet && link.label === 'Sell' ? (
           <li key={link.label}>
             <Tooltip title="You need to add a Wallet to be able to sell Tokens">
               <span>{link.label}</span>
@@ -33,10 +34,14 @@ const HeaderDesktop = ({ logout, user, noWallet = true }) => (
   </Fragment>
 );
 
+const mapStateToProps = state => ({
+  hasWallet: state.wallets.walletList.length
+});
+
 HeaderDesktop.propTypes = {
-  noWallet: PropTypes.bool,
+  hasWallet: PropTypes.number,
   logout: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired
 };
 
-export default HeaderDesktop;
+export default connect(mapStateToProps)(HeaderDesktop);

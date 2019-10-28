@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import CloseIcon from '@material-ui/icons/Close';
-import Dialog from '@material-ui/core/Dialog';
+import { Dialog } from '@material-ui/core';
 
 import Responsive from '../../components/Responsive';
 import DefaultButton from '../Buttons/DefaultButton';

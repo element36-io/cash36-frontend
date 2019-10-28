@@ -15,7 +15,7 @@ import useGetWithState from '../../hooks/useGetWithState';
 
 import './Sell.scss';
 
-export const Sell = ({ user, tokens, getTokens, noWallet = true }) => {
+export const Sell = ({ user, tokens, getTokens, hasWallet }) => {
   const [step, setStep] = useState(0);
   const [values, setValues] = useState({ amount: '', symbol: 'EUR36' });
   const [sellError, setSellError] = useState(null);
@@ -35,7 +35,7 @@ export const Sell = ({ user, tokens, getTokens, noWallet = true }) => {
     };
   }, []);
 
-  if (noWallet) return <Redirect to="/" />;
+  if (!hasWallet) return <Redirect to="/" />;
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -132,9 +132,14 @@ Sell.propTypes = {
   user: PropTypes.object
 };
 
-const mapStateToProps = ({ tokens: { tokens = [] }, auth: { user } }) => ({
+const mapStateToProps = ({
+  tokens: { tokens = [] },
+  auth: { user },
+  wallets
+}) => ({
   tokens,
-  user
+  user,
+  hasWallet: wallets.walletList.length
 });
 
 export default connect(

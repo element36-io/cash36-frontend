@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import RightArrowIcon from '@material-ui/icons/KeyboardArrowRight';
 import UserProfile from '../../UserProfile';
 import navLinks from '../navLinks';
+import ManageWalletsMobile from '../../ManageWallets/ManageWalletsMobile/ManageWalletsMobile';
+
 import './HeaderMobileDropdown.scss';
 
 const HeaderMobileDropdown = ({
@@ -11,14 +14,14 @@ const HeaderMobileDropdown = ({
   logout,
   clickCallback,
   currentLevel,
-  noWallet = true
+  hasWallet
 }) => {
   return (
     <div className={`header__mobile-dropdown ${isActive ? 'active' : ''}`}>
       <UserProfile alt />
       <ul className="paper">
         {navLinks.map(link =>
-          noWallet && link.label === 'Sell' ? (
+          !hasWallet && link.label === 'Sell' ? (
             <li key={link.label} style={{ opacity: '0.5' }}>
               <span>
                 {link.label}
@@ -54,6 +57,7 @@ const HeaderMobileDropdown = ({
             </span>
           </li>
         )}
+        <ManageWalletsMobile />
         <li onClick={logout}>
           <span>
             Logout
@@ -65,12 +69,16 @@ const HeaderMobileDropdown = ({
   );
 };
 
+const mapStateToProps = state => ({
+  hasWallet: state.wallets.walletList.length
+});
+
 HeaderMobileDropdown.propTypes = {
   currentLevel: PropTypes.string,
-  noWallet: PropTypes.bool,
+  hasWallet: PropTypes.number,
   isActive: PropTypes.bool,
   logout: PropTypes.func.isRequired,
   clickCallback: PropTypes.func.isRequired
 };
 
-export default HeaderMobileDropdown;
+export default connect(mapStateToProps)(HeaderMobileDropdown);

@@ -17,7 +17,16 @@ const initialState = {
       name: 'Euro',
       symbol: 'EUR36'
     }
-  ]
+  ],
+  wallets: {
+    walletList: ['1']
+  }
+};
+
+const location = {
+  state: {
+    fromQuickActions: false
+  }
 };
 
 describe('step 0', () => {
@@ -26,7 +35,7 @@ describe('step 0', () => {
   beforeEach(() => {
     component = renderWithRedux(
       <ResponsiveContext.Provider value={{ width: 1200 }}>
-        <Buy getTokens={jest.fn()} />
+        <Buy getTokens={jest.fn()} location={location} />
       </ResponsiveContext.Provider>,
       { initialState }
     );
@@ -46,10 +55,10 @@ describe('step 0', () => {
     expect(getByTestId('buy-tokens')).toBeInTheDocument();
   });
 
-  test('goes to step 2.1 when clicked on Send to an address', () => {
+  test('goes to step 2.1 when clicked on Send to a contract', () => {
     const { getByText, getByTestId } = component;
 
-    fireEvent.click(getByText(/send to an address/i));
+    fireEvent.click(getByText(/send to contract/i));
 
     expect(getByTestId('buy__choose-address')).toBeInTheDocument();
   });
@@ -62,7 +71,7 @@ describe('step 1', () => {
     component = renderWithRedux(
       <ResponsiveContext.Provider value={{ width: 1200 }}>
         <BrowserRouter>
-          <Buy getTokens={jest.fn()} />
+          <Buy getTokens={jest.fn()} location={location} />
         </BrowserRouter>
       </ResponsiveContext.Provider>,
       { initialState }

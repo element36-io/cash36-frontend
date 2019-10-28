@@ -121,9 +121,9 @@ const Transfer = ({
 
   const renderStep = () => {
     const { amount, symbol } = values;
-    const 
-      { utils }
-     = web3;
+    const
+      { utils } =
+     web3;
 
     switch (step) {
       case 1:

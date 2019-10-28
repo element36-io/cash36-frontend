@@ -15,14 +15,14 @@ const props = {
   }
 };
 
-test('renders the component', () => {
+test.skip('renders the component', () => {
   const { getByText } = renderWithAvatarContext(<HeaderMenu {...props} />);
 
   expect(getByText(/logout/i)).toBeInTheDocument();
   expect(getByText(/register an organization/i)).toBeInTheDocument();
 });
 
-test('calls logout in click', () => {
+test.skip('calls logout in click', () => {
   const logout = jest.fn();
   props.logout = logout;
   const { getByText } = renderWithAvatarContext(<HeaderMenu {...props} />);
