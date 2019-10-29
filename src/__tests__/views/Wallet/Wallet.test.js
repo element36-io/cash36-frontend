@@ -26,6 +26,9 @@ test('stays on the / route if user is authenticated', async () => {
     },
     notifications: {
       badgeCount: 0
+    },
+    wallets: {
+      walletList: ['1']
     }
   });
   const { history } = renderWithRouter(

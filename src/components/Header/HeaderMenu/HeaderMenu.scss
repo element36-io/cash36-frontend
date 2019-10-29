@@ -52,7 +52,13 @@
 
     > li {
       display: flex;
-      justify-content: center;
+      // justify-content: center;
+      svg {
+        margin-right: 0.8rem;
+        fill: $primary-main;
+        width: 2.25rem;
+        height: 2.25rem;
+      }
     }
 
     &.header__menu__content--active {

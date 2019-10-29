@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Tooltip } from '@material-ui/core';
 
@@ -7,13 +8,13 @@ import buttons from './buttons';
 
 import './QuickActions.scss';
 
-const QuickActions = ({ noWallet = true }) => {
+const QuickActions = ({ hasWallet }) => {
   return (
     <div className="quick-actions">
       <div>Quick Actions</div>
-      <div className={`${noWallet ? 'no-wallet' : ''}`}>
+      <div className={`${!hasWallet ? 'no-wallet' : ''}`}>
         {buttons.map(({ link, Icon, label }) =>
-          noWallet && label === 'Sell' ? (
+          !hasWallet && label === 'Sell' ? (
             <Tooltip
               key={label}
               title="You need to add a Wallet to be able to sell Tokens"
@@ -43,8 +44,12 @@ const QuickActions = ({ noWallet = true }) => {
   );
 };
 
+const mapStateToProps = state => ({
+  hasWallet: state.wallets.walletList.length
+});
+
 QuickActions.propTypes = {
-  noWallet: PropTypes.bool
+  hasWallet: PropTypes.number.isRequired
 };
 
-export default QuickActions;
+export default connect(mapStateToProps)(QuickActions);

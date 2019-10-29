@@ -27,6 +27,28 @@ const initialState = {
       caseId: '1',
       badgeCount: 0
     }
+  },
+  wallets: {
+    walletList: [
+      {
+        accountAddress: '0xd3124977047f6aE28DdA3978B38E1fC599a5aCd1',
+        contractAddress: '',
+        creationDate: '',
+        mainWallet: true,
+        networkId: '4',
+        shortDescription: 'My Wallet 1',
+        walletType: 'UPORT'
+      },
+      {
+        accountAddress: '0xd3124977047f6ad28DdA3978B38E1fC599a5aCd1',
+        contractAddress: '',
+        creationDate: '',
+        mainWallet: false,
+        networkId: '4',
+        shortDescription: 'My Wallet 2',
+        walletType: 'METAMASK'
+      }
+    ]
   }
 };
 

@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/KeyboardArrowDown';
+import OrganizationIcon from '@material-ui/icons/Domain';
+import LogoutIcon from '@material-ui/icons/PowerSettingsNew';
 import { Tooltip } from '@material-ui/core';
 
 import Avatar from '../../../components/Avatar';
+import ManageWallets from '../../../components/ManageWallets';
 
 import './HeaderMenu.scss';
 
@@ -40,8 +43,11 @@ const HeaderMenu = ({
               open ? ' header__menu__content--active' : ''
             }`}
           >
+            <ManageWallets />
             {currentLevel === 'Tier_2' ? (
               <MenuItem>
+                <OrganizationIcon />
+
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
@@ -52,12 +58,16 @@ const HeaderMenu = ({
               </MenuItem>
             ) : (
               <MenuItem style={{ opacity: '0.5' }}>
+                <OrganizationIcon />
                 <Tooltip title="You need to be a verified user to register an organization">
                   <span>Register an organization</span>
                 </Tooltip>
               </MenuItem>
             )}
-            <MenuItem onClick={logout}>Logout</MenuItem>
+            <MenuItem onClick={logout}>
+              <LogoutIcon />
+              Logout
+            </MenuItem>
           </div>
         </span>
       </ClickAwayListener>

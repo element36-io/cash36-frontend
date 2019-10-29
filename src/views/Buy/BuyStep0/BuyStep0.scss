@@ -70,5 +70,14 @@
     &:hover {
       box-shadow: $box-shadow-1-hover;
     }
+
+    &--hidden {
+      opacity: 0.5;
+      cursor: default;
+
+      &:hover {
+        box-shadow: $box-shadow-1;
+      }
+    }
   }
 }
