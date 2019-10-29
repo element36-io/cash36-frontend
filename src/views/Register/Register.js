@@ -24,7 +24,7 @@ const Register = ({ isAuthenticated, register }) => {
 
   return (
     <AuthWrapper>
-      <div>
+      <div data-testid="register_component">
         <p>
           Welcome aboard, <br /> Please, enter your email & choose a password
         </p>

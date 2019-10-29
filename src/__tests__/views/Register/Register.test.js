@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent } from '@testing-library/react';
 import { renderWithRouterAndRedux } from '../../../helpers/tests.helpers';
-import Login from '../../../views/Login';
+import Register from '../../../views/Register';
 
 const initialState = {
   auth: {
@@ -11,22 +11,22 @@ const initialState = {
 
 describe('test Login component', () => {
   test('renders the component', () => {
-    const { getByTestId } = renderWithRouterAndRedux(<Login />, {
+    const { getByTestId } = renderWithRouterAndRedux(<Register />, {
       initialState
     });
 
-    expect(getByTestId('login_component')).toBeVisible();
+    expect(getByTestId('register_component')).toBeVisible();
   });
 
   test('test routing', () => {
-    const { getByText, history } = renderWithRouterAndRedux(<Login />, {
+    const { getByText, history } = renderWithRouterAndRedux(<Register />, {
       initialState,
-      route: '/login'
+      route: '/register'
     });
-    const registerLink = getByText(/Sign up/i);
+    const signinLink = getByText(/sign in/i);
 
-    expect(history.location.pathname).toBe('/login');
-    fireEvent.click(registerLink);
     expect(history.location.pathname).toBe('/register');
+    fireEvent.click(signinLink);
+    expect(history.location.pathname).toBe('/login');
   });
 });

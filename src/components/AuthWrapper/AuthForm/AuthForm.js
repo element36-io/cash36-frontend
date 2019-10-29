@@ -39,6 +39,7 @@ const AuthForm = ({
                 <label>
                   <span>{field.label}</span>
                   <input
+                    data-testid={`auth_form_${field.name}`}
                     type={field.type}
                     name={field.name}
                     value={formProps.values[field.name]}
