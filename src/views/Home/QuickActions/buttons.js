@@ -17,7 +17,7 @@ export default [
     link: {
       pathname: '/buy',
       state: {
-        fromQuickActions: true
+        quickActions: true
       }
     },
     Icon: ArrowForwardIcon,

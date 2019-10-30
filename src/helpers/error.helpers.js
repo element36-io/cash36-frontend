@@ -3,9 +3,10 @@ export function handleError (error) {
     const errorData = error.response.data;
     let errorMessage;
     if (errorData) {
-      errorMessage = errorData.message
-        ? errorData.message
-        : `${errorData.status} ${errorData.error}`;
+      errorMessage =
+        errorData.message && errorData.message !== 'No message available'
+          ? errorData.message
+          : `${errorData.status} ${errorData.error}`;
 
       return Promise.reject(errorMessage);
     }

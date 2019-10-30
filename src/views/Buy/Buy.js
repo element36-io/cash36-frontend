@@ -23,12 +23,21 @@ export const Buy = ({ getTokens, location }) => {
   const [amount, setAmount] = useState('');
   const [symbol, setSymbol] = useState('EUR36');
   const [address, setAddress] = useState('');
+  const [target, setTarget] = useState(null);
   const [manualTransferData, setManualTransferData] = useState(null);
   const manualTransferStarted = useRef(false);
   useGet(getTokens, setError);
 
   if (location.state) {
-    if (location.state.fromQuickActions) step = 2.1;
+    if (location.state.quickActions) setStep(2.1);
+
+    if (location.state.quickTransfer) {
+      setAddress(location.state.quickTransfer.contactAddress);
+      setTarget(location.state.quickTransfer);
+      setStep(2.2);
+    }
+
+    location.state = null;
   }
 
   const nextStep = () => {
@@ -51,6 +60,7 @@ export const Buy = ({ getTokens, location }) => {
     }
   };
 
+  // check data sending to buy on manual transfer
   const handleManualTransferClick = async () => {
     if (manualTransferStarted.current) return;
 
@@ -58,7 +68,8 @@ export const Buy = ({ getTokens, location }) => {
 
     const data = {
       amount: parseInt(amount),
-      symbol: symbol
+      symbol,
+      address
     };
 
     try {
@@ -106,6 +117,7 @@ export const Buy = ({ getTokens, location }) => {
                 symbol={symbol}
                 handleChange={handleChange}
                 amount={amount}
+                target={target}
                 setStep={setStep}
               />
               <div className="error-text">{error}</div>

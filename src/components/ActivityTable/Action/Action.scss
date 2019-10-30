@@ -11,6 +11,12 @@
   }
 
   > span {
+    display: flex;
+    flex-wrap: wrap;
     width: 100%;
+
+    a {
+      max-width: 100%;
+    }
   }
 }
