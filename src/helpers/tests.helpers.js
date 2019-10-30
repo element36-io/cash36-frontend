@@ -60,9 +60,34 @@ export function renderWithRouterAndRedux (
   };
 }
 
+export function renderWithAvatarContextAndRouter (
+  component,
+  {
+    route = '/',
+    history = createMemoryHistory({ initialEntries: [route] })
+  } = {},
+  state = {},
+  actions = {}
+) {
+  return {
+    ...render(
+      <Router history={history}>
+        <AvatarContext.Provider value={{ state, actions }}>
+          {component}
+        </AvatarContext.Provider>
+      </Router>
+    ),
+    history
+  };
+}
+
 export function renderWithAvatarContext (
   component,
   renderFunction = render,
+  {
+    route = '/',
+    history = createMemoryHistory({ initialEntries: [route] })
+  } = {},
   state = {},
   actions = {}
 ) {
