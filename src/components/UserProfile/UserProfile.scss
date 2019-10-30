@@ -173,7 +173,7 @@
   }
 
   &__info {
-    p {
+    > p {
       margin: 0 0 1rem;
       color: $darkGrey;
       font-size: 1.4rem;

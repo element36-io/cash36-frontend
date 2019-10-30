@@ -1,0 +1,66 @@
+@import '../../styles/settings.scss';
+@import '../../styles/utils.scss';
+@import '../../styles/mixins.scss';
+
+.wallet-type {
+  text-align: left;
+
+  > h3 {
+    margin-bottom: 2.4rem;
+    font-weight: 500;
+  }
+
+  > div {
+    display: flex;
+    justify-content: space-between;
+
+    @include mobile {
+      flex-direction: column;
+    }
+
+    .wallet-type__item {
+      cursor: pointer;
+      white-space: nowrap;
+      min-width: calc(50% - 2rem);
+      max-width: calc(50% - 2rem);
+      @extend .paper;
+      padding: 4rem;
+      font-size: 1.8rem;
+      font-weight: 300;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+
+      @include mobile {
+        white-space: pre-wrap;
+        min-width: 100%;
+        max-width: 100%;
+      }
+
+      &:not(:last-child) {
+        margin-right: 2.4rem;
+
+        @include mobile {
+          margin-right: 0;
+          margin-bottom: 1.6rem;
+        }
+      }
+
+      > img {
+        margin-top: 0.8rem;
+        width: auto;
+        height: 3rem;
+      }
+
+      &:hover {
+        box-shadow: $box-shadow-1-hover;
+      }
+    }
+  }
+
+  @include mobile {
+    text-align: center;
+  }
+}

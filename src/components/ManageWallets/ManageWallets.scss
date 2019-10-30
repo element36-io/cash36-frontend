@@ -1,0 +1,227 @@
+@import '../../styles/settings.scss';
+@import '../../styles/mixins.scss';
+
+.manage-wallets-wrapper {
+  position: relative;
+
+  .manage-wallets__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.4rem;
+
+    > h3 {
+      font-weight: 500;
+    }
+
+    > svg {
+      fill: $darkGrey;
+      cursor: pointer;
+    }
+  }
+
+  .manage-wallets__content {
+    padding: 3.2rem;
+    text-align: center;
+
+    .add-wallet-dialog {
+      width: 100%;
+      display: flex;
+
+      > button {
+        // margin-right: 0;
+        // color: $white !important;
+        flex: 1;
+        margin-top: 3.2rem;
+      }
+    }
+  }
+
+  .manage-wallets__wallet {
+    &:not(:last-child) {
+      padding-bottom: 1.6rem;
+    }
+    display: flex;
+    align-items: center;
+
+    > img {
+      width: 6rem;
+
+      margin-right: 1.2rem;
+    }
+
+    .manage-wallets__wallet__text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-right: 2.4rem;
+
+      > span:first-child {
+        font-weight: 500;
+      }
+
+      > span:last-child {
+        font-size: 1.3rem;
+        opacity: 0.4;
+        letter-spacing: 0.1px;
+        font-weight: 500;
+      }
+    }
+
+    .manage-wallets__wallet__buttons {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+
+      > span {
+        margin-right: 2.4rem;
+        font-size: 1.1rem;
+        color: $primary-main;
+        padding: 5px 10px;
+        cursor: default;
+      }
+
+      > button {
+        outline: none;
+        border: none;
+        cursor: pointer;
+        color: $primary-main;
+        border-radius: 4px;
+        margin-right: 2.4rem;
+        transition: color 0.2s;
+        background-color: $grey-blue;
+        padding: 5px 10px;
+        transition: all 0.2s;
+
+        &:hover {
+          background-color: $primary-main;
+          color: $white;
+        }
+      }
+
+      > svg {
+        cursor: pointer;
+        fill: $primary-main;
+        justify-self: flex-end;
+
+        &:hover {
+          fill: darken($primary-main, 10);
+        }
+      }
+    }
+  }
+
+  @include mobile {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    background: #fff;
+    transition: transform 255ms;
+    transform: translateX(-200%);
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-top: 28rem;
+
+    &.--open {
+      transform: translateX(0);
+    }
+
+    .manage-wallets__header {
+      display: flex;
+      margin-bottom: 3.2rem;
+
+      > h3 {
+        font-weight: 500;
+      }
+
+      > svg {
+        fill: $darkGrey;
+        cursor: pointer;
+      }
+    }
+
+    .manage-wallets__content {
+      padding: 1.2rem;
+      text-align: center;
+
+      .add-wallet-dialog {
+        width: 100%;
+
+        > button {
+          // margin-right: 0;
+          // color: $white !important;
+          flex: 1;
+          margin-top: 2.4rem;
+          display: flex;
+
+          > span {
+            display: flex;
+            color: $white;
+            align-items: center;
+          }
+        }
+      }
+    }
+
+    .manage-wallets__wallet {
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+
+      padding-bottom: 1.6rem;
+
+      &:not(:first-child) {
+        padding-top: 1.6rem;
+      }
+
+      &:not(:last-child) {
+        border-bottom: 1px solid $grey-border;
+      }
+
+      > img {
+        width: 8rem;
+
+        margin-right: 0;
+        margin-bottom: 0.6rem;
+      }
+
+      .manage-wallets__wallet__text {
+        margin-right: 0;
+        margin-bottom: 0.6rem;
+
+        > span:first-child {
+          font-weight: 500;
+        }
+
+        > span:last-child {
+          font-size: 1.3rem;
+          opacity: 0.4;
+          letter-spacing: 0.1px;
+          font-weight: 500;
+        }
+      }
+
+      > button {
+        margin-right: 0;
+
+        &:hover {
+          background-color: $primary-main;
+          color: $white;
+        }
+      }
+
+      > svg {
+        margin-left: 0;
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
+}

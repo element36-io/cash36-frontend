@@ -5,8 +5,7 @@ import mockAxios from 'axios';
 import {
   AUTH_USER,
   GET_USER_INFO,
-  GET_CURRENT_KYC_STEP,
-  CONFIRM_ATTESTATION
+  GET_CURRENT_KYC_STEP
 } from '../../../store/auth/auth.types';
 
 import {
@@ -17,9 +16,7 @@ import {
   startKycProcess,
   updateKycStep,
   register,
-  login,
-  createUserObject,
-  confirmAttestation
+  login
 } from '../../../store/auth/auth.actions';
 
 const middlewares = [thunk];
@@ -126,15 +123,14 @@ test('dispatches updateKycStep', async () => {
 });
 
 test('dispatches register', async () => {
-  const creds = {};
-  const useMetamask = false;
+  const username = 'test@test.com';
   const password = 'password';
 
   mockAxios.post.mockImplementation(() => Promise.resolve());
 
   const store = mockStore();
 
-  await store.dispatch(register(creds, useMetamask, password));
+  await store.dispatch(register(username, password));
 
   expect(mockAxios.post).toHaveBeenCalledTimes(2);
 
@@ -142,11 +138,11 @@ test('dispatches register', async () => {
 });
 
 test('dispatches login', async () => {
-  const creds = {};
-  const useMetamask = false;
+  const username = 'test@test.com';
   const password = 'password';
-
-  const { user } = createUserObject(creds, useMetamask);
+  const user = {
+    username
+  };
 
   mockAxios.post.mockImplementation(() =>
     Promise.resolve({
@@ -171,20 +167,11 @@ test('dispatches login', async () => {
     }
   ];
 
-  await store.dispatch(login(creds, useMetamask, password));
+  await store.dispatch(login(username, password));
 
   expect(store.getActions()).toEqual(expectedActions);
   expect(mockAxios.post).toHaveBeenCalledTimes(1);
   expect(mockAxios.get).toHaveBeenCalledTimes(1);
   mockAxios.post.mockRestore();
   mockAxios.get.mockRestore();
-});
-
-test('dispatches confirmAttestation', () => {
-  const action = confirmAttestation('attest1');
-
-  expect(action).toEqual({
-    type: CONFIRM_ATTESTATION,
-    payload: 'attest1'
-  });
 });

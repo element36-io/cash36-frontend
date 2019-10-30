@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import SellTokens from './SellTokens';
 import SellConfirmation from './SellConfirmation';
@@ -14,7 +15,7 @@ import useGetWithState from '../../hooks/useGetWithState';
 
 import './Sell.scss';
 
-export const Sell = ({ user, tokens, getTokens }) => {
+export const Sell = ({ user, tokens, getTokens, hasWallet }) => {
   const [step, setStep] = useState(0);
   const [values, setValues] = useState({ amount: '', symbol: 'EUR36' });
   const [sellError, setSellError] = useState(null);
@@ -22,7 +23,7 @@ export const Sell = ({ user, tokens, getTokens }) => {
   const [exchangeFeeError, setExchangeFeeError] = useState('');
   const [tokensError, setTokensError] = useState('');
   const mounted = useRef(true);
-  const cash36 = useCash36();
+  const web3 = useCash36();
 
   useGetWithState(getExchangeFee, setExchangeFeeError, setExchangeFee);
 
@@ -33,6 +34,8 @@ export const Sell = ({ user, tokens, getTokens }) => {
       mounted.current = false;
     };
   }, []);
+
+  if (!hasWallet) return <Redirect to="/" />;
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -53,7 +56,6 @@ export const Sell = ({ user, tokens, getTokens }) => {
   };
 
   const burnTokens = async () => {
-    let { web3 } = cash36;
     const { account } = user;
     const { symbol, amount } = values;
     const { tokenAddress } = tokens.filter(token => token.symbol === symbol)[0];
@@ -130,9 +132,14 @@ Sell.propTypes = {
   user: PropTypes.object
 };
 
-const mapStateToProps = ({ tokens: { tokens = [] }, auth: { user } }) => ({
+const mapStateToProps = ({
+  tokens: { tokens = [] },
+  auth: { user },
+  wallets
+}) => ({
   tokens,
-  user
+  user,
+  hasWallet: wallets.walletList.length
 });
 
 export default connect(

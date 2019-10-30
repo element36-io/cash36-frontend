@@ -3,17 +3,21 @@ import PropTypes from 'prop-types';
 import QRCode from 'qrcode.react';
 
 import Responsive from '../../../components/Responsive';
+import BackButton from '../../../components/Buttons/BackButton';
 import DefaultButton from '../../../components/Buttons/DefaultButton';
 import ManualTransferIcon from '../../../assets/Buy/manual-transfer-icon.svg';
+import BuyFooter from '../BuyFooter';
 
 import './PaymentMethod.scss';
 
 const PaymentMethod = ({
   handleManualTransferClick,
-  handleAutoTransferClick
+  handleAutoTransferClick,
+  setStep
 }) => {
   return (
-    <div className="payment-method">
+    <div className="payment-method" data-testid="payment-method">
+      <BackButton onClick={() => setStep(0)} />
       <Responsive isMobile>
         <h2>Payment method</h2>
       </Responsive>
@@ -44,6 +48,10 @@ const PaymentMethod = ({
           </span>
         </DefaultButton>
       </div>
+      <BuyFooter
+        textline1="Buying cash36 Tokens is as simple as a bank transfer. First, choose amount and type of Token you wish to buy."
+        textline2="After that you will receive the transfer instructions. Once we receive the amount, the tokens will be credited to your account."
+      />
     </div>
   );
 };

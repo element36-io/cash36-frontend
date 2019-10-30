@@ -17,7 +17,16 @@ const initialState = {
       name: 'Euro',
       symbol: 'EUR36'
     }
-  ]
+  ],
+  wallets: {
+    walletList: ['1']
+  }
+};
+
+const location = {
+  state: {
+    fromQuickActions: false
+  }
 };
 
 describe('step 0', () => {
@@ -26,40 +35,32 @@ describe('step 0', () => {
   beforeEach(() => {
     component = renderWithRedux(
       <ResponsiveContext.Provider value={{ width: 1200 }}>
-        <Buy getTokens={jest.fn()} />
+        <Buy getTokens={jest.fn()} location={location} />
       </ResponsiveContext.Provider>,
       { initialState }
     );
   });
 
   test('renders the component', () => {
-    const { getByText, getByLabelText } = component;
+    const { getByTestId } = component;
 
-    expect(getByText(/buy tokens/i)).toBeInTheDocument();
-    expect(getByText(/next step/i)).toBeInTheDocument();
-    expect(getByText(/select token/i)).toBeInTheDocument();
-    expect(getByLabelText(/choose amount/i)).toBeInTheDocument();
-    expect(
-      getByText(/buying cash36 tokens is as simple as a bank transfer/i)
-    ).toBeInTheDocument();
-    expect(getByLabelText(/select token/i).value).toBe('EUR36');
+    expect(getByTestId('buy-step0')).toBeInTheDocument();
   });
 
-  test('goes to step 1 when user updates amount and clicks on next step button', () => {
-    const { getByText, getByLabelText } = component;
+  test('goes to step 1 when clicked on Send to your Wallet ', () => {
+    const { getByText, getByTestId } = component;
 
-    const nextStepButton = getByText(/next step/i);
-    const amountInput = getByLabelText(/choose amount/i);
+    fireEvent.click(getByText(/send to your wallet/i));
 
-    fireEvent.change(amountInput, { target: { value: 23 } });
-    fireEvent.click(nextStepButton);
+    expect(getByTestId('buy-tokens')).toBeInTheDocument();
+  });
 
-    expect(getByText(/payment method/i)).toBeInTheDocument();
-    expect(getByText(/manual bank transfer/i)).toBeInTheDocument();
-    expect(getByText(/automated bank transfer/i)).toBeInTheDocument();
-    expect(
-      getByText(/buying cash36 tokens is as simple as a bank transfer/i)
-    ).toBeInTheDocument();
+  test('goes to step 2.1 when clicked on Send to a contract', () => {
+    const { getByText, getByTestId } = component;
+
+    fireEvent.click(getByText(/send to contract/i));
+
+    expect(getByTestId('buy__choose-address')).toBeInTheDocument();
   });
 });
 
@@ -70,11 +71,13 @@ describe('step 1', () => {
     component = renderWithRedux(
       <ResponsiveContext.Provider value={{ width: 1200 }}>
         <BrowserRouter>
-          <Buy getTokens={jest.fn()} />
+          <Buy getTokens={jest.fn()} location={location} />
         </BrowserRouter>
       </ResponsiveContext.Provider>,
       { initialState }
     );
+
+    fireEvent.click(component.getByText(/send to your wallet/i));
 
     const nextStepButton = component.getByText(/next step/i);
     const amountInput = component.getByLabelText(/choose amount/i);
@@ -84,19 +87,22 @@ describe('step 1', () => {
   });
 
   test('goes back to step 0 when back button is clicked', () => {
-    const { getByTestId, getByText, getByLabelText } = component;
+    const { getByTestId } = component;
 
     const backButton = getByTestId('back-button');
 
     fireEvent.click(backButton);
 
-    expect(getByText(/buy tokens/i)).toBeInTheDocument();
-    expect(getByText(/next step/i)).toBeInTheDocument();
-    expect(getByText(/select token/i)).toBeInTheDocument();
-    expect(getByLabelText(/choose amount/i)).toBeInTheDocument();
+    expect(getByTestId('buy-step0')).toBeInTheDocument();
   });
 
-  test('goes to step 2.1 when manual transfer button is clicked with success', async () => {
+  test('goes to step 3 when data is entered', () => {
+    const { getByTestId } = component;
+
+    expect(getByTestId('payment-method')).toBeInTheDocument();
+  });
+
+  test('goes to step 4.1 when manual transfer button is clicked with success', async () => {
     const data = {
       amount: 1,
       bankAddress: 'Main Street',
@@ -111,7 +117,7 @@ describe('step 1', () => {
       receipientName: 'element36',
       userIban: 'CH0289144246976269165'
     };
-    const { getByText } = component;
+    const { getByText, getByTestId } = component;
 
     const manualPaymentButton = getByText(/manual bank transfer/i);
 
@@ -120,25 +126,14 @@ describe('step 1', () => {
     fireEvent.click(manualPaymentButton);
 
     await wait(() => {
-      expect(getByText(/trigger your payment/i)).toBeInTheDocument();
-      expect(getByText(/main street/i)).toBeInTheDocument();
-      expect(getByText(/1000/i)).toBeInTheDocument();
-      expect(getByText(/main bank/i)).toBeInTheDocument();
-      expect(getByText(/chf/i)).toBeInTheDocument();
-      expect(getByText(/ch0289144246976269165/i)).toBeInTheDocument();
-      expect(getByText(/rs1289144246976269165/i)).toBeInTheDocument();
-      expect(getByText(/element36/i)).toBeInTheDocument();
-      expect(getByText(/go to account history/i)).toBeInTheDocument();
-      expect(getByText(/back to homepage/i)).toBeInTheDocument();
-      expect(getByText(/back to homepage/i)).toBeInTheDocument();
-      expect(getByText(/iban ch0289144246976269165/i)).toBeInTheDocument();
+      expect(getByTestId('payment-info')).toBeInTheDocument();
     });
 
     mockAxios.post.mockRestore();
   });
 
-  test('goes to step 2.1 when manual transfer button is clicked with error', async () => {
-    const { getByText } = component;
+  test('goes to step 5 when manual transfer button is clicked with error', async () => {
+    const { getByText, getByTestId } = component;
 
     const manualPaymentButton = getByText(/manual bank transfer/i);
 
@@ -148,16 +143,13 @@ describe('step 1', () => {
     fireEvent.click(manualPaymentButton);
 
     await wait(() => {
-      expect(getByText(/buy unsuccessful/i)).toBeInTheDocument();
-      expect(getByText(/user not enabled or verified/i)).toBeInTheDocument();
-      expect(getByText(/go to account history/i)).toBeInTheDocument();
-      expect(getByText(/back to homepage/i)).toBeInTheDocument();
+      expect(getByTestId('buy-error')).toBeInTheDocument();
     });
 
     mockAxios.post.mockRestore();
   });
 
-  test('goes to 2.2 when automatic transfer button is clicked', () => {
+  test('goes to 4.2 when automatic transfer button is clicked', () => {
     const { getByText } = component;
 
     const autoPaymentButton = getByText(/automated bank transfer/i);

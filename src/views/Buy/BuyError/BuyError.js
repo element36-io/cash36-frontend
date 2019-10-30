@@ -7,7 +7,7 @@ import './BuyError.scss';
 
 const BuyError = ({ message }) => {
   return (
-    <div className="buy__buy-status">
+    <div className="buy__buy-status" data-testid="buy-error">
       <ActionStatus type="error" title="Buy unsuccessful" />
       <p>{message}</p>
       <TransactionFooter />

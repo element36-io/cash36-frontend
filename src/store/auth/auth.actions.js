@@ -2,12 +2,7 @@ import axios from 'axios';
 import API, { API_ROOT } from '../../config/api';
 import { handleError } from '../../helpers/error.helpers';
 
-import {
-  AUTH_USER,
-  GET_USER_INFO,
-  CONFIRM_ATTESTATION,
-  GET_CURRENT_KYC_STEP
-} from './auth.types';
+import { AUTH_USER, GET_USER_INFO, GET_CURRENT_KYC_STEP } from './auth.types';
 
 export const checkUserId = id => API.get(`/auth/user/is-user/${id}`);
 
@@ -61,6 +56,7 @@ export const startKycProcess = () => async dispatch => {
 };
 
 export const updateKycStep = (step, payload, params) => async dispatch => {
+  console.warn(step, payload, params);
   try {
     await API.post(`/compliance/kyc/step-${step}`, payload, { params });
     dispatch(getCurrentKycStep());
@@ -80,13 +76,22 @@ export const getSelfieCode = async () => {
   }
 };
 
-export const register = (creds, useMetamask, password) => async dispatch => {
+export const getIndustries = async () => {
+  try {
+    const response = await API.get(`/compliance/data/industries`);
+    return response.data;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const register = (username, password) => async dispatch => {
   try {
     await axios.post(`${API_ROOT}/auth/user/register`, {
-      username: creds.id,
+      username,
       password
     });
-    dispatch(login(creds, useMetamask, password));
+    dispatch(login(username, password));
   } catch (error) {
     return Promise.reject(
       error.response.data.message || 'An error has occured'
@@ -94,8 +99,10 @@ export const register = (creds, useMetamask, password) => async dispatch => {
   }
 };
 
-export const login = (creds, useMetamask, password) => async dispatch => {
-  const { user, username } = createUserObject(creds, useMetamask);
+export const login = (username, password) => async dispatch => {
+  const user = {
+    username
+  };
   const config = {
     data: `username=${username}&password=${password}&grant_type=password`,
     headers: {
@@ -129,35 +136,9 @@ export const login = (creds, useMetamask, password) => async dispatch => {
     });
     dispatch(getUserInfo());
   } catch (error) {
-    return Promise.reject(error.response.data.error_description);
+    return (
+      Promise.reject(error.response.data.error_description) ||
+      'An error has occured'
+    );
   }
-};
-
-export const createUserObject = (creds, useMetamask) => {
-  const username = creds.id;
-  const account = useMetamask ? creds.account : creds.address;
-
-  const user = {
-    username,
-    account,
-    avatarUri: creds.avatar ? creds.avatar.uri : null,
-    name: creds.name,
-    verified: creds.verified,
-    useMetamask,
-    pushToken: creds.pushToken,
-    boxPub: creds.boxPub,
-    did: creds.did
-  };
-
-  return {
-    username,
-    user
-  };
-};
-
-export const confirmAttestation = data => {
-  return {
-    type: CONFIRM_ATTESTATION,
-    payload: data
-  };
 };

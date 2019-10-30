@@ -1,9 +1,4 @@
-import {
-  AUTH_USER,
-  GET_USER_INFO,
-  GET_CURRENT_KYC_STEP,
-  CONFIRM_ATTESTATION
-} from './auth.types';
+import { AUTH_USER, GET_USER_INFO, GET_CURRENT_KYC_STEP } from './auth.types';
 
 const initialState = {
   isAuthenticated: !!localStorage.getItem('access_token'),
@@ -39,24 +34,6 @@ export default (state = initialState, action) => {
           currentStep: action.payload
         }
       };
-    case CONFIRM_ATTESTATION:
-      if (state.user.verified) {
-        return {
-          ...state,
-          user: {
-            ...state.user,
-            verified: [...state.user.verified, action.payload]
-          }
-        };
-      } else {
-        return {
-          ...state,
-          user: {
-            ...state.user,
-            verified: [action.payload]
-          }
-        };
-      }
 
     default:
       return state;

@@ -1,0 +1,13 @@
+.send-tokens {
+  display: flex;
+  flex-direction: column;
+
+  > h2 {
+    text-align: center;
+    margin-bottom: 3.2rem;
+  }
+
+  > div {
+    margin-bottom: 3.2rem;
+  }
+}
