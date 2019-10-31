@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent } from '@testing-library/react';
 
-import { renderWithAvatarContext } from '../../../helpers/tests.helpers';
+import { renderWithAvatarContextAndRouter } from '../../../helpers/tests.helpers';
 import ContactItem from '../../../views/Contacts/ContactItem';
 
 const props = {
@@ -16,7 +16,9 @@ const props = {
 };
 
 test('renders the component', () => {
-  const { getByText } = renderWithAvatarContext(<ContactItem {...props} />);
+  const { getByText } = renderWithAvatarContextAndRouter(
+    <ContactItem {...props} />
+  );
 
   expect(getByText('John Doe')).toBeInTheDocument();
   expect(
@@ -24,22 +26,22 @@ test('renders the component', () => {
   ).toBeInTheDocument();
 });
 
-test('calls removeContact on click', () => {
+test('changes route on click', () => {
   const quickTransfer = jest.fn();
-  const { getByText } = renderWithAvatarContext(
+  const { getByText, history } = renderWithAvatarContextAndRouter(
     <ContactItem {...props} quickTransfer={quickTransfer} />
   );
 
   const quickTransferButton = getByText(/transfer/i);
 
+  expect(history.location.pathname).toBe('/');
   fireEvent.click(quickTransferButton);
-
-  expect(quickTransfer).toHaveBeenCalledTimes(1);
+  expect(history.location.pathname).toBe('/buy');
 });
 
 test('calls removeCallback on click', () => {
   const removeCallback = jest.fn();
-  const { getByText, getByTestId } = renderWithAvatarContext(
+  const { getByText, getByTestId } = renderWithAvatarContextAndRouter(
     <ContactItem {...props} removeCallback={removeCallback} />
   );
 

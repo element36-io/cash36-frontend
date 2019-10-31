@@ -1,0 +1,19 @@
+.copy-to-clipboard {
+  position: relative;
+
+  textarea {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    // display: none;
+  }
+
+  button {
+    min-width: auto;
+    padding: 0rem 1rem;
+  }
+
+  svg {
+    width: 1.5rem;
+  }
+}

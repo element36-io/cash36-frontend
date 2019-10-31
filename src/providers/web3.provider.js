@@ -10,6 +10,7 @@ const Web3Provider = ({ children, user }) => {
   const [networkId, setNetworkId] = useState(null);
   const [network, setNetwork] = useState(null);
   const [networkError, setNetworkError] = useState(false);
+  const [web3Obj] = useState(new Web3());
 
   const initWeb3 = () => {
     let { ethereum } = window;
@@ -84,7 +85,8 @@ const Web3Provider = ({ children, user }) => {
         networkError,
         loading,
         web3: window.web3,
-        getNetwork
+        getNetwork,
+        utils: web3Obj.utils
       }}
     >
       {children}

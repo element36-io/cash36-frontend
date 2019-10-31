@@ -1,19 +1,31 @@
 @import '../../../styles/settings.scss';
+@import '../../../styles/mixins.scss';
 
-.choose-address {
+.transfer-address {
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   > h2 {
+    margin-bottom: 3.2rem;
+  }
+
+  > h4 {
     text-align: center;
-    margin-bottom: 3.2rem;
+    margin-bottom: 2.4rem;
   }
 
-  > div {
-    margin-bottom: 3.2rem;
+  .transfer-address__search-container {
+    position: relative;
+    width: 100%;
+
+    > p {
+      color: $red-1;
+      font-size: 1.2rem;
+    }
   }
 
-  .choose-address__input-wrapper {
+  .transfer-address__input-wrapper {
     position: relative;
     border: 1px solid $grey-border;
     background: $white;
@@ -42,8 +54,6 @@
       outline: none;
       border: none;
       background: transparent;
-      padding: 2rem;
-      font-size: 1.6rem;
 
       &.selected-contact {
         padding: 3rem 1rem 2.1rem 6.8rem;
@@ -53,6 +63,34 @@
 
       &:focus + span {
         width: 100%;
+      }
+    }
+  }
+
+  @include desktop {
+    .transfer-address__search-container {
+      margin-bottom: 4rem;
+    }
+
+    .transfer-address__input-wrapper {
+      input {
+        padding: 2.4rem 1.6rem;
+        font-size: 1.8rem;
+        line-height: 2.2rem;
+      }
+    }
+  }
+
+  @include mobile {
+    .transfer-address__search-container {
+      margin-bottom: 2.1rem;
+    }
+
+    .transfer-address__input-wrapper {
+      input {
+        padding: 2rem 1.2rem;
+        font-size: 1.6rem;
+        line-height: 1.9rem;
       }
     }
   }

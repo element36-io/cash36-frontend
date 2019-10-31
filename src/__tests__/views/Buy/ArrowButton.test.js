@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render, fireEvent } from '@testing-library/react';
 
-import ArrowButton from '../../../views/Transfer/ArrowButton';
+import ArrowButton from '../../../views/Buy/ArrowButton';
 
 test('renders the component', () => {
   const { getByTestId } = render(<ArrowButton />);

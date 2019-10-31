@@ -1,34 +1,43 @@
-import React, { Fragment, useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import API from '../../config/api';
 import BuyTokens from './BuyTokens';
 import { getTokens } from '../../store/tokens/tokens.actions';
+import { getContacts } from '../../store/contacts/contacts.actions';
 import BuyStep0 from './BuyStep0';
 import SendTokens from './SendTokens';
-import ChooseAddress from './ChooseAddress';
 import PaymentMethod from './PaymentMethod';
 import InitiateAutoPayment from './InitiateAutoPayment';
 import PaymentInfo from '../../components/PaymentInfo';
 import TransactionFooter from '../../components/TransactionFooter';
 import BuyError from './BuyError';
+import TransferAddress from './TransferAddress';
 import useGet from '../../hooks/useGet';
 
 import './Buy.scss';
 
-export const Buy = ({ getTokens, location }) => {
+export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
   const [error, setError] = useState('');
   let [step, setStep] = useState(0);
   const [amount, setAmount] = useState('');
   const [symbol, setSymbol] = useState('EUR36');
-  const [address, setAddress] = useState('');
+  const [target, setTarget] = useState(null);
   const [manualTransferData, setManualTransferData] = useState(null);
   const manualTransferStarted = useRef(false);
   useGet(getTokens, setError);
+  useGet(getContacts, setError);
 
   if (location.state) {
-    if (location.state.fromQuickActions) step = 2.1;
+    if (location.state.quickActions) setStep(2.1);
+
+    if (location.state.quickTransfer) {
+      setTarget(location.state.quickTransfer);
+      setStep(2.2);
+    }
+
+    location.state = null;
   }
 
   const nextStep = () => {
@@ -46,11 +55,15 @@ export const Buy = ({ getTokens, location }) => {
       setAmount(value);
     } else if (name === 'symbol') {
       setSymbol(value);
-    } else if (name === 'address') {
-      setAddress(value);
     }
   };
 
+  const addTarget = target => {
+    setTarget(target);
+    setStep(2.2);
+  };
+
+  // check data sending to buy on manual transfer
   const handleManualTransferClick = async () => {
     if (manualTransferStarted.current) return;
 
@@ -58,8 +71,12 @@ export const Buy = ({ getTokens, location }) => {
 
     const data = {
       amount: parseInt(amount),
-      symbol: symbol
+      symbol
     };
+    // Recheck this when buy is working again
+    if (target) {
+      data.address = target.contactAddress;
+    }
 
     try {
       const response = await API.post('/exchange/buy', data);
@@ -74,42 +91,54 @@ export const Buy = ({ getTokens, location }) => {
     setStep(4.2);
   };
 
+  useEffect(() => {
+    if (step === 0) setTarget(null);
+  }, [step]);
+
   return (
     <div className="wrapper">
       <div className="buy paper">
         <div className="buy__content">
           {step === 0 && <BuyStep0 setStep={setStep} />}
           {step === 1 && (
-            <Fragment>
+            <>
               <BuyTokens
                 handleChange={handleChange}
                 amount={amount}
                 symbol={symbol}
                 setStep={setStep}
               />
-              <div className="error-text">{error}</div>
-            </Fragment>
+              <div className="error-text">
+                {error && error.message ? error.message : error}
+              </div>
+            </>
           )}
           {step === 2.1 && (
-            <Fragment>
-              <ChooseAddress
+            <>
+              <TransferAddress
+                contactsList={contactsList}
+                submitCallback={addTarget}
                 setStep={setStep}
-                address={address}
-                handleChange={handleChange}
+                target={target}
               />
-              <div className="error-text">{error}</div>
-            </Fragment>
+              <div className="error-text">
+                {error && error.message ? error.message : error}
+              </div>
+            </>
           )}
           {step === 2.2 && (
-            <Fragment>
+            <>
               <SendTokens
                 symbol={symbol}
                 handleChange={handleChange}
                 amount={amount}
+                target={target}
                 setStep={setStep}
               />
-              <div className="error-text">{error}</div>
-            </Fragment>
+              <div className="error-text">
+                {error && error.message ? error.message : error}
+              </div>
+            </>
           )}
           {step === 3 && (
             <PaymentMethod
@@ -131,7 +160,11 @@ export const Buy = ({ getTokens, location }) => {
             </PaymentInfo>
           )}
           {step === 4.2 && <InitiateAutoPayment next={nextStep} />}
-          {step === 5 && <BuyError message="User not enabled or verified." />}
+          {step === 5 && (
+            <BuyError
+              message={error ? error.message : 'User not enabled or verified.'}
+            />
+          )}
         </div>
         <div className="buy__footer">
           {step > 4 && step < 4.2 && (
@@ -150,10 +183,16 @@ export const Buy = ({ getTokens, location }) => {
 };
 
 Buy.propTypes = {
-  getTokens: PropTypes.func.isRequired
+  getTokens: PropTypes.func.isRequired,
+  getContacts: PropTypes.func.isRequired,
+  contactsList: PropTypes.array
 };
 
+const mapStateToProps = ({ contacts: { contactsList } }) => ({
+  contactsList
+});
+
 export default connect(
-  null,
-  { getTokens }
+  mapStateToProps,
+  { getTokens, getContacts }
 )(Buy);

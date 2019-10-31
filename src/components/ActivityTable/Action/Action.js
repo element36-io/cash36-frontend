@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import TruncateString from 'react-truncate-string';
 import { Web3Context } from '../../../providers/web3.provider';
+import CopyToClipboard from '../../CopyToClipboard';
 
 import './Action.scss';
 
@@ -20,15 +21,18 @@ const Action = ({ type, targetAddress, txHash }) => {
       <div>{renderActionName(type)}</div>
       <span>
         {txHash ? (
-          <a
-            href={`https://${
-              networkId !== 1 ? `${network.toLowerCase()}.` : ''
-            }etherscan.io/tx/${txHash}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <TruncateString text={targetAddress} />
-          </a>
+          <>
+            <CopyToClipboard text={txHash} />
+            <a
+              href={`https://${
+                network && networkId !== 1 ? `${network.toLowerCase()}.` : ''
+              }etherscan.io/tx/${txHash}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <TruncateString text={targetAddress} />
+            </a>
+          </>
         ) : (
           <TruncateString text={targetAddress} />
         )}

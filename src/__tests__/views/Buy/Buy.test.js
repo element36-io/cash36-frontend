@@ -20,6 +20,16 @@ const initialState = {
   ],
   wallets: {
     walletList: ['1']
+  },
+  contacts: {
+    contactsList: [
+      {
+        id: 1,
+        avatarUrl: null,
+        contactAddress: '0x147f133136325ad1c7b33309a05b7f967411111',
+        contactName: 'test'
+      }
+    ]
   }
 };
 
@@ -35,7 +45,11 @@ describe('step 0', () => {
   beforeEach(() => {
     component = renderWithRedux(
       <ResponsiveContext.Provider value={{ width: 1200 }}>
-        <Buy getTokens={jest.fn()} location={location} />
+        <Buy
+          getTokens={jest.fn()}
+          location={location}
+          getContacts={jest.fn()}
+        />
       </ResponsiveContext.Provider>,
       { initialState }
     );

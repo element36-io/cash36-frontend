@@ -1,15 +1,13 @@
 import {
   GET_CONTACTS,
   GET_CONTACTS_SUCCESS,
-  CONTACTS_ERROR,
   REMOVE_CONTACTS,
   ADD_CONTACTS
 } from './contacts.types';
 
 const initialState = {
   contactsList: [],
-  fetching: false,
-  error: null
+  fetching: false
 };
 
 export default (state = initialState, action) => {
@@ -22,14 +20,7 @@ export default (state = initialState, action) => {
     case GET_CONTACTS_SUCCESS:
       return {
         contactsList: action.payload,
-        fetching: false,
-        error: null
-      };
-    case CONTACTS_ERROR:
-      return {
-        ...state,
-        fetching: false,
-        error: action.payload
+        fetching: false
       };
     case REMOVE_CONTACTS:
       const contactsList = state.contactsList.filter(
@@ -37,14 +28,12 @@ export default (state = initialState, action) => {
       );
       return {
         ...state,
-        error: null,
         contactsList
       };
     case ADD_CONTACTS:
       return {
         ...state,
-        contactsList: [...state.contactsList, action.payload],
-        error: false
+        contactsList: [...state.contactsList, action.payload]
       };
     default:
       return state;

@@ -5,8 +5,7 @@ import {
   GET_CONTACTS,
   GET_CONTACTS_SUCCESS,
   ADD_CONTACTS,
-  REMOVE_CONTACTS,
-  CONTACTS_ERROR
+  REMOVE_CONTACTS
 } from './contacts.types';
 
 export const getContacts = () => async dispatch => {
@@ -19,7 +18,6 @@ export const getContacts = () => async dispatch => {
       payload: response.data
     });
   } catch (error) {
-    dispatch({ type: CONTACTS_ERROR, payload: error });
     return handleError(error);
   }
 };
@@ -32,7 +30,6 @@ export const removeContact = id => async dispatch => {
       payload: id
     });
   } catch (error) {
-    dispatch({ type: CONTACTS_ERROR, payload: error });
     return handleError(error);
   }
 };
@@ -48,7 +45,6 @@ export const addContact = data => async dispatch => {
 
     return Promise.resolve();
   } catch (error) {
-    dispatch({ type: CONTACTS_ERROR, payload: error });
     return handleError(error);
   }
 };
