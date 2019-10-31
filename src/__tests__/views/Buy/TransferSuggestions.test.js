@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { renderWithAvatarContext } from '../../../helpers/tests.helpers';
-import TransferSuggestions from '../../../views/Transfer/TransferSuggestions';
+import TransferSuggestions from '../../../views/Buy/TransferSuggestions';
 import { fireEvent } from '@testing-library/react';
 
 const props = {

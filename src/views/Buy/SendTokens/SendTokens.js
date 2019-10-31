@@ -24,7 +24,6 @@ const SendTokens = ({ setStep, amount, handleChange, symbol, target }) => {
         <TruncateString text={target.contactAddress} />
       </div>
       <hr />
-
       <ChooseAmountForm
         amount={amount}
         handleChange={handleChange}

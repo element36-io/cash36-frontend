@@ -7,10 +7,7 @@ import ContactsForm from '../ContactsForm/ContactsForm';
 import BackButton from '../../../components/Buttons/BackButton/BackButton';
 import ContactResponse from '../ContactResponse/ContactResponse';
 import { Web3Context } from '../../../providers/web3.provider';
-import {
-  isWalletAddress,
-  e36WalletType
-} from '../../../helpers/wallet.helpers';
+import { isWalletAddress } from '../../../helpers/wallet.helpers';
 import './ContactFormContainer.scss';
 
 const ContactsFormContainer = ({
@@ -53,12 +50,12 @@ const ContactsFormContainer = ({
     setSubmitting(true);
 
     try {
-      // backend store addresses as lowercase
-      const addressType = await isWalletAddress(
+      // backend stores addresses as lowercase
+      const isWallet = await isWalletAddress(
         walletAddress.trim().toLowerCase()
       );
 
-      if (addressType.result !== e36WalletType) {
+      if (!isWallet) {
         submitCallback(
           true,
           'error',

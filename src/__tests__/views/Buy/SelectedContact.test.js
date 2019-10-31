@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { renderWithAvatarContext } from '../../../helpers/tests.helpers';
-import SelectedContact from '../../../views/Transfer/SelectedContact';
+import SelectedContact from '../../../views/Buy/SelectedContact';
 
 const contact = {
   contactName: 'John',

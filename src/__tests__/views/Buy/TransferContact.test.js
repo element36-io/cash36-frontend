@@ -2,7 +2,7 @@ import React from 'react';
 import { fireEvent } from '@testing-library/react';
 
 import { renderWithAvatarContext } from '../../../helpers/tests.helpers';
-import TransferContact from '../../../views/Transfer/TransferContact';
+import TransferContact from '../../../views/Buy/TransferContact';
 
 const props = {
   contact: {

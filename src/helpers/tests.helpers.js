@@ -11,6 +11,12 @@ import { reducers } from '../store';
 import { AvatarContext } from '../providers/avatar.provider';
 import { Web3Context } from '../providers/web3.provider';
 
+const web3Values = {
+  networkId: 4,
+  network: 'Rinkeby',
+  utils: { isAddress: jest.fn() }
+};
+
 afterEach(cleanup);
 
 export function renderWithRedux (
@@ -21,7 +27,12 @@ export function renderWithRedux (
   } = {}
 ) {
   return {
-    ...render(<Provider store={store}>{component}</Provider>, store)
+    ...render(
+      <Web3Context.Provider value={{ ...web3Values }}>
+        <Provider store={store}>{component}</Provider>
+      </Web3Context.Provider>,
+      store
+    )
   };
 }
 
@@ -72,9 +83,11 @@ export function renderWithAvatarContextAndRouter (
   return {
     ...render(
       <Router history={history}>
-        <AvatarContext.Provider value={{ state, actions }}>
-          {component}
-        </AvatarContext.Provider>
+        <Web3Context.Provider value={{ ...web3Values }}>
+          <AvatarContext.Provider value={{ state, actions }}>
+            {component}
+          </AvatarContext.Provider>
+        </Web3Context.Provider>
       </Router>
     ),
     history
@@ -100,7 +113,7 @@ export function renderWithAvatarContext (
 
 export function renderWithWeb3Context (component, renderFunction = render) {
   return renderFunction(
-    <Web3Context.Provider value={{ networkId: 4, network: 'Rinkeby' }}>
+    <Web3Context.Provider value={{ ...web3Values }}>
       {component}
     </Web3Context.Provider>
   );

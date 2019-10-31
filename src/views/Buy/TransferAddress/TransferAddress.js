@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import StepButton from '../../../components/Buttons/StepButton';
+import BackButton from '../../../components/Buttons/BackButton';
 import TransferSuggestions from '../TransferSuggestions';
 import TransferContacts from '../TransferContacts';
 import SelectedContact from '../SelectedContact';
+import { Web3Context } from '../../../providers/web3.provider';
+import { isWalletAddress } from '../../../helpers/wallet.helpers';
+import BuyFooter from '../BuyFooter';
+
 import './TransferAddress.scss';
 
-const TransferAddress = ({ submitCallback, contactsList, utils }) => {
-  const [address, setAddress] = useState('');
+const TransferAddress = ({ submitCallback, contactsList, setStep, target }) => {
+  const [address, setAddress] = useState(target ? target.contactAddress : '');
   const [activeSuggestions, setActiveSuggestions] = useState(false);
-  const [selectedContact, setSelectedContact] = useState(null);
+  const [selectedContact, setSelectedContact] = useState(target);
+  const [isWallet, setIsWallet] = useState(true);
+  const { utils } = useContext(Web3Context);
 
   const handleChange = evt => {
     const { value } = evt.target;
@@ -42,21 +49,32 @@ const TransferAddress = ({ submitCallback, contactsList, utils }) => {
     setSelectedContact(contact);
   };
 
-  const onSubmit = () => {
-    const target = contactsList.filter(
-      c => c.contactAddress === address
-    )[0] || { contactAddress: address };
-    submitCallback(target);
+  const onSubmit = async () => {
+    try {
+      const res = await isWalletAddress(address);
+      if (!res) {
+        setIsWallet(false);
+        return;
+      }
+      const target = contactsList.filter(
+        c => c.contactAddress === address
+      )[0] || { contactAddress: address };
+      submitCallback(target);
+    } catch (error) {}
   };
 
   const validateAddress = () => {
     return utils.isAddress(address);
   };
 
+  useEffect(() => {
+    setIsWallet(true);
+  }, [address]);
+
   return (
-    <div className="transfer-address">
-      <h2>Transfer Tokens</h2>
-      <h4>Transfer tokens to</h4>
+    <div className="transfer-address" data-testid="buy__choose-address">
+      <BackButton onClick={() => setStep(0)} />
+      <h2>Send tokens to</h2>
       <ClickAwayListener onClickAway={hideSuggestions}>
         <div className="transfer-address__search-container">
           <div className="transfer-address__input-wrapper">
@@ -73,6 +91,12 @@ const TransferAddress = ({ submitCallback, contactsList, utils }) => {
             />
             <span />
           </div>
+          {!isWallet && (
+            <p className="error-text">
+              Wallet is not registered on e36, please tell recepient to register
+              at e36 and to add his wallet
+            </p>
+          )}
           {!!contactsList && activeSuggestions && (
             <TransferSuggestions
               contacts={contactsList}
@@ -83,7 +107,7 @@ const TransferAddress = ({ submitCallback, contactsList, utils }) => {
         </div>
       </ClickAwayListener>
 
-      {!!contactsList.length && (
+      {contactsList && !!contactsList.length && (
         <TransferContacts
           clickCallback={selectContact}
           contactsList={contactsList}
@@ -92,7 +116,11 @@ const TransferAddress = ({ submitCallback, contactsList, utils }) => {
       <StepButton
         text={'Next Step'}
         onClick={onSubmit}
-        disabled={!validateAddress()}
+        disabled={!validateAddress() || !isWallet}
+      />
+      <BuyFooter
+        textline1="Sending cash36 Tokens is as simple as a bank transfer. First, add address you wish to send tokens to."
+        textline2="After that you will select the amount and the type of Token you wish to send."
       />
     </div>
   );
@@ -100,8 +128,9 @@ const TransferAddress = ({ submitCallback, contactsList, utils }) => {
 
 TransferAddress.propTypes = {
   submitCallback: PropTypes.func,
-  utils: PropTypes.object.isRequired,
-  contactsList: PropTypes.array
+  setStep: PropTypes.func,
+  contactsList: PropTypes.array,
+  target: PropTypes.object
 };
 
 export default TransferAddress;

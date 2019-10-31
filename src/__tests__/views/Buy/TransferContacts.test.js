@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { renderWithAvatarContext } from '../../../helpers/tests.helpers';
-import TransferContacts from '../../../views/Transfer/TransferContacts';
+import TransferContacts from '../../../views/Buy/TransferContacts';
 
 const props = {
   clickCallback: jest.fn(),

@@ -1,12 +1,9 @@
 import React from 'react';
 
-import { renderWithAvatarContext } from '../../../helpers/tests.helpers';
-import TransferAddress from '../../../views/Transfer/TransferAddress';
+import { renderWithAvatarContextAndRouter } from '../../../helpers/tests.helpers';
+import TransferAddress from '../../../views/Buy/TransferAddress';
 
 const props = {
-  utils: {
-    isAddress: jest.fn(() => true)
-  },
   contactsList: [
     {
       id: '1',
@@ -18,9 +15,10 @@ const props = {
 };
 
 test('renders the component', () => {
-  const { getByText } = renderWithAvatarContext(<TransferAddress {...props} />);
+  const { getByText } = renderWithAvatarContextAndRouter(
+    <TransferAddress {...props} />
+  );
 
-  expect(getByText(/transfer tokens to/i)).toBeInTheDocument();
   expect(getByText(/contacts/i)).toBeInTheDocument();
   expect(getByText(/next step/i)).toBeInTheDocument();
 });
