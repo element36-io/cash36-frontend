@@ -129,7 +129,8 @@ export const Sell = ({ user, tokens, getTokens, hasWallet }) => {
 Sell.propTypes = {
   tokens: PropTypes.array,
   getTokens: PropTypes.func,
-  user: PropTypes.object
+  user: PropTypes.object,
+  hasWallet: PropTypes.bool
 };
 
 const mapStateToProps = ({
@@ -139,7 +140,7 @@ const mapStateToProps = ({
 }) => ({
   tokens,
   user,
-  hasWallet: wallets.walletList.length
+  hasWallet: Boolean(wallets.walletList.length)
 });
 
 export default connect(

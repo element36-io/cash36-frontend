@@ -65,6 +65,16 @@
     }
   }
 
+  &--ETHER {
+    background-image: url('../../assets/BalanceCard/ether.svg');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    &:after {
+      background-image: $gradient-ether;
+    }
+  }
+
   > div {
     display: flex;
   }
@@ -75,6 +85,10 @@
 
   &__icon {
     margin-right: 0.5rem;
+    > img {
+      width: 3.8rem;
+      height: 3.8rem;
+    }
   }
 
   &__balance {

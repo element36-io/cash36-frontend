@@ -4,6 +4,7 @@ import euroIcon from '../../assets/BalanceCard/euro-icon.svg';
 import dollarIcon from '../../assets/BalanceCard/dollar-icon.svg';
 import poundIcon from '../../assets/BalanceCard/pound-icon.svg';
 import francIcon from '../../assets/BalanceCard/franc-icon.svg';
+import etherIcon from '../../assets/BalanceCard/ether-icon.svg';
 
 const TokenIcon = ({ symbol }) => {
   switch (symbol) {
@@ -15,6 +16,8 @@ const TokenIcon = ({ symbol }) => {
       return <img src={poundIcon} alt="POUND TOKEN" />;
     case 'CHF36':
       return <img src={francIcon} alt="FRANC TOKEN" />;
+    case 'ETHER':
+      return <img src={etherIcon} alt="ETHER ICON" />;
     default:
       return null;
   }

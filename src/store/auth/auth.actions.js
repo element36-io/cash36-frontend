@@ -56,7 +56,6 @@ export const startKycProcess = () => async dispatch => {
 };
 
 export const updateKycStep = (step, payload, params) => async dispatch => {
-  console.warn(step, payload, params);
   try {
     await API.post(`/compliance/kyc/step-${step}`, payload, { params });
     dispatch(getCurrentKycStep());

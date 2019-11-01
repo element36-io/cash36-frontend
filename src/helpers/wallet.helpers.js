@@ -14,3 +14,6 @@ export const isWalletAddress = async address => {
     return handleError(error);
   }
 };
+
+export const getMainWalletAddress = walletList =>
+  walletList.find(wallet => wallet.mainWallet).accountAddress;

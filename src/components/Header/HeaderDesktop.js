@@ -35,11 +35,11 @@ const HeaderDesktop = ({ logout, user, hasWallet }) => (
 );
 
 const mapStateToProps = state => ({
-  hasWallet: state.wallets.walletList.length
+  hasWallet: Boolean(state.wallets.walletList.length)
 });
 
 HeaderDesktop.propTypes = {
-  hasWallet: PropTypes.number,
+  hasWallet: PropTypes.bool,
   logout: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired
 };

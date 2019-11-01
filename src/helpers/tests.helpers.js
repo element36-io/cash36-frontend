@@ -14,7 +14,8 @@ import { Web3Context } from '../providers/web3.provider';
 const web3Values = {
   networkId: 4,
   network: 'Rinkeby',
-  utils: { isAddress: jest.fn() }
+  utils: { isAddress: jest.fn(), fromWei: jest.fn() },
+  eth: { getBalance: jest.fn() }
 };
 
 afterEach(cleanup);
