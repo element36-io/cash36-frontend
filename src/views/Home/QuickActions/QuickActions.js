@@ -45,11 +45,11 @@ const QuickActions = ({ hasWallet }) => {
 };
 
 const mapStateToProps = state => ({
-  hasWallet: state.wallets.walletList.length
+  hasWallet: Boolean(state.wallets.walletList.length)
 });
 
 QuickActions.propTypes = {
-  hasWallet: PropTypes.number.isRequired
+  hasWallet: PropTypes.bool.isRequired
 };
 
 export default connect(mapStateToProps)(QuickActions);

@@ -70,12 +70,12 @@ const HeaderMobileDropdown = ({
 };
 
 const mapStateToProps = state => ({
-  hasWallet: state.wallets.walletList.length
+  hasWallet: Boolean(state.wallets.walletList.length)
 });
 
 HeaderMobileDropdown.propTypes = {
   currentLevel: PropTypes.string,
-  hasWallet: PropTypes.number,
+  hasWallet: PropTypes.bool,
   isActive: PropTypes.bool,
   logout: PropTypes.func.isRequired,
   clickCallback: PropTypes.func.isRequired

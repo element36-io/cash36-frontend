@@ -53,11 +53,11 @@ const BuyStep0 = ({ setStep, hasWallet }) => {
 };
 
 const mapStateToProps = state => ({
-  hasWallet: state.wallets.walletList.length
+  hasWallet: Boolean(state.wallets.walletList.length)
 });
 
 BuyStep0.propTypes = {
-  hasWallet: PropTypes.number.isRequired,
+  hasWallet: PropTypes.bool.isRequired,
   setStep: PropTypes.func.isRequired
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { render, waitForElement } from '@testing-library/react';
-
+import { waitForElement } from '@testing-library/react';
+import { renderWithWeb3Context } from '../../helpers/tests.helpers';
 import { BalanceCards } from '../../components/BalanceCards/BalanceCards';
 
 const tokens = [
@@ -22,16 +22,27 @@ const tokens = [
   }
 ];
 
+const walletList = [
+  {
+    accountAddress: '0x0000081c040b341cc943a67872b737349048cb11',
+    mainWallet: true
+  }
+];
+
 const getTokens = jest.fn();
 
 test('renders 4 balance cards if getTokens resolves', async () => {
-  const { getAllByTestId } = render(
-    <BalanceCards tokens={tokens} getTokens={getTokens} />
+  const { getAllByTestId } = renderWithWeb3Context(
+    <BalanceCards
+      tokens={tokens}
+      getTokens={getTokens}
+      walletList={walletList}
+    />
   );
 
   expect(getTokens).toHaveBeenCalled();
   await waitForElement(() => getAllByTestId('balance-card'));
-  expect(getAllByTestId('balance-card').length).toBe(2);
+  expect(getAllByTestId('balance-card').length).toBe(3);
 });
 
 test('renders no tokens if getTokens rejects', async () => {
@@ -40,8 +51,12 @@ test('renders no tokens if getTokens rejects', async () => {
     // eslint-disable-next-line prefer-promise-reject-errors
     .mockReturnValue(Promise.reject('error message'));
 
-  const { queryAllByTestId } = render(
-    <BalanceCards tokens={tokens} getTokens={getTokens} />
+  const { queryAllByTestId } = renderWithWeb3Context(
+    <BalanceCards
+      tokens={tokens}
+      getTokens={getTokens}
+      walletList={walletList}
+    />
   );
 
   expect(getTokens).toHaveBeenCalled();
@@ -55,11 +70,27 @@ test('renders an error message if getTokens rejects', async () => {
     // eslint-disable-next-line prefer-promise-reject-errors
     .mockReturnValue(Promise.reject('error message'));
 
-  const { getByText } = render(
-    <BalanceCards tokens={tokens} getTokens={getTokens} />
+  const { getByText } = renderWithWeb3Context(
+    <BalanceCards
+      tokens={tokens}
+      getTokens={getTokens}
+      walletList={walletList}
+    />
   );
 
   expect(getTokens).toHaveBeenCalled();
   await waitForElement(() => getByText('Fetching data error - error message'));
   expect(getByText('Fetching data error - error message')).toBeVisible();
+});
+
+test('renders EtherBalanceCard if hasWallet is true', () => {
+  const { getByText } = renderWithWeb3Context(
+    <BalanceCards
+      tokens={tokens}
+      getTokens={getTokens}
+      walletList={walletList}
+    />
+  );
+
+  expect(getByText(/ether balance/i)).toBeInTheDocument();
 });

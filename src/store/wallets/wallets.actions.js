@@ -1,11 +1,7 @@
 import API from '../../config/api';
 import { handleError } from '../../helpers/error.helpers';
 
-import {
-  GET_WALLETS
-  // REMOVE_WALLET,
-  // UPDATE_WALLET_DESCRIPTION,
-} from './wallets.types';
+import { GET_WALLETS } from './wallets.types';
 
 export const getWallets = () => async dispatch => {
   try {
@@ -21,7 +17,7 @@ export const getWallets = () => async dispatch => {
 
 export const setMainWallet = async address => {
   try {
-    await API.put(`/compliance/wallet/updateMain?address=${address}`);
+    await API.put(`/compliance/wallet/updateMain/${address}`);
   } catch (error) {
     return handleError(error);
   }
@@ -29,7 +25,7 @@ export const setMainWallet = async address => {
 
 export const deleteWallet = async address => {
   try {
-    await API.delete(`/compliance/wallet/delete?address=${address}`);
+    await API.delete(`/compliance/wallet/delete/${address}`);
   } catch (error) {
     return handleError(error);
   }
@@ -51,7 +47,6 @@ export const addWallet = (
       contractAddress
     });
     dispatch(getWallets());
-    return Promise.resolve();
   } catch (error) {
     return handleError(error);
   }

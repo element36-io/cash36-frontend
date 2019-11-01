@@ -2,7 +2,9 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import Web3 from 'web3';
 
+import { Web3Context } from '../../../providers/web3.provider';
 import { AvatarContext } from '../../../providers/avatar.provider';
 import { renderWithRouter } from '../../../helpers/tests.helpers';
 import { Wallet } from '../../../views/Wallet/Wallet';
@@ -28,15 +30,28 @@ test('stays on the / route if user is authenticated', async () => {
       badgeCount: 0
     },
     wallets: {
-      walletList: ['1']
+      walletList: [
+        {
+          accountAddress: '0x0000081c040b341cc943a67872b737349048cb11',
+          mainWallet: true
+        }
+      ]
     }
   });
   const { history } = renderWithRouter(
-    <Provider store={store}>
-      <AvatarContext.Provider value={{ state: {} }}>
-        <Wallet isAuthenticated />
-      </AvatarContext.Provider>
-    </Provider>,
+    <Web3Context.Provider
+      value={{
+        networkId: '3',
+        network: 'TestNetwork',
+        web3: new Web3()
+      }}
+    >
+      <Provider store={store}>
+        <AvatarContext.Provider value={{ state: {} }}>
+          <Wallet isAuthenticated />
+        </AvatarContext.Provider>
+      </Provider>
+    </Web3Context.Provider>,
     {
       route: '/'
     }

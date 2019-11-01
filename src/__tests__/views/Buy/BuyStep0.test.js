@@ -40,7 +40,12 @@ test('doesnt call setStep if there are no wallets', () => {
 test('calls setStep', () => {
   const initialState = {
     wallets: {
-      walletList: ['1']
+      walletList: [
+        {
+          accountAddress: '0x0000081c040b341cc943a67872b737349048cb11',
+          mainWallet: true
+        }
+      ]
     }
   };
 
