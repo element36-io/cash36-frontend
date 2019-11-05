@@ -1,10 +1,22 @@
+@import '../../styles/settings.scss';
+@import '../../styles/mixins.scss';
+
 .copy-to-clipboard {
   position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  span {
+    cursor: pointer;
+  }
 
   textarea {
     width: 0;
     height: 0;
     opacity: 0;
+    position: absolute;
+    z-index: -1;
     // display: none;
   }
 
@@ -15,5 +27,27 @@
 
   svg {
     width: 1.5rem;
+  }
+
+  .copy-to-clipboard__tooltip {
+    position: relative;
+
+    &::after {
+      content: 'copied to clipboard';
+      position: absolute;
+      bottom: -2rem;
+      left: 0;
+      padding: 0.3rem;
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: 1.2rem;
+      color: $primary-main;
+      background-color: $grey-blue;
+
+      @include mobile {
+        top: 0;
+        bottom: 0;
+      }
+    }
   }
 }

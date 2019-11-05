@@ -6,5 +6,5 @@ import CopyToClipboard from '../../components/CopyToClipboard';
 test('renders the component', () => {
   const { getByTestId } = render(<CopyToClipboard />);
 
-  expect(getByTestId('copy-to-clipboard')).toBeVisible();
+  expect(getByTestId('copy-to-clipboard')).toBeInTheDocument();
 });
