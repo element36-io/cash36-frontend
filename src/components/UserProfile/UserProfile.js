@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 import tiers from './tiers';
-import Avatar from '../../components/Avatar';
+import Avatar from '../Avatar';
 import VerificationButton from './VerificationButton';
-import AddWalletDialog from '../AddWalletDialog';
+import AddWalletButton from '../AddWalletButton';
 import WalletMode from '../WalletMode';
 
 import './UserProfile.scss';
@@ -57,7 +56,7 @@ export const UserProfile = ({ user, alt }) => {
             currentProcessStatus={currentProcessStatus}
             caseId={caseId}
           />
-          <AddWalletDialog />
+          <AddWalletButton />
         </div>
       </div>
     </div>

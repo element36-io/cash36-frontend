@@ -1,17 +1,7 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import configureMockStore from 'redux-mock-store';
-
-import {
-  renderWithAvatarContext,
-  renderWithRouter
-} from '../../helpers/tests.helpers';
+import { renderWithAvatarContextAndRouter } from '../../helpers/tests.helpers';
 
 import HeaderMobile from '../../components/Header/HeaderMobile';
-
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
 
 const initialState = {
   notifications: {
@@ -57,16 +47,14 @@ const props = {
   currentLevel: 'Tier_0'
 };
 
-test.skip('renders the component', () => {
-  const store = mockStore(initialState);
-  const { getByText } = renderWithAvatarContext(
-    <Provider store={store}>
-      <HeaderMobile {...props} />
-    </Provider>,
-    renderWithRouter
+test('renders the component', () => {
+  const { getByText } = renderWithAvatarContextAndRouter(
+    <HeaderMobile {...props} />,
+    {
+      initialState
+    }
   );
 
-  expect(getByText(/test@example.com/i)).toBeInTheDocument();
   expect(getByText(/logout/i)).toBeInTheDocument();
   expect(getByText(/buy/i)).toBeInTheDocument();
 });

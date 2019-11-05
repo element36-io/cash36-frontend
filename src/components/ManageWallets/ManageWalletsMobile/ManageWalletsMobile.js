@@ -5,7 +5,7 @@ import RightArrowIcon from '@material-ui/icons/KeyboardArrowRight';
 import CloseIcon from '@material-ui/icons/Close';
 
 import Wallet from '../Wallet';
-import AddWalletDialog from '../../AddWalletDialog';
+import AddWalletButton from '../../AddWalletButton';
 
 const ManageWalletsMobile = ({ walletList }) => {
   const [open, setOpen] = useState(false);
@@ -38,7 +38,7 @@ const ManageWalletsMobile = ({ walletList }) => {
               ))
               : 'You have no wallets registered. You can register one by clicking below.'}
           </div>
-          <AddWalletDialog />
+          <AddWalletButton />
         </div>
       </div>
     </Fragment>

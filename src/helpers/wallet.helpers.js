@@ -17,3 +17,17 @@ export const isWalletAddress = async address => {
 
 export const getMainWalletAddress = walletList =>
   walletList.find(wallet => wallet.mainWallet).accountAddress;
+
+export const getQueryStringValue = (search, key) => {
+  return decodeURIComponent(
+    search.replace(
+      new RegExp(
+        '^(?:.*[&\\?]' +
+          encodeURIComponent(key).replace(/[.+*]/g, '\\$&') +
+          '(?:\\=([^&]*))?)?.*$',
+        'i'
+      ),
+      '$1'
+    )
+  );
+};

@@ -1,7 +1,17 @@
 @import '../../styles/settings.scss';
+@import '../../styles/mixins.scss';
 
 .new-wallet {
+  position: relative;
   padding: 3.2rem;
+
+  svg.add-wallet-dialog__close {
+    position: absolute;
+    right: 2.5rem;
+    top: 2.5rem;
+    fill: $darkGrey;
+    cursor: pointer;
+  }
 
   .add-wallet__success {
     display: flex;
@@ -14,5 +24,16 @@
     background: $gradient-green-1;
     color: #fff;
     font-size: 3.5rem;
+    cursor: pointer;
+  }
+
+  @include mobile {
+    display: flex;
+    height: 100%;
+    padding: 2rem;
+
+    svg.add-wallet-dialog__close {
+      right: 1rem;
+    }
   }
 }

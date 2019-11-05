@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { renderWithRedux } from '../../helpers/tests.helpers';
 
 import WalletMode from '../../components/WalletMode';
@@ -17,13 +16,17 @@ const initialState = {
 };
 
 test('renders the component', () => {
-  const { getByTestId } = renderWithRedux(<WalletMode />, { initialState });
+  const { getByTestId } = renderWithRedux(<WalletMode />, {
+    initialState
+  });
 
   expect(getByTestId('wallet-mode')).toBeVisible();
 });
 
 test('renders walletless mode', () => {
-  const { getByText } = renderWithRedux(<WalletMode />, { ...{} });
+  const { getByText } = renderWithRedux(<WalletMode />, {
+    ...{ wallets: { walletList: [] } }
+  });
 
   expect(getByText(/walletless mode/i)).toBeInTheDocument();
 });

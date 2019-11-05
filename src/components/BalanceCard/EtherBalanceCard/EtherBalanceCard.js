@@ -12,7 +12,6 @@ const EtherBalanceCard = ({ walletAddress }) => {
   const getBalance = async () => {
     try {
       let balance;
-
       balance = await eth.getBalance(walletAddress);
       balance = await utils.fromWei(balance, 'ether');
 
