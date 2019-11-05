@@ -10,12 +10,19 @@ import { render, cleanup } from '@testing-library/react';
 import { reducers } from '../store';
 import { AvatarContext } from '../providers/avatar.provider';
 import { Web3Context } from '../providers/web3.provider';
+import { AddWalletContext } from '../providers/addWallet.provider';
 
 const web3Values = {
   networkId: 4,
   network: 'Rinkeby',
   utils: { isAddress: jest.fn(), fromWei: jest.fn() },
-  eth: { getBalance: jest.fn() }
+  eth: { getBalance: jest.fn(), getAccounts: jest.fn() }
+};
+
+const addWalletValues = {
+  onOpen: jest.fn(),
+  onClose: jest.fn(),
+  isUportWallet: false
 };
 
 afterEach(cleanup);
@@ -75,21 +82,30 @@ export function renderWithRouterAndRedux (
 export function renderWithAvatarContextAndRouter (
   component,
   {
+    initialState = {},
     route = '/',
     history = createMemoryHistory({ initialEntries: [route] })
   } = {},
   state = {},
   actions = {}
 ) {
+  const middlewares = [thunk];
+  const mockStore = configureMockStore(middlewares);
+  const store = mockStore(initialState);
+
   return {
     ...render(
-      <Router history={history}>
-        <Web3Context.Provider value={{ ...web3Values }}>
-          <AvatarContext.Provider value={{ state, actions }}>
-            {component}
-          </AvatarContext.Provider>
-        </Web3Context.Provider>
-      </Router>
+      <Provider store={store}>
+        <Router history={history}>
+          <Web3Context.Provider value={{ ...web3Values }}>
+            <AvatarContext.Provider value={{ state, actions }}>
+              <AddWalletContext.Provider value={{ ...addWalletValues }}>
+                {component}
+              </AddWalletContext.Provider>
+            </AvatarContext.Provider>
+          </Web3Context.Provider>
+        </Router>
+      </Provider>
     ),
     history
   };

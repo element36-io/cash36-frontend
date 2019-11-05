@@ -14,27 +14,15 @@
     &.error-text {
       font-size: 1.2rem;
     }
+
+    span {
+      display: block;
+      word-break: break-all;
+    }
   }
 
-  .add-uport-wallet__qr {
-    display: flex;
-    justify-content: center;
-    margin: 2rem;
-  }
-
-  .add-uport-wallet__stores {
-    text-align: center;
-
-    p {
-      font-size: 1.4rem;
-    }
-
-    a:first-of-type {
-      margin-right: 1rem;
-    }
-    a:last-of-type {
-      margin-left: 1rem;
-    }
+  .add-uport-wallet__creds {
+    width: 100%;
   }
 
   @include desktop {
@@ -45,9 +33,16 @@
   }
 
   @include mobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+
     > img {
-      display: block;
-      margin: 0 auto 1rem;
+      &.align-left {
+        margin-right: auto;
+      }
     }
 
     button {

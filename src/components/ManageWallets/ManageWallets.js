@@ -6,7 +6,7 @@ import WalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import { Dialog, MenuItem } from '@material-ui/core';
 
 import Wallet from './Wallet';
-import AddWalletDialog from '../AddWalletDialog';
+import AddWalletButton from '../AddWalletButton';
 
 import './ManageWallets.scss';
 
@@ -45,7 +45,7 @@ const ManageWallets = ({ walletList }) => {
               ))
               : 'You have no wallets registered. You can register one by clicking below.'}
           </div>
-          <AddWalletDialog />
+          <AddWalletButton />
         </div>
       </Dialog>
     </Fragment>

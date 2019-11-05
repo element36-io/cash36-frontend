@@ -24,16 +24,11 @@
     padding: 3.2rem;
     text-align: center;
 
-    .add-wallet-dialog {
+    .add-wallet-button {
       width: 100%;
       display: flex;
-
-      > button {
-        // margin-right: 0;
-        // color: $white !important;
-        flex: 1;
-        margin-top: 3.2rem;
-      }
+      flex: 1;
+      margin-top: 3.2rem;
     }
   }
 
@@ -117,17 +112,17 @@
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 3;
+    z-index: 1000;
     background: #fff;
     transition: transform 255ms;
     transform: translateX(-200%);
-    height: 100%;
+    height: 100vh;
 
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding-top: 28rem;
+    // padding-top: 28rem;
 
     &.--open {
       transform: translateX(0);
@@ -150,24 +145,6 @@
     .manage-wallets__content {
       padding: 1.2rem;
       text-align: center;
-
-      .add-wallet-dialog {
-        width: 100%;
-
-        > button {
-          // margin-right: 0;
-          // color: $white !important;
-          flex: 1;
-          margin-top: 2.4rem;
-          display: flex;
-
-          > span {
-            display: flex;
-            color: $white;
-            align-items: center;
-          }
-        }
-      }
     }
 
     .manage-wallets__wallet {

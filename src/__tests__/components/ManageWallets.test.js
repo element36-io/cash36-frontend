@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, cleanup } from '@testing-library/react';
 
-import { renderWithRedux } from '../../helpers/tests.helpers';
+import { renderWithAvatarContextAndRouter } from '../../helpers/tests.helpers';
 
 import ManageWallets from '../../components/ManageWallets';
 
@@ -31,13 +31,15 @@ const initialState = {
 };
 
 test('renders the component', () => {
-  const { getByText } = renderWithRedux(<ManageWallets />);
+  const { getByText } = renderWithAvatarContextAndRouter(<ManageWallets />, {
+    initialState
+  });
 
   expect(getByText(/manage wallets/i)).toBeInTheDocument();
 });
 
 test('opens and renders dialog content', () => {
-  const { getByText } = renderWithRedux(<ManageWallets />, {
+  const { getByText } = renderWithAvatarContextAndRouter(<ManageWallets />, {
     initialState
   });
 

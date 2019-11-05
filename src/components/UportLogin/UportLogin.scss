@@ -1,0 +1,30 @@
+.uport-login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .uport-login__qr {
+    display: flex;
+    justify-content: center;
+    margin: 2rem;
+  }
+
+  .uport-login__stores {
+    text-align: center;
+
+    img {
+      margin: 0;
+    }
+
+    p {
+      font-size: 1.4rem;
+    }
+
+    a:first-of-type {
+      margin-right: 1rem;
+    }
+    a:last-of-type {
+      margin-left: 1rem;
+    }
+  }
+}

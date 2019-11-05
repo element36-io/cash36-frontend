@@ -6,7 +6,8 @@
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 100;
+  // z-index of MUI dialog is 1300
+  z-index: 1305;
   background: $gradient-primary;
   display: flex;
   align-items: center;

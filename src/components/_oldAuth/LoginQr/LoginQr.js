@@ -18,7 +18,7 @@ const LoginQr = ({ scanCallback }) => {
 
   const getQr = async () => {
     try {
-      const requestResponse = await getLoginQr(metamaskLogin);
+      const requestResponse = await getLoginQr();
       const { callbackUrl, uri, mobileUri } = requestResponse.data;
 
       if (md.current.mobile() && !md.current.tablet()) {

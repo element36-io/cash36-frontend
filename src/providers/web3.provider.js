@@ -5,7 +5,9 @@ import { WEB3_NODE } from '../config/api';
 
 export const Web3Context = React.createContext();
 
-const Web3Provider = ({ children, user }) => {
+const web3 = new Web3(WEB3_NODE);
+
+const Web3Provider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [networkId, setNetworkId] = useState(null);
   const [network, setNetwork] = useState(null);
@@ -22,7 +24,7 @@ const Web3Provider = ({ children, user }) => {
         'Injected web3 detected. We will override web3 provider. Your plugin might not work anymore.'
       );
     } else {
-      web3js = new Web3(WEB3_NODE);
+      web3js = web3;
     }
 
     window.web3 = web3js;
@@ -85,8 +87,8 @@ const Web3Provider = ({ children, user }) => {
         loading,
         web3: window.web3,
         getNetwork,
-        utils: window.web3.utils,
-        eth: window.web3.eth
+        utils: Web3.utils,
+        eth: web3.eth
       }}
     >
       {children}

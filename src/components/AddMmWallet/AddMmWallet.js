@@ -4,6 +4,7 @@ import DoneIcon from '@material-ui/icons/Done';
 import AddWalletForm from '../AddWalletForm';
 import { Web3Context } from '../../providers/web3.provider';
 import metamaskLogo from '../../assets/icons/metamask.svg';
+import { AddWalletContext } from '../../providers/addWallet.provider';
 
 import './AddMmWallet.scss';
 
@@ -16,6 +17,7 @@ const AddMmWallet = ({ addWallet, walletList }) => {
   const [submitting, setSubmitting] = useState(null);
   const [submitted, setSubmitted] = useState(null);
   const { getNetwork } = useContext(Web3Context);
+  const { onClose } = useContext(AddWalletContext);
 
   const changeDescription = event => setDescription(event.target.value);
 
@@ -98,7 +100,7 @@ const AddMmWallet = ({ addWallet, walletList }) => {
         </>
       )}
       {submitted && (
-        <span className="add-wallet__success">
+        <span className="add-wallet__success" onClick={onClose}>
           <DoneIcon />
         </span>
       )}
