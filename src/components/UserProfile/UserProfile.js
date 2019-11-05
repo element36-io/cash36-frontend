@@ -6,6 +6,7 @@ import tiers from './tiers';
 import Avatar from '../../components/Avatar';
 import VerificationButton from './VerificationButton';
 import AddWalletDialog from '../AddWalletDialog';
+import WalletMode from '../WalletMode';
 
 import './UserProfile.scss';
 
@@ -44,12 +45,13 @@ export const UserProfile = ({ user, alt }) => {
       </div>
       <div className="user-profile__info">
         <p>
-          <span>{name}</span> ({currentLevel && tiers[currentLevel].text} user)
+          <span>{username}</span> ({currentLevel && tiers[currentLevel].text}{' '}
+          user)
           {currentLevel !== 'Tier_2' && (
             <i className="fas fa-exclamation-triangle" />
           )}
         </p>
-        <p>ID: {username}</p>
+        <WalletMode />
         <div className="user-profile__buttons">
           <VerificationButton
             currentProcessStatus={currentProcessStatus}

@@ -173,8 +173,17 @@
   }
 
   &__info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+
+    .user-profile__buttons {
+      margin-top: auto;
+    }
+
     > p {
-      margin: 0 0 1rem;
+      margin: 0 0 0.4rem;
       color: $darkGrey;
       font-size: 1.4rem;
 
@@ -184,7 +193,7 @@
 
       span {
         color: $text-primary;
-        font-size: 2rem;
+        font-size: 1.6rem;
       }
 
       &:nth-of-type(2) {
@@ -196,5 +205,10 @@
         word-break: break-all;
       }
     }
+  }
+
+  @include mobile {
+    width: 100%;
+    overflow: hidden;
   }
 }
