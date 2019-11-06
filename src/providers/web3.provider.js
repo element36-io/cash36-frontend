@@ -12,19 +12,19 @@ const Web3Provider = ({ children }) => {
   const [networkId, setNetworkId] = useState(null);
   const [network, setNetwork] = useState(null);
   const [networkError, setNetworkError] = useState(false);
+  const [web3js, setWeb3js] = useState(web3);
 
   const initWeb3 = () => {
     let { ethereum } = window;
-    let web3js;
 
     if (ethereum !== undefined) {
       // Use Mist/MetaMask's provider.
-      web3js = new Web3(ethereum);
+      setWeb3js(new Web3(ethereum));
       console.info(
         'Injected web3 detected. We will override web3 provider. Your plugin might not work anymore.'
       );
     } else {
-      web3js = web3;
+      setWeb3js(web3);
     }
 
     window.web3 = web3js;
@@ -68,7 +68,6 @@ const Web3Provider = ({ children }) => {
     }
   };
 
-  //
   useEffect(() => {
     initWeb3();
     getNetworkId();
@@ -85,10 +84,10 @@ const Web3Provider = ({ children }) => {
         networkId,
         networkError,
         loading,
-        web3: window.web3,
+        web3: web3js,
         getNetwork,
         utils: Web3.utils,
-        eth: web3.eth
+        eth: web3js.eth
       }}
     >
       {children}
