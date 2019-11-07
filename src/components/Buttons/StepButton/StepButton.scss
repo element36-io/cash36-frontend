@@ -10,12 +10,18 @@
     justify-content: space-between;
     font-size: 1.6rem;
     line-height: 19px;
-    padding: .4rem;
+    padding: 0.4rem;
 
     @include mobile {
       font-size: 1.6rem;
       padding: 1rem 0;
       border-radius: 4px;
+    }
+  }
+
+  &.step-button--submitting {
+    > span:first-of-type {
+      justify-content: center;
     }
   }
 }

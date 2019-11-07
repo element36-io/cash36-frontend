@@ -28,6 +28,7 @@
     "react-country-flag": "^1.0.1",
     "react-date-range": "^0.9.4",
     "react-dom": "^16.8.6",
+    "react-google-recaptcha": "^2.0.1",
     "react-ink": "^6.4.0",
     "react-redux": "^7.1.0",
     "react-responsive": "^7.0.0",
