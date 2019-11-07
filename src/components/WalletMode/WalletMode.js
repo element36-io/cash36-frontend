@@ -49,9 +49,7 @@ const WalletMode = ({ walletList }) => {
         data-testid="wallet-mode"
       >
         <WalletIcon />
-        <div>
-          <CopyToClipboard text={mainWallet} showAsText />
-        </div>
+        <CopyToClipboard text={mainWallet} showAsText />
       </div>
     );
   }

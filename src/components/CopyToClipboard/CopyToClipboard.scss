@@ -3,9 +3,6 @@
 
 .copy-to-clipboard {
   position: relative;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
 
   span {
     cursor: pointer;
@@ -30,8 +27,6 @@
   }
 
   .copy-to-clipboard__tooltip {
-    position: relative;
-
     &::after {
       content: 'copied to clipboard';
       position: absolute;

@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import Copy from '@material-ui/icons/FileCopy';
+import TruncateString from 'react-truncate-string';
 
 import DefaultButton from '../Buttons/DefaultButton';
 
@@ -27,9 +28,10 @@ const CopyToClipboard = React.memo(({ text, showAsText = false }) => {
       {showAsText ? (
         <span
           className={showTooltip ? 'copy-to-clipboard__tooltip' : null}
+          // className="copy-to-clipboard__tooltip"
           onClick={copy}
         >
-          {text}
+          <TruncateString text={text} />
         </span>
       ) : (
         <DefaultButton onClick={copy}>
