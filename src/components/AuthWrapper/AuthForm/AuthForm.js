@@ -1,5 +1,7 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { CAPTCHA_KEY } from '../../../config/api';
 import Form from '../../Form';
 import StepButton from '../../Buttons/StepButton/StepButton';
 
@@ -12,6 +14,15 @@ const AuthForm = ({
   children,
   errorMsg
 }) => {
+  const [isVerified, setIsVerified] = useState(false);
+  const [captchaError, setCaptchaError] = useState(null);
+
+  const onVerify = token => {
+    if (token) setIsVerified(true);
+  };
+
+  const onCaptchaError = err => setCaptchaError(err);
+
   const renderErrors = useCallback(
     errors =>
       Object.values(errors).map(err => (
@@ -22,9 +33,16 @@ const AuthForm = ({
     []
   );
 
-  const isDisabled = useCallback((submitting, values) => {
-    return submitting || Object.values(values).some(val => !val);
-  }, []);
+  const isDisabled = useCallback(
+    (submitting, values) => {
+      return (
+        submitting || Object.values(values).some(val => !val) || !isVerified
+      );
+    },
+    [isVerified]
+  );
+
+  console.warn('====== CAPTCHA VERIFY', isVerified);
 
   return (
     <Form
@@ -51,7 +69,15 @@ const AuthForm = ({
               </div>
             ))}
           </div>
+          <div className="auth__captcha">
+            <ReCAPTCHA
+              onChange={onVerify}
+              sitekey={CAPTCHA_KEY}
+              onErrored={onCaptchaError}
+            />
+          </div>
           {renderErrors(formProps.errors)}
+          {captchaError && <p className="auth__form__error">{captchaError}</p>}
           {errorMsg && <p className="auth__form__error">{errorMsg}</p>}
           <StepButton
             variant="contained"
@@ -62,6 +88,7 @@ const AuthForm = ({
             text={buttonLabel}
             onClick={formProps.handleSubmit}
             disabled={isDisabled(submitting, formProps.values)}
+            submitting={submitting}
           />
           {children}
         </form>
