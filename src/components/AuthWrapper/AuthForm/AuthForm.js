@@ -12,9 +12,10 @@ const AuthForm = ({
   formFields,
   buttonLabel,
   children,
-  errorMsg
+  errorMsg,
+  captcha = true
 }) => {
-  const [isVerified, setIsVerified] = useState(false);
+  const [isVerified, setIsVerified] = useState(!captcha);
   const [captchaError, setCaptchaError] = useState(null);
 
   const onVerify = token => {
@@ -42,8 +43,6 @@ const AuthForm = ({
     [isVerified]
   );
 
-  console.warn('====== CAPTCHA VERIFY', isVerified);
-
   return (
     <Form
       submitCallback={submitCallback}
@@ -69,13 +68,15 @@ const AuthForm = ({
               </div>
             ))}
           </div>
-          <div className="auth__captcha">
-            <ReCAPTCHA
-              onChange={onVerify}
-              sitekey={CAPTCHA_KEY}
-              onErrored={onCaptchaError}
-            />
-          </div>
+          {captcha && (
+            <div className="auth__captcha">
+              <ReCAPTCHA
+                onChange={onVerify}
+                sitekey={CAPTCHA_KEY}
+                onErrored={onCaptchaError}
+              />
+            </div>
+          )}
           {renderErrors(formProps.errors)}
           {captchaError && <p className="auth__form__error">{captchaError}</p>}
           {errorMsg && <p className="auth__form__error">{errorMsg}</p>}
@@ -104,7 +105,8 @@ AuthForm.propTypes = {
   formFields: PropTypes.array,
   buttonLabel: PropTypes.string,
   errorMsg: PropTypes.string,
-  children: PropTypes.any
+  children: PropTypes.any,
+  captcha: PropTypes.bool
 };
 
 export default AuthForm;
