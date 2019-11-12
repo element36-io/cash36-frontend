@@ -16,7 +16,6 @@ const Login = ({ isAuthenticated, login }) => {
       await login(values.username, values.password);
     } catch (err) {
       setError(err);
-      return Promise.reject(err);
     }
   };
 
@@ -39,7 +38,10 @@ const Login = ({ isAuthenticated, login }) => {
           errorMsg={error}
         >
           <p>
-            New to element36? <Link to="/register">Sign up now</Link>
+            New to element36? <Link to="/register">Sign up</Link>
+          </p>
+          <p className="paragraph-link-gray">
+            <Link to="/reset-password">Forgot password?</Link>
           </p>
         </AuthForm>
       </div>
