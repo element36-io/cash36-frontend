@@ -16,6 +16,7 @@ const Login = ({ isAuthenticated, login }) => {
       await login(values.username, values.password);
     } catch (err) {
       setError(err);
+      return Promise.reject(err);
     }
   };
 
