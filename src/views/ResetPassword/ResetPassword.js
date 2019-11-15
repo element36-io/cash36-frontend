@@ -5,7 +5,7 @@ import AuthWrapper from '../../components/AuthWrapper';
 import AuthForm from '../../components/AuthWrapper/AuthForm';
 import { formFields, initialValues } from './form-model';
 import validationSchema from './validation-schema';
-// import { resetPassword } from '../../store/auth/auth.actions';
+import { resetPassword } from '../../store/auth/auth.actions';
 
 import './ResetPassword.scss';
 
@@ -15,7 +15,7 @@ const ResetPassword = () => {
 
   const submitCallback = async values => {
     try {
-      // await resetPassword(values.email);
+      await resetPassword(values.email);
 
       setEmailSent(true);
     } catch (error) {
@@ -36,7 +36,6 @@ const ResetPassword = () => {
               formFields={formFields}
               buttonLabel="Send me Instructions"
               errorMsg={error}
-              captcha={false}
             >
               <p className="paragraph-link-gray">
                 <Link to="/login">Back to login</Link>
@@ -52,7 +51,6 @@ const ResetPassword = () => {
           </div>
         )}
       </AuthWrapper>
-      )}
     </div>
   );
 };

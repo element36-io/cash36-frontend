@@ -15,8 +15,11 @@ export const isWalletAddress = async address => {
   }
 };
 
-export const getMainWalletAddress = walletList =>
-  walletList.find(wallet => wallet.mainWallet).accountAddress;
+export const getMainWalletAddress = walletList => {
+  if (!walletList.length) return '';
+
+  return walletList.find(wallet => wallet.mainWallet).accountAddress;
+};
 
 export const getQueryStringValue = (search, key) => {
   return decodeURIComponent(

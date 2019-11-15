@@ -37,6 +37,7 @@ const Login = ({ isAuthenticated, login }) => {
           formFields={formFields}
           buttonLabel="Login"
           errorMsg={error}
+          captcha={false}
         >
           <p>
             New to element36? <Link to="/register">Sign up</Link>
