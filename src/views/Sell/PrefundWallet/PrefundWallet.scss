@@ -1,0 +1,59 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/settings.scss';
+
+.prefund-wallet {
+  position: relative;
+
+  .prefund-wallet__content {
+    max-width: 63rem;
+    margin: 0 auto;
+    text-align: center;
+
+    > button {
+      margin-top: 3.2rem;
+      width: 100%;
+    }
+
+    .sell__footer {
+      padding-bottom: 0;
+    }
+
+    @include desktop {
+      padding: 14.4rem 0;
+
+      h2 {
+        margin-bottom: 3.2rem;
+      }
+    }
+
+    @include mobile {
+      padding: 2.1rem 0 6.9rem;
+
+      h2 {
+        margin-bottom: 7.7rem;
+      }
+    }
+  }
+
+  .prefund-wallet__currency {
+    margin-top: 3.2rem;
+    .prefund-wallet__currency-field {
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      padding: 1.2rem;
+      font-size: 3rem;
+      margin-right: 2rem;
+
+      > span {
+        font-size: 1.4rem;
+        align-self: flex-end;
+        margin-right: 1.2rem;
+      }
+
+      &.prefund-wallet__currency-field--selected {
+        background-color: $primary-light-2;
+      }
+    }
+  }
+}

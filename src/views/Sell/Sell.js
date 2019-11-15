@@ -7,27 +7,37 @@ import SellTokens from './SellTokens';
 import SellConfirmation from './SellConfirmation';
 import SellSuccess from './SellSuccess';
 import SellError from './SellError';
+import PrefundWallet from './PrefundWallet';
 import { getTokens, getExchangeFee } from '../../store/tokens/tokens.actions';
+import { getMinFunds } from '../../store/wallets/wallets.actions';
 import useCash36 from '../../hooks/useCash36';
 import Token from '../../contracts/ERC20Burnable';
 import useGet from '../../hooks/useGet';
 import useGetWithState from '../../hooks/useGetWithState';
+import useGetEtherBalance from '../../hooks/useGetEtherBalance';
+import { getMainWalletAddress } from '../../helpers/wallet.helpers';
 
 import './Sell.scss';
 
-export const Sell = ({ user, tokens, getTokens, hasWallet }) => {
+export const Sell = ({ user, tokens, getTokens, hasWallet, mainWallet }) => {
   const [step, setStep] = useState(0);
   const [values, setValues] = useState({ amount: '', symbol: 'EUR36' });
   const [sellError, setSellError] = useState(null);
   const [exchangeFee, setExchangeFee] = useState(null);
+  const [minFunds, setMinFunds] = useState(null);
   const [exchangeFeeError, setExchangeFeeError] = useState('');
   const [tokensError, setTokensError] = useState('');
+  const [minFundsError, setMinFundsError] = useState('');
   const mounted = useRef(true);
   const web3 = useCash36();
 
   useGetWithState(getExchangeFee, setExchangeFeeError, setExchangeFee);
-
+  useGetWithState(getMinFunds, setMinFundsError, setMinFunds);
   useGet(getTokens, setTokensError);
+  const balanceWei = useGetEtherBalance(mainWallet, 'wei');
+  const etherBalance = useGetEtherBalance(mainWallet);
+
+  console.log(minFunds);
 
   useEffect(() => {
     return () => {
@@ -43,6 +53,10 @@ export const Sell = ({ user, tokens, getTokens, hasWallet }) => {
   };
 
   const confirmationStep = () => {
+    if (balanceWei < minFunds.balanceWei) {
+      setStep(4);
+    }
+
     setStep(1);
     burnTokens();
   };
@@ -101,6 +115,14 @@ export const Sell = ({ user, tokens, getTokens, hasWallet }) => {
         return <SellSuccess amount={amount} symbol={symbol} />;
       case 3:
         return <SellError message={sellError} />;
+      case 4:
+        return (
+          <PrefundWallet
+            mainWallet={mainWallet}
+            minFunds={minFunds}
+            tokens={tokens}
+          />
+        );
       default:
         return (
           <SellTokens
@@ -112,6 +134,8 @@ export const Sell = ({ user, tokens, getTokens, hasWallet }) => {
             exchangeFeeError={exchangeFeeError}
             exchangeFee={exchangeFee}
             tokensError={tokensError}
+            minFundsError={minFundsError}
+            etherBalance={etherBalance}
           />
         );
     }
@@ -130,7 +154,8 @@ Sell.propTypes = {
   tokens: PropTypes.array,
   getTokens: PropTypes.func,
   user: PropTypes.object,
-  hasWallet: PropTypes.bool
+  hasWallet: PropTypes.bool,
+  mainWallet: PropTypes.string
 };
 
 const mapStateToProps = ({
@@ -140,7 +165,8 @@ const mapStateToProps = ({
 }) => ({
   tokens,
   user,
-  hasWallet: Boolean(wallets.walletList.length)
+  hasWallet: Boolean(wallets.walletList.length),
+  mainWallet: getMainWalletAddress(wallets.walletList)
 });
 
 export default connect(

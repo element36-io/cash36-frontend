@@ -51,3 +51,25 @@ export const addWallet = (
     return handleError(error);
   }
 };
+
+export const getMinFunds = async () => {
+  try {
+    const response = await API.get('/compliance/prefund/minFunds');
+
+    return response.data;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const fundWallet = async (walletAddress, tokenSymbol) => {
+  try {
+    const response = await API.post(
+      `/compliance/prefund/sendto/${walletAddress}/${tokenSymbol}`
+    );
+
+    console.log(response);
+  } catch (error) {
+    return handleError(error);
+  }
+};

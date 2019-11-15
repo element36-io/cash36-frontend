@@ -6,7 +6,6 @@ import StepButton from '../../../components/Buttons/StepButton';
 import AvailableBalance from '../../../components/AvailableBalance';
 import UnavailableBalance from '../../../components/UnavailableBalance';
 import { parseAmount } from '../../../helpers/currencies.helpers';
-
 import ExchangeFee from '../ExchangeFee';
 
 import './SellTokens.scss';
@@ -19,7 +18,9 @@ const SellTokens = ({
   token,
   exchangeFee,
   exchangeFeeError,
-  tokensError
+  tokensError,
+  minFundsError,
+  etherBalance
 }) => {
   return (
     <div className="sell__sell-tokens">
@@ -33,22 +34,18 @@ const SellTokens = ({
         <UnavailableBalance />
       )}
       {token ? (
-        <AvailableBalance balance={token.balance} symbol={symbol} />
+        <AvailableBalance
+          balance={token.balance}
+          symbol={symbol}
+          etherBalance={etherBalance}
+        />
       ) : (
-        <AvailableBalance balance={0} symbol={symbol} />
+        <AvailableBalance
+          balance={0}
+          symbol={symbol}
+          etherBalance={etherBalance}
+        />
       )}
-      <p className="sell__sell-tokes__exchange-msg">
-        If your bank account is using a different currency, the exchange rates
-        of{' '}
-        <a
-          href="https://www.hbl.ch/de/private/zahlen/reisen/waehrungsrechner/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Hypo Lenzburg
-        </a>{' '}
-        apply.
-      </p>
       <ExchangeFee
         amount={amount}
         exchangeFee={exchangeFee}
@@ -70,6 +67,21 @@ const SellTokens = ({
         }
       />
       {tokensError && <div className="error-text">{tokensError}</div>}
+      {minFundsError && <div className="error-text">{minFundsError}</div>}
+      <div className="sell__footer">
+        <span style={{ fontSize: '1.2rem' }}>
+          If your bank account is using a different currency, the exchange rates
+          of{' '}
+          <a
+            href="https://www.hbl.ch/de/private/zahlen/reisen/waehrungsrechner/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Hypo Lenzburg
+          </a>{' '}
+          apply.
+        </span>
+      </div>
     </div>
   );
 };
@@ -82,7 +94,8 @@ SellTokens.propTypes = {
   token: PropTypes.object,
   tokensError: PropTypes.string,
   exchangeFeeError: PropTypes.string,
-  exchangeFee: PropTypes.oneOfType([PropTypes.number, PropTypes.bool])
+  exchangeFee: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
+  etherBalance: PropTypes.number
 };
 
 export default SellTokens;

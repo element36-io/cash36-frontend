@@ -1,6 +1,19 @@
 @import '../../../styles/mixins.scss';
 @import '../../../styles/settings.scss';
 
+.sell__footer {
+  text-align: center;
+  padding-top: 3rem;
+  margin-top: 3rem;
+  border-top: 1px solid $lightGrey;
+  padding-bottom: 2.4rem;
+
+  @include mobile {
+    margin: 1rem 1rem 0 1rem;
+    padding-bottom: 1.2rem;
+  }
+}
+
 .sell__sell-tokens {
   h2 {
     text-align: center;
@@ -22,12 +35,10 @@
   }
 
   .exchange-fee {
-    color: $red-1;
     margin-bottom: 0.8rem;
   }
 
   .no-exchange-fee {
-    color: $red-1;
     justify-content: center;
   }
 
