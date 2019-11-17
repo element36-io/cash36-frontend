@@ -41,12 +41,14 @@ const UportLogin = ({ onSuccess, onError, type }) => {
         return;
       }
 
-      setQr(uri);
-      const uportCreds = await checkRequestStatus(
-        callbackUrl,
-        () => !isActive()
-      );
-      onSuccess(uportCreds);
+      if (_isMounted.current) {
+        setQr(uri);
+        const uportCreds = await checkRequestStatus(
+          callbackUrl,
+          () => !isActive()
+        );
+        onSuccess(uportCreds);
+      }
     } catch (error) {
       onError(error.message);
     }

@@ -6,12 +6,11 @@ import WalletType from '../WalletType';
 import AddMmWallet from '../AddMmWallet';
 import AddUportWallet from '../AddUportWallet';
 import { addWallet } from '../../store/wallets/wallets.actions';
-import { AddWalletContext } from '../../providers/addWallet.provider';
-import './NewWallet.scss';
+import { WalletContext } from '../../providers/wallet.provider';
 
-const NewWallet = ({ addWallet, walletList, onClose }) => {
+const NewWallet = ({ addWallet, walletList }) => {
   const [step, setStep] = useState(0);
-  const { isUportWallet, setIsUportWallet } = useContext(AddWalletContext);
+  const { isUportWallet, onCloseDialogs } = useContext(WalletContext);
 
   const renderStep = () => {
     switch (step) {
@@ -26,17 +25,13 @@ const NewWallet = ({ addWallet, walletList, onClose }) => {
 
   useEffect(() => {
     if (isUportWallet) setStep(1);
-
-    return () => {
-      if (isUportWallet) setIsUportWallet(false);
-    };
   }, []);
 
   return (
-    <div className="new-wallet">
+    <div className="new-wallet dialog-content">
       <CloseIcon
-        className="add-wallet-dialog__close"
-        onClick={onClose}
+        className="dialog-close"
+        onClick={onCloseDialogs}
         data-testid="add-wallet-dialog__close"
       />
       {renderStep()}
@@ -46,8 +41,7 @@ const NewWallet = ({ addWallet, walletList, onClose }) => {
 
 NewWallet.propTypes = {
   addWallet: PropTypes.func,
-  walletList: PropTypes.array,
-  onClose: PropTypes.func
+  walletList: PropTypes.array
 };
 
 const mapStateToProps = ({ wallets: { walletList } }) => ({ walletList });

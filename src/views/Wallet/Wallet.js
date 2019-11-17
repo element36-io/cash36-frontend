@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from '../../components/Header';
-import AddWalletProvider from '../../providers/addWallet.provider';
+import WalletProvider from '../../providers/wallet.provider';
 import PageLoader from '../../components/PageLoader';
 import Home from '../Home';
 import Buy from '../Buy';
@@ -15,7 +15,7 @@ export const Wallet = ({ isAuthenticated }) => {
   if (!isAuthenticated) return <Redirect to="/login" />;
 
   return (
-    <AddWalletProvider>
+    <WalletProvider>
       <PageLoader />
       <Header />
       <Switch>
@@ -26,7 +26,7 @@ export const Wallet = ({ isAuthenticated }) => {
         <Route exact path="/contacts" component={Contacts} />
         <Route path="/kyc/:id" component={Kyc} />
       </Switch>
-    </AddWalletProvider>
+    </WalletProvider>
   );
 };
 
