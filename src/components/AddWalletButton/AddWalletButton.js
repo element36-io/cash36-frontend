@@ -1,18 +1,18 @@
 import React, { useContext } from 'react';
 import DefaultButton from '../Buttons/DefaultButton';
 import walletIcon from '../../assets/icons/wallet-plus-outline.svg';
-import { AddWalletContext } from '../../providers/addWallet.provider';
+import { WalletContext } from '../../providers/wallet.provider';
 
 import './AddWalletButton.scss';
 
 const AddWalletButton = () => {
-  const { onOpen } = useContext(AddWalletContext);
+  const { onOpenAdd } = useContext(WalletContext);
 
   return (
     <DefaultButton
       className="add-wallet-button"
       variant="contained"
-      onClick={onOpen}
+      onClick={onOpenAdd}
     >
       <img src={walletIcon} alt="wallet icon" />
       Add Wallet

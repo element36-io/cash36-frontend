@@ -6,7 +6,7 @@ import AddWalletForm from '../AddWalletForm';
 import UportLogin from '../UportLogin';
 import { Web3Context } from '../../providers/web3.provider';
 import uportLogo from '../../assets/icons/uport_logo.svg';
-import { AddWalletContext } from '../../providers/addWallet.provider';
+import { WalletContext, walletTypes } from '../../providers/wallet.provider';
 import { verifyResponse } from '../../helpers/uport.helpers';
 
 import './AddUportWallet.scss';
@@ -19,7 +19,12 @@ const AddUportWallet = ({ addWallet, walletList }) => {
   const [submitted, setSubmitted] = useState(null);
   const location = useLocation();
   const { network, networkId } = useContext(Web3Context);
-  const { isUportWallet, onClose } = useContext(AddWalletContext);
+  const {
+    isUportWallet,
+    onCloseDialogs,
+    mainWallet,
+    setLoggedInWallet
+  } = useContext(WalletContext);
 
   const changeDescription = event => setDescription(event.target.value);
 
@@ -40,7 +45,7 @@ const AddUportWallet = ({ addWallet, walletList }) => {
     try {
       await addWallet(
         creds.address,
-        'UPORT',
+        walletTypes.uport,
         networkId,
         description,
         creds.username
@@ -57,6 +62,13 @@ const AddUportWallet = ({ addWallet, walletList }) => {
       fetchMobileCreds();
     }
   }, []);
+
+  useEffect(() => {
+    if (mainWallet && creds && mainWallet.accountAddress === creds.address) {
+      const { pushToken, boxPub } = creds;
+      setLoggedInWallet({ ...mainWallet, pushToken, boxPub });
+    }
+  }, [mainWallet, creds]);
 
   const filteredWallet = walletList.filter(wallet =>
     creds ? wallet.accountAddress === creds.address : null
@@ -85,7 +97,7 @@ const AddUportWallet = ({ addWallet, walletList }) => {
             />
           )}
           {submitted && (
-            <span className="add-wallet__success" onClick={onClose}>
+            <span className="icon-success" onClick={onCloseDialogs}>
               <DoneIcon />
             </span>
           )}

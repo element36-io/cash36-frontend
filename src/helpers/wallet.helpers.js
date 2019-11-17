@@ -21,6 +21,9 @@ export const getMainWalletAddress = walletList => {
   return walletList.find(wallet => wallet.mainWallet).accountAddress;
 };
 
+export const getMainWallet = walletList =>
+  walletList.find(wallet => wallet.mainWallet);
+
 export const getQueryStringValue = (search, key) => {
   return decodeURIComponent(
     search.replace(

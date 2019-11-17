@@ -10,7 +10,7 @@ import { render, cleanup } from '@testing-library/react';
 import { reducers } from '../store';
 import { AvatarContext } from '../providers/avatar.provider';
 import { Web3Context } from '../providers/web3.provider';
-import { AddWalletContext } from '../providers/addWallet.provider';
+import { WalletContext } from '../providers/wallet.provider';
 
 const web3Values = {
   networkId: 4,
@@ -20,14 +20,15 @@ const web3Values = {
 };
 
 const addWalletValues = {
-  onOpen: jest.fn(),
-  onClose: jest.fn(),
-  isUportWallet: false
+  setIsOpenAdd: jest.fn(),
+  onCloseDialogs: jest.fn(),
+  isUportWallet: false,
+  loggedInWallet: null
 };
 
 afterEach(cleanup);
 
-export function renderWithRedux (
+export function renderWithRedux(
   component,
   {
     initialState,
@@ -44,7 +45,7 @@ export function renderWithRedux (
   };
 }
 
-export function renderWithRouter (
+export function renderWithRouter(
   component,
   {
     route = '/',
@@ -57,7 +58,7 @@ export function renderWithRouter (
   };
 }
 
-export function renderWithRouterAndRedux (
+export function renderWithRouterAndRedux(
   component,
   {
     initialState = {},
@@ -79,7 +80,7 @@ export function renderWithRouterAndRedux (
   };
 }
 
-export function renderWithAvatarContextAndRouter (
+export function renderWithAvatarContextAndRouter(
   component,
   {
     initialState = {},
@@ -99,9 +100,9 @@ export function renderWithAvatarContextAndRouter (
         <Router history={history}>
           <Web3Context.Provider value={{ ...web3Values }}>
             <AvatarContext.Provider value={{ state, actions }}>
-              <AddWalletContext.Provider value={{ ...addWalletValues }}>
+              <WalletContext.Provider value={{ ...addWalletValues }}>
                 {component}
-              </AddWalletContext.Provider>
+              </WalletContext.Provider>
             </AvatarContext.Provider>
           </Web3Context.Provider>
         </Router>
@@ -111,7 +112,7 @@ export function renderWithAvatarContextAndRouter (
   };
 }
 
-export function renderWithAvatarContext (
+export function renderWithAvatarContext(
   component,
   renderFunction = render,
   {
@@ -128,7 +129,7 @@ export function renderWithAvatarContext (
   );
 }
 
-export function renderWithWeb3Context (component, renderFunction = render) {
+export function renderWithWeb3Context(component, renderFunction = render) {
   return renderFunction(
     <Web3Context.Provider value={{ ...web3Values }}>
       {component}

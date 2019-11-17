@@ -52,3 +52,40 @@
   -ms-filter: blur(3px);
   filter: blur(3px);
 }
+
+.dialog-content {
+  position: relative;
+  padding: 3.2rem;
+
+  @include mobile {
+    display: flex;
+    height: 100%;
+    padding: 2rem;
+
+    svg.add-wallet-dialog__close {
+      right: 1rem;
+    }
+  }
+}
+
+svg.dialog-close {
+  position: absolute;
+  right: 2.5rem;
+  top: 2.5rem;
+  fill: $darkGrey;
+  cursor: pointer;
+}
+
+.icon-success {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2.5rem auto 0;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background: $gradient-green-1;
+  color: #fff;
+  font-size: 3.5rem;
+  cursor: pointer;
+}
