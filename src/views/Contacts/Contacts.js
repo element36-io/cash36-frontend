@@ -19,9 +19,8 @@ import './Contacts.scss';
 const Contacts = ({ contacts, getContacts, removeContact, addContact }) => {
   const [search, setSearch] = useState('');
   const [activeForm, setActiveForm] = useState(false);
-  const [error, setError] = useState('');
 
-  useGet(getContacts, setError);
+  const contactsError = useGet(getContacts)[1];
 
   const searchChangeHandler = evt => {
     setSearch(evt.target.value);
@@ -52,10 +51,10 @@ const Contacts = ({ contacts, getContacts, removeContact, addContact }) => {
       ));
   };
 
-  if (error) {
+  if (contactsError) {
     return (
       <div className="wrapper contacts">
-        <div className="error-text">Fetching data error: {error}</div>
+        <div className="error-text">Fetching data error: {contactsError}</div>
       </div>
     );
   }

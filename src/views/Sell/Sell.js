@@ -13,7 +13,6 @@ import { getMinFunds } from '../../store/wallets/wallets.actions';
 import useCash36 from '../../hooks/useCash36';
 import Token from '../../contracts/ERC20Burnable';
 import useGet from '../../hooks/useGet';
-import useGetWithState from '../../hooks/useGetWithState';
 import useGetEtherBalance from '../../hooks/useGetEtherBalance';
 import { getMainWalletAddress } from '../../helpers/wallet.helpers';
 
@@ -23,21 +22,15 @@ export const Sell = ({ user, tokens, getTokens, hasWallet, mainWallet }) => {
   const [step, setStep] = useState(0);
   const [values, setValues] = useState({ amount: '', symbol: 'EUR36' });
   const [sellError, setSellError] = useState(null);
-  const [exchangeFee, setExchangeFee] = useState(null);
-  const [minFunds, setMinFunds] = useState(null);
-  const [exchangeFeeError, setExchangeFeeError] = useState('');
-  const [tokensError, setTokensError] = useState('');
-  const [minFundsError, setMinFundsError] = useState('');
   const mounted = useRef(true);
   const web3 = useCash36();
 
-  useGetWithState(getExchangeFee, setExchangeFeeError, setExchangeFee);
-  useGetWithState(getMinFunds, setMinFundsError, setMinFunds);
-  useGet(getTokens, setTokensError);
+  const tokensError = useGet(getTokens)[1];
+  const [exchangeFee, exchangeFeeError] = useGet(getExchangeFee);
+  const [minFunds, minFundsError] = useGet(getMinFunds);
+
   const balanceWei = useGetEtherBalance(mainWallet, 'wei');
   const etherBalance = useGetEtherBalance(mainWallet);
-
-  console.log(minFunds);
 
   useEffect(() => {
     return () => {

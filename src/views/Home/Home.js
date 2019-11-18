@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import QuickActions from './QuickActions';
 import ActivityTable from '../../components/ActivityTable';
@@ -11,9 +11,8 @@ import './Home.scss';
 
 const Home = ({ getUserActivity, userActivity }) => {
   const lastActivity = userActivity.slice(0, 5);
-  const [error, setError] = useState('');
 
-  useGet(getUserActivity, setError);
+  const lastActivityError = useGet(getUserActivity)[1];
 
   return (
     <div className="home-page" data-testid="home-page">
@@ -31,8 +30,8 @@ const Home = ({ getUserActivity, userActivity }) => {
             <ActivityTable userActivity={lastActivity} />
           ) : (
             <div className="paper home-page__no-activity">
-              {error ? (
-                <div className="error-text">{error}</div>
+              {lastActivityError ? (
+                <div className="error-text">{lastActivityError}</div>
               ) : (
                 <Fragment>
                   <h3>No Recent Activity.</h3>

@@ -44,7 +44,7 @@ export const Step1Tier1Form = ({
     }
   };
 
-  useGet(getCountries, setError);
+  const countriesError = useGet(getCountries)[1];
 
   const fieldGroup = formModel.map(field => {
     if (field.name === 'country') field.list = countries;
@@ -100,7 +100,7 @@ export const Step1Tier1Form = ({
               disabled={submitting}
               submitting={submitting}
               submitCallback={formProps.handleSubmit}
-              error={error || stepError}
+              error={error || stepError || countriesError}
             />
           </form>
         )}
