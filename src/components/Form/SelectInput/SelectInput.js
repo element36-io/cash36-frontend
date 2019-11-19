@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactCountryFlag from 'react-country-flag';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import { TextField, MenuItem, withStyles } from '@material-ui/core';
+import { MenuItem, withStyles, Select, InputLabel } from '@material-ui/core';
 import styles from './MuiStyles';
 
 export const SelectInput = ({
@@ -16,33 +16,29 @@ export const SelectInput = ({
   isTouched,
   placeholder,
   countryList,
-  classes
+  classes,
+  isNative
 }) => {
   return (
     <div
       className={`element-form__input-wrapper element-form__input-wrapper--select  ${name}`}
     >
-      <TextField
+      <InputLabel id={`select-${name}-label`} shrink>
+        {label}
+      </InputLabel>
+      <Select
         id={`text-field-${name}`}
         name={name}
-        label={label}
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        select
         fullWidth
         className={classes.root}
-        InputProps={{
-          disableUnderline: true
-        }}
-        InputLabelProps={{
-          shrink: true
-        }}
-        SelectProps={{
-          displayEmpty: true,
-          IconComponent: KeyboardArrowDownIcon,
-          className: 'invest-select'
-        }}
+        disableUnderline
+        native={isNative}
+        displayEmpty
+        autoComplete="off"
+        IconComponent={KeyboardArrowDownIcon}
       >
         <MenuItem value="" disabled>
           <div className={classes.placeholder}>
@@ -69,7 +65,7 @@ export const SelectInput = ({
             {item.name || item.label}
           </MenuItem>
         ))}
-      </TextField>
+      </Select>
       {isTouched && error && <p className="form-error">{error}</p>}
     </div>
   );
@@ -86,7 +82,8 @@ SelectInput.propTypes = {
   placeholder: PropTypes.string,
   isTouched: PropTypes.bool,
   classes: PropTypes.object,
-  countryList: PropTypes.bool
+  countryList: PropTypes.bool,
+  isNative: PropTypes.bool
 };
 
 SelectInput.defaultProps = {

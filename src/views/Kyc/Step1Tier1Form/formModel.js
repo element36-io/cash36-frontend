@@ -61,8 +61,8 @@ export const formModel = [
   },
   {
     name: 'country',
-    type: 'autocomplete',
-    label: 'Select your country',
+    type: 'select',
+    label: 'Country of residence',
     list: [],
     placeholder: 'Select your country'
   }
