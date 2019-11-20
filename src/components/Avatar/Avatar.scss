@@ -6,6 +6,11 @@
   border-radius: 16px;
   overflow: hidden;
 
+  input {
+    position: absolute;
+    left: -9999px;
+  }
+
   img {
     display: block;
     width: 100%;

@@ -33,6 +33,7 @@ export const UserProfile = ({ user, alt }) => {
           alt={name}
           cssClass="user-profile__avatar__image"
           username={username}
+          isEditable
         />
         {currentLevel && (
           <div

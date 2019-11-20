@@ -152,13 +152,22 @@ export const resetPassword = async email => {
 
 export const setNewPassword = async (challenge, password, username) => {
   try {
-    const response = await axios.post(`${API_ROOT}/auth/user/reset`, {
+    await axios.post(`${API_ROOT}/auth/user/reset`, {
       challenge,
       password,
       username
     });
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const getAvatarUrl = async () => {
+  try {
+    const response = await API.get(`${API_ROOT}/compliance/avatar`);
 
     console.log(response);
+    return response.data;
   } catch (error) {
     return handleError(error);
   }

@@ -1,30 +1,62 @@
-import React, { useEffect, useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { AvatarContext } from '../../providers/avatar.provider';
-import { checkIfUrlContainsImage } from '../../helpers/image.helpers';
+
+import { getAvatarUrl } from '../../store/auth/auth.actions';
+import useGet from '../../hooks/useGet';
+
 import './Avatar.scss';
 
-const Avatar = ({ avatarUrl, cssClass, alt, username }) => {
-  const { state, actions } = useContext(AvatarContext);
+const Avatar = ({ cssClass, alt, isEditable = false }) => {
+  let [avatarUrl, error] = useGet(getAvatarUrl);
 
-  const fetchImage = async () => {
-    if (state[username] || !avatarUrl) return;
-    try {
-      const imageUrl = await checkIfUrlContainsImage(avatarUrl);
-      actions.add(username, imageUrl);
-    } catch (error) {
-      console.warn('Avatar does not exist.');
+  const uploadAvatar = event => {
+    const { files } = event.target;
+
+    const fileTypes = ['png', 'jpg', 'jpeg'];
+
+    if (!files[0]) return;
+
+    const isValidFileType = fileTypes.includes(
+      files[0].name
+        .split('.')
+        .pop()
+        .toLowerCase()
+    );
+    const isValidSize = files[0].size < 10485760;
+
+    if (!isValidFileType) {
+      error = 'Not a valid file type';
+      return;
     }
+
+    if (!isValidSize) {
+      error = 'File is too big';
+      return;
+    }
+
+    const formData = new FormData();
+
+    formData.append('files', files[0]);
   };
 
-  useEffect(() => {
-    fetchImage();
-  }, []);
+  if (isEditable) {
+    return (
+      <label className={`avatar ${cssClass || ''}`}>
+        <input type="file" onChange={uploadAvatar} />
+        {avatarUrl ? (
+          <img src={avatarUrl} alt={alt} />
+        ) : (
+          <i className="fas fa-user" data-testid="avatar__icon" />
+        )}
+        <span className="error-text">{error}</span>
+      </label>
+    );
+  }
 
   return (
     <div className={`avatar ${cssClass || ''}`}>
-      {state[username] ? (
-        <img src={state[username]} alt={alt} />
+      {avatarUrl ? (
+        <img src={avatarUrl} alt={alt} />
       ) : (
         <i className="fas fa-user" data-testid="avatar__icon" />
       )}
@@ -33,10 +65,9 @@ const Avatar = ({ avatarUrl, cssClass, alt, username }) => {
 };
 
 Avatar.propTypes = {
-  avatarUrl: PropTypes.string,
   cssClass: PropTypes.string,
   alt: PropTypes.string,
-  username: PropTypes.string
+  isEditable: PropTypes.bool
 };
 
 export default Avatar;
