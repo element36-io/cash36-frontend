@@ -15,10 +15,20 @@ export const SelectInput = ({
   onBlur,
   isTouched,
   placeholder,
+  relatedField,
   countryList,
   classes,
+  formValues,
+  setFieldValue,
   isNative
 }) => {
+  const changeHandler = evt => {
+    onChange(evt);
+    if (relatedField && !formValues[relatedField]) {
+      setFieldValue(relatedField, evt.target.value, true);
+    }
+  };
+
   return (
     <div
       className={`element-form__input-wrapper element-form__input-wrapper--select  ${name}`}
@@ -30,7 +40,7 @@ export const SelectInput = ({
         id={`text-field-${name}`}
         name={name}
         value={value}
-        onChange={onChange}
+        onChange={changeHandler}
         onBlur={onBlur}
         fullWidth
         className={classes.root}
@@ -77,12 +87,15 @@ SelectInput.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func,
+  onBsetFieldValuelur: PropTypes.func,
   list: PropTypes.arrayOf(PropTypes.object),
   error: PropTypes.string,
+  relatedField: PropTypes.string,
   placeholder: PropTypes.string,
   isTouched: PropTypes.bool,
   classes: PropTypes.object,
   countryList: PropTypes.bool,
+  formValues: PropTypes.object,
   isNative: PropTypes.bool
 };
 

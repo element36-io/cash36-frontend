@@ -52,6 +52,9 @@ const FormField = props => {
           error={errors[formField.name]}
           list={formField.list}
           disabled={disabled}
+          formValues={values}
+          relatedField={formField.relatedField}
+          setFieldValue={setFieldValue}
           countryList={countryList}
         />
       );

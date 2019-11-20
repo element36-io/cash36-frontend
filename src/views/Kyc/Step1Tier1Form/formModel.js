@@ -33,7 +33,8 @@ export const formModel = [
     name: 'email',
     type: 'text',
     label: 'Email Address',
-    placeholder: 'Enter your Email Address'
+    placeholder: 'Enter your Email Address',
+    disabled: true
   },
   {
     name: 'street',
@@ -63,36 +64,37 @@ export const formModel = [
     name: 'country',
     type: 'select',
     label: 'Country of residence',
+    relatedField: 'nationality',
     list: [],
     placeholder: 'Select your country'
+  },
+  {
+    name: 'nationality',
+    type: 'select',
+    label: 'Select your nationality',
+    list: [],
+    placeholder: 'Select your nationality'
   }
 ];
 
 export const nationalityModel = [
   {
-    name: 'nationality',
-    type: 'autocomplete',
-    label: 'Select your nationality 1',
-    list: [],
-    placeholder: 'Select your nationality'
-  },
-  {
     name: 'nationality2',
-    type: 'autocomplete',
+    type: 'select',
     label: 'Select your nationality 2',
     list: [],
     placeholder: 'Select your nationality'
   },
   {
     name: 'nationality3',
-    type: 'autocomplete',
+    type: 'select',
     label: 'Select your nationality 3',
     list: [],
     placeholder: 'Select your nationality'
   },
   {
     name: 'nationality4',
-    type: 'autocomplete',
+    type: 'select',
     label: 'Select your nationality 4',
     list: [],
     placeholder: 'Select your nationality'
@@ -120,5 +122,6 @@ export const initialValues = {
   streetNr: '',
   zip: '',
   email: '',
-  iban: ''
+  iban: '',
+  moreNationalities: false
 };
