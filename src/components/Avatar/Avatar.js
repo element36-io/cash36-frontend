@@ -7,7 +7,10 @@ import useGet from '../../hooks/useGet';
 import './Avatar.scss';
 
 const Avatar = ({ cssClass, alt, isEditable = false }) => {
-  let [avatarUrl, error] = useGet(getAvatarUrl);
+  // let [avatarUrl, error] = useGet(getAvatarUrl);
+
+  let avatarUrl = null;
+  let error = '';
 
   const uploadAvatar = event => {
     const { files } = event.target;
