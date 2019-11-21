@@ -14,7 +14,6 @@ const NationalitiesCheckbox = ({
       setFieldValue('nationality3', '', true);
       setFieldValue('nationality4', '', true);
     }
-    console.warn(values);
   };
 
   return (
