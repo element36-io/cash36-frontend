@@ -14,7 +14,10 @@ const Avatar = ({ cssClass, alt, isEditable = false }) => {
 
     const fileTypes = ['png', 'jpg', 'jpeg'];
 
-    if (!files[0]) return;
+    if (!files[0]) {
+      error = 'You must choose a file';
+      return;
+    }
 
     const isValidFileType = fileTypes.includes(
       files[0].name
@@ -48,7 +51,7 @@ const Avatar = ({ cssClass, alt, isEditable = false }) => {
         ) : (
           <i className="fas fa-user" data-testid="avatar__icon" />
         )}
-        <span className="error-text">{error}</span>
+        {error && <span className="error-text">{error}</span>}
       </label>
     );
   }
