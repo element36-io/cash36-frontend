@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
-
 import Form from '../../../components/Form';
 import FormField from '../../../components/Form/FormField';
 import ProcessHeader from '../ProcessHeader';
 import ProcessControls from '../ProcessControls';
+import NationalitiesCheckbox from './NationalitiesCheckbox';
 import { getCountries } from '../../../store/countries/countries.actions';
 import validationSchema from './validation-schema';
 import {
@@ -21,7 +21,6 @@ import './Step1Tier1Form.scss';
 
 export const Step1Tier1Form = ({
   countries,
-  nationalities,
   getCountries,
   changeSteps,
   avatarUri,
@@ -47,11 +46,11 @@ export const Step1Tier1Form = ({
   const countriesError = useGet(getCountries)[1];
 
   const fieldGroup = formModel.map(field => {
-    if (field.name === 'country') field.list = countries;
+    if (field.type === 'select') field.list = countries;
     return field;
   });
   const nationalitySelects = nationalityModel.map(item => {
-    item.list = nationalities;
+    item.list = countries;
     return item;
   });
 
@@ -64,7 +63,7 @@ export const Step1Tier1Form = ({
       <Form
         submitCallback={submit}
         validationSchema={validationSchema}
-        initialValues={initialValues}
+        initialValues={{ ...initialValues, email: user.username }}
         render={(formProps, submitting) => (
           <form autoComplete="off" onSubmit={formProps.handleSubmit}>
             <h3>Personal Information</h3>
@@ -74,20 +73,32 @@ export const Step1Tier1Form = ({
                   key={field.name}
                   formField={field}
                   formProps={formProps}
-                  countryList={field.name === 'country'}
+                  disabled={field.disabled}
+                  countryList={
+                    field.name === 'country' || field.name === 'nationality'
+                  }
                 />
               ))}
             </div>
-            <div className="tier1-form__field-group">
-              {nationalitySelects.map(field => (
-                <FormField
-                  key={field.name}
-                  formField={field}
-                  formProps={formProps}
-                  countryList
-                />
-              ))}
+            <div className="tier1-form__field-group checkbox">
+              <NationalitiesCheckbox
+                formProps={formProps}
+                fieldName="moreNationalities"
+              />
             </div>
+            {formProps.values.moreNationalities && (
+              <div className="tier1-form__field-group">
+                {nationalitySelects.map(field => (
+                  <FormField
+                    key={field.name}
+                    formField={field}
+                    formProps={formProps}
+                    countryList
+                  />
+                ))}
+              </div>
+            )}
+
             <h3>Bank Account</h3>
             <FormField formField={ibanModel} formProps={formProps} />
             {!formProps.isValid && formProps.submitCount > 0 && (
@@ -121,8 +132,8 @@ Step1Tier1Form.propTypes = {
 
 const mapStateToProps = ({
   auth: { user },
-  countries: { countries = [], nationalities = [] }
-}) => ({ countries, nationalities, user });
+  countries: { countries = [] }
+}) => ({ countries, user });
 
 export default connect(
   mapStateToProps,
