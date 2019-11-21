@@ -11,7 +11,6 @@ const mockStore = configureMockStore(middlewares);
 
 test('dispatches getCountries action', async () => {
   const countries = [{ code: 'CH', name: 'Switzerland' }];
-  const nationalities = [{ code: 'CH', name: 'Switzerland' }];
 
   mockAxios.get.mockImplementation(() =>
     Promise.resolve({
@@ -25,8 +24,7 @@ test('dispatches getCountries action', async () => {
     {
       type: GET_COUNTRIES,
       payload: {
-        countries,
-        nationalities
+        countries
       }
     }
   ];
@@ -34,6 +32,6 @@ test('dispatches getCountries action', async () => {
   await store.dispatch(getCountries());
 
   expect(store.getActions()).toEqual(expectedActions);
-  expect(mockAxios.get).toHaveBeenCalledTimes(2);
+  expect(mockAxios.get).toHaveBeenCalledTimes(1);
   mockAxios.get.mockRestore();
 });

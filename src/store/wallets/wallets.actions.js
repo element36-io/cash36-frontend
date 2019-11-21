@@ -74,7 +74,7 @@ export const getMinFunds = async () => {
 
 export const fundWallet = async (walletAddress, tokenSymbol) => {
   try {
-    const response = await API.post(
+    await API.post(
       `/compliance/prefund/sendto/${walletAddress}/${tokenSymbol}`
     );
   } catch (error) {
