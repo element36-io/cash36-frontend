@@ -22,7 +22,8 @@ export default theme => ({
     marginBottom: '20px'
   },
   placeholderText: {
-    fontSize: '1.6rem',
-    color: theme.palette.text.hint
+    fontSize: '1.8rem',
+    color: '#01152C',
+    opacity: '0.5'
   }
 });

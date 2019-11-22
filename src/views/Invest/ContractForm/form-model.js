@@ -7,14 +7,18 @@ export const formModel = [
   },
   {
     name: 'description',
-    type: 'text',
+    type: 'textarea',
     label: 'Description',
-    placeholder: 'Enther your contract description'
+    placeholder: 'Enter your contract description'
   },
   {
     name: 'symbol',
-    type: 'text',
+    type: 'select',
     label: 'Token',
+    list: [
+      { value: 'EUR36', label: 'EUR36' },
+      { value: 'CHF36', label: 'CHF36' }
+    ],
     placeholder: 'Choose the token of contract'
   },
   {
