@@ -7,6 +7,7 @@ import PageLoader from '../../components/PageLoader';
 import Home from '../Home';
 import Buy from '../Buy';
 import Sell from '../Sell';
+import Invest from '../Invest';
 import History from '../History';
 import Contacts from '../Contacts';
 import Kyc from '../Kyc';
@@ -22,6 +23,7 @@ export const Wallet = ({ isAuthenticated }) => {
         <Route exact path="/" component={Home} />
         <Route exact path="/buy" component={Buy} />
         <Route exact path="/sell" component={Sell} />
+        <Route exact path="/invest" component={Invest} />
         <Route exact path="/history" component={History} />
         <Route exact path="/contacts" component={Contacts} />
         <Route path="/kyc/:id" component={Kyc} />

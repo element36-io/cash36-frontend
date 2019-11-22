@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import './Form.scss';
 
-const Form = ({ render, submitCallback, initialValues, validationSchema }) => {
+const Form = ({
+  render,
+  submitCallback,
+  initialValues,
+  validationSchema = {},
+  validate = () => {}
+}) => {
   const [submitting, toggleSubmitting] = useState(false);
 
   const onSubmit = useCallback(async formValues => {
@@ -32,7 +38,8 @@ const Form = ({ render, submitCallback, initialValues, validationSchema }) => {
 Form.propTypes = {
   submitCallback: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
-  validationSchema: PropTypes.object.isRequired,
+  validationSchema: PropTypes.object,
+  validate: PropTypes.func,
   render: PropTypes.func.isRequired
 };
 

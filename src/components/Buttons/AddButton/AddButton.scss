@@ -1,12 +1,12 @@
 @import '../../../styles/mixins.scss';
 @import '../../../styles/settings.scss';
 
-.contacts__add-btn {
+.add-button {
   > span {
     border-radius: 10px;
   }
 
-  .contacts__add-btn__inner {
+  .add-button__inner {
     display: flex;
     align-items: center;
     background: $white;

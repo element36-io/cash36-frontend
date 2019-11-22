@@ -15,7 +15,10 @@
   .element-form__input-wrapper {
     position: relative;
     width: 100%;
-    margin-bottom: 3rem;
+
+    &:not(:last-child) {
+      margin-bottom: 3rem;
+    }
 
     &.element-form__input-wrapper--select {
       transform: translateY(-0.2rem);
