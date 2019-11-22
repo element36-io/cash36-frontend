@@ -1,16 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import { getAvatarUrl } from '../../store/auth/auth.actions';
-import useGet from '../../hooks/useGet';
+import API, { API_ROOT } from '../../config/api';
 
 import './Avatar.scss';
 
-const Avatar = ({ cssClass, alt, isEditable = false }) => {
-  // let [avatarUrl, error] = useGet(getAvatarUrl);
+const Avatar = ({ cssClass, alt, isEditable = false, avatarUrl }) => {
+  const [error, setError] = useState('');
 
-  let avatarUrl = null;
-  let error = '';
+  avatarUrl = `${API_ROOT}/compliance/avatar`;
 
   const uploadAvatar = event => {
     const { files } = event.target;
@@ -18,7 +17,7 @@ const Avatar = ({ cssClass, alt, isEditable = false }) => {
     const fileTypes = ['png', 'jpg', 'jpeg'];
 
     if (!files[0]) {
-      error = 'You must choose a file';
+      setError('You must choose a file');
       return;
     }
 
@@ -31,18 +30,26 @@ const Avatar = ({ cssClass, alt, isEditable = false }) => {
     const isValidSize = files[0].size < 10485760;
 
     if (!isValidFileType) {
-      error = 'Not a valid file type';
+      setError('Not a valid file type');
       return;
     }
 
     if (!isValidSize) {
-      error = 'File is too big';
+      setError('File is too big');
       return;
     }
 
     const formData = new FormData();
 
-    formData.append('files', files[0]);
+    formData.append('file', files[0]);
+
+    try {
+      API.post(`/compliance/avatar`, formData);
+
+      console.log('SUCCESS!!!');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   if (isEditable) {
@@ -70,10 +77,14 @@ const Avatar = ({ cssClass, alt, isEditable = false }) => {
   );
 };
 
+const mapStateToProps = state => {
+  return { avatarUrl: state.auth.user.avatarUrl };
+};
+
 Avatar.propTypes = {
   cssClass: PropTypes.string,
   alt: PropTypes.string,
   isEditable: PropTypes.bool
 };
 
-export default Avatar;
+export default connect(mapStateToProps)(Avatar);
