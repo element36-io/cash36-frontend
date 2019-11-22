@@ -2,6 +2,7 @@ import React from 'react';
 
 import Form from '../../../components/Form';
 import FormField from '../../../components/Form/FormField';
+import DefaultButton from '../../../components/Buttons/DefaultButton';
 import { formModel, initialValues } from './form-model';
 
 import './ContractForm.scss';
@@ -9,7 +10,9 @@ import './ContractForm.scss';
 const ContractForm = () => {
   return (
     <Form
-      submitCallback={() => {}}
+      submitCallback={() => {
+        console.log('sumibbe');
+      }}
       initialValues={initialValues}
       render={(formProps, submitting) => (
         <form
@@ -28,6 +31,10 @@ const ContractForm = () => {
               />
             ))}
           </div>
+
+          <DefaultButton type="submit" disabled={submitting}>
+            Add Contract
+          </DefaultButton>
         </form>
       )}
     />

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import AddButton from '../../components/Buttons/AddButton';
 import ContractForm from './ContractForm';
 
