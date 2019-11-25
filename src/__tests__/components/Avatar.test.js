@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 
 import Avatar from '../../components/Avatar';
 
-test('renders the component', () => {
+test.skip('renders the component', () => {
   const { container } = render(<Avatar />);
 
   expect(container.firstChild).toBeVisible();
