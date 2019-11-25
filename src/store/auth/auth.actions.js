@@ -179,3 +179,11 @@ export const uploadAvatar = async formData => {
     return handleError(error);
   }
 };
+
+export const deleteAvatar = async () => {
+  try {
+    await API.delete(`/compliance/avatar`);
+  } catch (error) {
+    return handleError(error);
+  }
+};

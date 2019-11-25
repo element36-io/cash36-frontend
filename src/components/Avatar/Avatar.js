@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import DeleteIcon from '@material-ui/icons/Delete';
 
-import { uploadAvatar } from '../../store/auth/auth.actions';
+import { uploadAvatar, deleteAvatar } from '../../store/auth/auth.actions';
 import { AvatarContext } from '../../providers/avatar.provider';
 
 import './Avatar.scss';
@@ -21,7 +22,6 @@ const Avatar = ({ cssClass, alt, isEditable = false }) => {
     const fileTypes = ['png', 'jpg', 'jpeg'];
 
     if (!files[0]) {
-      setError('You must choose a file');
       return;
     }
 
@@ -55,17 +55,33 @@ const Avatar = ({ cssClass, alt, isEditable = false }) => {
     }
   };
 
+  const removeAvatar = async () => {
+    try {
+      await deleteAvatar();
+      await callGetAvatar();
+    } catch (error) {
+      setError(error);
+    }
+  };
+
   if (isEditable) {
     return (
-      <label className={`avatar ${cssClass || ''}`}>
-        <input type="file" onChange={uploadNewAvatar} />
-        {avatarUrl ? (
-          <img src={avatarUrl} alt={alt} />
-        ) : (
-          <i className="fas fa-user" data-testid="avatar__icon" />
+      <div className="avatar__container">
+        {avatarUrl && (
+          <div className="avatar__remove" onClick={removeAvatar}>
+            <DeleteIcon />
+          </div>
         )}
-        {error && <span className="error-text">{error}</span>}
-      </label>
+        <label className={`avatar ${cssClass || ''}`}>
+          <input type="file" onChange={uploadNewAvatar} />
+          {avatarUrl ? (
+            <img src={avatarUrl} alt={alt} />
+          ) : (
+            <i className="fas fa-user" data-testid="avatar__icon" />
+          )}
+          {error && <span className="error-text">{error}</span>}
+        </label>
+      </div>
     );
   }
 
