@@ -1,43 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Form from '../../../components/Form';
 import FormField from '../../../components/Form/FormField';
+import FormHeader from '../../../components/Form/FormHeader';
 import DefaultButton from '../../../components/Buttons/DefaultButton';
+import { addContract } from '../../../helpers/async/contracts.helpers';
 import { formModel, initialValues } from './form-model';
+import validationSchema from './validation-schema';
 
 import './ContractForm.scss';
 
 const ContractForm = () => {
+  const [error, setError] = useState('');
+  const submit = async formValues => {
+    try {
+      await addContract(formValues);
+    } catch (error) {
+      setError(error);
+    }
+  };
   return (
-    <Form
-      submitCallback={() => {
-        console.log('sumibbe');
-      }}
-      initialValues={initialValues}
-      render={(formProps, submitting) => (
-        <form
-          className="paper contract-form"
-          autoComplete="off"
-          onSubmit={formProps.handleSubmit}
-        >
-          <h3>Add Contract</h3>
-          <div className="tier1-form__field-group">
-            {formModel.map(field => (
-              <FormField
-                key={field.name}
-                formField={field}
-                formProps={formProps}
-                disabled={field.disabled}
-              />
-            ))}
-          </div>
+    <div className="paper contract-form">
+      <FormHeader title="Add Contract" />
+      <Form
+        submitCallback={submit}
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        render={(formProps, submitting) => (
+          <form
+            className=""
+            autoComplete="off"
+            onSubmit={formProps.handleSubmit}
+          >
+            <div className="tier1-form__field-group">
+              {formModel.map(field => (
+                <FormField
+                  key={field.name}
+                  formField={field}
+                  formProps={formProps}
+                  disabled={field.disabled}
+                />
+              ))}
+            </div>
 
-          <DefaultButton type="submit" disabled={submitting}>
-            Add Contract
-          </DefaultButton>
-        </form>
-      )}
-    />
+            <DefaultButton type="submit" disabled={submitting}>
+              Add Contract
+            </DefaultButton>
+            {error && <div className="error-text">{error}</div>}
+          </form>
+        )}
+      />
+    </div>
   );
 };
 

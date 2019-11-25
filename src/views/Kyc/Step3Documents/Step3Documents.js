@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import ProcessHeader from '../ProcessHeader';
+import FormHeader from '../../../components/Form/FormHeader';
 import ProcessControls from '../ProcessControls';
 import FileInput from '../FileInput';
 import { getSelfieCode } from '../../../store/auth/auth.actions';
@@ -72,7 +72,7 @@ const Step3Documents = ({ changeSteps, stepError }) => {
 
   return (
     <div className="documents-upload">
-      <ProcessHeader
+      <FormHeader
         title="Verification Process - Step 3"
         subtitle="Please upload the following documents so we can verify your identity and domicile address."
       />

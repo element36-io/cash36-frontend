@@ -62,6 +62,9 @@ export default createMuiTheme({
       }
     },
     MuiInput: {
+      root: {
+        fontSize: '1.6rem'
+      },
       underline: {
         '&&&&:hover:before': {
           borderBottom: '2px solid #EDF0F4'

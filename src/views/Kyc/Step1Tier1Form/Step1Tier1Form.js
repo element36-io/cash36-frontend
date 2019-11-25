@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import Form from '../../../components/Form';
 import FormField from '../../../components/Form/FormField';
-import ProcessHeader from '../ProcessHeader';
+import FormHeader from '../../../components/Form/FormHeader';
 import ProcessControls from '../ProcessControls';
 import NationalitiesCheckbox from './NationalitiesCheckbox';
 import { getCountries } from '../../../store/countries/countries.actions';
@@ -56,7 +56,7 @@ export const Step1Tier1Form = ({
 
   return (
     <div className="tier1-form">
-      <ProcessHeader
+      <FormHeader
         title="Verification Process - Step 1"
         subtitle="Please enter your personal and bank Information"
       />

@@ -1,15 +1,15 @@
 export const formModel = [
   {
+    name: 'name',
+    type: 'text',
+    label: 'Name',
+    placeholder: 'Contract Name'
+  },
+  {
     name: 'contractAddress',
     type: 'text',
     label: 'Contract Address',
-    placeholder: 'Enter the address of the contract'
-  },
-  {
-    name: 'description',
-    type: 'textarea',
-    label: 'Description',
-    placeholder: 'Enter your contract description'
+    placeholder: '0x00000000000...'
   },
   {
     name: 'symbol',
@@ -19,7 +19,7 @@ export const formModel = [
       { value: 'EUR36', label: 'EUR36' },
       { value: 'CHF36', label: 'CHF36' }
     ],
-    placeholder: 'Choose the token of contract'
+    placeholder: 'EUR36/CHF36'
   },
   {
     name: 'investmentLink',
@@ -35,13 +35,24 @@ export const formModel = [
   },
   {
     name: 'access',
-    type: 'text',
-    label: 'Contract Address',
-    placeholder: 'Enter the address of the contract'
+    type: 'select',
+    label: 'Access',
+    list: [
+      { value: 'PUBLIC', label: 'Public' },
+      { value: 'PRIVATE', label: 'Private' }
+    ],
+    placeholder: 'Public/Private'
+  },
+  {
+    name: 'description',
+    type: 'textarea',
+    label: 'Description',
+    placeholder: 'Enter your contract description'
   }
 ];
 
 export const initialValues = {
+  name: '',
   contractAddress: '',
   description: '',
   symbol: '',
