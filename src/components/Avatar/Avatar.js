@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
-import API, { API_ROOT } from '../../config/api';
+import { uploadAvatar } from '../../store/auth/auth.actions';
+import { AvatarContext } from '../../providers/avatar.provider';
 
 import './Avatar.scss';
 
-const Avatar = ({ cssClass, alt, isEditable = false, avatarUrl }) => {
+const Avatar = ({ cssClass, alt, isEditable = false }) => {
   const [error, setError] = useState('');
 
-  avatarUrl = `${API_ROOT}/compliance/avatar`;
+  const { avatarUrl, avatarError, callGetAvatar } = useContext(AvatarContext);
 
-  const uploadAvatar = event => {
+  if (avatarError) {
+    setError(avatarError);
+  }
+
+  const uploadNewAvatar = async event => {
     const { files } = event.target;
 
     const fileTypes = ['png', 'jpg', 'jpeg'];
@@ -44,18 +48,17 @@ const Avatar = ({ cssClass, alt, isEditable = false, avatarUrl }) => {
     formData.append('file', files[0]);
 
     try {
-      API.post(`/compliance/avatar`, formData);
-
-      console.log('SUCCESS!!!');
+      await uploadAvatar(formData);
+      await callGetAvatar();
     } catch (error) {
-      console.log(error);
+      setError(error);
     }
   };
 
   if (isEditable) {
     return (
       <label className={`avatar ${cssClass || ''}`}>
-        <input type="file" onChange={uploadAvatar} />
+        <input type="file" onChange={uploadNewAvatar} />
         {avatarUrl ? (
           <img src={avatarUrl} alt={alt} />
         ) : (
@@ -77,14 +80,10 @@ const Avatar = ({ cssClass, alt, isEditable = false, avatarUrl }) => {
   );
 };
 
-const mapStateToProps = state => {
-  return { avatarUrl: state.auth.user.avatarUrl };
-};
-
 Avatar.propTypes = {
   cssClass: PropTypes.string,
   alt: PropTypes.string,
   isEditable: PropTypes.bool
 };
 
-export default connect(mapStateToProps)(Avatar);
+export default Avatar;

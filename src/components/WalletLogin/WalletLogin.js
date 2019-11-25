@@ -63,7 +63,7 @@ const WalletLogin = () => {
                     </p>
                     <p>Please select the proper MetaMask account</p>
                   </>
-                )}
+              )}
             </>
           ) : (
             <UportLogin

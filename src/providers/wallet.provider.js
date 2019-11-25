@@ -62,8 +62,7 @@ const WalletProvider = ({
         const response = await verifyResponse(location.hash.split('=')[1]);
         const { boxPub, pushToken, address } = response.data;
 
-        if (mainWallet.accountAddress === address)
-          setLoggedInWallet({ ...mainWallet, pushToken, boxPub });
+        if (mainWallet.accountAddress === address) { setLoggedInWallet({ ...mainWallet, pushToken, boxPub }); }
 
         history.replace(location.pathname);
       }
@@ -94,11 +93,9 @@ const WalletProvider = ({
       if (
         loggedInWallet &&
         mainWallet.accountAddress !== loggedInWallet.accountAddress
-      )
-        removeLoggedInWallet();
+      ) { removeLoggedInWallet(); }
 
-      if (checkIfUportMobile(uportAction) && uportAction === 'login')
-        fetchUportMobileCreds(mainWallet);
+      if (checkIfUportMobile(uportAction) && uportAction === 'login') { fetchUportMobileCreds(mainWallet); }
     }
 
     if (

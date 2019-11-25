@@ -161,3 +161,21 @@ export const setNewPassword = async (challenge, password, username) => {
     return handleError(error);
   }
 };
+
+export const getAvatar = async () => {
+  try {
+    const response = await API.get('/compliance/avatar');
+
+    return response.data;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const uploadAvatar = async formData => {
+  try {
+    await API.post(`/compliance/avatar`, formData);
+  } catch (error) {
+    return handleError(error);
+  }
+};
