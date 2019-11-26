@@ -69,7 +69,7 @@ const Contacts = ({ contacts, getContacts, removeContact, addContact }) => {
       />
       <div className="contacts__actions">
         <SearchBox changeHandler={searchChangeHandler} value={search} />
-        <AddButton clickHandler={showForm} text="Add Contact" />
+        <AddButton onClick={showForm} text="Add Contact" />
       </div>
       {contacts.fetching ? (
         <div className="contacts__loader">

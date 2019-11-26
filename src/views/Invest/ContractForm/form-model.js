@@ -31,7 +31,7 @@ export const formModel = [
     name: 'website',
     type: 'text',
     label: 'Project website',
-    placeholder: 'Enter the project website.'
+    placeholder: 'Enter the project website'
   },
   {
     name: 'access',

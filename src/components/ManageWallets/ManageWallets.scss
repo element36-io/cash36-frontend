@@ -28,7 +28,13 @@
       width: 100%;
       display: flex;
       flex: 1;
+      align-items: center;
       margin-top: 3.2rem;
+      > span {
+        color: #fff;
+        display: flex;
+        align-items: center;
+      }
     }
   }
 

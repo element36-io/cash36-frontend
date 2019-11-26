@@ -6,8 +6,8 @@ import BaseButton from '../BaseButton';
 
 import './AddButton.scss';
 
-const AddButton = ({ text, clickHandler }) => (
-  <BaseButton className="add-button" onClick={clickHandler}>
+const AddButton = ({ text, onClick }) => (
+  <BaseButton className="add-button" onClick={onClick}>
     <span className="add-button__inner">
       <span>
         <AddIcon />
@@ -18,7 +18,7 @@ const AddButton = ({ text, clickHandler }) => (
 );
 
 AddButton.propTypes = {
-  clickHandler: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   text: PropTypes.string
 };
 
