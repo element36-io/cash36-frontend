@@ -1,0 +1,61 @@
+@import '../../../styles/settings.scss';
+
+.invest-card {
+  a {
+    color: $primary-main;
+  }
+  border-top: 6px solid $primary-main;
+  display: inline-flex;
+  flex-direction: column;
+  padding: 1.2rem;
+
+  min-width: 25rem;
+  max-width: 25rem;
+
+  .invest-card__heading {
+    margin-bottom: 2.4rem;
+    > h3 {
+      font-size: 2.4rem;
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+    }
+
+    > p {
+      margin-bottom: 1.6rem;
+    }
+
+    > div {
+      font-size: 1.4rem;
+    }
+  }
+
+  .invest-card__buttons {
+    display: flex;
+    margin-top: 1.6rem;
+
+    > button:last-child {
+      margin-left: 1rem;
+      flex: 1;
+    }
+  }
+
+  &--EUR36 {
+    background-image: url('../../../assets/BalanceCard/euro.svg');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    &:after {
+      background-image: $gradient-euro;
+    }
+  }
+
+  &--CHF36 {
+    background-image: url('../../../assets/BalanceCard/franc.svg');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    &:after {
+      background-image: $gradient-franc;
+    }
+  }
+}
