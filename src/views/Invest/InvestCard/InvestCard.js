@@ -1,9 +1,9 @@
 import React from 'react';
-import TruncateString from 'react-truncate-string';
 
 import DefaultButton from '../../../components/Buttons/DefaultButton';
 import SecondaryButton from '../../../components/Buttons/SecondaryButton';
 import DialogButton from '../../../components/DialogButton';
+import InvestDetails from '../InvestDetails';
 
 import './InvestCard.scss';
 
@@ -26,27 +26,18 @@ const InvestCard = () => {
       <div className="invest-card__heading">
         <h3>{data.name}</h3>
         <p>{data.description}</p>
+        <a target="_blank" href={data.website}>
+          Visit website
+        </a>
       </div>
-
-      <a href={data.investmentLink}>Investment Link</a>
-      <TruncateString text={data.contractAddress} />
 
       <div className="invest-card__buttons">
         <DialogButton button={<SecondaryButton>More</SecondaryButton>}>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            name: {data.name} <br />
-            contractAddress: {data.contractAddress} <br />
-            symbol: {data.symbol}
-            <br />
-            description: {data.description} <br />
-            website: {data.website} <br />
-            investment link: {data.investmentLink} <br />
-            creationDate: {data.creationDate} <br />
-            access: {data.access} <br />
-            last modified: {data.lastModifiedDate}
-          </div>
+          <InvestDetails {...data} />
         </DialogButton>
-        <DefaultButton>Invest Now</DefaultButton>
+        <a target="_blank" href={data.investmentLink}>
+          <DefaultButton>Invest Now</DefaultButton>
+        </a>
       </div>
     </div>
   );

@@ -21,7 +21,7 @@
     }
 
     > p {
-      margin-bottom: 1.6rem;
+      margin-bottom: 0.4rem;
     }
 
     > div {
@@ -33,20 +33,21 @@
     display: flex;
     margin-top: 1.6rem;
 
-    > button:last-child {
-      margin-left: 1rem;
+    > a {
+      display: block;
+      margin-left: 1.2rem;
       flex: 1;
+      button {
+        width: 100%;
+      }
     }
   }
 
   &--EUR36 {
     background-image: url('../../../assets/BalanceCard/euro.svg');
     background-size: contain;
-    background-position: right;
+    background-position: bottom;
     background-repeat: no-repeat;
-    &:after {
-      background-image: $gradient-euro;
-    }
   }
 
   &--CHF36 {
@@ -54,8 +55,5 @@
     background-size: contain;
     background-position: right;
     background-repeat: no-repeat;
-    &:after {
-      background-image: $gradient-franc;
-    }
   }
 }
