@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactCountryFlag from 'react-country-flag';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import { TextField, MenuItem, withStyles } from '@material-ui/core';
+import { MenuItem, withStyles, Select, InputLabel } from '@material-ui/core';
 import styles from './MuiStyles';
 
 export const SelectInput = ({
@@ -15,33 +15,44 @@ export const SelectInput = ({
   onBlur,
   isTouched,
   placeholder,
+  relatedField,
   countryList,
-  classes
+  classes,
+  formValues,
+  setFieldValue,
+  isNative
 }) => {
+  const changeHandler = evt => {
+    onChange(evt);
+    if (relatedField && !formValues[relatedField]) {
+      setFieldValue(relatedField, evt.target.value, true);
+    }
+  };
+
   return (
     <div
       className={`element-form__input-wrapper element-form__input-wrapper--select  ${name}`}
     >
-      <TextField
+      <InputLabel id={`select-${name}-label`} shrink>
+        {label}
+      </InputLabel>
+      <Select
         id={`text-field-${name}`}
         name={name}
-        label={label}
         value={value}
-        onChange={onChange}
+        onChange={changeHandler}
         onBlur={onBlur}
-        select
         fullWidth
         className={classes.root}
-        InputProps={{
-          disableUnderline: true
-        }}
-        InputLabelProps={{
-          shrink: true
-        }}
-        SelectProps={{
-          displayEmpty: true,
-          IconComponent: KeyboardArrowDownIcon,
-          className: 'invest-select'
+        disableUnderline
+        native={isNative}
+        displayEmpty
+        autoComplete="off"
+        IconComponent={KeyboardArrowDownIcon}
+        inputProps={{
+          style: {
+            fontSize: '1.6rem'
+          }
         }}
       >
         <MenuItem value="" disabled>
@@ -69,7 +80,7 @@ export const SelectInput = ({
             {item.name || item.label}
           </MenuItem>
         ))}
-      </TextField>
+      </Select>
       {isTouched && error && <p className="form-error">{error}</p>}
     </div>
   );
@@ -81,12 +92,16 @@ SelectInput.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func,
+  onBsetFieldValuelur: PropTypes.func,
   list: PropTypes.arrayOf(PropTypes.object),
   error: PropTypes.string,
+  relatedField: PropTypes.string,
   placeholder: PropTypes.string,
   isTouched: PropTypes.bool,
   classes: PropTypes.object,
-  countryList: PropTypes.bool
+  countryList: PropTypes.bool,
+  formValues: PropTypes.object,
+  isNative: PropTypes.bool
 };
 
 SelectInput.defaultProps = {

@@ -1,21 +1,25 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import AuthWrapper from '../../components/AuthWrapper';
 import AuthForm from '../../components/AuthWrapper/AuthForm';
 import { formFields, initialValues } from './form-model';
 import validationSchema from './validation-schema';
+import { setNewPassword } from '../../store/auth/auth.actions';
 
 import './SetNewPassword.scss';
 
 const SetNewPassword = () => {
   const [error, setError] = useState('');
   const [passwordSet, setPasswordSet] = useState(false);
+  const { search } = useLocation();
+
+  const username = search.split('=')[1].trim();
 
   const submitCallback = async values => {
     try {
-      // await setNewPassword(values.email, password);
-      console.log('password chosen');
+      await setNewPassword(values.code, values.newPassword, username);
+
       setPasswordSet(true);
     } catch (error) {
       setError(error);
@@ -27,7 +31,7 @@ const SetNewPassword = () => {
       <AuthWrapper message={!passwordSet ? 'Set New Password' : 'Password set'}>
         {!passwordSet ? (
           <Fragment>
-            <p>Enter your new password</p>
+            <p>Check your email for confirmation code</p>
             <AuthForm
               submitCallback={submitCallback}
               validationSchema={validationSchema}

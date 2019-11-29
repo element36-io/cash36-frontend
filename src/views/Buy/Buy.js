@@ -19,15 +19,15 @@ import useGet from '../../hooks/useGet';
 import './Buy.scss';
 
 export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
-  const [error, setError] = useState('');
   let [step, setStep] = useState(0);
   const [amount, setAmount] = useState('');
   const [symbol, setSymbol] = useState('EUR36');
   const [target, setTarget] = useState(null);
   const [manualTransferData, setManualTransferData] = useState(null);
   const manualTransferStarted = useRef(false);
-  useGet(getTokens, setError);
-  useGet(getContacts, setError);
+
+  const tokensError = useGet(getTokens)[1];
+  const contactsError = useGet(getContacts)[1];
 
   if (location.state) {
     if (location.state.quickActions) setStep(2.1);
@@ -108,9 +108,9 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
                 symbol={symbol}
                 setStep={setStep}
               />
-              <div className="error-text">
-                {error && error.message ? error.message : error}
-              </div>
+              {(tokensError || contactsError) && (
+                <div className="error-text">{tokensError || contactsError}</div>
+              )}
             </>
           )}
           {step === 2.1 && (
@@ -121,9 +121,9 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
                 setStep={setStep}
                 target={target}
               />
-              <div className="error-text">
-                {error && error.message ? error.message : error}
-              </div>
+              {(tokensError || contactsError) && (
+                <div className="error-text">{tokensError || contactsError}</div>
+              )}
             </>
           )}
           {step === 2.2 && (
@@ -135,9 +135,9 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
                 target={target}
                 setStep={setStep}
               />
-              <div className="error-text">
-                {error && error.message ? error.message : error}
-              </div>
+              {(tokensError || contactsError) && (
+                <div className="error-text">{tokensError || contactsError}</div>
+              )}
             </>
           )}
           {step === 3 && (
@@ -160,11 +160,7 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
             </PaymentInfo>
           )}
           {step === 4.2 && <InitiateAutoPayment next={nextStep} />}
-          {step === 5 && (
-            <BuyError
-              message={error ? error.message : 'User not enabled or verified.'}
-            />
-          )}
+          {step === 5 && <BuyError message={'User not enabled or verified.'} />}
         </div>
         <div className="buy__footer">
           {step > 4 && step < 4.2 && (

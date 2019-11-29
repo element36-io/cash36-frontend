@@ -1,0 +1,43 @@
+@import '../../../styles/mixins.scss';
+
+.contract-form {
+  padding: 3.2rem;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  > h3 {
+    margin-bottom: 2.4rem;
+  }
+
+  .tier1-form__field-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    &.checkbox {
+      margin-bottom: 2rem;
+    }
+  }
+
+  @include desktop {
+    padding: 5.2rem 10rem 3.5rem 10rem;
+
+    .element-form__input-wrapper {
+      max-width: calc(50% - 2rem);
+      min-width: calc(50% - 2rem);
+    }
+  }
+
+  @include mobile {
+    padding: 3.2rem 1rem 3.2rem 1rem;
+    height: 100%;
+    width: 100%;
+    justify-content: flex-end;
+
+    .tier1-form__field-group {
+      flex-direction: column;
+    }
+  }
+}

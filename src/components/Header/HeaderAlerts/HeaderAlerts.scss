@@ -4,6 +4,8 @@
 .header__alerts {
   position: relative;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
 
   i {
     font-size: 22px;

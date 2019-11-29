@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import ProcessHeader from '../ProcessHeader';
+import FormHeader from '../../../components/Form/FormHeader';
 import ProcessControls from '../ProcessControls';
 import FileInput from '../FileInput';
 import { getSelfieCode } from '../../../store/auth/auth.actions';
 import idFront from '../../../assets/icons/ID Front Icon.svg';
 import idBack from '../../../assets/icons/ID Back Icon.svg';
 import selfie from '../../../assets/icons/Selfie Icon.svg';
-import useGetWithState from '../../../hooks/useGetWithState';
+import useGet from '../../../hooks/useGet';
 
 import './Step3Documents.scss';
 
@@ -33,7 +33,6 @@ const Step3Documents = ({ changeSteps, stepError }) => {
   });
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
-  const [selfieCode, setSelfieCode] = useState('');
 
   const onSubmit = async () => {
     try {
@@ -65,7 +64,7 @@ const Step3Documents = ({ changeSteps, stepError }) => {
     });
   };
 
-  useGetWithState(getSelfieCode, setError, setSelfieCode);
+  const [selfieCode, selfieCodeError] = useGet(getSelfieCode);
 
   const disabled = Object.values(types)
     .filter(t => t.documentType !== 'ID_Back')
@@ -73,7 +72,7 @@ const Step3Documents = ({ changeSteps, stepError }) => {
 
   return (
     <div className="documents-upload">
-      <ProcessHeader
+      <FormHeader
         title="Verification Process - Step 3"
         subtitle="Please upload the following documents so we can verify your identity and domicile address."
       />
@@ -164,7 +163,7 @@ const Step3Documents = ({ changeSteps, stepError }) => {
         disabled={disabled || submitting}
         submitting={submitting}
         submitCallback={onSubmit}
-        error={error || stepError}
+        error={error || stepError || selfieCodeError}
       />
     </div>
   );

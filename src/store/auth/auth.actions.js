@@ -144,9 +144,19 @@ export const login = (username, password) => async dispatch => {
 
 export const resetPassword = async email => {
   try {
-    const response = await axios.get(
-      `${API_ROOT}/auth/user/reset-user/${email}`
-    );
+    await axios.get(`${API_ROOT}/auth/user/reset-user/${email}`);
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const setNewPassword = async (challenge, password, username) => {
+  try {
+    const response = await axios.post(`${API_ROOT}/auth/user/reset`, {
+      challenge,
+      password,
+      username
+    });
 
     console.log(response);
   } catch (error) {
