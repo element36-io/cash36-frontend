@@ -35,7 +35,7 @@ const InvestDetails = ({
           <a href={website}>{website}</a>
         </div>
       </div>
-      <a target="_blank" href={investmentLink}>
+      <a target="_blank" href={investmentLink} rel="noopener noreferrer">
         <DefaultButton>Invest Now</DefaultButton>
       </a>
     </div>

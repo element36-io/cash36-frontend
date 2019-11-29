@@ -7,7 +7,7 @@ const Form = ({
   render,
   submitCallback,
   initialValues,
-  validationSchema = {},
+  validationSchema = null,
   validate = () => {}
 }) => {
   const [submitting, toggleSubmitting] = useState(false);
@@ -24,6 +24,7 @@ const Form = ({
   return (
     <div className="element-form-wrapper">
       <Formik
+        validate={validate}
         initialValues={initialValues}
         validationSchema={validationSchema}
         validateOnBlur={false}

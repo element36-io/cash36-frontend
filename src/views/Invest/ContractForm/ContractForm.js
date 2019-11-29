@@ -6,7 +6,7 @@ import FormHeader from '../../../components/Form/FormHeader';
 import DefaultButton from '../../../components/Buttons/DefaultButton';
 import { addContract } from '../../../helpers/async/contracts.helpers';
 import { formModel, initialValues } from './form-model';
-import validationSchema from './validation-schema';
+import validate from './validateForm';
 
 import './ContractForm.scss';
 
@@ -23,9 +23,9 @@ const ContractForm = () => {
     <div className="paper contract-form">
       <FormHeader title="Add Contract" />
       <Form
+        validate={validate}
         submitCallback={submit}
         initialValues={initialValues}
-        validationSchema={validationSchema}
         render={(formProps, submitting) => (
           <form
             className=""

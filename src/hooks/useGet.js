@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from 'react';
 
-export default getFunction => {
+export default (getFunction, defaultState = {}) => {
   const mounted = useRef(true);
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
+  const [data, setData] = useState(defaultState);
+  const [error, setError] = useState('');
 
   const get = async () => {
     try {
