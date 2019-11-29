@@ -1,41 +1,51 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import API from '../../config/api';
 import BuyTokens from './BuyTokens';
 import { getTokens } from '../../store/tokens/tokens.actions';
+import { getContacts } from '../../store/contacts/contacts.actions';
+import BuyStep0 from './BuyStep0';
+import SendTokens from './SendTokens';
 import PaymentMethod from './PaymentMethod';
 import InitiateAutoPayment from './InitiateAutoPayment';
-import BackButton from '../../components/Buttons/BackButton';
 import PaymentInfo from '../../components/PaymentInfo';
 import TransactionFooter from '../../components/TransactionFooter';
 import BuyError from './BuyError';
+import TransferAddress from './TransferAddress';
 import useGet from '../../hooks/useGet';
 
 import './Buy.scss';
 
-export const Buy = ({ getTokens }) => {
+export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
   const [error, setError] = useState('');
-  const [step, setStep] = useState(0);
+  let [step, setStep] = useState(0);
   const [amount, setAmount] = useState('');
   const [symbol, setSymbol] = useState('EUR36');
+  const [target, setTarget] = useState(null);
   const [manualTransferData, setManualTransferData] = useState(null);
-
+  const manualTransferStarted = useRef(false);
   useGet(getTokens, setError);
+  useGet(getContacts, setError);
 
-  let manualTransferStarted = false;
+  if (location.state) {
+    if (location.state.quickActions) setStep(2.1);
+
+    if (location.state.quickTransfer) {
+      setTarget(location.state.quickTransfer);
+      setStep(2.2);
+    }
+
+    location.state = null;
+  }
 
   const nextStep = () => {
-    if (step === 0) {
+    if (step === 1.1) {
       if (amount && symbol) {
-        setStep(1);
+        setStep(2);
       }
     }
-  };
-
-  const previousStep = () => {
-    setStep(prevState => Math.round(prevState - 1));
   };
 
   const handleChange = event => {
@@ -48,53 +58,96 @@ export const Buy = ({ getTokens }) => {
     }
   };
 
-  const handleManualTransferClick = async () => {
-    if (manualTransferStarted) return;
+  const addTarget = target => {
+    setTarget(target);
+    setStep(2.2);
+  };
 
-    manualTransferStarted = true;
+  // check data sending to buy on manual transfer
+  const handleManualTransferClick = async () => {
+    if (manualTransferStarted.current) return;
+
+    manualTransferStarted.current = true;
 
     const data = {
       amount: parseInt(amount),
-      symbol: symbol
+      symbol
     };
+    // Recheck this when buy is working again
+    if (target) {
+      data.address = target.contactAddress;
+    }
 
     try {
       const response = await API.post('/exchange/buy', data);
       setManualTransferData(response.data);
-      setStep(2.1);
+      setStep(4.1);
     } catch (error) {
-      setStep(3);
+      setStep(5);
     }
   };
 
   const handleAutoTransferClick = () => {
-    setStep(2.2);
+    setStep(4.2);
   };
+
+  useEffect(() => {
+    if (step === 0) setTarget(null);
+  }, [step]);
 
   return (
     <div className="wrapper">
       <div className="buy paper">
-        {step > 0 && step !== 2.1 && <BackButton onClick={previousStep} />}
         <div className="buy__content">
-          {step === 0 && (
-            <Fragment>
+          {step === 0 && <BuyStep0 setStep={setStep} />}
+          {step === 1 && (
+            <>
               <BuyTokens
                 handleChange={handleChange}
                 amount={amount}
                 symbol={symbol}
-                nextStep={nextStep}
+                setStep={setStep}
               />
-              <div className="error-text">{error}</div>
-            </Fragment>
+              <div className="error-text">
+                {error && error.message ? error.message : error}
+              </div>
+            </>
           )}
-          {step === 1 && (
+          {step === 2.1 && (
+            <>
+              <TransferAddress
+                contactsList={contactsList}
+                submitCallback={addTarget}
+                setStep={setStep}
+                target={target}
+              />
+              <div className="error-text">
+                {error && error.message ? error.message : error}
+              </div>
+            </>
+          )}
+          {step === 2.2 && (
+            <>
+              <SendTokens
+                symbol={symbol}
+                handleChange={handleChange}
+                amount={amount}
+                target={target}
+                setStep={setStep}
+              />
+              <div className="error-text">
+                {error && error.message ? error.message : error}
+              </div>
+            </>
+          )}
+          {step === 3 && (
             <PaymentMethod
-              next={nextStep}
+              setStep={setStep}
               handleManualTransferClick={handleManualTransferClick}
               handleAutoTransferClick={handleAutoTransferClick}
             />
           )}
-          {step === 2.1 && (
+          {step === 4.1 && (
             <PaymentInfo info={manualTransferData} title="Trigger your payment">
               <div className="payment-info__message--credit">
                 <p>
@@ -106,20 +159,15 @@ export const Buy = ({ getTokens }) => {
               <TransactionFooter />
             </PaymentInfo>
           )}
-          {step === 2.2 && <InitiateAutoPayment next={nextStep} />}
-          {step === 3 && <BuyError message="User not enabled or verified." />}
+          {step === 4.2 && <InitiateAutoPayment next={nextStep} />}
+          {step === 5 && (
+            <BuyError
+              message={error ? error.message : 'User not enabled or verified.'}
+            />
+          )}
         </div>
         <div className="buy__footer">
-          {step < 2 && (
-            <span style={{ fontSize: '1.2rem' }}>
-              Buying cash36 Tokens is as simple as a bank transfer. First,
-              choose amount and type of Token you wish to buy.
-              <br />
-              After that you will receive the transfer instructions. Once we
-              receive the amount, the tokens will be credited to your account.
-            </span>
-          )}
-          {step > 2 && step < 2.2 && (
+          {step > 4 && step < 4.2 && (
             <span style={{ fontSize: '1.6rem' }}>
               Please make sure your payment will be triggered from your
               registered bank account
@@ -135,10 +183,16 @@ export const Buy = ({ getTokens }) => {
 };
 
 Buy.propTypes = {
-  getTokens: PropTypes.func.isRequired
+  getTokens: PropTypes.func.isRequired,
+  getContacts: PropTypes.func.isRequired,
+  contactsList: PropTypes.array
 };
 
+const mapStateToProps = ({ contacts: { contactsList } }) => ({
+  contactsList
+});
+
 export default connect(
-  null,
-  { getTokens }
+  mapStateToProps,
+  { getTokens, getContacts }
 )(Buy);

@@ -1,0 +1,20 @@
+@import '../../styles/mixins.scss';
+
+.add-wallet-form {
+  button {
+    display: flex;
+    margin: 2rem auto 0;
+
+    svg {
+      color: #fff;
+    }
+  }
+
+  @include mobile {
+    width: 100%;
+
+    button {
+      width: 100%;
+    }
+  }
+}

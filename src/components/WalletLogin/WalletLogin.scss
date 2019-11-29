@@ -1,0 +1,36 @@
+@import '../../styles/settings.scss';
+@import '../../styles/utils.scss';
+@import '../../styles/mixins.scss';
+
+.wallet-login {
+  img {
+    max-width: 12rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin-bottom: 1rem;
+
+    span {
+      display: block;
+      word-break: break-all;
+    }
+  }
+
+  @include desktop {
+    min-width: 50rem;
+    max-width: 50rem;
+
+    img {
+      margin-top: -1.5rem;
+    }
+  }
+
+  @include mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+}

@@ -32,37 +32,43 @@
       margin-right: 2rem;
     }
 
-    &:hover {
-      background-color: none;
-      background-image: $gradient-primary;
-      div:first-child {
-        background-image: none;
-        background-color: $grey-blue;
-        color: $primary-main;
-        font-weight: 500;
-      }
-      div:last-child {
-        color: $white;
-      }
-    }
-
     > div:first-child {
       background-image: $gradient-primary;
       display: flex;
       justify-content: center;
       align-items: center;
       border-radius: 50%;
-      padding: .5rem;
+      padding: 0.5rem;
       color: $white;
-      transition: all .1s;
+      transition: all 0.1s;
     }
 
     > div:last-child {
-      margin-top: .5rem;
+      margin-top: 0.5rem;
       text-transform: uppercase;
       font-weight: 500;
       color: $primary-main;
-      transition: all .1s;
+      transition: all 0.1s;
+    }
+
+    &--active {
+      &:hover {
+        background-color: none;
+        background-image: $gradient-primary;
+        div:first-child {
+          background-image: none;
+          background-color: $grey-blue;
+          color: $primary-main;
+          font-weight: 500;
+        }
+        div:last-child {
+          color: $white;
+        }
+      }
+    }
+
+    &--inactive {
+      opacity: 0.5;
     }
   }
 

@@ -6,7 +6,22 @@
     font-size: 1.4rem;
   }
 
+  .copy-to-clipboard {
+    margin-right: 0.3rem;
+  }
+
+  a {
+    color: $link-blue-1;
+  }
+
   > span {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     width: 100%;
+
+    a {
+      max-width: 100%;
+    }
   }
 }

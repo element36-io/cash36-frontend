@@ -16,13 +16,7 @@ import useGet from '../../hooks/useGet';
 
 import './Contacts.scss';
 
-const Contacts = ({
-  contacts,
-  getContacts,
-  removeContact,
-  addContact,
-  history
-}) => {
+const Contacts = ({ contacts, getContacts, removeContact, addContact }) => {
   const [search, setSearch] = useState('');
   const [activeForm, setActiveForm] = useState(false);
   const [error, setError] = useState('');
@@ -41,10 +35,6 @@ const Contacts = ({
     setActiveForm(false);
   };
 
-  const quickTransfer = contact => {
-    history.push('/transfer', { quickTransfer: contact });
-  };
-
   const renderList = () => {
     const { contactsList } = contacts;
 
@@ -58,12 +48,7 @@ const Contacts = ({
         );
       })
       .map(c => (
-        <ContactItem
-          key={c.id}
-          contact={c}
-          removeCallback={removeContact}
-          quickTransfer={quickTransfer}
-        />
+        <ContactItem key={c.id} contact={c} removeCallback={removeContact} />
       ));
   };
 
@@ -104,8 +89,7 @@ Contacts.propTypes = {
   contacts: PropTypes.object,
   getContacts: PropTypes.func,
   removeContact: PropTypes.func,
-  addContact: PropTypes.func,
-  history: PropTypes.object
+  addContact: PropTypes.func
 };
 
 export default connect(

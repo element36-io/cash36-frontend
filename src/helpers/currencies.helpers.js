@@ -4,4 +4,6 @@ export const formatAmount = amount => {
   );
 };
 
+export const parseAmount = amount => amount.replace(/,/g, '.');
+
 export const formatSymbolToCurrency = symbol => symbol.substring(0, 3);

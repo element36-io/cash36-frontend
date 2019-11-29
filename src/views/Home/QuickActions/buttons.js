@@ -14,8 +14,13 @@ export default [
     label: 'Sell'
   },
   {
-    link: '/transfer',
+    link: {
+      pathname: '/buy',
+      state: {
+        quickActions: true
+      }
+    },
     Icon: ArrowForwardIcon,
-    label: 'Transfer'
+    label: 'Send'
   }
 ];

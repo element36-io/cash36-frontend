@@ -4,6 +4,7 @@ import { logout } from '../store/auth/auth.actions';
 
 export const API_ROOT = process.env.REACT_APP_API_URL;
 export const WEB3_NODE = process.env.REACT_APP_WEB3_URL;
+export const CAPTCHA_KEY = process.env.REACT_APP_CAPTCHA_KEY;
 
 const api = axios.create({
   baseURL: API_ROOT

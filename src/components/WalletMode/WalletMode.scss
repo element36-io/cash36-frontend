@@ -1,0 +1,44 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/settings.scss';
+
+.walletless-mode {
+  display: flex;
+  max-width: 100%;
+  opacity: 0.5;
+  font-size: 1.4rem;
+  align-items: center;
+
+  > img {
+    margin-right: 0.6rem;
+    display: block;
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+  > div {
+    margin-top: 3px;
+  }
+}
+
+.wallet-login-mode {
+  display: flex;
+  align-items: center;
+
+  > svg {
+    display: block;
+    width: 2.25rem;
+    height: 2.25rem;
+    color: $primary-main;
+    margin-right: 0.6rem;
+  }
+
+  > div {
+    margin-top: 3px;
+    font-size: 1.4rem;
+    max-width: calc(100% - 2.85rem);
+  }
+
+  @include mobile {
+    // flex-direction: column;
+    margin-bottom: 0.8rem;
+  }
+}

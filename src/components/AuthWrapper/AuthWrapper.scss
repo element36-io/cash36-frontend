@@ -1,0 +1,259 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/settings.scss';
+
+.auth__wrapper {
+  max-width: 140rem;
+  margin: 0 auto;
+
+  > div:first-child {
+    > div {
+      width: 100%;
+    }
+  }
+
+  .element-form-wrapper {
+    width: 100%;
+
+    button {
+      padding: 0.8rem 2.4rem;
+    }
+  }
+
+  .auth__form {
+    margin-top: 1.5rem;
+
+    p {
+      margin-top: 0.5rem;
+      font-size: 1.5rem;
+      text-align: left;
+    }
+
+    a {
+      color: $link-blue-1;
+    }
+
+    p.auth__form__error {
+      margin-top: 0.2rem;
+      color: red;
+      text-align: left;
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+  }
+
+  button {
+    margin: 2.4rem 0 0.5rem;
+  }
+
+  .auth__field {
+    position: relative;
+    background: #fff;
+    color: $text-light-grey-1;
+    border: 1px solid $grey-border;
+    text-align: left;
+    word-break: break-all;
+    overflow: hidden;
+
+    &:first-child {
+      border-radius: 4px 4px 0 0;
+    }
+
+    &:last-child {
+      border-radius: 0 0 4px 4px;
+    }
+
+    &:not(:first-child) {
+      border-top: 0;
+    }
+
+    label {
+      display: block;
+      span {
+        display: block;
+      }
+      span:first-child {
+        position: absolute;
+      }
+    }
+
+    input {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      padding: 0;
+      outline: none;
+      border: none;
+      background: transparent;
+      font-size: 1.6rem;
+      line-height: 1.9rem;
+      box-shadow: inset 0 0 5px 5px $headerGrey;
+
+      &:focus + span {
+        width: 120%;
+      }
+
+      & + span {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 1px);
+        display: block;
+        height: 3px;
+        width: 0;
+        background: $gradient-primary;
+        transition: width 0.3s;
+      }
+    }
+  }
+
+  .auth__captcha {
+    max-width: 100%;
+    margin-top: 2.4rem;
+
+    div {
+      max-width: 100%;
+    }
+  }
+
+  @include desktop {
+    display: flex;
+    flex: 1;
+    min-height: 100%;
+
+    > div {
+      display: flex;
+      position: relative;
+    }
+
+    > div:first-child {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      width: 40%;
+      padding: 4.5rem 6rem;
+    }
+
+    h2 {
+      margin-bottom: 2.4rem;
+      font-size: 3.2rem;
+      line-height: 3.8rem;
+    }
+
+    p {
+      font-size: 1.8rem;
+      line-height: 2.2rem;
+    }
+
+    .auth__form {
+      max-width: 40rem;
+      margin-bottom: 3.2rem;
+    }
+
+    .paragraph-link-gray {
+      font-size: 1.5rem;
+      > a {
+        color: $text-black-1;
+        opacity: 0.5;
+      }
+    }
+
+    .auth__field {
+      label {
+        span {
+          font-size: 1.4rem;
+          line-height: 1.7rem;
+
+          &:first-of-type {
+            left: 1.2rem;
+            top: 1.2rem;
+          }
+        }
+      }
+
+      input {
+        padding: 3.5rem 1.2rem 1.2rem;
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  @include tablet() {
+    .auth__captcha {
+      div {
+        height: 5.3rem;
+      }
+
+      iframe {
+        transform: scale(0.66);
+        transform-origin: 0 0;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 840px) {
+    .auth__captcha {
+      div {
+        height: 4.7rem;
+      }
+
+      iframe {
+        transform: scale(0.57);
+        transform-origin: 0 0;
+      }
+    }
+  }
+
+  @include mobile {
+    margin-top: -9.7rem;
+    text-align: center;
+
+    h2 {
+      margin-bottom: 1.2rem;
+      font-size: 2.4rem;
+      line-height: 2.8rem;
+    }
+
+    p {
+      font-size: 1.6rem;
+      line-height: 1.9rem;
+    }
+
+    .auth__form {
+      padding: 2.5rem 1.6rem 2rem;
+
+      p {
+        margin-bottom: 2.4rem;
+      }
+    }
+
+    .auth__field {
+      label {
+        span {
+          font-size: 1.2rem;
+          line-height: 1.4rem;
+
+          &:first-of-type {
+            left: 1rem;
+            top: 1rem;
+          }
+        }
+        input {
+          padding: 2.8rem 1rem 1rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 335px) {
+  .auth__captcha {
+    div {
+      height: 4.7rem;
+    }
+
+    iframe {
+      transform: scale(0.77);
+      transform-origin: 0 0;
+    }
+  }
+}

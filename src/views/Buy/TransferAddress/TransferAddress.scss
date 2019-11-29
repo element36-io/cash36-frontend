@@ -1,0 +1,97 @@
+@import '../../../styles/settings.scss';
+@import '../../../styles/mixins.scss';
+
+.transfer-address {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > h2 {
+    margin-bottom: 3.2rem;
+  }
+
+  > h4 {
+    text-align: center;
+    margin-bottom: 2.4rem;
+  }
+
+  .transfer-address__search-container {
+    position: relative;
+    width: 100%;
+
+    > p {
+      color: $red-1;
+      font-size: 1.2rem;
+    }
+  }
+
+  .transfer-address__input-wrapper {
+    position: relative;
+    border: 1px solid $grey-border;
+    background: $white;
+    border-radius: 4px;
+    box-shadow: 0 5px 6px 0 rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+
+    > span {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      z-index: 5;
+      height: 2px;
+      width: 0;
+      background: $gradient-primary;
+      transform: translate(-50%);
+      transition: width 255ms;
+    }
+
+    input {
+      position: relative;
+      z-index: 20;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      outline: none;
+      border: none;
+      background: transparent;
+
+      &.selected-contact {
+        padding: 3rem 1rem 2.1rem 6.8rem;
+        font-size: 1.5rem;
+        line-height: 1.9rem;
+      }
+
+      &:focus + span {
+        width: 100%;
+      }
+    }
+  }
+
+  @include desktop {
+    .transfer-address__search-container {
+      margin-bottom: 4rem;
+    }
+
+    .transfer-address__input-wrapper {
+      input {
+        padding: 2.4rem 1.6rem;
+        font-size: 1.8rem;
+        line-height: 2.2rem;
+      }
+    }
+  }
+
+  @include mobile {
+    .transfer-address__search-container {
+      margin-bottom: 2.1rem;
+    }
+
+    .transfer-address__input-wrapper {
+      input {
+        padding: 2rem 1.2rem;
+        font-size: 1.6rem;
+        line-height: 1.9rem;
+      }
+    }
+  }
+}

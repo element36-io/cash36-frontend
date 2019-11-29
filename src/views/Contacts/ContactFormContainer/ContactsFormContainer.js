@@ -1,12 +1,13 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import CloseIcon from '@material-ui/icons/Close';
 import Responsive from '../../../components/Responsive';
-import useCash36 from '../../../hooks/useCash36';
 import ContactsForm from '../ContactsForm/ContactsForm';
 import BackButton from '../../../components/Buttons/BackButton/BackButton';
 import ContactResponse from '../ContactResponse/ContactResponse';
+import { Web3Context } from '../../../providers/web3.provider';
+import { isWalletAddress } from '../../../helpers/wallet.helpers';
 import './ContactFormContainer.scss';
 
 const ContactsFormContainer = ({
@@ -15,7 +16,7 @@ const ContactsFormContainer = ({
   closeForm,
   contactsList
 }) => {
-  const [values, setValues] = useState({ contactName: '', contactAddress: '' });
+  const [values, setValues] = useState({ contactName: '', walletAddress: '' });
   const [submitting, setSubmitting] = useState(false);
   const [response, setResponse] = useState({
     showResponse: false,
@@ -23,11 +24,11 @@ const ContactsFormContainer = ({
     msg: '',
     btnText: ''
   });
-  const cash36 = useCash36();
+  const { web3 } = useContext(Web3Context);
 
   useEffect(() => {
     if (isActive) {
-      setValues({ contactName: '', contactAddress: '' });
+      setValues({ contactName: '', walletAddress: '' });
       setResponse({
         showResponse: false,
         type: 'success',
@@ -44,12 +45,30 @@ const ContactsFormContainer = ({
 
   const addContact = async evt => {
     evt.preventDefault();
-    const { contactName, contactAddress } = values;
+    const { contactName, walletAddress } = values;
 
     setSubmitting(true);
 
     try {
-      await onSubmit({ contactAddress, contactName });
+      // backend stores addresses as lowercase
+      const isWallet = await isWalletAddress(
+        walletAddress.trim().toLowerCase()
+      );
+
+      if (!isWallet) {
+        submitCallback(
+          true,
+          'error',
+          'Wallet is not registered on e36, please tell recepient to register at e36 and to add his wallet',
+          'Try again'
+        );
+        return;
+      }
+
+      await onSubmit({
+        contactAddress: walletAddress.trim(),
+        contactName: contactName.trim()
+      });
       submitCallback(
         true,
         'success',
@@ -67,23 +86,26 @@ const ContactsFormContainer = ({
   };
 
   const showForm = () => {
-    setValues({ contactName: '', contactAddress: '' });
+    setValues({ contactName: '', walletAddress: '' });
     setResponse({ ...response, showResponse: false });
   };
 
   const validateForm = () => {
-    const { contactName, contactAddress } = values;
-    const { web3 } = cash36;
+    const address = values.walletAddress.trim();
+    const name = values.contactName.trim();
+
     return (
-      !contactName.trim() ||
-      !web3.utils.isAddress(contactAddress) ||
-      !!contactsList.filter(c => contactAddress === c.contactAddress).length
+      !name ||
+      !web3.utils.isAddress(address) ||
+      !!contactsList.filter(
+        c => address.toLowerCase() === c.contactAddress.toLowerCase()
+      ).length
     );
   };
 
   const renderContent = () => {
     const { showResponse, btnText, type, msg } = response;
-    const { contactAddress, contactName } = values;
+    const { walletAddress, contactName } = values;
     const isValid = validateForm();
 
     return (
@@ -108,7 +130,7 @@ const ContactsFormContainer = ({
         ) : (
           <ContactsForm
             onSubmit={addContact}
-            contactAddress={contactAddress}
+            walletAddress={walletAddress}
             contactName={contactName}
             changeHandler={changeHandler}
             isValid={isValid}
