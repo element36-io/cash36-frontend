@@ -1,23 +1,66 @@
 @import '../../styles/settings.scss';
 
-.avatar {
+.avatar__container {
   position: relative;
-  background: $primary-light-4;
-  border-radius: 16px;
-  overflow: hidden;
 
-  img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  .avatar {
+    // position: relative;
+    background: $primary-light-4;
+    border-radius: 16px;
+
+    .error-text {
+      font-size: 1.2rem;
+      position: absolute;
+      padding: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: $primary-light-4;
+      text-align: center;
+      width: 100%;
+      z-index: 300;
+    }
+
+    input {
+      position: absolute;
+      left: -9999px;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    i {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: $primary-light-3;
+    }
   }
 
-  i {
+  .avatar__remove {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: $primary-light-3;
+    right: 0;
+    top: 0rem;
+    color: $red-1;
+    background-color: $red-light;
+    cursor: pointer;
+    padding: 0;
+    padding: 2px;
+    font-size: 1.2rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 2.25rem;
+    width: 2.25rem;
+    border-radius: 0;
+
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
   }
 }

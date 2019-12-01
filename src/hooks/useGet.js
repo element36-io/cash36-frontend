@@ -15,7 +15,16 @@ export default (getFunction, defaultState = {}) => {
   };
 
   useEffect(() => {
-    get();
+    const getData = async () => {
+      try {
+        const data = await getFunction();
+        if (mounted.current) setData(data);
+      } catch (error) {
+        if (mounted.current) setError(error);
+      }
+    };
+
+    getData();
 
     return () => {
       mounted.current = false;

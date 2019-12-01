@@ -1,33 +1,33 @@
-import React, { useReducer } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'ADD':
-      return { ...state, ...action.payload };
-    default:
-      return state;
-  }
-};
+import { getAvatar } from '../store/auth/auth.actions';
 
-const useAvatarReducer = () => {
-  const [state, dispatch] = useReducer(reducer, {});
-  const actions = {
-    add: (username, avatarUri) => {
-      dispatch({ type: 'ADD', payload: { [username]: avatarUri } });
+export const AvatarContext = createContext();
+
+const AvatarProvider = ({ children }) => {
+  const [error, setError] = useState('');
+  const [avatarUrl, setAvatarUrl] = useState('');
+
+  const callGetAvatar = async () => {
+    try {
+      const response = await getAvatar();
+      console.log(response);
+
+      setAvatarUrl(
+        `${response.dataType};${response.encoding}, ${response.data}`
+      );
+    } catch (error) {
+      setError(error);
     }
   };
 
-  return { state, actions };
-};
-
-export const AvatarContext = React.createContext();
-
-const AvatarProvider = props => {
-  const avatarReducer = useAvatarReducer();
+  useEffect(() => {
+    callGetAvatar();
+  }, []);
 
   return (
-    <AvatarContext.Provider value={{ ...avatarReducer }}>
-      {props.children}
+    <AvatarContext.Provider value={{ avatarUrl, error, callGetAvatar }}>
+      {children}
     </AvatarContext.Provider>
   );
 };
