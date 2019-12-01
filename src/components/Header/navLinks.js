@@ -12,6 +12,10 @@ const navLinks = [
     url: '/sell'
   },
   {
+    label: 'Invest',
+    url: '/invest'
+  },
+  {
     label: 'History',
     url: '/history'
   },

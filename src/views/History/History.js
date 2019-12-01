@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { CircularProgress } from '@material-ui/core';
@@ -16,9 +16,7 @@ const History = ({
   fetchingFilters,
   getUserActivity
 }) => {
-  const [error, setError] = useState('');
-
-  useGet(getUserActivity, setError);
+  const userActivityError = useGet(getUserActivity)[1];
 
   const renderHistory = () => {
     if (userActivity.length === 0 && historyFiltered === false) {
@@ -78,10 +76,10 @@ const History = ({
     }
   };
 
-  if (error) {
+  if (userActivityError) {
     return (
       <div className="wrapper">
-        <div className="history error-text">{error}</div>
+        <div className="history error-text">{userActivityError}</div>
       </div>
     );
   }

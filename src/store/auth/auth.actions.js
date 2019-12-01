@@ -144,11 +144,45 @@ export const login = (username, password) => async dispatch => {
 
 export const resetPassword = async email => {
   try {
-    const response = await axios.get(
-      `${API_ROOT}/auth/user/reset-user/${email}`
-    );
+    await axios.get(`${API_ROOT}/auth/user/reset-user/${email}`);
+  } catch (error) {
+    return handleError(error);
+  }
+};
 
-    console.log(response);
+export const setNewPassword = async (challenge, password, username) => {
+  try {
+    await axios.post(`${API_ROOT}/auth/user/reset`, {
+      challenge,
+      password,
+      username
+    });
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const getAvatar = async () => {
+  try {
+    const response = await API.get('/compliance/avatar');
+
+    return response.data;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const uploadAvatar = async formData => {
+  try {
+    await API.post(`/compliance/avatar`, formData);
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const deleteAvatar = async () => {
+  try {
+    await API.delete(`/compliance/avatar`);
   } catch (error) {
     return handleError(error);
   }

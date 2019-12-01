@@ -1,30 +1,94 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import DeleteIcon from '@material-ui/icons/Delete';
+
+import { uploadAvatar, deleteAvatar } from '../../store/auth/auth.actions';
 import { AvatarContext } from '../../providers/avatar.provider';
-import { checkIfUrlContainsImage } from '../../helpers/image.helpers';
+
 import './Avatar.scss';
 
-const Avatar = ({ avatarUrl, cssClass, alt, username }) => {
-  const { state, actions } = useContext(AvatarContext);
+const Avatar = ({ cssClass, alt, isEditable = false }) => {
+  const [error, setError] = useState('');
 
-  const fetchImage = async () => {
-    if (state[username] || !avatarUrl) return;
+  const { avatarUrl, avatarError, callGetAvatar } = useContext(AvatarContext);
+
+  if (avatarError) {
+    setError(avatarError);
+  }
+
+  const uploadNewAvatar = async event => {
+    const { files } = event.target;
+
+    const fileTypes = ['png', 'jpg', 'jpeg'];
+
+    if (!files[0]) {
+      return;
+    }
+
+    const isValidFileType = fileTypes.includes(
+      files[0].name
+        .split('.')
+        .pop()
+        .toLowerCase()
+    );
+    const isValidSize = files[0].size < 10485760;
+
+    if (!isValidFileType) {
+      setError('Not a valid file type');
+      return;
+    }
+
+    if (!isValidSize) {
+      setError('File is too big');
+      return;
+    }
+
+    const formData = new FormData();
+
+    formData.append('file', files[0]);
+
     try {
-      const imageUrl = await checkIfUrlContainsImage(avatarUrl);
-      actions.add(username, imageUrl);
+      await uploadAvatar(formData);
+      await callGetAvatar();
     } catch (error) {
-      console.warn('Avatar does not exist.');
+      setError(error);
     }
   };
 
-  useEffect(() => {
-    fetchImage();
-  }, []);
+  const removeAvatar = async () => {
+    try {
+      await deleteAvatar();
+      await callGetAvatar();
+    } catch (error) {
+      setError(error);
+    }
+  };
+
+  if (isEditable) {
+    return (
+      <div className="avatar__container">
+        {avatarUrl && (
+          <div className="avatar__remove" onClick={removeAvatar}>
+            <DeleteIcon />
+          </div>
+        )}
+        <label className={`avatar ${cssClass || ''}`}>
+          <input type="file" onChange={uploadNewAvatar} />
+          {avatarUrl ? (
+            <img src={avatarUrl} alt={alt} />
+          ) : (
+            <i className="fas fa-user" data-testid="avatar__icon" />
+          )}
+          {error && <span className="error-text">{error}</span>}
+        </label>
+      </div>
+    );
+  }
 
   return (
     <div className={`avatar ${cssClass || ''}`}>
-      {state[username] ? (
-        <img src={state[username]} alt={alt} />
+      {avatarUrl ? (
+        <img src={avatarUrl} alt={alt} />
       ) : (
         <i className="fas fa-user" data-testid="avatar__icon" />
       )}
@@ -33,10 +97,9 @@ const Avatar = ({ avatarUrl, cssClass, alt, username }) => {
 };
 
 Avatar.propTypes = {
-  avatarUrl: PropTypes.string,
   cssClass: PropTypes.string,
   alt: PropTypes.string,
-  username: PropTypes.string
+  isEditable: PropTypes.bool
 };
 
 export default Avatar;

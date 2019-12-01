@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { CircularProgress } from '@material-ui/core';
 
 import SearchBox from './SearchBox';
-import AddContact from './AddContact';
+import AddButton from '../../components/Buttons/AddButton';
 import ContactItem from './ContactItem';
 import ContactFormContainer from './ContactFormContainer';
 import {
@@ -19,9 +19,8 @@ import './Contacts.scss';
 const Contacts = ({ contacts, getContacts, removeContact, addContact }) => {
   const [search, setSearch] = useState('');
   const [activeForm, setActiveForm] = useState(false);
-  const [error, setError] = useState('');
 
-  useGet(getContacts, setError);
+  const contactsError = useGet(getContacts)[1];
 
   const searchChangeHandler = evt => {
     setSearch(evt.target.value);
@@ -52,10 +51,10 @@ const Contacts = ({ contacts, getContacts, removeContact, addContact }) => {
       ));
   };
 
-  if (error) {
+  if (contactsError) {
     return (
       <div className="wrapper contacts">
-        <div className="error-text">Fetching data error: {error}</div>
+        <div className="error-text">Fetching data error: {contactsError}</div>
       </div>
     );
   }
@@ -70,7 +69,7 @@ const Contacts = ({ contacts, getContacts, removeContact, addContact }) => {
       />
       <div className="contacts__actions">
         <SearchBox changeHandler={searchChangeHandler} value={search} />
-        <AddContact clickHandler={showForm} />
+        <AddButton onClick={showForm} text="Add Contact" />
       </div>
       {contacts.fetching ? (
         <div className="contacts__loader">

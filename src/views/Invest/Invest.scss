@@ -1,0 +1,22 @@
+@import '../../styles/mixins.scss';
+
+.invest {
+  .add-button {
+    justify-self: flex-end;
+  }
+
+  .invest__cards {
+    margin-top: 3.2rem;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @include mobile {
+    .invest__cards {
+      > div {
+        margin-bottom: 2rem;
+      }
+    }
+  }
+}
