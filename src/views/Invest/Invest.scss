@@ -9,13 +9,17 @@
     margin-top: 3.2rem;
     flex-wrap: wrap;
     display: flex;
-    justify-content: space-between;
+
+    > div {
+      margin-right: 2rem;
+    }
   }
 
   @include mobile {
     .invest__cards {
       > div {
         margin-bottom: 2rem;
+        margin-right: 0;
       }
     }
   }

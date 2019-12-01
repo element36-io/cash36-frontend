@@ -21,7 +21,7 @@ export const getUserContracts = async () => {
 
 export const getPublicContracts = async () => {
   try {
-    const { data } = await API.get('compliance/external-contract/listPublic');
+    const { data } = await API.get('compliance/external-contract/listPublic/');
 
     return data;
   } catch (error) {
