@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import ProcessHeader from '../ProcessHeader';
+import FormHeader from '../../../components/Form/FormHeader';
 import ProcessControls from '../ProcessControls';
 import RadioButtons from './RadioButtons';
 import IndustryFields from './IndustryFields';
@@ -151,7 +151,7 @@ const Step4UserProfile = ({ changeSteps, stepError }) => {
 
   return (
     <div className="verification-user-profile">
-      <ProcessHeader
+      <FormHeader
         title="Verification Process - Step 4"
         subtitle="For smooth operations, we need to comply with international Anti-Money-Laundering standards. We need to monitor constantly if your used funds match the declared source of funds."
       />

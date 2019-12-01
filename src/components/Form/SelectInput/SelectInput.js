@@ -49,6 +49,11 @@ export const SelectInput = ({
         displayEmpty
         autoComplete="off"
         IconComponent={KeyboardArrowDownIcon}
+        inputProps={{
+          style: {
+            fontSize: '1.6rem'
+          }
+        }}
       >
         <MenuItem value="" disabled>
           <div className={classes.placeholder}>

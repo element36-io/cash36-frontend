@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import ProcessHeader from '../ProcessHeader';
+import FormHeader from '../../../components/Form/FormHeader';
 import ProcessControls from '../ProcessControls';
 import Responsive from '../../../components/Responsive';
 
@@ -24,7 +24,7 @@ const Step0ProcessWelcomeScreen = ({ startKycProcess }) => {
 
   return (
     <div className="process-welcome-screen">
-      <ProcessHeader title="Welcome to element36" />
+      <FormHeader title="Welcome to element36" />
       <p>Thank you for choosing element36!</p>
       <p>
         Having your account fully verified allows you to cross the limits of

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { CircularProgress } from '@material-ui/core';
 
 import SearchBox from './SearchBox';
-import AddContact from './AddContact';
+import AddButton from '../../components/Buttons/AddButton';
 import ContactItem from './ContactItem';
 import ContactFormContainer from './ContactFormContainer';
 import {
@@ -69,7 +69,7 @@ const Contacts = ({ contacts, getContacts, removeContact, addContact }) => {
       />
       <div className="contacts__actions">
         <SearchBox changeHandler={searchChangeHandler} value={search} />
-        <AddContact clickHandler={showForm} />
+        <AddButton onClick={showForm} text="Add Contact" />
       </div>
       {contacts.fetching ? (
         <div className="contacts__loader">
