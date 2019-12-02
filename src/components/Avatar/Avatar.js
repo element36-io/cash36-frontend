@@ -13,7 +13,8 @@ const Avatar = ({ cssClass, alt, isEditable = false }) => {
   const { avatarUrl, avatarError, callGetAvatar } = useContext(AvatarContext);
 
   if (avatarError) {
-    setError(avatarError);
+    // setError(avatarError);
+    console.log(error);
   }
 
   const uploadNewAvatar = async event => {
@@ -79,7 +80,7 @@ const Avatar = ({ cssClass, alt, isEditable = false }) => {
           ) : (
             <i className="fas fa-user" data-testid="avatar__icon" />
           )}
-          {error && <span className="error-text">{error}</span>}
+          {/* {error && <span className="error-text">{error}</span>} */}
         </label>
       </div>
     );
