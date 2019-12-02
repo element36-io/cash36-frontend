@@ -6,7 +6,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 
-import './DropdownMenu.scss';
+import './style.scss';
 
 const DropdownMenu = ({ menuItems = [] }) => {
   const [showActions, setShowActions] = useState(false);
