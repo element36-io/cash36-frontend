@@ -10,13 +10,21 @@ import validate from './validateForm';
 
 import './ContractForm.scss';
 
-const ContractForm = () => {
+const ContractForm = ({
+  closeDialog,
+  refetchUserContracts,
+  refetchPublicContracts
+}) => {
   const [error, setError] = useState('');
   const submit = async formValues => {
     try {
       await addContract(formValues);
+      closeDialog();
+      refetchUserContracts();
+      refetchPublicContracts();
     } catch (error) {
       setError(error);
+      return Promise.reject(error);
     }
   };
   return (
@@ -53,5 +61,7 @@ const ContractForm = () => {
     </div>
   );
 };
+
+ContractForm.propTypes = {};
 
 export default ContractForm;

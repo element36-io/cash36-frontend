@@ -1,28 +1,67 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import DialogButton from '../../components/DialogButton';
 import AddButton from '../../components/Buttons/AddButton';
 import ContractForm from './ContractForm';
 import InvestCard from './InvestCard';
 import useGet from '../../hooks/useGet';
-import { getAllContracts } from '../../helpers/async/contracts.helpers';
+import {
+  getUserContracts,
+  getPublicContracts
+} from '../../helpers/async/contracts.helpers';
 
 import './Invest.scss';
 
 const Invest = () => {
-  const [visibleContracts, error] = useGet(getAllContracts, []);
+  const [visibleContracts, setVisibleContracts] = useState([]);
+
+  const [userContracts, userContractsError, refetchUserContracts] = useGet(
+    getUserContracts,
+    []
+  );
+  const [
+    publicContracts,
+    publicContractsError,
+    refetchPublicContracts
+  ] = useGet(getPublicContracts, []);
+
+  useEffect(() => {
+    setVisibleContracts(publicContracts);
+  }, [userContracts, publicContracts]);
 
   return (
     <div className="wrapper invest">
       <DialogButton button={<AddButton text="Add Contract" />}>
-        <ContractForm />
+        <ContractForm
+          refetchUserContracts={refetchUserContracts}
+          refetchPublicContracts={refetchPublicContracts}
+        />
       </DialogButton>
       <div className="invest__cards">
         {visibleContracts.map(contract => {
+          const isOwnedByUser = !!userContracts.find(userContract => {
+            return userContract.contractAddress !== contract.contractAddress;
+          });
+
+          if (isOwnedByUser) {
+            return (
+              <InvestCard
+                key={contract.contractAddress}
+                {...contract}
+                isOwnedByUser
+              />
+            );
+          }
+
           return <InvestCard key={contract.contractAddress} {...contract} />;
         })}
       </div>
-      {error && <div className="error-text">{error}</div>}
+      {publicContractsError && (
+        <div className="error-text">{publicContractsError}</div>
+      )}
+      {userContractsError && (
+        <div className="error-text">{userContractsError}</div>
+      )}
     </div>
   );
 };

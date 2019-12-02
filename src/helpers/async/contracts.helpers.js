@@ -21,7 +21,7 @@ export const getUserContracts = async () => {
 
 export const getPublicContracts = async () => {
   try {
-    const { data } = await API.get('compliance/external-contract/listPublic');
+    const { data } = await API.get('compliance/external-contract/listPublic/');
 
     return data;
   } catch (error) {
@@ -34,6 +34,14 @@ export const getAllContracts = async () => {
     const { data } = await API.get('compliance/external-contract/listAll/');
 
     return data;
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const deleteContract = async contractAddress => {
+  try {
+    await API.delete(`compliance/external-contract/delete/${contractAddress}`);
   } catch (error) {
     return handleError(error);
   }
