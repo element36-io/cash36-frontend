@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import CloseIcon from '@material-ui/icons/Close';
@@ -29,7 +29,7 @@ const DialogButton = ({ button, children }) => {
           className="dialog-button"
         >
           <CloseIcon className="dialog-button__close" onClick={onClose} />
-          {children}
+          {cloneElement(children, { closeDialog: onClose })}
         </Dialog>
       </Responsive>
     </div>

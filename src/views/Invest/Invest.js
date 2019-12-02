@@ -6,7 +6,6 @@ import ContractForm from './ContractForm';
 import InvestCard from './InvestCard';
 import useGet from '../../hooks/useGet';
 import {
-  getAllContracts,
   getUserContracts,
   getPublicContracts
 } from '../../helpers/async/contracts.helpers';
@@ -16,21 +15,27 @@ import './Invest.scss';
 const Invest = () => {
   const [visibleContracts, setVisibleContracts] = useState([]);
 
-  const [allContracts, allContractsError] = useGet(getAllContracts, []);
-  const [userContracts, userContractsError] = useGet(getUserContracts, []);
-  const [publicContracts, publicContractsError] = useGet(
-    getPublicContracts,
+  const [userContracts, userContractsError, refetchUserContracts] = useGet(
+    getUserContracts,
     []
   );
+  const [
+    publicContracts,
+    publicContractsError,
+    refetchPublicContracts
+  ] = useGet(getPublicContracts, []);
 
   useEffect(() => {
     setVisibleContracts(publicContracts);
-  }, [allContracts, userContracts, publicContracts]);
+  }, [userContracts, publicContracts]);
 
   return (
     <div className="wrapper invest">
       <DialogButton button={<AddButton text="Add Contract" />}>
-        <ContractForm />
+        <ContractForm
+          refetchUserContracts={refetchUserContracts}
+          refetchPublicContracts={refetchPublicContracts}
+        />
       </DialogButton>
       <div className="invest__cards">
         {visibleContracts.map(contract => {
@@ -51,8 +56,11 @@ const Invest = () => {
           return <InvestCard key={contract.contractAddress} {...contract} />;
         })}
       </div>
-      {allContractsError && (
-        <div className="error-text">{allContractsError}</div>
+      {publicContractsError && (
+        <div className="error-text">{publicContractsError}</div>
+      )}
+      {userContractsError && (
+        <div className="error-text">{userContractsError}</div>
       )}
     </div>
   );

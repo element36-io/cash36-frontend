@@ -64,7 +64,7 @@ const Step3Documents = ({ changeSteps, stepError }) => {
     });
   };
 
-  const [selfieCode, selfieCodeError] = useGet(getSelfieCode);
+  const [selfieCode, selfieCodeError] = useGet(getSelfieCode, '');
 
   const disabled = Object.values(types)
     .filter(t => t.documentType !== 'ID_Back')

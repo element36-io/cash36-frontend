@@ -38,3 +38,11 @@ export const getAllContracts = async () => {
     return handleError(error);
   }
 };
+
+export const deleteContract = async contractAddress => {
+  try {
+    await API.delete(`compliance/external-contract/delete/${contractAddress}`);
+  } catch (error) {
+    return handleError(error);
+  }
+};

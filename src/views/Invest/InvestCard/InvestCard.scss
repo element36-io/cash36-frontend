@@ -2,9 +2,6 @@
 @import '../../../styles/mixins.scss';
 
 .invest-card {
-  a {
-    color: $primary-main;
-  }
   border-bottom: 4px solid $primary-main;
   display: inline-flex;
   flex-direction: column;
@@ -14,6 +11,7 @@
 
   @include desktop {
     max-width: 30%;
+    width: 100%;
   }
 
   .invest-card__heading {
@@ -22,10 +20,15 @@
     .invest-card__heading__top {
       display: flex;
       justify-content: space-between;
+      align-items: center;
 
       > h3 {
         font-size: 2.4rem;
         font-weight: 500;
+        margin-bottom: 0.8rem;
+      }
+
+      .dropdown-menu {
         margin-bottom: 0.8rem;
       }
     }
