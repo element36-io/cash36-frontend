@@ -26,7 +26,7 @@ export const Sell = ({ user, tokens, getTokens, hasWallet, mainWallet }) => {
   const web3 = useCash36();
 
   const tokensError = useGet(getTokens)[1];
-  const [exchangeFee, exchangeFeeError] = useGet(getExchangeFee);
+  const [exchangeFee, exchangeFeeError] = useGet(getExchangeFee, null);
   const [minFunds, minFundsError] = useGet(getMinFunds);
 
   const balanceWei = useGetEtherBalance(mainWallet, 'wei');
