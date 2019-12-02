@@ -22,6 +22,7 @@ const SellTokens = ({
   minFundsError,
   etherBalance
 }) => {
+  console.log(exchangeFee);
   return (
     <div className="sell__sell-tokens">
       <h2>Sell Tokens</h2>
