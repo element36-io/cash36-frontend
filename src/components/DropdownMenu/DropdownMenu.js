@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import IconButton from '@material-ui/core/IconButton';
-import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 
 import './DropdownMenu.scss';
 
@@ -13,6 +12,9 @@ const DropdownMenu = ({ menuItems = [] }) => {
   // const [error, setError] = useState('');
 
   const openActions = () => {
+    if (showActions) {
+      setShowActions(false);
+    }
     setShowActions(true);
   };
 
@@ -37,13 +39,7 @@ const DropdownMenu = ({ menuItems = [] }) => {
               showActions ? '--active' : ''
             }`}
           >
-            {menuItems.map(item => {
-              return (
-                <MenuItem key={item.title} onClick={item.action}>
-                  {item.title}
-                </MenuItem>
-              );
-            })}
+            {menuItems.map(item => item)}
           </div>
         </div>
       </ClickAwayListener>

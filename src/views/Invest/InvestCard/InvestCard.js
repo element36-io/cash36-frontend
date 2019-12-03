@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
+import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 
 import DefaultButton from '../../../components/Buttons/DefaultButton';
 import SecondaryButton from '../../../components/Buttons/SecondaryButton';
 import DialogButton from '../../../components/DialogButton';
 import InvestDetails from '../InvestDetails';
 import DropdownMenu from '../../../components/DropdownMenu';
+import EditContractForm from '../EditContractForm';
 import { truncateString } from '../../../helpers/string.helpers';
 import { deleteContract } from '../../../helpers/async/contracts.helpers';
 
@@ -18,21 +20,21 @@ const InvestCard = props => {
     isOwnedByUser,
     description,
     website,
-    investmentLink
+    investmentLink,
+    refetchPublicContracts,
+    refetchUserContracts,
+    access
   } = props;
-
-  const [deleted, setDeleted] = useState(false);
 
   const removeContract = async () => {
     try {
       await deleteContract(contractAddress);
-      setDeleted(true);
+      refetchPublicContracts();
+      refetchUserContracts();
     } catch (error) {
       console.log(error);
     }
   };
-
-  if (deleted) return null;
 
   return (
     <div className={`invest-card invest-card--${symbol} paper`}>
@@ -42,10 +44,26 @@ const InvestCard = props => {
           {isOwnedByUser && (
             <DropdownMenu
               menuItems={[
-                {
-                  title: 'Remove',
-                  action: removeContract
-                }
+                <MenuItem key="edit">
+                  <DialogButton button={<div>Edit</div>}>
+                    <EditContractForm
+                      refetchUserContracts={refetchUserContracts}
+                      refetchPublicContracts={refetchPublicContracts}
+                      contractAddress={contractAddress}
+                      initialValues={{
+                        name,
+                        symbol,
+                        description,
+                        website,
+                        investmentLink,
+                        access
+                      }}
+                    />
+                  </DialogButton>
+                </MenuItem>,
+                <MenuItem key="remove" onClick={removeContract}>
+                  Remove
+                </MenuItem>
               ]}
             />
           )}

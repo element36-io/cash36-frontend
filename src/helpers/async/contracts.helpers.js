@@ -9,6 +9,17 @@ export const addContract = async formData => {
   }
 };
 
+export const editContract = async (contractAddress, formData) => {
+  try {
+    await API.put(
+      `compliance/external-contract/update/${contractAddress}`,
+      formData
+    );
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
 export const getUserContracts = async () => {
   try {
     const { data } = await API.get('compliance/external-contract/list');

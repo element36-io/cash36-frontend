@@ -25,10 +25,20 @@
       border-radius: 4px;
       transform: scale(0) translate3d(0, -2rem, 0);
       transform-origin: 80% 0;
+      display: flex;
+      flex-direction: column;
 
       &.--active {
         opacity: 1;
         transform: scale(1) translate3d(0, 0, 0);
+      }
+
+      > li {
+        .dialog-button-wrapper {
+          height: 100%;
+          width: 100%;
+          position: relative;
+        }
       }
     }
   }

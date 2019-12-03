@@ -19,6 +19,7 @@ const Invest = () => {
     getUserContracts,
     []
   );
+
   const [
     publicContracts,
     publicContractsError,
@@ -38,22 +39,31 @@ const Invest = () => {
         />
       </DialogButton>
       <div className="invest__cards">
-        {visibleContracts.map(contract => {
+        {visibleContracts.map(visibleContract => {
           const isOwnedByUser = !!userContracts.find(userContract => {
-            return userContract.contractAddress !== contract.contractAddress;
+            return (
+              userContract.contractAddress === visibleContract.contractAddress
+            );
           });
 
           if (isOwnedByUser) {
             return (
               <InvestCard
-                key={contract.contractAddress}
-                {...contract}
+                key={visibleContract.contractAddress}
+                {...visibleContract}
                 isOwnedByUser
+                refetchUserContracts={refetchUserContracts}
+                refetchPublicContracts={refetchPublicContracts}
               />
             );
           }
 
-          return <InvestCard key={contract.contractAddress} {...contract} />;
+          return (
+            <InvestCard
+              key={visibleContract.contractAddress}
+              {...visibleContract}
+            />
+          );
         })}
       </div>
       {publicContractsError && (
