@@ -71,6 +71,16 @@
   &__avatar {
     position: relative;
 
+    .avatar__container {
+      width: 10.5rem;
+      height: 10.5rem;
+
+      .user-profile__avatar__image {
+        width: 10.5rem;
+        height: 10.5rem;
+      }
+    }
+
     margin-right: 1.6rem;
 
     > div:first-child {
