@@ -2,7 +2,6 @@ import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import CloseIcon from '@material-ui/icons/Close';
-import WalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import { Dialog, MenuItem } from '@material-ui/core';
 
 import Wallet from './Wallet';
@@ -18,7 +17,6 @@ const ManageWallets = ({ walletList }) => {
   return (
     <Fragment>
       <MenuItem onClick={onOpen}>
-        <WalletIcon />
         <span>Manage Wallets</span>
       </MenuItem>
 
@@ -41,8 +39,8 @@ const ManageWallets = ({ walletList }) => {
           <div>
             {walletList.length
               ? walletList.map(wallet => (
-                <Wallet key={wallet.accountAddress} wallet={wallet} />
-              ))
+                  <Wallet key={wallet.accountAddress} wallet={wallet} />
+                ))
               : 'You have no wallets registered. You can register one by clicking below.'}
           </div>
           <AddWalletButton />
