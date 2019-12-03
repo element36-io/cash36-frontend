@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import DialogButton from '../../components/DialogButton';
+import ButtonDialog from '../../components/ButtonDialog';
 import AddButton from '../../components/Buttons/AddButton';
 import ContractForm from './ContractForm';
 import InvestCard from './InvestCard';
@@ -32,12 +32,15 @@ const Invest = () => {
 
   return (
     <div className="wrapper invest">
-      <DialogButton button={<AddButton text="Add Contract" />}>
-        <ContractForm
-          refetchUserContracts={refetchUserContracts}
-          refetchPublicContracts={refetchPublicContracts}
-        />
-      </DialogButton>
+      <div className="invest__header">
+        <ButtonDialog button={<AddButton text="Add Contract" />}>
+          <ContractForm
+            refetchUserContracts={refetchUserContracts}
+            refetchPublicContracts={refetchPublicContracts}
+          />
+        </ButtonDialog>
+      </div>
+
       <div className="invest__cards">
         {visibleContracts.map(visibleContract => {
           const isOwnedByUser = !!userContracts.find(userContract => {

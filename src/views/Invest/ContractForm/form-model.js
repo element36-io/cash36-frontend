@@ -9,12 +9,12 @@ export const formModel = [
     name: 'contractAddress',
     type: 'text',
     label: 'Contract Address',
-    placeholder: '0x00000000000...'
+    placeholder: '0x67b5656d60a809915323bf2c40a8bef15a152e3e'
   },
   {
     name: 'symbol',
     type: 'select',
-    label: 'Token',
+    label: 'Accepted Tokens',
     list: [
       { value: 'EUR36', label: 'EUR36' },
       { value: 'CHF36', label: 'CHF36' }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -39,7 +40,11 @@ const DropdownMenu = ({ menuItems = [] }) => {
               showActions ? '--active' : ''
             }`}
           >
-            {menuItems.map(item => item)}
+            {menuItems.map(({ title, onClick }) => (
+              <MenuItem key={title} onClick={onClick}>
+                {title}
+              </MenuItem>
+            ))}
           </div>
         </div>
       </ClickAwayListener>

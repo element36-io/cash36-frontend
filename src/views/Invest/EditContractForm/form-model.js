@@ -8,7 +8,7 @@ export const formModel = [
   {
     name: 'symbol',
     type: 'select',
-    label: 'Token',
+    label: 'Accepted Tokens',
     list: [
       { value: 'EUR36', label: 'EUR36' },
       { value: 'CHF36', label: 'CHF36' }

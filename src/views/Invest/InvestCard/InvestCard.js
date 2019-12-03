@@ -1,9 +1,8 @@
-import React from 'react';
-import MenuItem from '@material-ui/core/MenuItem/MenuItem';
+import React, { useRef } from 'react';
 
 import DefaultButton from '../../../components/Buttons/DefaultButton';
 import SecondaryButton from '../../../components/Buttons/SecondaryButton';
-import DialogButton from '../../../components/DialogButton';
+import ButtonDialog from '../../../components/ButtonDialog';
 import InvestDetails from '../InvestDetails';
 import DropdownMenu from '../../../components/DropdownMenu';
 import EditContractForm from '../EditContractForm';
@@ -26,6 +25,8 @@ const InvestCard = props => {
     access
   } = props;
 
+  const editButtonRef = useRef();
+
   const removeContract = async () => {
     try {
       await deleteContract(contractAddress);
@@ -36,34 +37,43 @@ const InvestCard = props => {
     }
   };
 
+  const editContract = () => {
+    editButtonRef.current.click();
+  };
+
   return (
     <div className={`invest-card invest-card--${symbol} paper`}>
       <div className="invest-card__heading">
         <div className="invest-card__heading__top">
           <h3>{name}</h3>
           {isOwnedByUser && (
+            <ButtonDialog button={<button ref={editButtonRef}>Edit</button>}>
+              <EditContractForm
+                refetchUserContracts={refetchUserContracts}
+                refetchPublicContracts={refetchPublicContracts}
+                contractAddress={contractAddress}
+                initialValues={{
+                  name,
+                  symbol,
+                  description,
+                  website,
+                  investmentLink,
+                  access
+                }}
+              />
+            </ButtonDialog>
+          )}
+          {isOwnedByUser && (
             <DropdownMenu
               menuItems={[
-                <MenuItem key="edit">
-                  <DialogButton button={<div>Edit</div>}>
-                    <EditContractForm
-                      refetchUserContracts={refetchUserContracts}
-                      refetchPublicContracts={refetchPublicContracts}
-                      contractAddress={contractAddress}
-                      initialValues={{
-                        name,
-                        symbol,
-                        description,
-                        website,
-                        investmentLink,
-                        access
-                      }}
-                    />
-                  </DialogButton>
-                </MenuItem>,
-                <MenuItem key="remove" onClick={removeContract}>
-                  Remove
-                </MenuItem>
+                {
+                  title: 'Edit',
+                  onClick: editContract
+                },
+                {
+                  title: 'Remove',
+                  onClick: removeContract
+                }
               ]}
             />
           )}
@@ -76,9 +86,9 @@ const InvestCard = props => {
       </div>
 
       <div className="invest-card__buttons">
-        <DialogButton button={<SecondaryButton>More</SecondaryButton>}>
+        <ButtonDialog button={<SecondaryButton>More</SecondaryButton>}>
           <InvestDetails {...props} />
-        </DialogButton>
+        </ButtonDialog>
         <a target="_blank" href={investmentLink} rel="noopener noreferrer">
           <DefaultButton>Invest Now</DefaultButton>
         </a>
