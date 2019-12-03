@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import DeleteIcon from '@material-ui/icons/Delete';
+import AttachmentIcon from '@material-ui/icons/Attachment';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import { uploadAvatar, deleteAvatar } from '../../store/auth/auth.actions';
 import { AvatarContext } from '../../providers/avatar.provider';
@@ -65,34 +67,34 @@ const Avatar = ({ cssClass, alt, isEditable = false }) => {
     }
   };
 
-  if (isEditable) {
-    return (
-      <div className="avatar__container">
-        {avatarUrl && (
-          <div className="avatar__remove" onClick={removeAvatar}>
-            <DeleteIcon />
-          </div>
-        )}
-        <label className={`avatar ${cssClass || ''}`}>
-          <input type="file" onChange={uploadNewAvatar} />
-          {avatarUrl ? (
-            <img src={avatarUrl} alt={alt} />
-          ) : (
-            <i className="fas fa-user" data-testid="avatar__icon" />
-          )}
-          {/* {error && <span className="error-text">{error}</span>} */}
-        </label>
-      </div>
-    );
-  }
-
   return (
-    <div className={`avatar ${cssClass || ''}`}>
-      {avatarUrl ? (
-        <img src={avatarUrl} alt={alt} />
-      ) : (
-        <i className="fas fa-user" data-testid="avatar__icon" />
+    <div className="avatar__container">
+      {isEditable && (
+        <div className="avatar__controls">
+          <label className="avatar__upload">
+            <input type="file" onChange={uploadNewAvatar} />
+            <Tooltip title="Upload new avatar">
+              <AttachmentIcon />
+            </Tooltip>
+          </label>
+
+          {avatarUrl && (
+            <div className="avatar__remove" onClick={removeAvatar}>
+              <Tooltip title="Delete avatar">
+                <DeleteIcon />
+              </Tooltip>
+            </div>
+          )}
+        </div>
       )}
+
+      <div className={`avatar ${cssClass || ''}`}>
+        {avatarUrl ? (
+          <img src={avatarUrl} alt={alt} />
+        ) : (
+          <i className="fas fa-user" data-testid="avatar__icon" />
+        )}
+      </div>
     </div>
   );
 };
