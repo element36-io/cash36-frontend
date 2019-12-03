@@ -20,8 +20,7 @@ const InvestCard = props => {
     description,
     website,
     investmentLink,
-    refetchPublicContracts,
-    refetchUserContracts,
+    refetchContracts,
     access
   } = props;
 
@@ -30,8 +29,7 @@ const InvestCard = props => {
   const removeContract = async () => {
     try {
       await deleteContract(contractAddress);
-      refetchPublicContracts();
-      refetchUserContracts();
+      refetchContracts();
     } catch (error) {
       console.log(error);
     }
@@ -49,8 +47,7 @@ const InvestCard = props => {
           {isOwnedByUser && (
             <ButtonDialog button={<button ref={editButtonRef}>Edit</button>}>
               <EditContractForm
-                refetchUserContracts={refetchUserContracts}
-                refetchPublicContracts={refetchPublicContracts}
+                refetchContracts={refetchContracts}
                 contractAddress={contractAddress}
                 initialValues={{
                   name,

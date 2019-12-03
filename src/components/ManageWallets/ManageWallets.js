@@ -39,8 +39,8 @@ const ManageWallets = ({ walletList }) => {
           <div>
             {walletList.length
               ? walletList.map(wallet => (
-                  <Wallet key={wallet.accountAddress} wallet={wallet} />
-                ))
+                <Wallet key={wallet.accountAddress} wallet={wallet} />
+              ))
               : 'You have no wallets registered. You can register one by clicking below.'}
           </div>
           <AddWalletButton />

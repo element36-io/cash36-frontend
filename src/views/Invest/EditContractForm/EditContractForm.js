@@ -13,8 +13,7 @@ import '../ContractForm/ContractForm.scss';
 
 const EditContractForm = ({
   closeDialog,
-  refetchUserContracts,
-  refetchPublicContracts,
+  refetchContracts,
   contractAddress,
   initialValues
 }) => {
@@ -23,8 +22,7 @@ const EditContractForm = ({
     try {
       await editContract(contractAddress, formValues);
       closeDialog();
-      refetchUserContracts();
-      refetchPublicContracts();
+      refetchContracts();
     } catch (error) {
       setError(error);
       return Promise.reject(error);
@@ -67,8 +65,7 @@ const EditContractForm = ({
 
 EditContractForm.propTypes = {
   closeDialog: PropTypes.func,
-  refetchUserContracts: PropTypes.func,
-  refetchPublicContracts: PropTypes.func,
+  refetchContracts: PropTypes.func,
   contractAddress: PropTypes.string,
   initialValues: PropTypes.object
 };

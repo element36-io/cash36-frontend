@@ -20,29 +20,9 @@ export const editContract = async (contractAddress, formData) => {
   }
 };
 
-export const getUserContracts = async () => {
+export const getContracts = async () => {
   try {
-    const { data } = await API.get('compliance/external-contract/list');
-
-    return data;
-  } catch (error) {
-    return handleError(error);
-  }
-};
-
-export const getPublicContracts = async () => {
-  try {
-    const { data } = await API.get('compliance/external-contract/listPublic/');
-
-    return data;
-  } catch (error) {
-    return handleError(error);
-  }
-};
-
-export const getAllContracts = async () => {
-  try {
-    const { data } = await API.get('compliance/external-contract/listAll/');
+    const { data } = await API.get('compliance/external-contract/list/');
 
     return data;
   } catch (error) {

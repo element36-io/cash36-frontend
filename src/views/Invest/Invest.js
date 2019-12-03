@@ -5,76 +5,43 @@ import AddButton from '../../components/Buttons/AddButton';
 import ContractForm from './ContractForm';
 import InvestCard from './InvestCard';
 import useGet from '../../hooks/useGet';
-import {
-  getUserContracts,
-  getPublicContracts
-} from '../../helpers/async/contracts.helpers';
+import { getContracts } from '../../helpers/async/contracts.helpers';
 
 import './Invest.scss';
 
 const Invest = () => {
   const [visibleContracts, setVisibleContracts] = useState([]);
 
-  const [userContracts, userContractsError, refetchUserContracts] = useGet(
-    getUserContracts,
+  const [contracts, contractsError, refetchContracts] = useGet(
+    getContracts,
     []
   );
 
-  const [
-    publicContracts,
-    publicContractsError,
-    refetchPublicContracts
-  ] = useGet(getPublicContracts, []);
-
   useEffect(() => {
-    setVisibleContracts(publicContracts);
-  }, [userContracts, publicContracts]);
+    setVisibleContracts(contracts);
+  }, [contracts]);
 
   return (
     <div className="wrapper invest">
       <div className="invest__header">
         <ButtonDialog button={<AddButton text="Add Contract" />}>
-          <ContractForm
-            refetchUserContracts={refetchUserContracts}
-            refetchPublicContracts={refetchPublicContracts}
-          />
+          <ContractForm refetchContracts={refetchContracts} />
         </ButtonDialog>
       </div>
 
       <div className="invest__cards">
         {visibleContracts.map(visibleContract => {
-          const isOwnedByUser = !!userContracts.find(userContract => {
-            return (
-              userContract.contractAddress === visibleContract.contractAddress
-            );
-          });
-
-          if (isOwnedByUser) {
-            return (
-              <InvestCard
-                key={visibleContract.contractAddress}
-                {...visibleContract}
-                isOwnedByUser
-                refetchUserContracts={refetchUserContracts}
-                refetchPublicContracts={refetchPublicContracts}
-              />
-            );
-          }
-
           return (
             <InvestCard
+              refetchContracts={refetchContracts}
               key={visibleContract.contractAddress}
               {...visibleContract}
+              isOwnedByUser={visibleContract.isOwnedByUser}
             />
           );
         })}
       </div>
-      {publicContractsError && (
-        <div className="error-text">{publicContractsError}</div>
-      )}
-      {userContractsError && (
-        <div className="error-text">{userContractsError}</div>
-      )}
+      {contractsError && <div className="error-text">{contractsError}</div>}
     </div>
   );
 };
