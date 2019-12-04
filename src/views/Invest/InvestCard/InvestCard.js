@@ -43,7 +43,9 @@ const InvestCard = props => {
     <div className={`invest-card invest-card--${symbol} paper`}>
       <div className="invest-card__heading">
         <div className="invest-card__heading__top">
-          <h3>{name}</h3>
+          <h3>
+            {name} {access === 'PRIVATE' && <span>private</span>}
+          </h3>
           {isOwnedByUser && (
             <ButtonDialog button={<button ref={editButtonRef}>Edit</button>}>
               <EditContractForm

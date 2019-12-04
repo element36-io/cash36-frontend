@@ -9,7 +9,6 @@ import './ButtonDialog.scss';
 
 const ButtonDialog = ({ button, children }) => {
   const [open, setOpen] = useState(false);
-  console.log(open);
   const onClose = () => setOpen(false);
   const onOpen = () => setOpen(true);
 
