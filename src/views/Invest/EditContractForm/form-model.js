@@ -6,14 +6,15 @@ export const formModel = [
     placeholder: 'Contract Name'
   },
   {
-    name: 'symbol',
+    name: 'acceptedTokens',
     type: 'select',
-    label: 'Accepted Tokens',
+    label: 'Accepted Token(s)',
     list: [
-      { value: 'EUR36', label: 'EUR36' },
-      { value: 'CHF36', label: 'CHF36' }
+      { value: ['EUR36'], label: 'EUR36' },
+      { value: ['CHF36'], label: 'CHF36' },
+      { value: ['EUR36', 'CHF36'], label: 'EUR36 and CHF36' }
     ],
-    placeholder: 'EUR36/CHF36'
+    placeholder: 'Choose which token(s) you want to accept'
   },
   {
     name: 'investmentLink',

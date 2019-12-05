@@ -13,7 +13,7 @@ import './InvestCard.scss';
 
 const InvestCard = props => {
   const {
-    symbol,
+    acceptedTokens,
     contractAddress,
     name,
     isOwnedByUser,
@@ -40,7 +40,7 @@ const InvestCard = props => {
   };
 
   return (
-    <div className={`invest-card invest-card--${symbol} paper`}>
+    <div className={`invest-card invest-card--${acceptedTokens[0]} paper`}>
       <div className="invest-card__heading">
         <div className="invest-card__heading__top">
           <h3>
@@ -53,7 +53,7 @@ const InvestCard = props => {
                 contractAddress={contractAddress}
                 initialValues={{
                   name,
-                  symbol,
+                  acceptedTokens,
                   description,
                   website,
                   investmentLink,

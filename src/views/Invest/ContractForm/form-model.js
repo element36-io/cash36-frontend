@@ -12,14 +12,15 @@ export const formModel = [
     placeholder: '0x67b5656d60a809915323bf2c40a8bef15a152e3e'
   },
   {
-    name: 'symbol',
+    name: 'acceptedTokens',
     type: 'select',
-    label: 'Accepted Tokens',
+    label: 'Accepted Token(s)',
     list: [
-      { value: 'EUR36', label: 'EUR36' },
-      { value: 'CHF36', label: 'CHF36' }
+      { value: ['EUR36'], label: 'EUR36' },
+      { value: ['CHF36'], label: 'CHF36' },
+      { value: ['EUR36', 'CHF36'], label: 'EUR36 and CHF36' }
     ],
-    placeholder: 'EUR36/CHF36'
+    placeholder: 'Choose which token(s) you want to accept'
   },
   {
     name: 'investmentLink',
@@ -41,13 +42,18 @@ export const formModel = [
       { value: 'PUBLIC', label: 'Public' },
       { value: 'PRIVATE', label: 'Private' }
     ],
-    placeholder: 'Public/Private'
+    placeholder: 'Determine the access scope of your project'
   },
   {
     name: 'description',
     type: 'textarea',
     label: 'Description',
     placeholder: 'Enter your contract description'
+  },
+  {
+    name: 'isWalletFree',
+    type: 'checkbox',
+    label: 'Is it wallet free?'
   }
 ];
 
@@ -55,8 +61,9 @@ export const initialValues = {
   name: '',
   contractAddress: '',
   description: '',
-  symbol: '',
+  acceptedTokens: '',
   investmentLink: '',
   website: '',
-  access: ''
+  access: '',
+  isWalletFree: false
 };
