@@ -57,7 +57,7 @@ export const UserProfile = ({ user, alt }) => {
             currentProcessStatus={currentProcessStatus}
             caseId={caseId}
           />
-          <AddWalletButton />
+          {currentProcessStatus !== 'REGISTERED' && <AddWalletButton />}
         </div>
       </div>
     </div>
