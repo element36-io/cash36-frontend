@@ -30,8 +30,8 @@ const Step4UserProfile = ({ changeSteps, stepError }) => {
     industry: '',
     industryOther: ''
   });
-  const [transactionVolume, setTransactionVolume] = useState('');
-  const [incomeVolume, setIncomeVolume] = useState('');
+  const [transactionVolume, setTransactionVolume] = useState('LessThan10k');
+  const [incomeVolume, setIncomeVolume] = useState('LessThan50k');
   const [sourceOfFunds, setSourceOfFunds] = useState({
     SavingsFromWork: false,
     Inheritance: false,
