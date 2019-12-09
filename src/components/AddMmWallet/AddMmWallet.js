@@ -6,6 +6,7 @@ import { Web3Context } from '../../providers/web3.provider';
 import metamaskLogo from '../../assets/icons/metamask.svg';
 import MmCheck from '../MmCheck';
 import { WalletContext, walletTypes } from '../../providers/wallet.provider';
+import SecondaryButton from '../Buttons/SecondaryButton';
 
 import './AddMmWallet.scss';
 
@@ -13,7 +14,7 @@ const AddMmWallet = ({ addWallet, walletList }) => {
   const [account, setAccount] = useState(null);
   const [description, setDescription] = useState('');
   const [error, setError] = useState(null);
-  const [submitting, setSubmitting] = useState(null);
+  const [submitting, setSubmitting] = useState(true);
   const [submitted, setSubmitted] = useState(null);
   const { getNetwork } = useContext(Web3Context);
   const { onCloseDialogs } = useContext(WalletContext);
@@ -64,9 +65,13 @@ const AddMmWallet = ({ addWallet, walletList }) => {
         </>
       )}
       {submitted && (
-        <span className="icon-success" onClick={onCloseDialogs}>
-          <DoneIcon />
-        </span>
+        <div className="add-mm-wallet__submitted">
+          <div>
+            <DoneIcon className="icon-success" />
+            Wallet added successfully
+          </div>
+          <SecondaryButton onClick={onCloseDialogs}>Close</SecondaryButton>
+        </div>
       )}
     </div>
   );
