@@ -5,6 +5,9 @@ import { CAPTCHA_KEY } from '../../../config/api';
 import Form from '../../Form';
 import StepButton from '../../Buttons/StepButton/StepButton';
 
+console.warn(process.env.REACT_APP_CAPTCHA_ACTIVE);
+const activeCaptcha = process.env.REACT_APP_CAPTCHA_ACTIVE;
+
 const AuthForm = ({
   submitCallback,
   validationSchema,
@@ -15,8 +18,10 @@ const AuthForm = ({
   errorMsg,
   captcha = true
 }) => {
-  const [isVerified, setIsVerified] = useState(!captcha);
+  const [isVerified, setIsVerified] = useState(!captcha || !activeCaptcha);
   const [captchaError, setCaptchaError] = useState(null);
+
+  console.warn('========== isCaptcha', isVerified);
 
   const onVerify = token => {
     if (token) setIsVerified(true);
@@ -68,7 +73,7 @@ const AuthForm = ({
               </div>
             ))}
           </div>
-          {captcha && (
+          {captcha && activeCaptcha && (
             <div className="auth__captcha">
               <ReCAPTCHA
                 onChange={onVerify}
