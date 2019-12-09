@@ -53,11 +53,17 @@
     > li {
       display: flex;
       // justify-content: center;
+
+      > span {
+        font-size: 1.5rem;
+      }
       svg {
         margin-right: 0.8rem;
-        fill: $primary-main;
-        width: 2.25rem;
-        height: 2.25rem;
+        // fill: $primary-main;
+        fill: $primary-light;
+        width: 1.6rem;
+        height: 1.6rem;
+        display: none;
       }
     }
 

@@ -1,67 +1,47 @@
 import React, { useState, useEffect } from 'react';
 
-import DialogButton from '../../components/DialogButton';
+import ButtonDialog from '../../components/ButtonDialog';
 import AddButton from '../../components/Buttons/AddButton';
 import ContractForm from './ContractForm';
 import InvestCard from './InvestCard';
 import useGet from '../../hooks/useGet';
-import {
-  getUserContracts,
-  getPublicContracts
-} from '../../helpers/async/contracts.helpers';
+import { getContracts } from '../../helpers/async/contracts.helpers';
 
 import './Invest.scss';
 
 const Invest = () => {
   const [visibleContracts, setVisibleContracts] = useState([]);
 
-  const [userContracts, userContractsError, refetchUserContracts] = useGet(
-    getUserContracts,
+  const [contracts, contractsError, refetchContracts] = useGet(
+    getContracts,
     []
   );
-  const [
-    publicContracts,
-    publicContractsError,
-    refetchPublicContracts
-  ] = useGet(getPublicContracts, []);
 
   useEffect(() => {
-    setVisibleContracts(publicContracts);
-  }, [userContracts, publicContracts]);
+    setVisibleContracts(contracts);
+  }, [contracts]);
 
   return (
     <div className="wrapper invest">
-      <DialogButton button={<AddButton text="Add Contract" />}>
-        <ContractForm
-          refetchUserContracts={refetchUserContracts}
-          refetchPublicContracts={refetchPublicContracts}
-        />
-      </DialogButton>
+      <div className="invest__header">
+        <ButtonDialog button={<AddButton text="Add Contract" />}>
+          <ContractForm refetchContracts={refetchContracts} />
+        </ButtonDialog>
+      </div>
+
       <div className="invest__cards">
-        {visibleContracts.map(contract => {
-          const isOwnedByUser = !!userContracts.find(userContract => {
-            return userContract.contractAddress !== contract.contractAddress;
-          });
-
-          if (isOwnedByUser) {
-            return (
-              <InvestCard
-                key={contract.contractAddress}
-                {...contract}
-                isOwnedByUser
-              />
-            );
-          }
-
-          return <InvestCard key={contract.contractAddress} {...contract} />;
+        {visibleContracts.map(visibleContract => {
+          return (
+            <InvestCard
+              refetchContracts={refetchContracts}
+              key={visibleContract.contractAddress}
+              {...visibleContract}
+              isOwnedByUser={visibleContract.isOwnedByUser}
+            />
+          );
         })}
       </div>
-      {publicContractsError && (
-        <div className="error-text">{publicContractsError}</div>
-      )}
-      {userContractsError && (
-        <div className="error-text">{userContractsError}</div>
-      )}
+      {contractsError && <div className="error-text">{contractsError}</div>}
     </div>
   );
 };

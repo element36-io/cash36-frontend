@@ -12,6 +12,11 @@ const AvatarProvider = ({ children }) => {
     try {
       const response = await getAvatar();
 
+      if (!response.data) {
+        setAvatarUrl('');
+        return;
+      }
+
       setAvatarUrl(
         `${response.dataType};${response.encoding}, ${response.data}`
       );

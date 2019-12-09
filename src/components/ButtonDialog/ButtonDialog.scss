@@ -1,11 +1,11 @@
 @import '../../styles/mixins.scss';
 
-.dialog-button {
+.button-dialog {
   max-width: 117rem;
   margin: 0 auto;
   position: relative;
 
-  .dialog-button__close {
+  .button-dialog__close {
     cursor: pointer;
     position: absolute;
     right: 2.4rem;
@@ -31,7 +31,7 @@
     width: 100%;
     // padding-top: 28rem;
 
-    .dialog-button__close {
+    .button-dialog__close {
       top: 1.6rem;
       right: 1.6rem;
     }

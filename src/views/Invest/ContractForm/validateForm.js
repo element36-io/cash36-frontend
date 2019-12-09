@@ -23,8 +23,8 @@ export default (values, props) => {
     errors.description = 'Description must be 240 characters or less';
   }
 
-  if (!values.symbol) {
-    errors.symbol = 'This field is required';
+  if (!values.acceptedTokens.length) {
+    errors.acceptedTokens = 'This field is required';
   }
 
   if (!values.access) {

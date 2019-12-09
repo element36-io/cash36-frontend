@@ -6,12 +6,6 @@ export const formModel = [
     placeholder: 'Contract Name'
   },
   {
-    name: 'contractAddress',
-    type: 'text',
-    label: 'Contract Address',
-    placeholder: '0x67b5656d60a809915323bf2c40a8bef15a152e3e'
-  },
-  {
     name: 'acceptedTokens',
     type: 'select',
     label: 'Accepted Token(s)',
@@ -42,28 +36,12 @@ export const formModel = [
       { value: 'PUBLIC', label: 'Public' },
       { value: 'PRIVATE', label: 'Private' }
     ],
-    placeholder: 'Determine the access scope of your project'
+    placeholder: 'Public/Private'
   },
   {
     name: 'description',
     type: 'textarea',
     label: 'Description',
     placeholder: 'Enter your contract description'
-  },
-  {
-    name: 'isWalletFree',
-    type: 'checkbox',
-    label: 'Is it wallet free?'
   }
 ];
-
-export const initialValues = {
-  name: '',
-  contractAddress: '',
-  description: '',
-  acceptedTokens: '',
-  investmentLink: '',
-  website: '',
-  access: '',
-  isWalletFree: false
-};
