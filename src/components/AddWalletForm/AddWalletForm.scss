@@ -4,6 +4,7 @@
   button {
     display: flex;
     margin: 2rem auto 0;
+    width: 100%;
 
     svg {
       color: #fff;
@@ -15,6 +16,18 @@
 
     button {
       width: 100%;
+    }
+  }
+
+  .add-wallet-form__feedback {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    > div {
+      position: absolute;
+      margin-right: 1rem;
+      left: -3rem;
     }
   }
 }

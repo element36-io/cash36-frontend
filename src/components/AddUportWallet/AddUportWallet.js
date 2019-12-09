@@ -8,6 +8,7 @@ import { Web3Context } from '../../providers/web3.provider';
 import uportLogo from '../../assets/icons/uport_logo.svg';
 import { WalletContext, walletTypes } from '../../providers/wallet.provider';
 import { verifyResponse } from '../../helpers/uport.helpers';
+import SecondaryButton from '../Buttons/SecondaryButton';
 
 import './AddUportWallet.scss';
 
@@ -97,9 +98,13 @@ const AddUportWallet = ({ addWallet, walletList }) => {
             />
           )}
           {submitted && (
-            <span className="icon-success" onClick={onCloseDialogs}>
-              <DoneIcon />
-            </span>
+            <div className="add-uport-wallet__submitted">
+              <div>
+                <DoneIcon className="icon-success" />
+                Wallet added successfully
+              </div>
+              <SecondaryButton onClick={onCloseDialogs}>Close</SecondaryButton>
+            </div>
           )}
         </div>
       )}
