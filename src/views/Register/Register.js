@@ -9,11 +9,13 @@ import validationSchema from './validation-schema';
 
 import { register } from '../../store/auth/auth.actions';
 
-const Register = ({ isAuthenticated, register }) => {
+const Register = ({ isAuthenticated }) => {
   const [error, setError] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
   const submitCallback = async values => {
     try {
       await register(values.username, values.password);
+      setUserEmail(values.username);
     } catch (e) {
       setError(e);
       return Promise.reject(e);
@@ -26,20 +28,30 @@ const Register = ({ isAuthenticated, register }) => {
     <AuthWrapper>
       <div data-testid="register_component">
         <p>
-          Welcome aboard, <br /> Please, enter your email & choose a password
+          Welcome aboard, <br />{' '}
+          {userEmail ? (
+            <span>
+              Confirmation email was sent to {userEmail}.{' '}
+              <Link to="/login">Back to sign in</Link>
+            </span>
+          ) : (
+            'Please, enter your email & choose a password'
+          )}
         </p>
-        <AuthForm
-          submitCallback={submitCallback}
-          validationSchema={validationSchema}
-          initialValues={initialValues}
-          formFields={formFields}
-          buttonLabel="Register"
-          errorMsg={error}
-        >
-          <p>
-            Already a member? <Link to="/login">Sign in</Link>
-          </p>
-        </AuthForm>
+        {!userEmail && (
+          <AuthForm
+            submitCallback={submitCallback}
+            validationSchema={validationSchema}
+            initialValues={initialValues}
+            formFields={formFields}
+            buttonLabel="Register"
+            errorMsg={error}
+          >
+            <p>
+              Already a member? <Link to="/login">Sign in</Link>
+            </p>
+          </AuthForm>
+        )}
       </div>
     </AuthWrapper>
   );
@@ -56,5 +68,5 @@ Register.propTypes = {
 
 export default connect(
   mapStateToProps,
-  { register }
+  null
 )(Register);

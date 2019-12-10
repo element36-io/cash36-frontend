@@ -86,16 +86,26 @@ export const getIndustries = async () => {
   }
 };
 
-export const register = (username, password) => async dispatch => {
+export const register = async (username, password) => {
   try {
     await axios.post(`${API_ROOT}/auth/user/register`, {
       username,
-      password
+      password,
+      emailUrl: `${window.location.origin}/account-activation`
     });
-    dispatch(login(username, password));
   } catch (error) {
     return Promise.reject(
       error.response.data.message || 'An error has occured'
+    );
+  }
+};
+
+export const activateUser = async code => {
+  try {
+    await axios.get(`${API_ROOT}/compliance/confirm/public/check?code=${code}`);
+  } catch (error) {
+    return Promise.reject(
+      error.response.data.error_description || 'An error has occured'
     );
   }
 };

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/KeyboardArrowDown';
@@ -59,6 +60,9 @@ const HeaderMenu = ({
                 </Tooltip>
               </MenuItem>
             )}
+            <MenuItem>
+              <Link to="/contacts">Contacts</Link>
+            </MenuItem>
             <MenuItem onClick={logout}>Logout</MenuItem>
           </div>
         </span>
