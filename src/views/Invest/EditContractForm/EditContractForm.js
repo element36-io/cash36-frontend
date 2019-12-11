@@ -7,7 +7,7 @@ import FormHeader from '../../../components/Form/FormHeader';
 import DefaultButton from '../../../components/Buttons/DefaultButton';
 import { editContract } from '../../../helpers/async/contracts.helpers';
 import { formModel } from './form-model';
-import validationSchema from './validation-schema';
+import validate from './validateForm';
 
 import '../ContractForm/ContractForm.scss';
 
@@ -32,7 +32,7 @@ const EditContractForm = ({
     <div className="paper contract-form">
       <FormHeader title="Edit Contract" />
       <Form
-        validationSchema={validationSchema}
+        validate={validate}
         submitCallback={submit}
         initialValues={initialValues}
         render={(formProps, submitting) => (

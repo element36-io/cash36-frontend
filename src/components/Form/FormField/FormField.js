@@ -5,6 +5,7 @@ import SelectInput from '../SelectInput';
 import CheckboxInput from '../CheckboxInput';
 import DateInput from '../DateInput';
 import Autocomplete from '../Autocomplete';
+import CheckboxArray from '../CheckboxArray';
 
 const FormField = props => {
   const {
@@ -85,6 +86,16 @@ const FormField = props => {
           isTouched={touched[formField.name]}
           error={errors[formField.name]}
           disabled={disabled}
+        />
+      );
+    case 'checkboxArray':
+      return (
+        <CheckboxArray
+          checkboxes={formField.checkboxes}
+          name={formField.name}
+          formProps={props.formProps}
+          isTouched={touched[formField.name]}
+          error={errors[formField.name]}
         />
       );
     default:

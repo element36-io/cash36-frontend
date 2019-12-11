@@ -26,7 +26,7 @@ export const Wallet = ({ isAuthenticated }) => {
           <Route exact path="/" component={Home} />
           <Route exact path="/buy" component={Buy} />
           <Route exact path="/sell" component={Sell} />
-          <Route exact path="/invest" component={Invest} />
+          <Route exact path="/use" component={Invest} />
           <Route exact path="/history" component={History} />
           <Route exact path="/contacts" component={Contacts} />
           <Route path="/kyc/:id" component={Kyc} />

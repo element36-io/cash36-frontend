@@ -25,14 +25,17 @@
       font-size: 1.4rem;
     }
 
-    > div:last-child {
-      display: flex;
-      align-items: center;
-
-      > img {
+    .invest-details__accepted-token {
+      margin-bottom: 0.2rem;
+      img {
         width: 2.2rem;
         margin-left: 0.5rem;
       }
+    }
+
+    > div {
+      display: flex;
+      align-items: center;
     }
   }
 

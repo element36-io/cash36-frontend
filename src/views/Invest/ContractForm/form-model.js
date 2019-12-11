@@ -12,16 +12,17 @@ export const formModel = [
     placeholder: '0x67b5656d60a809915323bf2c40a8bef15a152e3e'
   },
   {
+    type: 'checkboxArray',
     name: 'acceptedTokens',
-    type: 'select',
-    label: 'Accepted Token(s)',
-    list: [
-      { value: ['EUR36'], label: 'EUR36' },
-      { value: ['CHF36'], label: 'CHF36' },
-      { value: ['EUR36', 'CHF36'], label: 'EUR36 and CHF36' }
-    ],
-    placeholder: 'Choose which token(s) you want to accept'
+    checkboxes: [{ id: 'CHF36', name: 'CHF36' }, { id: 'EUR36', name: 'EUR36' }]
   },
+  {
+    name: 'contractSymbol',
+    type: 'text',
+    label: 'Contract symbol',
+    placeholder: 'Enter your contract symbol'
+  },
+
   {
     name: 'investmentLink',
     type: 'text',
@@ -61,7 +62,8 @@ export const initialValues = {
   name: '',
   contractAddress: '',
   description: '',
-  acceptedTokens: '',
+  acceptedTokens: [],
+  contractSymbol: '',
   investmentLink: '',
   website: '',
   access: '',

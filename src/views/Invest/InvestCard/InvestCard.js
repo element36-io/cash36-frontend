@@ -8,6 +8,7 @@ import DropdownMenu from '../../../components/DropdownMenu';
 import EditContractForm from '../EditContractForm';
 import { truncateString } from '../../../helpers/string.helpers';
 import { deleteContract } from '../../../helpers/async/contracts.helpers';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 
 import './InvestCard.scss';
 
@@ -19,6 +20,8 @@ const InvestCard = props => {
     isOwnedByUser,
     description,
     website,
+    contractSymbol,
+    isWalletFree,
     investmentLink,
     refetchContracts,
     access
@@ -45,6 +48,7 @@ const InvestCard = props => {
         <div className="invest-card__heading__top">
           <h3>
             {name} {access === 'PRIVATE' && <span>private</span>}
+            {isWalletFree && <AccountBalanceIcon />}
           </h3>
           {isOwnedByUser && (
             <ButtonDialog button={<button ref={editButtonRef}>Edit</button>}>
@@ -54,6 +58,8 @@ const InvestCard = props => {
                 initialValues={{
                   name,
                   acceptedTokens,
+                  contractSymbol,
+                  isWalletFree,
                   description,
                   website,
                   investmentLink,

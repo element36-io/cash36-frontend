@@ -1,7 +1,4 @@
-import Web3 from 'web3';
 import validator from 'validator';
-
-const web3 = new Web3();
 
 const urlOptions = {
   protocols: ['https'],
@@ -47,12 +44,6 @@ export default values => {
     errors.investmentLink = 'This field is required';
   } else if (!validator.isURL(values.investmentLink, urlOptions)) {
     errors.investmentLink = 'Must be a valid https URL';
-  }
-
-  if (!values.contractAddress) {
-    errors.contractAddress = 'This field is required';
-  } else if (!web3.utils.isAddress(values.contractAddress)) {
-    errors.contractAddress = 'Must be a valid ethereum address';
   }
 
   return errors;
