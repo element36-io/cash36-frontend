@@ -14,7 +14,7 @@ const AddMmWallet = ({ addWallet, walletList }) => {
   const [account, setAccount] = useState(null);
   const [description, setDescription] = useState('');
   const [error, setError] = useState(null);
-  const [submitting, setSubmitting] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(null);
   const { getNetwork } = useContext(Web3Context);
   const { onCloseDialogs } = useContext(WalletContext);
