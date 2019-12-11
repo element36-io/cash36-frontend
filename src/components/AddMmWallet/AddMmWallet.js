@@ -1,16 +1,19 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import DoneIcon from '@material-ui/icons/Done';
+
 import AddWalletForm from '../AddWalletForm';
 import { Web3Context } from '../../providers/web3.provider';
 import metamaskLogo from '../../assets/icons/metamask.svg';
 import MmCheck from '../MmCheck';
 import { WalletContext, walletTypes } from '../../providers/wallet.provider';
 import SecondaryButton from '../Buttons/SecondaryButton';
+import { addTokensToMetamask } from '../../helpers/metamask.helpers';
 
 import './AddMmWallet.scss';
 
-const AddMmWallet = ({ addWallet, walletList }) => {
+const AddMmWallet = ({ addWallet, walletList, tokens }) => {
   const [account, setAccount] = useState(null);
   const [description, setDescription] = useState('');
   const [error, setError] = useState(null);
@@ -31,6 +34,8 @@ const AddMmWallet = ({ addWallet, walletList }) => {
         window.ethereum.networkVersion,
         description
       );
+
+      await addTokensToMetamask(tokens);
       setSubmitted(true);
     } catch (err) {
       setError(err);
@@ -77,9 +82,11 @@ const AddMmWallet = ({ addWallet, walletList }) => {
   );
 };
 
+const mapStateToProps = ({ tokens }) => ({ tokens: tokens.tokens });
+
 AddMmWallet.propTypes = {
   addWallet: PropTypes.func,
   walletList: PropTypes.array
 };
 
-export default AddMmWallet;
+export default connect(mapStateToProps)(AddMmWallet);
