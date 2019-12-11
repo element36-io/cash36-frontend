@@ -130,9 +130,9 @@ test('dispatches register', async () => {
 
   const store = mockStore();
 
-  await store.dispatch(register(username, password));
+  await register(username, password);
 
-  expect(mockAxios.post).toHaveBeenCalledTimes(2);
+  expect(mockAxios.post).toHaveBeenCalledTimes(1);
 
   mockAxios.post.mockRestore();
 });
