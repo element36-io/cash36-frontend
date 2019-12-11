@@ -58,6 +58,17 @@ const HeaderMobileDropdown = ({
           </li>
         )}
         <ManageWalletsMobile />
+        <li>
+          <NavLink
+            exact
+            activeClassName="selected"
+            to="/contacts"
+            onClick={clickCallback}
+          >
+            Contacts
+            <RightArrowIcon className="header__mobile-dropdown__icon" />
+          </NavLink>
+        </li>
         <li onClick={logout}>
           <span>
             Logout
