@@ -5,6 +5,7 @@ import FormHeader from '../../../components/Form/FormHeader';
 import ProcessControls from '../ProcessControls';
 import FileInput from '../FileInput';
 import { getSelfieCode } from '../../../store/auth/auth.actions';
+import { sendUploadUrl } from '../../../helpers/async/uploadDocuments.helpers';
 import idFront from '../../../assets/icons/ID Front Icon.svg';
 import idBack from '../../../assets/icons/ID Back Icon.svg';
 import selfie from '../../../assets/icons/Selfie Icon.svg';
@@ -33,6 +34,14 @@ const Step3Documents = ({ changeSteps, stepError }) => {
   });
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
+
+  const sendEmail = async () => {
+    try {
+      sendUploadUrl();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const onSubmit = async () => {
     try {
@@ -76,6 +85,8 @@ const Step3Documents = ({ changeSteps, stepError }) => {
         title="Verification Process - Step 3"
         subtitle="Please upload the following documents so we can verify your identity and domicile address."
       />
+      <button onClick={sendEmail}>Upload via mobile</button>
+
       <div className="documents-upload__document-wrapper">
         <div className="documents-upload__document-wrapper__content">
           <img src={idFront} alt="ID Front" />
