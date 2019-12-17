@@ -6,6 +6,13 @@
     margin-bottom: 0;
   }
 
+  .documents-upload__via-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1.6rem;
+  }
+
   .documents-upload__document-wrapper {
     display: flex;
     flex-wrap: wrap;

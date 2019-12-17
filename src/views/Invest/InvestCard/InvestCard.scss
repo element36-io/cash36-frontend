@@ -36,22 +36,16 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
+        position: relative;
 
         > span {
-          margin-left: 0.6rem;
+          position: absolute;
           font-weight: 400;
           font-size: 1.4rem;
           border-radius: 4px;
-          padding: 2px;
-
+          right: -3rem;
+          top: -1.4rem;
           color: $primary-main;
-        }
-
-        > svg {
-          margin-left: 0.6rem;
-          width: 2.25rem;
-          align-self: center;
-          fill: $primary-main;
         }
       }
 
@@ -79,7 +73,31 @@
       flex: 1;
       button {
         width: 100%;
+
+        > span {
+          display: flex;
+          align-items: center;
+        }
+
+        svg {
+          margin-right: 0.5rem;
+          width: 2rem;
+        }
       }
+    }
+  }
+
+  .invest-card__heading__status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+
+    > svg {
+      margin-left: 0.6rem;
+      width: 2.25rem;
+      align-self: center;
+      fill: $primary-main;
     }
   }
 

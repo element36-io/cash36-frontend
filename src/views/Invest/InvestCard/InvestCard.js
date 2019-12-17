@@ -48,8 +48,8 @@ const InvestCard = props => {
         <div className="invest-card__heading__top">
           <h3>
             {name} {access === 'PRIVATE' && <span>private</span>}
-            {isWalletFree && <AccountBalanceIcon />}
           </h3>
+
           {isOwnedByUser && (
             <ButtonDialog button={<button ref={editButtonRef}>Edit</button>}>
               <EditContractForm
@@ -95,7 +95,10 @@ const InvestCard = props => {
           <InvestDetails {...props} />
         </ButtonDialog>
         <a target="_blank" href={investmentLink} rel="noopener noreferrer">
-          <DefaultButton>Invest Now</DefaultButton>
+          <DefaultButton>
+            {' '}
+            {isWalletFree && <AccountBalanceIcon />}Invest Now
+          </DefaultButton>
         </a>
       </div>
     </div>

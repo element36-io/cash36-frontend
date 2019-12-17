@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import SmartphoneIcon from '@material-ui/icons/Smartphone';
 
+import Responsive from '../../../components/Responsive';
 import FormHeader from '../../../components/Form/FormHeader';
 import ProcessControls from '../ProcessControls';
 import FileInput from '../FileInput';
@@ -10,6 +12,7 @@ import idFront from '../../../assets/icons/ID Front Icon.svg';
 import idBack from '../../../assets/icons/ID Back Icon.svg';
 import selfie from '../../../assets/icons/Selfie Icon.svg';
 import useGet from '../../../hooks/useGet';
+import SecondaryButton from '../../../components/Buttons/SecondaryButton';
 
 import './Step3Documents.scss';
 
@@ -33,13 +36,20 @@ const Step3Documents = ({ changeSteps, stepError }) => {
     }
   });
   const [submitting, setSubmitting] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
   const [error, setError] = useState('');
 
   const sendEmail = async () => {
     try {
-      sendUploadUrl();
+      await sendUploadUrl();
+
+      setEmailSent(true);
+
+      setTimeout(() => {
+        setEmailSent(false);
+      }, 2000);
     } catch (error) {
-      console.log(error);
+      setError(error);
     }
   };
 
@@ -85,7 +95,6 @@ const Step3Documents = ({ changeSteps, stepError }) => {
         title="Verification Process - Step 3"
         subtitle="Please upload the following documents so we can verify your identity and domicile address."
       />
-      <button onClick={sendEmail}>Upload via mobile</button>
 
       <div className="documents-upload__document-wrapper">
         <div className="documents-upload__document-wrapper__content">
@@ -169,6 +178,18 @@ const Step3Documents = ({ changeSteps, stepError }) => {
           changeCallback={addDocument}
         />
       </div>
+      <Responsive>
+        <div className="documents-upload__via-mobile">
+          <SecondaryButton onClick={sendEmail}>
+            <SmartphoneIcon />
+            Upload via mobile
+          </SecondaryButton>
+
+          {emailSent && (
+            <div>Link to upload via mobile has been sent to your email</div>
+          )}
+        </div>
+      </Responsive>
       <ProcessControls
         submitLabel="Submit & Continue"
         disabled={disabled || submitting}
