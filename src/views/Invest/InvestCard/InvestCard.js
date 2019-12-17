@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 
 import DefaultButton from '../../../components/Buttons/DefaultButton';
 import SecondaryButton from '../../../components/Buttons/SecondaryButton';
@@ -103,6 +104,20 @@ const InvestCard = props => {
       </div>
     </div>
   );
+};
+
+InvestCard.propTypes = {
+  acceptedTokens: PropTypes.array,
+  contractAddress: PropTypes.string,
+  name: PropTypes.string,
+  isOwnedByUser: PropTypes.bool,
+  description: PropTypes.string,
+  website: PropTypes.string,
+  contractSymbol: PropTypes.string,
+  isWalletFree: PropTypes.bool,
+  investmentLink: PropTypes.string,
+  refetchContracts: PropTypes.func,
+  access: PropTypes.bool
 };
 
 export default InvestCard;
