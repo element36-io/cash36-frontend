@@ -28,7 +28,7 @@ const addWalletValues = {
 
 afterEach(cleanup);
 
-export function renderWithRedux (
+export function renderWithRedux(
   component,
   {
     initialState,
@@ -45,7 +45,7 @@ export function renderWithRedux (
   };
 }
 
-export function renderWithRouter (
+export function renderWithRouter(
   component,
   {
     route = '/',
@@ -58,7 +58,7 @@ export function renderWithRouter (
   };
 }
 
-export function renderWithRouterAndRedux (
+export function renderWithRouterAndRedux(
   component,
   {
     initialState = {},
@@ -80,7 +80,7 @@ export function renderWithRouterAndRedux (
   };
 }
 
-export function renderWithAvatarContextAndRouter (
+export function renderWithAvatarContextAndRouter(
   component,
   {
     initialState = {},
@@ -112,7 +112,7 @@ export function renderWithAvatarContextAndRouter (
   };
 }
 
-export function renderWithAvatarContext (
+export function renderWithAvatarContext(
   component,
   renderFunction = render,
   {
@@ -129,7 +129,7 @@ export function renderWithAvatarContext (
   );
 }
 
-export function renderWithWeb3Context (component, renderFunction = render) {
+export function renderWithWeb3Context(component, renderFunction = render) {
   return renderFunction(
     <Web3Context.Provider value={{ ...web3Values }}>
       {component}

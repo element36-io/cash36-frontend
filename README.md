@@ -1,9 +1,7 @@
 # Bootstraped with create-react-app
 
 # Running the dev server
-  * Run 'yarn install' or 'npm install'
-  * Use the command 'yarn start' or 'npm start'
-  * Dev server can be accessed on http://localhost:3000/
 
-# code style
-[![js-semistandard-style](https://cdn.rawgit.com/flet/semistandard/master/badge.svg)](https://github.com/Flet/semistandard)
+- Run 'yarn install' or 'npm install'
+- Use the command 'yarn start' or 'npm start'
+- Dev server can be accessed on http://localhost:3000/
