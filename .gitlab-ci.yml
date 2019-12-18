@@ -21,6 +21,7 @@ test:
 #    - yarn --registry http://167.99.243.81:4873/
     - yarn cache clean
     - yarn config get registry
+    - ls -la
     - yarn --registry https://registry.yarnpkg.com
     - yarn test
   except:
