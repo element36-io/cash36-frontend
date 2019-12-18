@@ -44,10 +44,6 @@ const Step3Documents = ({ changeSteps, stepError }) => {
       await sendUploadUrl();
 
       setEmailSent(true);
-
-      setTimeout(() => {
-        setEmailSent(false);
-      }, 2000);
     } catch (error) {
       setError(error);
     }
