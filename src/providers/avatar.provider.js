@@ -1,4 +1,5 @@
 import React, { useState, useEffect, createContext } from 'react';
+import PropTypes from 'prop-types';
 
 import { getAvatar } from '../store/auth/auth.actions';
 
@@ -34,6 +35,10 @@ const AvatarProvider = ({ children }) => {
       {children}
     </AvatarContext.Provider>
   );
+};
+
+AvatarProvider.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
 };
 
 export default AvatarProvider;

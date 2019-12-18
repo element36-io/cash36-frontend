@@ -117,7 +117,7 @@ InvestCard.propTypes = {
   isWalletFree: PropTypes.bool,
   investmentLink: PropTypes.string,
   refetchContracts: PropTypes.func,
-  access: PropTypes.bool
+  access: PropTypes.string
 };
 
 export default InvestCard;
