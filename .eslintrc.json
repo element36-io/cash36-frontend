@@ -25,6 +25,7 @@
   },
   "plugins": ["react", "react-hooks"],
   "rules": {
+    "react/no-unescaped-entities": "off",
     "no-console": "off",
     "react-hooks/rules-of-hooks": "error"
   }
