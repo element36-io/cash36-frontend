@@ -20,7 +20,8 @@ test:
     - npm install -g yarn
 #    - yarn --registry http://167.99.243.81:4873/
     - yarn cache clean
-    - yarn 
+    - yarn config get registry
+    - yarn --registry https://registry.yarnpkg.com
     - yarn test
   except:
     - master
