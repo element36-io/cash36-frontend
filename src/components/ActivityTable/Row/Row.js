@@ -63,8 +63,8 @@ const Row = ({ activity }) => {
   );
 };
 
-Row.propTyps = {
-  activity: PropTypes.object.isRequired
+Row.propTypes = {
+  activity: PropTypes.object
 };
 
 export default Row;

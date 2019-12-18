@@ -6,7 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ReactCountryFlag from 'react-country-flag';
 import useStyles from './MuiStyles';
 
-function getSuggestions (value, list) {
+function getSuggestions(value, list) {
   const input = value.trim().toLowerCase();
   const inputLength = input.length;
   if (inputLength === 0) return [];
@@ -18,7 +18,7 @@ function getSuggestions (value, list) {
   return suggestions;
 }
 
-function renderItem ({ item, itemProps, index, highlightedIndex }) {
+function renderItem({ item, itemProps, index, highlightedIndex }) {
   const isHighlighted = highlightedIndex === index;
   return (
     <MenuItem key={item.code} {...itemProps} selected={isHighlighted}>
@@ -36,6 +36,13 @@ function renderItem ({ item, itemProps, index, highlightedIndex }) {
     </MenuItem>
   );
 }
+
+renderItem.propTypes = {
+  item: PropTypes.object,
+  itemProps: PropTypes.object,
+  index: PropTypes.number,
+  highlightedIndex: PropTypes.number
+};
 
 const Autocomplete = ({
   name,
@@ -64,7 +71,6 @@ const Autocomplete = ({
           getMenuProps,
           isOpen,
           highlightedIndex,
-          selectedItem,
           inputValue
         }) => {
           const inputProps = getInputProps();
@@ -116,7 +122,8 @@ Autocomplete.propTypes = {
   isTouched: PropTypes.bool,
   setFieldValue: PropTypes.func.isRequired,
   setFieldTouched: PropTypes.func.isRequired,
-  classes: PropTypes.object
+  classes: PropTypes.object,
+  disabled: PropTypes.bool
 };
 
 export default Autocomplete;

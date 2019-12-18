@@ -56,7 +56,8 @@ TextInput.propTypes = {
   error: PropTypes.string,
   isTouched: PropTypes.bool,
   multiline: PropTypes.bool,
-  rows: PropTypes.number
+  rows: PropTypes.number,
+  type: PropTypes.string
 };
 
 export default TextInput;

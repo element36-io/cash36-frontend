@@ -128,8 +128,6 @@ test('dispatches register', async () => {
 
   mockAxios.post.mockImplementation(() => Promise.resolve());
 
-  const store = mockStore();
-
   await register(username, password);
 
   expect(mockAxios.post).toHaveBeenCalledTimes(1);

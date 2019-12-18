@@ -84,7 +84,7 @@ Header.propTypes = {
   getUserActivity: PropTypes.func,
   getUserInfo: PropTypes.func,
   getWallets: PropTypes.func,
-  notifications: PropTypes.array,
+  notifications: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   auth: PropTypes.object
 };
 

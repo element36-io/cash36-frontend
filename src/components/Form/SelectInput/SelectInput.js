@@ -105,7 +105,8 @@ SelectInput.propTypes = {
   classes: PropTypes.object,
   countryList: PropTypes.bool,
   formValues: PropTypes.object,
-  isNative: PropTypes.bool
+  isNative: PropTypes.bool,
+  setFieldValue: PropTypes.func
 };
 
 SelectInput.defaultProps = {
