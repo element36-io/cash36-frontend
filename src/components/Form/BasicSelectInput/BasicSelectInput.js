@@ -61,6 +61,8 @@ const BasicSelectInput = ({
 
 BasicSelectInput.propTypes = {
   list: PropTypes.array,
+  label: PropTypes.string,
+  placeholder: PropTypes.string,
   name: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,

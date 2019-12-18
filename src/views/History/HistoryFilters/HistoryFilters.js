@@ -148,7 +148,7 @@ class HistoryFilters extends Component {
     );
   };
 
-  render () {
+  render() {
     const {
       startDate,
       endDate,
@@ -215,10 +215,8 @@ class HistoryFilters extends Component {
 
 HistoryFilters.propTypes = {
   fetchingFilters: PropTypes.bool.isRequired,
-  getUserActivity: PropTypes.func.isRequired
+  getUserActivity: PropTypes.func.isRequired,
+  historyFiltered: PropTypes.bool
 };
 
-export default connect(
-  null,
-  { getUserActivity }
-)(HistoryFilters);
+export default connect(null, { getUserActivity })(HistoryFilters);

@@ -60,7 +60,9 @@ const TransferAddress = ({ submitCallback, contactsList, setStep, target }) => {
         c => c.contactAddress === address
       )[0] || { contactAddress: address };
       submitCallback(target);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const validateAddress = () => {

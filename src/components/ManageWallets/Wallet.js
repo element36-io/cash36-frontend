@@ -64,10 +64,8 @@ const Wallet = ({ wallet, getWallets }) => {
 };
 
 Wallet.propTypes = {
-  wallet: PropTypes.object.isRequired
+  wallet: PropTypes.object.isRequired,
+  getWallets: PropTypes.func
 };
 
-export default connect(
-  null,
-  { getWallets }
-)(Wallet);
+export default connect(null, { getWallets })(Wallet);

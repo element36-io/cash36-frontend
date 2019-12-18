@@ -14,7 +14,9 @@ const Responsive = ({ isMobile, isTablet, isDesktop, children }) => {
 };
 
 Responsive.propTypes = {
-  isMobile: PropTypes.bool
+  isMobile: PropTypes.bool,
+  isTablet: PropTypes.bool,
+  isDesktop: PropTypes.bool
 };
 
 export default Responsive;

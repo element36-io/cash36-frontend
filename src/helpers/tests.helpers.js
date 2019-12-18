@@ -117,6 +117,7 @@ export function renderWithAvatarContext(
   renderFunction = render,
   {
     route = '/',
+    // eslint-disable-next-line no-unused-vars
     history = createMemoryHistory({ initialEntries: [route] })
   } = {},
   state = {},
