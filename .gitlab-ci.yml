@@ -28,7 +28,7 @@ test:
 
 docker-debug-build:
   stage: package
-  environment: test
+#  environment: test
   image: docker:dind
   tags:
     - dokcer
