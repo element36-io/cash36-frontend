@@ -95,7 +95,8 @@ SellTokens.propTypes = {
   tokensError: PropTypes.string,
   exchangeFeeError: PropTypes.string,
   exchangeFee: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
-  etherBalance: PropTypes.number
+  etherBalance: PropTypes.number,
+  minFundsError: PropTypes.string
 };
 
 export default SellTokens;

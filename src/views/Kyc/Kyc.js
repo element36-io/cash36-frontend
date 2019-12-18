@@ -127,10 +127,14 @@ const mapStateToProps = state => ({
 Kyc.propTypes = {
   currentKycStep: PropTypes.string,
   avatarUri: PropTypes.string,
-  username: PropTypes.string
+  username: PropTypes.string,
+  getCurrentKycStep: PropTypes.func,
+  updateKycStep: PropTypes.func,
+  startKycProcess: PropTypes.func
 };
 
-export default connect(
-  mapStateToProps,
-  { getCurrentKycStep, updateKycStep, startKycProcess }
-)(Kyc);
+export default connect(mapStateToProps, {
+  getCurrentKycStep,
+  updateKycStep,
+  startKycProcess
+})(Kyc);

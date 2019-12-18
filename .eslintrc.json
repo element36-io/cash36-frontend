@@ -16,6 +16,7 @@
     "afterEach": "writable",
     "process": "writable"
   },
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -27,6 +28,12 @@
   "rules": {
     "react/no-unescaped-entities": "off",
     "no-console": "off",
-    "react-hooks/rules-of-hooks": "error"
+    "react-hooks/rules-of-hooks": "error",
+    "react/prop-types": [
+      1,
+      {
+        "ignore": ["className", "children", "location", "params", "location*"]
+      }
+    ]
   }
 }

@@ -32,7 +32,6 @@ const DefaultButton = props => {
 
 DefaultButton.propTypes = {
   style: PropTypes.any,
-  children: PropTypes.any,
   submitting: PropTypes.bool,
   disabled: PropTypes.bool
 };

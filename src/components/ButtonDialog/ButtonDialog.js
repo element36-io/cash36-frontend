@@ -37,8 +37,7 @@ const ButtonDialog = ({ button, children }) => {
 };
 
 ButtonDialog.propTypes = {
-  button: PropTypes.any,
-  children: PropTypes.any
+  button: PropTypes.any
 };
 
 export default ButtonDialog;

@@ -25,7 +25,6 @@ const AuthWrapper = ({ children, message = 'Welcome' }) => (
 );
 
 AuthWrapper.propTypes = {
-  children: PropTypes.node,
   message: PropTypes.string
 };
 

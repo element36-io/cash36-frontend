@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { DateRange } from 'react-date-range';
 import TodayIcon from '@material-ui/icons/Today';
 
 import './DateRangeMobile.scss';
 
 class DateRangeMobile extends Component {
-  render () {
+  render() {
     const {
       startDate,
       endDate,
@@ -35,5 +36,13 @@ class DateRangeMobile extends Component {
     );
   }
 }
+
+DateRangeMobile.propTypes = {
+  startDate: PropTypes.any,
+  endDate: PropTypes.any,
+  handleMobileRangeDateChange: PropTypes.func,
+  visible: PropTypes.bool,
+  toggleFiltersVisible: PropTypes.func
+};
 
 export default DateRangeMobile;

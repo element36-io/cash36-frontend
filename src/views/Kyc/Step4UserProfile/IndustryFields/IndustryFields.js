@@ -1,50 +1,48 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import TextInput from '../../../../components/Form/TextInput';
 import BasicSelectInput from '../../../../components/Form/BasicSelectInput';
 import './IndustryFields.scss';
 
-const IndustryFields = React.memo(
-  ({
-    changeHandler,
-    values: { profession, industry, industryOther },
-    professionError,
-    industryError,
-    industryOtherError,
-    industryList
-  }) => (
-    <div className="verification-user-profile__industry">
+const IndustryFields = ({
+  changeHandler,
+  values: { profession, industry, industryOther },
+  professionError,
+  industryError,
+  industryOtherError,
+  industryList
+}) => (
+  <div className="verification-user-profile__industry">
+    <TextInput
+      name="profession"
+      label="Profession"
+      placeholder="Enter Your Profession"
+      onChange={changeHandler}
+      value={profession}
+      isTouched
+      error={professionError ? 'This field is required' : null}
+    />
+    <BasicSelectInput
+      name="industry"
+      list={industryList}
+      label="Industry"
+      placeholder="Enter Your Industry"
+      value={industry}
+      onChange={changeHandler}
+      error={industryError ? 'This field is required' : null}
+    />
+    {industry.toLowerCase() === 'other' && (
       <TextInput
-        name="profession"
-        label="Profession"
-        placeholder="Enter Your Profession"
-        onChange={changeHandler}
-        value={profession}
-        isTouched
-        error={professionError ? 'This field is required' : null}
-      />
-      <BasicSelectInput
-        name="industry"
-        list={industryList}
-        label="Industry"
+        name="industryOther"
+        label="Other"
         placeholder="Enter Your Industry"
-        value={industry}
         onChange={changeHandler}
-        error={industryError ? 'This field is required' : null}
+        value={industryOther}
+        isTouched
+        error={industryOtherError ? 'This field is required' : null}
       />
-      {industry.toLowerCase() === 'other' && (
-        <TextInput
-          name="industryOther"
-          label="Other"
-          placeholder="Enter Your Industry"
-          onChange={changeHandler}
-          value={industryOther}
-          isTouched
-          error={industryOtherError ? 'This field is required' : null}
-        />
-      )}
-    </div>
-  )
+    )}
+  </div>
 );
 
 IndustryFields.propTypes = {
@@ -56,4 +54,4 @@ IndustryFields.propTypes = {
   industryList: PropTypes.array
 };
 
-export default IndustryFields;
+export default memo(IndustryFields);

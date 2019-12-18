@@ -111,10 +111,8 @@ const mapStateToProps = ({
 History.propTypes = {
   userActivity: PropTypes.arrayOf(PropTypes.object),
   fetchingFilters: PropTypes.bool,
-  historyFiltered: PropTypes.bool
+  historyFiltered: PropTypes.bool,
+  getUserActivity: PropTypes.func
 };
 
-export default connect(
-  mapStateToProps,
-  { getUserActivity }
-)(History);
+export default connect(mapStateToProps, { getUserActivity })(History);

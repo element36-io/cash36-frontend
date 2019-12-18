@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import QuickActions from './QuickActions';
 import ActivityTable from '../../components/ActivityTable';
@@ -53,7 +54,9 @@ const mapStateToProps = ({ tokens: { userActivity = [] } }) => ({
   userActivity
 });
 
-export default connect(
-  mapStateToProps,
-  { getUserActivity }
-)(Home);
+Home.propTypes = {
+  getUserActivity: PropTypes.func,
+  userActivity: PropTypes.array
+};
+
+export default connect(mapStateToProps, { getUserActivity })(Home);

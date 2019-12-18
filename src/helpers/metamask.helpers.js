@@ -23,7 +23,7 @@ export const addTokensToMetamask = tokens => {
       },
       id: Math.round(Math.random() * 100000)
     },
-    (error, addedBoolean) => {
+    error => {
       if (error) return;
 
       window.ethereum.sendAsync(
@@ -40,9 +40,8 @@ export const addTokensToMetamask = tokens => {
           },
           id: Math.round(Math.random() * 100000)
         },
-        (error, addedBoolean) => {
+        error => {
           if (error) return;
-          console.log(addedBoolean);
         }
       );
     }

@@ -32,6 +32,8 @@ const RadioButtons = ({ title, choices, value, onChange }) => {
 };
 
 RadioButtons.propTypes = {
+  value: PropTypes.string,
+  onChange: PropTypes.func,
   title: PropTypes.string,
   choices: PropTypes.array,
   checkbox: PropTypes.bool,
