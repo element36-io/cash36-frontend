@@ -3,6 +3,8 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from '../../components/Header';
 import WalletProvider from '../../providers/wallet.provider';
+import AvatarProvider from '../../providers/avatar.provider';
+
 import PageLoader from '../../components/PageLoader';
 import Home from '../Home';
 import Buy from '../Buy';
@@ -17,17 +19,19 @@ export const Wallet = ({ isAuthenticated }) => {
 
   return (
     <WalletProvider>
-      <PageLoader />
-      <Header />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/buy" component={Buy} />
-        <Route exact path="/sell" component={Sell} />
-        <Route exact path="/invest" component={Invest} />
-        <Route exact path="/history" component={History} />
-        <Route exact path="/contacts" component={Contacts} />
-        <Route path="/kyc/:id" component={Kyc} />
-      </Switch>
+      <AvatarProvider>
+        <PageLoader />
+        <Header />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/buy" component={Buy} />
+          <Route exact path="/sell" component={Sell} />
+          <Route exact path="/use" component={Invest} />
+          <Route exact path="/history" component={History} />
+          <Route exact path="/contacts" component={Contacts} />
+          <Route path="/kyc/:id" component={Kyc} />
+        </Switch>
+      </AvatarProvider>
     </WalletProvider>
   );
 };

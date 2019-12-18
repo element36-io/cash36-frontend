@@ -10,9 +10,11 @@ const InvestDetails = ({
   name,
   description,
   contractAddress,
-  symbol,
+  contractSymbol,
+  acceptedTokens,
   investmentLink,
-  website
+  website,
+  isWalletFree
 }) => {
   return (
     <div className="invest-details">
@@ -23,16 +25,30 @@ const InvestDetails = ({
         <div>{contractAddress}</div>
       </div>
       <div className="invest-details__info-field">
-        <div>Token:</div>
-        <div>
-          {symbol} <TokenIcon symbol={symbol} />
-        </div>
+        <div>Contract token:</div>
+        <div>{contractSymbol}</div>
+      </div>
+      <div className="invest-details__info-field">
+        <div>Accepted Token(s):</div>
+        {acceptedTokens.map(acceptedToken => (
+          <div key={acceptedToken} className="invest-details__accepted-token">
+            {acceptedToken} <TokenIcon symbol={acceptedToken} />
+          </div>
+        ))}
       </div>
 
       <div className="invest-details__info-field">
         <div>Website:</div>
         <div>
           <a href={website}>{website}</a>
+        </div>
+      </div>
+      <div className="invest-details__info-field">
+        <div>Wallet free status:</div>
+        <div>
+          {isWalletFree
+            ? 'This contract is wallet free'
+            : 'This contract is not wallet free'}
         </div>
       </div>
       <a target="_blank" href={investmentLink} rel="noopener noreferrer">

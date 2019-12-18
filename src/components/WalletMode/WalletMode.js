@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import WalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import { WalletContext } from '../../providers/wallet.provider';
 import { getMainWalletAddress } from '../../helpers/wallet.helpers';
-import noWalletIcon from '../../assets/icons/wallet-offline-new.svg';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 
 import './WalletMode.scss';
 import CopyToClipboard from '../CopyToClipboard/CopyToClipboard';
@@ -15,7 +15,7 @@ const WalletMode = ({ walletList }) => {
   if (!hasWallet) {
     return (
       <div className="walletless-mode">
-        <img src={noWalletIcon} alt="" />
+        <AccountBalanceIcon />
         <div>You are now in walletless mode</div>
       </div>
     );

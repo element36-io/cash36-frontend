@@ -8,6 +8,7 @@ import AddWalletButton from '../AddWalletButton';
 import WalletMode from '../WalletMode';
 
 import './UserProfile.scss';
+import { Tooltip } from '@material-ui/core';
 
 export const UserProfile = ({ user, alt }) => {
   let {
@@ -48,7 +49,9 @@ export const UserProfile = ({ user, alt }) => {
           <span>{username}</span> ({currentLevel && tiers[currentLevel].text}{' '}
           user)
           {currentLevel !== 'Tier_2' && (
-            <i className="fas fa-exclamation-triangle" />
+            <Tooltip title="Verification process uncomplete">
+              <i className="fas fa-exclamation-triangle" />
+            </Tooltip>
           )}
         </p>
         <WalletMode />

@@ -11,7 +11,11 @@ const AvatarProvider = ({ children }) => {
   const callGetAvatar = async () => {
     try {
       const response = await getAvatar();
-      console.log(response);
+
+      if (!response.data) {
+        setAvatarUrl('');
+        return;
+      }
 
       setAvatarUrl(
         `${response.dataType};${response.encoding}, ${response.data}`

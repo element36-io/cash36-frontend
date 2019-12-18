@@ -89,7 +89,11 @@ export const SelectInput = ({
 SelectInput.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.array
+  ]),
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func,
   onBsetFieldValuelur: PropTypes.func,
@@ -97,7 +101,7 @@ SelectInput.propTypes = {
   error: PropTypes.string,
   relatedField: PropTypes.string,
   placeholder: PropTypes.string,
-  isTouched: PropTypes.bool,
+  isTouched: PropTypes.any,
   classes: PropTypes.object,
   countryList: PropTypes.bool,
   formValues: PropTypes.object,

@@ -8,7 +8,7 @@ const urlOptions = {
   require_protocol: true
 };
 
-export default (values, props) => {
+export default values => {
   const errors = {};
 
   if (!values.name) {
@@ -23,8 +23,14 @@ export default (values, props) => {
     errors.description = 'Description must be 240 characters or less';
   }
 
-  if (!values.symbol) {
-    errors.symbol = 'This field is required';
+  if (!values.acceptedTokens.length) {
+    errors.acceptedTokens = 'This field is required';
+  }
+
+  if (!values.contractSymbol) {
+    errors.contractSymbol = 'This field is required';
+  } else if (values.contractSymbol.length > 5) {
+    errors.contractSymbol = 'Must be 5 characters or less';
   }
 
   if (!values.access) {

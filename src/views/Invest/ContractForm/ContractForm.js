@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import Form from '../../../components/Form';
 import FormField from '../../../components/Form/FormField';
@@ -10,13 +11,18 @@ import validate from './validateForm';
 
 import './ContractForm.scss';
 
-const ContractForm = () => {
+const ContractForm = ({ closeDialog, refetchContracts }) => {
   const [error, setError] = useState('');
   const submit = async formValues => {
+    console.log(formValues);
+
     try {
       await addContract(formValues);
+      closeDialog();
+      refetchContracts();
     } catch (error) {
       setError(error);
+      return Promise.reject(error);
     }
   };
   return (
@@ -52,6 +58,11 @@ const ContractForm = () => {
       />
     </div>
   );
+};
+
+ContractForm.propTypes = {
+  closeDialog: PropTypes.func,
+  refetchContracts: PropTypes.func
 };
 
 export default ContractForm;

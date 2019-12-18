@@ -8,11 +8,12 @@
   font-size: 1.4rem;
   align-items: center;
 
-  > img {
+  > svg {
     margin-right: 0.6rem;
     display: block;
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2rem;
+    height: 2rem;
+    fill: $primary-main;
   }
   > div {
     margin-top: 3px;

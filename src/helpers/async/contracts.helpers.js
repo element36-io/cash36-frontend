@@ -9,9 +9,20 @@ export const addContract = async formData => {
   }
 };
 
-export const getUserContracts = async () => {
+export const editContract = async (contractAddress, formData) => {
   try {
-    const { data } = await API.get('compliance/external-contract/list');
+    await API.put(
+      `compliance/external-contract/update/${contractAddress}`,
+      formData
+    );
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const getContracts = async () => {
+  try {
+    const { data } = await API.get('compliance/external-contract/list/');
 
     return data;
   } catch (error) {
@@ -19,21 +30,9 @@ export const getUserContracts = async () => {
   }
 };
 
-export const getPublicContracts = async () => {
+export const deleteContract = async contractAddress => {
   try {
-    const { data } = await API.get('compliance/external-contract/listPublic');
-
-    return data;
-  } catch (error) {
-    return handleError(error);
-  }
-};
-
-export const getAllContracts = async () => {
-  try {
-    const { data } = await API.get('compliance/external-contract/listAll/');
-
-    return data;
+    await API.delete(`compliance/external-contract/delete/${contractAddress}`);
   } catch (error) {
     return handleError(error);
   }

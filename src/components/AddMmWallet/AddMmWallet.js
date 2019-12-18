@@ -1,19 +1,23 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import DoneIcon from '@material-ui/icons/Done';
+
 import AddWalletForm from '../AddWalletForm';
 import { Web3Context } from '../../providers/web3.provider';
 import metamaskLogo from '../../assets/icons/metamask.svg';
 import MmCheck from '../MmCheck';
 import { WalletContext, walletTypes } from '../../providers/wallet.provider';
+import SecondaryButton from '../Buttons/SecondaryButton';
+import { addTokensToMetamask } from '../../helpers/metamask.helpers';
 
 import './AddMmWallet.scss';
 
-const AddMmWallet = ({ addWallet, walletList }) => {
+const AddMmWallet = ({ addWallet, walletList, tokens }) => {
   const [account, setAccount] = useState(null);
   const [description, setDescription] = useState('');
   const [error, setError] = useState(null);
-  const [submitting, setSubmitting] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(null);
   const { getNetwork } = useContext(Web3Context);
   const { onCloseDialogs } = useContext(WalletContext);
@@ -30,6 +34,8 @@ const AddMmWallet = ({ addWallet, walletList }) => {
         window.ethereum.networkVersion,
         description
       );
+
+      await addTokensToMetamask(tokens);
       setSubmitted(true);
     } catch (err) {
       setError(err);
@@ -64,17 +70,23 @@ const AddMmWallet = ({ addWallet, walletList }) => {
         </>
       )}
       {submitted && (
-        <span className="icon-success" onClick={onCloseDialogs}>
-          <DoneIcon />
-        </span>
+        <div className="add-mm-wallet__submitted">
+          <div>
+            <DoneIcon className="icon-success" />
+            Wallet added successfully
+          </div>
+          <SecondaryButton onClick={onCloseDialogs}>Close</SecondaryButton>
+        </div>
       )}
     </div>
   );
 };
+
+const mapStateToProps = ({ tokens }) => ({ tokens: tokens.tokens });
 
 AddMmWallet.propTypes = {
   addWallet: PropTypes.func,
   walletList: PropTypes.array
 };
 
-export default AddMmWallet;
+export default connect(mapStateToProps)(AddMmWallet);

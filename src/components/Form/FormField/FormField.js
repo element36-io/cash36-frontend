@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TextInput from '../TextInput';
 import SelectInput from '../SelectInput';
+import CheckboxInput from '../CheckboxInput';
 import DateInput from '../DateInput';
 import Autocomplete from '../Autocomplete';
+import CheckboxArray from '../CheckboxArray';
 
 const FormField = props => {
   const {
@@ -70,6 +72,30 @@ const FormField = props => {
           error={errors[formField.name]}
           list={formField.list}
           disabled={disabled}
+        />
+      );
+    case 'checkbox':
+      return (
+        <CheckboxInput
+          value={values[formField.name]}
+          name={formField.name}
+          label={formField.label}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          type={formField.type}
+          isTouched={touched[formField.name]}
+          error={errors[formField.name]}
+          disabled={disabled}
+        />
+      );
+    case 'checkboxArray':
+      return (
+        <CheckboxArray
+          checkboxes={formField.checkboxes}
+          name={formField.name}
+          formProps={props.formProps}
+          isTouched={touched[formField.name]}
+          error={errors[formField.name]}
         />
       );
     default:

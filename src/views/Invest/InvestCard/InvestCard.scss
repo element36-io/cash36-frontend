@@ -2,10 +2,7 @@
 @import '../../../styles/mixins.scss';
 
 .invest-card {
-  a {
-    color: $primary-main;
-  }
-  border-top: 6px solid $primary-main;
+  border-bottom: 4px solid $primary-main;
   display: inline-flex;
   flex-direction: column;
   padding: 1.2rem;
@@ -14,14 +11,53 @@
 
   @include desktop {
     max-width: 30%;
+    width: 100%;
   }
 
   .invest-card__heading {
     margin-bottom: 2.4rem;
-    > h3 {
-      font-size: 2.4rem;
-      font-weight: 500;
-      margin-bottom: 0.8rem;
+
+    .invest-card__heading__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      > .button-dialog-wrapper {
+        > span {
+          visibility: hidden;
+          opacity: 0;
+        }
+      }
+
+      > h3 {
+        font-size: 2.4rem;
+        font-weight: 500;
+        margin-bottom: 0.8rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        > span {
+          margin-left: 0.6rem;
+          font-weight: 400;
+          font-size: 1.4rem;
+          border-radius: 4px;
+          padding: 2px;
+
+          color: $primary-main;
+        }
+
+        > svg {
+          margin-left: 0.6rem;
+          width: 2.25rem;
+          align-self: center;
+          fill: $primary-main;
+        }
+      }
+
+      .dropdown-menu {
+        margin-bottom: 0.8rem;
+      }
     }
 
     > p {

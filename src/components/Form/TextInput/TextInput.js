@@ -51,7 +51,7 @@ TextInput.propTypes = {
   onBlur: PropTypes.func,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   disabled: PropTypes.bool,
   error: PropTypes.string,
   isTouched: PropTypes.bool,

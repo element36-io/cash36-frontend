@@ -12,16 +12,12 @@ const navLinks = [
     url: '/sell'
   },
   {
-    label: 'Invest',
-    url: '/invest'
+    label: 'Use',
+    url: '/use'
   },
   {
     label: 'History',
     url: '/history'
-  },
-  {
-    label: 'Contacts',
-    url: '/contacts'
   }
 ];
 
