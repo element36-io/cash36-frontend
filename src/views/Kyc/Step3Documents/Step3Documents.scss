@@ -7,7 +7,7 @@
   }
 
   .documents-upload__via-mobile {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 1.6rem;
@@ -23,11 +23,17 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: flex-start;
+
     border-bottom: 1px solid $border-light-grey-1;
 
     &:nth-child(5) {
       border-bottom: none;
+    }
+
+    .documents-upload__waiting-for-doc {
+      opacity: 0.5;
+      display: inline-flex;
+      align-items: center;
     }
   }
 

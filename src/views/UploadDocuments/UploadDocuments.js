@@ -33,6 +33,7 @@ const UploadDocuments = () => {
   const [error, setError] = useState('');
   const location = useLocation();
   const code = getQueryStringValue(location.search, 'code');
+  const selfieCode = getQueryStringValue(location.search, 'selfieCode');
 
   const onSubmit = async () => {
     if (!code) setError('Unauthorized');
@@ -95,7 +96,9 @@ const UploadDocuments = () => {
           />
         </div>
         <div className="upload-documents__form-field">
-          <h3>Selfie with code</h3>
+          <h3>
+            Selfie with the code <strong>{selfieCode}</strong>
+          </h3>
           <FileInput
             documentType={types.ID_Selfie.documentType}
             removeCallback={removeDocument}
