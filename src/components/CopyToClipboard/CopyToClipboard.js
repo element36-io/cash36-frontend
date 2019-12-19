@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, memo } from 'react';
 import PropTypes from 'prop-types';
 import Copy from '@material-ui/icons/FileCopy';
 import TruncateString from 'react-truncate-string';
@@ -7,7 +7,7 @@ import DefaultButton from '../Buttons/DefaultButton';
 
 import './CopyToClipboard.scss';
 
-const CopyToClipboard = React.memo(({ text, showAsText = false }) => {
+const CopyToClipboard = ({ text, showAsText = false }) => {
   const [showTooltip, setShowTooltip] = useState(false);
 
   const textToCopy = useRef();
@@ -41,11 +41,11 @@ const CopyToClipboard = React.memo(({ text, showAsText = false }) => {
       <textarea value={text} ref={textToCopy} onChange={() => {}} />
     </div>
   );
-});
+};
 
 CopyToClipboard.propTypes = {
   text: PropTypes.string,
   showAsText: PropTypes.bool
 };
 
-export default CopyToClipboard;
+export default memo(CopyToClipboard);

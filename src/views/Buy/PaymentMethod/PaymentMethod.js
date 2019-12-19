@@ -58,7 +58,8 @@ const PaymentMethod = ({
 
 PaymentMethod.propTypes = {
   handleManualTransferClick: PropTypes.func,
-  handleAutoTransferClick: PropTypes.func
+  handleAutoTransferClick: PropTypes.func,
+  setStep: PropTypes.func
 };
 
 export default PaymentMethod;

@@ -53,7 +53,7 @@ const DropdownMenu = ({ menuItems = [] }) => {
 };
 
 DropdownMenu.propTypes = {
-  items: PropTypes.array
+  menuItems: PropTypes.array
 };
 
 export default DropdownMenu;

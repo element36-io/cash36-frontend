@@ -122,6 +122,7 @@ export const Step1Tier1Form = ({
 
 Step1Tier1Form.propTypes = {
   changeSteps: PropTypes.func.isRequired,
+  countries: PropTypes.array,
   getCountries: PropTypes.func.isRequired,
   username: PropTypes.string,
   avatarUri: PropTypes.string,
@@ -135,7 +136,4 @@ const mapStateToProps = ({
   countries: { countries = [] }
 }) => ({ countries, user });
 
-export default connect(
-  mapStateToProps,
-  { getCountries }
-)(Step1Tier1Form);
+export default connect(mapStateToProps, { getCountries })(Step1Tier1Form);

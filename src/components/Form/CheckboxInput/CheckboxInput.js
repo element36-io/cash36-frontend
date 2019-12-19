@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormControlLabel, Checkbox } from '@material-ui/core';
 
 import './CheckboxInput.scss';
@@ -20,6 +21,14 @@ const CheckboxInput = ({ label, value, onChange, name, type }) => {
       }
     />
   );
+};
+
+CheckboxInput.propTypes = {
+  label: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  name: PropTypes.string,
+  type: PropTypes.string
 };
 
 export default CheckboxInput;

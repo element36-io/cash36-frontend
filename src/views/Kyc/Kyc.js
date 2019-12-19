@@ -8,6 +8,7 @@ import {
 } from '../../store/auth/auth.actions';
 import { CircularProgress } from '@material-ui/core';
 
+import useInterval from '../../hooks/useInterval';
 import Step0ProcessWelcomeScreen from './Step0ProcessWelcomeScreen';
 import Step1Tier1Form from './Step1Tier1Form';
 import Step1aConfirmTier1 from './Step1aConfirmTier1';
@@ -52,6 +53,13 @@ const Kyc = ({
       return Promise.reject(error);
     }
   };
+
+  useInterval(
+    () => {
+      getCurrentStep();
+    },
+    currentKycStep === 'UPLOAD_DOCUMENTS' ? 5000 : null
+  );
 
   const renderStep = () => {
     switch (currentKycStep) {
@@ -127,10 +135,14 @@ const mapStateToProps = state => ({
 Kyc.propTypes = {
   currentKycStep: PropTypes.string,
   avatarUri: PropTypes.string,
-  username: PropTypes.string
+  username: PropTypes.string,
+  getCurrentKycStep: PropTypes.func,
+  updateKycStep: PropTypes.func,
+  startKycProcess: PropTypes.func
 };
 
-export default connect(
-  mapStateToProps,
-  { getCurrentKycStep, updateKycStep, startKycProcess }
-)(Kyc);
+export default connect(mapStateToProps, {
+  getCurrentKycStep,
+  updateKycStep,
+  startKycProcess
+})(Kyc);

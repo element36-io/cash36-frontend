@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import SmartphoneIcon from '@material-ui/icons/Smartphone';
+import { Tooltip } from '@material-ui/core';
 
+import Responsive from '../../../components/Responsive';
 import FormHeader from '../../../components/Form/FormHeader';
 import ProcessControls from '../ProcessControls';
 import FileInput from '../FileInput';
 import { getSelfieCode } from '../../../store/auth/auth.actions';
+import { sendUploadUrl } from '../../../helpers/async/uploadDocuments.helpers';
 import idFront from '../../../assets/icons/ID Front Icon.svg';
 import idBack from '../../../assets/icons/ID Back Icon.svg';
 import selfie from '../../../assets/icons/Selfie Icon.svg';
 import useGet from '../../../hooks/useGet';
+import SecondaryButton from '../../../components/Buttons/SecondaryButton';
 
 import './Step3Documents.scss';
 
 const Step3Documents = ({ changeSteps, stepError }) => {
+  const [selfieCode, selfieCodeError] = useGet(getSelfieCode, '');
   const [types, updateTypes] = useState({
     ID_Front: {
       documentType: 'ID_Front',
@@ -32,7 +38,18 @@ const Step3Documents = ({ changeSteps, stepError }) => {
     }
   });
   const [submitting, setSubmitting] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
   const [error, setError] = useState('');
+
+  const sendEmail = async () => {
+    try {
+      await sendUploadUrl(selfieCode);
+
+      setEmailSent(true);
+    } catch (error) {
+      setError(error);
+    }
+  };
 
   const onSubmit = async () => {
     try {
@@ -64,8 +81,6 @@ const Step3Documents = ({ changeSteps, stepError }) => {
     });
   };
 
-  const [selfieCode, selfieCodeError] = useGet(getSelfieCode, '');
-
   const disabled = Object.values(types)
     .filter(t => t.documentType !== 'ID_Back')
     .some(t => !t.file);
@@ -76,6 +91,7 @@ const Step3Documents = ({ changeSteps, stepError }) => {
         title="Verification Process - Step 3"
         subtitle="Please upload the following documents so we can verify your identity and domicile address."
       />
+
       <div className="documents-upload__document-wrapper">
         <div className="documents-upload__document-wrapper__content">
           <img src={idFront} alt="ID Front" />
@@ -88,11 +104,17 @@ const Step3Documents = ({ changeSteps, stepError }) => {
             </ul>
           </div>
         </div>
-        <FileInput
-          documentType={types.ID_Front.documentType}
-          removeCallback={removeDocument}
-          changeCallback={addDocument}
-        />
+        {!emailSent ? (
+          <FileInput
+            documentType={types.ID_Front.documentType}
+            removeCallback={removeDocument}
+            changeCallback={addDocument}
+          />
+        ) : (
+          <div className="documents-upload__waiting-for-doc">
+            Waiting for document
+          </div>
+        )}
       </div>
       <div className="documents-upload__document-wrapper">
         <div className="documents-upload__document-wrapper__content">
@@ -105,14 +127,23 @@ const Step3Documents = ({ changeSteps, stepError }) => {
             </p>
           </div>
         </div>
-        <FileInput
-          documentType={types.ID_Back.documentType}
-          removeCallback={removeDocument}
-          changeCallback={addDocument}
-        />
+        {!emailSent ? (
+          <FileInput
+            documentType={types.ID_Back.documentType}
+            removeCallback={removeDocument}
+            changeCallback={addDocument}
+          />
+        ) : (
+          <div className="documents-upload__waiting-for-doc">
+            Waiting for document
+          </div>
+        )}
       </div>
       <div className="documents-upload__document-wrapper">
-        <div className="documents-upload__document-wrapper__content">
+        <div
+          className="documents-upload__document-wrapper__content"
+          data-state={emailSent}
+        >
           <img src={selfie} alt="Selfie" />
           <div>
             <h3>Selfie</h3>
@@ -129,11 +160,17 @@ const Step3Documents = ({ changeSteps, stepError }) => {
             </p>
           </div>
         </div>
-        <FileInput
-          documentType={types.ID_Selfie.documentType}
-          removeCallback={removeDocument}
-          changeCallback={addDocument}
-        />
+        {!emailSent ? (
+          <FileInput
+            documentType={types.ID_Selfie.documentType}
+            removeCallback={removeDocument}
+            changeCallback={addDocument}
+          />
+        ) : (
+          <div className="documents-upload__waiting-for-doc">
+            Waiting for document
+          </div>
+        )}
       </div>
       <div className="documents-upload__document-wrapper">
         <div className="documents-upload__document-wrapper__content">
@@ -152,12 +189,34 @@ const Step3Documents = ({ changeSteps, stepError }) => {
             </ul>
           </div>
         </div>
-        <FileInput
-          documentType={types.Utility_Bill.documentType}
-          removeCallback={removeDocument}
-          changeCallback={addDocument}
-        />
+        {!emailSent ? (
+          <FileInput
+            documentType={types.Utility_Bill.documentType}
+            removeCallback={removeDocument}
+            changeCallback={addDocument}
+          />
+        ) : (
+          <div className="documents-upload__waiting-for-doc">
+            Waiting for document
+          </div>
+        )}
       </div>
+      <Responsive>
+        <Tooltip title="You'll be sent an email with a link to upload your documents from your phone">
+          <div className="documents-upload__via-mobile">
+            <SecondaryButton onClick={sendEmail}>
+              <SmartphoneIcon />
+              Upload via mobile
+            </SecondaryButton>
+
+            {emailSent && (
+              <div className="documents-upload__waiting-for-doc">
+                Link to upload via mobile has been sent to your email
+              </div>
+            )}
+          </div>
+        </Tooltip>
+      </Responsive>
       <ProcessControls
         submitLabel="Submit & Continue"
         disabled={disabled || submitting}

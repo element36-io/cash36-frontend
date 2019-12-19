@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
 const BaseButton = props => {
@@ -12,6 +13,10 @@ const BaseButton = props => {
       {children}
     </ButtonBase>
   );
+};
+
+BaseButton.propTypes = {
+  style: PropTypes.object
 };
 
 export default BaseButton;

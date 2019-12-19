@@ -32,7 +32,7 @@ const StepButton = ({ text, onClick, disabled, type, submitting }) => (
 );
 
 StepButton.propTypes = {
-  buttonText: PropTypes.string,
+  text: PropTypes.string,
   type: PropTypes.string,
   onClick: PropTypes.func.isRequired,
   disabled: PropTypes.bool,

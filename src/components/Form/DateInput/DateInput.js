@@ -62,6 +62,7 @@ const DateInput = ({
 };
 
 DateInput.propTypes = {
+  name: PropTypes.string,
   date: PropTypes.any,
   setFieldValue: PropTypes.func.isRequired,
   setFieldTouched: PropTypes.func.isRequired,

@@ -60,13 +60,16 @@ const InvestDetails = ({
 
 InvestDetails.propTypes = {
   name: PropTypes.string,
+  description: PropTypes.string,
+  contractSymbol: PropTypes.string,
   contractAddress: PropTypes.string,
-  symbol: PropTypes.string,
+  acceptedTokens: PropTypes.arrayOf(PropTypes.string),
   investmentLink: PropTypes.string,
   website: PropTypes.string,
   creationDate: PropTypes.string,
   lastModifiedDate: PropTypes.string,
-  access: PropTypes.string
+  access: PropTypes.string,
+  isWalletFree: PropTypes.bool
 };
 
 export default InvestDetails;

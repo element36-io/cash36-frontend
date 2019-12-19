@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import Avatar from '../../../components/Avatar';
 import Ink from 'react-ink';
 
 import './TransferContact.scss';
 
-const TransferContact = React.memo(({ contact, clickCallback, alt }) => {
+const TransferContact = ({ contact, clickCallback, alt }) => {
   const clickHandler = () => {
     clickCallback(contact);
   };
@@ -27,7 +27,7 @@ const TransferContact = React.memo(({ contact, clickCallback, alt }) => {
       <Ink duration={500} />
     </div>
   );
-});
+};
 
 TransferContact.propTypes = {
   contact: PropTypes.object.isRequired,
@@ -35,4 +35,4 @@ TransferContact.propTypes = {
   alt: PropTypes.bool
 };
 
-export default TransferContact;
+export default memo(TransferContact);

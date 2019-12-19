@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Logo from '../Logo';
 import Responsive from '../Responsive';
@@ -75,6 +76,17 @@ const Header = ({
 };
 
 const mapStateToProps = ({ auth, notifications }) => ({ auth, notifications });
+
+Header.propTypes = {
+  logout: PropTypes.func,
+  fetchNotifications: PropTypes.func,
+  getTokens: PropTypes.func,
+  getUserActivity: PropTypes.func,
+  getUserInfo: PropTypes.func,
+  getWallets: PropTypes.func,
+  notifications: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  auth: PropTypes.object
+};
 
 export default connect(
   mapStateToProps,

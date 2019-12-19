@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from '../../components/Header';
@@ -39,5 +40,9 @@ export const Wallet = ({ isAuthenticated }) => {
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
+
+Wallet.propTypes = {
+  isAuthenticated: PropTypes.bool
+};
 
 export default connect(mapStateToProps)(Wallet);

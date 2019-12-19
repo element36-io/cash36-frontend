@@ -28,7 +28,7 @@ const Step1aConfirmTier1 = ({ changeSteps, stepError }) => {
 
 Step1aConfirmTier1.propTypes = {
   changeSteps: PropTypes.func.isRequired,
-  error: PropTypes.string
+  stepError: PropTypes.string
 };
 
 export default Step1aConfirmTier1;

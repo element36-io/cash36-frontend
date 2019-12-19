@@ -107,7 +107,6 @@ AuthForm.propTypes = {
   formFields: PropTypes.array,
   buttonLabel: PropTypes.string,
   errorMsg: PropTypes.string,
-  children: PropTypes.any,
   captcha: PropTypes.bool
 };
 

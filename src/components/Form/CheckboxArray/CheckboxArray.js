@@ -1,17 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FieldArray } from 'formik';
 import { FormControlLabel, Checkbox } from '@material-ui/core';
 
 import './CheckboxArray.scss';
 
-const CheckboxArray = ({
-  name,
-  checkboxes,
-  formProps,
-  isTouched,
-  error,
-  handleChange
-}) => {
+const CheckboxArray = ({ name, checkboxes, formProps, isTouched, error }) => {
   return (
     <div className="element-form__input-wrapper --checkboxes">
       <div>Accepted token(s)</div>
@@ -54,6 +48,14 @@ const CheckboxArray = ({
       {isTouched && error && <p className="form-error">{error}</p>}
     </div>
   );
+};
+
+CheckboxArray.propTypes = {
+  name: PropTypes.string,
+  checkboxes: PropTypes.array,
+  formProps: PropTypes.object,
+  isTouched: PropTypes.bool,
+  error: PropTypes.string
 };
 
 export default CheckboxArray;

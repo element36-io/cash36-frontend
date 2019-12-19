@@ -126,7 +126,9 @@ const Step4UserProfile = ({ changeSteps, stepError }) => {
     try {
       const list = await getIndustries();
       setIndustryList(list);
-    } catch (err) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -137,7 +139,7 @@ const Step4UserProfile = ({ changeSteps, stepError }) => {
     if (industry.industry.toLowerCase() !== 'other') {
       setIndustry({ ...industry, industryOther: '' });
     }
-  }, [industry]);
+  }, [industry.industry]);
 
   useEffect(() => {
     if (!sourceOfFunds.Other) setSourceOfFundsOther('');

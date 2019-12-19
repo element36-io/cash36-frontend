@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 
 import DefaultButton from '../../../components/Buttons/DefaultButton';
 import SecondaryButton from '../../../components/Buttons/SecondaryButton';
@@ -48,8 +49,8 @@ const InvestCard = props => {
         <div className="invest-card__heading__top">
           <h3>
             {name} {access === 'PRIVATE' && <span>private</span>}
-            {isWalletFree && <AccountBalanceIcon />}
           </h3>
+
           {isOwnedByUser && (
             <ButtonDialog button={<button ref={editButtonRef}>Edit</button>}>
               <EditContractForm
@@ -95,11 +96,28 @@ const InvestCard = props => {
           <InvestDetails {...props} />
         </ButtonDialog>
         <a target="_blank" href={investmentLink} rel="noopener noreferrer">
-          <DefaultButton>Invest Now</DefaultButton>
+          <DefaultButton>
+            {' '}
+            {isWalletFree && <AccountBalanceIcon />}Invest Now
+          </DefaultButton>
         </a>
       </div>
     </div>
   );
+};
+
+InvestCard.propTypes = {
+  acceptedTokens: PropTypes.array,
+  contractAddress: PropTypes.string,
+  name: PropTypes.string,
+  isOwnedByUser: PropTypes.bool,
+  description: PropTypes.string,
+  website: PropTypes.string,
+  contractSymbol: PropTypes.string,
+  isWalletFree: PropTypes.bool,
+  investmentLink: PropTypes.string,
+  refetchContracts: PropTypes.func,
+  access: PropTypes.string
 };
 
 export default InvestCard;

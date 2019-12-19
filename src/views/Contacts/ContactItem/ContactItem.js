@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -9,7 +9,7 @@ import BaseButton from '../../../components/Buttons/BaseButton/BaseButton';
 import Avatar from '../../../components/Avatar';
 import './ContactItem.scss';
 
-const ContactItem = React.memo(({ contact, removeCallback }) => {
+const ContactItem = ({ contact, removeCallback }) => {
   const [showActions, setShowActions] = useState(false);
   const [error, setError] = useState('');
 
@@ -70,11 +70,11 @@ const ContactItem = React.memo(({ contact, removeCallback }) => {
       <div className="error-text">{error}</div>
     </div>
   );
-});
+};
 
 ContactItem.propTypes = {
   contact: PropTypes.object.isRequired,
   removeCallback: PropTypes.func.isRequired
 };
 
-export default ContactItem;
+export default memo(ContactItem);

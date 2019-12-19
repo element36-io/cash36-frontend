@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import WalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import { WalletContext } from '../../providers/wallet.provider';
@@ -43,5 +44,9 @@ const mapStateToProps = ({ wallets: { walletList, loggedInWallet } }) => ({
   walletList,
   loggedInWallet
 });
+
+WalletMode.propTypes = {
+  walletList: PropTypes.array
+};
 
 export default connect(mapStateToProps)(WalletMode);

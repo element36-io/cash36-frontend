@@ -1,4 +1,4 @@
-export default theme => ({
+export default {
   root: {
     borderBottom: '1px solid #EDF0F4'
   },
@@ -25,4 +25,4 @@ export default theme => ({
     color: '#01152C',
     opacity: '0.5'
   }
-});
+};

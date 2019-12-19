@@ -12,11 +12,10 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case AUTH_USER:
-      const { isAuthenticated, user } = action.payload;
       return {
         ...state,
-        isAuthenticated,
-        user
+        isAuthenticated: action.payload.isAuthenticated,
+        user: action.payload.user
       };
     case GET_USER_INFO:
       return {

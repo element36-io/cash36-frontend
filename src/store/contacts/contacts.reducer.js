@@ -23,6 +23,7 @@ export default (state = initialState, action) => {
         fetching: false
       };
     case REMOVE_CONTACTS:
+      // eslint-disable-next-line no-case-declarations
       const contactsList = state.contactsList.filter(
         c => c.id !== action.payload
       );

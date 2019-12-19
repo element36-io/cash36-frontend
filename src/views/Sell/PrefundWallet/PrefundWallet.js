@@ -17,7 +17,7 @@ const PrefundWallet = ({ mainWallet, minFunds, tokens }) => {
       EUR36: balanceEUR36,
       CHF36: balanceCHF36
     };
-  }, [minFunds]);
+  }, [balanceCHF36, balanceEUR36]);
 
   const [selectedSymbol, setSelectedSymbol] = useState('CHF36');
 

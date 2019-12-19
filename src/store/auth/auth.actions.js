@@ -34,8 +34,6 @@ export const getCurrentKycStep = () => async dispatch => {
   try {
     const response = await API.get('/compliance/kyc/get-step');
 
-    console.log(response);
-
     const processStatus = response.data.result;
 
     dispatch({

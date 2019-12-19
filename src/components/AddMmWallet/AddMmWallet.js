@@ -86,7 +86,8 @@ const mapStateToProps = ({ tokens }) => ({ tokens: tokens.tokens });
 
 AddMmWallet.propTypes = {
   addWallet: PropTypes.func,
-  walletList: PropTypes.array
+  walletList: PropTypes.array,
+  tokens: PropTypes.array
 };
 
 export default connect(mapStateToProps)(AddMmWallet);
