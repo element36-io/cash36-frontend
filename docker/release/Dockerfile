@@ -2,7 +2,7 @@
 FROM node:8 as react-build
 WORKDIR /app
 COPY . ./
-RUN yarn --registry http://167.99.243.81:4873/
+RUN yarn
 RUN yarn build:staging
 
 # Stage 2 - the production environment
