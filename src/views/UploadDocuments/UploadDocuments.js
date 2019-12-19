@@ -30,6 +30,7 @@ const UploadDocuments = () => {
   });
 
   const [submitting, setSubmitting] = useState(false);
+  const [uploaded, setUploaded] = useState(true);
   const [error, setError] = useState('');
   const location = useLocation();
   const code = getQueryStringValue(location.search, 'code');
@@ -48,6 +49,8 @@ const UploadDocuments = () => {
       });
 
       await uploadDocumentsViaMobile(formData, code);
+
+      setUploaded(true);
     } catch (error) {
       setError(error);
     }
@@ -71,6 +74,20 @@ const UploadDocuments = () => {
   const disabled = Object.values(types)
     .filter(t => t.documentType !== 'ID_Back')
     .some(t => !t.file);
+
+  if (uploaded) {
+    return (
+      <div className="upload-documents-view">
+        <div className="upload-documents-view__header">
+          <Logo />
+        </div>
+
+        <h1>Upload Documents</h1>
+
+        <h3>Your documents have been uploaded.</h3>
+      </div>
+    );
+  }
 
   return (
     <div className="upload-documents-view">
