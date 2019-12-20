@@ -30,7 +30,7 @@ const UploadDocuments = () => {
   });
 
   const [submitting, setSubmitting] = useState(false);
-  const [uploaded, setUploaded] = useState(true);
+  const [uploaded, setUploaded] = useState(false);
   const [error, setError] = useState('');
   const location = useLocation();
   const code = getQueryStringValue(location.search, 'code');

@@ -4,11 +4,11 @@ import { handleError } from '../error.helpers';
 
 // const websiteUrl = process.env.REACT_APP_APP_URL;
 
-export const sendUploadUrl = async selfieCode => {
+export const sendUploadUrl = async (websiteUrl, selfieCode) => {
   try {
     await API.put(
       `/compliance/directupload/send-kyc-link`,
-      `http://localhost:3000/upload-documents?selfieCode=${selfieCode}`,
+      `${websiteUrl}/upload-documents?selfieCode=${selfieCode}`,
       {
         headers: {
           'Content-Type': 'application/json'

@@ -145,10 +145,7 @@ export const login = (username, password) => async dispatch => {
     });
     dispatch(getUserInfo());
   } catch (error) {
-    return (
-      Promise.reject(error.response.data.error_description) ||
-      'An error has occured'
-    );
+    return handleError(error);
   }
 };
 
