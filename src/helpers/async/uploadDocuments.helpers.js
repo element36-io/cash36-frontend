@@ -2,6 +2,8 @@ import API, { API_ROOT } from '../../config/api';
 import axios from 'axios';
 import { handleError } from '../error.helpers';
 
+// const websiteUrl = process.env.REACT_APP_APP_URL;
+
 export const sendUploadUrl = async selfieCode => {
   try {
     await API.put(
