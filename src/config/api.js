@@ -46,7 +46,7 @@ const getRefreshedToken = async refreshToken => {
 
 // Intercept the request and inject the token into headers. Check if token is expired and call getRefreshedToken function if needed.
 api.interceptors.request.use(
-  async function (config) {
+  async function(config) {
     const getToken = async () => {
       const token = localStorage.getItem('access_token');
       const refreshToken = localStorage.getItem('refresh_token');
@@ -65,7 +65,7 @@ api.interceptors.request.use(
     if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
   },
-  function (error) {
+  function(error) {
     return Promise.reject(error);
   }
 );

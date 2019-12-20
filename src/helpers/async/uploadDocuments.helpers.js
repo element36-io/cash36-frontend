@@ -8,7 +8,7 @@ export const sendUploadUrl = async (websiteUrl, selfieCode) => {
   try {
     await API.put(
       `/compliance/directupload/send-kyc-link`,
-      `${websiteUrl}/upload-documents?selfieCode=${selfieCode}`,
+      `${websiteUrl}upload-documents?selfieCode=${selfieCode}`,
       {
         headers: {
           'Content-Type': 'application/json'
