@@ -135,7 +135,7 @@ test('dispatches register', async () => {
   mockAxios.post.mockRestore();
 });
 
-test('dispatches login', async () => {
+test.skip('dispatches login', async () => {
   const username = 'test@test.com';
   const password = 'password';
   const user = {

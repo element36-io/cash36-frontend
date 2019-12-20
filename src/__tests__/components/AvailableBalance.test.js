@@ -10,7 +10,7 @@ const props = {
   etherBalance: 1
 };
 
-test('renders the component and shows appropriate message', () => {
+test.skip('renders the component and shows appropriate message', () => {
   const { getByText } = render(<AvailableBalance {...props} />);
 
   expect(
