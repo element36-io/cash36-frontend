@@ -34,8 +34,7 @@ docker-debug-build:
   script:
     - docker build -t $CI_REGISTRY_IMAGE:dev-latest -f ./docker/debug/Dockerfile .
     - docker push $CI_REGISTRY_IMAGE:dev-latest
-  only:
-    - master
+
 
 # deploys and runs on the digi ocean node because this node is also the gitlab runner....
 #deploy-test:
