@@ -59,7 +59,10 @@
   },
   "scripts": {
     "start": "env-cmd -e development react-scripts start",
+    "start:development": "env-cmd -e development react-scripts start",
+    "start:demo": "env-cmd -e demo react-scripts start",    
     "start:test": "env-cmd -e test react-scripts start",
+    "start:production": "env-cmd -e demo react-scripts start",
     "build:staging": "env-cmd -e staging react-scripts build",
     "build": "env-cmd -e production react-scripts build",
     "test": "react-scripts test --env=jsdom",

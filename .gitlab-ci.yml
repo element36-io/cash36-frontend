@@ -32,9 +32,22 @@ docker-debug-build:
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
-    - docker build -t $CI_REGISTRY_IMAGE:dev-latest -f ./docker/debug/Dockerfile .
+    - docker build --build-arg nodeenv=development -t $CI_REGISTRY_IMAGE:dev-latest -f ./docker/Dockerfile .
     - docker push $CI_REGISTRY_IMAGE:dev-latest
 
+docker-demo-build:
+  stage: package
+#  environment: test
+  image: docker:dind
+  tags:
+    - dokcer
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  script:
+    - docker build --build-arg nodeenv=demo -t $CI_REGISTRY_IMAGE:demo-latest -f ./docker/Dockerfile .
+    - docker push $CI_REGISTRY_IMAGE:demo-latest
+  only:
+    - manual
 
 # deploys and runs on the digi ocean node because this node is also the gitlab runner....
 #deploy-test:
