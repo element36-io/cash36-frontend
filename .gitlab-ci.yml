@@ -10,7 +10,6 @@ stages:
   - test
   - package
 
-
 test:
   stage: test
   tags:
@@ -20,10 +19,10 @@ test:
     - npm install -g yarn
     - yarn --registry https://registry.yarnpkg.com
     - yarn test
-  except:
-    - master
+#  except:
+#    - master
 
-docker-debug-build:
+docker-dev-build:
   stage: package
 #  environment: test
   image: docker:dind
@@ -34,7 +33,9 @@ docker-debug-build:
   script:
     - docker build --build-arg nodeenv=development -t $CI_REGISTRY_IMAGE:dev-latest -f ./docker/Dockerfile .
     - docker push $CI_REGISTRY_IMAGE:dev-latest
-
+  only:
+    - develop
+    - master
 
 # deploys and runs on the digi ocean node because this node is also the gitlab runner....
 #deploy-test:

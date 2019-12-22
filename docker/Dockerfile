@@ -14,4 +14,4 @@ RUN yarn
 # RUN ls -la
 EXPOSE 3000
 #CMD ["yarn", "start:$NODE_ENV"]
-CMD ["/bin/bash", "-c", "yarn start:$NODE_ENV"]
+CMD ["/bin/bash", "-c", "yarn  start:$NODE_ENV"]
