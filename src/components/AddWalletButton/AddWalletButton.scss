@@ -5,8 +5,8 @@
   display: flex;
   align-items: center;
 
-  img {
-    margin-right: 0.8rem;
+  svg {
+    margin-right: 0.5rem;
 
     @include mobile {
       width: 2rem;

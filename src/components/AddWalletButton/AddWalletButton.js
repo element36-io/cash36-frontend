@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
-import DefaultButton from '../Buttons/DefaultButton';
-import walletIcon from '../../assets/icons/wallet-plus-outline.svg';
+import WalletIcon from '@material-ui/icons/AccountBalanceWalletOutlined';
+
+import SecondaryButton from '../Buttons/SecondaryButton';
 import { WalletContext } from '../../providers/wallet.provider';
 
 import './AddWalletButton.scss';
@@ -9,14 +10,14 @@ const AddWalletButton = () => {
   const { onOpenAdd } = useContext(WalletContext);
 
   return (
-    <DefaultButton
+    <SecondaryButton
       className="add-wallet-button"
       variant="contained"
       onClick={onOpenAdd}
     >
-      <img src={walletIcon} alt="wallet icon" />
+      <WalletIcon />
       Add Wallet
-    </DefaultButton>
+    </SecondaryButton>
   );
 };
 
