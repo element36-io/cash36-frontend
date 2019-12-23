@@ -53,7 +53,7 @@ const EditContractForm = ({
             </div>
 
             <DefaultButton type="submit" disabled={submitting}>
-              Edit Contract
+              Save changes
             </DefaultButton>
             {error && <div className="error-text">{error}</div>}
           </form>
