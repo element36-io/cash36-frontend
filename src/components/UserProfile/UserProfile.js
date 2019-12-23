@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Tooltip } from '@material-ui/core';
+
 import tiers from './tiers';
 import Avatar from '../Avatar';
 import VerificationButton from './VerificationButton';
@@ -8,7 +10,6 @@ import AddWalletButton from '../AddWalletButton';
 import WalletMode from '../WalletMode';
 
 import './UserProfile.scss';
-import { Tooltip } from '@material-ui/core';
 
 export const UserProfile = ({ user, alt }) => {
   let {
@@ -60,7 +61,7 @@ export const UserProfile = ({ user, alt }) => {
             currentProcessStatus={currentProcessStatus}
             caseId={caseId}
           />
-          <AddWalletButton />
+          <AddWalletButton primary={false} />
         </div>
       </div>
     </div>
