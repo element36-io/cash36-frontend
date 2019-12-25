@@ -6,13 +6,14 @@ import AuthWrapper from '../../components/AuthWrapper';
 import AuthForm from '../../components/AuthWrapper/AuthForm';
 import { formFields, initialValues } from './form-model';
 import validationSchema from './validation-schema';
-import { register } from '../../store/auth/auth.actions';
+import { register, resendActivationLink } from '../../store/auth/auth.actions';
 
 import './Register.scss';
 
 const Register = ({ isAuthenticated }) => {
   const [error, setError] = useState(null);
-  const [userEmail, setUserEmail] = useState('milossomelongassemail@test.com');
+  const [userEmail, setUserEmail] = useState(null);
+
   const submitCallback = async values => {
     try {
       await register(values.username, values.password);
@@ -20,6 +21,17 @@ const Register = ({ isAuthenticated }) => {
     } catch (e) {
       setError(e);
       return Promise.reject(e);
+    }
+  };
+
+  const resendLink = () => {
+    try {
+      resendActivationLink(
+        `${window.location.origin}/account-activation`,
+        userEmail
+      );
+    } catch (error) {
+      setError(error);
     }
   };
 
@@ -38,7 +50,7 @@ const Register = ({ isAuthenticated }) => {
             </div>
             <div className="register-email__resend">
               <div>Didn't receive it?</div>
-              <div>Resend email</div>
+              <button onClick={resendLink}>Resend email</button>
             </div>
 
             <Link to="/login">Back to sign in</Link>

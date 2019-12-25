@@ -106,6 +106,17 @@ export const activateUser = async code => {
   }
 };
 
+export const resendActivationLink = async (emailUrl, username) => {
+  try {
+    await axios.post(`${API_ROOT}/auth/user/register-new-confirm`, {
+      emailUrl,
+      username
+    });
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
 export const login = (username, password) => async dispatch => {
   const user = {
     username
