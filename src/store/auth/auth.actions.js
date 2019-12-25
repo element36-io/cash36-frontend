@@ -92,9 +92,7 @@ export const register = async (username, password) => {
       emailUrl: `${window.location.origin}/account-activation`
     });
   } catch (error) {
-    return Promise.reject(
-      error.response.data.message || 'An error has occured'
-    );
+    return handleError(error);
   }
 };
 
