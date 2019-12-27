@@ -1,9 +1,11 @@
 import React, { useCallback, useState } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { CAPTCHA_KEY } from '../../../config/api';
 import Form from '../../Form';
 import StepButton from '../../Buttons/StepButton/StepButton';
+import { setCaptchaToken } from '../../../store/auth/auth.actions';
 
 const activeCaptcha = process.env.REACT_APP_CAPTCHA_ACTIVE;
 
@@ -15,13 +17,15 @@ const AuthForm = ({
   buttonLabel,
   children,
   errorMsg,
-  captcha = true
+  captcha = true,
+  setCaptchaToken
 }) => {
   const [isVerified, setIsVerified] = useState(!captcha || !activeCaptcha);
   const [captchaError, setCaptchaError] = useState(null);
 
   const onVerify = token => {
     if (token) setIsVerified(true);
+    setCaptchaToken(token);
   };
 
   const onCaptchaError = err => setCaptchaError(err);
@@ -107,7 +111,8 @@ AuthForm.propTypes = {
   formFields: PropTypes.array,
   buttonLabel: PropTypes.string,
   errorMsg: PropTypes.string,
-  captcha: PropTypes.bool
+  captcha: PropTypes.bool,
+  setCaptchaToken: PropTypes.func
 };
 
-export default AuthForm;
+export default connect(null, { setCaptchaToken })(AuthForm);

@@ -10,13 +10,15 @@ import { register, resendActivationLink } from '../../store/auth/auth.actions';
 
 import './Register.scss';
 
-const Register = ({ isAuthenticated }) => {
+const Register = ({ isAuthenticated, captchaToken }) => {
   const [error, setError] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
+  const captcha = React.useRef(captchaToken);
+  captcha.current = captchaToken;
 
   const submitCallback = async values => {
     try {
-      await register(values.username, values.password);
+      await register(values.username, values.password, captcha.current);
       setUserEmail(values.username);
     } catch (e) {
       setError(e);
@@ -82,11 +84,13 @@ const Register = ({ isAuthenticated }) => {
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  captchaToken: state.auth.captchaToken
 });
 
 Register.propTypes = {
-  isAuthenticated: PropTypes.bool
+  isAuthenticated: PropTypes.bool,
+  captchaToken: PropTypes.string
 };
 
 export default connect(mapStateToProps, null)(Register);

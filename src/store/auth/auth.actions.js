@@ -2,9 +2,21 @@ import axios from 'axios';
 import API, { API_ROOT } from '../../config/api';
 import { handleError } from '../../helpers/error.helpers';
 
-import { AUTH_USER, GET_USER_INFO, GET_CURRENT_KYC_STEP } from './auth.types';
+import {
+  AUTH_USER,
+  GET_USER_INFO,
+  GET_CURRENT_KYC_STEP,
+  SET_CAPTCHA_TOKEN
+} from './auth.types';
 
 export const checkUserId = id => API.get(`/auth/user/is-user/${id}`);
+
+export const setCaptchaToken = token => {
+  return {
+    type: SET_CAPTCHA_TOKEN,
+    payload: token
+  };
+};
 
 export const logout = () => {
   localStorage.removeItem('state');
@@ -84,12 +96,13 @@ export const getIndustries = async () => {
   }
 };
 
-export const register = async (username, password) => {
+export const register = async (username, password, captchaToken) => {
   try {
     await axios.post(`${API_ROOT}/auth/user/register`, {
       username,
       password,
-      emailUrl: `${window.location.origin}/account-activation`
+      emailUrl: `${window.location.origin}/account-activation`,
+      captchaToken
     });
   } catch (error) {
     return handleError(error);

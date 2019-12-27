@@ -1,7 +1,13 @@
-import { AUTH_USER, GET_USER_INFO, GET_CURRENT_KYC_STEP } from './auth.types';
+import {
+  AUTH_USER,
+  GET_USER_INFO,
+  GET_CURRENT_KYC_STEP,
+  SET_CAPTCHA_TOKEN
+} from './auth.types';
 
 const initialState = {
   isAuthenticated: !!localStorage.getItem('access_token'),
+  captchaToken: '',
   user: JSON.parse(localStorage.getItem('state'))
     ? JSON.parse(localStorage.getItem('state')).user
     : undefined,
@@ -32,6 +38,11 @@ export default (state = initialState, action) => {
           ...state.kyc,
           currentStep: action.payload
         }
+      };
+    case SET_CAPTCHA_TOKEN:
+      return {
+        ...state,
+        captchaToken: action.payload
       };
 
     default:
