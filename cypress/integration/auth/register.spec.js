@@ -19,12 +19,6 @@ it('Registers the user', () => {
     expect(response.status).to.equal(201);
   });
 
-  cy.request('/cash36/compliance/confirm/public/check?code=e36isMagic').then(
-    resp => {
-      expect(resp.status).to.eq(200);
-    }
-  );
-
   cy.contains('Back to sign in').click();
 
   cy.location('pathname').should('equal', '/login');
