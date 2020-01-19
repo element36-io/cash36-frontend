@@ -1,0 +1,41 @@
+@import '../../styles/settings.scss';
+
+.register-email {
+  align-self: center;
+  justify-self: center;
+  color: $text-secondary;
+
+  > div:first-child {
+    color: $text-secondary;
+    display: block;
+
+    > span {
+      color: $text-primary;
+    }
+
+    > a {
+      display: block;
+      margin-top: 1.6rem;
+    }
+  }
+
+  .register-email__resend {
+    margin-bottom: 2.4rem;
+    margin-top: 2.4rem;
+
+    > div:last-child {
+      color: $primary-main;
+      cursor: pointer;
+    }
+
+    button {
+      cursor: pointer;
+      outline: none;
+      margin: 0;
+      padding: 0;
+      border: none;
+      font-size: 1.6rem;
+      color: $primary-main;
+    }
+  }
+}

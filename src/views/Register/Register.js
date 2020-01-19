@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
@@ -6,15 +6,19 @@ import AuthWrapper from '../../components/AuthWrapper';
 import AuthForm from '../../components/AuthWrapper/AuthForm';
 import { formFields, initialValues } from './form-model';
 import validationSchema from './validation-schema';
+import { register, resendActivationLink } from '../../store/auth/auth.actions';
 
-import { register } from '../../store/auth/auth.actions';
+import './Register.scss';
 
-const Register = ({ isAuthenticated }) => {
+const Register = ({ isAuthenticated, captchaToken }) => {
   const [error, setError] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
+  const captcha = React.useRef(captchaToken);
+  captcha.current = captchaToken;
+
   const submitCallback = async values => {
     try {
-      await register(values.username, values.password);
+      await register(values.username, values.password, captcha.current);
       setUserEmail(values.username);
     } catch (e) {
       setError(e);
@@ -22,22 +26,44 @@ const Register = ({ isAuthenticated }) => {
     }
   };
 
+  const resendLink = () => {
+    try {
+      resendActivationLink(
+        `${window.location.origin}/account-activation`,
+        userEmail
+      );
+    } catch (error) {
+      setError(error);
+    }
+  };
+
   if (isAuthenticated) return <Redirect to="/" />;
 
   return (
-    <AuthWrapper>
-      <div data-testid="register_component">
-        <p>
-          Welcome aboard, <br />{' '}
-          {userEmail ? (
-            <span>
-              Confirmation email was sent to {userEmail}.{' '}
-              <Link to="/login">Back to sign in</Link>
-            </span>
-          ) : (
-            'Please, enter your email & choose a password'
-          )}
-        </p>
+    <AuthWrapper message={userEmail ? '' : 'Welcome'}>
+      <div
+        className={`${userEmail ? 'register-email' : ''}`}
+        data-testid="register_component"
+      >
+        {userEmail ? (
+          <Fragment>
+            <div>
+              Confirmation email was sent to <span>{userEmail}</span>
+            </div>
+            <div className="register-email__resend">
+              <div>Didn't receive it?</div>
+              <button onClick={resendLink}>Resend email</button>
+            </div>
+
+            <Link to="/login">Back to sign in</Link>
+          </Fragment>
+        ) : (
+          <p>
+            Welcome aboard, <br />
+            Please, enter your email & choose a password
+          </p>
+        )}
+
         {!userEmail && (
           <AuthForm
             submitCallback={submitCallback}
@@ -58,15 +84,13 @@ const Register = ({ isAuthenticated }) => {
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  captchaToken: state.auth.captchaToken
 });
 
 Register.propTypes = {
-  register: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool
+  isAuthenticated: PropTypes.bool,
+  captchaToken: PropTypes.string
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(Register);
+export default connect(mapStateToProps, null)(Register);

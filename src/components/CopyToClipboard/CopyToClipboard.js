@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Copy from '@material-ui/icons/FileCopy';
 import TruncateString from 'react-truncate-string';
 
-import DefaultButton from '../Buttons/DefaultButton';
+import SecondaryButton from '../Buttons/SecondaryButton';
 
 import './CopyToClipboard.scss';
 
@@ -34,9 +34,9 @@ const CopyToClipboard = ({ text, showAsText = false }) => {
           <TruncateString text={text} />
         </span>
       ) : (
-        <DefaultButton onClick={copy}>
+        <SecondaryButton onClick={copy}>
           <Copy />
-        </DefaultButton>
+        </SecondaryButton>
       )}
       <textarea value={text} ref={textToCopy} onChange={() => {}} />
     </div>

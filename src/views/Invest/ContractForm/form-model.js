@@ -14,7 +14,10 @@ export const formModel = [
   {
     type: 'checkboxArray',
     name: 'acceptedTokens',
-    checkboxes: [{ id: 'CHF36', name: 'CHF36' }, { id: 'EUR36', name: 'EUR36' }]
+    checkboxes: [
+      { id: 'CHF36', name: 'CHF36' },
+      { id: 'EUR36', name: 'EUR36' }
+    ]
   },
   {
     name: 'contractSymbol',
@@ -62,10 +65,10 @@ export const initialValues = {
   name: '',
   contractAddress: '',
   description: '',
-  acceptedTokens: [],
+  acceptedTokens: ['CHF36', 'EUR36'],
   contractSymbol: '',
   investmentLink: '',
   website: '',
-  access: '',
+  access: 'PRIVATE',
   isWalletFree: false
 };

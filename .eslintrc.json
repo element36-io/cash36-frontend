@@ -14,7 +14,11 @@
     "describe": "writable",
     "beforeEach": "writable",
     "afterEach": "writable",
-    "process": "writable"
+    "process": "writable",
+    "module": "writable",
+    "Cypress": "writable",
+    "cy": "writable",
+    "before": "writable"
   },
   "parser": "babel-eslint",
   "parserOptions": {

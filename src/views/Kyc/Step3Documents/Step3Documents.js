@@ -44,7 +44,7 @@ const Step3Documents = ({ changeSteps, stepError }) => {
   const sendEmail = async () => {
     try {
       // TODO: strip the link from the weburl
-      await sendUploadUrl('http://localhost:3000/', selfieCode);
+      await sendUploadUrl(window.location.origin, selfieCode);
 
       setEmailSent(true);
     } catch (error) {

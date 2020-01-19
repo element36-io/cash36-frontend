@@ -73,7 +73,8 @@ const AddMmWallet = ({ addWallet, walletList, tokens }) => {
         <div className="add-mm-wallet__submitted">
           <div>
             <DoneIcon className="icon-success" />
-            Wallet added successfully
+            Wallet added successfully - now registering stablecoins of
+            element36; please confirm on Metamask!
           </div>
           <SecondaryButton onClick={onCloseDialogs}>Close</SecondaryButton>
         </div>

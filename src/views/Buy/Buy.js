@@ -107,6 +107,7 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
                 amount={amount}
                 symbol={symbol}
                 setStep={setStep}
+                handleManualTransferClick={handleManualTransferClick}
               />
               {(tokensError || contactsError) && (
                 <div className="error-text">{tokensError || contactsError}</div>
@@ -188,7 +189,4 @@ const mapStateToProps = ({ contacts: { contactsList } }) => ({
   contactsList
 });
 
-export default connect(
-  mapStateToProps,
-  { getTokens, getContacts }
-)(Buy);
+export default connect(mapStateToProps, { getTokens, getContacts })(Buy);

@@ -50,6 +50,8 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^4.0.0",
     "@testing-library/react": "^8.0.7",
+    "cypress": "^3.8.0",
+    "cypress-file-upload": "^3.5.1",
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-react-hooks": "^2.3.0",
     "history": "^4.9.0",
@@ -61,7 +63,7 @@
     "start": "env-cmd -e development react-scripts start",
     "start:development": "env-cmd -e development react-scripts start",
     "start:test": "env-cmd -e test react-scripts start",
-    "start:demo": "env-cmd -e demo react-scripts start",    
+    "start:demo": "env-cmd -e demo react-scripts start",
     "start:production": "env-cmd -e demo react-scripts start",
     "build:staging": "env-cmd -e staging react-scripts build",
     "build": "env-cmd -e production react-scripts build",
