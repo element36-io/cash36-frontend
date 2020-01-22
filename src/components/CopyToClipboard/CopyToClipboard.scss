@@ -3,6 +3,7 @@
 
 .copy-to-clipboard {
   position: relative;
+  background-color: $white;
 
   span {
     cursor: pointer;
@@ -20,10 +21,13 @@
   button {
     min-width: auto;
     padding: 0rem 0.5rem;
+    background: $white !important;
   }
 
   svg {
     width: 1.5rem;
+    fill: $primary-light;
+    background-color: $white;
   }
 
   .copy-to-clipboard__tooltip {
