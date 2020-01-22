@@ -34,9 +34,9 @@ const CopyToClipboard = ({ text, showAsText = false }) => {
           <TruncateString text={text} />
         </span>
       ) : (
-        <SecondaryButton onClick={copy}>
+        <button onClick={copy}>
           <Copy />
-        </SecondaryButton>
+        </button>
       )}
       <textarea value={text} ref={textToCopy} onChange={() => {}} />
     </div>

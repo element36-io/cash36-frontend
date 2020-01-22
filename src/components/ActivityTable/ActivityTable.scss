@@ -7,7 +7,7 @@
   &__row {
     display: flex;
     align-items: center;
-    padding: .5rem 1.5rem;
+    padding: 0.5rem 1.5rem;
 
     > div:first-child {
       margin-right: 2rem;
@@ -45,13 +45,13 @@
     &__row {
       display: inline-flex;
       align-items: center;
-      padding: .5rem 1.5rem;
+      padding: 0.5rem 1.5rem;
       flex-wrap: wrap;
       width: 100%;
 
       &:not(:last-child) {
         > div:nth-child(3) {
-          padding-bottom: .5rem;
+          padding-bottom: 0.5rem;
           border-bottom: 1px solid $grey-border;
         }
       }
@@ -79,5 +79,4 @@
       }
     }
   }
-
 }
