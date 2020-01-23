@@ -40,7 +40,10 @@ const Step2BeneficialOwner = ({ changeSteps, stepError }) => {
             The contracting party declares herewith to be the sole Beneficial
             Owner regarding all funds brought into this business relation. The
             contracting party further commits to communicate any changes to
-            element36 without prior request.
+            element36 without prior request. Sending funds within the KYC
+            network means to share personal data with the recipient. Data will
+            be: Name, Email, Nationality and Place of Living which you entered
+            when onboarding.
           </p>
         </div>
         <ProcessControls
