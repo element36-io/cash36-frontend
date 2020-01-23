@@ -26,15 +26,19 @@ const CopyToClipboard = ({ text, showAsText = false }) => {
       {showAsText ? (
         <span
           className={showTooltip ? 'copy-to-clipboard__tooltip' : null}
-          // className="copy-to-clipboard__tooltip"
           onClick={copy}
         >
           <TruncateString text={text} />
         </span>
       ) : (
-        <button onClick={copy}>
-          <Copy />
-        </button>
+        <span
+          className={showTooltip ? 'copy-to-clipboard__tooltip' : null}
+          onClick={copy}
+        >
+          <button>
+            <Copy />
+          </button>
+        </span>
       )}
       <textarea value={text} ref={textToCopy} onChange={() => {}} />
     </div>
