@@ -28,6 +28,8 @@ const AddMmWallet = ({ addWallet, walletList, tokens }) => {
     evt.preventDefault();
     setSubmitting(true);
     try {
+      await addTokensToMetamask(tokens);
+
       await addWallet(
         account,
         walletTypes.metamask,
@@ -35,7 +37,6 @@ const AddMmWallet = ({ addWallet, walletList, tokens }) => {
         description
       );
 
-      await addTokensToMetamask(tokens);
       setSubmitted(true);
     } catch (err) {
       setError(err);
@@ -73,8 +74,7 @@ const AddMmWallet = ({ addWallet, walletList, tokens }) => {
         <div className="add-mm-wallet__submitted">
           <div>
             <DoneIcon className="icon-success" />
-            Wallet added successfully - now registering stablecoins of
-            element36; please confirm on Metamask!
+            Wallet added successfully.
           </div>
           <SecondaryButton onClick={onCloseDialogs}>Close</SecondaryButton>
         </div>
