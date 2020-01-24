@@ -12,7 +12,8 @@ const feedbackValues = [
   'Adding wallet to element 36 KYC network',
   'Updating Smart Contracts',
   'Publishing results',
-  'Preparing next steps ...'
+  'Preparing next steps',
+  'Be patient - this may take a while'
 ];
 
 const AddWalletForm = ({ onChange, value, error, onSubmit, submitting }) => {
@@ -27,7 +28,7 @@ const AddWalletForm = ({ onChange, value, error, onSubmit, submitting }) => {
 
       if (count === feedbackValues.length - 1) setIsRunning(null);
     },
-    isRunning ? 2000 : null
+    isRunning ? 3000 : null
   );
 
   return (
