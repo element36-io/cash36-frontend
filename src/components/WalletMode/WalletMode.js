@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import WalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import { WalletContext } from '../../providers/wallet.provider';
-import { getMainWalletAddress } from '../../helpers/wallet.helpers';
+import { getMainWallet } from '../../helpers/wallet.helpers';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
+import CopyToClipboard from '../CopyToClipboard/CopyToClipboard';
 
 import './WalletMode.scss';
-import CopyToClipboard from '../CopyToClipboard/CopyToClipboard';
 
 const WalletMode = ({ walletList }) => {
   const hasWallet = walletList.length > 0;
@@ -23,7 +23,8 @@ const WalletMode = ({ walletList }) => {
   }
 
   if (hasWallet) {
-    const mainWallet = getMainWalletAddress(walletList);
+    const mainWallet = getMainWallet(walletList);
+    console.log(mainWallet);
 
     return (
       <div
@@ -32,7 +33,16 @@ const WalletMode = ({ walletList }) => {
         data-testid="wallet-mode"
       >
         <WalletIcon />
-        <CopyToClipboard text={mainWallet} showAsText />
+        <div className="wallet-login-mode__name">
+          <div>{mainWallet.shortDescription}</div>
+          <div>
+            <CopyToClipboard
+              text={mainWallet.accountAddress}
+              showAsText
+              truncated
+            />
+          </div>
+        </div>
       </div>
     );
   }

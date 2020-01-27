@@ -1,11 +1,11 @@
 import React, { useRef, useState, memo } from 'react';
 import PropTypes from 'prop-types';
 import Copy from '@material-ui/icons/FileCopy';
-import TruncateString from 'react-truncate-string';
+import { truncateBlockchainAddress } from '../../helpers/string.helpers';
 
 import './CopyToClipboard.scss';
 
-const CopyToClipboard = ({ text, showAsText = false }) => {
+const CopyToClipboard = ({ text, showAsText = false, truncated = false }) => {
   const [showTooltip, setShowTooltip] = useState(false);
 
   const textToCopy = useRef();
@@ -28,7 +28,7 @@ const CopyToClipboard = ({ text, showAsText = false }) => {
           className={showTooltip ? 'copy-to-clipboard__tooltip' : null}
           onClick={copy}
         >
-          <TruncateString text={text} />
+          {truncated ? truncateBlockchainAddress(text) : text}
         </span>
       ) : (
         <span
@@ -47,7 +47,8 @@ const CopyToClipboard = ({ text, showAsText = false }) => {
 
 CopyToClipboard.propTypes = {
   text: PropTypes.string,
-  showAsText: PropTypes.bool
+  showAsText: PropTypes.bool,
+  truncated: PropTypes.bool
 };
 
 export default memo(CopyToClipboard);
