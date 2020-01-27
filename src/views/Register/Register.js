@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
@@ -46,17 +46,19 @@ const Register = ({ isAuthenticated, captchaToken }) => {
         data-testid="register_component"
       >
         {userEmail ? (
-          <Fragment>
+          <div className="register-email__message">
+            <h1>Thank you for registering </h1>
             <div>
-              Confirmation email was sent to <span>{userEmail}</span>
+              Confirmation email was sent to{' '}
+              <span className="black-bold">{userEmail}.</span>
             </div>
             <div className="register-email__resend">
               <div>Didn't receive it?</div>
-              <button onClick={resendLink}>Resend email</button>
+              <button onClick={resendLink}>Click here to resend email</button>
             </div>
 
-            <Link to="/login">Back to sign in</Link>
-          </Fragment>
+            <Link to="/login">Back to Login</Link>
+          </div>
         ) : (
           <p>
             Welcome aboard, <br />
