@@ -59,7 +59,7 @@ const Web3Provider = ({ children }) => {
         return 'Ropsten';
       case 4:
         return 'Rinkeby';
-      case 85588558:
+      case 85458545:
         return 'Local';
       case 10:
         return 'DEV';

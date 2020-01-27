@@ -48,6 +48,8 @@ const AddMmWallet = ({ addWallet, walletList, tokens }) => {
     wallet => wallet.accountAddress === account
   )[0];
 
+  const network = getNetwork(window.ethereum.networkVersion);
+
   return (
     <div className="add-mm-wallet">
       <img src={metamaskLogo} alt="MetaMask" />
@@ -55,7 +57,10 @@ const AddMmWallet = ({ addWallet, walletList, tokens }) => {
       {account && (
         <>
           <p>Wallet address: {account}</p>
-          <p>Network: {getNetwork(window.ethereum.networkVersion)}</p>
+          <p>
+            Network:{' '}
+            {network !== 'unknown' ? network : window.ethereum.networkVersion}
+          </p>
           {filteredWallet && !submitted && (
             <p>Wallet already registered with user</p>
           )}

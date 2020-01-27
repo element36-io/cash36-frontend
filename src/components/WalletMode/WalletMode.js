@@ -24,7 +24,6 @@ const WalletMode = ({ walletList }) => {
 
   if (hasWallet) {
     const mainWallet = getMainWallet(walletList);
-    console.log(mainWallet);
 
     return (
       <div
