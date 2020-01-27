@@ -46,12 +46,14 @@ const SellTokens = ({
           etherBalance={etherBalance}
         />
       )}
-      <ExchangeFee
-        amount={amount}
-        exchangeFee={exchangeFee}
-        symbol={symbol}
-        isSell
-      />
+      {exchangeFee && (
+        <ExchangeFee
+          amount={amount}
+          exchangeFee={exchangeFee}
+          symbol={symbol}
+          isSell
+        />
+      )}
       {exchangeFeeError && (
         <div className="error-text">
           Exchange Fee error - {exchangeFeeError}

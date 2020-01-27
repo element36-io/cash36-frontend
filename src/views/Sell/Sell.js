@@ -162,7 +162,4 @@ const mapStateToProps = ({
   mainWallet: getMainWalletAddress(wallets.walletList)
 });
 
-export default connect(
-  mapStateToProps,
-  { getTokens }
-)(Sell);
+export default connect(mapStateToProps, { getTokens })(Sell);
