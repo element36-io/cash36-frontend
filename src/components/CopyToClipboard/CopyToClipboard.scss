@@ -36,7 +36,7 @@
 
   .copy-to-clipboard__tooltip {
     &::after {
-      content: 'copied to clipboard';
+      content: 'copied';
       position: absolute;
       bottom: -2rem;
       left: 0;
@@ -47,10 +47,24 @@
       color: $primary-main;
       background-color: $grey-blue;
       white-space: nowrap;
+      animation: slideOutUp 0.6s;
 
       @include mobile {
         top: 0;
         bottom: 0;
+      }
+    }
+
+    @keyframes slideOutUp {
+      from {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+      }
+
+      to {
+        visibility: hidden;
+        opacity: 0;
+        transform: translate3d(0, -100%, 0);
       }
     }
   }
