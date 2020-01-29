@@ -18,7 +18,7 @@ const CopyToClipboard = ({ text, showAsText = false, truncated = false }) => {
 
     setTimeout(() => {
       setShowTooltip(false);
-    }, 1000);
+    }, 550);
   };
 
   return (
