@@ -7,12 +7,15 @@
 
   .initiate-tokens-transfer__kyc-verifications {
     margin-top: 3.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 
     .initiate-tokens-transfer__kyc-verification {
       @extend .paper;
       padding: 1.4rem;
       margin-bottom: 2rem;
-      display: flex;
+      display: inline-flex;
       align-items: center;
 
       h4 {
@@ -23,7 +26,7 @@
 
   .initiate-tokens-transfer__buttons {
     display: inline-flex;
-    margin-top: 6.4rem;
+    margin-top: 2.4rem;
     width: 100%;
 
     > button {

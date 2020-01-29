@@ -3,10 +3,14 @@ import { CircularProgress } from '@material-ui/core';
 
 import DefaultButton from '../../../components/Buttons/DefaultButton';
 import SecondaryButton from '../../../components/Buttons/SecondaryButton';
+import useCash36 from '../../../hooks/useCash36';
 
 import './InitiateTokensTransfer.scss';
 
 const InitiateTokensTransfer = () => {
+  const web3 = useCash36();
+
+  console.log(web3);
   const [checkingSender, setCheckingSender] = useState(true);
   const [checkingReceiver, setCheckingReceiver] = useState(true);
 
