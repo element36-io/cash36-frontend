@@ -1,7 +1,11 @@
 # Stage 1
-FROM node:8 as react-build
+FROM node:10 as react-build
+ARG gprtoken
 WORKDIR /app
 COPY . ./
+COPY .npmrc /root/.npmrc
+RUN echo "//npm.pkg.github.com/:_authToken='${gprtoken}'" >> /root/.npmrc
+RUN echo "NODE_ENV is not passed, fixed production TOKEN is ${gprtoken}. "
 RUN yarn
 RUN yarn build:staging
 
