@@ -28,12 +28,14 @@
 
     button {
       background-image: none;
-      border: 0 solid rgba(36,145,233,0.2);
-      box-shadow: 0 10px 20px 0 rgba(28,141,233,0.1);
+      border: 0 solid rgba(36, 145, 233, 0.2);
+      box-shadow: 0 10px 20px 0 rgba(28, 141, 233, 0.1);
       width: 26.2rem;
       height: 22.1rem;
       border-radius: 12px;
-      > * { color: $text-black-1; }
+      > * {
+        color: $text-black-1;
+      }
       span:first-child {
         display: flex;
         flex-direction: column;
@@ -43,8 +45,10 @@
     }
 
     &--icon {
-      width: 7.2rem;
-      height: 7.2rem;
+      > img {
+        width: 7.2rem;
+        height: 7.2rem;
+      }
     }
   }
 

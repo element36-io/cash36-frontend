@@ -9,7 +9,7 @@ import { getContacts } from '../../store/contacts/contacts.actions';
 import BuyStep0 from './BuyStep0';
 import SendTokens from './SendTokens';
 import PaymentMethod from './PaymentMethod';
-import InitiateAutoPayment from './InitiateAutoPayment';
+import InitiateTokensTransfer from './InitiateTokensTransfer';
 import PaymentInfo from '../../components/PaymentInfo';
 import TransactionFooter from '../../components/TransactionFooter';
 import BuyError from './BuyError';
@@ -19,7 +19,7 @@ import useGet from '../../hooks/useGet';
 import './Buy.scss';
 
 export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
-  let [step, setStep] = useState(0);
+  const [step, setStep] = useState(0);
   const [amount, setAmount] = useState('');
   const [symbol, setSymbol] = useState('EUR36');
   const [target, setTarget] = useState(null);
@@ -30,7 +30,8 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
   const contactsError = useGet(getContacts)[1];
 
   if (location.state) {
-    if (location.state.quickActions) setStep(2.1);
+    // change back to 2.1
+    if (location.state.quickActions) setStep(4.2);
 
     if (location.state.quickTransfer) {
       setTarget(location.state.quickTransfer);
@@ -39,14 +40,6 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
 
     location.state = null;
   }
-
-  const nextStep = () => {
-    if (step === 1.1) {
-      if (amount && symbol) {
-        setStep(2);
-      }
-    }
-  };
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -160,8 +153,8 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
               <TransactionFooter />
             </PaymentInfo>
           )}
-          {step === 4.2 && <InitiateAutoPayment next={nextStep} />}
-          {step === 5 && <BuyError message={'User not enabled or verified.'} />}
+          {step === 4.2 && <InitiateTokensTransfer setStep={setStep} />}
+          {step === 5 && <BuyError message="User not enabled or verified." />}
         </div>
         <div className="buy__footer">
           {step > 4 && step < 4.2 && (
