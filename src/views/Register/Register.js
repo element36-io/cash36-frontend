@@ -14,6 +14,7 @@ import './Register.scss';
 const Register = ({ isAuthenticated, captchaToken }) => {
   const [error, setError] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
+  const [resentEmail, setResentEmail] = useState(false);
   const captcha = React.useRef(captchaToken);
   captcha.current = captchaToken;
 
@@ -36,12 +37,14 @@ const Register = ({ isAuthenticated, captchaToken }) => {
     }
   };
 
-  const resendLink = () => {
+  const resendLink = async () => {
     try {
-      resendActivationLink(
+      await resendActivationLink(
         `${window.location.origin}/account-activation`,
         userEmail
       );
+
+      setResentEmail(true);
     } catch (error) {
       setError(error);
     }
@@ -64,7 +67,11 @@ const Register = ({ isAuthenticated, captchaToken }) => {
             </div>
             <div className="register-email__resend">
               <div>Didn't receive it?</div>
-              <button onClick={resendLink}>Click here to resend email</button>
+              {resentEmail ? (
+                <div>Email sent. Check your inbox and activate account.</div>
+              ) : (
+                <button onClick={resendLink}>Resend activation link</button>
+              )}
             </div>
 
             <Link to="/login">Back to Login</Link>
