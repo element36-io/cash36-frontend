@@ -1,0 +1,23 @@
+.resend-activation {
+  height: 100%;
+
+  .auth__wrapper {
+    > div:first-child {
+      justify-content: flex-start;
+
+      > h2 {
+        margin-top: auto;
+      }
+
+      .login__terms {
+        margin-top: auto;
+      }
+    }
+  }
+
+  .resend-activation__message {
+    .paragraph-link-gray {
+      margin-top: 1rem;
+    }
+  }
+}

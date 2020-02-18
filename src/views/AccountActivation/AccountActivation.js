@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress';
-import { Redirect, useLocation, useHistory } from 'react-router-dom';
+import { Redirect, useLocation, useHistory, Link } from 'react-router-dom';
 import AuthWrapper from '../../components/AuthWrapper';
 import { getQueryStringValue } from '../../helpers/wallet.helpers';
 import { activateUser } from '../../store/auth/auth.actions';
@@ -18,7 +18,9 @@ const AccountActivation = () => {
       await activateUser(code);
       history.push('/login');
     } catch (error) {
-      setError(error);
+      setError(
+        'Your activation link has expired, click below to resend the activation code'
+      );
     }
   };
 
@@ -29,10 +31,15 @@ const AccountActivation = () => {
   if (!code) return <Redirect to="/login" />;
 
   return (
-    <AuthWrapper>
+    <AuthWrapper message="">
       <div className="account-activation">
         {error ? (
-          <p>{error}</p>
+          <div className="account-activation__message">
+            <p>{error}</p>
+            <p className="paragraph-link-gray">
+              <Link to="/resend-activation">Resend activation link</Link>
+            </p>
+          </div>
         ) : (
           <CircularProgress color="primary" size={50} />
         )}

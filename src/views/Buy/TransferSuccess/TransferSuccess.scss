@@ -1,7 +1,7 @@
 @import '../../../styles/mixins.scss';
 @import '../../../styles/settings.scss';
 
-.sell__sell-success {
+.transfer__transfer-success {
   text-align: center;
 
   p {
@@ -9,7 +9,7 @@
     text-align: center;
   }
 
-  .sell__sell-success__token {
+  .transfer__transfer-success__token {
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -64,7 +64,7 @@
       line-height: 2.4rem;
     }
 
-    .sell__sell-success__token {
+    .transfer__transfer-success__token {
       margin-bottom: 2.4rem;
       font-size: 2.4rem;
       line-height: 2.8rem;
@@ -80,7 +80,7 @@
       line-height: 1.8rem;
     }
 
-    .sell__sell-success__token {
+    .transfer__transfer-success__token {
       margin-bottom: 1.6rem;
       font-size: 1.8rem;
       line-height: 2.2rem;

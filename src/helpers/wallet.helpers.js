@@ -37,3 +37,7 @@ export const getQueryStringValue = (search, key) => {
     )
   );
 };
+
+export const generateWalletName = walletListLength => {
+  return `Account ${walletListLength + 1}`;
+};

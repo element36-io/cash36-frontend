@@ -36,6 +36,7 @@
       > * {
         color: $text-black-1;
       }
+
       span:first-child {
         display: flex;
         flex-direction: column;
@@ -83,6 +84,9 @@
         margin-bottom: 1rem;
         padding: 2rem;
 
+        align-items: center;
+        display: flex;
+
         span:first-child {
           margin: 0;
         }
@@ -98,6 +102,8 @@
       &--icon {
         width: 4rem;
         height: 3.7rem;
+        display: flex;
+        align-items: center;
       }
     }
   }

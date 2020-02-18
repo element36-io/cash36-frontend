@@ -15,8 +15,8 @@ test:
   tags:
     - dokcer
   script:
-    - apk add --no-cache nodejs nodejs-npm git python g++ make    
-    - echo "//npm.pkg.github.com/:_authToken='$GPR_READ_TOKEN'" >> .npmrc    
+    - apk add --no-cache nodejs nodejs-npm git python g++ make
+    - echo "//npm.pkg.github.com/:_authToken='$GPR_READ_TOKEN'" >> .npmrc
     - npm install -g yarn
     - yarn version
     - yarn --registry https://registry.yarnpkg.com
@@ -26,7 +26,7 @@ test:
 
 docker-dev-build:
   stage: package
-#  environment: test
+  #  environment: test
   image: docker:dind
   tags:
     - dokcer
@@ -71,7 +71,7 @@ docker-release-build:
   only:
     - manual
     - master
-#    - tags    
+#    - tags
 
 # we deploy to gcs with docker-in docker; managed by docker-compose directory
 #deploy-prod:

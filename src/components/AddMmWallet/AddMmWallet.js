@@ -10,17 +10,21 @@ import MmCheck from '../MmCheck';
 import { WalletContext, walletTypes } from '../../providers/wallet.provider';
 import SecondaryButton from '../Buttons/SecondaryButton';
 import { addTokensToMetamask } from '../../helpers/metamask.helpers';
+import { generateWalletName } from '../../helpers/wallet.helpers';
 
 import './AddMmWallet.scss';
 
 const AddMmWallet = ({ addWallet, walletList, tokens }) => {
   const [account, setAccount] = useState(null);
-  const [description, setDescription] = useState('');
   const [error, setError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(null);
   const { getNetwork } = useContext(Web3Context);
   const { onCloseDialogs } = useContext(WalletContext);
+
+  const [description, setDescription] = useState(
+    generateWalletName(walletList.length)
+  );
 
   const changeDescription = event => setDescription(event.target.value);
 
