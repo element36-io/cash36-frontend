@@ -1,0 +1,20 @@
+.initiate-tokens-transfer-check-item {
+  display: flex;
+  align-items: center;
+
+  .action-status {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0.6rem;
+
+    > div {
+      width: 2rem;
+      height: 2rem;
+
+      > svg {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+  }
+}

@@ -14,6 +14,7 @@ import PaymentInfo from '../../components/PaymentInfo';
 import TransactionFooter from '../../components/TransactionFooter';
 import BuyError from './BuyError';
 import TransferAddress from './TransferAddress';
+import TransferSuccess from './TransferSuccess';
 import useGet from '../../hooks/useGet';
 
 import './Buy.scss';
@@ -24,14 +25,22 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
   const [symbol, setSymbol] = useState('EUR36');
   const [target, setTarget] = useState(null);
   const [manualTransferData, setManualTransferData] = useState(null);
+  const [transferData, setTransferData] = useState({
+    amount: '',
+    symbol: ''
+  });
   const manualTransferStarted = useRef(false);
+
+  const [transactionError, setTransactionError] = useState({
+    title: 'Buy unsuccessful',
+    message: 'User not enabled or verified'
+  });
 
   const tokensError = useGet(getTokens)[1];
   const contactsError = useGet(getContacts)[1];
 
   if (location.state) {
-    // change back to 2.1
-    if (location.state.quickActions) setStep(4.2);
+    if (location.state.quickActions) setStep(2.1);
 
     if (location.state.quickTransfer) {
       setTarget(location.state.quickTransfer);
@@ -153,8 +162,28 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
               <TransactionFooter />
             </PaymentInfo>
           )}
-          {step === 4.2 && <InitiateTokensTransfer setStep={setStep} />}
-          {step === 5 && <BuyError message="User not enabled or verified." />}
+          {step === 4.2 && (
+            <InitiateTokensTransfer
+              setStep={setStep}
+              setTransactionError={setTransactionError}
+              amount={amount}
+              symbol={symbol}
+              targetAddress={target.contactAddress}
+              setTransferData={setTransferData}
+            />
+          )}
+          {step === 5 && (
+            <BuyError
+              title={transactionError.title}
+              message={transactionError.message}
+            />
+          )}
+          {step === 6 && (
+            <TransferSuccess
+              amount={transferData.amount}
+              symbol={transferData.symbol}
+            />
+          )}
         </div>
         <div className="buy__footer">
           {step > 4 && step < 4.2 && (

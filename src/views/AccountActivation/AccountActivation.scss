@@ -1,4 +1,12 @@
 .account-activation {
   display: flex;
   justify-content: center;
+
+  .account-activation__message {
+    p {
+      font-size: 1.8rem;
+      line-height: 1.8;
+      margin-bottom: 1.4rem;
+    }
+  }
 }

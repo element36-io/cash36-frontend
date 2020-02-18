@@ -13,7 +13,10 @@ const useCash36 = () => {
   };
 
   const setProvider = () => {
-    if (!user && !user.useMetamask) return;
+    // TODO: SOLVE THIS TO NOT REDIRECT ON UPORT - GOTTA TELL IT WHEN TO USE METAMASK, by setting this flag to true
+
+    const useMetamask = true;
+    if (!user || useMetamask) return;
 
     const { account, pushToken, boxPub } = user;
     const provider = new E36Provider({

@@ -59,6 +59,8 @@ const Web3Provider = ({ children }) => {
         return 'Ropsten';
       case 4:
         return 'Rinkeby';
+      case 5:
+        return 'Goerli';
       case 85458545:
         return 'Local';
       case 10:
@@ -86,7 +88,7 @@ const Web3Provider = ({ children }) => {
         loading,
         web3: web3js,
         getNetwork,
-        utils: Web3.utils,
+        utils: web3js.utils,
         eth: web3js.eth
       }}
     >

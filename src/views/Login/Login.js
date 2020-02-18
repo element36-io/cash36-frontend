@@ -11,10 +11,18 @@ import { login } from '../../store/auth/auth.actions';
 
 const Login = ({ isAuthenticated, login }) => {
   const [error, setError] = useState(null);
+  const [resendActivation, setResendActivation] = useState(false);
   const submitCallback = async values => {
     try {
       await login(values.username, values.password);
     } catch (err) {
+      if (err.includes('User is disabled')) {
+        setResendActivation(true);
+        setError(
+          'Your account has not been activated. Click "Resend activation link" to activate it'
+        );
+        return Promise.reject(err);
+      }
       setError(err);
       return Promise.reject(err);
     }
@@ -45,6 +53,11 @@ const Login = ({ isAuthenticated, login }) => {
           <p className="paragraph-link-gray">
             <Link to="/reset-password">Forgot password?</Link>
           </p>
+          {resendActivation && (
+            <p className="paragraph-link-gray">
+              <Link to="/resend-activation">Resend activtion link</Link>
+            </p>
+          )}
         </AuthForm>
       </div>
     </AuthWrapper>
@@ -60,7 +73,4 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(
-  mapStateToProps,
-  { login }
-)(Login);
+export default connect(mapStateToProps, { login })(Login);

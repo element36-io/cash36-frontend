@@ -171,9 +171,11 @@ export const login = (username, password) => async dispatch => {
   }
 };
 
-export const resetPassword = async email => {
+export const resetPassword = async (userId, emailUrl) => {
   try {
-    await axios.get(`${API_ROOT}/auth/user/reset-user/${email}`);
+    await axios.put(`${API_ROOT}/auth/user/reset-user/${userId}`, {
+      emailUrl
+    });
   } catch (error) {
     return handleError(error);
   }

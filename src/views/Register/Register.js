@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect, Link, useLocation } from 'react-router-dom';
 import AuthWrapper from '../../components/AuthWrapper';
 import AuthForm from '../../components/AuthWrapper/AuthForm';
 import { formFields, initialValues } from './form-model';
 import validationSchema from './validation-schema';
 import { register, resendActivationLink } from '../../store/auth/auth.actions';
+import { getQueryStringValue } from '../../helpers/wallet.helpers';
 
 import './Register.scss';
 
@@ -15,6 +16,15 @@ const Register = ({ isAuthenticated, captchaToken }) => {
   const [userEmail, setUserEmail] = useState(null);
   const captcha = React.useRef(captchaToken);
   captcha.current = captchaToken;
+
+  const location = useLocation();
+  const queryEmail = getQueryStringValue(location.search, 'email');
+
+  useEffect(() => {
+    if (queryEmail) {
+      setUserEmail(queryEmail);
+    }
+  });
 
   const submitCallback = async values => {
     try {
