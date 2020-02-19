@@ -13,7 +13,9 @@ const calculateTime = creationDate => {
   const minutesFromMessage = moment(now).diff(creationDate, 'minutes');
 
   // return days if it was 3 days or less (excluding 0)
-  if (daysFromMessage <= 3 && daysFromMessage !== 0) { return `${daysFromMessage}d`; }
+  if (daysFromMessage <= 3 && daysFromMessage !== 0) {
+    return `${daysFromMessage}d`;
+  }
   // raturn the date if it was more then 3 days
   if (daysFromMessage > 3) return moment(creationDate).format('MMM DD');
   // return hours if it was 0 days and > 0 hours
@@ -25,8 +27,12 @@ const calculateTime = creationDate => {
 };
 
 const renderIcon = type => {
-  if (type === 'PAYMENT' || type === 'PAYOUT') { return <img src={ConfirmationIcon} alt={type} />; }
+  if (type === 'PAYMENT' || type === 'PAYOUT') {
+    return <img src={ConfirmationIcon} alt={type} />;
+  }
   if (type === 'TIER_2_CONFIRMED') return <img src={Tier2Icon} alt={type} />;
+
+  return <img src={ConfirmationIcon} alt={type} />;
 };
 
 const Notification = props => {

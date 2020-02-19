@@ -50,7 +50,7 @@ export const UserProfile = ({ user, alt }) => {
           <span>{username}</span> ({currentLevel && tiers[currentLevel].text}{' '}
           user)
           {currentLevel !== 'Tier_2' && (
-            <Tooltip title="Verification process uncomplete">
+            <Tooltip title="Verification process incomplete">
               <i className="fas fa-exclamation-triangle" />
             </Tooltip>
           )}
