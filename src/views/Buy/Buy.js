@@ -24,6 +24,7 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
   const [amount, setAmount] = useState('');
   const [symbol, setSymbol] = useState('EUR36');
   const [target, setTarget] = useState(null);
+  const [quickActions, setQuickActions] = useState(false);
   const [manualTransferData, setManualTransferData] = useState(null);
   const [transferData, setTransferData] = useState({
     amount: '',
@@ -40,7 +41,10 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
   const contactsError = useGet(getContacts)[1];
 
   if (location.state) {
-    if (location.state.quickActions) setStep(2.1);
+    if (location.state.quickActions) {
+      setStep(2.1);
+      setQuickActions(true);
+    }
 
     if (location.state.quickTransfer) {
       setTarget(location.state.quickTransfer);
@@ -123,6 +127,7 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
                 submitCallback={addTarget}
                 setStep={setStep}
                 target={target}
+                quickActions={quickActions}
               />
               {(tokensError || contactsError) && (
                 <div className="error-text">{tokensError || contactsError}</div>

@@ -34,11 +34,8 @@ const BuyStep0 = ({ setStep, hasWallet }) => {
         <div className="buy-step0__option" onClick={() => setStep(2.1)}>
           <ContactMailIcon />
           <div>
-            <h3>Send to Contract</h3>
-
-            <p>
-              The funds will be deposited to the contract address you specify.
-            </p>
+            <h3>Send to Contact</h3>
+            <p>The funds (tokens) will be sent to the address you specify.</p>
           </div>
         </div>
       </div>

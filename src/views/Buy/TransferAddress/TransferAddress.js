@@ -9,15 +9,23 @@ import SelectedContact from '../SelectedContact';
 import { Web3Context } from '../../../providers/web3.provider';
 import { isWalletAddress } from '../../../helpers/wallet.helpers';
 import BuyFooter from '../BuyFooter';
+import { useHistory } from 'react-router-dom';
 
 import './TransferAddress.scss';
 
-const TransferAddress = ({ submitCallback, contactsList, setStep, target }) => {
+const TransferAddress = ({
+  submitCallback,
+  contactsList,
+  setStep,
+  target,
+  quickActions
+}) => {
   const [address, setAddress] = useState(target ? target.contactAddress : '');
   const [activeSuggestions, setActiveSuggestions] = useState(false);
   const [selectedContact, setSelectedContact] = useState(target);
   const [isWallet, setIsWallet] = useState(true);
   const { utils } = useContext(Web3Context);
+  const history = useHistory();
 
   const handleChange = evt => {
     const { value } = evt.target;
@@ -75,7 +83,15 @@ const TransferAddress = ({ submitCallback, contactsList, setStep, target }) => {
 
   return (
     <div className="transfer-address" data-testid="buy__choose-address">
-      <BackButton onClick={() => setStep(0)} />
+      {quickActions ? (
+        <BackButton
+          onClick={() => {
+            history.goBack();
+          }}
+        />
+      ) : (
+        <BackButton onClick={() => setStep(0)} />
+      )}
       <h2>Send tokens to</h2>
       <ClickAwayListener onClickAway={hideSuggestions}>
         <div className="transfer-address__search-container">
@@ -132,7 +148,8 @@ TransferAddress.propTypes = {
   submitCallback: PropTypes.func,
   setStep: PropTypes.func,
   contactsList: PropTypes.array,
-  target: PropTypes.object
+  target: PropTypes.object,
+  quickActions: PropTypes.bool
 };
 
 export default TransferAddress;

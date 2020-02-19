@@ -5,7 +5,7 @@ import Responsive from '../../../components/Responsive';
 import BackButton from '../../../components/Buttons/BackButton';
 import DefaultButton from '../../../components/Buttons/DefaultButton';
 import manualTransferIcon from '../../../assets/Buy/manual-transfer-icon.svg';
-import tokenTransferIcon from '../../../assets/icons/tokens-transfer.svg';
+import tokenTransferIcon from '../../../assets/Buy/tokens-transfer.svg';
 import BuyFooter from '../BuyFooter';
 
 import './PaymentMethod.scss';
