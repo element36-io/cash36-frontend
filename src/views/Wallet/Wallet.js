@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -14,8 +14,23 @@ import Invest from '../Invest';
 import History from '../History';
 import Contacts from '../Contacts';
 import Kyc from '../Kyc';
+import { setMainWallet, getWallets } from '../../store/wallets/wallets.actions';
+import { getTokens } from '../../store/tokens/tokens.actions';
 
-export const Wallet = ({ isAuthenticated }) => {
+export const Wallet = ({ isAuthenticated, getWallets, getTokens }) => {
+  useEffect(() => {
+    if (window.ethereum) {
+      window.ethereum.on('accountsChanged', async accounts => {
+        try {
+          await setMainWallet(accounts[0]);
+          await getWallets();
+          await getTokens();
+        } catch (err) {
+          console.log(err);
+        }
+      });
+    }
+  });
   if (!isAuthenticated) return <Redirect to="/login" />;
 
   return (
@@ -42,7 +57,10 @@ const mapStateToProps = state => ({
 });
 
 Wallet.propTypes = {
-  isAuthenticated: PropTypes.bool
+  isAuthenticated: PropTypes.bool,
+  getWallets: PropTypes.func,
+  getTokens: PropTypes.func,
+  walletList: PropTypes.array
 };
 
-export default connect(mapStateToProps)(Wallet);
+export default connect(mapStateToProps, { getTokens, getWallets })(Wallet);
