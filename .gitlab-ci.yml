@@ -4,7 +4,7 @@ variables:
   DOCKER_DRIVER: overlay
 
 services:
-  - docker:18.09-dind
+  - docker:dind
 
 stages:
   - test
@@ -27,7 +27,7 @@ test:
 docker-dev-build:
   stage: package
   #  environment: test
-  image: docker:18.09-dind
+  image: docker:dind
   tags:
     - dokcer
   before_script:
@@ -58,7 +58,7 @@ docker-dev-build:
 docker-release-build:
   stage: package
   environment: production
-  image: docker:18.09-dind
+  image: docker:dind
   tags:
     - dokcer
   before_script:
