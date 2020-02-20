@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import QRCode from 'qrcode.react';
 
 import Responsive from '../../../components/Responsive';
 import BackButton from '../../../components/Buttons/BackButton';
 import DefaultButton from '../../../components/Buttons/DefaultButton';
-import ManualTransferIcon from '../../../assets/Buy/manual-transfer-icon.svg';
+import manualTransferIcon from '../../../assets/Buy/manual-transfer-icon.svg';
+import tokenTransferIcon from '../../../assets/Buy/tokens-transfer.svg';
 import BuyFooter from '../BuyFooter';
 
 import './PaymentMethod.scss';
@@ -25,26 +25,21 @@ const PaymentMethod = ({
         <h2>Select your payment method</h2>
       </Responsive>
       <div className="payment-method__buttons">
+        <DefaultButton onClick={handleAutoTransferClick}>
+          <span className="payment-method__buttons--heading">
+            Tokens Transfer
+          </span>
+          <span className="payment-method__buttons--icon">
+            <img src={tokenTransferIcon} alt="" />
+          </span>
+        </DefaultButton>
+        <span className="payment-method__separator">Or</span>
         <DefaultButton onClick={handleManualTransferClick}>
           <span className="payment-method__buttons--heading">
             Manual Bank Transfer
           </span>
           <span className="payment-method__buttons--icon">
-            <img src={ManualTransferIcon} alt="" />
-          </span>
-        </DefaultButton>
-        <span className="payment-method__separator">Or</span>
-        <DefaultButton onClick={handleAutoTransferClick}>
-          <span className="payment-method__buttons--heading">
-            Automated Bank Transfer
-          </span>
-          <span className="payment-method__buttons--icon">
-            <Responsive>
-              <QRCode value="#" size={72} />
-            </Responsive>
-            <Responsive isMobile>
-              <QRCode value="#" size={32} />
-            </Responsive>
+            <img src={manualTransferIcon} alt="" />
           </span>
         </DefaultButton>
       </div>

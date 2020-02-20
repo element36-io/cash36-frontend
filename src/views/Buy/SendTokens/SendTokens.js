@@ -1,15 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TruncateString from 'react-truncate-string';
 import Avatar from '../../../components/Avatar';
 import ChooseAmountForm from '../../../components/ChooseAmountForm';
 import BuyFooter from '../BuyFooter';
 import BackButton from '../../../components/Buttons/BackButton';
 import StepButton from '../../../components/Buttons/StepButton';
+import Responsive from '../../../components/Responsive';
+import { truncateBlockchainAddress } from '../../../helpers/string.helpers';
 
 import './SendTokens.scss';
 
-const SendTokens = ({ setStep, amount, handleChange, symbol, target }) => {
+const SendTokens = ({
+  setStep,
+  amount,
+  handleChange,
+  symbol = 'EUR36',
+  target
+}) => {
   return (
     <div className="send-tokens">
       <BackButton onClick={() => setStep(2.1)} />
@@ -21,7 +28,10 @@ const SendTokens = ({ setStep, amount, handleChange, symbol, target }) => {
           username={target.contactAddress}
         />
         {target.contactName && <span>{target.contactName}</span>}
-        <TruncateString text={target.contactAddress} />
+        <Responsive>{target.contactAddress}</Responsive>
+        <Responsive isMobile>
+          {truncateBlockchainAddress(target.contactAddress)}
+        </Responsive>
       </div>
       <hr />
       <ChooseAmountForm

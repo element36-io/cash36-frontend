@@ -9,7 +9,7 @@
   .documents-upload__via-mobile {
     display: inline-flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
     margin-bottom: 1.6rem;
 
     > div {
@@ -79,6 +79,11 @@
         left: 0;
       }
     }
+  }
+
+  .form-header {
+    display: flex;
+    justify-content: space-between;
   }
 
   @include desktop {

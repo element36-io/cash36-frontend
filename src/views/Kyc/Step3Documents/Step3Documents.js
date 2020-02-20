@@ -4,7 +4,6 @@ import SmartphoneIcon from '@material-ui/icons/Smartphone';
 import { Tooltip } from '@material-ui/core';
 
 import Responsive from '../../../components/Responsive';
-import FormHeader from '../../../components/Form/FormHeader';
 import ProcessControls from '../ProcessControls';
 import FileInput from '../FileInput';
 import { getSelfieCode } from '../../../store/auth/auth.actions';
@@ -44,7 +43,7 @@ const Step3Documents = ({ changeSteps, stepError }) => {
   const sendEmail = async () => {
     try {
       // TODO: strip the link from the weburl
-      await sendUploadUrl('http://localhost:3000/', selfieCode);
+      await sendUploadUrl(window.location.origin, selfieCode);
 
       setEmailSent(true);
     } catch (error) {
@@ -88,10 +87,31 @@ const Step3Documents = ({ changeSteps, stepError }) => {
 
   return (
     <div className="documents-upload">
-      <FormHeader
-        title="Verification Process - Step 3"
-        subtitle="Please upload the following documents so we can verify your identity and domicile address."
-      />
+      <div className="form-header">
+        <div>
+          <h2>Verification Process - Step 3</h2>
+          <p>
+            Please upload the following documents so we can verify your identity
+            and domicile address.
+          </p>
+        </div>
+        <Responsive>
+          <Tooltip title="You'll be sent an email with a link to upload your documents from your phone">
+            <div className="documents-upload__via-mobile">
+              <SecondaryButton onClick={sendEmail}>
+                <SmartphoneIcon />
+                Upload via mobile
+              </SecondaryButton>
+
+              {emailSent && (
+                <div className="documents-upload__waiting-for-doc">
+                  Link to upload via mobile has been sent to your email
+                </div>
+              )}
+            </div>
+          </Tooltip>
+        </Responsive>
+      </div>
 
       <div className="documents-upload__document-wrapper">
         <div className="documents-upload__document-wrapper__content">
@@ -202,22 +222,6 @@ const Step3Documents = ({ changeSteps, stepError }) => {
           </div>
         )}
       </div>
-      <Responsive>
-        <Tooltip title="You'll be sent an email with a link to upload your documents from your phone">
-          <div className="documents-upload__via-mobile">
-            <SecondaryButton onClick={sendEmail}>
-              <SmartphoneIcon />
-              Upload via mobile
-            </SecondaryButton>
-
-            {emailSent && (
-              <div className="documents-upload__waiting-for-doc">
-                Link to upload via mobile has been sent to your email
-              </div>
-            )}
-          </div>
-        </Tooltip>
-      </Responsive>
       <ProcessControls
         submitLabel="Submit & Continue"
         disabled={disabled || submitting}

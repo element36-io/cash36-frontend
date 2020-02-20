@@ -5,10 +5,10 @@ import DefaultButton from '../DefaultButton';
 
 import './SecondaryButton.scss';
 
-const SecondaryButton = ({ children, onClick }) => {
+const SecondaryButton = ({ children, onClick, className }) => {
   return (
     <DefaultButton
-      className="secondary-button"
+      className={`secondary-button ${className}`}
       onClick={onClick}
       style={{
         background:

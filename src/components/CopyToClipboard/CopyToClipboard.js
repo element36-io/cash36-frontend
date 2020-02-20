@@ -1,13 +1,11 @@
 import React, { useRef, useState, memo } from 'react';
 import PropTypes from 'prop-types';
 import Copy from '@material-ui/icons/FileCopy';
-import TruncateString from 'react-truncate-string';
-
-import DefaultButton from '../Buttons/DefaultButton';
+import { truncateBlockchainAddress } from '../../helpers/string.helpers';
 
 import './CopyToClipboard.scss';
 
-const CopyToClipboard = ({ text, showAsText = false }) => {
+const CopyToClipboard = ({ text, showAsText = false, truncated = false }) => {
   const [showTooltip, setShowTooltip] = useState(false);
 
   const textToCopy = useRef();
@@ -20,7 +18,7 @@ const CopyToClipboard = ({ text, showAsText = false }) => {
 
     setTimeout(() => {
       setShowTooltip(false);
-    }, 1000);
+    }, 550);
   };
 
   return (
@@ -28,15 +26,19 @@ const CopyToClipboard = ({ text, showAsText = false }) => {
       {showAsText ? (
         <span
           className={showTooltip ? 'copy-to-clipboard__tooltip' : null}
-          // className="copy-to-clipboard__tooltip"
           onClick={copy}
         >
-          <TruncateString text={text} />
+          {truncated ? truncateBlockchainAddress(text) : text}
         </span>
       ) : (
-        <DefaultButton onClick={copy}>
-          <Copy />
-        </DefaultButton>
+        <span
+          className={showTooltip ? 'copy-to-clipboard__tooltip' : null}
+          onClick={copy}
+        >
+          <button>
+            <Copy />
+          </button>
+        </span>
       )}
       <textarea value={text} ref={textToCopy} onChange={() => {}} />
     </div>
@@ -45,7 +47,8 @@ const CopyToClipboard = ({ text, showAsText = false }) => {
 
 CopyToClipboard.propTypes = {
   text: PropTypes.string,
-  showAsText: PropTypes.bool
+  showAsText: PropTypes.bool,
+  truncated: PropTypes.bool
 };
 
 export default memo(CopyToClipboard);

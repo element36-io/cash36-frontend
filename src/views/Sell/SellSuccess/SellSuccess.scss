@@ -15,7 +15,7 @@
     align-items: center;
     width: 100%;
     max-width: 27.5rem;
-    padding: 2.2rem .5rem 2.2rem 2.2rem;
+    padding: 2.2rem 0.5rem 2.2rem 2.2rem;
     border-radius: 10px;
     overflow: hidden;
 
@@ -24,7 +24,7 @@
     }
 
     span {
-      margin-left: .8rem;
+      margin-left: 0.8rem;
       color: $text-secondary;
       font-size: 1.2rem;
       line-height: 1.4rem;
@@ -41,25 +41,23 @@
     }
 
     &--EUR36:after {
-        background-image: $gradient-euro;
+      background-image: $gradient-euro;
     }
 
     &--USD36:after {
-        background-image: $gradient-dollar;
+      background-image: $gradient-dollar;
     }
 
     &--GBP36:after {
-        background-image: $gradient-pound;
+      background-image: $gradient-pound;
     }
 
     &--CHF36:after {
-        background-image: $gradient-franc;
-      }
+      background-image: $gradient-franc;
+    }
   }
 
   @include desktop {
-    padding: 14.4rem 0;
-
     p {
       margin-bottom: 3.2rem;
       font-size: 1.8rem;

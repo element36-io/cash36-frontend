@@ -43,7 +43,7 @@
       padding-bottom: 1.6rem;
     }
     display: flex;
-    align-items: center;
+    // align-items: center;
 
     > img {
       width: 6rem;
@@ -72,14 +72,15 @@
     .manage-wallets__wallet__buttons {
       margin-left: auto;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
 
       > span {
         margin-right: 2.4rem;
         font-size: 1.1rem;
         color: $primary-main;
-        padding: 5px 10px;
+        padding: 3px 10px;
         cursor: default;
+        margin-top: auto;
       }
 
       > button {
@@ -91,7 +92,7 @@
         margin-right: 2.4rem;
         transition: color 0.2s;
         background-color: $grey-blue;
-        padding: 5px 10px;
+        padding: 3px 10px;
         transition: all 0.2s;
 
         &:hover {
@@ -194,13 +195,17 @@
       > button {
         margin-right: 0;
 
+        > span {
+          margin-right: 0;
+        }
+
         &:hover {
           background-color: $primary-main;
           color: $white;
         }
       }
 
-      > svg {
+      svg {
         margin-left: 0;
         position: absolute;
         right: 0;

@@ -3,6 +3,8 @@
 
 .copy-to-clipboard {
   position: relative;
+  display: flex;
+  align-items: center;
 
   span {
     cursor: pointer;
@@ -18,17 +20,23 @@
   }
 
   button {
+    position: relative;
     min-width: auto;
-    padding: 0rem 1rem;
+    padding: 0rem 0.5rem;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
   }
 
   svg {
     width: 1.5rem;
+    fill: $primary-light;
   }
 
   .copy-to-clipboard__tooltip {
     &::after {
-      content: 'copied to clipboard';
+      content: 'copied';
       position: absolute;
       bottom: -2rem;
       left: 0;
@@ -38,10 +46,25 @@
       font-size: 1.2rem;
       color: $primary-main;
       background-color: $grey-blue;
+      white-space: nowrap;
+      animation: slideOutUp 0.6s;
 
       @include mobile {
         top: 0;
         bottom: 0;
+      }
+    }
+
+    @keyframes slideOutUp {
+      from {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+      }
+
+      to {
+        visibility: hidden;
+        opacity: 0;
+        transform: translate3d(0, -100%, 0);
       }
     }
   }

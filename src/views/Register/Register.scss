@@ -1,0 +1,54 @@
+@import '../../styles/settings.scss';
+@import '../../styles/mixins.scss';
+
+.register-email {
+  align-self: center;
+  justify-self: center;
+  color: $text-secondary;
+
+  .register-email__message {
+    display: flex;
+
+    h1 {
+      color: $black;
+    }
+
+    .black-bold {
+      color: $black;
+    }
+
+    @include mobile {
+      padding: 1rem;
+    }
+  }
+
+  > div:first-child {
+    color: $text-secondary;
+    display: block;
+
+    > span {
+      color: $text-primary;
+    }
+
+    > a {
+      display: block;
+      margin-top: 1.6rem;
+    }
+  }
+
+  .register-email__resend {
+    margin-bottom: 2.4rem;
+    margin-top: 2.4rem;
+
+    button {
+      cursor: pointer;
+      outline: none;
+      margin: 0;
+      padding: 0;
+      border: none;
+      font-size: 1.6rem;
+      color: $primary-main;
+      background-color: $backgroundGrey;
+    }
+  }
+}

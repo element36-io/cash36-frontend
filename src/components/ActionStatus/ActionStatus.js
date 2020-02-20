@@ -3,20 +3,20 @@ import PropTypes from 'prop-types';
 import TimeIcon from '@material-ui/icons/Schedule';
 import DoneIcon from '@material-ui/icons/Done';
 import ErrorIcon from '@material-ui/icons/Clear';
+
 import './ActionStatus.scss';
 
 const ActionStatus = ({ type, title }) => {
   let icon = '';
 
-  switch (type) {
-    case 'success':
-      icon = <DoneIcon data-testid="done-icon" />;
-      break;
-    case 'progress':
-      icon = <TimeIcon data-testid="time-icon" />;
-      break;
-    default:
-      icon = <ErrorIcon data-testid="error-icon" />;
+  if (type === 'success') {
+    icon = <DoneIcon data-testid="done-icon" />;
+  } else if (type === 'progress') {
+    icon = <TimeIcon data-testid="time-icon" />;
+  } else if (type === 'error') {
+    icon = <ErrorIcon data-testid="error-icon" />;
+  } else {
+    return null;
   }
 
   return (

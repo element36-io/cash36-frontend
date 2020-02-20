@@ -8,7 +8,13 @@ import BackButton from '../../../components/Buttons/BackButton';
 
 import './BuyTokens.scss';
 
-const BuyTokens = ({ handleChange, amount, symbol, setStep }) => (
+const BuyTokens = ({
+  handleChange,
+  amount,
+  symbol,
+  setStep,
+  handleManualTransferClick
+}) => (
   <div className="buy-tokens" data-testid="buy-tokens">
     <BackButton onClick={() => setStep(0)} />
     <h2>Buy Tokens</h2>
@@ -18,8 +24,8 @@ const BuyTokens = ({ handleChange, amount, symbol, setStep }) => (
       symbol={symbol}
     />
     <StepButton
-      onClick={() => setStep(3)}
-      text={'Next Step'}
+      onClick={handleManualTransferClick}
+      text={'Buy tokens'}
       disabled={!amount}
     />
     <BuyFooter
@@ -33,7 +39,8 @@ BuyTokens.propTypes = {
   handleChange: PropTypes.func,
   amount: PropTypes.string,
   symbol: PropTypes.string,
-  setStep: PropTypes.func
+  setStep: PropTypes.func,
+  handleManualTransferClick: PropTypes.func
 };
 
 export default BuyTokens;

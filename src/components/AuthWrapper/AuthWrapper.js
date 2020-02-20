@@ -14,7 +14,7 @@ const AuthWrapper = ({ children, message = 'Welcome' }) => (
       <Responsive isMobile>
         <img src={backgroundImage} alt="element36" />
       </Responsive>
-      <h2>{message}</h2>
+      {message && <h2>{message}</h2>}
       {children}
       <AuthTerms />
     </div>

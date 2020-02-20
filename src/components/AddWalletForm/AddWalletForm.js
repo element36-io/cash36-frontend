@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { CircularProgress, TextField } from '@material-ui/core';
 import DefaultButton from '../Buttons/DefaultButton';
@@ -12,7 +12,8 @@ const feedbackValues = [
   'Adding wallet to element 36 KYC network',
   'Updating Smart Contracts',
   'Publishing results',
-  'Preparing next steps ...'
+  'Preparing next steps',
+  'Be patient - this may take a while'
 ];
 
 const AddWalletForm = ({ onChange, value, error, onSubmit, submitting }) => {
@@ -27,8 +28,14 @@ const AddWalletForm = ({ onChange, value, error, onSubmit, submitting }) => {
 
       if (count === feedbackValues.length - 1) setIsRunning(null);
     },
-    isRunning ? 2000 : null
+    isRunning ? 3000 : null
   );
+
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current.focus();
+  });
 
   return (
     <form className="add-wallet-form" onSubmit={onSubmit}>
@@ -37,6 +44,7 @@ const AddWalletForm = ({ onChange, value, error, onSubmit, submitting }) => {
         onChange={onChange}
         value={value}
         fullWidth
+        inputRef={inputRef}
       />
       {error && <p className="error-text">{error}</p>}
       <DefaultButton onClick={onSubmit} disabled={submitting || !value.length}>

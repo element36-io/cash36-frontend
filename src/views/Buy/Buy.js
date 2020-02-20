@@ -9,28 +9,42 @@ import { getContacts } from '../../store/contacts/contacts.actions';
 import BuyStep0 from './BuyStep0';
 import SendTokens from './SendTokens';
 import PaymentMethod from './PaymentMethod';
-import InitiateAutoPayment from './InitiateAutoPayment';
+import InitiateTokensTransfer from './InitiateTokensTransfer';
 import PaymentInfo from '../../components/PaymentInfo';
 import TransactionFooter from '../../components/TransactionFooter';
 import BuyError from './BuyError';
 import TransferAddress from './TransferAddress';
+import TransferSuccess from './TransferSuccess';
 import useGet from '../../hooks/useGet';
 
 import './Buy.scss';
 
 export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
-  let [step, setStep] = useState(0);
+  const [step, setStep] = useState(0);
   const [amount, setAmount] = useState('');
   const [symbol, setSymbol] = useState('EUR36');
   const [target, setTarget] = useState(null);
+  const [quickActions, setQuickActions] = useState(false);
   const [manualTransferData, setManualTransferData] = useState(null);
+  const [transferData, setTransferData] = useState({
+    amount: '',
+    symbol: ''
+  });
   const manualTransferStarted = useRef(false);
+
+  const [transactionError, setTransactionError] = useState({
+    title: 'Buy unsuccessful',
+    message: 'User not enabled or verified'
+  });
 
   const tokensError = useGet(getTokens)[1];
   const contactsError = useGet(getContacts)[1];
 
   if (location.state) {
-    if (location.state.quickActions) setStep(2.1);
+    if (location.state.quickActions) {
+      setStep(2.1);
+      setQuickActions(true);
+    }
 
     if (location.state.quickTransfer) {
       setTarget(location.state.quickTransfer);
@@ -39,14 +53,6 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
 
     location.state = null;
   }
-
-  const nextStep = () => {
-    if (step === 1.1) {
-      if (amount && symbol) {
-        setStep(2);
-      }
-    }
-  };
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -107,6 +113,7 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
                 amount={amount}
                 symbol={symbol}
                 setStep={setStep}
+                handleManualTransferClick={handleManualTransferClick}
               />
               {(tokensError || contactsError) && (
                 <div className="error-text">{tokensError || contactsError}</div>
@@ -120,6 +127,7 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
                 submitCallback={addTarget}
                 setStep={setStep}
                 target={target}
+                quickActions={quickActions}
               />
               {(tokensError || contactsError) && (
                 <div className="error-text">{tokensError || contactsError}</div>
@@ -159,8 +167,28 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
               <TransactionFooter />
             </PaymentInfo>
           )}
-          {step === 4.2 && <InitiateAutoPayment next={nextStep} />}
-          {step === 5 && <BuyError message={'User not enabled or verified.'} />}
+          {step === 4.2 && (
+            <InitiateTokensTransfer
+              setStep={setStep}
+              setTransactionError={setTransactionError}
+              amount={amount}
+              symbol={symbol}
+              targetAddress={target.contactAddress}
+              setTransferData={setTransferData}
+            />
+          )}
+          {step === 5 && (
+            <BuyError
+              title={transactionError.title}
+              message={transactionError.message}
+            />
+          )}
+          {step === 6 && (
+            <TransferSuccess
+              amount={transferData.amount}
+              symbol={transferData.symbol}
+            />
+          )}
         </div>
         <div className="buy__footer">
           {step > 4 && step < 4.2 && (
@@ -188,7 +216,4 @@ const mapStateToProps = ({ contacts: { contactsList } }) => ({
   contactsList
 });
 
-export default connect(
-  mapStateToProps,
-  { getTokens, getContacts }
-)(Buy);
+export default connect(mapStateToProps, { getTokens, getContacts })(Buy);

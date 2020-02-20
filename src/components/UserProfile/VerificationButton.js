@@ -10,15 +10,7 @@ const VerificationButton = ({ currentProcessStatus, caseId }) => {
   if (currentProcessStatus === 'NOT_STARTED') {
     return (
       <Link to={`/kyc/start`} data-testid="verification-button">
-        <DefaultButton
-          variant="contained"
-          style={{
-            background:
-              'linear-gradient(90deg, rgba(186,0,13,1) 0%, rgba(244,67,54,1) 100%)'
-          }}
-        >
-          Verify Account
-        </DefaultButton>
+        <DefaultButton variant="contained">Verify Account</DefaultButton>
       </Link>
     );
   }

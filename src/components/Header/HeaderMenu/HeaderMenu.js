@@ -60,10 +60,12 @@ const HeaderMenu = ({
                 </Tooltip>
               </MenuItem>
             )}
-            <MenuItem>
+            <MenuItem onClick={closeMenu}>
               <Link to="/contacts">Contacts</Link>
             </MenuItem>
-            <MenuItem onClick={logout}>Logout</MenuItem>
+            <MenuItem onClick={logout}>
+              <span>Logout</span>
+            </MenuItem>
           </div>
         </span>
       </ClickAwayListener>

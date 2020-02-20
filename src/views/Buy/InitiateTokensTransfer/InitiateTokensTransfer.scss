@@ -1,0 +1,73 @@
+@import '../../../styles/utils.scss';
+
+.initiate-tokens-transfer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h2 {
+    text-align: center;
+  }
+
+  .initiate-tokens-transfer__kyc-verifications {
+    margin-top: 3.2rem;
+    display: inline-flex;
+    justify-content: space-between;
+
+    .initiate-tokens-transfer__kyc-verification {
+      padding: 1.4rem;
+      margin-bottom: 2rem;
+      display: inline-flex;
+      flex-direction: column;
+
+      > h4 {
+        font-weight: 500;
+      }
+    }
+
+    .initiate-tokens-transfer__mid-section {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+
+      > div:first-child {
+        font-size: 2.4rem;
+        line-height: 0;
+        margin-bottom: 0.6rem;
+      }
+
+      > div:last-child {
+        > img {
+          width: 3rem;
+        }
+        @extend .paper;
+        padding: 0.4rem 0.8rem;
+        display: flex;
+        align-items: center;
+        font-size: 2.4rem;
+
+        > div:first-child {
+          margin-right: 0.5rem;
+        }
+      }
+    }
+  }
+
+  .initiate-tokens-transfer__buttons {
+    display: inline-flex;
+    margin-top: 2.4rem;
+
+    > button {
+      width: 100%;
+    }
+
+    > button:first-child {
+      margin-right: 0.8rem;
+    }
+
+    > button:nth-child(2) {
+      flex: 40%;
+    }
+  }
+}

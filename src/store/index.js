@@ -24,6 +24,7 @@ export const reducers = combineReducers({
   wallets: walletsReducer
 });
 
+// add back logger
 const store = createStore(
   reducers,
   composeEnhancers(applyMiddleware(thunk, loggerMiddleware))

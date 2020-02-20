@@ -38,6 +38,23 @@
     max-width: calc(100% - 2.85rem);
   }
 
+  .wallet-login-mode__name {
+    display: flex;
+
+    > div:first-child {
+      font-weight: 500;
+      margin-right: 0.6rem;
+    }
+
+    > div:last-child {
+      color: $text-secondary;
+    }
+
+    @include mobile {
+      flex-direction: column;
+    }
+  }
+
   @include mobile {
     // flex-direction: column;
     margin-bottom: 0.8rem;

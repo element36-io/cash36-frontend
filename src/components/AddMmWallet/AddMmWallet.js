@@ -10,17 +10,21 @@ import MmCheck from '../MmCheck';
 import { WalletContext, walletTypes } from '../../providers/wallet.provider';
 import SecondaryButton from '../Buttons/SecondaryButton';
 import { addTokensToMetamask } from '../../helpers/metamask.helpers';
+import { generateWalletName } from '../../helpers/wallet.helpers';
 
 import './AddMmWallet.scss';
 
 const AddMmWallet = ({ addWallet, walletList, tokens }) => {
   const [account, setAccount] = useState(null);
-  const [description, setDescription] = useState('');
   const [error, setError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(null);
   const { getNetwork } = useContext(Web3Context);
   const { onCloseDialogs } = useContext(WalletContext);
+
+  const [description, setDescription] = useState(
+    generateWalletName(walletList.length)
+  );
 
   const changeDescription = event => setDescription(event.target.value);
 
@@ -28,6 +32,8 @@ const AddMmWallet = ({ addWallet, walletList, tokens }) => {
     evt.preventDefault();
     setSubmitting(true);
     try {
+      await addTokensToMetamask(tokens);
+
       await addWallet(
         account,
         walletTypes.metamask,
@@ -35,7 +41,6 @@ const AddMmWallet = ({ addWallet, walletList, tokens }) => {
         description
       );
 
-      await addTokensToMetamask(tokens);
       setSubmitted(true);
     } catch (err) {
       setError(err);
@@ -47,6 +52,8 @@ const AddMmWallet = ({ addWallet, walletList, tokens }) => {
     wallet => wallet.accountAddress === account
   )[0];
 
+  const network = getNetwork(window.ethereum.networkVersion);
+
   return (
     <div className="add-mm-wallet">
       <img src={metamaskLogo} alt="MetaMask" />
@@ -54,7 +61,10 @@ const AddMmWallet = ({ addWallet, walletList, tokens }) => {
       {account && (
         <>
           <p>Wallet address: {account}</p>
-          <p>Network: {getNetwork(window.ethereum.networkVersion)}</p>
+          <p>
+            Network:{' '}
+            {network !== 'unknown' ? network : window.ethereum.networkVersion}
+          </p>
           {filteredWallet && !submitted && (
             <p>Wallet already registered with user</p>
           )}
@@ -73,7 +83,7 @@ const AddMmWallet = ({ addWallet, walletList, tokens }) => {
         <div className="add-mm-wallet__submitted">
           <div>
             <DoneIcon className="icon-success" />
-            Wallet added successfully
+            Wallet added successfully.
           </div>
           <SecondaryButton onClick={onCloseDialogs}>Close</SecondaryButton>
         </div>

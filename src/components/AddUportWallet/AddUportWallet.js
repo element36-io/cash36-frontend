@@ -8,6 +8,7 @@ import { Web3Context } from '../../providers/web3.provider';
 import uportLogo from '../../assets/icons/uport_logo.svg';
 import { WalletContext, walletTypes } from '../../providers/wallet.provider';
 import { verifyResponse } from '../../helpers/uport.helpers';
+import { generateWalletName } from '../../helpers/wallet.helpers';
 import SecondaryButton from '../Buttons/SecondaryButton';
 
 import './AddUportWallet.scss';
@@ -15,7 +16,11 @@ import './AddUportWallet.scss';
 const AddUportWallet = ({ addWallet, walletList }) => {
   const [creds, setCreds] = useState(null);
   const [error, setError] = useState(null);
-  const [description, setDescription] = useState('');
+
+  const [description, setDescription] = useState(
+    generateWalletName(walletList.length)
+  );
+
   const [submitting, setSubmitting] = useState(null);
   const [submitted, setSubmitted] = useState(null);
   const location = useLocation();
