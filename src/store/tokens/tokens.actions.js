@@ -101,3 +101,13 @@ export const getExchangeFee = async () => {
     return handleError(error);
   }
 };
+
+export const getServerNetworkId = async () => {
+  try {
+    const response = await API.get('/exchange/tokens/networkid');
+
+    return response.data;
+  } catch (error) {
+    return handleError(error);
+  }
+};

@@ -1,17 +1,41 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import WalletIcon from '@material-ui/icons/AccountBalanceWallet';
+import { Tooltip } from '@material-ui/core';
+
 import { WalletContext } from '../../providers/wallet.provider';
 import { getMainWallet } from '../../helpers/wallet.helpers';
-import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import CopyToClipboard from '../CopyToClipboard/CopyToClipboard';
+import useGet from '../../hooks/useGet';
+import { getServerNetworkId } from '../../store/tokens/tokens.actions';
+import { parseNetworkIdToName } from '../../helpers/metamask.helpers';
 
 import './WalletMode.scss';
 
 const WalletMode = ({ walletList }) => {
   const hasWallet = walletList.length > 0;
   const { loggedInWallet } = useContext(WalletContext);
+  const [divergedNetworks, setDivergedNetworks] = useState(false);
+
+  const [serverNetworkId, serverNetworkIdError] = useGet(
+    getServerNetworkId,
+    '1'
+  );
+
+  useEffect(() => {
+    if (window.ethereum) {
+      const metamaskNetworkId = window.ethereum.networkVersion;
+      if (serverNetworkIdError) return;
+
+      if (parseInt(serverNetworkId, 10) !== parseInt(metamaskNetworkId, 10)) {
+        setDivergedNetworks(true);
+      } else {
+        setDivergedNetworks(false);
+      }
+    }
+  }, [serverNetworkId]);
 
   if (!hasWallet) {
     return (
@@ -42,6 +66,22 @@ const WalletMode = ({ walletList }) => {
             />
           </div>
         </div>
+        {divergedNetworks &&
+          !serverNetworkIdError &&
+          serverNetworkId &&
+          window.ethereum && (
+            <div className="wallet-login-mode__diverged-network">
+              <Tooltip
+                title={`Web3 network is ${parseNetworkIdToName(
+                  window.ethereum.networkVersion
+                )}, but Server is connected to ${parseNetworkIdToName(
+                  serverNetworkId
+                )}`}
+              >
+                <i className="fas fa-exclamation-triangle" />
+              </Tooltip>
+            </div>
+          )}
       </div>
     );
   }

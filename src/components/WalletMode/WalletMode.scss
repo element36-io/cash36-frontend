@@ -40,6 +40,7 @@
 
   .wallet-login-mode__name {
     display: flex;
+    margin-right: 1rem;
 
     > div:first-child {
       font-weight: 500;
@@ -53,6 +54,10 @@
     @include mobile {
       flex-direction: column;
     }
+  }
+
+  .wallet-login-mode__diverged-network {
+    color: $darkGrey;
   }
 
   @include mobile {

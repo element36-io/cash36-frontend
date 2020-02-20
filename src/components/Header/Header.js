@@ -9,6 +9,7 @@ import { logout, getUserInfo } from '../../store/auth/auth.actions';
 import { fetchNotifications } from '../../store/notifications/notifications.actions';
 import { getWallets } from '../../store/wallets/wallets.actions';
 import { getTokens, getUserActivity } from '../../store/tokens/tokens.actions';
+
 import './Header.scss';
 
 const Header = ({
