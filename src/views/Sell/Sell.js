@@ -11,19 +11,21 @@ import PrefundWallet from './PrefundWallet';
 import { getTokens, getExchangeFee } from '../../store/tokens/tokens.actions';
 import { getMinFunds } from '../../store/wallets/wallets.actions';
 import useCash36 from '../../hooks/useCash36';
-import Token from '../../contracts/ERC20Burnable';
+import { Token36Contract } from '@element36-io/cash36-contracts';
 import useGet from '../../hooks/useGet';
 import useGetEtherBalance from '../../hooks/useGetEtherBalance';
 import { getMainWalletAddress } from '../../helpers/wallet.helpers';
 
 import './Sell.scss';
 
-export const Sell = ({ user, tokens, getTokens, hasWallet, mainWallet }) => {
+export const Sell = ({ tokens, getTokens, hasWallet, mainWallet }) => {
   const [step, setStep] = useState(0);
   const [values, setValues] = useState({ amount: '', symbol: 'EUR36' });
   const [sellError, setSellError] = useState(null);
   const mounted = useRef(true);
   const web3 = useCash36();
+
+  console.log(mainWallet);
 
   const tokensError = useGet(getTokens)[1];
   const [exchangeFee, exchangeFeeError] = useGet(getExchangeFee, null);
@@ -63,24 +65,31 @@ export const Sell = ({ user, tokens, getTokens, hasWallet, mainWallet }) => {
   };
 
   const burnTokens = async () => {
-    const { account } = user;
+    console.warn('this was called');
+
     const { symbol, amount } = values;
     const { tokenAddress } = tokens.filter(token => token.symbol === symbol)[0];
-    const token36Contract = new web3.eth.Contract(Token.abi, tokenAddress);
+    const token36Contract = new web3.eth.Contract(
+      Token36Contract.abi,
+      tokenAddress
+    );
 
     const sellAmount = web3.utils.toWei(amount, 'ether');
+
+    console.log(token36Contract.methods);
 
     try {
       const estimate = await token36Contract.methods
         .burn(sellAmount)
-        .estimateGas({ from: account });
+        .estimateGas({ from: mainWallet });
+
       const data = await token36Contract.methods.burn(sellAmount).encodeABI();
 
       const options = {
-        from: account,
+        from: mainWallet,
         to: tokenAddress,
         gas: estimate + Math.round(estimate * 0.1),
-        nonce: await web3.eth.getTransactionCount(account, 'pending'),
+        nonce: await web3.eth.getTransactionCount(mainWallet, 'pending'),
         data
       };
 

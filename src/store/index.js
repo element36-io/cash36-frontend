@@ -25,10 +25,7 @@ export const reducers = combineReducers({
 });
 
 // add back logger
-const store = createStore(
-  reducers,
-  composeEnhancers(applyMiddleware(thunk, loggerMiddleware))
-);
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 
 store.subscribe(
   throttle(() => {
