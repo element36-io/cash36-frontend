@@ -76,8 +76,6 @@ export const Sell = ({ tokens, getTokens, hasWallet, mainWallet }) => {
 
     const sellAmount = web3.utils.toWei(amount, 'ether');
 
-    console.log(token36Contract.methods);
-
     try {
       const estimate = await token36Contract.methods
         .burn(sellAmount)

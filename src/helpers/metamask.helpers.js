@@ -64,7 +64,9 @@ export const parseNetworkIdToName = networkId => {
       return 'Local';
     case 10:
       return 'DEV';
+    case 42:
+      return 'Kovan';
     default:
-      return 'Unknown';
+      return networkId;
   }
 };

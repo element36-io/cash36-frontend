@@ -100,7 +100,7 @@ const TransferAddress = ({
 
             <input
               onChange={handleChange}
-              placeholder="Address"
+              placeholder="User's registered address"
               className={`${selectedContact ? 'selected-contact' : ''}`}
               name="address"
               value={address}

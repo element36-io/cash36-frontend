@@ -14,8 +14,6 @@ import './ContractForm.scss';
 const ContractForm = ({ closeDialog, refetchContracts }) => {
   const [error, setError] = useState('');
   const submit = async formValues => {
-    console.log(formValues);
-
     try {
       await addContract(formValues);
       closeDialog();
