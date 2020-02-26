@@ -7,8 +7,7 @@ import TransferFooter from '../TransferFooter';
 
 import './TransferAddress.scss';
 
-const TransferAddress = ({ setStep }) => {
-  const [address, setAddress] = useState('');
+const TransferAddress = ({ setStep, address, setAddress }) => {
   const [error, setError] = useState('');
   const { utils, eth } = useContext(Web3Context);
 
@@ -17,8 +16,6 @@ const TransferAddress = ({ setStep }) => {
     if (!isAddress) return false;
 
     const code = await eth.getCode(address);
-
-    console.log(code);
 
     if (code === '0x') return false;
 
@@ -32,13 +29,12 @@ const TransferAddress = ({ setStep }) => {
   };
 
   const onSubmit = async () => {
-    // Validate if the address is a smart contract
-    // const isContractAddress = await checkIsContractAddress(address);
+    const isContractAddress = await checkIsContractAddress(address);
 
-    // if (!isContractAddress) {
-    //   setError('The target address is not a valid ethereum contract address.');
-    //   return;
-    // }
+    if (!isContractAddress) {
+      setError('The target address is not a valid ethereum contract address.');
+      return;
+    }
 
     setStep(1);
   };
@@ -70,6 +66,8 @@ const TransferAddress = ({ setStep }) => {
 };
 
 TransferAddress.propTypes = {
+  address: PropTypes.string,
+  setAddress: PropTypes.func,
   setStep: PropTypes.func
 };
 

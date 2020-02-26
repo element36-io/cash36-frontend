@@ -10,6 +10,7 @@ import useGet from '../../../hooks/useGet';
 import './SendToContract.scss';
 
 const SendToContract = ({ getTokens }) => {
+  const [address, setAddress] = useState('');
   const [step, setStep] = useState(0);
   const [amount, setAmount] = useState('');
   const [symbol, setSymbol] = useState('EUR36');
@@ -26,9 +27,15 @@ const SendToContract = ({ getTokens }) => {
   };
 
   const steps = [
-    <TransferAddress key={0} setStep={setStep} />,
+    <TransferAddress
+      key={0}
+      setStep={setStep}
+      address={address}
+      setAddress={setAddress}
+    />,
     <TransferTokens
       key={1}
+      targetAddress={address}
       setStep={setStep}
       symbol={symbol}
       amount={amount}

@@ -4,19 +4,28 @@ import PropTypes from 'prop-types';
 import ChooseAmountForm from '../../../components/ChooseAmountForm';
 import StepButton from '../../../components/Buttons/StepButton';
 import TransferFooter from '../TransferFooter';
+import Responsive from '../../../components/Responsive';
+import { truncateBlockchainAddress } from '../../../helpers/string.helpers';
+import contractIcon from '../../../assets/icons/contract-icon.svg';
 
 import './TransferTokens.scss';
 
 const TransferTokens = ({
+  targetAddress,
   setStep,
   amount,
   symbol = 'EUR36',
   handleChange
 }) => {
   return (
-    <div className="send-tokens">
-      <div className="send-tokens__header">
+    <div className="invest-transfer-tokens">
+      <div className="invest-transfer-tokens__header">
         <h4>Sending to</h4>
+        <img src={contractIcon} alt="" />
+        <Responsive>{targetAddress}</Responsive>
+        <Responsive isMobile>
+          {truncateBlockchainAddress(targetAddress)}
+        </Responsive>
       </div>
       <hr />
       <ChooseAmountForm
@@ -35,6 +44,7 @@ const TransferTokens = ({
 };
 
 TransferTokens.propTypes = {
+  targetAddress: PropTypes.string,
   handleChange: PropTypes.func,
   amount: PropTypes.string,
   symbol: PropTypes.string,
