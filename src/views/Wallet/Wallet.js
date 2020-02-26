@@ -13,6 +13,7 @@ import Sell from '../Sell';
 import Invest from '../Invest';
 import History from '../History';
 import Contacts from '../Contacts';
+import SendToContract from '../../views/Invest/SendToContract';
 import Kyc from '../Kyc';
 import { setMainWallet, getWallets } from '../../store/wallets/wallets.actions';
 import { getTokens } from '../../store/tokens/tokens.actions';
@@ -43,6 +44,7 @@ export const Wallet = ({ isAuthenticated, getWallets, getTokens }) => {
           <Route exact path="/buy" component={Buy} />
           <Route exact path="/sell" component={Sell} />
           <Route exact path="/use" component={Invest} />
+          <Route path="/use/send-to-contract" component={SendToContract} />
           <Route exact path="/history" component={History} />
           <Route exact path="/contacts" component={Contacts} />
           <Route path="/kyc/:id" component={Kyc} />

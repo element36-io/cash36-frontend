@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import ButtonDialog from '../../components/ButtonDialog';
 import AddButton from '../../components/Buttons/AddButton';
@@ -24,6 +25,10 @@ const Invest = () => {
   return (
     <div className="wrapper invest">
       <div className="invest__header">
+        <Link to="/use/send-to-contract">
+          <AddButton text="Send to Contract" send />
+        </Link>
+
         <ButtonDialog button={<AddButton text="Add Contract" />}>
           <ContractForm refetchContracts={refetchContracts} />
         </ButtonDialog>

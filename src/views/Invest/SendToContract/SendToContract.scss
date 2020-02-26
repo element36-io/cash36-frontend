@@ -1,0 +1,29 @@
+@import '../../../styles/mixins.scss';
+
+.send-to-contract {
+  max-width: 117rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  .error-text {
+    text-align: center;
+    margin-top: 0.3rem;
+  }
+
+  &__content {
+    max-width: 63rem;
+    width: 100%;
+    margin: 0 auto;
+
+    @include desktop {
+      padding-top: 14.4rem;
+    }
+
+    @include mobile {
+      margin: 0;
+      padding: 2rem 1.2rem;
+    }
+  }
+}
