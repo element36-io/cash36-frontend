@@ -16,6 +16,7 @@ import BuyError from './BuyError';
 import TransferAddress from './TransferAddress';
 import TransferSuccess from './TransferSuccess';
 import useGet from '../../hooks/useGet';
+import { parseAmount } from '../../helpers/currencies.helpers';
 
 import './Buy.scss';
 
@@ -185,7 +186,7 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
           )}
           {step === 6 && (
             <TransferSuccess
-              amount={transferData.amount}
+              amount={parseAmount(transferData.amount)}
               symbol={transferData.symbol}
             />
           )}

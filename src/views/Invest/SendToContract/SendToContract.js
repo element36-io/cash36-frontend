@@ -2,16 +2,18 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import API from '../../../config/api';
 import { getTokens } from '../../../store/tokens/tokens.actions';
 import TransferAddress from '../TransferAddress';
 import TransferTokens from '../TransferTokens';
+import PaymentMethod from '../PaymentMethod';
 import useGet from '../../../hooks/useGet';
 
 import './SendToContract.scss';
 
 const SendToContract = ({ getTokens }) => {
   const [address, setAddress] = useState('');
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(2);
   const [amount, setAmount] = useState('');
   const [symbol, setSymbol] = useState('EUR36');
   const tokensError = useGet(getTokens)[1];
@@ -24,6 +26,17 @@ const SendToContract = ({ getTokens }) => {
     } else if (name === 'symbol') {
       setSymbol(value);
     }
+  };
+
+  const handleTokensTransferClick = () => {
+    console.log('clicked handle tokenstransfer');
+    // set step to blockchain transaction screen
+    setStep(3);
+  };
+  const handleManualBankTransferClick = () => {
+    // trigger buy for and show the end screen
+    console.log('clicked handle manual');
+    setStep(4);
   };
 
   const steps = [
@@ -40,6 +53,11 @@ const SendToContract = ({ getTokens }) => {
       symbol={symbol}
       amount={amount}
       handleChange={handleChange}
+    />,
+    <PaymentMethod
+      key={2}
+      handleTokensTransferClick={handleTokensTransferClick}
+      handleManualBankTransferClick={handleManualBankTransferClick}
     />
   ];
 

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 import { Web3Context } from '../../../providers/web3.provider';
 import { getMainWalletAddress } from '../../../helpers/wallet.helpers';
+import { parseAmount } from '../../../helpers/currencies.helpers';
 import TokenIcon from '../../../components/TokenIcon';
 import {
   Cash36ComplianceContract,
@@ -104,9 +105,8 @@ const InitiateTokensTransfer = ({
     );
 
     // 1. Call .transfer on the Token Contract (address, amount * 18 zeros or toWei)
-    const sendAmount = web3.utils.toWei(amount);
+    const sendAmount = web3.utils.toWei(parseAmount(amount));
 
-    console.log(sendAmount);
     try {
       await tokenContract.methods
         .transfer(targetAddress, sendAmount)

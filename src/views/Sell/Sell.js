@@ -15,6 +15,7 @@ import { Token36Contract } from '@element36-io/cash36-contracts';
 import useGet from '../../hooks/useGet';
 import useGetEtherBalance from '../../hooks/useGetEtherBalance';
 import { getMainWalletAddress } from '../../helpers/wallet.helpers';
+import { parseAmount } from '../../helpers/currencies.helpers';
 
 import './Sell.scss';
 
@@ -24,8 +25,6 @@ export const Sell = ({ tokens, getTokens, hasWallet, mainWallet }) => {
   const [sellError, setSellError] = useState(null);
   const mounted = useRef(true);
   const web3 = useCash36();
-
-  console.log(mainWallet);
 
   const tokensError = useGet(getTokens)[1];
   const [exchangeFee, exchangeFeeError] = useGet(getExchangeFee, null);
@@ -65,8 +64,6 @@ export const Sell = ({ tokens, getTokens, hasWallet, mainWallet }) => {
   };
 
   const burnTokens = async () => {
-    console.warn('this was called');
-
     const { symbol, amount } = values;
     const { tokenAddress } = tokens.filter(token => token.symbol === symbol)[0];
     const token36Contract = new web3.eth.Contract(
@@ -74,7 +71,7 @@ export const Sell = ({ tokens, getTokens, hasWallet, mainWallet }) => {
       tokenAddress
     );
 
-    const sellAmount = web3.utils.toWei(amount, 'ether');
+    const sellAmount = web3.utils.toWei(parseAmount(amount), 'ether');
 
     try {
       const estimate = await token36Contract.methods
@@ -112,7 +109,7 @@ export const Sell = ({ tokens, getTokens, hasWallet, mainWallet }) => {
       case 1:
         return <SellConfirmation />;
       case 2:
-        return <SellSuccess amount={amount} symbol={symbol} />;
+        return <SellSuccess amount={parseAmount(amount)} symbol={symbol} />;
       case 3:
         return <SellError message={sellError} />;
       case 4:
