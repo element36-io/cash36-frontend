@@ -22,7 +22,7 @@ const PaymentMethod = ({
         <h2>Select your payment method</h2>
       </Responsive>
       <div className="invest-payment-method__buttons">
-        <DefaultButton onClick={handleManualBankTransferClick}>
+        <DefaultButton onClick={handleTokensTransferClick}>
           <span className="payment-method__buttons--heading">
             Tokens Transfer
           </span>
@@ -31,7 +31,7 @@ const PaymentMethod = ({
           </span>
         </DefaultButton>
         <span className="invest-payment-method__separator">Or</span>
-        <DefaultButton onClick={handleTokensTransferClick}>
+        <DefaultButton onClick={handleManualBankTransferClick}>
           <span className="payment-method__buttons--heading">
             Manual Bank Transfer
           </span>

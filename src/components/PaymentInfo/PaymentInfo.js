@@ -79,7 +79,7 @@ const PaymentInfo = ({ info, title, children, isModal, closeModal }) => (
 );
 
 PaymentInfo.propTypes = {
-  info: PropTypes.object.isRequired,
+  info: PropTypes.object,
   title: PropTypes.string,
   isModal: PropTypes.bool,
   closeModal: PropTypes.func
