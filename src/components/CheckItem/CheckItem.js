@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ActionStatus from '../../../../components/ActionStatus';
+import ActionStatus from '../ActionStatus';
 
 import './CheckItem.scss';
 

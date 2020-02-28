@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import Responsive from '../../../components/Responsive';
+import BackButton from '../../../components/Buttons/BackButton';
 import DefaultButton from '../../../components/Buttons/DefaultButton';
 import manualTransferIcon from '../../../assets/Buy/manual-transfer-icon.svg';
 import tokenTransferIcon from '../../../assets/Buy/tokens-transfer.svg';
@@ -11,10 +13,14 @@ import './PaymentMethod.scss';
 
 const PaymentMethod = ({
   handleTokensTransferClick,
-  handleManualBankTransferClick
+  handleManualBankTransferClick,
+  hasWallet,
+  setStep
 }) => {
   return (
     <div className="invest-payment-method">
+      <BackButton onClick={() => setStep(1)} />
+
       <Responsive isMobile>
         <h2>Payment method</h2>
       </Responsive>
@@ -22,14 +28,26 @@ const PaymentMethod = ({
         <h2>Select your payment method</h2>
       </Responsive>
       <div className="invest-payment-method__buttons">
-        <DefaultButton onClick={handleTokensTransferClick}>
-          <span className="payment-method__buttons--heading">
-            Tokens Transfer
-          </span>
-          <span className="invest-payment-method__buttons--icon">
-            <img src={tokenTransferIcon} alt="" />
-          </span>
-        </DefaultButton>
+        {hasWallet ? (
+          <DefaultButton onClick={handleTokensTransferClick}>
+            <span className="payment-method__buttons--heading">
+              Tokens Transfer
+            </span>
+            <span className="invest-payment-method__buttons--icon">
+              <img src={tokenTransferIcon} alt="" />
+            </span>
+          </DefaultButton>
+        ) : (
+          <DefaultButton disabled>
+            <span className="payment-method__buttons--heading">
+              Tokens Transfer
+            </span>
+            <span className="invest-payment-method__buttons--icon">
+              <img src={tokenTransferIcon} alt="" />
+            </span>
+          </DefaultButton>
+        )}
+
         <span className="invest-payment-method__separator">Or</span>
         <DefaultButton onClick={handleManualBankTransferClick}>
           <span className="payment-method__buttons--heading">
@@ -48,9 +66,15 @@ const PaymentMethod = ({
   );
 };
 
+const mapStateToProps = state => ({
+  hasWallet: Boolean(state.wallets.walletList.length)
+});
+
 PaymentMethod.propTypes = {
   handleTokensTransferClick: PropTypes.func,
-  handleManualBankTransferClick: PropTypes.func
+  handleManualBankTransferClick: PropTypes.func,
+  hasWallet: PropTypes.bool,
+  setStep: PropTypes.func
 };
 
-export default PaymentMethod;
+export default connect(mapStateToProps)(PaymentMethod);

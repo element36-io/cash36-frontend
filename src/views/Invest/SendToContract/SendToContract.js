@@ -36,8 +36,6 @@ const SendToContract = ({ getTokens }) => {
   };
 
   const handleTokensTransferClick = () => {
-    console.log('clicked handle tokenstransfer');
-    // set step to blockchain transaction screen
     setStep(3);
   };
   const handleManualBankTransferClick = async () => {
@@ -76,8 +74,15 @@ const SendToContract = ({ getTokens }) => {
       key={2}
       handleTokensTransferClick={handleTokensTransferClick}
       handleManualBankTransferClick={handleManualBankTransferClick}
+      setStep={setStep}
     />,
-    <TokensTransferOption key={3} />,
+    <TokensTransferOption
+      key={3}
+      symbol={symbol}
+      amount={amount}
+      targetAddress={address}
+      setStep={setStep}
+    />,
     <PaymentInfo key={4} info={transferData} title="Trigger your payment">
       <div className="payment-info__message--credit">
         <p>

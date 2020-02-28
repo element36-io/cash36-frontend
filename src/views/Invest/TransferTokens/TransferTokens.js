@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ChooseAmountForm from '../../../components/ChooseAmountForm';
+import BackButton from '../../../components/Buttons/BackButton';
 import StepButton from '../../../components/Buttons/StepButton';
 import TransferFooter from '../TransferFooter';
 import Responsive from '../../../components/Responsive';
@@ -19,6 +20,7 @@ const TransferTokens = ({
 }) => {
   return (
     <div className="invest-transfer-tokens">
+      <BackButton onClick={() => setStep(0)} />
       <div className="invest-transfer-tokens__header">
         <h4>Sending to</h4>
         <img src={contractIcon} alt="" />

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import Responsive from '../../../components/Responsive';
 import BackButton from '../../../components/Buttons/BackButton';
@@ -13,7 +14,8 @@ import './PaymentMethod.scss';
 const PaymentMethod = ({
   handleManualTransferClick,
   handleAutoTransferClick,
-  setStep
+  setStep,
+  hasWallet
 }) => {
   return (
     <div className="payment-method" data-testid="payment-method">
@@ -25,14 +27,26 @@ const PaymentMethod = ({
         <h2>Select your payment method</h2>
       </Responsive>
       <div className="payment-method__buttons">
-        <DefaultButton onClick={handleAutoTransferClick}>
-          <span className="payment-method__buttons--heading">
-            Tokens Transfer
-          </span>
-          <span className="payment-method__buttons--icon">
-            <img src={tokenTransferIcon} alt="" />
-          </span>
-        </DefaultButton>
+        {hasWallet ? (
+          <DefaultButton onClick={handleAutoTransferClick}>
+            <span className="payment-method__buttons--heading">
+              Tokens Transfer
+            </span>
+            <span className="payment-method__buttons--icon">
+              <img src={tokenTransferIcon} alt="" />
+            </span>
+          </DefaultButton>
+        ) : (
+          <DefaultButton disabled>
+            <span className="payment-method__buttons--heading">
+              Tokens Transfer
+            </span>
+            <span className="payment-method__buttons--icon">
+              <img src={tokenTransferIcon} alt="" />
+            </span>
+          </DefaultButton>
+        )}
+
         <span className="payment-method__separator">Or</span>
         <DefaultButton onClick={handleManualTransferClick}>
           <span className="payment-method__buttons--heading">
@@ -51,10 +65,15 @@ const PaymentMethod = ({
   );
 };
 
+const mapStateToProps = state => ({
+  hasWallet: Boolean(state.wallets.walletList.length)
+});
+
 PaymentMethod.propTypes = {
   handleManualTransferClick: PropTypes.func,
   handleAutoTransferClick: PropTypes.func,
-  setStep: PropTypes.func
+  setStep: PropTypes.func,
+  hasWallet: PropTypes.bool
 };
 
-export default PaymentMethod;
+export default connect(mapStateToProps)(PaymentMethod);

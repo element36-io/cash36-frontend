@@ -13,6 +13,9 @@
     margin-top: 3.2rem;
     display: inline-flex;
     justify-content: space-between;
+    @include mobile {
+      flex-direction: column;
+    }
 
     .initiate-tokens-transfer__kyc-verification {
       padding: 1.4rem;

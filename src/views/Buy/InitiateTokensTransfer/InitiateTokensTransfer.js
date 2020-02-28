@@ -15,7 +15,7 @@ import {
 import { getMinFunds } from '../../../store/wallets/wallets.actions';
 import DefaultButton from '../../../components/Buttons/DefaultButton';
 import SecondaryButton from '../../../components/Buttons/SecondaryButton';
-import CheckItem from './CheckItem';
+import CheckItem from '../../../components/CheckItem';
 import useCash36 from '../../../hooks/useCash36';
 
 import './InitiateTokensTransfer.scss';

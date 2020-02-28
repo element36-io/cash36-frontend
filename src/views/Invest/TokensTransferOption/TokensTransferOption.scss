@@ -1,0 +1,86 @@
+@import '../../../styles/utils.scss';
+
+.tokens-transfer-option {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h2 {
+    text-align: center;
+  }
+
+  .tokens-transfer-option__kyc-verifications {
+    margin-top: 3.2rem;
+    display: inline-flex;
+    justify-content: space-between;
+
+    @include mobile {
+      flex-direction: column;
+    }
+
+    .tokens-transfer-option__kyc-verification {
+      padding: 1.4rem;
+      margin-bottom: 2rem;
+      display: inline-flex;
+      flex-direction: column;
+      white-space: nowrap;
+      width: 50%;
+
+      > h4 {
+        font-weight: 500;
+      }
+
+      .tokens-transfer-option__smart-contract {
+        margin: auto 0;
+        font-size: 1.8rem;
+        white-space: nowrap;
+      }
+    }
+
+    .tokens-transfer-option__mid-section {
+      display: flex;
+      min-width: 10rem;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+
+      > div:first-child {
+        font-size: 2.4rem;
+        line-height: 0;
+        margin-bottom: 0.6rem;
+      }
+
+      > div:last-child {
+        > img {
+          width: 3rem;
+        }
+        @extend .paper;
+        padding: 0.4rem 0.8rem;
+        display: flex;
+        align-items: center;
+        font-size: 2.4rem;
+
+        > div:first-child {
+          margin-right: 0.5rem;
+        }
+      }
+    }
+  }
+
+  .tokens-transfer-option__buttons {
+    display: inline-flex;
+    margin-top: 2.4rem;
+
+    > button {
+      width: 100%;
+    }
+
+    > button:first-child {
+      margin-right: 0.8rem;
+    }
+
+    > button:nth-child(2) {
+      flex: 40%;
+    }
+  }
+}

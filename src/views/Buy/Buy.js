@@ -82,11 +82,17 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
     };
     // Recheck this when buy is working again
     if (target) {
-      data.address = target.contactAddress;
+      data.targetAddress = target.contactAddress;
+      data.targetAddressType = 'WALLET';
     }
 
     try {
-      const response = await API.post('/exchange/buy', data);
+      let response;
+      if (target) {
+        response = await API.post('/exchange/buy', data);
+      } else {
+        response = await API.post('/exchange/buy/for', data);
+      }
       setManualTransferData(response.data);
       setStep(4.1);
     } catch (error) {

@@ -42,7 +42,6 @@ const TransferAddress = ({ setStep, address, setAddress }) => {
   return (
     <div className="invest-transfer-address">
       <h2>Send tokens to</h2>
-
       <div className="invest-transfer-address__input-wrapper">
         <input
           onChange={handleChange}
