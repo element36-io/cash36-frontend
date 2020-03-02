@@ -89,9 +89,9 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
     try {
       let response;
       if (target) {
-        response = await API.post('/exchange/buy', data);
-      } else {
         response = await API.post('/exchange/buy/for', data);
+      } else {
+        response = await API.post('/exchange/buy', data);
       }
       setManualTransferData(response.data);
       setStep(4.1);

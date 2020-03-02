@@ -52,7 +52,10 @@ const AddMmWallet = ({ addWallet, walletList, tokens }) => {
     wallet => wallet.accountAddress === account
   )[0];
 
-  const network = getNetwork(window.ethereum.networkVersion);
+  let network;
+  if (window.ethereum) {
+    network = getNetwork(window.ethereum.networkVersion);
+  }
 
   return (
     <div className="add-mm-wallet">

@@ -107,6 +107,8 @@ const InitiateTokensTransfer = ({
     // 1. Call .transfer on the Token Contract (address, amount * 18 zeros or toWei)
     const sendAmount = web3.utils.toWei(parseAmount(amount));
 
+    console.log(senderAddress);
+
     try {
       await tokenContract.methods
         .transfer(targetAddress, sendAmount)
