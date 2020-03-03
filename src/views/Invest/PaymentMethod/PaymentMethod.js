@@ -7,32 +7,33 @@ import BackButton from '../../../components/Buttons/BackButton';
 import DefaultButton from '../../../components/Buttons/DefaultButton';
 import manualTransferIcon from '../../../assets/Buy/manual-transfer-icon.svg';
 import tokenTransferIcon from '../../../assets/Buy/tokens-transfer.svg';
-import BuyFooter from '../BuyFooter';
+import TransferFooter from '../TransferFooter';
 
 import './PaymentMethod.scss';
 
 const PaymentMethod = ({
-  handleManualTransferClick,
-  handleAutoTransferClick,
-  setStep,
-  hasWallet
+  handleTokensTransferClick,
+  handleManualBankTransferClick,
+  hasWallet,
+  setStep
 }) => {
   return (
-    <div className="payment-method" data-testid="payment-method">
-      <BackButton onClick={() => setStep(0)} />
+    <div className="invest-payment-method">
+      <BackButton onClick={() => setStep(1)} />
+
       <Responsive isMobile>
         <h2>Payment method</h2>
       </Responsive>
       <Responsive>
         <h2>Select your payment method</h2>
       </Responsive>
-      <div className="payment-method__buttons">
+      <div className="invest-payment-method__buttons">
         {hasWallet ? (
-          <DefaultButton onClick={handleAutoTransferClick}>
+          <DefaultButton onClick={handleTokensTransferClick}>
             <span className="payment-method__buttons--heading">
               Tokens Transfer
             </span>
-            <span className="payment-method__buttons--icon">
+            <span className="invest-payment-method__buttons--icon">
               <img src={tokenTransferIcon} alt="" />
             </span>
           </DefaultButton>
@@ -41,23 +42,23 @@ const PaymentMethod = ({
             <span className="payment-method__buttons--heading">
               Tokens Transfer
             </span>
-            <span className="payment-method__buttons--icon">
+            <span className="invest-payment-method__buttons--icon">
               <img src={tokenTransferIcon} alt="" />
             </span>
           </DefaultButton>
         )}
 
-        <span className="payment-method__separator">Or</span>
-        <DefaultButton onClick={handleManualTransferClick}>
+        <span className="invest-payment-method__separator">Or</span>
+        <DefaultButton onClick={handleManualBankTransferClick}>
           <span className="payment-method__buttons--heading">
             Manual Bank Transfer
           </span>
-          <span className="payment-method__buttons--icon">
+          <span className="invest-payment-method__buttons--icon">
             <img src={manualTransferIcon} alt="" />
           </span>
         </DefaultButton>
       </div>
-      <BuyFooter
+      <TransferFooter
         textline1="Buying cash36 Tokens is as simple as a bank transfer. First, choose amount and type of Token you wish to buy."
         textline2="After that you will receive the transfer instructions. Once we receive the amount, the tokens will be credited to your account."
       />
@@ -70,10 +71,10 @@ const mapStateToProps = state => ({
 });
 
 PaymentMethod.propTypes = {
-  handleManualTransferClick: PropTypes.func,
-  handleAutoTransferClick: PropTypes.func,
-  setStep: PropTypes.func,
-  hasWallet: PropTypes.bool
+  handleTokensTransferClick: PropTypes.func,
+  handleManualBankTransferClick: PropTypes.func,
+  hasWallet: PropTypes.bool,
+  setStep: PropTypes.func
 };
 
 export default connect(mapStateToProps)(PaymentMethod);

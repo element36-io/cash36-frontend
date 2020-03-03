@@ -6,21 +6,25 @@ export default (walletAddress, type = 'ether') => {
   const { utils, eth } = useContext(Web3Context);
   const [balance, setBalance] = useState(0);
 
-  const getBalance = async () => {
-    try {
-      let balance;
-      balance = await eth.getBalance(walletAddress);
-      balance = await utils.fromWei(balance, type);
-
-      setBalance(Number(balance));
-    } catch (error) {
-      console.warn(error);
-    }
-  };
-
   useEffect(() => {
-    getBalance();
+    if (walletAddress) {
+      const getBalance = async () => {
+        try {
+          let balance;
+          balance = await eth.getBalance(walletAddress);
+          balance = await utils.fromWei(balance, type);
+
+          setBalance(Number(balance));
+        } catch (error) {
+          console.warn(error);
+        }
+      };
+
+      getBalance();
+    }
   }, [walletAddress]);
+
+  if (!walletAddress) return null;
 
   return balance;
 };

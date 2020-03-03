@@ -17,18 +17,17 @@ import DefaultButton from '../../../components/Buttons/DefaultButton';
 import SecondaryButton from '../../../components/Buttons/SecondaryButton';
 import CheckItem from '../../../components/CheckItem';
 import useCash36 from '../../../hooks/useCash36';
+import { truncateBlockchainAddress } from '../../../helpers/string.helpers';
 
-import './InitiateTokensTransfer.scss';
+import './TokensTransferOption.scss';
 
-const InitiateTokensTransfer = ({
+const TokensTransferOption = ({
   amount,
   targetAddress,
-  symbol = 'EUR36',
+  symbol,
   tokens,
   walletList,
-  setStep,
-  setTransactionError,
-  setTransferData
+  setStep
 }) => {
   const web3 = useCash36();
   const { networkId } = useContext(Web3Context);
@@ -39,9 +38,7 @@ const InitiateTokensTransfer = ({
   );
 
   const [checkingSender, setCheckingSender] = useState(false);
-  const [checkingReceiver, setCheckingReceiver] = useState(false);
   const [senderChecks, setSenderChecks] = useState({});
-  const [receiverChecks, setReceiverChecks] = useState({});
 
   const senderAddress = getMainWalletAddress(walletList);
   const senderBalance = tokens.find(token => token.symbol === symbol).balance;
@@ -74,29 +71,6 @@ const InitiateTokensTransfer = ({
     setCheckingSender(false);
   };
 
-  const verifyReceiver = async targetAddress => {
-    setCheckingReceiver(true);
-
-    const checkUser = await complianceContract.methods
-      .checkUser(targetAddress)
-      .call();
-
-    const attrBuy = web3.utils.fromAscii('ATTR_BUY');
-    const attrReceive = web3.utils.fromAscii('ATTR_RECEIVE');
-
-    const canBuy = await complianceContract.methods
-      .hasAttribute(targetAddress, attrBuy)
-      .call();
-
-    const canReceive = await complianceContract.methods
-      .hasAttribute(targetAddress, attrReceive)
-      .call();
-
-    setReceiverChecks({ checkUser, canBuy, canReceive });
-
-    setCheckingReceiver(false);
-  };
-
   const transferTokens = async () => {
     const { tokenAddress } = tokens.find(token => token.symbol === symbol);
     const tokenContract = new web3.eth.Contract(
@@ -107,35 +81,27 @@ const InitiateTokensTransfer = ({
     // 1. Call .transfer on the Token Contract (address, amount * 18 zeros or toWei)
     const sendAmount = web3.utils.toWei(parseAmount(amount));
 
-    console.log(senderAddress);
-
     try {
       await tokenContract.methods
         .transfer(targetAddress, sendAmount)
         .send({ from: senderAddress });
 
-      setTransferData({ amount, symbol });
-      setStep(6);
-    } catch (err) {
-      setTransactionError({
-        title: 'Transfer unsuccessful',
-        message: 'An error occured during the transfer of tokens'
-      });
       setStep(5);
+    } catch (err) {
+      setStep(6);
     }
   };
 
   useEffect(() => {
     verifySender(senderAddress);
-    verifyReceiver(targetAddress);
   }, []);
 
   return (
     <div>
-      <div className="initiate-tokens-transfer">
+      <div className="tokens-transfer-option">
         <h2>Initiate Tokens Transfer</h2>
-        <div className="initiate-tokens-transfer__kyc-verifications">
-          <div className="initiate-tokens-transfer__kyc-verification">
+        <div className="tokens-transfer-option__kyc-verifications">
+          <div className="tokens-transfer-option__kyc-verification">
             <h4>{checkingSender ? 'Verifying KYC for Sender...' : 'Sender'}</h4>
             {checkingSender ? (
               <CircularProgress color="primary" size={15} />
@@ -154,34 +120,23 @@ const InitiateTokensTransfer = ({
               </div>
             )}
           </div>
-          <div className="initiate-tokens-transfer__mid-section">
+          <div className="tokens-transfer-option__mid-section">
             <div>&rarr;</div>
             <div>
               <div>{amount}</div>
               <TokenIcon symbol={symbol} />
             </div>
           </div>
-          <div className="initiate-tokens-transfer__kyc-verification">
-            <h4>
-              {checkingReceiver ? 'Verifying KYC for Receiver...' : 'Receiver'}
-            </h4>
-            {checkingReceiver ? (
-              <CircularProgress color="primary" size={15} />
-            ) : (
-              <div>
-                <CheckItem text="KYC" checked={receiverChecks.checkUser} />
-                <CheckItem text="Can buy" checked={receiverChecks.canBuy} />
-                <CheckItem
-                  text="Can receive"
-                  checked={receiverChecks.canReceive}
-                />
-              </div>
-            )}
+          <div className="tokens-transfer-option__kyc-verification">
+            <h4>Receiver</h4>
+            <div className="tokens-transfer-option__smart-contract">
+              {truncateBlockchainAddress(targetAddress)}
+            </div>
           </div>
         </div>
 
-        {(!checkingSender || !checkingReceiver) && (
-          <div className="initiate-tokens-transfer__buttons">
+        {!checkingSender && (
+          <div className="tokens-transfer-option__buttons">
             <DefaultButton onClick={transferTokens}>
               Execute Order
             </DefaultButton>
@@ -195,7 +150,7 @@ const InitiateTokensTransfer = ({
   );
 };
 
-InitiateTokensTransfer.propTypes = {
+TokensTransferOption.propTypes = {
   amount: PropTypes.string,
   symbol: PropTypes.string,
   targetAddress: PropTypes.string,
@@ -211,4 +166,4 @@ const mapStateToProps = state => ({
   tokens: state.tokens.tokens
 });
 
-export default connect(mapStateToProps)(InitiateTokensTransfer);
+export default connect(mapStateToProps)(TokensTransferOption);

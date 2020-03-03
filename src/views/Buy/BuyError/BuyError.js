@@ -16,6 +16,7 @@ const BuyError = ({ title, message }) => {
 };
 
 BuyError.propTypes = {
+  title: PropTypes.string,
   message: PropTypes.string.isRequired
 };
 

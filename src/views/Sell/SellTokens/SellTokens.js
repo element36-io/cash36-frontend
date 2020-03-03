@@ -96,7 +96,11 @@ SellTokens.propTypes = {
   token: PropTypes.object,
   tokensError: PropTypes.string,
   exchangeFeeError: PropTypes.string,
-  exchangeFee: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
+  exchangeFee: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.bool,
+    PropTypes.string
+  ]),
   etherBalance: PropTypes.number,
   minFundsError: PropTypes.string
 };

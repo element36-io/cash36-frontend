@@ -1,6 +1,6 @@
 @import '../../../styles/utils.scss';
 
-.initiate-tokens-transfer {
+.tokens-transfer-option {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,27 +9,37 @@
     text-align: center;
   }
 
-  .initiate-tokens-transfer__kyc-verifications {
+  .tokens-transfer-option__kyc-verifications {
     margin-top: 3.2rem;
     display: inline-flex;
     justify-content: space-between;
+
     @include mobile {
       flex-direction: column;
     }
 
-    .initiate-tokens-transfer__kyc-verification {
+    .tokens-transfer-option__kyc-verification {
       padding: 1.4rem;
       margin-bottom: 2rem;
       display: inline-flex;
       flex-direction: column;
+      white-space: nowrap;
+      width: 50%;
 
       > h4 {
         font-weight: 500;
       }
+
+      .tokens-transfer-option__smart-contract {
+        margin: auto 0;
+        font-size: 1.8rem;
+        white-space: nowrap;
+      }
     }
 
-    .initiate-tokens-transfer__mid-section {
+    .tokens-transfer-option__mid-section {
       display: flex;
+      min-width: 10rem;
       align-items: center;
       flex-direction: column;
       justify-content: center;
@@ -57,7 +67,7 @@
     }
   }
 
-  .initiate-tokens-transfer__buttons {
+  .tokens-transfer-option__buttons {
     display: inline-flex;
     margin-top: 2.4rem;
 

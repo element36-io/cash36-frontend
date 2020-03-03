@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AddIcon from '@material-ui/icons/Add';
+import SendIcon from '@material-ui/icons/ArrowForward';
 
 import BaseButton from '../BaseButton';
 
 import './AddButton.scss';
 
-const AddButton = ({ text, onClick }) => (
+const AddButton = ({ text, onClick, send = false }) => (
   <BaseButton className="add-button" onClick={onClick}>
     <span className="add-button__inner">
-      <span>
-        <AddIcon />
-      </span>
+      <span>{send ? <SendIcon /> : <AddIcon />}</span>
       <span>{text}</span>
     </span>
   </BaseButton>
@@ -19,7 +18,8 @@ const AddButton = ({ text, onClick }) => (
 
 AddButton.propTypes = {
   onClick: PropTypes.func,
-  text: PropTypes.string
+  text: PropTypes.string,
+  send: PropTypes.bool
 };
 
 export default AddButton;

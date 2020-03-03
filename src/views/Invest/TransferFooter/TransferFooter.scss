@@ -1,0 +1,17 @@
+@import '../../../styles/settings.scss';
+@import '../../../styles/mixins.scss';
+
+.transfer__footer {
+  text-align: center;
+  padding-top: 3rem;
+  margin-top: 3rem;
+  border-top: 1px solid $lightGrey;
+  padding-bottom: 3.7rem;
+}
+
+@include mobile {
+  .transfer__footer {
+    margin: 1rem 1rem 0 1rem;
+    padding-bottom: 1.2rem;
+  }
+}

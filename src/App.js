@@ -11,12 +11,14 @@ import Wallet from './views/Wallet';
 
 const App = () => {
   React.useEffect(() => {
-    if (window.ethereum.networkVersion) {
-      window.ethereum.autoRefreshOnNetworkChange = false;
+    if (window.ethereum) {
+      if (window.ethereum.networkVersion) {
+        window.ethereum.autoRefreshOnNetworkChange = false;
 
-      window.ethereum.on('networkChanged', () => {
-        document.location.reload();
-      });
+        window.ethereum.on('networkChanged', () => {
+          document.location.reload();
+        });
+      }
     }
   }, []);
 

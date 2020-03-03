@@ -47,3 +47,26 @@ export const addTokensToMetamask = tokens => {
     }
   );
 };
+
+export const parseNetworkIdToName = networkId => {
+  switch (parseInt(networkId)) {
+    case 1:
+      return 'MainNet';
+    case 2:
+      return 'Morden';
+    case 3:
+      return 'Ropsten';
+    case 4:
+      return 'Rinkeby';
+    case 5:
+      return 'Goerli';
+    case 85458545:
+      return 'Local';
+    case 10:
+      return 'DEV';
+    case 42:
+      return 'Kovan';
+    default:
+      return networkId;
+  }
+};

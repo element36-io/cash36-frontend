@@ -36,7 +36,7 @@ const CheckboxArray = ({ name, checkboxes, formProps, isTouched, error }) => {
                     }}
                     color="primary"
                     name={checkbox.name}
-                    id={checkbox.name}
+                    id={`checkbox-${checkbox.name}`}
                     type="checkbox"
                   />
                 }
@@ -54,8 +54,8 @@ CheckboxArray.propTypes = {
   name: PropTypes.string,
   checkboxes: PropTypes.array,
   formProps: PropTypes.object,
-  isTouched: PropTypes.bool,
-  error: PropTypes.string
+  isTouched: PropTypes.any,
+  error: PropTypes.any
 };
 
 export default CheckboxArray;

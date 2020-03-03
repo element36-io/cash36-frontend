@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CloseIcon from '@material-ui/icons/Close';
 import ReactCountryFlag from 'react-country-flag';
+
 import './PaymentInfo.scss';
 
 const PaymentInfo = ({ info, title, children, isModal, closeModal }) => (
@@ -79,7 +80,7 @@ const PaymentInfo = ({ info, title, children, isModal, closeModal }) => (
 );
 
 PaymentInfo.propTypes = {
-  info: PropTypes.object.isRequired,
+  info: PropTypes.object,
   title: PropTypes.string,
   isModal: PropTypes.bool,
   closeModal: PropTypes.func

@@ -1,0 +1,67 @@
+@import '../../../styles/settings.scss';
+@import '../../../styles/mixins.scss';
+
+.invest-transfer-tokens {
+  display: flex;
+  flex-direction: column;
+
+  .invest-transfer-tokens__header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    img {
+      width: 4rem;
+      height: 4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    > h4 {
+      text-align: center;
+      margin-bottom: 1.6rem;
+    }
+
+    > h3 {
+      letter-spacing: -1px;
+      text-align: center;
+    }
+
+    > :nth-child(3) {
+      font-size: 1.8rem;
+      line-height: 2.2rem;
+    }
+
+    > :nth-child(4) {
+      margin-top: 0.6rem;
+      color: $text-light-grey-1;
+      font-size: 1.4rem;
+      line-height: 1.7rem;
+    }
+  }
+
+  > hr {
+    margin: 3.2rem 0;
+    border-bottom: 1px solid $grey-border;
+    border-top: none;
+  }
+
+  .choose-amount-form {
+    margin-bottom: 3.2rem;
+  }
+
+  @include desktop {
+    > hr {
+      width: 120%;
+      transform: translateX(-10%);
+    }
+  }
+
+  @include mobile {
+    > hr {
+      margin: 3.2rem 0;
+      border-bottom: 1px solid $grey-border;
+      border-top: none;
+      width: 100%;
+    }
+  }
+}

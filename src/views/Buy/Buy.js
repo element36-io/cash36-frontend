@@ -16,6 +16,7 @@ import BuyError from './BuyError';
 import TransferAddress from './TransferAddress';
 import TransferSuccess from './TransferSuccess';
 import useGet from '../../hooks/useGet';
+import { parseAmount } from '../../helpers/currencies.helpers';
 
 import './Buy.scss';
 
@@ -81,11 +82,17 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
     };
     // Recheck this when buy is working again
     if (target) {
-      data.address = target.contactAddress;
+      data.targetAddress = target.contactAddress;
+      data.targetAddressType = 'WALLET';
     }
 
     try {
-      const response = await API.post('/exchange/buy', data);
+      let response;
+      if (target) {
+        response = await API.post('/exchange/buy/for', data);
+      } else {
+        response = await API.post('/exchange/buy', data);
+      }
       setManualTransferData(response.data);
       setStep(4.1);
     } catch (error) {
@@ -185,7 +192,7 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
           )}
           {step === 6 && (
             <TransferSuccess
-              amount={transferData.amount}
+              amount={parseAmount(transferData.amount)}
               symbol={transferData.symbol}
             />
           )}
