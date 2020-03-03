@@ -7,10 +7,12 @@ import CopyToClipboard from '../../CopyToClipboard';
 import './Action.scss';
 
 const renderActionName = type => {
-  if (type === 'BUY') return 'Bought Tokens';
-  if (type === 'SELL') return 'Sold Tokens';
-  if (type === 'SENT') return 'Sent to';
-  if (type === 'RECEIVED') return 'Bought Tokens';
+  if (type === 'BUY') return 'New tokens created';
+  if (type === 'SELL') return 'Sold tokens';
+  if (type === 'SENT') return 'Tokens sent to';
+  if (type === 'RECEIVED') return 'Received tokens';
+  if (type === 'APPROVED') return 'Approved token spending';
+  
 };
 
 const Action = ({ type, targetAddress, txHash }) => {
