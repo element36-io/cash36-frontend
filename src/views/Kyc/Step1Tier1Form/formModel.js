@@ -123,5 +123,6 @@ export const initialValues = {
   zip: '',
   email: '',
   iban: '',
-  moreNationalities: false
+  moreNationalities: false,
+  USPerson: false
 };
