@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
+import { Tooltip } from '@material-ui/core';
 import Responsive from '../../../components/Responsive';
 import BackButton from '../../../components/Buttons/BackButton';
 import DefaultButton from '../../../components/Buttons/DefaultButton';
@@ -38,14 +38,19 @@ const PaymentMethod = ({
             </span>
           </DefaultButton>
         ) : (
-          <DefaultButton disabled>
-            <span className="payment-method__buttons--heading">
-              Tokens Transfer
-            </span>
-            <span className="invest-payment-method__buttons--icon">
-              <img src={tokenTransferIcon} alt="" />
-            </span>
-          </DefaultButton>
+          <Tooltip title="This action is not possible in walletless mode.">
+            <div>
+              <DefaultButton disabled>
+                <span className="payment-method__buttons--heading">
+                  Tokens Transfer
+                </span>
+
+                <span className="invest-payment-method__buttons--icon">
+                  <img src={tokenTransferIcon} alt="" />
+                </span>
+              </DefaultButton>
+            </div>
+          </Tooltip>
         )}
 
         <span className="invest-payment-method__separator">Or</span>

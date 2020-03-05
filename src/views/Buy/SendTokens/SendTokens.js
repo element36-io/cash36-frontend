@@ -5,6 +5,7 @@ import ChooseAmountForm from '../../../components/ChooseAmountForm';
 import BuyFooter from '../BuyFooter';
 import BackButton from '../../../components/Buttons/BackButton';
 import StepButton from '../../../components/Buttons/StepButton';
+import AvailableBalance from '../../../components/AvailableBalance';
 import Responsive from '../../../components/Responsive';
 import { truncateBlockchainAddress } from '../../../helpers/string.helpers';
 
@@ -39,6 +40,7 @@ const SendTokens = ({
         handleChange={handleChange}
         symbol={symbol}
       />
+      <AvailableBalance symbol={symbol} />
       <StepButton
         onClick={() => setStep(3)}
         text={'Next Step'}

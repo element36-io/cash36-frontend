@@ -34,17 +34,9 @@ const SellTokens = ({
         <UnavailableBalance />
       )}
       {token ? (
-        <AvailableBalance
-          balance={token.balance}
-          symbol={symbol}
-          etherBalance={etherBalance}
-        />
+        <AvailableBalance symbol={symbol} etherBalance={etherBalance} />
       ) : (
-        <AvailableBalance
-          balance={0}
-          symbol={symbol}
-          etherBalance={etherBalance}
-        />
+        <AvailableBalance symbol={symbol} etherBalance={etherBalance} />
       )}
       {exchangeFee && (
         <ExchangeFee

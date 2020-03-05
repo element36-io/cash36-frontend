@@ -9,8 +9,8 @@ import TransferTokens from '../TransferTokens';
 import PaymentMethod from '../PaymentMethod';
 import TokensTransferOption from '../TokensTransferOption';
 import PaymentInfo from '../../../components/PaymentInfo';
-import TransferSuccess from '../../../views/Buy/TransferSuccess';
-import TransferError from '../../../views/Buy/BuyError';
+import TransferSuccess from '../../Buy/TransferSuccess';
+import TransferError from '../../Buy/BuyError';
 import TransactionFooter from '../../../components/TransactionFooter';
 import useGet from '../../../hooks/useGet';
 import { parseAmount } from '../../../helpers/currencies.helpers';
@@ -19,7 +19,7 @@ import './SendToContract.scss';
 
 const SendToContract = ({ getTokens }) => {
   const [address, setAddress] = useState('');
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(2);
   const [amount, setAmount] = useState('');
   const [symbol, setSymbol] = useState('EUR36');
   const [transferData, setTransferData] = useState(null);
