@@ -13,6 +13,7 @@ import {
   Token36Contract
 } from '@element36-io/cash36-contracts';
 import { getMinFunds } from '../../../store/wallets/wallets.actions';
+import BackButton from '../../../components/Buttons/BackButton';
 import DefaultButton from '../../../components/Buttons/DefaultButton';
 import SecondaryButton from '../../../components/Buttons/SecondaryButton';
 import CheckItem from '../../../components/CheckItem';
@@ -133,6 +134,7 @@ const InitiateTokensTransfer = ({
   return (
     <div>
       <div className="initiate-tokens-transfer">
+        <BackButton onClick={() => setStep(3)} />
         <h2>Initiate Tokens Transfer</h2>
         <div className="initiate-tokens-transfer__kyc-verifications">
           <div className="initiate-tokens-transfer__kyc-verification">

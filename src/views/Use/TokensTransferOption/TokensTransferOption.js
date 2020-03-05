@@ -14,6 +14,7 @@ import {
 } from '@element36-io/cash36-contracts';
 import { getMinFunds } from '../../../store/wallets/wallets.actions';
 import DefaultButton from '../../../components/Buttons/DefaultButton';
+import BackButton from '../../../components/Buttons/BackButton';
 import SecondaryButton from '../../../components/Buttons/SecondaryButton';
 import CheckItem from '../../../components/CheckItem';
 import useCash36 from '../../../hooks/useCash36';
@@ -99,6 +100,7 @@ const TokensTransferOption = ({
   return (
     <div>
       <div className="tokens-transfer-option">
+        <BackButton onClick={() => setStep(2)} />
         <h2>Initiate Tokens Transfer</h2>
         <div className="tokens-transfer-option__kyc-verifications">
           <div className="tokens-transfer-option__kyc-verification">

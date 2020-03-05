@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import ChooseAmountForm from '../../../components/ChooseAmountForm';
 import BackButton from '../../../components/Buttons/BackButton';
+import AvailableBalance from '../../../components/AvailableBalance';
 import StepButton from '../../../components/Buttons/StepButton';
 import TransferFooter from '../TransferFooter';
 import Responsive from '../../../components/Responsive';
@@ -35,6 +36,7 @@ const TransferTokens = ({
         handleChange={handleChange}
         symbol={symbol}
       />
+      <AvailableBalance symbol={symbol} etherBalance={''} />
       <StepButton
         onClick={() => setStep(2)}
         text={'Next Step'}
@@ -50,7 +52,8 @@ TransferTokens.propTypes = {
   handleChange: PropTypes.func,
   amount: PropTypes.string,
   symbol: PropTypes.string,
-  setStep: PropTypes.func
+  setStep: PropTypes.func,
+  tokens: PropTypes.array
 };
 
 export default TransferTokens;

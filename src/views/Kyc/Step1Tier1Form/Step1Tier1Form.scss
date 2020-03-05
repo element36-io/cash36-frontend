@@ -1,5 +1,6 @@
 @import '../../../styles/settings.scss';
 @import '../../../styles/mixins.scss';
+@import '../../../styles/base.scss';
 
 .tier1-form {
   h3 {
@@ -31,6 +32,26 @@
   .kyc-process-controls {
     min-width: 100%;
     margin-top: 3.5rem;
+  }
+
+  .tier1-form__checkboxes {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .us-person-text {
+    > div {
+      margin-bottom: 0.7rem;
+    }
+
+    ul {
+      font-size: 1.4rem;
+      min-width: 50vw;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+    }
   }
 
   @include desktop {

@@ -27,6 +27,7 @@ const Header = ({
 
     const newNotifications = notifications.slice(0, badgeCount);
     const newTransaction = newNotifications.some(
+      // TODO: add transfer here
       n => n.type === 'PAYMENT' || n.type === 'PAYOUT'
     );
     const tier2Notification = newNotifications.some(
@@ -44,7 +45,7 @@ const Header = ({
     try {
       await fetchNotifications();
     } catch (error) {
-      // TODO: handle the notification error
+      console.error(error);
     }
   };
 

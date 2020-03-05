@@ -7,12 +7,12 @@ export default Yup.object().shape({
   lastName: Yup.string().required('This field is required'),
   dateOfBirth: Yup.string()
     .required('This field is required')
-    .test('isValidDate', 'Please enter a valid date', function (value) {
+    .test('isValidDate', 'Please enter a valid date', function(value) {
       if (!value) return false;
       const m = moment(new Date(value));
       return m.isValid();
     })
-    .test('is18Year', 'Min. age is 18', function (value) {
+    .test('is18Year', 'Min. age is 18', function(value) {
       if (!value) return false;
       const today = new Date(
         moment()
@@ -31,7 +31,7 @@ export default Yup.object().shape({
   zip: Yup.string().required('This field is required'),
   country: Yup.string().required('This field is required'),
   iban: Yup.string()
-    .test('isValidIBAN', 'Please enter a valid IBAN', function (value) {
+    .test('isValidIBAN', 'Please enter a valid IBAN', function(value) {
       return IBAN.isValid(value);
     })
     .required('This field is required'),
