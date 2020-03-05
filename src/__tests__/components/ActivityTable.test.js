@@ -49,7 +49,7 @@ describe('action', () => {
       <ActivityTable userActivity={userActivity} />
     );
 
-    expect(getByText('Bought Tokens')).toBeVisible();
+    expect(getByText('New tokens created')).toBeVisible();
   });
 
   test('shows proper status on SELL tokens', () => {
@@ -58,7 +58,7 @@ describe('action', () => {
       <ActivityTable userActivity={userActivity} />
     );
 
-    expect(getByText('Sold Tokens')).toBeVisible();
+    expect(getByText('Sold tokens')).toBeVisible();
   });
 
   test('shows proper status on SENT tokens', () => {
@@ -67,7 +67,7 @@ describe('action', () => {
       <ActivityTable userActivity={userActivity} />
     );
 
-    expect(getByText('Sent to')).toBeVisible();
+    expect(getByText('Tokens sent to')).toBeVisible();
   });
 
   test('shows proper status on TRANSFERED tokens', () => {
@@ -76,7 +76,7 @@ describe('action', () => {
       <ActivityTable userActivity={userActivity} />
     );
 
-    expect(getByText('Bought Tokens')).toBeVisible();
+    expect(getByText('Received tokens')).toBeVisible();
   });
 
   test('shows proper address', () => {

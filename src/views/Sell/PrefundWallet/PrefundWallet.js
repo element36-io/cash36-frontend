@@ -69,10 +69,7 @@ const PrefundWallet = ({ mainWallet, minFunds, tokens }) => {
             Fund my Wallet
           </DefaultButton>
           {error && <div className="error-text">{error}</div>}
-          <AvailableBalance
-            balance={selectedToken.balance}
-            symbol={selectedToken.symbol}
-          />
+          <AvailableBalance symbol={selectedToken.symbol} />
           <div className="sell__footer">
             <span style={{ fontSize: '1.2rem' }}>
               The amount will be deducted from your element36 account Tokens.
