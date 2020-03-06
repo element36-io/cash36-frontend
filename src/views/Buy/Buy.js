@@ -77,7 +77,7 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
     manualTransferStarted.current = true;
 
     const data = {
-      amount: parseInt(amount),
+      amount: parseAmount(amount),
       symbol
     };
     // Recheck this when buy is working again
