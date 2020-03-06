@@ -26,7 +26,7 @@ const Invest = () => {
     <div className="wrapper invest">
       <div className="invest__header">
         <Link to="/use/send-to-contract">
-          <AddButton text="Send to Contract" send />
+          <AddButton text="Use with Smart Contract" send />
         </Link>
 
         <ButtonDialog button={<AddButton text="Add Contract" />}>

@@ -103,22 +103,26 @@ export const Step1Tier1Form = ({
                   <div className="us-person-text">
                     <div>You qualify as a US Person if:</div>
                     <ul>
-                      <li>You are a US citizen (sole or dual citizenship).</li>
-                      <li>You live or are domiciled in the USA.</li>
                       <li>
-                        You have permanent residence permit in the USA (eg.
-                        Green card).
+                        &#8226; You are a US citizen (sole or dual citizenship).
+                      </li>
+                      <li>&#8226; You live or are domiciled in the USA.</li>
+                      <li>
+                        &#8226; You have permanent residence permit in the USA
+                        (eg. Green card).
                       </li>
                       <li>
-                        You are mainly in the USA (You have lived in the USA for
-                        more then 183 days during the current year and at least
-                        two years - Substantial Presence test).
+                        &#8226; You are mainly in the USA (You have lived in the
+                        USA for more then 183 days during the current year and
+                        at least two years - Substantial Presence test).
                       </li>
                       <li>
-                        You are subject to US taxation for some other reason.
+                        &#8226; You are subject to US taxation for some other
+                        reason.
                       </li>
                       <li>
-                        You were born in the United States or US territory.
+                        &#8226; You were born in the United States or US
+                        territory.
                       </li>
                     </ul>
                   </div>

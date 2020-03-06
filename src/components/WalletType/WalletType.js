@@ -15,13 +15,13 @@ const WalletType = ({ onClick }) => {
     <div className="wallet-type">
       <h3>Choose the type of wallet</h3>
       <div>
-        <ButtonBase className="wallet-type__item" onClick={addUportWallet}>
-          Add wallet with uPort
-          <img src={uportLogo} alt="uport logo" />
-        </ButtonBase>
         <ButtonBase className="wallet-type__item" onClick={addMetaMaskWallet}>
           Add wallet with MetaMask
           <img src={metamaskLogo} alt="uport logo" />
+        </ButtonBase>
+        <ButtonBase className="wallet-type__item" onClick={addUportWallet}>
+          Add wallet with uPort
+          <img src={uportLogo} alt="uport logo" />
         </ButtonBase>
       </div>
     </div>
