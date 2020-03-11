@@ -7,7 +7,7 @@ import { Tooltip } from '@material-ui/core';
 
 import { WalletContext } from '../../providers/wallet.provider';
 import { getMainWallet } from '../../helpers/wallet.helpers';
-import CopyToClipboard from '../CopyToClipboard/CopyToClipboard';
+import ZeroXAddress from '../ZeroXAddress';
 import useGet from '../../hooks/useGet';
 import { getServerNetworkId } from '../../store/tokens/tokens.actions';
 import { parseNetworkIdToName } from '../../helpers/metamask.helpers';
@@ -59,11 +59,7 @@ const WalletMode = ({ walletList }) => {
         <div className="wallet-login-mode__name">
           <div>{mainWallet.shortDescription}</div>
           <div>
-            <CopyToClipboard
-              text={mainWallet.accountAddress}
-              showAsText
-              truncated
-            />
+            <ZeroXAddress address={mainWallet.accountAddress} truncated />
           </div>
         </div>
         {divergedNetworks &&
