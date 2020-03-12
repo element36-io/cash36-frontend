@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -52,6 +53,10 @@ const Invest = ({ getContractsAction }) => {
       {contractsError && <div className="error-text">{contractsError}</div>}
     </div>
   );
+};
+
+Invest.propTypes = {
+  getContractsAction: PropTypes.func
 };
 
 export default connect(null, { getContractsAction })(Invest);
