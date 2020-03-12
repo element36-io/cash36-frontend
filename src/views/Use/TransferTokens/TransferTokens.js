@@ -7,8 +7,8 @@ import AvailableBalance from '../../../components/AvailableBalance';
 import StepButton from '../../../components/Buttons/StepButton';
 import TransferFooter from '../TransferFooter';
 import Responsive from '../../../components/Responsive';
-import { truncateBlockchainAddress } from '../../../helpers/string.helpers';
 import contractIcon from '../../../assets/icons/contract-icon.svg';
+import ZeroXAddress from '../../../components/ZeroXAddress';
 
 import './TransferTokens.scss';
 
@@ -25,9 +25,11 @@ const TransferTokens = ({
       <div className="invest-transfer-tokens__header">
         <h4>Sending to</h4>
         <img src={contractIcon} alt="" />
-        <Responsive>{targetAddress}</Responsive>
+        <Responsive>
+          <ZeroXAddress address={targetAddress} />
+        </Responsive>
         <Responsive isMobile>
-          {truncateBlockchainAddress(targetAddress)}
+          <ZeroXAddress address={targetAddress} truncated />
         </Responsive>
       </div>
       <hr />

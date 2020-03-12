@@ -13,9 +13,9 @@ import './ZeroXAddress.scss';
 const ZeroXAddress = ({
   address,
   truncated = false,
-  contracts,
-  contacts,
-  wallets
+  contracts = [],
+  contacts = [],
+  wallets = []
 }) => {
   const { network, networkId } = useContext(Web3Context);
   const [hoverText, setHoverText] = useState('');
@@ -25,11 +25,9 @@ const ZeroXAddress = ({
     const contract = contracts.find(
       contract => contract.contractAddress === address
     );
-
     const contact = contacts.find(
       contact => contact.contactAddress === address
     );
-
     const me = wallets.find(wallet => wallet.accountAddress === address);
 
     if (me) {
@@ -92,13 +90,3 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(ZeroXAddress);
-
-// {
-//   /* <a
-
-// target="_blank"
-// rel="noopener noreferrer"
-// > */
-// }
-
-// const { networkId, network } = useContext(Web3Context);
