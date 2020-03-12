@@ -7,7 +7,6 @@ import BackButton from '../../../components/Buttons/BackButton';
 import StepButton from '../../../components/Buttons/StepButton';
 import AvailableBalance from '../../../components/AvailableBalance';
 import Responsive from '../../../components/Responsive';
-import { truncateBlockchainAddress } from '../../../helpers/string.helpers';
 import ZeroXAddress from '../../../components/ZeroXAddress';
 
 import './SendTokens.scss';
