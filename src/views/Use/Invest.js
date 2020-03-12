@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import ButtonDialog from '../../components/ButtonDialog';
@@ -7,10 +8,11 @@ import ContractForm from './ContractForm';
 import InvestCard from './InvestCard';
 import useGet from '../../hooks/useGet';
 import { getContracts } from '../../helpers/async/contracts.helpers';
+import { getContractsAction } from '../../store/contracts/contracts.actions';
 
 import './Invest.scss';
 
-const Invest = () => {
+const Invest = ({ getContractsAction }) => {
   const [visibleContracts, setVisibleContracts] = useState([]);
 
   const [contracts, contractsError, refetchContracts] = useGet(
@@ -19,6 +21,7 @@ const Invest = () => {
   );
 
   useEffect(() => {
+    getContractsAction(contracts);
     setVisibleContracts(contracts);
   }, [contracts]);
 
@@ -51,4 +54,4 @@ const Invest = () => {
   );
 };
 
-export default Invest;
+export default connect(null, { getContractsAction })(Invest);

@@ -1,8 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import TruncateString from 'react-truncate-string';
-import { Web3Context } from '../../../providers/web3.provider';
-import CopyToClipboard from '../../CopyToClipboard';
 import ZeroXAddress from '../../ZeroXAddress';
 
 import './Action.scss';
@@ -15,7 +12,7 @@ const renderActionName = type => {
   if (type === 'APPROVED') return 'Approved token spending';
 };
 
-const Action = ({ type, targetAddress, txHash }) => {
+const Action = ({ type, targetAddress }) => {
   return (
     <div className="activity-table-action">
       <div>{renderActionName(type)}</div>
@@ -28,7 +25,6 @@ const Action = ({ type, targetAddress, txHash }) => {
 
 Action.propTypes = {
   type: PropTypes.string.isRequired,
-  txHash: PropTypes.string,
   targetAddress: PropTypes.string.isRequired
 };
 
