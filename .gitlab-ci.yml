@@ -19,7 +19,7 @@ test:
     - echo "//npm.pkg.github.com/:_authToken='$GPR_READ_TOKEN'" >> .npmrc
     - npm install -g yarn
     - yarn version
-    - yarn --registry https://registry.yarnpkg.com --network-timeout 100000
+    - yarn --registry https://registry.yarnpkg.com --network-timeout 200000
     - yarn test
 #  except:
 #    - master
