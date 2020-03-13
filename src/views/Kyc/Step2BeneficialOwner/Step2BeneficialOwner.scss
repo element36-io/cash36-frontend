@@ -32,13 +32,23 @@
       margin-bottom: 13.8rem;
     }
 
-    .kyc-process-controls {
-      margin-top: 22rem;
-    }
-
     .beneficial-owner__checkbox-container {
       margin-top: 2.4rem;
-      padding-right: 28rem;
+      // padding-right: 28rem;
+
+      > p {
+        margin-right: 22rem;
+      }
+
+      > .step-2__link {
+        margin-left: auto;
+        align-self: flex-start;
+
+        > a {
+          white-space: nowrap;
+          text-decoration: underline;
+        }
+      }
     }
   }
 
@@ -64,8 +74,32 @@
       align-items: flex-start;
 
       > p {
-        font-size: 1.8rem;
+        margin-right: 2rem;
+        font-size: 1.6rem;
         line-height: 2rem;
+      }
+
+      > .step-2__link {
+        margin-left: auto;
+        align-self: flex-start;
+
+        > a {
+          white-space: nowrap;
+          font-size: 1.4rem;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .step-2__section {
+    padding-bottom: 2.4rem;
+    margin-bottom: 2.4rem;
+    border-bottom: 1px solid $grey-border;
+
+    @include mobile {
+      h4 {
+        margin-bottom: 1.6rem;
       }
     }
   }
