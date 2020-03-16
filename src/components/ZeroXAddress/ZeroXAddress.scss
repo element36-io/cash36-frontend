@@ -1,0 +1,28 @@
+@import '../../styles/settings.scss';
+
+.zerox-address {
+  display: flex;
+  align-items: center;
+  position: relative;
+  transition: all 0.2s;
+
+  > a {
+    margin-left: 4px;
+    display: flex;
+    align-items: center;
+    > svg {
+      width: 1.75rem;
+    }
+  }
+
+  .zerox-address__hovered {
+    font-size: 1rem;
+    position: absolute;
+    border-radius: 4px;
+    top: -2rem;
+    z-index: 999;
+    padding: 3px 6px;
+    background-color: $black;
+    color: white;
+  }
+}

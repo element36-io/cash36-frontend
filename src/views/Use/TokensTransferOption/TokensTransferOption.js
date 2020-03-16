@@ -47,15 +47,15 @@ const TokensTransferOption = ({
   const verifySender = async userAddress => {
     setCheckingSender(true);
 
+    const Attribs= { EXST:0, BUY:1, SELL:2, RCV:3, SEND:4, CPNY:5, BLACK:6, LOCK:7 }
+
     // Blockchain code for checking
     const checkUser = await complianceContract.methods
       .checkUser(userAddress)
       .call();
 
-    const attrSend = web3.utils.fromAscii('ATTR_SEND');
-
     const canSend = await complianceContract.methods
-      .hasAttribute(userAddress, attrSend)
+      .hasAttribute(userAddress, Attribs.SEND)
       .call();
 
     const hasFunds = senderBalance >= parseInt(amount, 10);

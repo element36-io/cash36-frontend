@@ -28,7 +28,6 @@ const Row = ({ activity }) => {
           <Action
             type={activity.action}
             targetAddress={activity.targetAddress}
-            txHash={activity.txHash}
           />
         </div>
         <div>

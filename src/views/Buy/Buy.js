@@ -77,7 +77,7 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
     manualTransferStarted.current = true;
 
     const data = {
-      amount: parseInt(amount),
+      amount: parseAmount(amount),
       symbol
     };
     // Recheck this when buy is working again
@@ -96,6 +96,18 @@ export const Buy = ({ getTokens, location, contactsList, getContacts }) => {
       setManualTransferData(response.data);
       setStep(4.1);
     } catch (error) {
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setTransactionError({
+          title: 'Buy unsuccessful',
+          message: error.response.data.message
+        });
+      }
+
+      console.log(error.response.data);
       setStep(5);
     }
   };

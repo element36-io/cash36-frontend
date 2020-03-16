@@ -27,7 +27,7 @@ const calculateTime = creationDate => {
 };
 
 const renderIcon = type => {
-  if (type === 'PAYMENT' || type === 'PAYOUT') {
+  if (type === 'PAYMENT' || type === 'PAYOUT' || type === 'TRANSFER') {
     return <img src={ConfirmationIcon} alt={type} />;
   }
   if (type === 'TIER_2_CONFIRMED') return <img src={Tier2Icon} alt={type} />;

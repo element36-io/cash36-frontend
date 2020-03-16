@@ -10,6 +10,7 @@ import countriesReducer from './countries/countries.reducer';
 import notificationsReducer from './notifications/notifications.reducer';
 import contactsReducer from './contacts/contacts.reducer';
 import walletsReducer from './wallets/wallets.reducer';
+import contractsReducer from './contracts/contracts.reducer';
 
 const loggerMiddleware = createLogger();
 
@@ -21,7 +22,8 @@ export const reducers = combineReducers({
   countries: countriesReducer,
   notifications: notificationsReducer,
   contacts: contactsReducer,
-  wallets: walletsReducer
+  wallets: walletsReducer,
+  contracts: contractsReducer
 });
 
 // add back logger
