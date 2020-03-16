@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import QuickActions from './QuickActions';
@@ -7,13 +7,30 @@ import UserProfile from '../../components/UserProfile';
 import { getUserActivity } from '../../store/tokens/tokens.actions';
 import BalanceCards from '../../components/BalanceCards';
 import useGet from '../../hooks/useGet';
+import { getContracts } from '../../helpers/async/contracts.helpers';
+import { getContractsAction } from '../../store/contracts/contracts.actions';
+import { getContacts } from '../../store/contacts/contacts.actions';
 
 import './Home.scss';
 
-const Home = ({ getUserActivity, userActivity }) => {
+const Home = ({
+  getUserActivity,
+  userActivity,
+  getContractsAction,
+  getContacts
+}) => {
   const lastActivity = userActivity.slice(0, 5);
 
   const lastActivityError = useGet(getUserActivity)[1];
+  const [contracts] = useGet(getContracts, []);
+
+  useEffect(() => {
+    getContractsAction(contracts);
+  }, [contracts]);
+
+  useEffect(() => {
+    getContacts();
+  }, []);
 
   return (
     <div className="home-page" data-testid="home-page">
@@ -56,7 +73,13 @@ const mapStateToProps = ({ tokens: { userActivity = [] } }) => ({
 
 Home.propTypes = {
   getUserActivity: PropTypes.func,
-  userActivity: PropTypes.array
+  userActivity: PropTypes.array,
+  getContractsAction: PropTypes.func,
+  getContacts: PropTypes.func
 };
 
-export default connect(mapStateToProps, { getUserActivity })(Home);
+export default connect(mapStateToProps, {
+  getUserActivity,
+  getContractsAction,
+  getContacts
+})(Home);

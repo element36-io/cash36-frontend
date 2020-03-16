@@ -1,0 +1,1 @@
+export const GET_CONTRACTS = 'GET_CONTRACTS';

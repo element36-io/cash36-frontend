@@ -7,7 +7,7 @@ import BackButton from '../../../components/Buttons/BackButton';
 import StepButton from '../../../components/Buttons/StepButton';
 import AvailableBalance from '../../../components/AvailableBalance';
 import Responsive from '../../../components/Responsive';
-import { truncateBlockchainAddress } from '../../../helpers/string.helpers';
+import ZeroXAddress from '../../../components/ZeroXAddress';
 
 import './SendTokens.scss';
 
@@ -29,9 +29,11 @@ const SendTokens = ({
           username={target.contactAddress}
         />
         {target.contactName && <span>{target.contactName}</span>}
-        <Responsive>{target.contactAddress}</Responsive>
+        <Responsive>
+          <ZeroXAddress address={target.contactAddress} />
+        </Responsive>
         <Responsive isMobile>
-          {truncateBlockchainAddress(target.contactAddress)}
+          <ZeroXAddress address={target.contactAddress} truncated />
         </Responsive>
       </div>
       <hr />

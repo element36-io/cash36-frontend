@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Tooltip } from '@material-ui/core';
+
 import Responsive from '../../../components/Responsive';
 import BackButton from '../../../components/Buttons/BackButton';
 import DefaultButton from '../../../components/Buttons/DefaultButton';
@@ -38,7 +39,7 @@ const PaymentMethod = ({
             </span>
           </DefaultButton>
         ) : (
-          <Tooltip title="This action is not possible in walletless mode.">
+          <Tooltip title="Token transfer not possible - you don't have a registered wallet available. Use manual bank transfer.">
             <div>
               <DefaultButton disabled>
                 <span className="payment-method__buttons--heading">

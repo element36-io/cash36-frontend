@@ -36,7 +36,7 @@
 
   .copy-to-clipboard__tooltip {
     &::after {
-      content: 'copied';
+      content: 'copied to clipboard';
       position: absolute;
       bottom: -2rem;
       left: 0;

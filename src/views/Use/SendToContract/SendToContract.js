@@ -19,7 +19,7 @@ import './SendToContract.scss';
 
 const SendToContract = ({ getTokens }) => {
   const [address, setAddress] = useState('');
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(0);
   const [amount, setAmount] = useState('');
   const [symbol, setSymbol] = useState('EUR36');
   const [transferData, setTransferData] = useState(null);
