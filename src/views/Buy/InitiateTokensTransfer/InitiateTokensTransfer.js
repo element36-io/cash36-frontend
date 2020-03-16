@@ -47,6 +47,8 @@ const InitiateTokensTransfer = ({
   const senderAddress = getMainWalletAddress(walletList);
   const senderBalance = tokens.find(token => token.symbol === symbol).balance;
 
+  const Attribs= { EXST:0, BUY:1, SELL:2, RCV:3, SEND:4, CPNY:5, BLACK:6, LOCK:7 }
+
   const verifySender = async userAddress => {
     setCheckingSender(true);
 
@@ -55,10 +57,10 @@ const InitiateTokensTransfer = ({
       .checkUser(userAddress)
       .call();
 
-    const attrSend = web3.utils.fromAscii('ATTR_SEND');
+  
 
     const canSend = await complianceContract.methods
-      .hasAttribute(userAddress, attrSend)
+      .hasAttribute(userAddress, Attribs.SEND)
       .call();
 
     const hasFunds = senderBalance >= parseInt(amount, 10);
@@ -82,15 +84,12 @@ const InitiateTokensTransfer = ({
       .checkUser(targetAddress)
       .call();
 
-    const attrBuy = web3.utils.fromAscii('ATTR_BUY');
-    const attrReceive = web3.utils.fromAscii('ATTR_RECEIVE');
-
     const canBuy = await complianceContract.methods
-      .hasAttribute(targetAddress, attrBuy)
+      .hasAttribute(targetAddress, Attribs.BUY)
       .call();
 
     const canReceive = await complianceContract.methods
-      .hasAttribute(targetAddress, attrReceive)
+      .hasAttribute(targetAddress, Attribs.RCV)
       .call();
 
     setReceiverChecks({ checkUser, canBuy, canReceive });
