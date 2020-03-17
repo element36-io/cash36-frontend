@@ -1,0 +1,10 @@
+@import '../../../styles/mixins.scss';
+
+.tx-id {
+  display: flex;
+  align-items: center;
+
+  @include mobile {
+    display: none;
+  }
+}

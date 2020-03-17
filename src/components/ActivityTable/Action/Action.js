@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ZeroXAddress from '../../ZeroXAddress';
+import Responsive from '../../Responsive';
+
+import sourceIcon from '../../../assets/icons/source-icon.svg';
+import targetIcon from '../../../assets/icons/target-icon.svg';
 
 import './Action.scss';
 
@@ -12,20 +16,38 @@ const renderActionName = type => {
   if (type === 'APPROVED') return 'Approved token spending';
 };
 
-const Action = ({ type, targetAddress }) => {
+const Action = ({ type, targetAddress, sourceAddress }) => {
   return (
     <div className="activity-table-action">
       <div>{renderActionName(type)}</div>
       <span>
-        <ZeroXAddress address={targetAddress} />
+        <img src={targetIcon} alt="" />
+        <Responsive isTablet>
+          <ZeroXAddress address={targetAddress} truncated />
+        </Responsive>
+        <Responsive>
+          <ZeroXAddress address={targetAddress} />
+        </Responsive>
       </span>
+      {sourceAddress && (
+        <span>
+          <img src={sourceIcon} alt="" />
+          <Responsive isTablet>
+            <ZeroXAddress address={targetAddress} truncated />
+          </Responsive>
+          <Responsive>
+            <ZeroXAddress address={targetAddress} />
+          </Responsive>{' '}
+        </span>
+      )}
     </div>
   );
 };
 
 Action.propTypes = {
   type: PropTypes.string.isRequired,
-  targetAddress: PropTypes.string.isRequired
+  targetAddress: PropTypes.string.isRequired,
+  sourceAddress: PropTypes.any
 };
 
 export default Action;

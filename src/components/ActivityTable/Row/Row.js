@@ -5,6 +5,7 @@ import Date from '../Date';
 import Status from '../Status';
 import Action from '../Action';
 import Amount from '../Amount';
+import TxId from '../TxId';
 import PaymentInfo from '../../PaymentInfo';
 
 const Row = ({ activity }) => {
@@ -27,8 +28,12 @@ const Row = ({ activity }) => {
         <div>
           <Action
             type={activity.action}
+            sourceAddress={activity.sourceAddress}
             targetAddress={activity.targetAddress}
           />
+        </div>
+        <div>
+          <TxId txHash={activity.txHash} />
         </div>
         <div>
           <Status status={activity.status} openModal={openModal} />
