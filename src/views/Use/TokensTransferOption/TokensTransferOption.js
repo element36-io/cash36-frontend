@@ -47,7 +47,7 @@ const TokensTransferOption = ({
   const verifySender = async userAddress => {
     setCheckingSender(true);
 
-    const Attribs= { EXST:0, BUY:1, SELL:2, RCV:3, SEND:4, CPNY:5, BLACK:6, LOCK:7 }
+    const Attribs= { EXST:0, ATTR_BUY:1, ATTR_SELL:2, ATTR_RECEIVE:3, ATTR_SEND:4, CPNY:5, BLACK:6, LOCK:7 }
 
     // Blockchain code for checking
     const checkUser = await complianceContract.methods
@@ -55,7 +55,7 @@ const TokensTransferOption = ({
       .call();
 
     const canSend = await complianceContract.methods
-      .hasAttribute(userAddress, Attribs.SEND)
+      .hasAttribute(userAddress, Attribs.ATTR_SEND)
       .call();
 
     const hasFunds = senderBalance >= parseInt(amount, 10);
