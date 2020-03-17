@@ -10,17 +10,19 @@ const TxId = ({ txHash }) => {
   const { network, networkId } = useContext(Web3Context);
 
   return (
-    <Tooltip title="See on etherscan">
-      <a
-        href={`https://${
-          network && networkId !== 1 ? `${network.toLowerCase()}.` : ''
-        }etherscan.io/tx/${txHash}`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <LinkIcon />
-      </a>
-    </Tooltip>
+    <div className="tx-id">
+      <Tooltip title="See on etherscan">
+        <a
+          href={`https://${
+            network && networkId !== 1 ? `${network.toLowerCase()}.` : ''
+          }etherscan.io/tx/${txHash}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <LinkIcon />
+        </a>
+      </Tooltip>
+    </div>
   );
 };
 

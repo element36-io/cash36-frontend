@@ -14,6 +14,7 @@ const ActivityTable = ({ userActivity }) => {
           <div>Date</div>
           <div>Action</div>
           <div>TxId</div>
+          <div>Message</div>
           <div>Status</div>
           <div>Amount</div>
         </div>
