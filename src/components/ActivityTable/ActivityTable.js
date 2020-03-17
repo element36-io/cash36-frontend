@@ -19,7 +19,7 @@ const ActivityTable = ({ userActivity }) => {
           <div>Amount</div>
         </div>
       </Responsive>
-      <div className="activity-table__body paper">
+      <div className="activity-table__body">
         {userActivity.map(activity => (
           <Row activity={activity} key={activity.id} />
         ))}

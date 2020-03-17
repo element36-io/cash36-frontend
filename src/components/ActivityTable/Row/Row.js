@@ -37,7 +37,7 @@ const Row = ({ activity }) => {
           <TxId txHash={activity.txHash} />
         </div>
         <div>
-          <Message />
+          <Message message={activity.message} />
         </div>
         <div>
           <Status status={activity.status} openModal={openModal} />
