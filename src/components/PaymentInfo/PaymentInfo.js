@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import CloseIcon from '@material-ui/icons/Close';
 import ReactCountryFlag from 'react-country-flag';
 
+import CopyToClipboard from '../CopyToClipboard';
+
 import './PaymentInfo.scss';
 
 const PaymentInfo = ({ info, title, children, isModal, closeModal }) => (
@@ -29,21 +31,22 @@ const PaymentInfo = ({ info, title, children, isModal, closeModal }) => (
       </div>
       <div className="payment-info__field">
         <span>Receipient Name</span>
-        <span>{info.receipientName}</span>
+        <CopyToClipboard text={info.receipientName} showAsText />
       </div>
       <div className="payment-info__field">
         <span>Receipient Address</span>
-        <span>{info.receipientAddress}</span>
+        <CopyToClipboard text={info.receipientAddress} showAsText />
       </div>
       <div className="payment-info__field">
         <span>Amount</span>
-        <span>
-          {info.amount} {info.currency}
-        </span>
+        <div className="payment-info__field--copy">
+          <CopyToClipboard text={info.amount} showAsText />{' '}
+          <span>{info.currency}</span>
+        </div>
       </div>
       <div className="payment-info__field">
         <span>Swift/BIC</span>
-        <span>{info.bankBic}</span>
+        <CopyToClipboard text={info.bankBic} showAsText />
       </div>
       <div className="payment-info__field">
         <span>Bank Country</span>
@@ -63,11 +66,11 @@ const PaymentInfo = ({ info, title, children, isModal, closeModal }) => (
       </div>
       <div className="payment-info__field">
         <span>Recipient IBAN</span>
-        <span>{info.receipientIban}</span>
+        <CopyToClipboard text={info.receipientIban} showAsText />
       </div>
       <div className="payment-info__field">
         <span>Reference Number/Purpose</span>
-        <span>{info.paymentReferenceId}</span>
+        <CopyToClipboard text={info.paymentReferenceId} showAsText />
       </div>
       <div className="payment-info__field">
         <span className="payment-info__message--warning">
