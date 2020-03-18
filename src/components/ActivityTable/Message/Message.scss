@@ -1,0 +1,11 @@
+@import '../../../styles/mixins.scss';
+
+.message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include mobile {
+    display: none;
+  }
+}

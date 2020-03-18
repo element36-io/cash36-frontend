@@ -5,23 +5,28 @@ import Row from './Row';
 
 import './ActivityTable.scss';
 
-const ActivityTable = ({ userActivity }) => (
-  <div className="activity-table">
-    <Responsive>
-      <div className="activity-table__head activity-table__row">
-        <div>Date</div>
-        <div>Action</div>
-        <div>Status</div>
-        <div>Amount</div>
+const ActivityTable = ({ userActivity }) => {
+  console.log(userActivity);
+  return (
+    <div className="activity-table">
+      <Responsive>
+        <div className="activity-table__head activity-table__row">
+          <div>Date</div>
+          <div>Action</div>
+          <div>TxId</div>
+          <div>Message</div>
+          <div>Status</div>
+          <div>Amount</div>
+        </div>
+      </Responsive>
+      <div className="activity-table__body">
+        {userActivity.map(activity => (
+          <Row activity={activity} key={activity.id} />
+        ))}
       </div>
-    </Responsive>
-    <div className="activity-table__body paper">
-      {userActivity.map(activity => (
-        <Row activity={activity} key={activity.id} />
-      ))}
     </div>
-  </div>
-);
+  );
+};
 
 ActivityTable.propTypes = {
   userActivity: PropTypes.array.isRequired
