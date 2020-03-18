@@ -6,7 +6,7 @@ export function handleError(error) {
     let errorMessage;
 
     if (Array.isArray(error.response.data)) {
-      errorMessage = error.response.data.join(';');
+      errorMessage = `${error.response.data.join('; ')} (${statusCode})`;
 
       return Promise.reject(errorMessage);
     }
