@@ -19,10 +19,12 @@
     flex-wrap: wrap;
     align-items: center;
     width: 100%;
+    line-height: 1;
 
     > img {
-      width: 2rem;
-      margin-right: 0.4rem;
+      height: 100%;
+      width: 1.75rem;
+      margin-right: 0.6rem;
     }
 
     a {

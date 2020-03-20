@@ -25,7 +25,7 @@ const Action = ({ type, targetAddress, sourceAddress }) => {
         <Responsive isTablet>
           <ZeroXAddress address={targetAddress} truncated />
         </Responsive>
-        <Responsive>
+        <Responsive isDesktop>
           <ZeroXAddress address={targetAddress} />
         </Responsive>
       </span>
@@ -35,9 +35,9 @@ const Action = ({ type, targetAddress, sourceAddress }) => {
           <Responsive isTablet>
             <ZeroXAddress address={targetAddress} truncated />
           </Responsive>
-          <Responsive>
+          <Responsive isDesktop>
             <ZeroXAddress address={targetAddress} />
-          </Responsive>{' '}
+          </Responsive>
         </span>
       )}
     </div>

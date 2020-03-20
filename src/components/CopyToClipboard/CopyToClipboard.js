@@ -46,7 +46,7 @@ const CopyToClipboard = ({ text, showAsText = false, truncated = false }) => {
 };
 
 CopyToClipboard.propTypes = {
-  text: PropTypes.string,
+  text: PropTypes.any,
   showAsText: PropTypes.bool,
   truncated: PropTypes.bool
 };
