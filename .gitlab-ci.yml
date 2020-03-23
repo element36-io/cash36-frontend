@@ -43,7 +43,7 @@ docker-dev-build:
 
 build-prod:
   image: google/cloud-sdk
-  stage: build
+  stage: package
   tags:
     - dokcer
   environment:
@@ -51,7 +51,7 @@ build-prod:
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
-    - docker build --build-arg nodeenv=development --build-arg gprtoken=$GPR_READ_TOKEN -t $CI_REGISTRY_IMAGE:prod-latest -f ./docker/Dockerfile .
+    - docker build --build-arg nodeenv=prod --build-arg gprtoken=$GPR_READ_TOKEN -t $CI_REGISTRY_IMAGE:prod-latest -f ./docker/Dockerfile .
     - docker tag  $CI_REGISTRY_IMAGE $CI_REGISTRY_IMAGE:latest
     - docker tag  $CI_REGISTRY_IMAGE $CI_REGISTRY_IMAGE:$CI_PIPELINE_ID 
     - docker tag  $CI_REGISTRY_IMAGE $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
@@ -61,26 +61,24 @@ build-prod:
   only:
     - prod
 
-docker-release-build:
-  stage: package
-  environment: production
-  image: docker:dind
-  tags:
-    - dokcer
-  before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-  script:
-    - docker build  --build-arg gprtoken=$GPR_READ_TOKEN  -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME -f ./docker/release/Dockerfile .
-    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
-    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME $CI_REGISTRY_IMAGE:latest
-    - docker push $CI_REGISTRY_IMAGE:latest
-  only:
-    - manual
-    - master
-#    - tags
 
-
-
+# docker-release-build:
+#   stage: package
+#   environment: production
+#   image: docker:dind
+#   tags:
+#     - dokcer
+#   before_script:
+#     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+#   script:
+#     - docker build  --build-arg gprtoken=$GPR_READ_TOKEN  -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME -f ./docker/release/Dockerfile .
+#     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+#     - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME $CI_REGISTRY_IMAGE:latest
+#     - docker push $CI_REGISTRY_IMAGE:latest
+#   only:
+#     - manual
+#     - master
+# #    - tags
 
 # we deploy to gcs with docker-in docker; managed by docker-compose directory
 #deploy-prod:
