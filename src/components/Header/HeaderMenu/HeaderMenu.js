@@ -63,6 +63,24 @@ const HeaderMenu = ({
             <MenuItem onClick={closeMenu}>
               <Link to="/contacts">Contacts</Link>
             </MenuItem>
+            <MenuItem onClick={closeMenu}>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://forms.gle/bpMP9bgQraWFNaFLA"
+              >
+                Report Error/Feedback
+              </a>
+            </MenuItem>
+            <MenuItem onClick={closeMenu}>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://forms.gle/QFutLWY8yr5iUBcY8"
+              >
+                Recover funds
+              </a>
+            </MenuItem>
             <MenuItem onClick={logout}>
               <span>Logout</span>
             </MenuItem>

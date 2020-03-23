@@ -1144,13 +1144,13 @@
   dependencies:
     "@date-io/core" "^1.3.13"
 
-"@element36-io/cash36-contracts@0.3.32":
-  version "0.3.32"
-  resolved "https://npm.pkg.github.com/download/@element36-io/cash36-contracts/0.3.32/916428d1ceb8a07819fcfd8a82b051e95a3de773781cd94be86afa294706d60f#8956dc66119e0d03f076fc2f84242c17097ebe84"
-  integrity sha512-+GA3l/8SYT2qoPTaKVJTnDlFz1XV5Z0U4VHamnUd3SH7jcGKTb2OLaRvSumsiuQBPf3NKPKxxPO3ks4VHwHbNA==
+"@element36-io/cash36-contracts@0.3.33":
+  version "0.3.33"
+  resolved "https://npm.pkg.github.com/download/@element36-io/cash36-contracts/0.3.33/542b3fd7364f31358d3634a3d2b3ce303e0f50351bc7e79c94e0113fbe24bb5d#00d71f795e6ac588a0e49e71022686548cd5d183"
+  integrity sha512-OvIRlnevvjm3SV79gKgxa78+kNLt11+sXZXakU2bOh7ezqI/Ck3KZJrE+PF+rPNH7uFaywy0uo1s9eAhKn3xNg==
   dependencies:
-    openzeppelin-solidity "2.4.0"
-    truffle "5.1.8"
+    openzeppelin-solidity "2.5.0"
+    truffle "5.1.17"
 
 "@emotion/hash@^0.7.4":
   version "0.7.4"
@@ -9287,10 +9287,10 @@ onetime@^2.0.0:
   dependencies:
     mimic-fn "^1.0.0"
 
-openzeppelin-solidity@2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/openzeppelin-solidity/-/openzeppelin-solidity-2.4.0.tgz#5f0a7b30571c45493449166e57b947203415349d"
-  integrity sha512-533gc5jkspxW5YT0qJo02Za5q1LHwXK9CJCc48jNj/22ncNM/3M/3JfWLqfpB90uqLwOKOovpl0JfaMQTR+gXQ==
+openzeppelin-solidity@2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/openzeppelin-solidity/-/openzeppelin-solidity-2.5.0.tgz#829a9bcfc928619dd96c44bd893b180044ff51aa"
+  integrity sha512-I0yRC3nff9Kn2LDWuz02fuw0EuomVQ9Z8lHzdqh8P9BiOUzIk8frQRxn/a1Kva3StF6hwPP+Dh3/SQ2ily1Pow==
 
 opn@5.4.0:
   version "5.4.0"
@@ -12840,10 +12840,10 @@ trim-right@^1.0.1:
   dependencies:
     glob "^7.1.2"
 
-truffle@5.1.8:
-  version "5.1.8"
-  resolved "https://registry.yarnpkg.com/truffle/-/truffle-5.1.8.tgz#aaaad69a63ca6bf6b459702bd0a1fdad3fb9c2be"
-  integrity sha512-/r2ul1mtoNO2obGZmfQX3kjTPQdWRfIjW4sm5x35VJVxsdPif5WZXsDluPAlcbqJcqP6vwLZNmWoZHMLUE5Y8w==
+truffle@5.1.17:
+  version "5.1.17"
+  resolved "https://registry.yarnpkg.com/truffle/-/truffle-5.1.17.tgz#9c821274afee807b64a04e680a89e8688981cdb4"
+  integrity sha512-x8CNCjtsX3B34Q6TI467+kgxqzjCRMvLsGIqf/MHo1NpntP1tIOySGJ+idEg857X0hJz8zfOVz9QKbvrrsKUGQ==
   dependencies:
     app-module-path "^2.2.0"
     mocha "5.2.0"
