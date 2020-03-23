@@ -21,8 +21,8 @@ test:
     - yarn version
     - yarn --registry https://registry.yarnpkg.com --network-timeout 200000
     - yarn test
-#  except:
-#    - master
+  except:
+    - prod
 
 docker-dev-build:
   stage: package
