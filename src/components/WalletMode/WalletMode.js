@@ -65,9 +65,11 @@ const WalletMode = ({ walletList }) => {
           >
             <ZeroXAddress address={mainWallet.accountAddress} truncated />
           </div>
-          <Tooltip title="You are not logged into your main wallet">
-            <i className="fas fa-exclamation-triangle" />
-          </Tooltip>
+          {!loggedInWallet && (
+            <Tooltip title="You are not logged into your main wallet">
+              <i className="fas fa-exclamation-triangle" />
+            </Tooltip>
+          )}
         </div>
         {divergedNetworks &&
           !serverNetworkIdError &&
