@@ -1,0 +1,11 @@
+@import '../../../styles/settings.scss';
+
+.who {
+  color: $primary-main;
+  display: flex;
+  justify-content: center;
+
+  .who__content {
+    color: $text-black-1;
+  }
+}

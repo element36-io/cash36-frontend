@@ -9,18 +9,18 @@
     align-items: center;
     padding: 0.5rem 1.5rem;
 
-    > div:first-child {
+    > .activity-th-date {
       margin-right: 2rem;
       align-items: center;
       display: flex;
     }
 
-    > div:nth-child(2) {
+    > .activity-th-action {
       width: calc((100% - 7rem) / 2);
       text-align: left;
     }
 
-    > div:nth-child(3) {
+    > .activity-th-txid {
       width: calc((100% - 7rem) / 8);
       text-align: center;
       @include mobile {
@@ -28,7 +28,7 @@
       }
     }
 
-    > div:nth-child(4) {
+    > .activity-th-message {
       width: calc((100% - 7rem) / 12);
       text-align: center;
 
@@ -37,7 +37,16 @@
       }
     }
 
-    > div:nth-child(5) {
+    .activity-th-who {
+      width: calc((100% - 7rem) / 12);
+      text-align: center;
+
+      @include mobile {
+        display: none;
+      }
+    }
+
+    > .activity-th-status {
       width: calc((100% - 7rem) / 5);
       text-align: right;
 
@@ -46,7 +55,7 @@
       }
     }
 
-    > div:nth-child(6) {
+    > .activity-th-amount {
       width: calc((100% - 7rem) / 5);
       text-align: right;
 

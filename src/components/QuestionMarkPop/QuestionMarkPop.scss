@@ -46,3 +46,12 @@
   opacity: 1;
   visibility: visible;
 }
+
+.imported-icon {
+  cursor: pointer;
+}
+
+.imported-icon:hover ~ .question-mark__content {
+  opacity: 1;
+  visibility: visible;
+}

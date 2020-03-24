@@ -6,17 +6,20 @@ import Row from './Row';
 import './ActivityTable.scss';
 
 const ActivityTable = ({ userActivity }) => {
-  console.log(userActivity);
+  let { initiatorUserId } = userActivity;
+
   return (
     <div className="activity-table">
       <Responsive>
         <div className="activity-table__head activity-table__row">
-          <div>Date</div>
-          <div>Action</div>
-          <div>TxId</div>
-          <div>Message</div>
-          <div>Status</div>
-          <div>Amount</div>
+          <div className="activity-th-date">Date</div>
+          <div className="activity-th-action">Action</div>
+          <div className="activity-th-txid">TxId</div>
+
+          <div className="activity-th-message">Message</div>
+          {initiatorUserId && <div className="activity-th-who">Who</div>}
+          <div className="activity-th-status">Status</div>
+          <div className="activity-th-amount">Amount</div>
         </div>
       </Responsive>
       <div className="activity-table__body">
