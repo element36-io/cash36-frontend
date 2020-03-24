@@ -39,8 +39,6 @@ docker-dev-build:
     - develop
     - master
 
-
-
 build-prod:
   image: google/cloud-sdk
   stage: package
