@@ -14,5 +14,5 @@ FROM nginx:alpine
 COPY ./docker/release/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=react-build /app/build /usr/share/nginx/html
 ENV NODE_ENV=prod
-EXPOSE 80
+EXPOSE 3000
 CMD ["nginx", "-g", "daemon off;"]
