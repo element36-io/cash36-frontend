@@ -49,7 +49,7 @@ build-prod:
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
-    - docker build --build-arg nodeenv=prod --build-arg gprtoken=$GPR_READ_TOKEN -t $CI_REGISTRY_IMAGE:prod-latest -f ./docker/Dockerfile .
+    - docker build --build-arg nodeenv=prod --build-arg gprtoken=$GPR_READ_TOKEN -t $CI_REGISTRY_IMAGE:prod-latest -f ./docker/release/Dockerfile .
     - docker tag  $CI_REGISTRY_IMAGE:prod-latest $CI_REGISTRY_IMAGE:prod-latest
     - docker tag  $CI_REGISTRY_IMAGE:prod-latest $CI_REGISTRY_IMAGE:$CI_PIPELINE_ID 
     - docker tag  $CI_REGISTRY_IMAGE:prod-latest $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
