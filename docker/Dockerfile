@@ -5,10 +5,10 @@ ARG gprtoken
 ENV NODE_ENV=$nodeenv
 WORKDIR /app
 COPY . ./
-COPY .npmrc /root/.npmrc
+# COPY .npmrc /root/.npmrc
 RUN echo "//npm.pkg.github.com/:_authToken='${gprtoken}' " > /root/.npmrc
 RUN echo "NODE_ENV is ${NODE_ENV} TOKEN is ${gprtoken}. "
-RUN cat .npmrc
+# RUN cat .npmrc
 
 RUN yarn install --update-checksums 
 # only used when served without node (with nginx)
