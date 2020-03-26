@@ -9,10 +9,15 @@ RUN echo "//npm.pkg.github.com/:_authToken='${gprtoken}'" >> /root/.npmrc
 RUN yarn
 RUN yarn build:staging
 
-# Stage 2 - the production environment
-FROM nginx:alpine
-COPY ./docker/release/nginx.conf /etc/nginx/conf.d/default.conf
+# Stage 2 - the production environment using https://hub.docker.com/r/staticfloat/nginx-certbot
+# used within cash36-docker/docker-compose-prod-frontend.yml
+FROM staticfloat/nginx-certbot
+# COPY ./docker/release/nginx.conf /etc/nginx/conf.d/default.conf
+RUN mkdir /etc/nginx/user.conf.d 
+COPY ./docker/release/nginx.conf /etc/nginx/user.conf.d/nginx.conf
 COPY --from=react-build /app/build /usr/share/nginx/html
+# COPY ./startNginx.sh /
 ENV NODE_ENV=prod
-EXPOSE 3000
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 80 443
+# CMD ["nginx", "-g", "daemon off;"]
+# CMD ["startNginx.sh", "cash36.element36.io"]
