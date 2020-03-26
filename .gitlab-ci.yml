@@ -1,4 +1,4 @@
-image: ubuntu
+image: alpine:3.10
 
 variables:
   DOCKER_DRIVER: overlay
