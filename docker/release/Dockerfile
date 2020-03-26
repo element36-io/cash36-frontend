@@ -8,8 +8,8 @@ COPY .npmrc /root/.npmrc
 RUN echo "//npm.pkg.github.com/:_authToken='${gprtoken}'" >> /root/.npmrc
 RUN yarn
 # RUN yarn build       FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memor
-RUN yarn build:staging  --max_old_space_size=8192 
-# RUN yarn build
+# RUN yarn build:staging  --max_old_space_size=8192   
+RUN yarn build
 
 # Stage 2 - the production environment using https://hub.docker.com/r/staticfloat/nginx-certbot
 # used within cash36-docker/docker-compose-prod-frontend.yml
