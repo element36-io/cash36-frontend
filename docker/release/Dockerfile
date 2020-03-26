@@ -7,7 +7,9 @@ COPY . ./
 COPY .npmrc /root/.npmrc
 RUN echo "//npm.pkg.github.com/:_authToken='${gprtoken}'" >> /root/.npmrc
 RUN yarn
+# RUN yarn build
 RUN yarn build:staging
+
 
 # Stage 2 - the production environment using https://hub.docker.com/r/staticfloat/nginx-certbot
 # used within cash36-docker/docker-compose-prod-frontend.yml
