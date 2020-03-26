@@ -1,5 +1,5 @@
 # Stage 1
-FROM node:10 as react-build
+FROM node:dubnium-alpine3.11 as react-build
 ARG gprtoken
 WORKDIR /app
 COPY . ./
