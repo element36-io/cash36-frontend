@@ -67,7 +67,7 @@
     "start:demo": "env-cmd -e demo react-scripts start",
     "start:production": "env-cmd -e prod react-scripts start",
     "build:staging": "env-cmd -e staging react-scripts build",
-    "build": "env-cmd -e prod react-scripts build",
+    "build": "env-cmd -e prod react-scripts build  --max_old_space_size=4096   ",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint src/",
