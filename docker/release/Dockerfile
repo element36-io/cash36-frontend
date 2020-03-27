@@ -6,6 +6,7 @@ COPY . ./
 # need to work with official and github packes, where we need a token for access
 COPY .npmrc /root/.npmrc
 RUN echo "//npm.pkg.github.com/:_authToken='${gprtoken}'" >> /root/.npmrc
+# --update-checksums because of github bug https://github.com/yarnpkg/yarn/issues/7552
 RUN yarn
 # RUN yarn build       FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memor
 ENV NODE_OPTIONS="--max-old-space-size=8192"
@@ -14,12 +15,9 @@ RUN yarn build
 # Stage 2 - the production environment using https://hub.docker.com/r/staticfloat/nginx-certbot
 # used within cash36-docker/docker-compose-prod-frontend.yml
 FROM staticfloat/nginx-certbot
-# COPY ./docker/release/nginx.conf /etc/nginx/conf.d/default.conf
 RUN mkdir /etc/nginx/user.conf.d 
 COPY ./docker/release/nginx.conf /etc/nginx/user.conf.d/nginx.conf
 COPY --from=react-build /app/build /usr/share/nginx/html
-# COPY ./startNginx.sh /
 ENV NODE_ENV=prod
 EXPOSE 80 443
-# CMD ["nginx", "-g", "daemon off;"]
-# CMD ["startNginx.sh", "cash36.element36.io"]
+
