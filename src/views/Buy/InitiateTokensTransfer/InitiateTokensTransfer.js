@@ -20,6 +20,7 @@ import SecondaryButton from '../../../components/Buttons/SecondaryButton';
 import CheckItem from '../../../components/CheckItem';
 import useCash36 from '../../../hooks/useCash36';
 import { formatAmount } from '../../../helpers/currencies.helpers';
+import BuyFooter from '../BuyFooter';
 
 import './InitiateTokensTransfer.scss';
 
@@ -200,6 +201,7 @@ const InitiateTokensTransfer = ({
             </Link>
           </div>
         )}
+        <BuyFooter textline1="Please make sure to confirm the transaction from your wallet after clicking 'execute order'." />
       </div>
     </div>
   );

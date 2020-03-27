@@ -21,6 +21,7 @@ import CheckItem from '../../../components/CheckItem';
 import useCash36 from '../../../hooks/useCash36';
 import { truncateBlockchainAddress } from '../../../helpers/string.helpers';
 import { formatAmount } from '../../../helpers/currencies.helpers';
+import TransferFooter from '../TransferFooter';
 
 import './TokensTransferOption.scss';
 
@@ -158,6 +159,7 @@ const TokensTransferOption = ({
             </Link>
           </div>
         )}
+        <TransferFooter textline1="Please make sure to confirm the transaction from your wallet after clicking 'execute order'." />
       </div>
     </div>
   );

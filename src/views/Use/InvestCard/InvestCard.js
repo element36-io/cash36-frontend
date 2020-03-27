@@ -7,7 +7,6 @@ import ButtonDialog from '../../../components/ButtonDialog';
 import InvestDetails from '../InvestDetails';
 import DropdownMenu from '../../../components/DropdownMenu';
 import EditContractForm from '../EditContractForm';
-import { truncateString } from '../../../helpers/string.helpers';
 import { deleteContract } from '../../../helpers/async/contracts.helpers';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 
@@ -85,7 +84,7 @@ const InvestCard = props => {
           )}
         </div>
 
-        <p>{truncateString(description, 56)}</p>
+        <p>{description}</p>
         <a target="_blank" href={website} rel="noopener noreferrer">
           Visit website
         </a>
