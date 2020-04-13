@@ -43,7 +43,7 @@ const WalletMode = ({ walletList }) => {
     return (
       <div className="walletless-mode">
         <AccountBalanceIcon />
-        <div>You are now in walletless mode</div>
+        <div>You are now in WALLET-FREE mode</div>
       </div>
     );
   }

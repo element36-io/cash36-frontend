@@ -113,7 +113,7 @@ const TokensTransferOption = ({
     <div>
       <div className="tokens-transfer-option">
         <BackButton onClick={() => setStep(2)} />
-        <h2>Initiate Tokens Transfer</h2>
+        <h2>Initiate Token Transfer to a Contract</h2>
         <div className="tokens-transfer-option__kyc-verifications">
           <div className="tokens-transfer-option__kyc-verification">
             <h4>{checkingSender ? 'Verifying KYC for Sender...' : 'Sender'}</h4>

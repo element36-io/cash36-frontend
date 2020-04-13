@@ -111,8 +111,8 @@ const TransferAddress = ({
           </div>
           {!isWallet && (
             <p className="error-text">
-              Wallet is not registered on e36, please tell recepient to register
-              at e36 and to add his wallet
+              This wallet address is not registered on this platform, please tell recepient to register
+              his identity and to add his wallet
             </p>
           )}
           {!!contactsList && activeSuggestions && (

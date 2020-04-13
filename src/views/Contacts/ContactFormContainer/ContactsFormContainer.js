@@ -59,7 +59,7 @@ const ContactsFormContainer = ({
         submitCallback(
           true,
           'error',
-          'Wallet is not registered on e36, please tell recepient to register at e36 and to add his wallet',
+          'This wallet address is not registered on this platform, please tell recepient to register his identity at this platform and to add his wallet',
           'Try again'
         );
         return;
