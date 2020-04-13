@@ -4,7 +4,7 @@ export const formatAmount = amount => {
   }
 
   var userLang = navigator.language || navigator.userLanguage;
-  if (!userLang || userLang=="") {
+  if (!userLang || userLang==="") {
     userLang="de-DE"
   }
   return new Intl.NumberFormat(userLang, { minimumFractionDigits: 2 }).format(amount );
