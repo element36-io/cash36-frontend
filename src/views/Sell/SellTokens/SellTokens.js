@@ -71,7 +71,7 @@ const SellTokens = ({
             target="_blank"
             rel="noopener noreferrer"
           >
-            Hypo Lenzburg
+            Hypi Lenzburg
           </a>{' '}
           apply.
         </span>

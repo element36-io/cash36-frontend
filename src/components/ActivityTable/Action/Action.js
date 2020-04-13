@@ -16,7 +16,7 @@ const renderActionName = type => {
   if (type === 'APPROVED') return 'Approved token spending';
 };
 
-const Action = ({ type, targetAddress, sourceAddress }) => {
+const Action = ({ type, targetAddress, sourceAddress, etherscanLink }) => {
   return (
     <div className="activity-table-action">
       <div>{renderActionName(type)}</div>
