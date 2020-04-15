@@ -24,12 +24,17 @@
   display: flex;
   align-items: center;
 
+  @include mobile {
+    align-items: flex-start;
+  }
+
   > svg {
     display: block;
     width: 2.25rem;
     height: 2.25rem;
     color: $primary-main;
     margin-right: 0.6rem;
+    cursor: pointer;
   }
 
   > div {
@@ -55,6 +60,7 @@
     }
 
     @include mobile {
+      align-items: flex-start;
       flex-direction: column;
     }
   }

@@ -16,10 +16,21 @@ const renderActionName = type => {
   if (type === 'APPROVED') return 'Approved token spending';
 };
 
-const Action = ({ type, targetAddress, sourceAddress }) => {
+const Action = ({ type, targetAddress, sourceAddress, etherscanLink }) => {
   return (
     <div className="activity-table-action">
       <div>{renderActionName(type)}</div>
+      {sourceAddress && (
+        <span>
+          <img src={sourceIcon} alt="" />
+          <Responsive isTablet>
+            <ZeroXAddress address={sourceAddress} truncated />
+          </Responsive>
+          <Responsive isDesktop>
+            <ZeroXAddress address={sourceAddress} />
+          </Responsive>
+        </span>
+      )}      
       <span>
         <img src={targetIcon} alt="" />
         <Responsive isTablet>
@@ -29,17 +40,6 @@ const Action = ({ type, targetAddress, sourceAddress }) => {
           <ZeroXAddress address={targetAddress} />
         </Responsive>
       </span>
-      {sourceAddress && (
-        <span>
-          <img src={sourceIcon} alt="" />
-          <Responsive isTablet>
-            <ZeroXAddress address={targetAddress} truncated />
-          </Responsive>
-          <Responsive isDesktop>
-            <ZeroXAddress address={targetAddress} />
-          </Responsive>
-        </span>
-      )}
     </div>
   );
 };

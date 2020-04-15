@@ -1144,10 +1144,10 @@
   dependencies:
     "@date-io/core" "^1.3.13"
 
-"@element36-io/cash36-contracts@0.3.33":
-  version "0.3.33"
-  resolved "https://npm.pkg.github.com/download/@element36-io/cash36-contracts/0.3.33/542b3fd7364f31358d3634a3d2b3ce303e0f50351bc7e79c94e0113fbe24bb5d#00d71f795e6ac588a0e49e71022686548cd5d183"
-  integrity sha512-OvIRlnevvjm3SV79gKgxa78+kNLt11+sXZXakU2bOh7ezqI/Ck3KZJrE+PF+rPNH7uFaywy0uo1s9eAhKn3xNg==
+"@element36-io/cash36-contracts@0.3.34":
+  version "0.3.34"
+  resolved "https://npm.pkg.github.com/download/@element36-io/cash36-contracts/0.3.34/c6b13a4fa0f7a6cbfc7c0713231b86515068fdd591f45983bc7ca955a32e8ce9#c2ab301ff21be5d16f8ff122524db1db08ffcf98"
+  integrity sha512-QaES0xbajYzavl6Za735kEIAUwooaIxsFjYTc6ooguGVq4YDT/zo3Rn5TTOlydW/jMgF32NZApoKzS6HSwXpAw==
   dependencies:
     openzeppelin-solidity "2.5.0"
     truffle "5.1.17"

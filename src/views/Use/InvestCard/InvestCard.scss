@@ -8,6 +8,7 @@
   padding: 1.2rem;
   white-space: wrap;
   word-break: break-all;
+  min-height: 36rem;
 
   @include desktop {
     max-width: 30%;

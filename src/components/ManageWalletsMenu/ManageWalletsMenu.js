@@ -2,12 +2,13 @@ import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import CloseIcon from '@material-ui/icons/Close';
-import { Dialog, MenuItem } from '@material-ui/core';
-
-import Wallet from './Wallet';
+import { Dialog, Tooltip } from '@material-ui/core';
 import AddWalletButton from '../AddWalletButton';
+import WalletIcon from '@material-ui/icons/AccountBalanceWallet';
 
-import './ManageWallets.scss';
+import Wallet from '../ManageWallets/Wallet';
+
+import './ManageWalletsMenu.scss';
 
 const ManageWallets = ({ walletList }) => {
   const [open, setOpen] = useState(false);
@@ -16,9 +17,15 @@ const ManageWallets = ({ walletList }) => {
 
   return (
     <Fragment>
-      <MenuItem onClick={onOpen}>
-        <span>Manage Wallets</span>
-      </MenuItem>
+      <Tooltip title="Manage Wallets">
+        <button
+          type="button"
+          className="manage-wallets__wallet-button"
+          onClick={onOpen}
+        >
+          <WalletIcon />
+        </button>
+      </Tooltip>
 
       <Dialog
         open={open}

@@ -20,6 +20,7 @@ import SecondaryButton from '../../../components/Buttons/SecondaryButton';
 import CheckItem from '../../../components/CheckItem';
 import useCash36 from '../../../hooks/useCash36';
 import { formatAmount } from '../../../helpers/currencies.helpers';
+import BuyFooter from '../BuyFooter';
 
 import './InitiateTokensTransfer.scss';
 
@@ -143,7 +144,7 @@ const InitiateTokensTransfer = ({
     <div>
       <div className="initiate-tokens-transfer">
         <BackButton onClick={() => setStep(3)} />
-        <h2>Initiate Tokens Transfer</h2>
+        <h2>Initiate Token Transfer</h2>
         <div className="initiate-tokens-transfer__kyc-verifications">
           <div className="initiate-tokens-transfer__kyc-verification">
             <h4>{checkingSender ? 'Verifying KYC for Sender...' : 'Sender'}</h4>
@@ -200,6 +201,7 @@ const InitiateTokensTransfer = ({
             </Link>
           </div>
         )}
+        <BuyFooter textline1="Please make sure to confirm the transaction from your wallet after clicking 'execute order'." />
       </div>
     </div>
   );

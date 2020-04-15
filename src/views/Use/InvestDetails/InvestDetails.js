@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import ZeroXAddress from '../../../components/ZeroXAddress';
 import TokenIcon from '../../../components/TokenIcon';
+import { formatAmount } from '../../../helpers/currencies.helpers';
 
 import './InvestDetails.scss';
 
@@ -34,16 +35,39 @@ const InvestDetails = ({
         <div>Contract token:</div>
         <div>{contractSymbol}</div>
       </div>
-      <div className="invest-details__info-field">
-        <div>Accepted Token(s):</div>
-        {acceptedTokens.map(acceptedToken => (
-          <div key={acceptedToken} className="invest-details__accepted-token">
-            <div>
-              {acceptedToken} <TokenIcon symbol={acceptedToken} />
+      <div
+        style={{
+          display: 'flex'
+        }}
+      >
+        <div className="invest-details__info-field">
+          <div>Accepted Token(s):</div>
+          {acceptedTokens.map(acceptedToken => (
+            <div key={acceptedToken} className="invest-details__accepted-token">
+              <div>
+                {acceptedToken} <TokenIcon symbol={acceptedToken} />
+              </div>
             </div>
-            <div>Balance: {tokenTotalSupply(tokens, acceptedToken)}</div>
-          </div>
-        ))}
+          ))}
+        </div>
+        <div className="invest-details__info-field">
+          <div style={{ marginLeft: '4rem', display: 'flex' }}>Balance(s):</div>
+          {acceptedTokens.map(acceptedToken => (
+            <div key={acceptedToken} className="invest-details__accepted-token">
+              <div
+                style={{
+                  fontWeight: '500',
+                  marginLeft: '4rem',
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'flex-end'
+                }}
+              >
+                {formatAmount(tokenTotalSupply(tokens, acceptedToken))}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="invest-details__info-field">
