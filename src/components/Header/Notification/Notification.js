@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import ConfirmationIcon from '../../../assets/icons/confirmation-icon.svg';
+import ErrorIcon from '../../../assets/icons/error-icon.svg';
+
 import Tier2Icon from '../../../assets/icons/tier2-badge.svg';
 import './Notification.scss';
 
@@ -30,6 +32,9 @@ const renderIcon = type => {
   if (type === 'PAYMENT' || type === 'PAYOUT' || type === 'TRANSFER') {
     return <img src={ConfirmationIcon} alt={type} />;
   }
+  if (type === 'ERROR') return <img src={ErrorIcon} alt={type} />;
+  
+
   if (type === 'TIER_2_CONFIRMED') return <img src={Tier2Icon} alt={type} />;
 
   return <img src={ConfirmationIcon} alt={type} />;

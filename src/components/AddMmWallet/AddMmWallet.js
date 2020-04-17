@@ -86,7 +86,7 @@ const AddMmWallet = ({ addWallet, walletList, tokens }) => {
         <div className="add-mm-wallet__submitted">
           <div>
             <DoneIcon className="icon-success" />
-            Your wallet will be verified and added to the blockchain.
+            Your wallet will be verified and added to the blockchain in the background. It will take 10 minutes, sometimes a couple of hours to get processed. Please be patient. 
           </div>
           <SecondaryButton onClick={onCloseDialogs}>Close</SecondaryButton>
         </div>
