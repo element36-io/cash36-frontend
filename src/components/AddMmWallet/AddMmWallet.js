@@ -86,7 +86,7 @@ const AddMmWallet = ({ addWallet, walletList, tokens }) => {
         <div className="add-mm-wallet__submitted">
           <div>
             <DoneIcon className="icon-success" />
-            Wallet added successfully.
+            Your wallet will be verified and added to the blockchain.
           </div>
           <SecondaryButton onClick={onCloseDialogs}>Close</SecondaryButton>
         </div>
