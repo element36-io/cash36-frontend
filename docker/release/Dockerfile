@@ -14,10 +14,11 @@ RUN yarn build
 
 # Stage 2 - the production environment using https://hub.docker.com/r/staticfloat/nginx-certbot
 # used within cash36-docker/docker-compose-prod-frontend.yml
-FROM staticfloat/nginx-certbot
+# FROM staticfloat/nginx-certbot
+FROM nginx:alpine
 RUN mkdir /etc/nginx/user.conf.d 
 COPY ./docker/release/nginx.conf /etc/nginx/user.conf.d/nginx.conf
 COPY --from=react-build /app/build /usr/share/nginx/html
 ENV NODE_ENV=prod
-EXPOSE 80 443
+EXPOSE 3000
 
