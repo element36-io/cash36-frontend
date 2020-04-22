@@ -21,4 +21,4 @@ COPY ./docker/release/nginx.conf /etc/nginx/user.conf.d/nginx.conf
 COPY --from=react-build /app/build /usr/share/nginx/html
 ENV NODE_ENV=prod
 EXPOSE 3000
-
+CMD ["nginx", "-g", "daemon off;"]
