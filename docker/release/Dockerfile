@@ -12,12 +12,10 @@ RUN yarn
 ENV NODE_OPTIONS="--max-old-space-size=8192"
 RUN yarn build 
 
-# Stage 2 - the production environment using https://hub.docker.com/r/staticfloat/nginx-certbot
-# used within cash36-docker/docker-compose-prod-frontend.yml
-# FROM staticfloat/nginx-certbot
+# Stage 2 - the production environment 
 FROM nginx:alpine
 RUN mkdir /etc/nginx/user.conf.d 
-COPY ./docker/release/nginx.conf /etc/nginx/user.conf.d/nginx.conf
+COPY ./docker/debug/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=react-build /app/build /usr/share/nginx/html
 ENV NODE_ENV=prod
 EXPOSE 3000
