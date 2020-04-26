@@ -9,9 +9,9 @@ import targetIcon from '../../../assets/icons/target-icon.svg';
 import './Action.scss';
 
 const renderActionName = type => {
-  if (type === 'BUY') return 'New tokens created';
-  if (type === 'SELL') return 'Sold tokens';
-  if (type === 'SENT') return 'Tokens sent to';
+  if (type === 'BUY') return 'Creating new tokens';
+  if (type === 'SELL') return 'Selling (burning) tokens';
+  if (type === 'SENT') return 'Sending tokens to';
   if (type === 'RECEIVED') return 'Received tokens';
   if (type === 'APPROVED') return 'Approved token spending';
 };
