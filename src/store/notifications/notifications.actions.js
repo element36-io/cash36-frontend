@@ -36,7 +36,6 @@ export const fetchNotifications = () => async dispatch => {
       type: FETCH_NOTIFICATIONS,
       payload: response.data
     });
-
     const lastRead = moment(localStorage.getItem('lastRead'));
     let badgeCount = 0;
 

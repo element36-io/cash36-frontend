@@ -15,7 +15,6 @@ export const ChooseAmountForm = ({
 }) => {
   const handleAmountChange = event => {
     const { value } = event.target;
-
     if (matches(value, /^[1-9]{1}\d*[.|,]?(?:\d{1,2})?$/) || value === '') {
       handleChange(event);
     }

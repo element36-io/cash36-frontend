@@ -4,7 +4,7 @@
 .payment-info {
   text-align: center;
 
-  &.__alt{
+  &.__alt {
     padding: 2.4rem;
     max-width: 65rem;
   }
@@ -71,6 +71,14 @@
     &--country {
       display: flex;
       align-items: center;
+    }
+
+    &--copy {
+      display: flex;
+
+      > span {
+        margin-left: 0.4rem;
+      }
     }
   }
 

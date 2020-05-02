@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { CircularProgress } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { ArrowForward } from '@material-ui/icons';
 
 import { Web3Context } from '../../../providers/web3.provider';
 import { getMainWalletAddress } from '../../../helpers/wallet.helpers';
@@ -18,6 +19,8 @@ import DefaultButton from '../../../components/Buttons/DefaultButton';
 import SecondaryButton from '../../../components/Buttons/SecondaryButton';
 import CheckItem from '../../../components/CheckItem';
 import useCash36 from '../../../hooks/useCash36';
+import { formatAmount } from '../../../helpers/currencies.helpers';
+import BuyFooter from '../BuyFooter';
 
 import './InitiateTokensTransfer.scss';
 
@@ -47,7 +50,16 @@ const InitiateTokensTransfer = ({
   const senderAddress = getMainWalletAddress(walletList);
   const senderBalance = tokens.find(token => token.symbol === symbol).balance;
 
-  const Attribs= { EXST:0, ATTR_BUY:1, ATTR_SELL:2, ATTR_RECEIVE:3, ATTR_SEND:4, CPNY:5, BLACK:6, LOCK:7 }
+  const Attribs = {
+    EXST: 0,
+    ATTR_BUY: 1,
+    ATTR_SELL: 2,
+    ATTR_RECEIVE: 3,
+    ATTR_SEND: 4,
+    CPNY: 5,
+    BLACK: 6,
+    LOCK: 7
+  };
 
   const verifySender = async userAddress => {
     setCheckingSender(true);
@@ -56,8 +68,6 @@ const InitiateTokensTransfer = ({
     const checkUser = await complianceContract.methods
       .checkUser(userAddress)
       .call();
-
-  
 
     const canSend = await complianceContract.methods
       .hasAttribute(userAddress, Attribs.ATTR_SEND)
@@ -134,7 +144,7 @@ const InitiateTokensTransfer = ({
     <div>
       <div className="initiate-tokens-transfer">
         <BackButton onClick={() => setStep(3)} />
-        <h2>Initiate Tokens Transfer</h2>
+        <h2>Initiate Token Transfer</h2>
         <div className="initiate-tokens-transfer__kyc-verifications">
           <div className="initiate-tokens-transfer__kyc-verification">
             <h4>{checkingSender ? 'Verifying KYC for Sender...' : 'Sender'}</h4>
@@ -156,10 +166,10 @@ const InitiateTokensTransfer = ({
             )}
           </div>
           <div className="initiate-tokens-transfer__mid-section">
-            <div>&rarr;</div>
             <div>
-              <div>{amount}</div>
+              <div>{formatAmount(amount)}</div>
               <TokenIcon symbol={symbol} />
+              <ArrowForward />
             </div>
           </div>
           <div className="initiate-tokens-transfer__kyc-verification">
@@ -191,6 +201,7 @@ const InitiateTokensTransfer = ({
             </Link>
           </div>
         )}
+        <BuyFooter textline1="Please make sure to confirm the transaction from your wallet after clicking 'execute order'." />
       </div>
     </div>
   );

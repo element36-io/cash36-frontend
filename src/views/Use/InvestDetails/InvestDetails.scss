@@ -1,7 +1,7 @@
 @import '../../../styles/settings.scss';
 
 .invest-details {
-  padding: 1.2rem;
+  padding: 2rem;
   padding-top: 3.2rem;
   overflow: hidden;
   max-width: 67rem;
@@ -26,10 +26,19 @@
     }
 
     .invest-details__accepted-token {
-      margin-bottom: 0.2rem;
-      img {
-        width: 2.2rem;
-        margin-left: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+
+      > div:first-child {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.2rem;
+        img {
+          width: 2.2rem;
+          margin-left: 0.5rem;
+        }
       }
     }
 

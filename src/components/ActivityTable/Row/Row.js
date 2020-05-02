@@ -5,6 +5,9 @@ import Date from '../Date';
 import Status from '../Status';
 import Action from '../Action';
 import Amount from '../Amount';
+import Message from '../Message';
+import TxId from '../TxId';
+import Who from '../Who';
 import PaymentInfo from '../../PaymentInfo';
 
 const Row = ({ activity }) => {
@@ -21,19 +24,31 @@ const Row = ({ activity }) => {
   return (
     <Fragment>
       <div className="activity-table__row">
-        <div>
+        <div className="activity-th-date">
           <Date date={activity.date} />
         </div>
-        <div>
+        <div className="activity-th-action">
           <Action
             type={activity.action}
+            sourceAddress={activity.sourceAddress}
             targetAddress={activity.targetAddress}
           />
         </div>
-        <div>
+        <div className="activity-th-txid">
+          <TxId txHash={activity.txHash} />
+        </div>
+        <div className="activity-th-message">
+          <Message message={activity.message} />
+        </div>
+        {activity.initiatorUserId && (
+          <div className="activity-th-who">
+            <Who initiatorUserId={activity.initiatorUserId} />
+          </div>
+        )}
+        <div className="activity-th-status">
           <Status status={activity.status} openModal={openModal} />
         </div>
-        <div>
+        <div className="activity-th-amount">
           <Amount
             type={activity.action}
             amount={activity.amount}

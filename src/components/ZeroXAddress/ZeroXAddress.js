@@ -58,6 +58,7 @@ const ZeroXAddress = ({
       <Responsive isMobile>
         <CopyToClipboard text={address} showAsText truncated />
       </Responsive>
+      
       <Tooltip title="See on Etherscan">
         <a
           href={`https://${
@@ -67,8 +68,10 @@ const ZeroXAddress = ({
           rel="noopener noreferrer"
         >
           <LinkIcon />
+          
         </a>
       </Tooltip>
+    
     </div>
   );
 };

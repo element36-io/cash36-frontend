@@ -3,17 +3,27 @@ import React from 'react';
 
 import './QuestionMarkPop.scss';
 
-const QuestionMarkPop = ({ children }) => {
+const QuestionMarkPop = ({
+  children,
+  importedIcon = false,
+  exclamation = false
+}) => {
   return (
     <div className="question-mark">
-      <div className="question-mark__icon">?</div>
+      {importedIcon ? (
+        <div className="imported-icon">{importedIcon}</div>
+      ) : (
+        <div className="question-mark__icon">{exclamation ? '!' : '?'}</div>
+      )}
       <div className="question-mark__content">{children}</div>
     </div>
   );
 };
 
 QuestionMarkPop.propTypes = {
-  children: PropTypes.any.isRequired
+  children: PropTypes.any.isRequired,
+  exclamation: PropTypes.bool,
+  importedIcon: PropTypes.any
 };
 
 export default QuestionMarkPop;

@@ -31,6 +31,8 @@ const History = ({
       );
     }
 
+    console.log(userActivity);
+
     if (userActivity.length === 0 && historyFiltered === true) {
       return (
         <div>

@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
-import WalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import { Tooltip } from '@material-ui/core';
 
+import ManageWalletsMenu from '../ManageWalletsMenu';
 import { WalletContext } from '../../providers/wallet.provider';
 import { getMainWallet } from '../../helpers/wallet.helpers';
 import ZeroXAddress from '../ZeroXAddress';
@@ -18,6 +18,8 @@ const WalletMode = ({ walletList }) => {
   const hasWallet = walletList.length > 0;
   const { loggedInWallet } = useContext(WalletContext);
   const [divergedNetworks, setDivergedNetworks] = useState(false);
+
+  console.log(loggedInWallet);
 
   const [serverNetworkId, serverNetworkIdError] = useGet(
     getServerNetworkId,
@@ -41,7 +43,7 @@ const WalletMode = ({ walletList }) => {
     return (
       <div className="walletless-mode">
         <AccountBalanceIcon />
-        <div>You are now in walletless mode</div>
+        <div>You are now in WALLET-FREE mode</div>
       </div>
     );
   }
@@ -55,12 +57,24 @@ const WalletMode = ({ walletList }) => {
         style={{ opacity: loggedInWallet ? 1 : 0.5 }}
         data-testid="wallet-mode"
       >
-        <WalletIcon />
+        <ManageWalletsMenu />
+
         <div className="wallet-login-mode__name">
           <div>{mainWallet.shortDescription}</div>
-          <div>
+          <div
+            style={{
+              marginRight: '0.4rem'
+            }}
+          >
             <ZeroXAddress address={mainWallet.accountAddress} truncated />
           </div>
+          {!loggedInWallet && (
+            <Tooltip
+              title={`Your Wallet (Metamask/Uport) is not logged in or different then your cash36 main wallet (${mainWallet.shortDescription}).`}
+            >
+              <i className="fas fa-exclamation-triangle" />
+            </Tooltip>
+          )}
         </div>
         {divergedNetworks &&
           !serverNetworkIdError &&

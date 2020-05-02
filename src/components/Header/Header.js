@@ -24,11 +24,11 @@ const Header = ({
 }) => {
   useEffect(() => {
     if (badgeCount === 0) return;
+// io.element36.cash36.exchange.enums.NotificationType => MESSAGE,PAYMENT,PAYOUT, TRANSFER, TIER_2_FAILED, TIER_2_CONFIRMED,INTRAMESSAGE	
 
     const newNotifications = notifications.slice(0, badgeCount);
     const newTransaction = newNotifications.some(
-      // TODO: add transfer here
-      n => n.type === 'PAYMENT' || n.type === 'PAYOUT'
+      n => n.type === 'PAYMENT' || n.type === 'PAYOUT' || n.type === 'TRANSFER'
     );
     const tier2Notification = newNotifications.some(
       n => n.type === 'TIER_2_CONFIRMED'

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { CircularProgress } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { ArrowForward } from '@material-ui/icons';
 
 import { Web3Context } from '../../../providers/web3.provider';
 import { getMainWalletAddress } from '../../../helpers/wallet.helpers';
@@ -19,6 +20,8 @@ import SecondaryButton from '../../../components/Buttons/SecondaryButton';
 import CheckItem from '../../../components/CheckItem';
 import useCash36 from '../../../hooks/useCash36';
 import { truncateBlockchainAddress } from '../../../helpers/string.helpers';
+import { formatAmount } from '../../../helpers/currencies.helpers';
+import TransferFooter from '../TransferFooter';
 
 import './TokensTransferOption.scss';
 
@@ -47,7 +50,16 @@ const TokensTransferOption = ({
   const verifySender = async userAddress => {
     setCheckingSender(true);
 
-    const Attribs= { EXST:0, ATTR_BUY:1, ATTR_SELL:2, ATTR_RECEIVE:3, ATTR_SEND:4, CPNY:5, BLACK:6, LOCK:7 }
+    const Attribs = {
+      EXST: 0,
+      ATTR_BUY: 1,
+      ATTR_SELL: 2,
+      ATTR_RECEIVE: 3,
+      ATTR_SEND: 4,
+      CPNY: 5,
+      BLACK: 6,
+      LOCK: 7
+    };
 
     // Blockchain code for checking
     const checkUser = await complianceContract.methods
@@ -101,7 +113,7 @@ const TokensTransferOption = ({
     <div>
       <div className="tokens-transfer-option">
         <BackButton onClick={() => setStep(2)} />
-        <h2>Initiate Tokens Transfer</h2>
+        <h2>Initiate Token Transfer to a Contract</h2>
         <div className="tokens-transfer-option__kyc-verifications">
           <div className="tokens-transfer-option__kyc-verification">
             <h4>{checkingSender ? 'Verifying KYC for Sender...' : 'Sender'}</h4>
@@ -123,10 +135,10 @@ const TokensTransferOption = ({
             )}
           </div>
           <div className="tokens-transfer-option__mid-section">
-            <div>&rarr;</div>
             <div>
-              <div>{amount}</div>
+              <div>{formatAmount(amount)}</div>
               <TokenIcon symbol={symbol} />
+              <ArrowForward />
             </div>
           </div>
           <div className="tokens-transfer-option__kyc-verification">
@@ -147,6 +159,7 @@ const TokensTransferOption = ({
             </Link>
           </div>
         )}
+        <TransferFooter textline1="Please make sure to confirm the transaction from your wallet after clicking 'execute order'." />
       </div>
     </div>
   );

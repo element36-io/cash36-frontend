@@ -44,16 +44,11 @@
   }
 
   > hr {
-    margin: 3.2rem 0;
+    margin: 3.2rem auto;
+    max-width: 63rem;
     border-bottom: 1px solid $grey-border;
     border-top: none;
-  }
-
-  @include desktop {
-    > hr {
-      width: 120%;
-      transform: translateX(-10%);
-    }
+    width: 100%;
   }
 
   @include mobile {

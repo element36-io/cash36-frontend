@@ -9,11 +9,12 @@ import ContractForm from './ContractForm';
 import InvestCard from './InvestCard';
 import useGet from '../../hooks/useGet';
 import { getContracts } from '../../helpers/async/contracts.helpers';
+import { getTokens } from '../../store/tokens/tokens.actions';
 import { getContractsAction } from '../../store/contracts/contracts.actions';
 
 import './Invest.scss';
 
-const Invest = ({ getContractsAction }) => {
+const Invest = ({ getContractsAction, getTokens }) => {
   const [visibleContracts, setVisibleContracts] = useState([]);
 
   const [contracts, contractsError, refetchContracts] = useGet(
@@ -24,6 +25,7 @@ const Invest = ({ getContractsAction }) => {
   useEffect(() => {
     getContractsAction(contracts);
     setVisibleContracts(contracts);
+    getTokens();
   }, [contracts]);
 
   return (
@@ -56,7 +58,8 @@ const Invest = ({ getContractsAction }) => {
 };
 
 Invest.propTypes = {
-  getContractsAction: PropTypes.func
+  getContractsAction: PropTypes.func,
+  getTokens: PropTypes.func
 };
 
-export default connect(null, { getContractsAction })(Invest);
+export default connect(null, { getContractsAction, getTokens })(Invest);
