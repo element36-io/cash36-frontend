@@ -76,7 +76,7 @@ const Step2BeneficialOwner = ({ changeSteps, stepError }) => {
             </p>
             <div className="step-2__link">
               <a
-                href="https://docs.google.com/document/d/e/2PACX-1vSoZx1QeOL1Zrshy8Jis1WAOv9LUtgi_dqje7_VIcObHAC82puvpPmhaj352p_Tm7d-XZyiIZaXBt4Z/pub"
+                href="https://docs.google.com/document/d/e/2PACX-1vQrdc8Y2IXX_wijlgpl5-hW2n18coP-hHup8LwUhQEiD787wx6tiOzvK4IEBawNYC0bTuKueO0M9Lqj/pub"
                 target="_blank"
                 rel="noopener noreferrer"
               >
