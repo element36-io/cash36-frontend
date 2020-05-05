@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="34px" height="41px" viewBox="0 0 34 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>5207CFC0-52F7-4F95-B4D3-409AB7309BC6</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <linearGradient x1="63.8375539%" y1="31.9058287%" x2="0%" y2="115.334302%" id="linearGradient-1">
+            <stop stop-color="#63B4F5" offset="0%"></stop>
+            <stop stop-color="#017EE5" offset="100%"></stop>
+        </linearGradient>
+        <polygon id="path-2" points="20 13.9668571 11.7714286 22.1954286 8 18.424 8.96685714 17.4571429 11.7714286 20.2548571 19.0331429 13"></polygon>
+        <filter x="-101.7%" y="-78.4%" width="303.5%" height="365.5%" filterUnits="objectBoundingBox" id="filter-3">
+            <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="5" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.05 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Web-App---Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Home---Tier-2-User-(Verified)" transform="translate(-195.000000, -241.000000)" fill-rule="nonzero">
+            <g id="Top" transform="translate(115.000000, 46.000000)">
+                <g id="User" transform="translate(0.000000, 117.000000)">
+                    <g id="Image">
+                        <g id="Badge" transform="translate(83.000000, 80.000000)">
+                            <path d="M5.1032367,2.39629523 C10.7561242,-0.173199081 17.2438758,-0.173199081 22.8967633,2.39629523 L29.5,5.39776646 L29.5,15.9090909 C29.5,25.4470684 23.0433233,34.2876276 14.3634415,36.4553042 L14,36.5460685 L13.6365585,36.4553042 C4.95667674,34.2876276 -1.5,25.4470684 -1.5,15.9090909 L-1.5,5.39776646 L5.1032367,2.39629523 Z" id="Shape" stroke="#F4F5FA" stroke-width="3" fill="url(#linearGradient-1)"></path>
+                            <g id="Shape">
+                                <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
+                                <path stroke="#FFFFFF" stroke-width="0.5" d="M11.7712958,19.9016033 L19.0332263,12.6465301 L20.3535534,13.9668571 L11.7714286,22.548982 L7.64644661,18.424 L8.9666409,17.1038057 L11.7712958,19.9016033 Z" fill="#FFFFFF" fill-rule="evenodd"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
