@@ -2,6 +2,7 @@
   "name": "cash36-frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "https://github.e36.io/",
   "dependencies": {
     "@element36-io/cash36-contracts": "0.3.34",
     "@date-io/moment": "^1.3.7",
@@ -64,6 +65,8 @@
     "start:rinkeby": "env-cmd -e rinkeby react-scripts start",
     "start": "env-cmd -e mainnet react-scripts start",
     "build": "env-cmd -e mainnet react-scripts build  --max_old_space_size=4096   ",
+    "build:rinkeby": "rm -R ./build-rinkeby/*; env-cmd -e rinkeby react-scripts build  --max_old_space_size=4096; cp ./build ./build-rinkeby   ",
+    
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint src/",
