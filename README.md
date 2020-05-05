@@ -1,12 +1,19 @@
-# Bootstraped with create-react-app
+# Configuration
 
-# Running the dev server
+The local server starts using our infura account. Please configure your own in .env-cmdrc or connect to your local client.   
+
+# Running the frontend locally against cash36.io and the mainnet
 
 - Run 'yarn install' or 'npm install'
 - Use the command 'yarn start' or 'npm start'
-- Dev server can be accessed on http://localhost:3000/
+- The local server connects to can be accessed on http://localhost:3000/
 
 
-# Running the prod server & ssl
+# Running the frontend locally with rinkeby
 
-We use Nginx with a 
+- yarn start:rinkeby
+
+The rinkeby network may be down - its only stared when needed. Contact element36 if you need a relyable instance; we support also other networks than rinkeby. This 
+
+
+
