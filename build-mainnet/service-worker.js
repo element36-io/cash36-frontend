@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/build-rinkeby/precache-manifest.6f5559f8d19cd4bfbf3a086d9bfdc3e7.js"
+  "https://rinkeby.e36.io/build-mainnet/precache-manifest.76caec2805cdf24e847a1f2d3189f920.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/build-rinkeby/index.html", {
+workbox.routing.registerNavigationRoute("https://rinkeby.e36.io/build-mainnet/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
