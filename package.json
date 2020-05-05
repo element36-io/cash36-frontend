@@ -63,7 +63,7 @@
   "scripts": {
     "start:rinkeby": "env-cmd -e rinkeby react-scripts start",
     "start": "env-cmd -e mainnet react-scripts start",
-    "build": "env-cmd -e prod react-scripts build  --max_old_space_size=4096   ",
+    "build": "env-cmd -e mainnet react-scripts build  --max_old_space_size=4096   ",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint src/",
