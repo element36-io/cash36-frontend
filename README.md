@@ -11,20 +11,20 @@ Thus you may tweak the frontend or just use it as a reference for work with our 
 
 The local server starts using our infura account. Please play fair, configure your own in `.env-cmdrc` or connect to your local client.   
 
-### Running the frontend localy against cash36.io and the mainnet
+### Starting the frontend localy with mainnet and productive cash36.io API
 
 * Run `yarn install` or `npm install`
 * Use the command `yarn start` or `npm start`
 * The local server connects to can be accessed on http://localhost:3000/
 
 
-### Running the frontend locally with rinkeby
+### Starting the frontend locally with rinkeby
 
 * `yarn start:rinkeby`
 
 The rinkeby network may be down - its only there when it get used by us. Contact element36 if you need a relyable instance; we support also other networks than rinkeby. This 
 
-### Static version
+### Build static version (github pages versions)
 * `yarn build`
 
 These are on github: 
