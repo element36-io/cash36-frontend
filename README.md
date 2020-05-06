@@ -1,11 +1,11 @@
-### Welcome to element36!
+### Frontend cash36.io
+
+Cash36.io connects the banking network with the ethereum network via open banking standards and adds a mandatory KYC-layer to the linking processes. The sources of the whole system are maintained in a private gitlab repo.
 
 Thus you may tweak the frontend or just use it as a reference for work with our cash36.io backend. The backend services are not FOSSed yet, because we think a lot of responsiblity comes with publishing a backend to create stable coins.
 
 * [Frontend linked to Rinkeby](https://rinkeby.e36.io/build-rinkeby/index.html)
 * [Frontend linked to Mainnet](https://rinkeby.e36.io/build-mainnet/index.html)
-
-The sources are maintained in a private gitlab repo. 
 
 ### Configuration
 
