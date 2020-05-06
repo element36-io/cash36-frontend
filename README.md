@@ -31,5 +31,10 @@ These are on github:
 * `yarn build:rinkeby`
 * `yarn build:mainnet`
 
-
 The later updates the content served via gibhub pages and github.e36.io if it is committed to master. 
+
+### Use Identity CRUD-API instead of Frontend
+
+[TOC](./doc/src/toc.md) or [single page version](./doc/src/singlepage.md)
+
+
