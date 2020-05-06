@@ -1,1 +1,3 @@
 theme: jekyll-theme-tactile
+title: [Welcome to element36!]
+description: [This is the frontend of cash36.io - it will connect to mainnet and to the API of cash36.io if started locally.  ]

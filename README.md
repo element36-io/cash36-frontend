@@ -1,10 +1,11 @@
-# Welcome to element36!
+### Welcome to element36!
 
-This is the frontend of cash36.io - it will connect to mainnet and to the API of cash36.io if started locally. Thus you may tweak the frontend or just use it as a reference for work with our cash36.io backend. The backend services are not FOSSed yet, because we think a lot of responsiblity comes with publishing a backend to create stable coins. 
+Thus you may tweak the frontend or just use it as a reference for work with our cash36.io backend. The backend services are not FOSSed yet, because we think a lot of responsiblity comes with publishing a backend to create stable coins.
 
 * [Frontend linked to Rinkeby](https://rinkeby.e36.io/build-rinkeby/index.html)
 * [Frontend linked to Mainnet](https://rinkeby.e36.io/build-mainnet/index.html)
 
+The sources are maintained in a private gitlab repo. 
 
 ### Configuration
 
