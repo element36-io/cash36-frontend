@@ -1,4 +1,4 @@
-### Frontend cash36.io
+### Test-frontends for cash36.io
 
 Cash36.io connects the banking network with the ethereum network via open banking standards and adds a mandatory KYC-layer to the linking processes. The sources of the whole system are maintained in a private gitlab repo.
 
