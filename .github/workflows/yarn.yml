@@ -19,12 +19,10 @@ jobs:
         node-version: [10.x]
     steps:
       - uses: actions/checkout@v1
-      - uses: borales/actions-yarn@v2.0.0
+      - uses: actions/setup-node@v1
         with:
-         auth-token: ${{ secrets.GITHUB_TOKEN }}
-         registry-url: https://npm.pkg.github.com/
-   #       auth-token: 2123cf689a93fcad0cebc7bd78b9c0ecd8f13085
-         cmd: install
+          node-version: '10'
+      - run: npm i
      
     
 
