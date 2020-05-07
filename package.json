@@ -64,7 +64,7 @@
   "scripts": {
     "start:rinkeby": "env-cmd -e rinkeby react-scripts start",
     "start": "env-cmd -e mainnet react-scripts start",
-    "build": "env-cmd -e mainnet react-scripts build  --max_old_space_size=6144   ",
+    "build": "env-cmd -e mainnet react-scripts build  --max_old_space_size=3000   ",
     "build:rinkeby": "rm -R ./build-rinkeby/*; env-cmd -e rinkeby react-scripts build  --max_old_space_size=4096; cp -r ./build/* ./build-rinkeby   ",
     "build:mainnet": "rm -R ./build-mainnet/*; env-cmd -e mainnet react-scripts build  --max_old_space_size=4096; cp -r ./build/* ./build-mainnet   ",
     "test": "react-scripts test --env=jsdom",
