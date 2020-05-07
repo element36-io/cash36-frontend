@@ -16,13 +16,13 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x]
+        node-version: [12.x]
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
         with:
           always-auth: true
-          node-version: '10.x'
+          node-version: '12.x'
           registry-url: https://npm.pkg.github.com/
           scope: '@element36-io'
       - name: Install dependencies
