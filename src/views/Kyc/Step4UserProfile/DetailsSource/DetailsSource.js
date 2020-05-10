@@ -25,14 +25,13 @@ const DetailsSource = ({ sourceDetails, updateSourceDetails, hasError }) => (
       <p>
         Good Description example:
         <br />
-        Mein jährliches Einkommen als IT-Berater beträgt ca. 130000 CHF vor
-        Steuern. Ich konnte damit etwas Geld sparen, welches ich nun investieren
-        möchte.
+        My annual income as a programmer is EUR 50.000. From that I have money on my
+        savings account which I would like to invest now. 
       </p>
       <p>
         Bad Description Example:
         <br />
-        Ich habe etwas Geld von meinem Gehlat gespart.
+        I have saved some money on my savings account.
       </p>
     </div>
   </div>

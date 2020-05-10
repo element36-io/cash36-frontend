@@ -50,7 +50,7 @@ const HeaderMenu = ({
                   rel="noopener noreferrer"
                   href="https://docs.google.com/forms/d/e/1FAIpQLSfmui57gNtK-wbjdPCl4iBdi3LLLEz01H67nT4trXhA4nwCdw/viewform"
                 >
-                  Register an organization
+                  Register a legal entity
                 </a>
               </MenuItem>
             ) : (
@@ -81,6 +81,17 @@ const HeaderMenu = ({
                 Recover funds
               </a>
             </MenuItem>
+
+            <MenuItem onClick={closeMenu}>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://docs.google.com/document/d/e/2PACX-1vQrdc8Y2IXX_wijlgpl5-hW2n18coP-hHup8LwUhQEiD787wx6tiOzvK4IEBawNYC0bTuKueO0M9Lqj/pub"
+              >
+                Terms of use
+              </a>
+            </MenuItem>
+
             <MenuItem onClick={logout}>
               <span>Logout</span>
             </MenuItem>

@@ -9,4 +9,5 @@
 
 # Running the prod server & ssl
 
-We use Nginx with a 
+We use Nginx with static pages: 
+- Run yarn build 
