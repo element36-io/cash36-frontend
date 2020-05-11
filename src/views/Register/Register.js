@@ -79,7 +79,7 @@ const Register = ({ isAuthenticated, captchaToken }) => {
         ) : (
           <p>
             Welcome aboard, <br />
-            Please, enter your email & choose a password
+            Please, enter your email &amp; choose a password
           </p>
         )}
 
@@ -90,6 +90,7 @@ const Register = ({ isAuthenticated, captchaToken }) => {
             initialValues={initialValues}
             formFields={formFields}
             buttonLabel="Register"
+            pwdHint="true"
             errorMsg={error}
           >
             <p>

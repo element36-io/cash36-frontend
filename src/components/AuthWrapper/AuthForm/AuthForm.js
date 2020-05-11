@@ -15,6 +15,7 @@ const AuthForm = ({
   initialValues,
   formFields,
   buttonLabel,
+  pwdHint,
   children,
   errorMsg,
   captcha = true,
@@ -74,6 +75,9 @@ const AuthForm = ({
               </div>
             ))}
           </div>
+          {pwdHint && (
+            <div className="auth__pwdHint">Use min. 8 numbers and characters - mIxEd &amp; speci@l_, like "P@ssw0rd"</div>
+          )}
           {captcha && activeCaptcha && (
             <div className="auth__captcha">
               <ReCAPTCHA
