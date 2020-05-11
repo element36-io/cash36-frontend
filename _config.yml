@@ -1,4 +1,4 @@
 theme: jekyll-theme-minimal
 title: [Welcome to element36!]
 description: [This is the frontend of cash36.io - it will connect to mainnet and to the API of cash36.io if started locally.  ]
-logo: [https://avatars0.githubusercontent.com/u/57393886?s=400&u=287bdc4581dc68d7d4e3d808c9e026a989d3c99f&v=4]
+logo: /src/assets/Logo.svg
