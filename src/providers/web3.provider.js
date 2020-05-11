@@ -23,7 +23,10 @@ const Web3Provider = ({ children }) => {
       console.info(
         'Injected web3 detected. We will override web3 provider. Your plugin might not work anymore.'
       );
-    } else {
+    } else { 
+      console.info(
+        'NO  web3 detected. '
+      );
       setWeb3js(web3);
     }
 
@@ -31,16 +34,19 @@ const Web3Provider = ({ children }) => {
   };
 
   const getNetworkId = async () => {
+    console.info(
+      'get networkid called');
     const { web3 } = window;
 
     try {
-      const id = await web3.eth.net.getId();
-      setNetworkId(id);
+      const id = await web3.eth.getChainId();//web3.version.network;//await web3.eth.net.getId();
+      setNetworkId(id);  
       setNetwork(getNetwork(id));
       setLoading(false);
       setNetworkError(null);
       return id;
     } catch (error) {
+      console.error(error)
       setNetworkError(
         `Network error: web3 not available ${error.message.replace('\\n', '')}`
       );

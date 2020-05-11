@@ -114,6 +114,11 @@
     }
   }
 
+  div.auth__pwdHint {
+    color:$text-light-grey-3;
+    font-size: 1.2rem;
+  }
+
   @include desktop {
     display: flex;
     flex: 1;
