@@ -8,13 +8,13 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   sodipodi:docname="ether-icon-2.svg"
+   sodipodi:docname="ether-icon.svg"
    inkscape:version="1.0 (4035a4f, 2020-05-01)"
    id="svg4968"
    version="1.1"
-   viewBox="0 0 12.520455 12.520455"
-   height="12.520455mm"
-   width="12.520455mm">
+   viewBox="0 0 6.7263193 9.6000004"
+   height="9.6000004mm"
+   width="6.7263193mm">
   <defs
      id="defs4962">
     <linearGradient
@@ -41,7 +41,7 @@
        x2="37.29702"
        y2="107.20333"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(2.82123,0,0,2.3399795,-99.643728,-248.76566)" />
+       gradientTransform="matrix(1.9767181,0,0,2.3399795,-71.209268,-243.96566)" />
     <linearGradient
        gradientUnits="userSpaceOnUse"
        id="linearGradient-1"
@@ -70,9 +70,9 @@
      inkscape:document-rotation="0"
      inkscape:current-layer="layer1"
      inkscape:document-units="mm"
-     inkscape:cy="137.32063"
-     inkscape:cx="53.752318"
-     inkscape:zoom="5.6"
+     inkscape:cy="83.286015"
+     inkscape:cx="39.732937"
+     inkscape:zoom="11.2"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      borderopacity="1.0"
@@ -92,23 +92,21 @@
     </rdf:RDF>
   </metadata>
   <g
-     transform="translate(1.460225,1.4602304)"
      id="layer1"
      inkscape:groupmode="layer"
      inkscape:label="Layer 1">
     <rect
-       transform="rotate(45)"
        ry="1.277505"
-       y="-4.800004"
-       x="1.9882246"
+       y="-3.0517579e-06"
+       x="2.2119141e-06"
        height="9.6000004"
-       width="9.6000004"
+       width="6.7263193"
        id="rect3656"
-       style="opacity:0.913648;fill:url(#linearGradient3664);fill-opacity:1;stroke-width:2.37833;stroke-miterlimit:4;stroke-dasharray:none" />
+       style="opacity:0.913648;fill:url(#linearGradient3664);fill-opacity:1;stroke-width:1.99079;stroke-miterlimit:4;stroke-dasharray:none" />
     <path
        style="stroke-width:0.286983"
        id="path5533"
        fill="#ffffff"
-       d="M 4.7999971,1.3562017 2.5041407,4.884004 4.7999971,6.1439125 7.0958643,4.8840041 Z M 2.5041407,5.3039735 4.799997,8.2437925 7.0958643,5.3039734 4.799997,6.563882 Z" />
+       d="M 1.8971526,2.531568 1.2346699,6.6881847 3.84449,6.9053594 5.4294181,4.8205625 Z M 1.4054868,7.0718459 4.6985881,8.8236953 5.6002351,5.2042236 4.0153069,7.2890207 Z" />
   </g>
 </svg>
