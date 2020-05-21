@@ -9,9 +9,10 @@ import './TxId.scss';
 const TxId = ({ txHash }) => {
   const { network, networkId } = useContext(Web3Context);
 
+
   return (
     <div className="tx-id">
-      <Tooltip title="See on etherscan">
+      <Tooltip title="See transaction log on etherscan">
         <a
           href={`https://${
             network && networkId !== 1 ? `${network.toLowerCase()}.` : ''
@@ -24,6 +25,7 @@ const TxId = ({ txHash }) => {
       </Tooltip>
     </div>
   );
+  
 };
 
 TxId.propTypes = {
