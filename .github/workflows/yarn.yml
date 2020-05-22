@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [10.x]
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
@@ -33,7 +33,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git pull
+          git pull master
           git commit -m "Add changes of static builds for github.e36.io " -a
       - name: Push changes
         uses: ad-m/github-push-action@master
