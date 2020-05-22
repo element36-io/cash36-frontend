@@ -39,41 +39,47 @@ const ZeroXAddress = ({
     }
   }, []);
 
-  return (
-    <div
-      className="zerox-address"
-      onMouseEnter={() => {
-        setIsHover(true);
-      }}
-      onMouseLeave={() => {
-        setIsHover(false);
-      }}
-    >
-      {isHover && hoverText && (
-        <div className="zerox-address__hovered">{hoverText}</div>
-      )}
-      <Responsive>
-        <CopyToClipboard text={address} showAsText truncated={truncated} />
-      </Responsive>
-      <Responsive isMobile>
-        <CopyToClipboard text={address} showAsText truncated />
-      </Responsive>
-      
-      <Tooltip title="See on Etherscan">
-        <a
-          href={`https://${
-            network && networkId !== 1 ? `${network.toLowerCase()}.` : ''
-          }etherscan.io/address/${address}`}
-          target="_blank"
-          rel="noopener noreferrer"
+  if (address==='0x') {
+      return (
+        <div  className="zerox-address">banking network</div>
+      );
+  } else {
+      return (
+        <div
+          className="zerox-address"
+          onMouseEnter={() => {
+            setIsHover(true);
+          }}
+          onMouseLeave={() => {
+            setIsHover(false);
+          }}
         >
-          <LinkIcon />
+          {isHover && hoverText && (
+            <div className="zerox-address__hovered">{hoverText}</div>
+          )}
+          <Responsive>
+            <CopyToClipboard text={address} showAsText truncated={truncated} />
+          </Responsive>
+          <Responsive isMobile>
+            <CopyToClipboard text={address} showAsText truncated />
+          </Responsive>
           
-        </a>
-      </Tooltip>
-    
-    </div>
-  );
+          <Tooltip title="Check address on etherscan">
+            <a
+              href={`https://${
+                network && networkId !== 1 ? `${network.toLowerCase()}.` : ''
+              }etherscan.io/address/${address}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <LinkIcon />
+              
+            </a>
+          </Tooltip>
+        
+        </div>
+      );
+  }
 };
 
 ZeroXAddress.propTypes = {

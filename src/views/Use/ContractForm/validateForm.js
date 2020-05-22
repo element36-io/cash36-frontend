@@ -14,13 +14,13 @@ export default values => {
   if (!values.name) {
     errors.name = 'This field is required';
   } else if (values.name.length > 40) {
-    errors.name = 'Name must be 40 characters or less';
+    errors.name = 'Name must be 40 characters or less number of characters used: '+values.name.length;
   }
 
   if (!values.description) {
     errors.description = 'This field is required';
-  } else if (values.description.length > 240) {
-    errors.description = 'Description must be 240 characters or less';
+  } else if (values.description.length > 400) {
+    errors.description = 'Description must be 400 characters or less - number of characters used: '+values.description.length;
   }
 
   if (!values.acceptedTokens.length) {
