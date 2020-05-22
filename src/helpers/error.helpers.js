@@ -4,26 +4,29 @@ export function handleError(error) {
     const statusCode = error.response.status;
     const statusText = error.response.statusText;
     
+    let status="("+statusCode;
+    if (statusText) status+=`: ${statusText})`
+    else status+=")";
 
     let errorMessage;
 
     if (Array.isArray(error.response.data)) {
-      errorMessage = `${error.response.data.join('; ')} (${statusCode}: ${statusText})`;
+      errorMessage = `${error.response.data.join('; ')} ${status}`;
       return Promise.reject(errorMessage);
     }
 
     if (errorData) {
       if (errorData.message) {
-        errorMessage = `${errorData.message} (${statusCode}: ${statusText})`;
+        errorMessage = `${errorData.message} ${status}`;
       } else if (errorData.error_description) {
-        errorMessage = `${errorData.error_description} (${statusCode}: ${statusText}))`;
-      } else if (errorData.error)
-        errorMessage = `${errorData.error} (${statusCode}: ${statusText}))`;
-      } else {
-        if (error.respnse.status=404) {
-          errorMessage = `Ressource (or user)  not found (${statusCode}: ${statusText}))`;
+        errorMessage = `${errorData.error_description} ${status}`;
+      } else if (errorData.error) {
+        if (statusText)  errorMessage = `${errorData.error} ${status}`;
+      } else {  // in case we dont have an error description we try to add it manually, otherwise it looks very ugly on UI
+        if (error.response && error.response.status===404) {
+          if (statusText) errorMessage = `Ressource (or user)  not found ${status}`;
         } else {
-          errorMessage = `Error from server: (${statusCode}: ${statusText}))`;
+          errorMessage = `Error from server: ${status}`;
         }
       }
 

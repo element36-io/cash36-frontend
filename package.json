@@ -65,6 +65,7 @@
     "start:development": "env-cmd -e development react-scripts start",
     "start:test": "env-cmd -e test react-scripts start",
     "start:demo": "env-cmd -e demo react-scripts start",
+    "start:demoe36": "env-cmd -e demoe36 react-scripts start",
     "start:production": "env-cmd -e prod react-scripts start",
     "build:staging": "env-cmd -e staging react-scripts build",
     "build": "env-cmd -e prod react-scripts build  --max_old_space_size=4096   ",
