@@ -76,7 +76,7 @@ const AuthForm = ({
             ))}
           </div>
           {pwdHint && (
-            <div className="auth__pwdHint">Hint: use at leasts 8 numbers and characters - mixED &amp; ->speci@l, like "P@ss-w0rd"</div>
+            <div className="auth__pwdHint">Hint: use at leasts 8 numbers and characters,  mixED and speci@l; like "Element36.io"</div>
           )}
           {captcha && activeCaptcha && (
             <div className="auth__captcha">
