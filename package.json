@@ -68,7 +68,6 @@
     "build:rinkeby": "rm -R ./build-rinkeby/*; env-cmd -e rinkeby react-scripts build  --max_old_space_size=3000; cp -r ./build/* ./build-rinkeby   ",
     "build:mainnet": "rm -R ./build-mainnet/*; env-cmd -e mainnet react-scripts build  --max_old_space_size=3000; cp -r ./build/* ./build-mainnet   ",
     "build:docs": "rm -R ./docs/*; env-cmd -e mainnet react-scripts build  --max_old_space_size=3000; cp -r ./build/* ./docs   ",
-    
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint src/",

@@ -167,7 +167,11 @@ export const login = (username, password) => async dispatch => {
     });
     dispatch(getUserInfo());
   } catch (error) {
-    return handleError(error);
+    if (error.response && error.response.status===404){
+      error.response.data["message"]="User not known.";
+    } else { 
+      return handleError(error);
+    }
   }
 };
 
