@@ -26,7 +26,7 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           scope: '@element36-io'
       - name: Install dependencies
-        run: yarn install ; yarn build ; # yarn build:rinkeby ; # yarn build:mainnet ;
+        run: yarn install ; yarn build ;  yarn build:rinkeby ; # yarn build:mainnet ;
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}     
       - name: Commit files
