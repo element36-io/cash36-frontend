@@ -172,12 +172,12 @@ self.__precacheManifest = [
     "url": "https://github.e36.io/static/media/rubik-latin-400italic.4ff19ede.woff2"
   },
   {
-    "revision": "9ac3d9de00cce6d3352a889816226451",
-    "url": "https://github.e36.io/static/media/rubik-latin-500.9ac3d9de.woff2"
-  },
-  {
     "revision": "f778b3151e4b3ed5b831e9e8646ab207",
     "url": "https://github.e36.io/static/media/rubik-latin-400italic.f778b315.woff"
+  },
+  {
+    "revision": "9ac3d9de00cce6d3352a889816226451",
+    "url": "https://github.e36.io/static/media/rubik-latin-500.9ac3d9de.woff2"
   },
   {
     "revision": "bec9243368f86e688b23bc1852823d0b",
@@ -188,12 +188,12 @@ self.__precacheManifest = [
     "url": "https://github.e36.io/static/media/rubik-latin-500italic.d8de1d9a.woff2"
   },
   {
-    "revision": "a7db29488272756e766b024e6aebe848",
-    "url": "https://github.e36.io/static/media/rubik-latin-700.a7db2948.woff2"
-  },
-  {
     "revision": "21955254e41869cea3f5a1769ab1cbe6",
     "url": "https://github.e36.io/static/media/rubik-latin-500italic.21955254.woff"
+  },
+  {
+    "revision": "a7db29488272756e766b024e6aebe848",
+    "url": "https://github.e36.io/static/media/rubik-latin-700.a7db2948.woff2"
   },
   {
     "revision": "29b164482600fc3976b5b2c863d69b71",
@@ -204,12 +204,12 @@ self.__precacheManifest = [
     "url": "https://github.e36.io/static/media/rubik-latin-700italic.9c1d6e0e.woff2"
   },
   {
-    "revision": "0d11544364bc4541af96267ca8b2a5ce",
-    "url": "https://github.e36.io/static/media/rubik-latin-900.0d115443.woff2"
-  },
-  {
     "revision": "4a8c46be9056c47cc8d0e3a3a70ae193",
     "url": "https://github.e36.io/static/media/rubik-latin-700italic.4a8c46be.woff"
+  },
+  {
+    "revision": "0d11544364bc4541af96267ca8b2a5ce",
+    "url": "https://github.e36.io/static/media/rubik-latin-900.0d115443.woff2"
   },
   {
     "revision": "44913051ee3d4536cd4fa368067e9a83",
