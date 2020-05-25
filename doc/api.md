@@ -1,4 +1,4 @@
-# E36 API documentation
+# Upload user-data API documentation
 
 Submit compliance data for a customer. This API can be used by KYC-ed entities of 
 element36. The data need to be prepared accordig to Swiss Laws enforced by [Finma](finma.ch), 
