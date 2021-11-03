@@ -45,7 +45,7 @@
     "redux-thunk": "^2.2.0",
     "typeface-rubik": "^0.0.72",
     "uport-transports": "^0.2.6",
-    "validator": "^10.8.0",
+    "validator": "^13.7.0",
     "web3": "^1.2.6",
     "yup": "^0.27.0"
   },
